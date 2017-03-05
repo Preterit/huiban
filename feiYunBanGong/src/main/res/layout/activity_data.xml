@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y857"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/ll_data"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_b_1" />
+
+                <TextView
+                    style="@style/ffcc33_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="打卡数据" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_daily"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_b_2" />
+
+                <TextView
+                    style="@style/ff99cb_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="日报" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_weekly"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_b_3" />
+
+                <TextView
+                    style="@style/a66c8ff_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="周报" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/ll_monthly"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_b_4" />
+
+                <TextView
+                    style="@style/d6a5f4_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="月报" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_performance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_b_5" />
+
+                <TextView
+                    style="@style/ff6f5c_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="业绩报表" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    style="@style/ffcc33_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

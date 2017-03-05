@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/ffffff"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/size20" >
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y200"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/x20"
+        android:scaleType="fitXY"
+        android:src="@drawable/fragment_head" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/y300"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/a000000_42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="德尔特曼" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/a000000_32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            android:text="18613887633" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/a000000_38"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y120"
+                android:gravity="center_vertical"
+                android:text="分组" />
+
+            <LinearLayout
+                android:id="@+id/ll_choice"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/y80"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/shape_bt_bg" >
+
+                <TextView
+                    android:id="@+id/tv_choice"
+                    style="@style/a000000_32"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="好友" />
+
+                <ImageView
+                    android:layout_width="@dimen/size30"
+                    android:layout_height="@dimen/size30"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/x20"
+                    android:src="@drawable/jiantou_xia" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bt_jieshou"
+            style="@style/ffffff_38"
+            android:layout_width="@dimen/x170"
+            android:layout_height="@dimen/y80"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_bt_bg_gray"
+            android:text="接受" />
+
+        <Button
+            android:id="@+id/bt_jvjue"
+            style="@style/ffffff_38"
+            android:layout_width="@dimen/x170"
+            android:layout_height="@dimen/y80"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/x20"
+            android:background="@drawable/shape_bt_bg_red"
+            android:text="拒绝" />
+
+        <TextView
+            android:id="@+id/tv_jishou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="已接受"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 自定义定位消息视图 -->
+
+    <ImageView
+        android:layout_width="@dimen/size350"
+        android:layout_height="@dimen/size220"
+        android:scaleType="fitXY"
+        android:src="@drawable/map" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        style="@style/a000000_32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/x350"
+        android:padding="@dimen/size5"
+        android:text="我的位置" />
+
+</LinearLayout>

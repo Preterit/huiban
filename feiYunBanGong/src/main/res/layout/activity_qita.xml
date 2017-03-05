@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ffffff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <ScrollView
+        android:id="@+id/sv_caigou"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="描述：" />
+
+                <EditText
+                    android:id="@+id/et_miaoshu"
+                    style="@style/a000000_38"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="请输入..."
+                    android:lines="5"
+                    android:padding="@dimen/x26" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y140"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="时间：" />
+
+                <TextView
+                    android:id="@+id/tv_shijian"
+                    style="@style/a000000_48"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:hint="请选择..." />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y450"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y20"
+                android:paddingTop="@dimen/y20" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="审批人：" />
+
+                <ListView
+                    android:id="@+id/lv_add_shenpiren"
+                    android:layout_width="@dimen/x350"
+                    android:layout_height="@dimen/y400"
+                    android:divider="@color/ffffff"
+                    android:dividerHeight="@dimen/y15" >
+                </ListView>
+
+                <ImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y100"
+                    android:src="@drawable/tianjia" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                style="@style/ffffff_60"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x114"
+                android:layout_marginBottom="@dimen/y150"
+                android:layout_marginLeft="@dimen/x140"
+                android:layout_marginRight="@dimen/x140"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/blue_bt_selector"
+                android:gravity="center"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

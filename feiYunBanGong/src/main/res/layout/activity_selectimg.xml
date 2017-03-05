@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        android:background="@color/a42baff" >
+
+        <ImageView
+            android:id="@id/iv_back"
+            android:layout_width="@dimen/x67"
+            android:layout_height="@dimen/y67"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x40"
+            android:src="@drawable/arrows_left" />
+
+        <TextView
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="发布动态" />
+
+        <TextView
+            android:id="@+id/activity_selectimg_send"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/size48"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x100"
+            android:textColor="@drawable/tv_selector_color"
+            android:text="发送" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y400"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/shape_bt_bg"
+        android:gravity="left|top"
+        android:hint="发布工作圈动态......"
+        android:padding="@dimen/size40"
+        android:textSize="@dimen/size48" >
+    </EditText>
+
+    <GridView
+        android:id="@+id/noScrollgridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y50"
+        android:horizontalSpacing="@dimen/size10"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/size10" >
+    </GridView>
+
+</LinearLayout>

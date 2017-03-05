@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y300"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y200"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_shenpiren"
+            android:layout_width="@dimen/size120"
+            android:layout_height="@dimen/size120"
+            android:src="@drawable/fragment_head"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/a000000_42"
+            android:layout_width="@dimen/x250"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:gravity="center"
+            android:text="卡哇伊" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/a000000_42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x50"
+            android:gravity="center"
+            android:text="1777777777" />
+
+        <Button
+            android:id="@+id/bt_tianjia"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/y80"
+            android:background="@drawable/selector_lianxiren_bg"
+            android:text="未添加"
+            android:textColor="@color/ffffff"
+            android:textSize="@dimen/size32" />
+    </LinearLayout>
+
+</LinearLayout>

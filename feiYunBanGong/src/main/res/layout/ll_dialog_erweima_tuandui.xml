@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x900"
+    android:layout_height="@dimen/y900"
+    android:background="@color/hui"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/iv_erweima2"
+        android:layout_width="@dimen/size600"
+        android:layout_height="@dimen/size600"
+        android:layout_marginBottom="@dimen/y10"
+        android:scaleType="fitXY" />
+
+    <TextView
+        style="@style/a000000_44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y50"
+        android:text="扫一扫加入我们的团队" />
+
+</LinearLayout>

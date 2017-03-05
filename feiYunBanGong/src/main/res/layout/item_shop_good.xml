@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/size20" >
+
+    <ImageView
+        android:id="@+id/iv_good_head"
+        android:layout_width="@dimen/size300"
+        android:layout_height="@dimen/size300"
+        android:src="@drawable/ic_launcher" 
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_good_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商品名称"
+        android:textSize="@dimen/size36" />
+
+    <TextView
+        android:id="@+id/tv_good_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:text="价格：￥123"
+        android:textSize="@dimen/size36" />
+
+</LinearLayout>

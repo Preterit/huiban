@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:gravity="center" >
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:src="@drawable/rili" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/a000000_38"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x8"
+            android:gravity="center_vertical"
+            android:text="时间选择" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_clockIn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/f0f0f0"
+        android:dividerHeight="@dimen/y4"
+        android:scrollbars="none" >
+    </ListView>
+
+</LinearLayout>

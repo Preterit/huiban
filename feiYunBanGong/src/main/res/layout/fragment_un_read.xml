@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.fragment.ReadFragment" >
+
+    <ListView
+        android:id="@+id/lv_unread_notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/hui"
+        android:dividerHeight="@dimen/y4"
+        >
+    </ListView>
+
+</LinearLayout>

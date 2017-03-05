@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y150"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="手机号：" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11" />
+
+        <ImageView
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/login2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y120"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="验证码：" />
+
+        <EditText
+            android:id="@+id/et_verify"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/bt_checking"
+            style="@style/a42baff_36"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y90"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@drawable/blue_circle"
+            android:padding="@dimen/size12"
+            android:text="获取验证码" />
+    </LinearLayout>
+
+    <com.feirui.feiyunbangong.view.RevealLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y180" >
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/ffffff_60"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y114"
+            android:layout_marginLeft="@dimen/x140"
+            android:layout_marginRight="@dimen/x140"
+            android:background="@drawable/blue_bt_selector"
+            android:gravity="center"
+            android:text="下一步" />
+    </com.feirui.feiyunbangong.view.RevealLayout>
+
+</LinearLayout>

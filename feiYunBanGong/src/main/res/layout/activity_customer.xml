@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:id="@+id/ll_wait"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120" >
+
+        <TextView
+            android:id="@+id/text1"
+            style="@style/huise_49"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/jianbianhui"
+            android:gravity="center"
+            android:text="进行中" />
+
+        <TextView
+            android:id="@+id/text2"
+            style="@style/huise_49"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已完成" />
+        <TextView
+            android:id="@+id/text3"
+            style="@style/huise_49"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="反馈" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_select_c"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

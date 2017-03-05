@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <ScrollView
+        android:id="@+id/sv_caigou"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x12"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y28"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y8"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        style="@style/a000000_48"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="J先生" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x42"
+                        android:layout_height="@dimen/y46"
+                        android:src="@drawable/xiaohogren" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y28"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        style="@style/a000000_44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="公司名称：" />
+
+                    <TextView
+                        android:id="@+id/tv_gongsiming"
+                        style="@style/huise_40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="北京飞锐科技有限公司" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y22"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        style="@style/a000000_44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="公司职位：" />
+
+                    <TextView
+                        android:id="@+id/tv_zhiwei"
+                        style="@style/huise_40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="产品经理" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y22" >
+
+                <TextView
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传名片：" />
+
+                <ImageView
+                    android:layout_width="@dimen/x580"
+                    android:layout_height="@dimen/y370"
+                    android:src="@drawable/banner1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68" >
+
+                <TextView
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="意        向：" />
+
+                <TextView
+                    android:id="@+id/tv_yixiang"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y32"
+                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginTop="@dimen/y32"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68" >
+
+                <TextView
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="文字说明：" />
+
+                <TextView
+                    android:id="@+id/tv_shuoming"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y32"
+                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginTop="@dimen/y32"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

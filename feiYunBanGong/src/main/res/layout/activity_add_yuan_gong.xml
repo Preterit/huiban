@@ -1,0 +1,173 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <!-- 添加员工： -->
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y100"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="员工姓名：" />
+
+        <EditText
+            android:id="@+id/et01"
+            style="@style/a000000_48"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:background="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="员工手机：" />
+
+        <EditText
+            android:id="@+id/et02"
+            style="@style/a000000_48"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="11" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="员工职务：" />
+
+        <EditText
+            android:id="@+id/et03"
+            style="@style/a000000_48"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:background="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="员工部门：" />
+
+        <EditText
+            android:id="@+id/et04"
+            style="@style/a000000_48"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:background="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y184"
+        android:orientation="horizontal" >
+
+        <com.feirui.feiyunbangong.view.RevealLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bt_luru"
+                style="@style/ffffff_49"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/y84"
+                android:layout_marginLeft="@dimen/x140"
+                android:layout_marginRight="@dimen/x140"
+                android:background="@drawable/blue_bt_selector"
+                android:gravity="center"
+                android:text="录入" />
+        </com.feirui.feiyunbangong.view.RevealLayout>
+
+        <com.feirui.feiyunbangong.view.RevealLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/bt_qingkong"
+                style="@style/ffffff_49"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/x84"
+                android:layout_marginLeft="@dimen/x140"
+                android:layout_marginRight="@dimen/x140"
+                android:background="@drawable/blue_bt_selector"
+                android:gravity="center"
+                android:text="清空" />
+        </com.feirui.feiyunbangong.view.RevealLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y100"
+        android:text="注：该功能仅对公司管理员开放！"
+        android:textColor="@color/red"
+        android:textSize="@dimen/size42" />
+
+</LinearLayout>

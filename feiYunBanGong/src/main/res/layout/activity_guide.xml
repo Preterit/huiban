@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    tools:context=".GuideActivity" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_guide"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y25"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/x105"
+            android:layout_height="@dimen/x105"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="@dimen/x30"
+            android:src="@drawable/dot" />
+
+        <ImageView
+            android:layout_width="@dimen/x105"
+            android:layout_height="@dimen/x105"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="@dimen/x30"
+            android:src="@drawable/dot" />
+
+        <!-- <ImageView
+            android:layout_width="@dimen/x105"
+            android:layout_height="@dimen/x105"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="@dimen/x30"
+            android:src="@drawable/dot" /> -->
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_guide"
+        android:layout_width="@dimen/x480"
+        android:layout_height="@dimen/y130"
+        android:layout_above="@id/ll_guide"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/lijitiyan"
+        android:visibility="gone"
+         />
+
+</RelativeLayout>

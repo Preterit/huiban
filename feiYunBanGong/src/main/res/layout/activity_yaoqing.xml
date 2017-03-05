@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150" >
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_weight="1"
+            android:text="我的邀请码：" />
+
+        <TextView
+            android:id="@+id/tv_yaoqingma"
+            style="@style/a42baff_46"
+            android:layout_width="@dimen/x260"
+            android:layout_height="@dimen/y90"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x36"
+            android:background="@drawable/blue_kuang"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y540"
+        android:background="@color/a42baff" >
+
+        <TextView
+            style="@style/ffffff_38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x56"
+            android:layout_marginTop="@dimen/y56"
+            android:text="奖励总金额" />
+
+        <TextView
+            android:id="@+id/tv_zongjine"
+            style="@style/ffffff_49"
+            android:layout_width="@dimen/x420"
+            android:layout_height="@dimen/y420"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/y36"
+            android:layout_marginLeft="@dimen/x72"
+            android:layout_marginTop="@dimen/y36"
+            android:background="@drawable/yaoqing1"
+            android:gravity="center"
+            android:text="￥ 00.00" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/huise_40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y30"
+        android:text="注册奖励1元" />
+
+    <Button
+        android:id="@+id/btn_duanxin"
+        style="@style/ffffff_60"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x114"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@drawable/blue_bt_selector"
+        android:gravity="center"
+        android:text="继续邀请更多好友" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124"
+        android:src="@drawable/yaoqing2" />
+
+    <ListView
+        android:id="@+id/lv_yiyaoqing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y4" >
+    </ListView>
+
+</LinearLayout>

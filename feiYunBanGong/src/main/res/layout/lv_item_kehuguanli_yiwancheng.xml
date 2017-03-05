@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ffffff" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x12"
+        android:layout_marginLeft="@dimen/x22"
+        android:layout_marginRight="@dimen/x38"
+        android:layout_marginTop="@dimen/y28"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y8"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/a000000_48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="J先生" />
+
+            <ImageView
+                android:layout_width="@dimen/x42"
+                android:layout_height="@dimen/y46"
+                android:src="@drawable/xiaohogren" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y8"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拜访时间：" />
+
+            <TextView
+                android:id="@+id/tv_shijian"
+                style="@style/huise_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-5-16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y8"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拜访地址：" />
+
+            <TextView
+                android:id="@+id/tv_dizhi"
+                style="@style/huise_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="北京飞锐科技有限公司" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_fankui"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/x70"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/x12"
+            android:background="@drawable/chakan"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="@dimen/x44"
+                android:layout_height="@dimen/y44"
+                android:src="@drawable/bai_fangdajing" />
+
+            <TextView
+                style="@style/ffffff_38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x9"
+                android:text="反馈" >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

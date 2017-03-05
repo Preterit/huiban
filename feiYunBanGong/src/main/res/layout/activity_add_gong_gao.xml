@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.AddGongGaoActivity" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <TextView
+        style="@style/a000000_44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginTop="@dimen/y100"
+        android:text="公告：" />
+
+    <EditText
+        android:id="@+id/et_gongao"
+        style="@style/a000000_42"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/shape_bt_bg"
+        android:gravity="top|left"
+        android:hint="请输入要发布的公告"
+        android:minHeight="@dimen/y400"
+        android:padding="@dimen/size20" />
+
+    <Button
+        android:id="@+id/bt_submit"
+        style="@style/ffffff_60"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y114"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y200"
+        android:background="@drawable/blue_bt_selector"
+        android:gravity="center"
+        android:text="发布公告" />
+
+</LinearLayout>

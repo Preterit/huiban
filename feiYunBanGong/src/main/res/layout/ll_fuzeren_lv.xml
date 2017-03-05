@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y200"
+        android:orientation="horizontal" 
+        android:padding="@dimen/size10"
+        android:gravity="center_vertical"
+        >
+
+        <com.feirui.feiyunbangong.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/size140"
+            android:layout_height="@dimen/size140"
+            android:src="@drawable/fragment_head"
+            android:layout_marginLeft="@dimen/x100"
+            android:layout_gravity="center_vertical"
+             />
+        <TextView 
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张三"
+            style="@style/a000000_50"
+            android:layout_marginLeft="@dimen/x50"
+            />
+        
+        <TextView 
+            android:id="@+id/tv_isguanliyuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理员"
+            android:background="@drawable/shape_bt_bg_lanse"
+			android:padding="@dimen/size15"  
+			style="@style/ffffff_38"   
+			android:layout_marginLeft="@dimen/x20"       
+            />
+        
+        <View 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+        
+        <Button 
+            android:id="@+id/bt_sheding"
+            android:layout_width="@dimen/x170"
+            android:layout_height="@dimen/y90"
+            android:text="取消"
+            android:background="@drawable/shape_bt_bg"
+            android:layout_marginRight="@dimen/x100"
+            style="@style/a000000_38"
+            />
+        
+        
+        
+        
+        
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y150"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="手 机 号：" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="number" />
+
+        <ImageView
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/login2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="姓      名：" />
+
+        <EditText
+            android:id="@+id/et_name"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入姓名" />
+
+        <ImageView
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/login2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="密      码：" />
+
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/login3" />
+    </LinearLayout>
+
+    <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="确认密码：" />
+
+        <EditText
+            android:id="@+id/et_affirm_password"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请确认密码"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/login3" />
+    </LinearLayout> -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="邀请码：" />
+
+        <EditText
+            android:id="@+id/et_yaoqing"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入邀请码"
+            android:inputType="textPassword" />
+
+        <TextView
+            style="@style/hongse_38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x50"
+            android:text="选填" />
+    </LinearLayout>
+
+    <com.feirui.feiyunbangong.view.RevealLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y150" >
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/ffffff_60"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x114"
+            android:layout_marginLeft="@dimen/x140"
+            android:layout_marginRight="@dimen/x140"
+            android:background="@drawable/blue_bt_selector"
+            android:gravity="center"
+            android:text="确定" />
+    </com.feirui.feiyunbangong.view.RevealLayout>
+
+</LinearLayout>

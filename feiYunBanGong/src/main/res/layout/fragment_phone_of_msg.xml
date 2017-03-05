@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.feirui.feiyunbangong.fragment.PhoneOfMsgFragment" >
+
+    <ListView
+        android:id="@+id/lv_lianxiren"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y5" >
+    </ListView>
+
+</FrameLayout>

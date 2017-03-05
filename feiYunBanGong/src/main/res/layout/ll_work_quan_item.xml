@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/size20" >
+
+    <!-- 工作圈 item -->
+
+    <com.feirui.feiyunbangong.view.CircleImageView
+        android:id="@+id/iv_head_work"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y200"
+        android:src="@drawable/fragment_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_name_work"
+            style="@style/a000000_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="J先生" />
+
+        <TextView
+            android:id="@+id/tv_content_work"
+            style="@style/a000000_38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:text="有时候不知道真像，不了解本质的人，假装不知道真像，不了解本质的人，却是幸福的！" />
+
+        <com.feirui.feiyunbangong.view.NoScrollGridView
+            android:id="@+id/gridview_work"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            android:columnWidth="@dimen/x250"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/x5"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="@dimen/y5" >
+        </com.feirui.feiyunbangong.view.NoScrollGridView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y40"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_show_hide_zan"
+                android:layout_width="@dimen/x450"
+                android:layout_height="@dimen/y90"
+                android:background="@drawable/shape_zan_pinglun_bag"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10"
+                android:visibility="invisible" >
+
+                <ImageView
+                    android:id="@+id/iv_zan"
+                    android:layout_width="@dimen/size50"
+                    android:layout_height="@dimen/size50"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/zan" />
+
+                <TextView
+                    android:id="@+id/tv_zan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:clickable="true"
+                    android:text="赞一下"
+                    android:textColor="@drawable/tv_selector_color"
+                    android:textSize="@dimen/size40" />
+
+                <ImageView
+                    android:id="@+id/iv_pinglun"
+                    android:layout_width="@dimen/size50"
+                    android:layout_height="@dimen/size50"
+                    android:layout_marginLeft="@dimen/x80"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pinglun" />
+
+                <TextView
+                    android:id="@+id/tv_pinglun_click"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="评  论"
+                    android:textColor="@drawable/tv_selector_color"
+                    android:textSize="@dimen/size40" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_xinxi"
+                android:layout_width="@dimen/size80"
+                android:layout_height="@dimen/size80"
+                android:layout_marginLeft="@dimen/x20"
+                android:scaleType="fitXY"
+                android:src="@drawable/xinxi" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_zan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_marginTop="@dimen/y10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="@dimen/size70"
+                android:layout_height="@dimen/size70"
+                android:layout_marginLeft="@dimen/x25"
+                android:scaleType="fitXY"
+                android:src="@drawable/xin" />
+            <!-- 赞列表 -->
+
+            <TextView
+                android:id="@+id/tv_zan_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- 评论列表 -->
+
+        <com.feirui.feiyunbangong.view.MyListView
+            android:id="@+id/lv_pinglun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </com.feirui.feiyunbangong.view.MyListView>
+    </LinearLayout>
+
+</LinearLayout>

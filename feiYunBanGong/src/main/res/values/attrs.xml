@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LineChar">
+        <attr name="xylinecolor" format="color" />
+        <!-- xy坐标轴颜色 -->
+        <attr name="xylinewidth" format="dimension" />
+        <!-- xy坐标轴宽度 -->
+        <attr name="xytextcolor" format="color" />
+        <!-- xy坐标轴文字颜色 -->
+        <attr name="xytextsize" format="dimension" />
+        <!-- xy坐标轴文字大小 -->
+        <attr name="linecolor" format="color" />
+        <!-- 折线图中折线的颜色 -->
+        <attr name="interval" format="dimension" />
+        <!-- x轴各个坐标点水平间距 -->
+        <attr name="bgcolor" format="color" />
+        <!-- 背景颜色 -->
+        <attr name="x_interval" format="dimension" />
+        <!-- x轴间隔 -->
+        <attr name="y_interval" format="dimension" />
+        <!-- y轴间隔 -->
+        <attr name="x_point" format="dimension" />
+        <!-- 原点x坐标 -->
+        <attr name="y_point" format="dimension" />
+        <!-- 原点y坐标 -->
+    </declare-styleable>
+    
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_overlay" format="boolean" />
+    </declare-styleable>
+
+</resources>

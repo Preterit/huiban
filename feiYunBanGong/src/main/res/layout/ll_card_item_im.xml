@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 名片消息自定义 -->
+    <TextView
+        android:id="@+id/tv_msg"
+        style="@style/a000000_38"
+        android:layout_width="@dimen/x650"
+        android:layout_height="@dimen/y180"
+        android:background="@drawable/card"
+        android:gravity="bottom|center_horizontal"
+        android:text="sdfsf" />
+
+</LinearLayout>

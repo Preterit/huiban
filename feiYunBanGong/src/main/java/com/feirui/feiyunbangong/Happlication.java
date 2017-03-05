@@ -1,0 +1,101 @@
+package com.feirui.feiyunbangong;
+
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.wxlib.util.SysUtil;
+import com.feirui.feiyunbangong.utils.IMUtil;
+import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import java.util.ArrayList;
+
+public class Happlication extends Application {
+    // application实例
+    private static Happlication instance;
+    public static boolean isDebug;// 是否打开调试
+    private static Context context;
+    // 应用程序中创建的每个activity
+    private static ArrayList<Activity> activitylist = new ArrayList<Activity>();
+    public static String APP_KEY = "23529997";
+
+    /**
+     * 实现单例模式
+     *
+     * @return
+     */
+    public static Happlication getInstance() {
+        isDebug = true;
+        return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+
+        // 必须首先执行这部分代码, 如果在":TCMSSevice"进程中，无需进行云旺（OpenIM）和app业务的初始化，以节省内存;
+        SysUtil.setApplication(this);
+        if (SysUtil.isTCMSServiceProcess(this)) {
+            return;
+        }
+        // 第一个参数是Application Context
+        // 这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
+        if (SysUtil.isMainProcess()) {
+            YWAPI.init(this, APP_KEY);
+        }
+
+        IMUtil.bind();// 绑定自定义会话列表等；
+
+        // 初始化ImageLoader;
+        ImageLoaderConfiguration config = ImageLoaderUtils.getNowConfig(this);
+        ImageLoader.getInstance().init(config);
+
+		/*
+         * // 使用andbase进行屏幕适配： AbAppConfig.UI_WIDTH = 1080;
+		 * AbAppConfig.UI_HEIGHT = 1920;
+		 */
+    }
+
+    public static void addActivity(Activity activity) {
+        activitylist.add(activity);
+    }
+
+    public static ArrayList<Activity> getActivities() {
+
+        return activitylist;
+    }
+
+    public static Context getAppContext() {
+        return Happlication.context;
+    }
+
+    public static void ClearAty() {
+        try {
+            for (Activity activity : activitylist) {
+                if (activity != null)
+                    activity.finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void exit() {
+        try {
+            for (Activity activity : activitylist) {
+                if (activity != null)
+                    activity.finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.exit(0);
+        }
+
+    }
+}

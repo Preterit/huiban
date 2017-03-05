@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <ScrollView
+        android:id="@+id/sv_caigou"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y160"
+                android:layout_marginLeft="@dimen/x65"
+                android:layout_marginRight="@dimen/x45"
+                android:layout_marginTop="@dimen/y28" >
+
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="@dimen/x160"
+                    android:layout_height="@dimen/y160"
+                    android:src="@drawable/fragment_head" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x48"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        style="@style/a000000_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="J先生（UI设计）       设计部" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        style="@style/huise_38"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y12"
+                        android:text="2016-11-25" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_a"
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日工作" />
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginTop="@dimen/y32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_b"
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="未完成工作" />
+
+                <TextView
+                    android:id="@+id/tv_2"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginTop="@dimen/y32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_c"
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="明日工作" />
+
+                <TextView
+                    android:id="@+id/tv_3"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginTop="@dimen/y32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注" />
+
+                <TextView
+                    android:id="@+id/tv_4"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginTop="@dimen/y32" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x38"
+                android:layout_marginRight="@dimen/x38"
+                android:layout_marginTop="@dimen/y68" >
+
+                <TextView
+                    style="@style/a000000_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="图片" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="@dimen/x320"
+                    android:layout_height="@dimen/y220"
+                    android:layout_marginRight="@dimen/x118"
+                    android:src="@drawable/banner1" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

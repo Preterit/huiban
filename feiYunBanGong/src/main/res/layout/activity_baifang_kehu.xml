@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/y120"
+                android:src="@drawable/dangqianshijian" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="当前时间" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/huise_38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="2016-8-10" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/y120"
+                android:src="@drawable/dangqiandizhi" />
+
+            <TextView
+                android:id="@+id/tv_section"
+                style="@style/a000000_48"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x8"
+                android:gravity="center_vertical"
+                android:text="当前位置" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x700"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x68"
+        android:layout_marginTop="@dimen/y68"
+        android:gravity="center_vertical" >
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客户姓名：" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/huise_40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="z先生" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x68"
+        android:layout_marginTop="@dimen/y38"
+        android:gravity="center_vertical" >
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拜访地址：" />
+
+        <TextView
+            android:id="@+id/tv_site"
+            style="@style/huise_40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="海淀区" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x68"
+        android:layout_marginTop="@dimen/y38"
+        android:gravity="center_vertical" >
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拜访时间：" />
+
+        <TextView
+            android:id="@+id/tv_see_time"
+            style="@style/huise_40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-10-10" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add"
+        style="@style/ffffff_60"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x114"
+        android:layout_marginBottom="@dimen/y150"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/blue_bt_selector"
+        android:gravity="center"
+        android:text="签到" />
+
+</LinearLayout>

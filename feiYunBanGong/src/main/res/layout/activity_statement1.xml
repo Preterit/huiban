@@ -1,0 +1,247 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_statement1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ffffff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <ScrollView
+        android:id="@+id/sv_caigou"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_marginTop="@dimen/y16"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日完成工作：" />
+
+                <EditText
+                    android:id="@+id/et_1"
+                    style="@style/a000000_38"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入..."
+                    android:lines="3"
+                    android:padding="@dimen/x26" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:id="@+id/ll_zongjie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_2"
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="未完成工作：" />
+
+                <EditText
+                    android:id="@+id/et_2"
+                    style="@style/a000000_38"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入..."
+                    android:lines="3"
+                    android:padding="@dimen/x26" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/tv_3"
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="明日工作计划：" />
+
+                <EditText
+                    android:id="@+id/et_3"
+                    style="@style/a000000_38"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入..."
+                    android:lines="3"
+                    android:padding="@dimen/x26" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注：" />
+
+                <EditText
+                    android:id="@+id/et_beizhu"
+                    style="@style/a000000_38"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入..."
+                    android:lines="5"
+                    android:padding="@dimen/x26" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_marginTop="@dimen/y20" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="图片：" />
+
+                <ImageView
+                    android:id="@+id/iv_tupian1"
+                    android:layout_width="@dimen/x200"
+                    android:layout_height="@dimen/y200"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/add_pic" />
+
+                <ImageView
+                    android:id="@+id/iv_tupian2"
+                    android:layout_width="@dimen/x200"
+                    android:layout_height="@dimen/y200"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/add_pic"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_tupian3"
+                    android:layout_width="@dimen/x200"
+                    android:layout_height="@dimen/y200"
+                    android:layout_marginLeft="@dimen/x40"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/add_pic"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y1"
+                android:background="@color/jiange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y450"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y20"
+                android:paddingTop="@dimen/y20" >
+
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发送到：" />
+
+                <ListView
+                    android:id="@+id/lv_add_shenpiren"
+                    android:layout_width="@dimen/x350"
+                    android:layout_height="@dimen/y400"
+                    android:divider="@color/ffffff"
+                    android:dividerHeight="@dimen/y15" >
+                </ListView>
+
+                <ImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y100"
+                    android:src="@drawable/tianjia" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                style="@style/ffffff_60"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x114"
+                android:layout_marginBottom="@dimen/y150"
+                android:layout_marginLeft="@dimen/x140"
+                android:layout_marginRight="@dimen/x140"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/blue_bt_selector"
+                android:gravity="center"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/a42baff" >
+
+        <LinearLayout
+            android:id="@+id/leftll"
+            android:layout_width="@dimen/x144"
+            android:layout_height="@dimen/title_bar"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/leftIv"
+                android:layout_width="@dimen/x57"
+                android:layout_height="@dimen/x57"
+                android:layout_gravity="center"
+                android:src="@drawable/homepage_l" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/centerTv"
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="聊天记录" />
+
+        <LinearLayout
+            android:id="@+id/rightll"
+            android:layout_width="@dimen/x144"
+            android:layout_height="@dimen/y144"
+            android:layout_alignParentRight="true"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/rightIv"
+                android:layout_width="@dimen/x57"
+                android:layout_height="@dimen/x57"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                android:src="@drawable/homepage_r" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </FrameLayout>
+
+</LinearLayout>

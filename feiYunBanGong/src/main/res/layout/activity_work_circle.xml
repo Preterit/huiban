@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_work"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ffffff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <com.feirui.feiyunbangong.view.RefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/lv_work"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.feirui.feiyunbangong.view.RefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_pinglun_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y20"
+        android:background="@color/hui"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:padding="@dimen/size10" >
+
+        <EditText
+            android:id="@+id/et_pinglun"
+            style="@style/a000000_44"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_weight="1"
+            android:background="@drawable/shape_bt_bg"
+            android:hint="说点什么呢？"
+            android:padding="@dimen/size30"
+             >
+        </EditText>
+
+        <Button
+            android:id="@+id/bt_send"
+            style="@style/ffffff_38"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:background="@drawable/shape_bt_bg_lanse"
+            android:text="发送" />
+    </LinearLayout>
+
+</LinearLayout>

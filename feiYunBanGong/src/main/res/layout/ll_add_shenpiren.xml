@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y100"
+    android:background="@drawable/selctor_shenpi_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/tv_01"
+        style="@style/huise_38"
+        android:layout_gravity="left|center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="J先生" />
+
+    <ImageView
+        android:id="@+id/iv_01"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/y50"
+        android:src="@drawable/jianhao" />
+    
+</LinearLayout>

@@ -1,0 +1,166 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.GuanLiTuanDuiActivity" >
+
+    <!-- bar -->
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <!-- 扫码加入我们 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_01"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:layout_marginTop="@dimen/y50"
+        android:paddingLeft="@dimen/x50"
+        android:paddingRight="@dimen/x100" >
+
+        <ImageView
+            android:id="@+id/iv_tuandui01"
+            android:layout_width="@dimen/size100"
+            android:layout_height="@dimen/size100"
+            android:layout_centerVertical="true"
+            android:src="@drawable/saoma" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@id/iv_tuandui01"
+            android:gravity="center_vertical"
+            android:text="扫码加入我们" />
+
+        <ImageView
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/jiantou_you" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/fenge" />
+
+    <!-- 团队联系邮箱 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_02"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:paddingLeft="@dimen/x50"
+        android:paddingRight="@dimen/x100" >
+
+        <ImageView
+            android:id="@+id/iv_tuandui02"
+            android:layout_width="@dimen/size100"
+            android:layout_height="@dimen/size100"
+            android:layout_centerVertical="true"
+            android:src="@drawable/youxiang" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@id/iv_tuandui02"
+            android:gravity="center_vertical"
+            android:text="团队联系邮箱" />
+
+        <ImageView
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/jiantou_you" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/fenge" />
+    <!-- 负责任指定 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_03"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:paddingLeft="@dimen/x50"
+        android:paddingRight="@dimen/x100" >
+
+        <ImageView
+            android:id="@+id/iv_tuandui03"
+            android:layout_width="@dimen/size100"
+            android:layout_height="@dimen/size100"
+            android:layout_centerVertical="true"
+            android:src="@drawable/fuzeren" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@id/iv_tuandui03"
+            android:gravity="center_vertical"
+            android:text="负责人指定" />
+
+        <ImageView
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/jiantou_you" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/fenge" />
+    <!-- 工作圈推广 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_04"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:paddingLeft="@dimen/x50"
+        android:paddingRight="@dimen/x100" >
+
+        <ImageView
+            android:id="@+id/iv_tuandui04"
+            android:layout_width="@dimen/size100"
+            android:layout_height="@dimen/size100"
+            android:layout_centerVertical="true"
+            android:src="@drawable/saoma" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@id/iv_tuandui04"
+            android:gravity="center_vertical"
+            android:text="工作圈推广" />
+
+        <ImageView
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/jiantou_you" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/fenge" />
+
+</LinearLayout>

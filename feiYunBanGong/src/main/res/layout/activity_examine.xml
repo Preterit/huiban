@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x170" >
+
+        <LinearLayout
+            android:id="@+id/ll_wait"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/y120"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/fragment1_d_a" />
+
+            <TextView
+                style="@style/a000000_48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x9"
+                android:text="待审批" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_record"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/y120"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/fragment1_d_b" />
+
+            <TextView
+                style="@style/a000000_48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x9"
+                android:text="操作记录" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y857"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/ll_leave"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_1" />
+
+                <TextView
+                    style="@style/ff99cb_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="请假" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_refund"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_2" />
+
+                <TextView
+                    style="@style/ffa44b_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="报销" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_goOut"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_3" />
+
+                <TextView
+                    style="@style/d6a5f4_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="外出" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/ll_payment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_4" />
+
+                <TextView
+                    style="@style/ff6f5c_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="付款" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_purchase"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_5" />
+
+                <TextView
+                    style="@style/ffcc33_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="采购" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_else"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_6" />
+
+                <TextView
+                    style="@style/a66c8ff_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="其他" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

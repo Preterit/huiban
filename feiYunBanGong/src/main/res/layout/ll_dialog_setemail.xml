@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="@dimen/x800"
+        android:layout_height="@dimen/y200"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="邮箱:" />
+
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/a000000_42"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_width="@dimen/x500"
+            android:layout_height="@dimen/y100"
+            android:background="@drawable/shape_bt_bg"
+            android:hint="请输入邮箱"
+            android:paddingLeft="@dimen/x30" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/x800"
+        android:layout_height="@dimen/y200"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/bt_quxiao"
+            style="@style/ffffff_38"
+            android:layout_width="@dimen/x240"
+            android:layout_height="@dimen/y100"
+            android:layout_marginLeft="@dimen/x80"
+            android:background="@drawable/shape_bt_bg_lanse"
+            android:text="取消" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/bt_queding"
+            style="@style/ffffff_38"
+            android:layout_width="@dimen/x240"
+            android:layout_height="@dimen/y100"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/shape_bt_bg_lanse"
+            android:text="确定" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y20" />
+
+</LinearLayout>

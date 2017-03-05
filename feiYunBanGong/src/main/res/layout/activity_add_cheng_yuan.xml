@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.AddChengYuanActivity" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <!-- android 原生下拉刷新 -->
+
+    <ExpandableListView
+        android:id="@+id/expandlist"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/ffffff"
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y4" />
+
+    <Button
+        android:id="@+id/bt_submit"
+        style="@style/ffffff_49"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="确认" />
+
+</LinearLayout>

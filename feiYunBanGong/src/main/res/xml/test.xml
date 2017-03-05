@@ -1,0 +1,12 @@
+<bookstore>
+  <book id = "501">
+     <category>CHILDREN</category>
+     <title lang="en"> Harry Potter </title>
+     <author> JK.Rowling</author>
+  </book>
+  <book  id = "502">
+     <category>CHILDREN</category>
+     <title lang="en"> Harry Potter </title>
+     <author> JK.Rowling</author>
+  </book>
+</bookstore>

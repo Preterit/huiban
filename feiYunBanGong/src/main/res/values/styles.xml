@@ -1,0 +1,316 @@
+<resources>
+
+    <style name="mydialog" parent="android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 没有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+
+    <style name="AppTheme" parent="AppBaseTheme"></style>
+
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <style name="Dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/push_top_in_dialog</item>
+        <item name="android:windowExitAnimation">@anim/alpha_dialog_hide</item>
+    </style>
+
+    <style name="a42baff_76">
+        <item name="android:textColor">@color/a42baff</item>
+        <item name="android:textSize">@dimen/size76</item>
+    </style>
+
+    <style name="a42baff_36">
+        <item name="android:textColor">@color/a42baff</item>
+        <item name="android:textSize">@dimen/size36</item>
+    </style>
+
+    <style name="a42baff_46">
+        <item name="android:textColor">@color/a42baff</item>
+        <item name="android:textSize">@dimen/size46</item>
+    </style>
+
+    <style name="a6a6a6a_46">
+        <item name="android:textColor">@color/a6a6a6a</item>
+        <item name="android:textSize">@dimen/size46</item>
+    </style>
+
+    <style name="a6a6a6a_38">
+        <item name="android:textColor">@color/a6a6a6a</item>
+        <item name="android:textSize">@dimen/size38</item>
+    </style>
+
+    <style name="ffffff_60">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size60</item>
+    </style>
+
+    <style name="ffffff_49">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size49</item>
+    </style>
+
+    <style name="ffffff_38">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size38</item>
+    </style>
+
+    <style name="ffffff_32">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size32</item>
+    </style>
+
+    <style name="ffffff_24">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size24</item>
+    </style>
+
+    <style name="ffffff_70">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size70</item>
+    </style>
+
+    <style name="ffffff_100">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size100</item>
+    </style>
+
+    <style name="main_30">
+        <item name="android:textColor">@color/main_botton_text_color</item>
+        <item name="android:textSize">@dimen/size30</item>
+    </style>
+
+    <style name="main_40">
+        <item name="android:textColor">@color/main_botton_text_color</item>
+        <item name="android:textSize">@dimen/size40</item>
+    </style>
+
+    <style name="a454545_35">
+        <item name="android:textColor">@color/a454545</item>
+        <item name="android:textSize">@dimen/size35</item>
+    </style>
+
+    <style name="d1d1d1_47">
+        <item name="android:textColor">@color/d1d1d1</item>
+        <item name="android:textSize">@dimen/size47</item>
+    </style>
+
+    <style name="a000000_38">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size38</item>
+    </style>
+
+    <style name="a000000_36">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size36</item>
+    </style>
+
+    <style name="a000000_32">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size32</item>
+    </style>
+
+    <style name="main_color_38">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">@dimen/size38</item>
+    </style>
+
+    <style name="main_color_44">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">@dimen/size44</item>
+    </style>
+
+    <style name="hongse_38">
+        <item name="android:textColor">@color/hongse</item>
+        <item name="android:textSize">@dimen/size38</item>
+    </style>
+
+    <style name="huise_38">
+        <item name="android:textColor">@color/huise</item>
+        <item name="android:textSize">@dimen/size38</item>
+    </style>
+
+    <style name="huise_40">
+        <item name="android:textColor">@color/huise</item>
+        <item name="android:textSize">@dimen/size40</item>
+    </style>
+
+    <style name="huise_49">
+        <item name="android:textColor">@color/huise</item>
+        <item name="android:textSize">@dimen/size49</item>
+    </style>
+
+    <style name="huise_58">
+        <item name="android:textColor">@color/huise</item>
+        <item name="android:textSize">@dimen/size58</item>
+    </style>
+
+    <style name="a000000_50">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size50</item>
+    </style>
+
+    <style name="a000000_48">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="tv_hint">
+        <item name="android:textColor">@color/tv_hint</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="a000000_44">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size44</item>
+    </style>
+
+    <style name="a000000_60">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size60</item>
+    </style>
+
+    <style name="a000000_42">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size42</item>
+    </style>
+
+    <style name="hongse_42">
+        <item name="android:textColor">@color/hongse</item>
+        <item name="android:textSize">@dimen/size42</item>
+    </style>
+
+    <style name="a000000_58">
+        <item name="android:textColor">@color/a000000</item>
+        <item name="android:textSize">@dimen/size58</item>
+    </style>
+
+    <style name="ff4f4f_27">
+        <item name="android:textColor">@color/ff4f4f</item>
+        <item name="android:textSize">@dimen/size27</item>
+    </style>
+
+    <style name="huise_50">
+        <item name="android:textColor">@color/huise</item>
+        <item name="android:textSize">@dimen/size50</item>
+    </style>
+
+    <style name="f8c600_60">
+        <item name="android:textColor">@color/f8c600</item>
+        <item name="android:textSize">@dimen/size60</item>
+    </style>
+    <!-- 打卡 -->
+    <style name="ff99cb_48">
+        <item name="android:textColor">@color/ff99cb</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="ff99cb_54">
+        <item name="android:textColor">@color/ff99cb</item>
+        <item name="android:textSize">@dimen/size54</item>
+    </style>
+    <!-- 报表 -->
+    <style name="ffa44b_48">
+        <item name="android:textColor">@color/ffa44b</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="ffa44b_54">
+        <item name="android:textColor">@color/ffa44b</item>
+        <item name="android:textSize">@dimen/size54</item>
+    </style>
+    <!-- 项目 -->
+    <style name="d6a5f4_48">
+        <item name="android:textColor">@color/d6a5f4</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="d6a5f4_54">
+        <item name="android:textColor">@color/d6a5f4</item>
+        <item name="android:textSize">@dimen/size54</item>
+    </style>
+    <!-- 审批 -->
+    <style name="ff6f5c_48">
+        <item name="android:textColor">@color/ff6f5c</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="ff6f5c_54">
+        <item name="android:textColor">@color/ff6f5c</item>
+        <item name="android:textSize">@dimen/size54</item>
+    </style>
+    <!-- 客户管理 -->
+    <style name="a66c8ff_48">
+        <item name="android:textColor">@color/a66c8ff</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="a66c8ff_54">
+        <item name="android:textColor">@color/a66c8ff</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+    <!-- 数据报表 -->
+    <style name="ffcc33_48">
+        <item name="android:textColor">@color/ffcc33</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="ffcc33_54">
+        <item name="android:textColor">@color/ffcc33</item>
+        <item name="android:textSize">@dimen/size48</item>
+    </style>
+
+    <style name="pb_tongjixuexi_shijian" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_height">@dimen/y50</item>
+        <item name="android:progress">20</item>
+        <item name="android:layout_marginLeft">@dimen/x1</item>
+    </style>
+    <!-- 这个是刷新listview的progress的样式 -->
+    <style name="customProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/custom_progress_bar</item>
+        <item name="android:layout_width">21dip</item>
+        <item name="android:layout_height">21dip</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="rl_line_style">
+
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/rl_line_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/shenpi_fg</item>
+    </style>
+
+    <style name="tv_right_text_in_rl">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_text</item>
+    </style>
+
+    <style name="tv_left_text_in_rl">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/tv_left_color</item>
+    </style>
+
+    <color name="gray_text">#989898</color>
+    <color name="tv_left_color">#666666</color>
+    <color name="shenpi_bg">#f9f9f9</color>
+    <color name="shenpi_fg">#fdfdfe</color>
+</resources>

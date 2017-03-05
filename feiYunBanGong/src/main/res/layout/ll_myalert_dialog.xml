@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x750"
+    android:layout_height="@dimen/y900"
+    android:background="@drawable/shape_bg_update"
+    android:orientation="vertical" >
+
+    <!-- 更新提示dialog -->
+
+    <ImageView
+        android:layout_width="@dimen/size250"
+        android:layout_height="@dimen/size250"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginTop="@dimen/y20"
+        android:scaleType="fitXY"
+        android:src="@drawable/update_01" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_white_update"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y60"
+            android:text="新版本正在努力的更新中，请稍等"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size38" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y100"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ProgressBar
+                android:id="@+id/update_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x60"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_weight="1"
+                android:background="@drawable/shape_progressbar" />
+
+            <TextView
+                android:id="@+id/tv_progress"
+                style="@style/a000000_44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x60"
+                android:gravity="center"
+                android:text="" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="@dimen/x290"
+            android:layout_height="@dimen/y90"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/y100"
+            android:layout_marginTop="@dimen/y50"
+            android:background="@drawable/bt_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

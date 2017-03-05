@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="@dimen/x500"
+        android:layout_height="@dimen/y550"
+        android:layout_below="@+id/inclue"
+        android:background="@drawable/jiahaoyou_bag"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/ll_qunliao"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:orientation="horizontal" 
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:id="@+id/iv_qunliao"
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/y70"
+                android:layout_marginLeft="@dimen/x50"
+                android:src="@drawable/group" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="分组管理"
+                android:textSize="@dimen/size50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tianjia"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:orientation="horizontal" 
+            android:layout_marginTop="@dimen/y40"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/y70"
+                android:layout_marginLeft="@dimen/x50"
+                android:src="@drawable/add_haoyou" />
+            <!-- <ImageView 
+                android:id="@+id/iv_hongdian"
+                android:layout_width="@dimen/size25"
+                android:layout_height="@dimen/size25"
+                android:src="@drawable/hongdian"
+                android:layout_gravity="top"
+				android:visibility="invisible"
+                android:layout_marginTop="@dimen/y10"
+                /> -->
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="添加好友"
+                android:textSize="@dimen/size50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_saoyisao"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:orientation="horizontal" 
+            android:layout_marginTop="@dimen/y40"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/y70"
+                android:layout_marginLeft="@dimen/x50"
+                android:src="@drawable/saoyisao" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="扫一扫"
+                android:textSize="@dimen/size50" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

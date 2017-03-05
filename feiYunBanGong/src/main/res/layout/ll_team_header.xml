@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hui"
+    android:orientation="vertical" >
+
+    <!-- 我的团队头布局 -->
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_below="@+id/inclue"
+        android:layout_marginLeft="@dimen/x95"
+        android:layout_marginRight="@dimen/x95"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@drawable/shape_sousuo"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/iv_sousuo"
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/sousuo" />
+
+        <TextView
+            android:id="@+id/tv_sousuolianxiren"
+            style="@style/a000000_48"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_sousuo"
+            android:background="@null"
+            android:gravity="left|center_vertical"
+            android:hint="搜     索"
+            android:imeOptions="actionSearch"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingLeft="@dimen/x50"
+            android:singleLine="true"
+            android:textColorHint="@color/d1d1d1" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/size25" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
+
+        <LinearLayout
+            android:id="@+id/ll_add_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="@dimen/size80"
+                android:layout_height="@dimen/size70"
+                android:scaleType="fitXY"
+                android:src="@drawable/selector_add_team" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="创建团队"
+                android:textColor="@drawable/tv_selector_color02"
+                android:textSize="@dimen/size46" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
+        <View
+            android:layout_width="@dimen/x4"
+            android:layout_height="match_parent"
+            android:background="@color/hui"
+             >
+        </View>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
+
+        <LinearLayout
+            android:id="@+id/ll_add_to_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="@dimen/size70"
+                android:layout_height="@dimen/size70"
+                android:scaleType="fitXY"
+                android:src="@drawable/selector_add_to_team" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="加入团队"
+                android:textColor="@drawable/tv_selector_color02"
+                android:textSize="@dimen/size46" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </View>
+    </LinearLayout>
+
+</LinearLayout>

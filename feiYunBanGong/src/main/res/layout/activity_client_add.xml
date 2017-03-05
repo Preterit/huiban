@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x12"
+        android:layout_marginLeft="@dimen/x38"
+        android:layout_marginRight="@dimen/x38"
+        android:layout_marginTop="@dimen/y28"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y140"
+            android:layout_marginTop="@dimen/y18"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓        名：" />
+
+            <EditText
+                android:id="@+id/et_name"
+                style="@style/a000000_38"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入..." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y140"
+            android:layout_marginTop="@dimen/y12"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拜访时间：" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/a000000_38"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="请选择..." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y140"
+            android:layout_marginTop="@dimen/y12"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公司地址：" />
+
+            <EditText
+                android:id="@+id/et_dizhi"
+                style="@style/a000000_38"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入..." />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add"
+        style="@style/ffffff_60"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x114"
+        android:layout_marginBottom="@dimen/y150"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/blue_bt_selector"
+        android:gravity="center"
+        android:text="创建" />
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y180"
+    android:background="@drawable/bantouming" >
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bantouming"
+        android:gravity="center" 
+        android:orientation="vertical"
+        >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/size100"
+            android:layout_height="@dimen/size100" />
+
+        <TextView
+            style="@style/huise_38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="玩命加载中" />
+    </LinearLayout>
+
+</RelativeLayout>

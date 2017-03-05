@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:padding="@dimen/size25"
+        >
+
+        <com.feirui.feiyunbangong.view.TextImageView
+            android:id="@+id/tiv_head"
+            android:layout_width="@dimen/size160"
+            android:layout_height="@dimen/size160"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x60"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x80"
+            android:layout_marginTop="@dimen/y20"
+            android:layout_marginRight="@dimen/x50"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/a000000_42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="张三" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/a000000_32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:text="2016-12-12 12:12:12" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_content"
+                style="@style/a000000_36"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:text="如果你无法简洁的表达你的想法那只能说明你还不够了解它！" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

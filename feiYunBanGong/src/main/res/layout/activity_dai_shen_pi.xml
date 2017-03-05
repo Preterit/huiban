@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/ffffff"
+              android:orientation="vertical">
+
+    <include
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"/>
+
+    <Spinner
+        android:id="@+id/sp_daishenpi"
+        android:layout_width="@dimen/x400"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/ffffff"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30"
+        android:background="@color/fenge"/>
+
+    <!--<com.feirui.feiyunbangong.view.AutoListView-->
+    <!--android:id="@+id/haveget"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:divider="@color/f0f0f0"-->
+    <!--android:scrollbars="none"/>-->
+    <com.xw.repo.refresh.PullToRefreshLayout
+        android:id="@+id/daishen_pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.xw.repo.refresh.PullListView
+            android:id="@+id/haveget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.xw.repo.refresh.PullListView>
+    </com.xw.repo.refresh.PullToRefreshLayout>
+
+</LinearLayout>

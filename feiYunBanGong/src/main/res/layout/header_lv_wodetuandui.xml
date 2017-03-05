@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 创建团队 -->
+
+    <LinearLayout
+        android:id="@+id/ll_chuangjiantuandui"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@color/main_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/size50"
+            android:layout_height="@dimen/size50"
+            android:layout_marginLeft="@dimen/x150"
+            android:src="@drawable/tuanduiadd" />
+
+        <TextView
+            style="@style/ffffff_49"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="创建团队" />
+    </LinearLayout>
+
+    <!-- 加入团队 -->
+
+    <LinearLayout
+        android:id="@+id/ll_jiarutuandui"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y160"
+        android:layout_marginTop="@dimen/y4"
+        android:background="@color/main_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/size50"
+            android:layout_height="@dimen/size50"
+            android:layout_marginLeft="@dimen/x150"
+            android:src="@drawable/tuanduiadd" />
+
+        <TextView
+            style="@style/ffffff_49"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="加入团队" />
+    </LinearLayout>
+
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y50"
+        android:background="@color/fenge"
+        />
+    
+</LinearLayout>

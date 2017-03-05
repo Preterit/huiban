@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/shenpi_bg"
+    android:focusable="true"
+
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    >
+
+    <include
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        >
+
+        <LinearLayout
+            android:id="@+id/activity_shen_pi_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.feirui.feiyunbangong.activity.ShenPiDetailActivity">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </LinearLayout>
+
+            <RelativeLayout
+                style="@style/rl_line_style">
+
+                <TextView
+                    style="@style/tv_left_text_in_rl"
+                    android:text="@string/type_qingjia"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_leave_type"
+                    style="@style/tv_right_text_in_rl"
+                    tools:text="请假"
+
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shenpi_div_height"/>
+
+            <RelativeLayout
+                style="@style/rl_line_style">
+
+                <TextView
+                    style="@style/tv_left_text_in_rl"
+                    android:text="@string/shenpi_kaishi"
+                    />
+
+                <TextView
+                    android:id="@+id/shenpi_start_time"
+                    style="@style/tv_right_text_in_rl"
+                    tools:text="请假"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="@dimen/shenpi_div_line_width"
+                android:layout_height="1px"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/gray_text"/>
+
+            <RelativeLayout
+                style="@style/rl_line_style">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/tv_left_text_in_rl"
+                    android:text="@string/shenpi_jieshu"/>
+
+                <TextView
+                    android:id="@+id/shenpi_end_time"
+                    style="@style/tv_right_text_in_rl"
+                    android:layout_alignBaseline="@+id/textView2"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    tools:text="2017年"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shenpi_div_height"/>
+
+            <RelativeLayout
+                style="@style/rl_line_style">
+
+                <TextView
+                    style="@style/tv_left_text_in_rl"
+                    android:text="@string/shenpi_tianshu"
+                    />
+
+                <TextView
+                    android:id="@+id/shenpi_tianshu"
+                    style="@style/tv_right_text_in_rl"
+                    tools:text="2017年"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="@dimen/shenpi_div_line_width"
+                android:layout_height="1px"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/gray_text"/>
+
+            <RelativeLayout
+                style="@style/rl_line_style">
+
+                <TextView
+                    style="@style/tv_left_text_in_rl"
+                    android:text="@string/shenpi_shiyou"
+                    />
+
+                <TextView
+                    android:id="@+id/shenpi_shiyou"
+                    style="@style/tv_right_text_in_rl"
+                    tools:text="2017年"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shenpi_div_height"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/shenpi_fg"
+                android:padding="@dimen/activity_vertical_margin"
+
+
+                >
+
+                <TextView
+                    android:id="@+id/shenpi_beizhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:textColor="@color/tv_left_color"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/shenpi_beizhu"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/shenpi_beizhu"
+                    android:text="必填项"
+                    android:textColor="@color/gray_text"
+                    android:textSize="9sp"
+                    />
+
+                <EditText
+                    android:id="@+id/et_beizhu"
+                    android:layout_width="352dp"
+                    android:layout_height="185dp"
+                    android:layout_below="@id/shenpi_beizhu"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/ll_rectangle_corner"
+
+                    android:gravity="left|top"
+                    android:lines="10"
+                    android:padding="17dp"
+                    />
+
+                <Button
+                    android:id="@+id/btn_shenpi_refuse"
+                    android:layout_width="148dp"
+                    android:layout_height="44dp"
+                    android:layout_below="@id/et_beizhu"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/blue_bt_selector"
+                    android:text="暂不通过"
+                    android:textColor="@color/white"
+                    />
+
+                <Button
+                    android:id="@+id/btn_shenpi_accept"
+                    android:layout_width="140dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/et_beizhu"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/blue_bt_selector"
+                    android:text="通过"
+                    android:textColor="@color/white"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

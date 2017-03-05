@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x780"
+    android:layout_height="@dimen/y600"
+    android:layout_gravity="center"
+    android:background="@drawable/add_msg_bg"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_personage"
+        android:layout_width="@dimen/x500"
+        android:layout_height="@dimen/y110"
+        android:background="@drawable/background_color"
+        android:gravity="center" >
+
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y80"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/homepage_l" />
+
+        <TextView
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="个人注册" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_firm"
+        android:layout_width="@dimen/x500"
+        android:layout_height="@dimen/y110"
+        android:layout_marginTop="@dimen/y80"
+        android:background="@drawable/background_color"
+        android:gravity="center" >
+
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y80"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/homepage_l" />
+
+        <TextView
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="企业注册" />
+    </LinearLayout>
+
+</LinearLayout>

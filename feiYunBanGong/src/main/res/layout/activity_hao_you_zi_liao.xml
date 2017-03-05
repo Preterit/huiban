@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_huise"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.DetailChengYuanActivity" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <com.feirui.feiyunbangong.view.TextImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/size300"
+        android:layout_height="@dimen/size300"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y50" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/a000000_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y30" />
+
+    <TextView
+        style="@style/a000000_48"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/ffffff"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x50"
+        android:text="个人信息" />
+
+    <TextView
+        android:id="@+id/tv_name_02"
+        style="@style/a000000_42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:text="姓名：" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        style="@style/a000000_42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:text="手机号：" />
+
+    <!-- 个人信息 -->
+
+    <TextView
+        android:id="@+id/tv_email"
+        style="@style/a000000_42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:text="地址 ：" />
+
+    <com.feirui.feiyunbangong.view.RevealLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/x94" >
+
+        <Button
+            android:id="@+id/bt_liaotian"
+            style="@style/ffffff_60"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x114"
+            android:layout_marginLeft="@dimen/x140"
+            android:layout_marginRight="@dimen/x140"
+            android:background="@drawable/blue_bt_selector"
+            android:gravity="center"
+            android:text="去聊天" />
+    </com.feirui.feiyunbangong.view.RevealLayout>
+
+</LinearLayout>

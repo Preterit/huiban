@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x700"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_marginLeft="@dimen/x40"
+        android:layout_marginTop="@dimen/y60"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70"
+            android:src="@drawable/touxiang" />
+
+        <TextView
+            style="@style/a66c8ff_48"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:gravity="center_vertical"
+            android:text="个人中心" />
+    </LinearLayout>
+
+    <com.feirui.feiyunbangong.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/x235"
+        android:layout_height="@dimen/y235"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/x60"
+        android:src="@drawable/fragment_head" />
+
+    <ListView
+        android:id="@+id/lv_left"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginTop="@dimen/y60"
+        android:layout_weight="1"
+        android:divider="@color/ffffff"
+        android:dividerHeight="@dimen/y10" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/a000000_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y50"
+        android:text="" />
+
+</LinearLayout>

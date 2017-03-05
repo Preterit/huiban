@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ffffff" >
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/y160"
+        android:layout_marginLeft="@dimen/x22"
+        android:layout_marginTop="@dimen/y28"
+        android:src="@drawable/fragment_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x12"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x38"
+        android:layout_marginTop="@dimen/y28"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_xiangmuming"
+            style="@style/a000000_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="项目名称" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y6"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目负责人：" />
+
+            <TextView
+                android:id="@+id/tv_fuzeren"
+                style="@style/huise_38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="J先生" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y6"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/a000000_42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目人数：" />
+
+            <TextView
+                android:id="@+id/tv_renshu"
+                style="@style/huise_38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6人" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y6"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/hongse_42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目开始时间：" />
+
+            <TextView
+                android:id="@+id/tv_kaishishijian"
+                style="@style/hongse_38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-6-01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y6"
+            android:gravity="center_vertical" >
+
+            <TextView
+                style="@style/hongse_42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目结束时间：" />
+
+            <TextView
+                android:id="@+id/tv_jieshushijian"
+                style="@style/hongse_38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-6-01" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/a000000_42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="项目进度：" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y6" >
+
+            <ProgressBar
+                android:id="@+id/pb_01"
+                style="@style/pb_tongjixuexi_shijian" />
+
+            <TextView
+                android:id="@+id/tv_jindu"
+                style="@style/a42baff_36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x26"
+                android:text="70%" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

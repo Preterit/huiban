@@ -1,0 +1,122 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.FriendInfoActivity" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y30"
+        android:gravity="center_vertical"
+        android:padding="@dimen/x50" >
+
+        <ImageView
+            android:id="@+id/iv_head_activity_friend_info"
+            android:layout_width="@dimen/x220"
+            android:layout_height="@dimen/x220"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_head_activity_friend_info"
+            android:orientation="vertical"
+            android:padding="@dimen/x20" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="张三丰" />
+
+                <ImageView
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/x50"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_launcher" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号:132341412424"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注:111323"
+                android:textColor="@color/gray" >
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:gravity="center"
+            android:text="备注" />
+
+        <ImageView
+            android:layout_width="@dimen/y120"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:gravity="center"
+            android:text="个人小店" />
+
+        <ImageView
+            android:layout_width="@dimen/y120"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="@dimen/x900"
+        android:layout_height="@dimen/y140"
+        android:layout_marginTop="@dimen/y100"
+        android:background="@drawable/blue_bt_selector"
+        android:text="发消息"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="@dimen/x900"
+        android:layout_height="@dimen/y140"
+        android:layout_marginTop="@dimen/y100"
+        android:background="@drawable/blue_bt_selector"
+        android:text="删除好友"
+        android:textColor="@color/white" />
+
+</LinearLayout>

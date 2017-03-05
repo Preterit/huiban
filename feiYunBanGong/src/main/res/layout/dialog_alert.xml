@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x950"
+    android:layout_height="@dimen/y650"
+    android:background="@drawable/shape_bg_update"
+    android:orientation="vertical" >
+
+    <!-- 更新提示dialog -->
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/ffffff_49"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y150"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="修改分组名" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_white_update"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_alert"
+            style="@style/a000000_48"
+            android:layout_width="@dimen/x720"
+            android:layout_height="@dimen/y130"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingLeft="@dimen/x18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/bt_ok"
+                style="@style/ffffff_38"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/y120"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/shape_bt_bg_gray"
+                android:text="确定" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/bt_cancel"
+                style="@style/ffffff_38"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/y120"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/shape_bt_bg_red"
+                android:text="取消" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

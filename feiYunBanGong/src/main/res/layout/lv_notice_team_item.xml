@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 团队公告 -->
+
+    <LinearLayout
+        android:id="@+id/ll_tuanduigonggao"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/ffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/size80"
+            android:layout_height="@dimen/size80"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/td_gonggao" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="团队公告" />
+
+        <TextView
+            android:id="@+id/tv_message_num"
+            style="@style/ffffff_32"
+            android:layout_width="@dimen/size60"
+            android:layout_height="@dimen/size60"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@drawable/hongdian"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="11"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:layout_width="@dimen/size21"
+            android:layout_height="@dimen/size37"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/td_jiantou" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/hui" >
+    </View>
+
+    <!-- 团队圈 -->
+
+    <LinearLayout
+        android:id="@+id/ll_tuanduiquan"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@color/ffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/size80"
+            android:layout_height="@dimen/size80"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/td_gongzuoquan" />
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="团队圈" />
+
+        <TextView
+            android:id="@+id/tv_message_num1"
+            style="@style/hongse_38"
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@drawable/hongdian"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="11"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:layout_width="@dimen/size21"
+            android:layout_height="@dimen/size37"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/td_jiantou" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/hui" >
+    </View>
+
+    <!-- 团队成员 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@color/ffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/size80"
+            android:layout_height="@dimen/size80"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/td_chengyuan" />
+
+        <TextView
+            android:id="@+id/tv_chenyuan"
+            style="@style/a000000_44"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="团队成员" />
+    </LinearLayout>
+
+</LinearLayout>

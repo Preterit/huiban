@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bantouming" >
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bantouming"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y10"
+        android:layout_marginLeft="@dimen/x38"
+        android:layout_marginRight="@dimen/x38"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="@dimen/x1004"
+            android:layout_height="@dimen/x295"
+            android:background="@drawable/photo"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/view_camero_rl_takephoto"
+                style="@style/f8c600_60"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="拍照" />
+
+            <TextView
+                android:id="@+id/fengexianImageView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:background="@color/ececec" />
+
+            <TextView
+                android:id="@+id/view_camero_rl_selectphoto"
+                style="@style/f8c600_60"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="从手机相册选择" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/view_camero_ll_cancel"
+            style="@style/f8c600_60"
+            android:layout_width="@dimen/x1004"
+            android:layout_height="@dimen/y150"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/photo_close"
+            android:gravity="center"
+            android:text="取消" />
+    </LinearLayout>
+
+</RelativeLayout>
