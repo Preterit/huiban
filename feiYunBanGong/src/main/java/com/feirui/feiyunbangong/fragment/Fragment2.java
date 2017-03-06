@@ -121,7 +121,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     }
 
 
-
     public Fragment2() {
     }
 

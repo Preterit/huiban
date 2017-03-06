@@ -1,9 +1,6 @@
 package com.feirui.feiyunbangong.utils;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -18,7 +15,7 @@ import java.util.List;
 /**
  * wifi业务类：
  */
-public class WifiHelper extends BroadcastReceiver {
+public class WifiHelper {
 
     private WifiManager wifiManager = null;
     private List<ScanResult> scanResults = new ArrayList<ScanResult>();
@@ -26,6 +23,10 @@ public class WifiHelper extends BroadcastReceiver {
     private WiFiGridViewAdapter mNameAdaper;
     private WifiLVAdapter adapter02;
     private Context mContext;
+
+    public WifiManager getWifiManager() {
+        return wifiManager;
+    }
 
     public WifiHelper(MyView myView, WiFiGridViewAdapter nameAdaper, WifiLVAdapter adapter) {
 
@@ -43,15 +44,11 @@ public class WifiHelper extends BroadcastReceiver {
             y_content.add(i + "");
         }
         myView.setContent(x_content, y_content);
-
     }
 
     public void startScan(Context context) {
-        IntentFilter intentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-        context.registerReceiver(this, intentFilter);
-
         mContext = context;
+
         if (wifiManager == null) {
             wifiManager = (WifiManager) context
                     .getSystemService(context.WIFI_SERVICE);
@@ -59,15 +56,12 @@ public class WifiHelper extends BroadcastReceiver {
         if (!wifiManager.isWifiEnabled()) {
             wifiManager.setWifiEnabled(true);
         }
+
         wifiManager.startScan();//广播接受器接收结果
-
-
     }
 
-    private static void update(final MyView mv, final Context context,
-                               final WiFiGridViewAdapter adapter01,
-                               final WifiLVAdapter adapter02,
-                               List<ScanResult> srs
+    public void update(final MyView mv,
+                       List<ScanResult> srs
     ) {
 
         ArrayList<Integer> wifiStrengh = new ArrayList<>();
@@ -76,25 +70,17 @@ public class WifiHelper extends BroadcastReceiver {
         Log.e("orz", "update: " + srs.size());
         int length = srs.size() > 7 ? 7 : srs.size();
 
+        ArrayList<ScanResult> sevenResults = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             wifiStrengh.add(srs.get(i).level);
             names.add(srs.get(i).SSID);
-            srs.add(srs.get(i));
+//            srs.add(srs.get(i));
+            sevenResults.add(srs.get(i));
         }
         mv.setStrength(wifiStrengh);
-        adapter01.add(names);
-        adapter02.add(srs);
-        mv.invalidate();
+        mNameAdaper.add(names);
+        adapter02.add(sevenResults);
     }
 
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Log.e("orz ", "onReceive " + intent.getAction());
-        scanResults = wifiManager.getScanResults();
-        Log.e("orz", "onReceive: " + scanResults.size());
-        if (scanResults.size() != 0) {
-            update(mMyView, mContext, mNameAdaper, adapter02, scanResults);
-        }
-    }
 }
