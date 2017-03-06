@@ -38,12 +38,9 @@ public class DaiShenPiActivity extends BaseActivity implements
     private ShenPiAdapter adapter;
     private String[] leixing = new String[]{"选择审批类型", "请假", "报销", "外出", "付款",
             "采购"};
-    //    @PView
-//    private AutoListView haveget;
-    // adapter加载的数据源
+
     private JsonBean json;
     // 当前数据页码
-    private int pageindex = -1;
 
     private PullListView mPullListView;
     private PullToRefreshLayout mPullToRefreshLayout;

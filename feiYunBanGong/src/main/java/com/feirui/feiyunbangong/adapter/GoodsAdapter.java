@@ -1,8 +1,6 @@
 package com.feirui.feiyunbangong.adapter;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,74 +8,75 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.Good;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.List;
+
 public class GoodsAdapter extends MyBaseAdapter<Good> {
-	private Context mContext;
+    private Context mContext;
 
-	public GoodsAdapter(Context context, LayoutInflater inflater) {
-		super(inflater);
-		mContext = context;
-	}
 
-	@Override
-	public View getView(int position, View v, ViewGroup parent) {
+    public GoodsAdapter(Context context, LayoutInflater inflater) {
+        super(inflater);
+        mContext = context;
+    }
 
-		ViewHolder holder = null;
-		if (v == null) {
-			v = mInflater.inflate(R.layout.item_shop_good, null);
-			holder = new ViewHolder();
-			holder.iv_good_head = (ImageView) v.findViewById(R.id.iv_good_head);
-			holder.tv_good_name = (TextView) v.findViewById(R.id.tv_good_name);
-			holder.tv_price = (TextView) v.findViewById(R.id.tv_good_price);
-			v.setTag(holder);
-		} else {
-			holder = (ViewHolder) v.getTag();
-		}
-		holder = (ViewHolder) v.getTag();
+    @Override
+    public View getView(int position, View v, ViewGroup parent) {
 
-		if (list.get(position).getImgUrl() != null) {
+        ViewHolder holder = null;
+        if (v == null) {
+            v = mInflater.inflate(R.layout.item_shop_good, null);
+            holder = new ViewHolder();
+            holder.iv_good_head = (ImageView) v.findViewById(R.id.iv_good_head);
+            holder.tv_good_name = (TextView) v.findViewById(R.id.tv_good_name);
+            holder.tv_price = (TextView) v.findViewById(R.id.tv_good_price);
+            v.setTag(holder);
+        } else {
+            holder = (ViewHolder) v.getTag();
+        }
+        holder = (ViewHolder) v.getTag();
 
-			if (position + 1 == list.size()) {
+        if (list.get(position).getImgUrl() != null) {
 
-			}
-			Log.e("orz", list.get(position).getImgUrl());
-			ImageLoader.getInstance().displayImage(list.get(position).getImgUrl(), holder.iv_good_head);
+            if (position + 1 == list.size()) {
 
-			holder.tv_price.setVisibility(View.GONE);
-			holder.tv_good_name.setVisibility(View.GONE);
+            }
+            Log.e("orz", list.get(position).getImgUrl());
+            ImageLoader.getInstance().displayImage(list.get(position).getImgUrl(), holder.iv_good_head);
 
-		}
-		if (list.get(position).getGood_name() != null) {
-			holder.tv_good_name.setText(list.get(position).getGood_name());
-		}
-		if (list.get(position).getPrivce() != null) {
-			holder.tv_price.setText(list.get(position).getPrivce());
-		}
+            holder.tv_price.setVisibility(View.GONE);
+            holder.tv_good_name.setVisibility(View.GONE);
 
-		return v;
-	}
+        }
+        if (list.get(position).getGood_name() != null) {
+            holder.tv_good_name.setText(list.get(position).getGood_name());
+        }
+        if (list.get(position).getPrivce() != null) {
+            holder.tv_price.setText(list.get(position).getPrivce());
+        }
 
-	class ViewHolder {
-		ImageView iv_good_head;// 商品缩略图；
-		TextView tv_good_name, tv_price;// 商品名称；
-	}
+        return v;
+    }
 
-	@Override
-	public void add(List<Good> ls) {
-		// TODO Auto-generated method stub
-		Good addGood = new Good();
+    class ViewHolder {
+        ImageView iv_good_head;// 商品缩略图；
+        TextView tv_good_name, tv_price;// 商品名称；
+    }
 
-		addGood.setImgUrl("drawable://" + R.drawable.add_pic);
-		addGood.setGood_name("添加商品");
-		addGood.setPrivce("");
-		ls.add(addGood);
+    @Override
+    public void add(List<Good> ls) {
+        // TODO Auto-generated method stub
+        Good addGood = new Good();
 
-		super.add(ls);
+        addGood.setImgUrl("drawable://" + R.drawable.add_pic);
+        addGood.setGood_name("添加商品");
+        addGood.setPrivce("");
+        ls.add(addGood);
 
-	}
+        super.add(ls);
+
+    }
 }

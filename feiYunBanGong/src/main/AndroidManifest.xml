@@ -473,6 +473,8 @@
         </activity>
         <activity android:name=".activity.ShenPiDetailActivity">
         </activity>
+        <activity android:name=".activity.AddGoodActivity">
+        </activity>
     </application>
 
 </manifest>

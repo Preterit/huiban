@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_good"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.AddGoodActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_bar"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商  品  名  称 "
+                    android:textColor="@color/text_dark"
+                    />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_bg_kuang"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商  品  价  格 "
+                    android:textColor="@color/text_dark"
+                    />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_bg_kuang"
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/tv_good_price_activityAddGood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商品详情介绍"
+                    android:textColor="@color/text_dark"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="118dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tv_good_price_activityAddGood"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_bg_kuang"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/tv_upLoadIndexImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传封面图片"
+                    android:textColor="@color/text_dark"
+                    />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="118dp"
+                    android:layout_below="@id/tv_upLoadIndexImg"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/default_pic_bg">
+
+                    <ImageView
+                        android:id="@+id/iv_addMainImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="30dp"
+                        android:src="@drawable/add_to_team_unchecked"
+                        android:tint="@color/main_color"
+                        />
+                </FrameLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/tv_upLoadDetailImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传详情图片"
+                    android:textColor="@color/text_dark"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_upLoadDetailImg"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="118dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/default_pic_bg">
+
+                        <ImageView
+                            android:id="@+id/iv_addDetailImage1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="30dp"
+                            android:src="@drawable/add_to_team_checked"
+                            android:tint="@color/main_color"
+                            />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="118dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/default_pic_bg">
+
+                        <ImageView
+                            android:id="@+id/iv_addDetailImage2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="30dp"
+                            android:src="@drawable/add_to_team_checked"
+                            android:tint="@color/main_color"
+                            />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="118dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/default_pic_bg">
+
+                        <ImageView
+                            android:id="@+id/iv_addDetailImage3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="30dp"
+                            android:src="@drawable/add_to_team_checked"
+                            android:tint="@color/main_color"
+                            />
+                    </FrameLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

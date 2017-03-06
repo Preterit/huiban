@@ -358,5 +358,7 @@
     <!-- 透明 -->
     <color name="style_red">#ff4c41</color>
     <color name="style_divider_color">#C9C7CD</color>
+    <color name="text_dark">#333333</color>
+    <color name="default_pic_bg">#f2f2f2</color>
 
 </resources>

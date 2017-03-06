@@ -62,7 +62,7 @@ public class ShenPiDetailActivity extends BaseActivity {
                     T.showShort(ShenPiDetailActivity.this, "请输入备注信息");
                     return;
                 }
-                updateShenPi(mList_id, "不通过");
+                updateShenPi(mList_id, "拒绝");
             }
         });
         mBtnAccept.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +91,7 @@ public class ShenPiDetailActivity extends BaseActivity {
                 if (bean.getCode().equals("200")) {
                     T.showShort(ShenPiDetailActivity.this, bean.getMsg());
 
-                    finish();
+                    ShenPiDetailActivity.this.finish();
                 }
             }
 
