@@ -16,7 +16,7 @@ import java.util.List;
 
 public class GoodsAdapter extends MyBaseAdapter<Good> {
     private Context mContext;
-
+    private boolean mEdit;
 
     public GoodsAdapter(Context context, LayoutInflater inflater) {
         super(inflater);
@@ -26,6 +26,7 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
     @Override
     public View getView(int position, View v, ViewGroup parent) {
 
+
         ViewHolder holder = null;
         if (v == null) {
             v = mInflater.inflate(R.layout.item_shop_good, null);
@@ -33,6 +34,7 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
             holder.iv_good_head = (ImageView) v.findViewById(R.id.iv_good_head);
             holder.tv_good_name = (TextView) v.findViewById(R.id.tv_good_name);
             holder.tv_price = (TextView) v.findViewById(R.id.tv_good_price);
+            holder.iv_left = (ImageView) v.findViewById(R.id.iv_left);
             v.setTag(holder);
         } else {
             holder = (ViewHolder) v.getTag();
@@ -47,7 +49,6 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
 
                 holder.tv_price.setVisibility(View.GONE);
                 holder.tv_good_name.setVisibility(View.GONE);
-
             } else {
                 holder.tv_price.setVisibility(View.VISIBLE);
                 holder.tv_good_name.setVisibility(View.VISIBLE);
@@ -62,12 +63,23 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
 
         }
 
+        if (mEdit) {
+            holder.iv_left.setVisibility(View.VISIBLE);
+            if (position + 1 == list.size()) {
+                holder.iv_left.setVisibility(View.GONE);
+            }
+        }
 
         return v;
     }
 
+    public void setEdit(boolean edit) {
+        mEdit = edit;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder {
-        ImageView iv_good_head;// 商品缩略图；
+        ImageView iv_good_head, iv_left;// 商品缩略图；
         TextView tv_good_name, tv_price;// 商品名称；
     }
 

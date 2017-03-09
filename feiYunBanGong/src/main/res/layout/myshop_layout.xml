@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x144"
-        android:background="@color/a42baff" >
+        android:background="@color/a42baff">
 
         <LinearLayout
             android:id="@+id/leftll"
             android:layout_width="@dimen/x144"
             android:layout_height="@dimen/x144"
-            android:gravity="center" >
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/leftIv"
                 android:layout_width="@dimen/size57"
                 android:layout_height="@dimen/size57"
                 android:layout_gravity="center"
-                android:src="@drawable/arrows_left" />
+                android:src="@drawable/arrows_left"/>
         </LinearLayout>
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:text="我的商品"
             android:textColor="@color/white"
-            android:textSize="@dimen/size67" />
+            android:textSize="@dimen/size67"/>
 
         <LinearLayout
             android:id="@+id/rightll"
@@ -41,7 +41,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingRight="20px" >
+            android:paddingRight="20px">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_centerVertical="true"
                 android:text="我的收藏"
                 android:textColor="@color/white"
-                android:textSize="@dimen/size45" />
+                android:textSize="@dimen/size45"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_color"
-        android:padding="@dimen/size30" >
+        android:padding="@dimen/size30">
 
         <com.feirui.feiyunbangong.view.CircleImageView2
             android:id="@+id/cicle_head"
@@ -68,7 +68,7 @@
             android:layout_marginTop="@dimen/y20"
             android:src="@drawable/ic_launcher"
             app:border_color="@color/white"
-            app:border_width="@dimen/size1" />
+            app:border_width="@dimen/size1"/>
 
         <TextView
             android:id="@+id/tv_name"
@@ -79,7 +79,7 @@
             android:layout_marginTop="@dimen/y40"
             android:text="我的姓名"
             android:textColor="@color/white"
-            android:textSize="@dimen/size48" />
+            android:textSize="@dimen/size48"/>
 
         <TextView
             android:id="@+id/tv_phone"
@@ -90,7 +90,7 @@
             android:layout_marginTop="@dimen/y40"
             android:text="17055105919"
             android:textColor="@color/white"
-            android:textSize="@dimen/size30" />
+            android:textSize="@dimen/size30"/>
 
         <TextView
             android:id="@+id/tv_address"
@@ -102,7 +102,7 @@
             android:layout_toRightOf="@id/tv_name"
             android:text="北京"
             android:textColor="@color/white"
-            android:textSize="@dimen/size30" />
+            android:textSize="@dimen/size30"/>
     </RelativeLayout>
 
     <TextView
@@ -112,38 +112,52 @@
         android:gravity="center"
         android:password="@dimen/size10"
         android:text="店铺介绍"
-        android:textSize="@dimen/size48" />
+        android:textSize="@dimen/size48"/>
 
     <TextView
         android:id="@+id/tv_content_my_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/y20"
         android:gravity="center_vertical"
         android:lineSpacingMultiplier="1.5"
         android:padding="@dimen/size5"
         android:password="@dimen/size10"
         android:text="\t\t一天，山羊爷爷买来锄头和铁锹，在森林里忙碌开来。他找到一块没有树木的空地，先铲除杂草，接着挖起一个个小土坑来。挖完这一块空地，他又找另一块空地接着挖。"
-        android:textSize="@dimen/size36" />
+        android:textSize="@dimen/size36"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y2"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/y30"
             android:gravity="center"
             android:password="@dimen/size10"
             android:text="我的推荐"
-            android:textSize="@dimen/size45" />
+            android:textSize="@dimen/size45"
+            />
+
+        <TextView
+            android:id="@+id/tv_edit_gv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="编辑"
+            android:textColor="@color/main_color"
+            android:textSize="17dp"
+            />
     </RelativeLayout>
 
     <com.feirui.feiyunbangong.view.MyGridView
@@ -151,6 +165,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/y10"
-        android:numColumns="2" />
+        android:numColumns="2"/>
 
 </LinearLayout>

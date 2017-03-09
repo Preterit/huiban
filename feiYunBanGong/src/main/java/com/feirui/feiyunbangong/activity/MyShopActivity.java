@@ -38,6 +38,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     private ScrollView sv;
     private LinearLayout leftll;
     private String store_id;
+    private TextView tvEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         TextView tvAddress = (TextView) findViewById(R.id.tv_address);
         TextView tvPhone = (TextView) findViewById(R.id.tv_phone);
         TextView tvContent = (TextView) findViewById(R.id.tv_content_my_shop);
+        tvEdit = (TextView) findViewById(R.id.tv_edit_gv);
+
         CircleImageView2 circleImageView2 = (CircleImageView2) findViewById(R.id.cicle_head);
 
         Intent intent = getIntent();
@@ -60,6 +63,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                 String storeName = String.valueOf(map.get("store_name"));
                 String provinceName = String.valueOf(map.get("provice_id"));
                 String cityName = String.valueOf(map.get("city_id"));
+
 
                 store_id = String.valueOf(map.get("id"));//小店的id
 
@@ -158,6 +162,12 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     intent.putExtra("id", store_id);
                     startActivity(intent);
                 }
+            }
+        });
+        tvEdit.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.setEdit(true);
             }
         });
     }
