@@ -149,7 +149,8 @@ public class AddGoodActivity extends BaseActivity {
                         Log.e("orz", "success: " + bean.toString());
                         if (bean.getCode().equals("200")) {
                             T.showShort(AddGoodActivity.this, bean.getMsg());
-                            finish();
+
+                            AddGoodActivity.this.finish();
                         } else {
                             T.showShort(AddGoodActivity.this, bean.getMsg());
                         }

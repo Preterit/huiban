@@ -75,13 +75,22 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
     public void add(List<Good> ls) {
         // TODO Auto-generated method stub
         Good addGood = new Good();
-
         addGood.setImgUrl("drawable://" + R.drawable.add_pic);
         addGood.setGood_name("添加商品");
         addGood.setPrivce("");
         ls.add(addGood);
-
         super.add(ls);
+    }
 
+    public void setData(List<Good> data) {
+        list.clear();
+        list.addAll(data);
+        Good addGood = new Good();
+        addGood.setImgUrl("drawable://" + R.drawable.add_pic);
+        addGood.setGood_name("添加商品");
+        addGood.setPrivce("");
+        list.add(addGood);
+
+        notifyDataSetChanged();
     }
 }

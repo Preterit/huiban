@@ -34,7 +34,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
     private MyGridView gv_shop_goods;
     private GoodsAdapter adapter;
-    private List<Good> goods = new ArrayList<>();
+    private List<Good> goods;
     private ScrollView sv;
     private LinearLayout leftll;
     private String store_id;
@@ -81,7 +81,6 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         }
         initView();
         setListener();
-        initData();
     }
 
     private void setListener() {
@@ -91,9 +90,12 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
+        initData();
     }
 
     private void initData() {
+
+        goods = new ArrayList<>();
 
         String url = UrlTools.url + UrlTools.XIAO_DIAN_GOODS;
         RequestParams requestParams = new RequestParams();
@@ -121,7 +123,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                 }
 
                 Log.e("orz", "" + goods);
-                adapter.add(goods);
+                adapter.setData(goods);
             }
 
             @Override
@@ -132,10 +134,9 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
             @Override
             public void failure(String msg) {
-                // TODO Auto-generated method stub
-
-                // 还没有产品
-                adapter.add(goods);
+//                // TODO Auto-generated method stub
+//                // 还没有产品
+//                adapter.add(goods);
             }
         });
 
