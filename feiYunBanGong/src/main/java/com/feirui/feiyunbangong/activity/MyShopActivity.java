@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     private List<Good> goods = new ArrayList<>();
     private ScrollView sv;
     private LinearLayout leftll;
+    private String store_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                 String storeName = String.valueOf(map.get("store_name"));
                 String provinceName = String.valueOf(map.get("provice_id"));
                 String cityName = String.valueOf(map.get("city_id"));
+
+                store_id = String.valueOf(map.get("id"));//小店的id
 
                 tvAddress.setText(provinceName + " " + cityName);
                 tvContent.setText(content);
@@ -109,13 +113,15 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     String price = String.valueOf(map.get("goods_price"));
                     String pic = String.valueOf(map.get("main_pic"));
 
+                    good.setGood_name(good_name);
+                    good.setPrivce(price);
+                    good.setImgUrl(pic);
+
                     goods.add(good);
                 }
 
                 Log.e("orz", "" + goods);
                 adapter.add(goods);
-
-
             }
 
             @Override
@@ -143,8 +149,20 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         sv = (ScrollView) findViewById(R.id.sv);
         leftll = (LinearLayout) findViewById(R.id.leftll);
 
-
+        gv_shop_goods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == parent.getCount() - 1) {
+                    Intent intent = new Intent(MyShopActivity.this, AddGoodActivity.class);
+                    intent.putExtra("id", store_id);
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
+
+    ;
 
     @Override
     public void onClick(View v) {

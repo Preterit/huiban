@@ -8,6 +8,12 @@
     android:orientation="vertical"
     tools:context="com.feirui.feiyunbangong.activity.AddGoodActivity">
 
+    <include
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,12 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <include
-                layout="@layout/top"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/title_bar"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,11 +38,14 @@
                     />
 
                 <EditText
+                    android:id="@+id/et_new_good_name"
+                    style="@style/et_input"
                     android:layout_width="0dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/blue_bg_kuang"
+                    android:lines="1"
+                    tools:text="hello"
                     />
             </LinearLayout>
 
@@ -51,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:orientation="horizontal"
+
                 >
 
                 <TextView
@@ -61,11 +65,14 @@
                     />
 
                 <EditText
+                    android:id="@+id/et_new_good_price"
+                    style="@style/et_input"
                     android:layout_width="0dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/blue_bg_kuang"
+                    android:inputType="number"
+                    android:lines="1"
                     />
             </LinearLayout>
 
@@ -85,12 +92,18 @@
                     />
 
                 <EditText
+                    android:id="@+id/et_new_good_description"
                     android:layout_width="match_parent"
                     android:layout_height="118dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_good_price_activityAddGood"
                     android:layout_weight="1"
                     android:background="@drawable/blue_bg_kuang"
+                    android:gravity="top"
+                    android:lines="8"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    tools:text="hahahah"
                     />
             </RelativeLayout>
 
@@ -116,15 +129,14 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:background="@color/default_pic_bg">
+                    android:background="@drawable/add_pic"
+                    >
 
                     <ImageView
                         android:id="@+id/iv_addMainImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="30dp"
-                        android:src="@drawable/add_to_team_unchecked"
-                        android:tint="@color/main_color"
+                        android:scaleType="centerCrop"
                         />
                 </FrameLayout>
 
@@ -158,15 +170,13 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:background="@color/default_pic_bg">
+                        android:background="@drawable/add_pic">
 
                         <ImageView
                             android:id="@+id/iv_addDetailImage1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="30dp"
-                            android:src="@drawable/add_to_team_checked"
-                            android:tint="@color/main_color"
+                            android:scaleType="centerCrop"
                             />
                     </FrameLayout>
 
@@ -176,15 +186,15 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:background="@color/default_pic_bg">
+                        android:background="@drawable/add_pic"
+                        >
+
 
                         <ImageView
                             android:id="@+id/iv_addDetailImage2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="30dp"
-                            android:src="@drawable/add_to_team_checked"
-                            android:tint="@color/main_color"
+                            android:scaleType="centerCrop"
                             />
                     </FrameLayout>
 
@@ -194,21 +204,32 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:background="@color/default_pic_bg">
+                        android:background="@drawable/add_pic"
+                        >
 
                         <ImageView
                             android:id="@+id/iv_addDetailImage3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="30dp"
-                            android:src="@drawable/add_to_team_checked"
-                            android:tint="@color/main_color"
+                            android:scaleType="centerCrop"
                             />
                     </FrameLayout>
                 </LinearLayout>
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_add_good_commit"
+                style="@style/btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="提交"
+                android:textColor="@color/white"
+                />
+
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

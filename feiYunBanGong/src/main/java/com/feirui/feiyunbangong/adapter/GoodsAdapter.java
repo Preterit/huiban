@@ -42,21 +42,26 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
         if (list.get(position).getImgUrl() != null) {
 
             if (position + 1 == list.size()) {
+                Log.e("orz", list.get(position).getImgUrl());
+                ImageLoader.getInstance().displayImage(list.get(position).getImgUrl(), holder.iv_good_head);
 
+                holder.tv_price.setVisibility(View.GONE);
+                holder.tv_good_name.setVisibility(View.GONE);
+
+            } else {
+                holder.tv_price.setVisibility(View.VISIBLE);
+                holder.tv_good_name.setVisibility(View.VISIBLE);
+                if (list.get(position).getGood_name() != null) {
+                    holder.tv_good_name.setText(list.get(position).getGood_name());
+                }
+                if (list.get(position).getPrivce() != null) {
+                    holder.tv_price.setText(list.get(position).getPrivce());
+                }
+                ImageLoader.getInstance().displayImage(list.get(position).getImgUrl(), holder.iv_good_head);
             }
-            Log.e("orz", list.get(position).getImgUrl());
-            ImageLoader.getInstance().displayImage(list.get(position).getImgUrl(), holder.iv_good_head);
-
-            holder.tv_price.setVisibility(View.GONE);
-            holder.tv_good_name.setVisibility(View.GONE);
 
         }
-        if (list.get(position).getGood_name() != null) {
-            holder.tv_good_name.setText(list.get(position).getGood_name());
-        }
-        if (list.get(position).getPrivce() != null) {
-            holder.tv_price.setText(list.get(position).getPrivce());
-        }
+
 
         return v;
     }

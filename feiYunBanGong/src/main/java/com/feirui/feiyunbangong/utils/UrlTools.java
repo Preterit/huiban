@@ -1,10 +1,12 @@
 package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
+
+    public static final String ADD_GOOD = "Store/addGoods";
     /**
      * 链接地址
      */
-    public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
+    public static String url = "http://123.57.45.74/feiybg/public/index.php/api/";
     /**
      * 注册获取验证码
      */

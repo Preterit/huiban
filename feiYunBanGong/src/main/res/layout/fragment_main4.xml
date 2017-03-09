@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
 
     <!-- bar -->
     <RelativeLayout
@@ -10,39 +10,40 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
         android:background="@color/main_color"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <TextView
             style="@style/ffffff_60"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我的团队" />
+            android:text="我的团队"/>
     </RelativeLayout>
 
     <!-- 创建的团队列表 -->
 
     <ListView
-        android:layout_below="@id/rl"
         android:id="@+id/lv_tuandui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/fenge"
+        android:layout_below="@id/rl"
         android:layout_marginBottom="@dimen/y10"
-        android:dividerHeight="@dimen/y2" >
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y2">
     </ListView>
-    
+
     <com.feirui.feiyunbangong.view.WordsNavigation
         android:id="@+id/words"
-        android:layout_below="@id/rl"
-        android:layout_marginTop="@dimen/y10"
-        android:layout_marginBottom="@dimen/y10"
         android:layout_width="@dimen/x90"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rl"
+        android:layout_marginBottom="@dimen/y10"
+        android:layout_marginTop="@dimen/y10"/>
 
     <TextView
         android:id="@+id/tv"
+        style="@style/ffffff_60"
         android:layout_width="@dimen/x250"
         android:layout_height="@dimen/y250"
         android:layout_centerHorizontal="true"
@@ -51,7 +52,7 @@
         android:gravity="center"
         android:text="sdf"
         android:visibility="gone"
-        style="@style/ffffff_60"
         />
-    
+
+
 </RelativeLayout>
