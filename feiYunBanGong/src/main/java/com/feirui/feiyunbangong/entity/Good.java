@@ -7,57 +7,65 @@ import android.graphics.Bitmap;
  */
 public class Good {
 
-	private String good_name;// 商品名称；
-	private String privce;// 商品价格；
-	private Bitmap good_head_title;// 商品缩略图；
-	private String imgUrl;
+    private String good_name;// 商品名称；
+    private String privce;// 商品价格；
+    private Bitmap good_head_title;// 商品缩略图；
+    private String imgUrl;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
 
-	public String getImgUrl() {
-		return imgUrl;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
+    public String getImgUrl() {
+        return imgUrl;
+    }
 
-	public String getGood_name() {
-		return good_name;
-	}
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
-	public void setGood_name(String good_name) {
-		this.good_name = good_name;
-	}
+    public String getGood_name() {
+        return good_name;
+    }
 
-	public String getPrivce() {
-		return privce;
-	}
+    public void setGood_name(String good_name) {
+        this.good_name = good_name;
+    }
 
-	public void setPrivce(String privce) {
-		this.privce = privce;
-	}
+    public String getPrivce() {
+        return privce;
+    }
 
-	public Bitmap getGood_head_title() {
-		return good_head_title;
-	}
+    public void setPrivce(String privce) {
+        this.privce = privce;
+    }
 
-	public void setGood_head_title(Bitmap good_head_title) {
-		this.good_head_title = good_head_title;
-	}
+    public Bitmap getGood_head_title() {
+        return good_head_title;
+    }
 
-	public Good() {
-	}
+    public void setGood_head_title(Bitmap good_head_title) {
+        this.good_head_title = good_head_title;
+    }
 
-	public Good(String good_name, String privce, Bitmap good_head_title) {
-		super();
-		this.good_name = good_name;
-		this.privce = privce;
-		this.good_head_title = good_head_title;
-	}
+    public Good() {
+    }
 
-	@Override
-	public String toString() {
-		return "Good [good_name=" + good_name + ", privce=" + privce + ", good_head_title=" + good_head_title + "]";
-	}
+    public Good(String good_name, String privce, Bitmap good_head_title) {
+        super();
+        this.good_name = good_name;
+        this.privce = privce;
+        this.good_head_title = good_head_title;
+    }
+
+    @Override
+    public String toString() {
+        return "Good [good_name=" + good_name + ", privce=" + privce + ", good_head_title=" + good_head_title + "]";
+    }
 
 }

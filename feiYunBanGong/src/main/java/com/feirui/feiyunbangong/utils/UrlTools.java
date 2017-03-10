@@ -481,4 +481,6 @@ public class UrlTools {
     public static String XIAO_DIAN_GOODS = "Other/goodsList";
 
     public static String APPROVAL_UPDATE = "Approval/approval_update";
+    //删除商品
+    public static String DELETE_GOOD="news/delete";
 }

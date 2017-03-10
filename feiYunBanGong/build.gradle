@@ -62,4 +62,6 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.9'
     compile 'com.xw.repo:PullToRefresh:2.1@aar'
     compile 'com.android.support:appcompat-v7:19.1.0'
+
+    compile 'in.srain.cube:grid-view-with-header-footer:1.0.12'
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.feirui.feiyunbangong.entity.Good;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -122,6 +124,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     good.setGood_name(good_name);
                     good.setPrivce(price);
                     good.setImgUrl(pic);
+                    good.setId((Integer) map.get("id"));
 
                     goods.add(good);
                 }
@@ -146,6 +149,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    private Button mBtnDelete;
+
     private void initView() {
         gv_shop_goods = (MyGridView) findViewById(R.id.gv_shop_goods);
         gv_shop_goods.setFocusable(false);// 解决初始时gridview获取焦点发生滚动；
@@ -162,12 +167,69 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     intent.putExtra("id", store_id);
                     startActivity(intent);
                 }
+                if (adapter.isEdit()) {//编辑模式
+                    //点击改变图标,重置其他位置的图标
+                    adapter.setSelectedItem(position);
+
+                } else {
+                    //跳转到详情页
+                }
             }
+
+
         });
+
+        mBtnDelete = (Button) findViewById(R.id.btn_delete_good);
+
         tvEdit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.setEdit(true);
+                if (tvEdit.getText().equals("编辑")) {
+                    adapter.setEdit(true);
+                    tvEdit.setText("取消");
+
+                    mBtnDelete.setVisibility(View.VISIBLE);
+                } else {
+                    tvEdit.setText("编辑");
+                    adapter.setEdit(false);
+                    mBtnDelete.setVisibility(View.GONE);
+                }
+            }
+        });
+        mBtnDelete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int selectedPosition = adapter.getSelectedPosition();
+                if (selectedPosition != -1) {
+                    String url = UrlTools.url + UrlTools.DELETE_GOOD;
+                    RequestParams requestParams = new RequestParams();
+                    int id = ((Good) adapter.getItem(selectedPosition)).getId();
+
+                    Log.e("orz", "onClick: " + id);
+                    requestParams.put("id", id + "");
+                    Utils.doPost(LoadingDialog.getInstance(MyShopActivity.this), MyShopActivity.this, url, requestParams, new HttpCallBack() {
+                        @Override
+                        public void success(JsonBean bean) {
+                            if (bean.getCode().equals("200")) {
+                                T.showShort(MyShopActivity.this, "删除成功");
+                                adapter.setSelectedItem(-1);
+                                adapter.remove(selectedPosition);
+                            }
+                        }
+
+                        @Override
+                        public void failure(String msg) {
+                            T.showShort(MyShopActivity.this, msg);
+                        }
+
+                        @Override
+                        public void finish() {
+
+                        }
+                    });
+                } else {
+                    T.showShort(MyShopActivity.this, "请选择要删除的商品");
+                }
             }
         });
     }

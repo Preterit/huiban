@@ -23,6 +23,10 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
         mContext = context;
     }
 
+    public boolean isEdit() {
+        return mEdit;
+    }
+
     @Override
     public View getView(int position, View v, ViewGroup parent) {
 
@@ -63,11 +67,21 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
 
         }
 
+        if (position == selectedPosition) {
+            //修改选中的图标
+            holder.iv_left.setImageResource(R.drawable.left_selected);
+        } else {
+            //重置为未选中icon
+            holder.iv_left.setImageResource(R.drawable.left_unselect);
+        }
+
         if (mEdit) {
             holder.iv_left.setVisibility(View.VISIBLE);
             if (position + 1 == list.size()) {
                 holder.iv_left.setVisibility(View.GONE);
             }
+        } else {
+            holder.iv_left.setVisibility(View.INVISIBLE);
         }
 
         return v;
@@ -75,6 +89,25 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
 
     public void setEdit(boolean edit) {
         mEdit = edit;
+        notifyDataSetChanged();
+    }
+
+    private int selectedPosition = -1;
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
+    /**
+     * 设置选中的条目
+     */
+    public void setSelectedItem(int position) {
+        selectedPosition = position;
+        notifyDataSetChanged();
+    }
+
+    public void remove(int selectedPosition) {
+        list.remove(selectedPosition);
         notifyDataSetChanged();
     }
 

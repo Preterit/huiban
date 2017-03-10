@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tool="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -124,8 +125,8 @@
         android:lineSpacingMultiplier="1.5"
         android:padding="@dimen/size5"
         android:password="@dimen/size10"
-        android:text="\t\t一天，山羊爷爷买来锄头和铁锹，在森林里忙碌开来。他找到一块没有树木的空地，先铲除杂草，接着挖起一个个小土坑来。挖完这一块空地，他又找另一块空地接着挖。"
-        android:textSize="@dimen/size36"/>
+        android:textSize="@dimen/size36"
+        tool:text="\t\t一天，山羊爷爷买来锄头和铁锹，在森林里忙碌开来。他找到一块没有树木的空地，先铲除杂草，接着挖起一个个小土坑来。挖完这一块空地，他又找另一块空地接着挖。"/>
 
     <View
         android:layout_width="match_parent"
@@ -167,4 +168,17 @@
         android:layout_marginTop="@dimen/y10"
         android:numColumns="2"/>
 
+    <Button
+        android:id="@+id/btn_delete_good"
+        style="@style/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        />
 </LinearLayout>

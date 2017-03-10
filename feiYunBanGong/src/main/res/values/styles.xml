@@ -322,6 +322,11 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="btn_red">
+        <item name="android:background">@drawable/red_ben_selector</item>
+
+    </style>
+
     <color name="gray_text">#989898</color>
     <color name="tv_left_color">#666666</color>
     <color name="shenpi_bg">#f9f9f9</color>
