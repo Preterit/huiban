@@ -2,19 +2,19 @@
                                         xmlns:tools="http://schemas.android.com/tools"
                                         android:id="@+id/drawerlayout"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent" >
+                                        android:layout_height="match_parent">
 
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_color" >
+        android:background="@color/main_color">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/fragment_container"
@@ -22,26 +22,28 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/ffffff"
-                android:orientation="vertical" >
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y152"
+                android:layout_height="wrap_content"
                 android:background="@color/ffffff"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:paddingBottom="6dp"
+                >
 
                 <LinearLayout
                     android:id="@+id/fragment1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal" >
+                        android:layout_gravity="center_horizontal">
 
                         <ImageView
                             android:id="@+id/iv_num"
@@ -49,7 +51,7 @@
                             android:layout_height="@dimen/y80"
                             android:layout_marginLeft="@dimen/x70"
                             android:layout_marginTop="@dimen/y12"
-                            android:src="@drawable/tab_guest_selector" />
+                            android:src="@drawable/tab_guest_selector"/>
 
                         <TextView
                             android:id="@+id/tv_num"
@@ -61,7 +63,7 @@
                             android:text=""
                             android:textColor="#ffffff"
                             android:textSize="@dimen/size32"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"/>
                     </RelativeLayout>
 
                     <TextView
@@ -70,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/y9"
-                        android:text="消息" />
+                        android:text="消息"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -78,12 +80,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal" >
+                        android:layout_gravity="center_horizontal">
 
                         <ImageView
                             android:id="@+id/iv_num_team"
@@ -91,7 +93,7 @@
                             android:layout_height="@dimen/y80"
                             android:layout_marginLeft="@dimen/x70"
                             android:layout_marginTop="@dimen/y12"
-                            android:src="@drawable/tab_team_selector" />
+                            android:src="@drawable/tab_team_selector"/>
 
                         <TextView
                             android:id="@+id/tv_num_team"
@@ -103,7 +105,7 @@
                             android:text=""
                             android:textColor="#ffffff"
                             android:textSize="@dimen/size32"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"/>
                     </RelativeLayout>
 
                     <TextView
@@ -112,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/y9"
-                        android:text="团队" />
+                        android:text="团队"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,12 +122,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal" >
+                        android:layout_gravity="center_horizontal">
 
                         <ImageView
                             android:id="@+id/iv"
@@ -133,7 +135,7 @@
                             android:layout_height="@dimen/y80"
                             android:layout_marginLeft="@dimen/x70"
                             android:layout_marginTop="@dimen/y12"
-                            android:src="@drawable/tab_social_selector" />
+                            android:src="@drawable/tab_social_selector"/>
 
                         <TextView
                             android:id="@+id/tv_num_contact"
@@ -145,7 +147,7 @@
                             android:text="12"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/size32"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"/>
                     </RelativeLayout>
 
                     <TextView
@@ -154,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/y9"
-                        android:text="联系人" />
+                        android:text="联系人"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -162,14 +164,14 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="@dimen/x80"
                         android:layout_height="@dimen/y80"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/y12"
-                        android:src="@drawable/tab_home_page_selector" />
+                        android:src="@drawable/tab_home_page_selector"/>
 
                     <TextView
                         style="@style/main_40"
@@ -177,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/y9"
-                        android:text="会办" />
+                        android:text="会办"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -187,10 +189,10 @@
 
     <include
         android:id="@+id/inclue"
+        layout="@layout/ll_left_drawer"
         android:layout_width="@dimen/x700"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
-        layout="@layout/ll_left_drawer" />
+        android:layout_gravity="left"/>
 
     <!-- 右邊側滑 -->
     <!--
