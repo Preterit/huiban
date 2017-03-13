@@ -112,7 +112,6 @@ public class WorkCircleActivity extends BaseActivity implements
                 } catch (Exception e) {
                     Log.e("TAG", e.getMessage());
                 }
-                ;
             }
         });
 
@@ -402,8 +401,6 @@ public class WorkCircleActivity extends BaseActivity implements
 
     /**
      * 评论：
-     *
-     * @param postion
      */
     private void pinglun(int position) {
         String url = UrlTools.url + UrlTools.WORK_QUAN_PINGLUN;

@@ -139,7 +139,8 @@ public class PublishedActivity extends Activity implements OnClickListener {
                             public void success(JsonBean bean) {
                                 Toast.makeText(PublishedActivity.this, "发表成功！",
                                         0).show();
-                                finish();
+
+                                PublishedActivity.this.finish();
                             }
 
                             @Override
@@ -161,8 +162,8 @@ public class PublishedActivity extends Activity implements OnClickListener {
 
     @SuppressLint("HandlerLeak")
     public class GridAdapter extends BaseAdapter {
-        private LayoutInflater inflater; // 瑙嗗浘瀹瑰櫒
-        private int selectedPosition = -1;// 閫変腑鐨勪綅缃�
+        private LayoutInflater inflater; //
+        private int selectedPosition = -1;//
         private boolean shape;
 
         public boolean isShape() {
