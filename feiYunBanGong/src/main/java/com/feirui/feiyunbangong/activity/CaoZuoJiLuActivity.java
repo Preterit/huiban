@@ -82,7 +82,7 @@ public class CaoZuoJiLuActivity extends BaseActivity {
         adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
             @Override
             public void onChakanClick(HashMap<String, Object> data, int position) {
-//                Intent intent = new Intent(DaiShenPiActivity.this, ShenPiDetailActivity.class);
+//                Intent intent = new Intent(DaiShenPiActivity.this, ShenPiQingJaDetailActivity.class);
 //                intent.putExtra("data", data);
 //                startActivity(new Intent(intent));
             }

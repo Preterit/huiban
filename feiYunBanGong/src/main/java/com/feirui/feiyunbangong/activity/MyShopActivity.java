@@ -110,10 +110,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         Utils.doPost(LoadingDialog.getInstance(this), this, url, requestParams, new HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
-                Log.e("orz", bean + "");
                 // TODO Auto-generated method stub
                 ArrayList<HashMap<String, Object>> arrayList = bean.getInfor();
-
                 for (HashMap<String, Object> map : arrayList) {
 
                     Good good = new Good();
@@ -129,6 +127,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     goods.add(good);
                 }
 
+
                 Log.e("orz", "" + goods);
                 adapter.setData(goods);
             }
@@ -136,14 +135,13 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
             @Override
             public void finish() {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void failure(String msg) {
 //                // TODO Auto-generated method stub
 //                // 还没有产品
-//                adapter.add(goods);
+                adapter.setData(new ArrayList<Good>());
             }
         });
 

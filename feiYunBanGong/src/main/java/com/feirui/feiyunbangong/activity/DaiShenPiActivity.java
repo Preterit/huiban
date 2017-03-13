@@ -85,9 +85,18 @@ public class DaiShenPiActivity extends BaseActivity implements
         adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
             @Override
             public void onChakanClick(HashMap<String, Object> data, int position) {
-                Intent intent = new Intent(DaiShenPiActivity.this, ShenPiDetailActivity.class);
-                intent.putExtra("data", data);
-                startActivity(new Intent(intent));
+                String approval_type = (String) data.get("approval_type");
+                switch (approval_type) {
+                    case "请假":
+                        Intent intent = new Intent(DaiShenPiActivity.this, ShenPiQingJaDetailActivity.class);
+                        intent.putExtra("data", data);
+                        startActivity(new Intent(intent));
+                        break;
+                    case "报销":
+
+                        break;
+                }
+
             }
         });
         mPullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {

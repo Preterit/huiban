@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -193,6 +195,10 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     public void toastChoicePic() {
         window = new SelectPicPopupWindow(this, this);
         // 显示窗口
+        //隐藏软键盘
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+                hideSoftInputFromWindow(BaoXiaoActivity.this.getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
         window.showAtLocation(findViewById(R.id.activity_baoxiao),
                 Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
     }

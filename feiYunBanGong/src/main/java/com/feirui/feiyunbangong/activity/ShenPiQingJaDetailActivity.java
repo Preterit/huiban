@@ -21,7 +21,7 @@ import java.util.HashMap;
 /**
  * 审批详情
  */
-public class ShenPiDetailActivity extends BaseActivity {
+public class ShenPiQingJaDetailActivity extends BaseActivity {
     private HashMap<String, Object> mData;
 
     @Override
@@ -59,7 +59,7 @@ public class ShenPiDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-                    T.showShort(ShenPiDetailActivity.this, "请输入备注信息");
+                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
                     return;
                 }
                 updateShenPi(mList_id, "拒绝");
@@ -69,7 +69,7 @@ public class ShenPiDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-                    T.showShort(ShenPiDetailActivity.this, "请输入备注信息");
+                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
                     return;
                 }
 
@@ -85,19 +85,19 @@ public class ShenPiDetailActivity extends BaseActivity {
 
         String url = UrlTools.url + UrlTools.APPROVAL_UPDATE;
 
-        Utils.doPost(LoadingDialog.getInstance(ShenPiDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
+        Utils.doPost(LoadingDialog.getInstance(ShenPiQingJaDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
                 if (bean.getCode().equals("200")) {
-                    T.showShort(ShenPiDetailActivity.this, bean.getMsg());
+                    T.showShort(ShenPiQingJaDetailActivity.this, bean.getMsg());
 
-                    ShenPiDetailActivity.this.finish();
+                    ShenPiQingJaDetailActivity.this.finish();
                 }
             }
 
             @Override
             public void failure(String msg) {
-                T.showShort(ShenPiDetailActivity.this, msg);
+                T.showShort(ShenPiQingJaDetailActivity.this, msg);
             }
 
             @Override

@@ -471,9 +471,11 @@
             android:name=".FriendInfoActivity"
             android:label="@string/title_activity_friend_info">
         </activity>
-        <activity android:name=".activity.ShenPiDetailActivity">
+        <activity android:name=".activity.ShenPiQingJaDetailActivity">
         </activity>
         <activity android:name=".activity.AddGoodActivity">
+        </activity>
+        <activity android:name=".activity.ShenpiBaoxiaoDetailActivity">
         </activity>
     </application>
 
