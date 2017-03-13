@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ShenPiRenAdapter;
@@ -101,10 +105,18 @@ public class ShenPiRenActivity extends BaseActivity implements
     }
 
     private void initUI() {
-        initTitle();
-        setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("选择人员");
-        setRightVisibility(false);
+//        initTitle();
+
+        top = (RelativeLayout) findViewById(R.id.top);
+        leftll = (LinearLayout) findViewById(R.id.leftll);
+        rightll = (LinearLayout) findViewById(R.id.rightll);
+        leftIv = (ImageView) findViewById(R.id.leftIv);
+        centerTv = (TextView) findViewById(R.id.centerTv);
+
+        leftIv.setImageResource(R.drawable.arrows_left);
+        centerTv.setText("选择人员");
+        rightll.setVisibility(View.INVISIBLE);
+
         lv = (ListView) findViewById(R.id.lv_shenpiren);
         adapter = new ShenPiRenAdapter(this, this.getLayoutInflater());
 
@@ -116,6 +128,7 @@ public class ShenPiRenActivity extends BaseActivity implements
                 Intent intent = new Intent();
                 intent.putExtra("shenpiren", new ShenPiRen());
                 setResult(102, intent);
+                Log.e("orz", "onClick: " + "-----------------------------");
                 finish();
             }
         });

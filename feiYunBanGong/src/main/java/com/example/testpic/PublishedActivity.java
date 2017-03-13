@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -40,276 +41,281 @@ import com.loopj.android.http.RequestParams;
  */
 public class PublishedActivity extends Activity implements OnClickListener {
 
-	private GridView noScrollgridview;
-	private GridAdapter adapter;
-	private TextView activity_selectimg_send, tv_content;
-	private SelectPicPopupWindow window;// 弹出图片选择框；
-	private String path = "";// 拍照返回的图片路径；
-	private ImageView iv_back;
-	private String team_id;
+    private GridView noScrollgridview;
+    private GridAdapter adapter;
+    private TextView activity_selectimg_send, tv_content;
+    private SelectPicPopupWindow window;// 弹出图片选择框；
+    private String path = "";// 拍照返回的图片路径；
+    private ImageView iv_back;
+    private String team_id;
 
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_selectimg);
-		Init();
-		setListener();
-	}
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_selectimg);
+        Init();
+        setListener();
+    }
 
-	private void setListener() {
-		iv_back.setOnClickListener(this);
-	}
+    private void setListener() {
+        iv_back.setOnClickListener(this);
+    }
 
-	public void Init() {
+    public void Init() {
 
-		team_id = getIntent().getStringExtra("team_id");
-		Log.e("TAG", team_id + "发布team_id");
+        team_id = getIntent().getStringExtra("team_id");
+        Log.e("TAG", team_id + "发布team_id");
 
-		iv_back = (ImageView) findViewById(R.id.iv_back);
-		tv_content = (TextView) findViewById(R.id.tv_content);
+        iv_back = (ImageView) findViewById(R.id.iv_back);
+        tv_content = (TextView) findViewById(R.id.tv_content);
 
-		if (team_id != null) {
-			tv_content.setHint("发布团队圈动态......");
-		} else {
-			tv_content.setHint("发布朋友圈动态......");
-		}
+        if (team_id != null) {
+            tv_content.setHint("发布团队圈动态......");
+        } else {
+            tv_content.setHint("发布朋友圈动态......");
+        }
 
-		noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
-		noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-		adapter = new GridAdapter(this);
-		adapter.update();
-		noScrollgridview.setAdapter(adapter);
+        noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
+        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        adapter = new GridAdapter(this);
+        adapter.update();
+        noScrollgridview.setAdapter(adapter);
 
-		noScrollgridview.setOnItemClickListener(new OnItemClickListener() {
+        noScrollgridview.setOnItemClickListener(new OnItemClickListener() {
 
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				if (arg2 == Bimp.bmp.size()) {
-					// 弹出选择图片：
-					window = PictureUtil.toastChoicePic(PublishedActivity.this,
-							PublishedActivity.this, noScrollgridview);
-				} else {
-					Intent intent = new Intent(PublishedActivity.this,
-							PhotoActivity.class);
-					intent.putExtra("ID", arg2);
-					startActivity(intent);
-				}
-			}
-		});
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                if (arg2 == Bimp.bmp.size()) {
+                    // 弹出选择图片：
+                    //隐藏键盘
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+                            hideSoftInputFromWindow(PublishedActivity.this.getCurrentFocus().getWindowToken(),
+                                    InputMethodManager.HIDE_NOT_ALWAYS);
 
-		activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
+                    window = PictureUtil.toastChoicePic(PublishedActivity.this,
+                            PublishedActivity.this, noScrollgridview);
+                } else {
+                    Intent intent = new Intent(PublishedActivity.this,
+                            PhotoActivity.class);
+                    intent.putExtra("ID", arg2);
+                    startActivity(intent);
+                }
+            }
+        });
 
-		activity_selectimg_send.setOnClickListener(new OnClickListener() {
+        activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
 
-			public void onClick(View v) {
+        activity_selectimg_send.setOnClickListener(new OnClickListener() {
 
-				if (TextUtils.isEmpty(tv_content.getText().toString().trim())) {
-					Toast.makeText(PublishedActivity.this, "请输入内容！", 0).show();
-					return;
-				}
+            public void onClick(View v) {
 
-				StringBuffer sb = new StringBuffer();
-				for (int i = 0; i < Bimp.bmp.size(); i++) {
-					Bitmap bt = Bimp.bmp.get(i);
-					sb.append(BitmapToBase64.bitmapToBase64(bt));
-					sb.append(",");
-				}
+                if (TextUtils.isEmpty(tv_content.getText().toString().trim())) {
+                    Toast.makeText(PublishedActivity.this, "请输入内容！", 0).show();
+                    return;
+                }
 
-				if (sb.length() > 0) {
-					sb.delete(sb.length() - 1, sb.length());
-				}
+                StringBuffer sb = new StringBuffer();
+                for (int i = 0; i < Bimp.bmp.size(); i++) {
+                    Bitmap bt = Bimp.bmp.get(i);
+                    sb.append(BitmapToBase64.bitmapToBase64(bt));
+                    sb.append(",");
+                }
 
-				String url = UrlTools.url + UrlTools.FABIAO_WENZHANG;
-				RequestParams params = new RequestParams();
-				params.put("picture", sb.toString());
-				params.put("text", tv_content.getText().toString());
-				params.put("type", "公开");
-				params.put("team_id", team_id);
+                if (sb.length() > 0) {
+                    sb.delete(sb.length() - 1, sb.length());
+                }
 
-				Utils.doPost(LoadingDialog.getInstance(PublishedActivity.this),
-						PublishedActivity.this, url, params,
-						new HttpCallBack() {
+                String url = UrlTools.url + UrlTools.FABIAO_WENZHANG;
+                RequestParams params = new RequestParams();
+                params.put("picture", sb.toString());
+                params.put("text", tv_content.getText().toString());
+                params.put("type", "公开");
+                params.put("team_id", team_id);
 
-							@Override
-							public void success(JsonBean bean) {
-								Toast.makeText(PublishedActivity.this, "发表成功！",
-										0).show();
-								finish();
-							}
+                Utils.doPost(LoadingDialog.getInstance(PublishedActivity.this),
+                        PublishedActivity.this, url, params,
+                        new HttpCallBack() {
 
-							@Override
-							public void failure(String msg) {
-								Toast.makeText(PublishedActivity.this, msg, 0)
-										.show();
-							}
+                            @Override
+                            public void success(JsonBean bean) {
+                                Toast.makeText(PublishedActivity.this, "发表成功！",
+                                        0).show();
+                                finish();
+                            }
 
-							@Override
-							public void finish() {
-								// TODO Auto-generated method stub
+                            @Override
+                            public void failure(String msg) {
+                                Toast.makeText(PublishedActivity.this, msg, 0)
+                                        .show();
+                            }
 
-							}
-						});
+                            @Override
+                            public void finish() {
+                                // TODO Auto-generated method stub
 
-			}
-		});
-	}
+                            }
+                        });
 
-	@SuppressLint("HandlerLeak")
-	public class GridAdapter extends BaseAdapter {
-		private LayoutInflater inflater; // 瑙嗗浘瀹瑰櫒
-		private int selectedPosition = -1;// 閫変腑鐨勪綅缃�
-		private boolean shape;
+            }
+        });
+    }
 
-		public boolean isShape() {
-			return shape;
-		}
+    @SuppressLint("HandlerLeak")
+    public class GridAdapter extends BaseAdapter {
+        private LayoutInflater inflater; // 瑙嗗浘瀹瑰櫒
+        private int selectedPosition = -1;// 閫変腑鐨勪綅缃�
+        private boolean shape;
 
-		public void setShape(boolean shape) {
-			this.shape = shape;
-		}
+        public boolean isShape() {
+            return shape;
+        }
 
-		public GridAdapter(Context context) {
-			inflater = LayoutInflater.from(context);
-		}
+        public void setShape(boolean shape) {
+            this.shape = shape;
+        }
 
-		public void update() {
-			loading();
-		}
+        public GridAdapter(Context context) {
+            inflater = LayoutInflater.from(context);
+        }
 
-		public int getCount() {
-			return (Bimp.bmp.size() + 1);
-		}
+        public void update() {
+            loading();
+        }
 
-		public Object getItem(int arg0) {
-			return null;
-		}
+        public int getCount() {
+            return (Bimp.bmp.size() + 1);
+        }
 
-		public long getItemId(int arg0) {
-			return 0;
-		}
+        public Object getItem(int arg0) {
+            return null;
+        }
 
-		public void setSelectedPosition(int position) {
-			selectedPosition = position;
-		}
+        public long getItemId(int arg0) {
+            return 0;
+        }
 
-		public int getSelectedPosition() {
-			return selectedPosition;
-		}
+        public void setSelectedPosition(int position) {
+            selectedPosition = position;
+        }
 
-		/**
-		 * ListView Item璁剧疆
-		 */
-		public View getView(int position, View convertView, ViewGroup parent) {
-			final int coord = position;
-			ViewHolder holder = null;
-			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.item_published_grida,
-						parent, false);
-				holder = new ViewHolder();
-				holder.image = (ImageView) convertView
-						.findViewById(R.id.item_grida_image);
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-			if (position == Bimp.bmp.size()) {
-				holder.image.setImageBitmap(BitmapFactory.decodeResource(
-						getResources(), R.drawable.icon_addpic_unfocused));
-				if (position == 9) {
-					holder.image.setVisibility(View.GONE);
-				}
-			} else {
-				try {
-					holder.image.setImageBitmap(Bimp.bmp.get(position));
-				} catch (Exception e) {
-					Log.e("TAg", e.getMessage());
-				}
-			}
-			return convertView;
-		}
+        public int getSelectedPosition() {
+            return selectedPosition;
+        }
 
-		public class ViewHolder {
-			public ImageView image;
-		}
+        /**
+         * ListView Item璁剧疆
+         */
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final int coord = position;
+            ViewHolder holder = null;
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.item_published_grida,
+                        parent, false);
+                holder = new ViewHolder();
+                holder.image = (ImageView) convertView
+                        .findViewById(R.id.item_grida_image);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            if (position == Bimp.bmp.size()) {
+                holder.image.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.icon_addpic_unfocused));
+                if (position == 9) {
+                    holder.image.setVisibility(View.GONE);
+                }
+            } else {
+                try {
+                    holder.image.setImageBitmap(Bimp.bmp.get(position));
+                } catch (Exception e) {
+                    Log.e("TAg", e.getMessage());
+                }
+            }
+            return convertView;
+        }
 
-		public void loading() {
-			new Thread(new Runnable() {
-				public void run() {
-					try {
-						for (int i = Bimp.bmp.size(); i < Bimp.drr.size(); i++) {
-							String path = Bimp.drr.get(i);
-							// Bitmap bm = Bimp.revitionImageSize(path);
-							// 注意：必须得压缩，否则极有可能报oom;上传服务器也比较慢；
-							Bitmap bm = ImageUtil.getimage(path);
-							Bimp.bmp.add(bm);
-							Bimp.max += 1;
-						}
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								adapter.notifyDataSetChanged();
-							}
-						});
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}).start();
-		}
-	}
+        public class ViewHolder {
+            public ImageView image;
+        }
 
-	protected void onRestart() {
-		adapter.update();
-		super.onRestart();
-	}
+        public void loading() {
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        for (int i = Bimp.bmp.size(); i < Bimp.drr.size(); i++) {
+                            String path = Bimp.drr.get(i);
+                            // Bitmap bm = Bimp.revitionImageSize(path);
+                            // 注意：必须得压缩，否则极有可能报oom;上传服务器也比较慢；
+                            Bitmap bm = ImageUtil.getimage(path);
+                            Bimp.bmp.add(bm);
+                            Bimp.max += 1;
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
-		case 2:
-			if (resultCode == Activity.RESULT_OK) {
-				Bitmap bitmap = ImageUtil.getimage(path);
-				if (Bimp.drr.size() < 9) {
-					Bimp.drr.add(path);
-				}
-			}
-			break;
-		}
-	}
+    protected void onRestart() {
+        adapter.update();
+        super.onRestart();
+    }
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		// 拍照；
-		case R.id.view_camero_rl_takephoto:
-			window.dismiss();
-			path = PictureUtil.paiZhao(window, this);
-			break;
-		// 从相册选择：
-		case R.id.view_camero_rl_selectphoto:
-			window.dismiss();
-			Intent intent = new Intent(PublishedActivity.this,
-					TestPicActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.iv_back:
-			finish();
-			break;
-		}
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 2:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bitmap bitmap = ImageUtil.getimage(path);
+                    if (Bimp.drr.size() < 9) {
+                        Bimp.drr.add(path);
+                    }
+                }
+                break;
+        }
+    }
 
-	}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // 拍照；
+            case R.id.view_camero_rl_takephoto:
+                window.dismiss();
+                path = PictureUtil.paiZhao(window, this);
+                break;
+            // 从相册选择：
+            case R.id.view_camero_rl_selectphoto:
+                window.dismiss();
+                Intent intent = new Intent(PublishedActivity.this,
+                        TestPicActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.iv_back:
+                finish();
+                break;
+        }
 
-	@Override
-	protected void onDestroy() {
-		initBimp();
-		Log.e("TAG", "清除！！！！");
-		super.onDestroy();
-	}
+    }
 
-	private void initBimp() {
-		FileUtils.deleteDir();
-		Bimp.drr.clear();
-		Bimp.bmp.removeAll(Bimp.bmp);
-		Bimp.act_bool = true;
-		Bimp.max = 0;
-	}
+    @Override
+    protected void onDestroy() {
+        initBimp();
+        Log.e("TAG", "清除！！！！");
+        super.onDestroy();
+    }
+
+    private void initBimp() {
+        FileUtils.deleteDir();
+        Bimp.drr.clear();
+        Bimp.bmp.removeAll(Bimp.bmp);
+        Bimp.act_bool = true;
+        Bimp.max = 0;
+    }
 
 }

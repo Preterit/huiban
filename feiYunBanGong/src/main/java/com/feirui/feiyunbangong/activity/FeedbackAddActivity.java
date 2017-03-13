@@ -1,10 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.io.File;
-
-import org.apache.http.Header;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +11,7 @@ import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +29,10 @@ import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+
+import java.io.File;
 
 /**
  * 反馈-添加
@@ -123,6 +125,11 @@ public class FeedbackAddActivity extends BaseActivity implements
 		case R.id.iv_mingpian: // 上传名片
 			window = new SelectPicPopupWindow(this, this);
 			// 显示窗口
+
+			//隐藏软键盘
+			((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+					hideSoftInputFromWindow(FeedbackAddActivity.this.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
 			window.showAtLocation(findViewById(R.id.activity_feedback_add),
 					Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
 			break;
