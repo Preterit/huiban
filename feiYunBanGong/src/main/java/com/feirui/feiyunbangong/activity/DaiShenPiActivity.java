@@ -27,6 +27,7 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class DaiShenPiActivity extends BaseActivity implements
         OnItemSelectedListener {
     private static final int ON_REFRESH = 1;
@@ -61,6 +62,12 @@ public class DaiShenPiActivity extends BaseActivity implements
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        loadData(currentPage, ON_REFRESH);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dai_shen_pi);
@@ -90,10 +97,12 @@ public class DaiShenPiActivity extends BaseActivity implements
                     case "请假":
                         Intent intent = new Intent(DaiShenPiActivity.this, ShenPiQingJaDetailActivity.class);
                         intent.putExtra("data", data);
-                        startActivity(new Intent(intent));
+                        startActivity(intent);
                         break;
                     case "报销":
-
+                        Intent baoxiaoIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        baoxiaoIntent.putExtra("data", data);
+                        startActivity(baoxiaoIntent);
                         break;
                 }
 

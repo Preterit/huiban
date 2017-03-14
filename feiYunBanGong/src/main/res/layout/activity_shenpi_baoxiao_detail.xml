@@ -5,6 +5,7 @@
     android:id="@+id/activity_shenpi_baoxiao_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/hui"
     android:orientation="vertical"
     tools:context="com.feirui.feiyunbangong.activity.ShenpiBaoxiaoDetailActivity">
 
@@ -13,6 +14,177 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <com.feirui.feiyunbangong.view.CircleImageView
+                android:id="@+id/baoxiao_head_img"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                tools:src="@drawable/ic_launcher"
+                />
+
+            <TextView
+                android:id="@+id/baoxiao_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                tools:text="小小"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:text="报销类型:"
+            />
+
+        <TextView
+            android:id="@+id/leixing_baoxiao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="haha"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="报销金额:"
+            />
+
+        <TextView
+            android:id="@+id/jine_baoxiao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="haha"
+
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/shenpi_div_line_width"
+        android:layout_height="1px"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/gray_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="费用明细"
+            />
+
+        <ImageView
+            android:id="@+id/iv_baoxiao_detail"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="30dp"
+            android:background="@color/red_bg"
+            android:scaleType="centerCrop"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/shenpi_div_line_width"
+        android:layout_height="1px"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/gray_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="总金额:"
+            />
+
+        <TextView
+            android:id="@+id/all_baoxiao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="haha"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+
+        <Button
+            android:id="@+id/btn_baoxiao_accept"
+            style="@style/btn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="通过"
+            android:textColor="@color/white"
+            />
+
+        <Button
+            android:id="@+id/btn_baoxiao_refuse"
+            style="@style/btn"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="不通过"
+            android:textColor="@color/white"
+            />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

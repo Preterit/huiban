@@ -26,7 +26,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +42,7 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.RefreshLayout;
 import com.feirui.feiyunbangong.view.RefreshLayout.OnLoadListener;
 import com.loopj.android.http.RequestParams;
+import com.xw.repo.refresh.PullListView;
 
 import static com.feirui.feiyunbangong.R.id.swipe_container;
 
@@ -57,7 +57,7 @@ public class WorkCircleActivity extends BaseActivity implements
     private RefreshLayout swipeLayout;
 
     private ArrayList<ItemEntity> itemEntities = new ArrayList<>();
-    private ListView lv_work;
+    private PullListView lv_work;
     private View header;
 
     private View m_listViewFooter;
@@ -120,9 +120,13 @@ public class WorkCircleActivity extends BaseActivity implements
                 .inflate(R.layout.ll_header_work, null);
         m_listViewFooter = LayoutInflater.from(this).inflate(
                 R.layout.listview_foot, null, false);
-        lv_work = (ListView) findViewById(R.id.lv_work);
+
+        lv_work = (PullListView) findViewById(R.id.lv_work);
+
         lv_work.addFooterView(m_listViewFooter);
+
         lv_work.addHeaderView(header);
+
         ll_pinglun_input = (LinearLayout) findViewById(R.id.ll_pinglun_input);
         et_pinglun = (EditText) findViewById(R.id.et_pinglun);
         bt_send = (Button) findViewById(R.id.bt_send);

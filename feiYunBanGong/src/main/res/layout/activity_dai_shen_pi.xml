@@ -22,13 +22,6 @@
         android:layout_height="@dimen/y30"
         android:background="@color/fenge"/>
 
-    <!--<com.feirui.feiyunbangong.view.AutoListView-->
-    <!--android:id="@+id/haveget"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:divider="@color/f0f0f0"-->
-    <!--android:scrollbars="none"/>-->
     <com.xw.repo.refresh.PullToRefreshLayout
         android:id="@+id/daishen_pull_to_refresh"
         android:layout_width="match_parent"

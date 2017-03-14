@@ -203,7 +203,7 @@ public class PublishedActivity extends Activity implements OnClickListener {
         }
 
         /**
-         * ListView Item璁剧疆
+         * ListView Item
          */
         public View getView(int position, View convertView, ViewGroup parent) {
             final int coord = position;

@@ -1,56 +1,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_caigou_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}" >
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/ll_caigou_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="${relativePackage}.${activityClass}">
 
     <include
+        layout="@layout/top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar"
-        layout="@layout/top" />
+        android:layout_height="@dimen/title_bar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="头像：" />
+            android:text="头像："/>
 
         <com.feirui.feiyunbangong.view.CircleImageView
             android:id="@+id/iv_head"
             android:layout_width="@dimen/x200"
             android:layout_height="@dimen/y200"
             android:layout_marginRight="@dimen/x50"
-            android:src="@drawable/fragment_head" />
+            android:src="@drawable/fragment_head"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y3"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y160"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="姓名：" />
+            android:text="姓名："/>
 
         <EditText
             android:id="@+id/et_name"
@@ -60,27 +60,27 @@
             android:layout_marginRight="@dimen/x50"
             android:background="@null"
             android:gravity="right"
-            android:hint="" />
+            android:hint=""/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y50"
-        android:background="@color/fenge" />
+        android:background="@color/fenge"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y160"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="手机：" />
+            android:text="手机："/>
 
         <EditText
             android:id="@+id/et_phone"
@@ -91,113 +91,113 @@
             android:background="@null"
             android:enabled="false"
             android:gravity="right"
-            android:hint="" />
+            android:hint=""/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y3"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y160"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="二维码名片：" />
+            android:text="二维码名片："/>
 
         <ImageView
             android:id="@+id/iv_erweima"
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/y80"
-            android:layout_marginRight="@dimen/x100" />
+            android:layout_marginRight="@dimen/x100"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y3"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y160"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="性别：" />
+            android:text="性别："/>
 
-        <EditText
-            android:id="@+id/et_sex"
+        <TextView
+            android:id="@+id/tv_choose_sex"
             style="@style/a000000_58"
             android:layout_width="@dimen/x150"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/x50"
             android:background="@null"
             android:gravity="right"
-            android:hint="" />
+            android:hint=""/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y3"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y160"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="生日：" />
+            android:text="生日："/>
 
-        <EditText
-            android:id="@+id/et_birthday"
+        <TextView
+            android:id="@+id/tv_birthday"
             style="@style/a000000_58"
             android:layout_width="@dimen/x400"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/x50"
             android:background="@null"
             android:gravity="right"
-            android:hint="" />
+            android:hint=""/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y3"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y160"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/size20" >
+        android:padding="@dimen/size20">
 
         <TextView
             style="@style/a000000_58"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="地区：" />
+            android:text="地区："/>
 
         <EditText
             android:id="@+id/et_city"
@@ -207,13 +207,13 @@
             android:layout_marginRight="@dimen/x50"
             android:background="@null"
             android:gravity="right"
-            android:hint="" />
+            android:hint=""/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y60"
-        android:background="@color/hui" />
+        android:background="@color/hui"/>
 
     <Button
         android:id="@+id/bt_xiugai"
@@ -225,11 +225,11 @@
         android:layout_marginTop="@dimen/x94"
         android:background="@drawable/blue_bt_selector"
         android:gravity="center"
-        android:text="确认修改" />
+        android:text="确认修改"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
             android:gravity="center"
             android:textColor="@color/base_white"
             android:textSize="@dimen/size10"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </LinearLayout>

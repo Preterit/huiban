@@ -6,42 +6,51 @@ import java.util.HashMap;
 
 public class JsonBean implements Serializable {
 
-	/**
-	 */
-	private String code;
-	private String msg;
-	private ArrayList<HashMap<String, Object>> infor;
+    /**
+     */
+    private String code;
+    private String msg;
+    private ArrayList<HashMap<String, Object>> infor;
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getMsg() {
-		return msg;
-	}
+    public String getMsg() {
+        return msg;
+    }
 
-	public void setMsg(String Msg) {
-		this.msg = Msg;
-	}
+    public void setMsg(String Msg) {
+        this.msg = Msg;
+    }
 
-	public ArrayList<HashMap<String, Object>> getInfor() {
-		return infor;
-	}
+    public ArrayList<HashMap<String, Object>> getInfor() {
+        return infor;
+    }
 
-	public void setInfor(ArrayList<HashMap<String, Object>> infor) {
-		this.infor = infor;
-	}
+    public void setInfor(ArrayList<HashMap<String, Object>> infor) {
+        this.infor = infor;
+    }
 
-	public JsonBean(String msg) {
-		super();
-		this.msg = msg;
-	}
+    public JsonBean(String msg) {
+        super();
+        this.msg = msg;
+    }
 
-	public JsonBean() {
-		super();
-	}
+    public JsonBean() {
+        super();
+    }
+
+    @Override
+    public String toString() {
+        return "JsonBean{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", infor=" + infor +
+                '}';
+    }
 }

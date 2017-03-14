@@ -190,8 +190,8 @@
     </style>
 
     <style name="a000000_58">
-        <item name="android:textColor">@color/a000000</item>
-        <item name="android:textSize">@dimen/size58</item>
+        <item name="android:textColor">@color/heise</item>
+        <item name="android:textSize">@dimen/size48</item>
     </style>
 
     <style name="ff4f4f_27">
@@ -331,4 +331,5 @@
     <color name="tv_left_color">#666666</color>
     <color name="shenpi_bg">#f9f9f9</color>
     <color name="shenpi_fg">#fdfdfe</color>
+    <color name="heise">#b4333333</color>
 </resources>
