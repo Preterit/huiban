@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"/>
 
-    <com.xw.repo.refresh.PullToRefreshLayout
+    <com.feirui.feiyunbangong.view.RefreshLayout
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent">
 
         </com.xw.repo.refresh.PullListView>
-    </com.xw.repo.refresh.PullToRefreshLayout>
+    </com.feirui.feiyunbangong.view.RefreshLayout>
 
 
     <LinearLayout

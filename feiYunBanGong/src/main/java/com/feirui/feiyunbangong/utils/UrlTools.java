@@ -484,4 +484,6 @@ public class UrlTools {
     public static String APPROVAL_UPDATE = "Approval/approval_update";
     //删除商品
     public static String DELETE_GOOD = "news/delete";
+    //删除朋友圈
+    public static String DELETE_CIRCLE = "circle/delCircle";
 }

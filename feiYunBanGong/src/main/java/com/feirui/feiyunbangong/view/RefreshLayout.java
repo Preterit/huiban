@@ -12,9 +12,7 @@ import android.widget.ListView;
   
 /** 
  * 继承自SwipeRefreshLayout,从而实现滑动到底部时上拉加载更多的功能. 
- *  
- *  
- */  
+ */
 public class RefreshLayout extends SwipeRefreshLayout implements  
         OnScrollListener {  
   
@@ -121,9 +119,7 @@ public class RefreshLayout extends SwipeRefreshLayout implements
   
     /** 
      * 是否可以加载更多, 条件是到了最底部, listview不在加载中, 且为上拉操作. 
-     *  
-     * @return 
-     */  
+     */
     private boolean canLoad() {  
         return isBottom() && !isLoading && isPullUp();  
     }  
@@ -142,9 +138,7 @@ public class RefreshLayout extends SwipeRefreshLayout implements
   
     /** 
      * 是否是上拉操作 
-     *  
-     * @return 
-     */  
+     */
     private boolean isPullUp() {  
         return (mYDown - mLastY) >= mTouchSlop;  
     }  
@@ -162,8 +156,7 @@ public class RefreshLayout extends SwipeRefreshLayout implements
     }  
   
     /** 
-     * @param loading 
-     */  
+     */
     public void setLoading(boolean loading) {  
         isLoading = loading;  
         if (isLoading) {  
@@ -180,8 +173,7 @@ public class RefreshLayout extends SwipeRefreshLayout implements
     }  
   
     /** 
-     * @param loadListener 
-     */  
+     */
     public void setOnLoadListener(OnLoadListener loadListener) {  
         mOnLoadListener = loadListener;  
     }  
@@ -213,9 +205,7 @@ public class RefreshLayout extends SwipeRefreshLayout implements
   
         /** 
          * 设置listview的底部控件 
-         *  
-         * @param isLoading 
-         */  
+         */
         public void setFooterView(boolean isLoading);  
     }  
 }  

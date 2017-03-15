@@ -629,12 +629,17 @@ public class MainActivity extends BaseActivity
                     String birthday = String.valueOf(hashMap.get("birthday"));
                     String phone = String.valueOf(hashMap.get("staff_mobile"));
 
+                    String id = String.valueOf(hashMap.get("id"));
+
+                    // TODO: 2017/3/15 id
+
                     if ("img/1_1.png".equals(head) || "1".equals(head)) {
                         iv_head.setImageResource(R.drawable.fragment_head);
                     } else {
                         ImageLoader.getInstance().displayImage(head, iv_head);
                     }
                     MyUser user = new MyUser(name, duty, head, department, sex, birthday, address, phone);
+                    user.setId(id);
                     AppStore.myuser = user;
                     break;
             }

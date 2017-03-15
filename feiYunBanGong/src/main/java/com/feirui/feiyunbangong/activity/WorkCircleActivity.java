@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -32,10 +35,12 @@ import android.widget.Toast;
 import com.example.testpic.PublishedActivity;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ListItemAdapter;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.ItemEntity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.PingLunItem;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -44,6 +49,9 @@ import com.feirui.feiyunbangong.view.RefreshLayout.OnLoadListener;
 import com.loopj.android.http.RequestParams;
 import com.xw.repo.refresh.PullListView;
 
+import static com.feirui.feiyunbangong.R.drawable.icon_data_select;
+import static com.feirui.feiyunbangong.R.drawable.msg;
+import static com.feirui.feiyunbangong.R.id.ifRoom;
 import static com.feirui.feiyunbangong.R.id.swipe_container;
 
 /**
@@ -83,6 +91,8 @@ public class WorkCircleActivity extends BaseActivity implements
     private void setAdapter() {
         lv_work.setAdapter(adapter);
     }
+
+    private AlertDialog mAlertDialog;
 
     @SuppressLint("InflateParams")
     private void initView() {
@@ -131,6 +141,72 @@ public class WorkCircleActivity extends BaseActivity implements
         et_pinglun = (EditText) findViewById(R.id.et_pinglun);
         bt_send = (Button) findViewById(R.id.bt_send);
         adapter = new ListItemAdapter(this, this, itemEntities);
+
+
+        lv_work.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+        adapter.setMyLongClickListener(new ListItemAdapter.MyLongClickListener() {
+            @Override
+            public void onLongClick(final ItemEntity itemEntity, final int position) {
+                if (itemEntity.getStaffId().equals(AppStore.myuser.getId())) {
+                    mAlertDialog = new AlertDialog.Builder(WorkCircleActivity.this)
+                            .setMessage("删除这条朋友圈吗?")
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    delete(itemEntity.getId(), position);
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .create();
+                    mAlertDialog.show();
+                }
+            }
+        });
+    }
+
+    /**
+     * @param id
+     */
+    private void delete(String id, final int postition) {
+        String url = UrlTools.url + UrlTools.DELETE_CIRCLE;
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+
+        Utils.doPost(LoadingDialog.getInstance(WorkCircleActivity.this), WorkCircleActivity.this, url, params, new HttpCallBack() {
+            @Override
+            public void success(JsonBean bean) {
+                if (bean.getCode().equals("200")) {
+                    T.showShort(WorkCircleActivity.this, "删除成功");
+
+                    getdata(1, 0);
+                }
+            }
+
+            @Override
+            public void failure(String msg) {
+                T.showShort(WorkCircleActivity.this, msg);
+            }
+
+            @Override
+            public void finish() {
+
+            }
+        });
     }
 
     // 点赞：
@@ -145,16 +221,32 @@ public class WorkCircleActivity extends BaseActivity implements
                 new HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {
-                        item.setZan(!item.isZan());
-                        // 获得数据后：
-                        item.setZan_name(""
-                                + bean.getInfor().get(0).get("name"));
+                        Log.e("orz", "success: " + bean.toString());
+                        if (bean.getMsg().equals("点赞成功")) {
+                            item.setZan(true);
+                            if (item.getZan_name().equals("")) {
+                                item.setZan_name(item.getZan_name().concat(AppStore.myuser.getName()));
+                            } else {
+                                item.setZan_name(item.getZan_name().concat("," + AppStore.myuser.getName()));
+                            }
+                        } else {
+                            item.setZan(false);
+                            if (item.getZan_name().equals(AppStore.myuser.getName())) {
+                                //没有人点赞,自己取消赞
+                                item.setZan_name("");
+                            } else {
+                                int lastIndexOf = item.getZan_name().lastIndexOf(",");
+                                if (lastIndexOf != -1) {
+                                    item.setZan_name(item.getZan_name().substring(lastIndexOf, item.getZan_name().length()));
+                                }
+                            }
+                        }
                         adapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(WorkCircleActivity.this, msg, 0).show();
+                        T.showShort(WorkCircleActivity.this, msg);
                     }
 
                     @Override
@@ -183,11 +275,6 @@ public class WorkCircleActivity extends BaseActivity implements
         bt_send.setOnTouchListener(this);
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setOnLoadListener(this);
-        swipeLayout.setColorScheme(
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
         lv_work.setOnTouchListener(this);
         lv_work.setOnItemClickListener(this);
     }
@@ -248,7 +335,6 @@ public class WorkCircleActivity extends BaseActivity implements
                     @SuppressLint("ShowToast")
                     @Override
                     public void success(JsonBean bean) {
-
                         ArrayList<HashMap<String, Object>> infor = bean
                                 .getInfor();
                         new Handler().postDelayed(new Runnable() {
@@ -275,6 +361,8 @@ public class WorkCircleActivity extends BaseActivity implements
                             String name = infor.get(i).get("fabu_name") + "";// 发布者名字；
                             String content = infor.get(i).get("text") + "";// 发布的内容；
                             String id = infor.get(i).get("id") + "";// 发布者id;
+                            String staff_id = infor.get(i).get("staff_id") + "";
+
                             JSONArray pics = (JSONArray) infor.get(i).get(
                                     "fabu_picture");// 发布的图片集合；
                             ArrayList<String> imageUrls = new ArrayList<>();
@@ -298,6 +386,7 @@ public class WorkCircleActivity extends BaseActivity implements
                             item.setTitle(name);
                             item.setZan_name(circle_zan_name);
                             String[] zans = circle_zan_name.split(",");
+                            item.setStaffId(staff_id);
 
                             for (int j = 0; j < zans.length; j++) {
                                 if (AppStore.myuser.getName().equals(zans[j])) {
@@ -336,7 +425,7 @@ public class WorkCircleActivity extends BaseActivity implements
                         if ("暂无内容".equals(msg) && position > 1) {
                             return;
                         }
-                        Toast.makeText(WorkCircleActivity.this, msg, 0).show();
+                        T.showShort(WorkCircleActivity.this, msg);
                     }
 
                     @Override
@@ -359,8 +448,7 @@ public class WorkCircleActivity extends BaseActivity implements
                     pinglun = null;
                     pinglun = et_pinglun.getText().toString();
                     if (TextUtils.isEmpty(pinglun)) {
-                        Toast.makeText(WorkCircleActivity.this, "请输入评论内容！", 0)
-                                .show();
+                        T.showShort(WorkCircleActivity.this, "请输入评论内容!");
                         return true;
                     }
                     pinglun(pos_pinglun);
@@ -392,7 +480,7 @@ public class WorkCircleActivity extends BaseActivity implements
                 }
                 return true;
             case R.id.ll_show_hide_zan:
-                Toast.makeText(this, "ll_show_hide_zan", 0).show();
+
                 return true;
             case R.id.iv_xinxi:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {

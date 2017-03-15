@@ -3,7 +3,6 @@ package com.feirui.feiyunbangong.utils;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.view.LayoutInflater;
 import android.widget.ImageView;
 
 import com.feirui.feiyunbangong.R;
