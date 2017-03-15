@@ -26,10 +26,10 @@
         android:layout_height="@dimen/y499">
 
         <!--<android.support.v4.view.ViewPager-->
-            <!--android:id="@+id/vp"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="@dimen/y499"-->
-            <!--android:background="@drawable/banner1"/>-->
+        <!--android:id="@+id/vp"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="@dimen/y499"-->
+        <!--android:background="@drawable/banner1"/>-->
 
         <com.youth.banner.Banner
             android:id="@+id/banner"
@@ -311,7 +311,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y6"
-                    android:text="数据报表"/>
+                    android:text="查看报表"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

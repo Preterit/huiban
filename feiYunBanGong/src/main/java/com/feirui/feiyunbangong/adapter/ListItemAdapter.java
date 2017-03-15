@@ -34,7 +34,6 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
     private MyLongClickListener mMyLongClickListener;
 
 
-
     public interface MyLongClickListener {
         void onLongClick(ItemEntity itemEntity, int position);
     }
@@ -113,11 +112,9 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
             holder.tv_zan_item.setText(itemEntity.getZan_name());
         }
 
-        // 加载头像：
-        if (itemEntity.getAvatar().contains("http://")) {
-            ImageLoader.getInstance().displayImage(itemEntity.getAvatar(),
-                    holder.iv_head, ImageLoaderUtils.getWholeOptions());
-        }
+        // 载头像：
+        ImageLoader.getInstance().displayImage(itemEntity.getAvatar(),
+                holder.iv_head, ImageLoaderUtils.getWholeOptions());
 
         if (!itemEntity.isZan()) {
             holder.tv_zan.setText("赞一下");
