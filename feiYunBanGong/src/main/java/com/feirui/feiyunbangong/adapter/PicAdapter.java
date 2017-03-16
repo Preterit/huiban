@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
-    private ArrayList<String> uris;
+    private ArrayList<String> mUris;
     private DisplayImageOptions options;
 
     public PicAdapter(ArrayList<String> uris) {
-        this.uris = uris;
+        this.mUris = uris;
         options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)  //加载图片时会在内存中加载缓存
                 .cacheOnDisc(true)   //加载图片时会在磁盘中加载缓存
@@ -33,7 +33,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
     }
 
     public void setUris(ArrayList<String> uris) {
-        this.uris = uris;
+        this.mUris = uris;
         notifyDataSetChanged();
     }
 
@@ -44,32 +44,29 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        ImageLoader.getInstance().displayImage(uris.get(position), holder.mIv, options);
+        ImageLoader.getInstance().displayImage(mUris.get(position), holder.mIv, options);
 
-        holder.mDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                removeAt(position);
-            }
-        });
 
     }
 
     public void removeAt(int position) {
-        uris.remove(position);
+        mUris.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, uris.size());
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return uris.size();
+        return mUris.size();
     }
 
     public void addPic(String uri) {
-        uris.add(uri);
+        mUris.add(uri);
         notifyDataSetChanged();
+    }
+
+    public ArrayList<String> getDataSet() {
+        return mUris;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,6 +77,12 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             super(itemView);
             mIv = (ImageView) itemView.findViewById(R.id.iv_item_choose_pic);
             mDelete = (ImageView) itemView.findViewById(R.id.pic_delete);
+            mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeAt(getAdapterPosition());
+                }
+            });
         }
     }
 }

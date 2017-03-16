@@ -3,7 +3,6 @@ package com.feirui.feiyunbangong.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,7 +18,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
@@ -30,8 +28,8 @@ import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.AddShenHe;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
+import com.feirui.feiyunbangong.utils.BitMapUtils;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
-import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -51,14 +49,10 @@ import java.util.Date;
  */
 public class Statement1Activity extends BaseActivity implements OnClickListener {
     @PView
-    EditText et_1, et_2, et_3, et_beizhu;// 完成，未完成，明天计划,备注
+    public EditText et_1, et_2, et_3, et_beizhu;// 完成，未完成，明天计划,备注
     private SelectPicPopupWindow window;// 弹出图片选择框；
-    private int select;// 点击上传图片位置；
-    private Bitmap bitmap1, bitmap2, bitmap3;
 
     AddShenHeAdapter adapter;
-    @PView
-    ScrollView sv_caigou;
 
     private Button mBtnCommit;
     private RecyclerView mRecPic;
@@ -70,20 +64,19 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statement1);
         initView();
-
-
     }
 
     private HeaderViewRecyclerAdapter mFooterAdapter;
-    private PicAdapter mPicAdapter;
+    public PicAdapter mPicAdapter;
     private HeaderViewRecyclerAdapter mShenpiFooterAdapter;
-    private ShenPiRecAdapter mShenPiRecAdapter;
+    public ShenPiRecAdapter mShenPiRecAdapter;
     private ImageView addPicDetail;
     private ImageView addShenPiRen;
 
-    private void initView() {
+    public void initView() {
         View footerAddPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer, null);
         View footerShenpi = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
+        mBtnCommit = (Button) findViewById(R.id.btn_submit_dialy);
 
         mPicAdapter = new PicAdapter(new ArrayList<String>());
         mFooterAdapter = new HeaderViewRecyclerAdapter(mPicAdapter);
@@ -106,7 +99,8 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
         addShenPiRen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Statement1Activity.this, ShenPiRenActivity.class);
+                startActivityForResult(intent, 101);// 请求码；
             }
         });
 
@@ -124,9 +118,17 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
 
         mRecPic.setAdapter(mFooterAdapter);
         mRecShenPi.setAdapter(mShenpiFooterAdapter);
+
+        mBtnCommit.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                commit();
+            }
+        });
     }
 
-    private void commit() {
+
+    public void commit() {
         if (TextUtils.isEmpty(et_1.getText().toString().trim())) {
             T.showShort(this, "请输入今日完成工作的内容");
             return;
@@ -135,8 +137,6 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
             T.showShort(this, "请输入明日计划");
             return;
         }
-
-
         RequestParams params = new RequestParams();
 
         params.put("type_id", "1");
@@ -145,32 +145,27 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
         params.put("option_three", et_3.getText().toString().trim());
         params.put("remarks", et_beizhu.getText().toString().trim());
         StringBuffer sb_pic = new StringBuffer();
-        if (bitmap1 != null) {
-            sb_pic.append(BitmapToBase64.bitmapToBase64(bitmap1) + ",");
-        }
-        if (bitmap2 != null) {
-            sb_pic.append(BitmapToBase64.bitmapToBase64(bitmap2) + ",");
-        }
-        if (bitmap3 != null) {
-            sb_pic.append(BitmapToBase64.bitmapToBase64(bitmap3) + ",");
-        }
 
-        if (bitmap1 == null && bitmap2 == null && bitmap3 == null) {
+        ArrayList<String> dataSet = mPicAdapter.getDataSet();
+        for (int i = 0; i < dataSet.size(); i++) {
+            sb_pic.append(BitmapToBase64.bitmapToBase64(BitMapUtils.getBitmap(dataSet.get(i))) + ",");
+        }
+        if (dataSet.size() == 0) {
             params.put("picture", "");
         } else {
             params.put("picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
                     .toString());
         }
+
+        ArrayList<ShenPiRen> shenPiRenList = mShenPiRecAdapter.getDataSet();
         StringBuffer sb_id = new StringBuffer();
-        for (int i = 0; i < adapter.getCount(); i++) {
-            AddShenHe ash = (AddShenHe) adapter.getItem(i);
-            sb_id.append(ash.getId() + ",");
+        for (int i = 0; i < shenPiRenList.size(); i++) {
+            sb_id.append(shenPiRenList.get(i).getId() + ",");
         }
         params.put("form_check", sb_id.deleteCharAt(sb_id.length() - 1)
                 .toString());
-        String url = UrlTools.url + UrlTools.FORM_REPORT;
-        L.e("上传日报url" + url + " params" + params);
 
+        String url = UrlTools.url + UrlTools.FORM_REPORT;
         Utils.doPost(LoadingDialog.getInstance(Statement1Activity.this), Statement1Activity.this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(final JsonBean bean) {
@@ -179,7 +174,8 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
                         public void run() {
                             T.showShort(Statement1Activity.this,
                                     bean.getMsg());
-                            finish();
+
+                            Statement1Activity.this.finish();
                             overridePendingTransition(
                                     R.anim.aty_zoomclosein,
                                     R.anim.aty_zoomcloseout);
@@ -194,7 +190,6 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
 
             @Override
             public void failure(String msg) {
-
                 T.showShort(Statement1Activity.this, msg);
             }
 
@@ -216,8 +211,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
                 if (spr.getId() == 0) {
                     return;
                 }
-                AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());
-                adapter.add(ash);
+                mShenPiRecAdapter.addShenPiRen(spr);
                 break;
             case 1://选择相片
                 if (resultCode == Activity.RESULT_OK) {
@@ -302,8 +296,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
                 adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
                 break;
             case R.id.iv_add:
-                Intent intent = new Intent(this, ShenPiRenActivity.class);
-                startActivityForResult(intent, 101);// 请求码；
+
                 break;
 
         }
