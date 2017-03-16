@@ -1,79 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/x750"
-    android:layout_height="@dimen/y1000"
-    android:background="@drawable/shape_bg_update"
-    android:orientation="vertical" >
+              android:layout_width="@dimen/x750"
+              android:layout_height="@dimen/y1000"
+              android:background="@drawable/shape_bg_update"
+              android:orientation="vertical">
 
 
-        <!-- 更新提示dialog -->
+    <!-- 更新提示dialog -->
 
-        <ImageView
-            android:layout_width="@dimen/size250"
-            android:layout_height="@dimen/size250"
+    <ImageView
+        android:layout_width="@dimen/size250"
+        android:layout_height="@dimen/size250"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginTop="@dimen/y20"
+        android:scaleType="fitXY"
+        android:src="@drawable/update_01"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_white_update"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/y20"
-            android:layout_marginTop="@dimen/y20"
-            android:scaleType="fitXY"
-            android:src="@drawable/update_01" />
+            android:layout_marginTop="@dimen/y25"
+            android:text="会办更新提示"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/size50"/>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_white_update"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/y25"
-                android:text="会办更新提示"
-                android:textColor="@color/main_color"
-                android:textSize="@dimen/size50" />
-
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <TextView
                 android:id="@+id/tv_content"
                 style="@style/a000000_38"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y60"
+                android:lineSpacingMultiplier="1.5"
                 android:paddingLeft="@dimen/x100"
                 android:paddingRight="@dimen/x150"
-                android:lineSpacingMultiplier="1.5"
-                android:text="" />
+                android:text=""/>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_cancel"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y90"
+                android:layout_marginBottom="@dimen/y80"
+                android:layout_marginLeft="@dimen/x100"
+                android:background="@drawable/bt_zanbu_update"/>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/bt_cancel"
-                    android:layout_width="@dimen/x250"
-                    android:layout_height="@dimen/y90"
-                    android:layout_marginBottom="@dimen/y80"
-                    android:layout_marginLeft="@dimen/x100"
-                    android:background="@drawable/bt_zanbu_update" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/bt_update"
-                    android:layout_width="@dimen/x250"
-                    android:layout_height="@dimen/y90"
-                    android:layout_marginBottom="@dimen/y100"
-                    android:layout_marginRight="@dimen/x100"
-                    android:background="@drawable/bt_update" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/bt_update"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y90"
+                android:layout_marginBottom="@dimen/y100"
+                android:layout_marginRight="@dimen/x100"
+                android:background="@drawable/bt_update"/>
         </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

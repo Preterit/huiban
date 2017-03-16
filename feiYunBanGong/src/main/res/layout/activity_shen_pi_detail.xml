@@ -74,7 +74,8 @@
                 android:layout_width="@dimen/shenpi_div_line_width"
                 android:layout_height="1px"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/gray_text"/>
+                android:background="@color/jiange"
+                />
 
             <RelativeLayout
                 style="@style/rl_line_style">

@@ -64,4 +64,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.1.0'
 
     compile 'in.srain.cube:grid-view-with-header-footer:1.0.12'
+    compile 'com.android.support:recyclerview-v7:23.2.0'
 }

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ffffff"
+              android:orientation="vertical">
 
     <include
+        layout="@layout/top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar"
-        layout="@layout/top" />
+        android:layout_height="@dimen/title_bar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
-        android:gravity="center" >
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="@dimen/x30"
                 android:layout_height="@dimen/y30"
-                android:src="@drawable/rili" />
+                android:src="@drawable/rili"/>
 
             <TextView
                 android:id="@+id/tv_time"
@@ -33,19 +33,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x8"
                 android:gravity="center_vertical"
-                android:text="时间选择" />
+                android:text="时间选择"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="@dimen/x30"
                 android:layout_height="@dimen/y30"
-                android:src="@drawable/rili" />
+                android:src="@drawable/rili"/>
 
             <TextView
                 android:id="@+id/tv_section"
@@ -54,7 +54,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x8"
                 android:gravity="center_vertical"
-                android:text="部门选择" />
+                android:text="部门选择"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/f0f0f0"
-        android:scrollbars="none" >
+        android:scrollbars="none">
     </ListView>
 
 </LinearLayout>
