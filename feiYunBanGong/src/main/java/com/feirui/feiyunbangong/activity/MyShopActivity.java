@@ -2,10 +2,13 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -13,6 +16,8 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.GoodsAdapter;
+import com.feirui.feiyunbangong.adapter.HeaderViewRecyclerAdapter;
+import com.feirui.feiyunbangong.adapter.ShopAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.Good;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -23,7 +28,6 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.CircleImageView2;
-import com.feirui.feiyunbangong.view.MyGridView;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -34,7 +38,7 @@ import java.util.List;
 
 public class MyShopActivity extends BaseActivity implements OnClickListener {
 
-    private MyGridView gv_shop_goods;
+    private RecyclerView mRecyclerView;
     private GoodsAdapter adapter;
     private List<Good> goods;
     private ScrollView sv;
@@ -110,7 +114,6 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         Utils.doPost(LoadingDialog.getInstance(this), this, url, requestParams, new HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
-                // TODO Auto-generated method stub
                 ArrayList<HashMap<String, Object>> arrayList = bean.getInfor();
                 for (HashMap<String, Object> map : arrayList) {
 
@@ -129,19 +132,16 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
 
                 Log.e("orz", "" + goods);
-                adapter.setData(goods);
+                mShopAdapter.setData(goods);
             }
 
             @Override
             public void finish() {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void failure(String msg) {
-//                // TODO Auto-generated method stub
-//                // 还没有产品
-                adapter.setData(new ArrayList<Good>());
+                mShopAdapter.setData(new ArrayList<Good>());
             }
         });
 
@@ -150,32 +150,10 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     private Button mBtnDelete;
 
     private void initView() {
-        gv_shop_goods = (MyGridView) findViewById(R.id.gv_shop_goods);
-        gv_shop_goods.setFocusable(false);// 解决初始时gridview获取焦点发生滚动；
-        adapter = new GoodsAdapter(this, getLayoutInflater());
-        gv_shop_goods.setAdapter(adapter);
+        initRv();
         sv = (ScrollView) findViewById(R.id.sv);
         leftll = (LinearLayout) findViewById(R.id.leftll);
 
-        gv_shop_goods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == parent.getCount() - 1) {
-                    Intent intent = new Intent(MyShopActivity.this, AddGoodActivity.class);
-                    intent.putExtra("id", store_id);
-                    startActivity(intent);
-                }
-                if (adapter.isEdit()) {//编辑模式
-                    //点击改变图标,重置其他位置的图标
-                    adapter.setSelectedItem(position);
-
-                } else {
-                    //跳转到详情页
-                }
-            }
-
-
-        });
 
         mBtnDelete = (Button) findViewById(R.id.btn_delete_good);
 
@@ -183,13 +161,12 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 if (tvEdit.getText().equals("编辑")) {
-                    adapter.setEdit(true);
+                    mShopAdapter.setEdit(true);
                     tvEdit.setText("取消");
-
                     mBtnDelete.setVisibility(View.VISIBLE);
                 } else {
                     tvEdit.setText("编辑");
-                    adapter.setEdit(false);
+                    mShopAdapter.setEdit(false);
                     mBtnDelete.setVisibility(View.GONE);
                 }
             }
@@ -197,7 +174,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         mBtnDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int selectedPosition = adapter.getSelectedPosition();
+                final int selectedPosition = mShopAdapter.getSelectedPosition();
                 if (selectedPosition != -1) {
                     String url = UrlTools.url + UrlTools.DELETE_GOOD;
                     RequestParams requestParams = new RequestParams();
@@ -210,8 +187,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                         public void success(JsonBean bean) {
                             if (bean.getCode().equals("200")) {
                                 T.showShort(MyShopActivity.this, "删除成功");
-                                adapter.setSelectedItem(-1);
-                                adapter.remove(selectedPosition);
+                                mShopAdapter.setSelectedItem(-1);
+                                mShopAdapter.remove(selectedPosition);
                             }
                         }
 
@@ -232,8 +209,39 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         });
     }
 
+    private HeaderViewRecyclerAdapter mHeaderViewRecyclerAdapter;
+    private ShopAdapter mShopAdapter;
+    private View footer;
 
-    ;
+    private void initRv() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.rec_shop_goods);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
+        mShopAdapter = new ShopAdapter(new ArrayList<Good>());
+        mHeaderViewRecyclerAdapter = new HeaderViewRecyclerAdapter(mShopAdapter);
+        footer = LayoutInflater.from(this).inflate(R.layout.add_good_footer, null, false);
+        mHeaderViewRecyclerAdapter.addFooterView(footer);
+        mRecyclerView.setAdapter(mHeaderViewRecyclerAdapter);
+        footer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyShopActivity.this, AddGoodActivity.class);
+                intent.putExtra("id", store_id);
+                startActivity(intent);
+            }
+        });
+
+        mShopAdapter.setOnItemClickListener(new ShopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ShopAdapter.ViewHolder holder, int position) {
+                if (mShopAdapter.isEdit()) {//编辑模式
+                    //点击改变图标,重置其他位置的图标
+                    mShopAdapter.setSelectedItem(position);
+                } else {
+                    //跳转到详情页
+                }
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {

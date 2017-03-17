@@ -1,10 +1,5 @@
 package com.feirui.feiyunbangong.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.feirui.feiyunbangong.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,10 +8,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
+import android.widget.ImageView;
+
+import com.feirui.feiyunbangong.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressLint("Recycle")
-public class MyView extends View {
+public class MyView extends ImageView {
 
     private List<String> x_content = new ArrayList<>();// x轴坐标点；
     private List<String> y_content = new ArrayList<>();// y轴坐标点；
@@ -30,7 +30,6 @@ public class MyView extends View {
 
     public MyView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         // 属性：
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
                 R.styleable.LineChar);
@@ -47,6 +46,7 @@ public class MyView extends View {
         xyTextSize = typedArray.getLayoutDimension(
                 R.styleable.LineChar_xytextsize, 30);
         typedArray.recycle();
+
     }
 
     @Override

@@ -135,6 +135,9 @@ public class DetailPersonActivity extends BaseActivity implements
                 startDate.set(1900, 1, 1);
                 Calendar endDate = Calendar.getInstance();
                 endDate.set(2080, 1, 1);
+
+                Calendar now = Calendar.getInstance();
+                now.setTime(new Date());
                 new TimePickerView.Builder(DetailPersonActivity.this, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
@@ -142,7 +145,7 @@ public class DetailPersonActivity extends BaseActivity implements
                     }
                 })
                         .setRange(startDate.get(Calendar.YEAR), endDate.get(Calendar.YEAR))
-                        .setDate(new Date())
+                        .setDate(now)
                         .setSubmitColor(R.color.main_color)
                         .setCancelColor(R.color.main_color)
                         .setType(TimePickerView.Type.YEAR_MONTH_DAY)

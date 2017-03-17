@@ -131,14 +131,14 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/add_pic"
                     >
 
                     <ImageView
                         android:id="@+id/iv_addMainImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/add_pic"
                         />
                 </FrameLayout>
 

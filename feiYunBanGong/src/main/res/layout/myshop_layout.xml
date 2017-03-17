@@ -67,9 +67,9 @@
             android:layout_height="@dimen/size277"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/y20"
-            android:src="@drawable/ic_launcher"
             app:border_color="@color/white"
-            app:border_width="@dimen/size1"/>
+            app:border_width="@dimen/size1"
+            />
 
         <TextView
             android:id="@+id/tv_name"
@@ -161,8 +161,8 @@
             />
     </RelativeLayout>
 
-    <com.feirui.feiyunbangong.view.MyGridView
-        android:id="@+id/gv_shop_goods"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rec_shop_goods"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/y10"

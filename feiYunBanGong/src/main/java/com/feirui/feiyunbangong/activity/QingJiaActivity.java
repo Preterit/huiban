@@ -158,6 +158,8 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                 break;
             case R.id.tv_kaishishijian:
 
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date());
 
                 new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -168,7 +170,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                     }
                 })
                         .setRange(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.YEAR) + 1)
-                        .setDate(new Date())
+                        .setDate(calendar)
                         .setSubmitColor(R.color.main_color)
                         .setCancelColor(R.color.main_color)
                         .setType(TimePickerView.Type.ALL)
@@ -181,6 +183,9 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                     T.showShort(this, "请先选择开始时间");
                     return;
                 }
+                Calendar now = Calendar.getInstance();
+                now.setTime(new Date());
+
                 // 点击了选择日期按钮
                 new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -207,7 +212,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                     }
                 })
                         .setRange(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.YEAR) + 1)
-                        .setDate(new Date())
+                        .setDate(now)
                         .setSubmitColor(R.color.main_color)
                         .setCancelColor(R.color.main_color)
                         .setType(TimePickerView.Type.ALL)
