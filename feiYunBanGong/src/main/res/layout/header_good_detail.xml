@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.feirui.feiyunbangong.activity.GoodDetailActivity">
+
+    <ImageView
+        android:id="@+id/good_banner"
+        android:layout_width="0dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_good_name_detail"
+        style="@style/tvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/good_banner"
+        tools:text="商品1"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/good_detail_content"
+        style="@style/tvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_good_name_detail"
+        tools:text="hahahahah wtf"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="19sp"
+        android:textColor="@color/price_color"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/good_detail_content"
+        tools:text="$ 2333"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/detail_place"
+        style="@style/tvStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/good_detail_content"
+        tools:text="地区"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -65,7 +65,12 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good [good_name=" + good_name + ", privce=" + privce + ", good_head_title=" + good_head_title + "]";
+        return "Good{" +
+                "good_name='" + good_name + '\'' +
+                ", privce='" + privce + '\'' +
+                ", good_head_title=" + good_head_title +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", id=" + id +
+                '}';
     }
-
 }

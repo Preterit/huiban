@@ -2,7 +2,6 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +27,7 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.CircleImageView2;
+import com.feirui.feiyunbangong.view.CustomGridLayoutManager;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -69,7 +69,6 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                 String storeName = String.valueOf(map.get("store_name"));
                 String provinceName = String.valueOf(map.get("provice_id"));
                 String cityName = String.valueOf(map.get("city_id"));
-
 
                 store_id = String.valueOf(map.get("id"));//小店的id
 
@@ -178,7 +177,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                 if (selectedPosition != -1) {
                     String url = UrlTools.url + UrlTools.DELETE_GOOD;
                     RequestParams requestParams = new RequestParams();
-                    int id = ((Good) adapter.getItem(selectedPosition)).getId();
+
+                    int id = ((Good) mShopAdapter.getItem(selectedPosition)).getId();
 
                     Log.e("orz", "onClick: " + id);
                     requestParams.put("id", id + "");
@@ -215,7 +215,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
     private void initRv() {
         mRecyclerView = (RecyclerView) findViewById(R.id.rec_shop_goods);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new CustomGridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
         mShopAdapter = new ShopAdapter(new ArrayList<Good>());
         mHeaderViewRecyclerAdapter = new HeaderViewRecyclerAdapter(mShopAdapter);
         footer = LayoutInflater.from(this).inflate(R.layout.add_good_footer, null, false);
@@ -238,6 +238,10 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     mShopAdapter.setSelectedItem(position);
                 } else {
                     //跳转到详情页
+                    Intent intent = new Intent(MyShopActivity.this, GoodDetailActivity.class);
+                    intent.putExtra("id", mShopAdapter.getItem(position).getId() + "");
+
+                    startActivity(intent);
                 }
             }
         });

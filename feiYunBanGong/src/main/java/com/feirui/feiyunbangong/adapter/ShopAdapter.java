@@ -29,6 +29,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         mOnItemClickListener = onItemClickListener;
     }
 
+    public Good getItem(int position) {
+        return mGoods.get(position);
+    }
+
     public void remove(int position) {
         mGoods.remove(position);
         notifyItemRemoved(position);

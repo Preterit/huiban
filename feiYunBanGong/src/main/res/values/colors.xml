@@ -361,5 +361,6 @@
     <color name="text_dark">#333333</color>
     <color name="default_pic_bg">#f2f2f2</color>
     <color name="red_bg">#FCB5B6</color>
+    <color name="price_color">#4d8eb4</color>
 
 </resources>

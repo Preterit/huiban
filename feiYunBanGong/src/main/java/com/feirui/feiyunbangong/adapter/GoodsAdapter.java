@@ -25,9 +25,6 @@ public class GoodsAdapter extends MyBaseAdapter<Good> {
     @Override
     public View getView(int position, View v, ViewGroup parent) {
 
-
-
-
         return v;
     }
 

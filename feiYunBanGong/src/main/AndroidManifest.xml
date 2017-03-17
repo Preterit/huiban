@@ -477,6 +477,8 @@
         </activity>
         <activity android:name=".activity.ShenpiBaoxiaoDetailActivity">
         </activity>
+        <activity android:name=".activity.GoodDetailActivity">
+        </activity>
     </application>
 
 </manifest>
