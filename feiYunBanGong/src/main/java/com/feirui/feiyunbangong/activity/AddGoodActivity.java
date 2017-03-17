@@ -27,6 +27,7 @@ import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.RequestParams;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class AddGoodActivity extends BaseActivity {
@@ -129,8 +130,13 @@ public class AddGoodActivity extends BaseActivity {
                     T.showShort(AddGoodActivity.this, "请填写商品描述");
                     return;
                 }
-                if (!(mBitMap2IsSelect && mBitMap2IsSelect && mBitMap3IsSelect && mBitMap4IsSelect)) {
-                    T.showShort(AddGoodActivity.this, "请选择商品图片");
+
+                if (!mBitMap1IsSelect) {
+                    T.showShort(AddGoodActivity.this, "请选择主图");
+                    return;
+                }
+                if (!(mBitMap2IsSelect || mBitMap3IsSelect || mBitMap4IsSelect)) {
+                    T.showShort(AddGoodActivity.this, "至少选择一张商品图片");
                     return;
                 }
                 RequestParams params = new RequestParams();
@@ -139,10 +145,33 @@ public class AddGoodActivity extends BaseActivity {
                 params.put("goods_price", et_price.getText().toString().trim());
                 params.put("goods_content", et_description.getText().toString().trim());
                 params.put("main_pic", BitmapToBase64.bitmapToBase64(mBitMapMain));
-                params.put("pic1", BitmapToBase64.bitmapToBase64(mBitMap01));
-                params.put("pic2", BitmapToBase64.bitmapToBase64(mBitMap02));
-                params.put("pic3", BitmapToBase64.bitmapToBase64(mBitMap03));
+
+                ArrayList<String> list = new ArrayList<String>();
+                if (mBitMap1IsSelect) {
+                    list.add(BitmapToBase64.bitmapToBase64(mBitMap01));
+                }
+                if (mBitMap2IsSelect) {
+                    list.add(BitmapToBase64.bitmapToBase64(mBitMap02));
+                }
+                if (mBitMap3IsSelect) {
+                    list.add(BitmapToBase64.bitmapToBase64(mBitMap03));
+                }
+
+                StringBuffer sp = new StringBuffer("");
+                for (String bitmap :
+                        list) {
+                    sp.append(bitmap + ",");
+                }
+                if (list.size() == 0) {
+                    params.put("figure", "");
+                } else {
+                    params.put("figure", sp.deleteCharAt(sp.length() - 1)
+                            .toString());
+                }
+
+
                 String url = UrlTools.url + UrlTools.ADD_GOOD;
+
                 Utils.doPost(LoadingDialog.getInstance(AddGoodActivity.this), AddGoodActivity.this, url, params, new Utils.HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {

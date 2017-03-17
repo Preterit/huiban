@@ -5,16 +5,12 @@
               android:orientation="vertical"
               tools:context="com.feirui.feiyunbangong.activity.MyShopActivity">
 
-    <ScrollView
-        android:id="@+id/sv"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recView_myshop"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            layout="@layout/myshop_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+    </android.support.v7.widget.RecyclerView>
 
-    </ScrollView>
 
 </LinearLayout>

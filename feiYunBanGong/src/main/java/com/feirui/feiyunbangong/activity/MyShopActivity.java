@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
@@ -27,7 +27,6 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.CircleImageView2;
-import com.feirui.feiyunbangong.view.CustomGridLayoutManager;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -41,26 +40,33 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     private RecyclerView mRecyclerView;
     private GoodsAdapter adapter;
     private List<Good> goods;
-    private ScrollView sv;
     private LinearLayout leftll;
     private String store_id;
     private TextView tvEdit;
+    private View mHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_shop);
-        TextView tvName = (TextView) findViewById(R.id.tv_name);
-        TextView tvAddress = (TextView) findViewById(R.id.tv_address);
-        TextView tvPhone = (TextView) findViewById(R.id.tv_phone);
-        TextView tvContent = (TextView) findViewById(R.id.tv_content_my_shop);
-        tvEdit = (TextView) findViewById(R.id.tv_edit_gv);
 
-        CircleImageView2 circleImageView2 = (CircleImageView2) findViewById(R.id.cicle_head);
+        initHeader();
 
+        initView();
+        setListener();
+    }
+
+    private void initHeader() {
+        mHeader = getLayoutInflater().inflate(R.layout.myshop_layout, null);
+        TextView tvName = (TextView) mHeader.findViewById(R.id.tv_name);
+        TextView tvAddress = (TextView) mHeader.findViewById(R.id.tv_address);
+        TextView tvPhone = (TextView) mHeader.findViewById(R.id.tv_phone);
+        TextView tvContent = (TextView) mHeader.findViewById(R.id.tv_content_my_shop);
+        tvEdit = (TextView) mHeader.findViewById(R.id.tv_edit_gv);
+
+        CircleImageView2 circleImageView2 = (CircleImageView2) mHeader.findViewById(R.id.cicle_head);
         Intent intent = getIntent();
         JsonBean jsonBean = (JsonBean) intent.getSerializableExtra("json_bean");
-
         if (jsonBean != null) {
             ArrayList<HashMap<String, Object>> list = jsonBean.getInfor();
             if (list.get(0) != null) {
@@ -88,8 +94,6 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                 }
             }
         }
-        initView();
-        setListener();
     }
 
     private void setListener() {
@@ -150,11 +154,10 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
     private void initView() {
         initRv();
-        sv = (ScrollView) findViewById(R.id.sv);
-        leftll = (LinearLayout) findViewById(R.id.leftll);
+        leftll = (LinearLayout) mHeader.findViewById(R.id.leftll);
 
 
-        mBtnDelete = (Button) findViewById(R.id.btn_delete_good);
+        mBtnDelete = (Button) mHeader.findViewById(R.id.btn_delete_good);
 
         tvEdit.setOnClickListener(new OnClickListener() {
             @Override
@@ -213,14 +216,29 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     private ShopAdapter mShopAdapter;
     private View footer;
 
+    private GridLayoutManager mGridLayoutManager;
+
     private void initRv() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.rec_shop_goods);
-        mRecyclerView.setLayoutManager(new CustomGridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
+        mGridLayoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recView_myshop);
+
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
+
         mShopAdapter = new ShopAdapter(new ArrayList<Good>());
         mHeaderViewRecyclerAdapter = new HeaderViewRecyclerAdapter(mShopAdapter);
         footer = LayoutInflater.from(this).inflate(R.layout.add_good_footer, null, false);
         mHeaderViewRecyclerAdapter.addFooterView(footer);
         mRecyclerView.setAdapter(mHeaderViewRecyclerAdapter);
+        mHeaderViewRecyclerAdapter.addHeaderView(mHeader);
+
+        mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return mShopAdapter.isHeader(position) ? mGridLayoutManager.getSpanCount() : 1;
+            }
+
+        });
         footer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

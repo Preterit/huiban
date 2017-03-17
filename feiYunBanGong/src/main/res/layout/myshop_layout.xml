@@ -161,13 +161,6 @@
             />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rec_shop_goods"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/y10"
-        android:numColumns="2"/>
-
     <Button
         android:id="@+id/btn_delete_good"
         style="@style/btn"

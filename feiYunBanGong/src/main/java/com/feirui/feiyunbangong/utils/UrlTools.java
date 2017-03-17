@@ -2,7 +2,7 @@ package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
 
-    public static final String ADD_GOOD = "Store/addGoods";
+    public static final String ADD_GOOD = "Store/add_goods";
     public static final String GOOD_DETAIL = "Other/goodsdetaile";
     /**
      * 链接地址

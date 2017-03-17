@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.entity.GoodDetail;
+import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rubing on 2017/3/17.
@@ -19,9 +21,13 @@ import java.util.ArrayList;
 
 public class GoodDetailAdapter extends RecyclerView.Adapter<GoodDetailAdapter.ViewHolder> {
 
-    private ArrayList<GoodDetail> mGoodDetails;
+    private List<String> mGoodDetails;
 
-    public void setGoodDetails(ArrayList<GoodDetail> goodDetails) {
+    public GoodDetailAdapter() {
+        mGoodDetails = new ArrayList<>();
+    }
+
+    public void setGoodDetails(List<String> goodDetails) {
         mGoodDetails.clear();
         mGoodDetails.addAll(goodDetails);
         notifyDataSetChanged();
@@ -34,7 +40,7 @@ public class GoodDetailAdapter extends RecyclerView.Adapter<GoodDetailAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        ImageLoader.getInstance().displayImage(mGoodDetails.get(position), holder.mImageView, ImageLoaderUtils.getSimpleOptions());
     }
 
     @Override

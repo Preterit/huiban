@@ -39,6 +39,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public boolean isHeader(int position) {
+        return position == 0;
+    }
+
     public interface OnItemClickListener {
         void onItemClick(ShopAdapter.ViewHolder holder, int position);
     }
