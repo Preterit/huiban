@@ -146,15 +146,19 @@ public class AddGoodActivity extends BaseActivity {
                 params.put("goods_content", et_description.getText().toString().trim());
                 params.put("main_pic", BitmapToBase64.bitmapToBase64(mBitMapMain));
 
+//                params.put("main_pic", "44");
                 ArrayList<String> list = new ArrayList<String>();
                 if (mBitMap1IsSelect) {
                     list.add(BitmapToBase64.bitmapToBase64(mBitMap01));
+//                    list.add("1");
                 }
                 if (mBitMap2IsSelect) {
                     list.add(BitmapToBase64.bitmapToBase64(mBitMap02));
+//                    list.add("2");
                 }
                 if (mBitMap3IsSelect) {
                     list.add(BitmapToBase64.bitmapToBase64(mBitMap03));
+//                    list.add("3");
                 }
 
                 StringBuffer sp = new StringBuffer("");
@@ -172,6 +176,7 @@ public class AddGoodActivity extends BaseActivity {
 
                 String url = UrlTools.url + UrlTools.ADD_GOOD;
 
+//                Log.e("orz", "onClick: " + params);
                 Utils.doPost(LoadingDialog.getInstance(AddGoodActivity.this), AddGoodActivity.this, url, params, new Utils.HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {

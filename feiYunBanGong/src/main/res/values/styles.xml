@@ -337,6 +337,11 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="tvBody">
+        <item name="android:textColor">#9f9f9f</item>
+
+    </style>
+
     <style name="div">
         <item name="android:layout_height">1px</item>
         <item name="android:layout_width">350dp</item>

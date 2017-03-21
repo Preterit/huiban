@@ -1,12 +1,11 @@
 package com.feirui.feiyunbangong.myinterface;
 
+import com.alibaba.mobileim.contact.IYWContact;
+import com.feirui.feiyunbangong.entity.ChildItem;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.alibaba.mobileim.contact.IYWContact;
-import com.feirui.feiyunbangong.entity.ChildItem;
-import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 
 public class AllInterface {
 

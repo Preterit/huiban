@@ -399,4 +399,15 @@ public class ImageLoaderUtils {
 
     }
 
+    public static DisplayImageOptions getCirlceOption() {
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)// 设置下载的图片是否缓存在内存中
+                .cacheOnDisc(true)// 设置下载的图片是否缓存在SD卡中
+                .considerExifParams(true) // 是否考虑JPEG图像EXIF参数（旋转，翻转）
+                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)// 设置图片以如何的编码方式显示
+                .bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型
+                .displayer(new RoundedBitmapDisplayer(20))// 不推荐用！！！！是否设置为圆角，弧度为多少
+                .build();// 构建完成
+        return options;
+    }
 }

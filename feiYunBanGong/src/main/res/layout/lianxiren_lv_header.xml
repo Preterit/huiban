@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/back_huise"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/back_huise"
+              android:orientation="vertical">
 
     <include
+        layout="@layout/ll_search"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        layout="@layout/ll_search" />
+        android:layout_height="wrap_content"/>
 
     <!-- 创建团队 -->
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y140"
         android:layout_marginTop="@dimen/y30"
-        android:background="@color/ffffff" >
+        android:background="@color/ffffff">
 
         <ImageView
             android:id="@+id/img_left"
@@ -26,7 +26,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/work_circle_icon" />
+            android:src="@drawable/work_circle_icon"/>
 
         <TextView
             android:id="@+id/tv_group_text01"
@@ -36,7 +36,7 @@
             android:layout_marginLeft="@dimen/x50"
             android:layout_toRightOf="@+id/img_left"
             android:text="朋友圈"
-            android:textSize="@dimen/size48" />
+            android:textSize="@dimen/size48"/>
 
         <ImageView
             android:id="@+id/img_indicator"
@@ -46,7 +46,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x100"
             android:scaleType="fitXY"
-            android:src="@drawable/jiantou_you" />
+            android:src="@drawable/jiantou_you"/>
     </RelativeLayout>
 
     <!-- 新的朋友 -->
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y140"
         android:layout_marginTop="@dimen/y4"
-        android:background="@color/ffffff" >
+        android:background="@color/ffffff">
 
         <ImageView
             android:id="@+id/img_newfriend"
@@ -65,7 +65,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/xindepengyou" />
+            android:src="@drawable/xindepengyou"/>
 
         <TextView
             android:id="@+id/tv_group_text02"
@@ -75,7 +75,7 @@
             android:layout_marginLeft="@dimen/x50"
             android:layout_toRightOf="@+id/img_newfriend"
             android:text="新的朋友"
-            android:textSize="@dimen/size48" />
+            android:textSize="@dimen/size48"/>
 
         <ImageView
             android:id="@+id/img_indicator02"
@@ -85,7 +85,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x100"
             android:scaleType="fitXY"
-            android:src="@drawable/jiantou_you" />
+            android:src="@drawable/jiantou_you"/>
 
         <TextView
             android:id="@+id/tv_num"
@@ -99,7 +99,7 @@
             android:text=""
             android:textColor="#ffffff"
             android:textSize="@dimen/size20"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </LinearLayout>
