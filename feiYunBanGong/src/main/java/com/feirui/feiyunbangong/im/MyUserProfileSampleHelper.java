@@ -1,10 +1,5 @@
 package com.feirui.feiyunbangong.im;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -19,13 +14,18 @@ import com.alibaba.mobileim.contact.IYWContactService;
 import com.alibaba.mobileim.contact.IYWCrossContactProfileCallback;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.lib.model.contact.Contact;
-import com.feirui.feiyunbangong.activity.HaoYouZiLiaoActivity;
+import com.feirui.feiyunbangong.FriendInfoActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 自定义用户信息：
@@ -55,7 +55,7 @@ public class MyUserProfileSampleHelper {
 							boolean arg4) {
 						// 跳转到好友资料页面：
 						Intent intent = new Intent(fragment.getActivity(),
-								HaoYouZiLiaoActivity.class);
+								FriendInfoActivity.class);
 						intent.putExtra("phone", user_id);
 						fragment.getActivity().startActivity(intent);
 					}
@@ -82,9 +82,7 @@ public class MyUserProfileSampleHelper {
 					 * 设置头像点击事件, 该方法已废弃，后续请使用
 					 * {@link IYWContactService#setContactHeadClickCallback(IYWContactHeadClickCallback)}
 					 * 
-					 * @param userId
 					 *            需要打开页面的用户
-					 * @param appKey
 					 *            需要返回个人信息的用户所属站点
 					 * @return
 					 * @deprecated
