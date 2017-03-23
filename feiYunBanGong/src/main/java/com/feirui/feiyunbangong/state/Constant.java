@@ -50,6 +50,7 @@ public class Constant {
 
     public static final int DEFAULT_PAGE_SIZE = 20;
     public static final String NEED_TO_SHEN_HE = "com.feirui.feiyunbangong.need.to.shenhe";
+    public static final String INTENT_SERIALIZABLE_DATA = "intent_serializable_data";
 
     public static class JPUSH {
         public static final String QINGJIA_SHENPI = "add_leave";

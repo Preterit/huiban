@@ -54,6 +54,7 @@ dependencies {
 
 
 
+
     compile 'com.contrarywind:Android-PickerView:3.1.1'
     compile 'com.android.support:support-v4:23.2.0'
     compile 'com.google.code.gson:gson:2.2.4'
@@ -67,6 +68,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
-
     compile 'de.hdodenhof:circleimageview:2.0.0'
 }

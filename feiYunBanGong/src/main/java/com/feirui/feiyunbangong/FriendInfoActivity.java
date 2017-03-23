@@ -1,6 +1,8 @@
 package com.feirui.feiyunbangong;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,12 +12,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.activity.BaseActivity;
+import com.feirui.feiyunbangong.activity.FriendShop;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.FriendShopBean;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.state.Constant;
+import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +47,7 @@ public class FriendInfoActivity extends BaseActivity {
     private RelativeLayout mRlBzFriendInfo;
     private RelativeLayout mRlShopFriendInfo;
     private Button deleteFriendInfo;
+    private Button contactFriendInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,18 +87,79 @@ public class FriendInfoActivity extends BaseActivity {
         mRlBzFriendInfo = (RelativeLayout) findViewById(R.id.rlBzFriendInfo);
         mRlShopFriendInfo = (RelativeLayout) findViewById(R.id.rlShopFriendInfo);
         deleteFriendInfo = (Button) findViewById(R.id.deleteFriendInfo);
+        contactFriendInfo = (Button) findViewById(R.id.contactFriendInfo);
         /**
-         * 去聊天
+         *
+         * 删除好友
          */
         deleteFriendInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        contactFriendInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        /**
+         * 跳转到好友的小店
+         */
+        mRlShopFriendInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //先查看是否有小店
+                String url = UrlTools.url + UrlTools.FRIEND_SHOP;
+                RequestParams requestParams = new RequestParams();
+                requestParams.put("staff_id", mStaffId);
+                if (mStaffId == null) {
+                    return;
+                }
+                Log.e("orz", "onClick: " + mStaffId);
+                AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        Gson gson = new Gson();
+                        final FriendShopBean friendShopBean = gson.fromJson(new String(responseBody), FriendShopBean.class);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (friendShopBean.getCode() == 200) {
+                                    if (friendShopBean.getInfo() == null) {
+                                        T.showShort(FriendInfoActivity.this, friendShopBean.getMsg());
+                                    } else {
+                                        Intent intent = new Intent(FriendInfoActivity.this, FriendShop.class);
+                                        FriendShopBean.InfoBean infoBean = friendShopBean.getInfo().get(0);
+                                        if (infoBean == null) {
+                                            return;
+                                        }
+                                        infoBean.setTargetAddress(mTargetAddress);
+                                        infoBean.setTargetHead(mTargetHead);
+                                        infoBean.setTargetName(mTargetName);
+                                        infoBean.setTargetPhoe(mTargetPhone);
+                                        intent.putExtra(Constant.INTENT_SERIALIZABLE_DATA, infoBean);
+                                        startActivity(intent);
+                                    }
+                                } else {
+                                    T.showShort(FriendInfoActivity.this, friendShopBean.getMsg());
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     private String phone;
+    private String mStaffId;
+    private String mTargetName;
+    private String mTargetPhone;
+    private String mTargetAddress;
+    private String mTargetHead;
 
     private void initData() {
         RequestParams params = new RequestParams();
@@ -99,10 +172,19 @@ public class FriendInfoActivity extends BaseActivity {
                 ArrayList<HashMap<String, Object>> infor = bean.getInfor();
                 HashMap<String, Object> map = infor.get(0);
 
-                mTvNameFriendInfo.setText(String.valueOf(map.get("staff_name")));
-                mTvNumberFriendInfo.setText(String.valueOf("手机号 :" + map.get("staff_mobile")));
-                mTvBZFriendInfo.setText(String.valueOf("地址: " + map.get("address")));
-                ImageLoader.getInstance().displayImage(map.get("staff_head") + "", mIvHeadActivityFriendInfo);
+
+                mTargetHead = String.valueOf(map.get("staff_head"));
+                mTargetName = String.valueOf(map.get("staff_name"));
+                mTargetAddress = String.valueOf(map.get("address"));
+                mTargetPhone = String.valueOf(map.get("staff_mobile"));
+
+
+                mTvNameFriendInfo.setText(mTargetName);
+                mTvNumberFriendInfo.setText(String.valueOf("手机号 :" + mTargetPhone));
+                mTvBZFriendInfo.setText(mTargetAddress);
+
+                mStaffId = String.valueOf(map.get("id"));
+                ImageLoader.getInstance().displayImage(mTargetHead + "", mIvHeadActivityFriendInfo);
             }
 
             @Override

@@ -127,6 +127,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/contactFriendInfo"
         android:layout_width="@dimen/x900"
         android:layout_height="@dimen/y140"
         android:layout_marginTop="@dimen/y100"

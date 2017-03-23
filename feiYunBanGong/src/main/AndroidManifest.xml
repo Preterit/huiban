@@ -479,6 +479,8 @@
         </activity>
         <activity android:name=".activity.GoodDetailActivity">
         </activity>
+        <activity android:name=".activity.FriendShop">
+        </activity>
     </application>
 
 </manifest>

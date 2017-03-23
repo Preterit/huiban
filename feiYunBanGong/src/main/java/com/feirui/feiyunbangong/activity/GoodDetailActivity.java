@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
@@ -30,6 +31,7 @@ public class GoodDetailActivity extends BaseActivity {
     private TextView tvPrice, tvGoodName, tvPlace, tvContent;
 
     private HeaderViewRecyclerAdapter mHeaderRecAdapter;
+    private LinearLayout llLikeAndTalkToHim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class GoodDetailActivity extends BaseActivity {
         setLeftDrawable(R.drawable.arrows_left);
 
 
+        llLikeAndTalkToHim = (LinearLayout) findViewById(R.id.llLikeAndTalkToHim);
     }
 
     private GoodDetailAdapter mGoodDetailAdapter;
@@ -119,5 +122,16 @@ public class GoodDetailActivity extends BaseActivity {
         tvContent = (TextView) header.findViewById(R.id.good_detail_content);
         tvPrice = (TextView) header.findViewById(R.id.tv_price_good_detail);
 
+        recGoodDetail.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy < 0) {//上划
+                    llLikeAndTalkToHim.setVisibility(View.VISIBLE);
+                } else {//下划
+                    llLikeAndTalkToHim.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

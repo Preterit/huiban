@@ -324,7 +324,16 @@
 
     <style name="btn_red">
         <item name="android:background">@drawable/red_ben_selector</item>
+    </style>
 
+    <style name="btn_gray_rectangle">
+        <item name="android:background">@drawable/gray_rectangle_selector</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="btn_blue_rectangle">
+        <item name="android:background">@drawable/blue_rectangle_selector</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="tvStyle">
@@ -348,6 +357,7 @@
         <item name="android:background">@color/jiange</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
+
 
     <color name="gray_text">#989898</color>
     <color name="tv_left_color">#666666</color>

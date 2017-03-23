@@ -363,4 +363,6 @@
     <color name="red_bg">#FCB5B6</color>
     <color name="price_color">#4d8eb4</color>
 
+    <color name="main_color_darker">@color/price_color</color>
+
 </resources>

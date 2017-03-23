@@ -4,6 +4,7 @@ public class UrlTools {
 
     public static final String ADD_GOOD = "Store/add_goods";
     public static final String GOOD_DETAIL = "Other/goodsdetaile";
+    public static final String FRIEND_SHOP = "Store/look_store";
     /**
      * 链接地址
      */
