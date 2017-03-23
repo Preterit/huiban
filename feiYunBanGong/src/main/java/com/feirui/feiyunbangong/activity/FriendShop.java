@@ -53,11 +53,22 @@ public class FriendShop extends BaseActivity {
         initView(mHeader);
         initRv();
         initData();
+        setInfo();
+    }
+
+    private void setInfo() {
+        tvFriendShopTitle.setText(mInfoBean.getTargetName() + "的小店");
+        tvEditGv.setVisibility(View.GONE);
+        tvName.setText(mInfoBean.getTargetName());
+        ImageLoader.getInstance().displayImage(mInfoBean.getTargetHead(), cicleHead, ImageLoaderUtils.getSimpleOptions());
+        tvAddress.setText(mInfoBean.getTargetAddress());
+        tvPhone.setText(mInfoBean.getTargetPhoe());
+        tvContentMyShop.setText(mInfoBean.getContent());
     }
 
 
     private void initView(View header) {
-        recViewActivityFriendShop = (RecyclerView) header.findViewById(R.id.recViewActivityFriendShop);
+        recViewActivityFriendShop = (RecyclerView) findViewById(R.id.recViewActivityFriendShop);
         tvFriendShopTitle = (TextView) header.findViewById(R.id.tvFriendShopTitle);
         cicleHead = (CircleImageView2) header.findViewById(R.id.cicle_head);
         tvName = (TextView) header.findViewById(R.id.tv_name);
@@ -66,7 +77,8 @@ public class FriendShop extends BaseActivity {
         tvContentMyShop = (TextView) header.findViewById(R.id.tv_content_my_shop);
         tvEditGv = (TextView) header.findViewById(R.id.tv_edit_gv);
         btnDeleteGood = (Button) header.findViewById(R.id.btn_delete_good);
-        LinearLayout lleft = (LinearLayout) header.findViewById(R.id.leftIv);
+
+        LinearLayout lleft = (LinearLayout) header.findViewById(R.id.leftll);
         LinearLayout rightll = (LinearLayout) header.findViewById(R.id.rightll);
 
         rightll.setVisibility(View.INVISIBLE);
@@ -81,19 +93,8 @@ public class FriendShop extends BaseActivity {
     }
 
     private void initHead() {
-
-
         mHeader = getLayoutInflater().inflate(R.layout.myshop_layout, null);
 
-
-        tvFriendShopTitle.setText(mInfoBean.getTargetName() + "的小店");
-        tvEditGv.setVisibility(View.GONE);
-
-        tvName.setText(mInfoBean.getTargetName());
-        ImageLoader.getInstance().displayImage(mInfoBean.getTargetHead(), cicleHead, ImageLoaderUtils.getSimpleOptions());
-        tvAddress.setText(mInfoBean.getTargetAddress());
-        tvPhone.setText(mInfoBean.getTargetPhoe());
-        tvContentMyShop.setText(mInfoBean.getContent());
     }
 
     private GridLayoutManager mGridLayoutManager;
@@ -120,6 +121,5 @@ public class FriendShop extends BaseActivity {
 
     private void initData() {
         //获取小店信息
-
     }
 }

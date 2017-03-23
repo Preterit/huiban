@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,8 @@ public class GoodDetailActivity extends BaseActivity {
 
     private HeaderViewRecyclerAdapter mHeaderRecAdapter;
     private LinearLayout llLikeAndTalkToHim;
+    private Button btnSaveGood;
+    private Button btnTalkToHim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +103,8 @@ public class GoodDetailActivity extends BaseActivity {
 
 
         llLikeAndTalkToHim = (LinearLayout) findViewById(R.id.llLikeAndTalkToHim);
+        btnSaveGood = (Button) findViewById(R.id.btnSaveGood);
+        btnTalkToHim = (Button) findViewById(R.id.btnTalkToHim);
     }
 
     private GoodDetailAdapter mGoodDetailAdapter;
@@ -131,6 +136,19 @@ public class GoodDetailActivity extends BaseActivity {
                 } else {//下划
                     llLikeAndTalkToHim.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        btnSaveGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        btnTalkToHim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

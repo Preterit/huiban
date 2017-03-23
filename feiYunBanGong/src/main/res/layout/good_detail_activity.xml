@@ -28,6 +28,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnSaveGood"
                 style="@style/btn_gray_rectangle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -37,6 +38,7 @@
                 />
 
             <Button
+                android:id="@+id/btnTalkToHim"
                 style="@style/btn_blue_rectangle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

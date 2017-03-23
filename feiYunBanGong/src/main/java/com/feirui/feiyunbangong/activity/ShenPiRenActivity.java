@@ -79,9 +79,13 @@ public class ShenPiRenActivity extends BaseActivity implements
                     ArrayList<ShenPiRen> sprs = new ArrayList<>();
                     for (int i = 0; i < list.size(); i++) {
                         HashMap<String, Object> hm = list.get(i);
+
+                        if (String.valueOf(hm.get("phone")).equals("null")) {
+                            continue;
+                        }
                         ShenPiRen spr = new ShenPiRen(Integer.parseInt(String
                                 .valueOf(hm.get("id"))),
-                                (String) hm.get("staff_name"),
+                                String.valueOf(hm.get("staff_name")),
                                 String.valueOf(hm.get("staff_head")),
                                 String.valueOf(hm.get("staff_department")));
                         sprs.add(spr);

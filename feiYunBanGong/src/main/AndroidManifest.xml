@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.feirui.feiyunbangong"
-          android:versionCode="30"
-          android:versionName="1.3.0">
+          android:versionCode="31"
+          android:versionName="1.3.1">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -322,14 +322,14 @@
             android:name="CHANNEL"
             android:value="360yidongkaifa"/>
 
-        <activity
-            android:name=".activity.ShenQingFenZuActivity"
-            android:label="@string/title_activity_shen_qing_fen_zu">
-        </activity>
-        <activity
-            android:name=".activity.DialogFenLeiActivity"
-            android:label="@string/title_activity_dialog_fen_lei">
-        </activity>
+        <!--<activity-->
+        <!--android:name=".activity.ShenQingFenZuActivity"-->
+        <!--android:label="@string/title_activity_shen_qing_fen_zu">-->
+        <!--</activity>-->
+        <!--<activity-->
+        <!--android:name=".activity.DialogFenLeiActivity"-->
+        <!--android:label="@string/title_activity_dialog_fen_lei">-->
+        <!--</activity>-->
         <activity
             android:name=".activity.NewFriendActivity"
             android:label="@string/title_activity_new_friend">
@@ -357,10 +357,10 @@
             android:name=".activity.YiJianActivity"
             android:label="@string/title_activity_yi_jian">
         </activity>
-        <activity
-            android:name=".activity.WoDeTuanDuiActivity"
-            android:label="@string/title_activity_chuang_jian">
-        </activity>
+        <!--<activity-->
+        <!--android:name=".activity.WoDeTuanDuiActivity"-->
+        <!--android:label="@string/title_activity_chuang_jian">-->
+        <!--</activity>-->
         <activity
             android:name=".activity.GuanLiTuanDuiActivity"
             android:label="@string/title_activity_guan_li_tuan_dui">
@@ -410,10 +410,10 @@
             android:name=".activity.AddGongGaoActivity"
             android:label="@string/title_activity_add_gong_gao">
         </activity>
-        <activity
-            android:name=".AddWorkActivity"
-            android:label="@string/title_activity_add_work">
-        </activity>
+        <!--<activity-->
+        <!--android:name=".AddWorkActivity"-->
+        <!--android:label="@string/title_activity_add_work">-->
+        <!--</activity>-->
         <activity
             android:name="com.example.testpic.TestPicActivity"
             android:theme="@android:style/Theme.NoTitleBar">
@@ -435,10 +435,10 @@
             android:name=".activity.WorkCircleActivity"
             android:label="@string/title_activity_work_circle">
         </activity>
-        <activity
-            android:name=".activity.SendMsgActivity"
-            android:label="@string/title_activity_send_msg">
-        </activity>
+        <!--<activity-->
+        <!--android:name=".activity.SendMsgActivity"-->
+        <!--android:label="@string/title_activity_send_msg">-->
+        <!--</activity>-->
         <activity
             android:name=".activity.DetailMapActivity"
             android:label="@string/title_activity_detail_map">
@@ -447,10 +447,10 @@
             android:name=".activity.NoticeReadUnReadActivity"
             android:label="@string/title_activity_notice_read_un_read">
         </activity>
-        <activity
-            android:name=".activity.MainSlidingMenuActivity"
-            android:label="@string/title_activity_main_sliding_menu">
-        </activity>
+        <!--<activity-->
+        <!--android:name=".activity.MainSlidingMenuActivity"-->
+        <!--android:label="@string/title_activity_main_sliding_menu">-->
+        <!--</activity>-->
         <activity
             android:name=".activity.WifiClockActivity"
             android:label="@string/title_activity_wifi_clock">
@@ -463,10 +463,10 @@
             android:name=".activity.MyShopActivity"
             android:label="@string/title_activity_my_shop">
         </activity>
-        <activity
-            android:name=".FriendInfo"
-            android:label="@string/title_activity_friend_info">
-        </activity>
+        <!--<activity-->
+        <!--android:name=".FriendInfo"-->
+        <!--android:label="@string/title_activity_friend_info">-->
+        <!--</activity>-->
         <activity
             android:name=".FriendInfoActivity"
             android:label="@string/title_activity_friend_info">
