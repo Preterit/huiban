@@ -246,7 +246,6 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
      *
      * @param uri
      */
-
     public void startPhotoZoom(Uri uri, File outPutFile) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
@@ -264,12 +263,10 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
 
     // 图片选择：
     public void toastChoicePic() {
-
         // 在显示窗口的 同时，将虚拟键盘关闭：
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(
                 getWindow().getDecorView().getWindowToken(), 0);
-
         window = new SelectPicPopupWindow(this, this);
         // 显示窗口
         window.showAtLocation(findViewById(R.id.activity_statement1),

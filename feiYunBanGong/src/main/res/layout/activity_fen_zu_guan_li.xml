@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#ffffff"
+  android:orientation="vertical">
+
+  <include
+    layout="@layout/top"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical" >
+    android:layout_height="@dimen/title_bar"/>
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar"
-        layout="@layout/top" />
-
-    <ListView
-        android:id="@+id/lv_fenzu"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="@dimen/y16"
-        android:divider="@color/hui"
-        android:dividerHeight="@dimen/y4"
-        android:scrollbars="none" >
-    </ListView>
-	<Button
-        android:id="@+id/bt_add"
-        style="@style/ffffff_49"
-        android:layout_width="@dimen/x800"
-        android:layout_height="@dimen/y114"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/y36"
-        android:layout_marginTop="@dimen/y36"
-        android:background="@drawable/blue_bt_selector"
-        android:gravity="center"
-        android:text="添加分組" />
+  <ListView
+    android:id="@+id/lv_fenzu"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginTop="@dimen/y16"
+    android:divider="@color/hui"
+    android:dividerHeight="@dimen/y4"
+    android:scrollbars="none">
+  </ListView>
+  <Button
+    android:id="@+id/bt_add"
+    style="@style/ffffff_49"
+    android:layout_width="@dimen/x800"
+    android:layout_height="@dimen/y114"
+    android:layout_marginTop="@dimen/y36"
+    android:layout_marginBottom="@dimen/y36"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/blue_bt_selector"
+    android:gravity="center"
+    android:text="添加分組"/>
 </LinearLayout>
