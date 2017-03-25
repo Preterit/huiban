@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ClockInActivity;
 import com.feirui.feiyunbangong.activity.CustomerActivity;
-import com.feirui.feiyunbangong.activity.DataActivity;
 import com.feirui.feiyunbangong.activity.ExamineActivity;
 import com.feirui.feiyunbangong.activity.ProjectActivity;
+import com.feirui.feiyunbangong.activity.ReadFormActivity;
 import com.feirui.feiyunbangong.activity.StatementActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -27,10 +26,8 @@ import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.youth.banner.Banner;
-
-import org.apache.http.Header;
-
 import java.util.ArrayList;
+import org.apache.http.Header;
 
 /**
  * 会办
@@ -184,7 +181,7 @@ public class Fragment1 extends BaseFragment {
                         R.anim.aty_zoomout);
                 break;
             case R.id.ll_data: // 数据报表
-                startActivity(new Intent(getActivity(), DataActivity.class));
+                startActivity(new Intent(getActivity(), ReadFormActivity.class));
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
                         R.anim.aty_zoomout);
                 break;

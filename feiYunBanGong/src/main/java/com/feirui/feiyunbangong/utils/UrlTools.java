@@ -6,6 +6,8 @@ public class UrlTools {
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
   public static final String TEAM_TASK_LIST = "Task/taskIndex";
+  public static final String MY_FORM_LIST = "form/my_form_list";
+  public static final String OTHER_FORM_LIST = "form/form_list";
 
   public static String pcUrl = "http://123.57.45.74/feiybg/public/index.php/home_api/";
   /**

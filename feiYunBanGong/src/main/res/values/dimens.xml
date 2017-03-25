@@ -1,13 +1,14 @@
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!-- 标题栏高度 -->
-    <dimen name="title_bar">@dimen/y144</dimen>
-    <dimen name="rl_line_height">56dp</dimen>
-    <dimen name="shenpi_div_height">8dp</dimen>
-    <dimen name="shenpi_div_line_width">333dp</dimen>
+  <!-- 标题栏高度 -->
+  <dimen name="title_bar">@dimen/y144</dimen>
+  <dimen name="rl_line_height">56dp</dimen>
+  <dimen name="shenpi_div_height">8dp</dimen>
+  <dimen name="shenpi_div_line_width">333dp</dimen>
+  <dimen name="text_margin">16dp</dimen>
 
 </resources>

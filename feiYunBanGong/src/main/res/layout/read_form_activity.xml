@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#ffffff"
+  android:orientation="vertical">
+
+  <include
+    layout="@layout/top"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bar"/>
+
+  <com.viewpagerindicator.TabPageIndicator
+    android:id="@+id/indicatorReadStatement"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    >
+  </com.viewpagerindicator.TabPageIndicator>
+
+  <android.support.v4.view.ViewPager
+    android:id="@+id/vpReadStatement"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  </android.support.v4.view.ViewPager>
+
+</LinearLayout>
