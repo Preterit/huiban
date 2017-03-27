@@ -328,7 +328,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                 startActivity(intent03);
                 break;
             case R.id.llTeamTask:
-                Intent teamTaskIntent = new Intent(this, TeamTaskList.class);
+                Intent teamTaskIntent = new Intent(this, TasksListActivity.class);
                 startActivity(teamTaskIntent);
                 break;
         }

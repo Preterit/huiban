@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:context="com.feirui.feiyunbangong.activity.TeamTaskList">
+  tools:context="com.feirui.feiyunbangong.activity.TasksListActivity">
 
   <include
     layout="@layout/top"

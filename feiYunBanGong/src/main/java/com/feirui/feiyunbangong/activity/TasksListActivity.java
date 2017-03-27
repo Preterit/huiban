@@ -15,7 +15,10 @@ import com.loopj.android.http.RequestParams;
 import java.util.ArrayList;
 import org.apache.http.Header;
 
-public class TeamTaskList extends BaseActivity {
+/**
+ * creator rubing
+ */
+public class TasksListActivity extends BaseActivity {
 
 
   private RecyclerView recViewTeamList;
@@ -31,8 +34,10 @@ public class TeamTaskList extends BaseActivity {
     loadData();
   }
 
-
   private void initView() {
+    initTitle();
+    setCenterString("任务列表");
+    setLeftDrawable(R.drawable.arrows_left);
     recViewTeamList = (RecyclerView) findViewById(R.id.recViewTeamList);
   }
 

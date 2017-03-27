@@ -254,6 +254,11 @@
     <item name="android:textSize">@dimen/size48</item>
   </style>
 
+  <style name="tasks">
+    <item name="android:textColor">@color/darkseagreen</item>
+    <item name="android:textSize">@dimen/size54</item>
+  </style>
+
   <style name="a66c8ff_54">
     <item name="android:textColor">@color/a66c8ff</item>
     <item name="android:textSize">@dimen/size48</item>
