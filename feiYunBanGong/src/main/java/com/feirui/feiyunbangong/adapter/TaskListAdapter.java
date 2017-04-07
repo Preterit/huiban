@@ -18,7 +18,7 @@ import java.util.List;
  * rubingem@163.com
  */
 
-public class TaskListAdapter extends Adapter<ViewHolder> {
+public class TaskListAdapter extends  Adapter<ViewHolder> {
 
   private List<InfoBean> mList;
 
@@ -52,6 +52,7 @@ public class TaskListAdapter extends Adapter<ViewHolder> {
   }
 
   private void initView() {
+
   }
 
 

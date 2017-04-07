@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ReadFormActivity;
 import com.feirui.feiyunbangong.adapter.FormAdapter;
@@ -18,8 +19,10 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import java.util.ArrayList;
+
 import org.apache.http.Header;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -72,6 +75,7 @@ public class FormListFragment extends Fragment {
         Gson gson = new Gson();
         ReadFormEntity readFormEntity = gson
             .fromJson(new String(responseBody), ReadFormEntity.class);
+          //////////////////报错,赋值为空-----第一处，如果列表为空可能会报错
         mFormAdapter.setData(readFormEntity.getInfor());
       }
     });
@@ -84,9 +88,8 @@ public class FormListFragment extends Fragment {
       @Override
       public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
         Gson gson = new Gson();
-        ReadFormEntity readFormEntity = gson
-            .fromJson(new String(responseBody), ReadFormEntity.class);
-        mFormAdapter.setData(readFormEntity.getInfor());
+        ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
+          mFormAdapter.setData(readFormEntity.getInfor());
       }
     });
   }
@@ -111,8 +114,7 @@ public class FormListFragment extends Fragment {
     mFormAdapter = new FormAdapter(new ArrayList<InforBean>(), getContext());
 
     list = (RecyclerView) view.findViewById(R.id.list);
-    list.setLayoutManager(
-        new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    list.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     list.setAdapter(mFormAdapter);
   }
 

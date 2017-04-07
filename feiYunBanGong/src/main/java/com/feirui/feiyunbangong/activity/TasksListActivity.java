@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.TaskListAdapter;
 import com.feirui.feiyunbangong.entity.TaskListEntity;
@@ -12,8 +13,10 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import java.util.ArrayList;
+
 import org.apache.http.Header;
+
+import java.util.ArrayList;
 
 /**
  * creator rubing
@@ -44,8 +47,9 @@ public class TasksListActivity extends BaseActivity {
 
   private void initRv() {
     mTaskListAdapter = new TaskListAdapter(new ArrayList<InfoBean>());
-    recViewTeamList
-        .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+    recViewTeamList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
     recViewTeamList.setAdapter(mTaskListAdapter);
   }
 
