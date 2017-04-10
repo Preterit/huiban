@@ -51,8 +51,7 @@ public class TaskListAdapter extends Adapter<ViewHolder> {
     notifyDataSetChanged();
   }
 
-  private void initView() {
-  }
+
 
 
   class ViewHolder extends RecyclerView.ViewHolder {

@@ -142,6 +142,7 @@ public class ShenPiRenActivity extends BaseActivity implements
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
         Intent intent = new Intent();
+
         intent.putExtra("shenpiren", (ShenPiRen) adapter.getItem(position));
         setResult(102, intent);
         finish();

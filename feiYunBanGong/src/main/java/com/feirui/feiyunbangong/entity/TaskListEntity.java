@@ -1,5 +1,6 @@
 package com.feirui.feiyunbangong.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * rubingem@163.com
  */
 
-public class TaskListEntity {
+public class TaskListEntity  implements Serializable{
 
 
   /**
@@ -44,7 +45,7 @@ public class TaskListEntity {
     this.info = info;
   }
 
-  public static class InfoBean {
+  public static class InfoBean implements  Serializable{
 
     /**
      * id : 21
@@ -55,6 +56,8 @@ public class TaskListEntity {
      * choose_team : 111,113
      * chooser : 376
      * name : 白晓鑫
+     * staff_head :头像的地址
+     * type :请求的状态码
      */
 
     private int id;
@@ -65,6 +68,33 @@ public class TaskListEntity {
     private String choose_team;
     private String chooser;
     private String name;
+    private String staff_head;
+    private int type;
+    private int statue; //状态
+
+      public int getStatue() {
+          return statue;
+      }
+
+      public void setStatue(int statue) {
+          this.statue = statue;
+      }
+
+      public int getType() {
+      return type;
+    }
+
+    public void setType(int type) {
+      this.type = type;
+    }
+
+    public String getStaff_head() {
+      return staff_head;
+    }
+
+    public void setStaff_head(String staff_head) {
+      this.staff_head = staff_head;
+    }
 
     public int getId() {
       return id;

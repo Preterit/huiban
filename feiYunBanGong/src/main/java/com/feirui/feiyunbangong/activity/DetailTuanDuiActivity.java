@@ -176,7 +176,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(DetailTuanDuiActivity.this, msg, 0)
+                        Toast.makeText(DetailTuanDuiActivity.this, msg,Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -200,7 +200,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
-                    Toast.makeText(DetailTuanDuiActivity.this, bean03.getMsg(), 0)
+                    Toast.makeText(DetailTuanDuiActivity.this, bean03.getMsg(),0)
                             .show();
                     break;
                 case 5:

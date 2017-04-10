@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.ReleaseTask">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/tvTasktitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务标题"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            />
+        <EditText
+            android:id="@+id/tvTaskTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvTasktitle"
+            android:background="@null"
+            android:hint="请输入任务标题"
+            android:textSize="13sp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+
+            >
+
+        </View>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <TextView
+            android:id="@+id/tvreleCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布内容"
+            android:layout_marginLeft="5dp"
+            />
+
+        <EditText
+            android:id="@+id/tvTaskCount"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:hint="任务的内容"
+            android:gravity="top"
+            android:textSize="13sp"
+            android:padding="2dp"
+            android:layout_below="@+id/tvreleCount"
+           android:layout_margin="5dp"
+            android:background="@drawable/shape_text_bg"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+
+            ></View>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:id="@+id/tvSelectFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择好友"
+            android:layout_marginLeft="5dp"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/friend_pic_recycler1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/tvSelectFriend"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        >
+        <TextView
+            android:id="@+id/tvSelectTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择团队"
+            android:layout_marginLeft="5dp"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/team_pic_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/tvSelectTeam"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        >
+
+        <Button
+            android:id="@+id/quxiaoButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="取消"
+            android:background="@drawable/task_button_selector"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/quedingButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/task_button_selector"
+            android:text="确定"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+</LinearLayout>

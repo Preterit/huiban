@@ -5,10 +5,11 @@ public class UrlTools {
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
-  public static final String TEAM_TASK_LIST = "Task/taskIndex";
+  public static final String TEAM_TASK_LIST = "Task/taskIndex";  //任务列表
   public static final String MY_FORM_LIST = "form/my_form_list";
   public static final String OTHER_FORM_LIST = "form/form_list";
-
+  public static final String TASK_ADDTASK="Task/add_task";  //添加发布的任务
+  public static final String TASK_ACCEPT="task/task_accept"; //接收任务
   public static String pcUrl = "http://123.57.45.74/feiybg/public/index.php/home_api/";
   /**
    * 链接地址

@@ -99,8 +99,10 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     addShenPiRen.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
+
         Intent intent = new Intent(Statement1Activity.this, ShenPiRenActivity.class);
-        startActivityForResult(intent, 101);// 请求码；
+        startActivityForResult(intent, 102);// 请求码；
+
       }
     });
 
@@ -208,12 +210,13 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     switch (requestCode) {
-      case 101:
+      case 102:
         ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
         if (spr.getId() == 0) {
           return;
         }
         mShenPiRecAdapter.addShenPiRen(spr);
+
         break;
       case 1://选择相片
         if (resultCode == Activity.RESULT_OK) {

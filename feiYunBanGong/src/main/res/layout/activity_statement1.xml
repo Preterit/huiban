@@ -157,15 +157,15 @@
                 >
 
                 <TextView
+                    android:id="@+id/textView3"
                     style="@style/tvHintStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="图片"
-                    android:textColor="@color/tv_hint"
 
-                    />
+                    android:textColor="@color/tv_hint"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/dialy_pic_recycler"
