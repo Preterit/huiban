@@ -47,8 +47,7 @@ public class FormAdapter extends Adapter<ViewHolder> {
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
-    ImageLoader.getInstance().displayImage(mBeanList.get(position).getPic(), holder.ivHeadFormItem,
-            ImageLoaderUtils.getSimpleOptions());
+    ImageLoader.getInstance().displayImage(mBeanList.get(position).getPic(), holder.ivHeadFormItem, ImageLoaderUtils.getSimpleOptions());
 
     holder.tvNameFormItem.setText(mBeanList.get(position).getName());
     holder.tvTimeFormItem.setText(mBeanList.get(position).getForm_time());

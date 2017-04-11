@@ -184,5 +184,33 @@ public class ReadFormEntity {
     public void setStaff_duties(Object staff_duties) {
       this.staff_duties = staff_duties;
     }
+
+    @Override
+    public String toString() {
+      return "InforBean{" +
+              "id=" + id +
+              ", staff_id=" + staff_id +
+              ", option_one='" + option_one + '\'' +
+              ", option_two='" + option_two + '\'' +
+              ", option_three='" + option_three + '\'' +
+              ", picture='" + picture + '\'' +
+              ", remarks='" + remarks + '\'' +
+              ", form_time='" + form_time + '\'' +
+              ", company_id=" + company_id +
+              ", type_id=" + type_id +
+              ", name='" + name + '\'' +
+              ", pic='" + pic + '\'' +
+              ", staff_duties=" + staff_duties +
+              '}';
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "ReadFormEntity{" +
+            "code=" + code +
+            ", msg='" + msg + '\'' +
+            ", infor=" + infor +
+            '}';
   }
 }

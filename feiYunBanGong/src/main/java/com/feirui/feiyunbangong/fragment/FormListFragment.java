@@ -126,10 +126,11 @@ public class FormListFragment extends Fragment {
 
       @Override
       public void onItemClick(View view, int position) {
+        view.getId();
         Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("position",position);
-
+        intent.putExtras(bundle);
 
         startActivity(intent);
       }
