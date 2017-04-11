@@ -1,5 +1,6 @@
 package com.feirui.feiyunbangong.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.CheckBaobiaoActivity;
 import com.feirui.feiyunbangong.activity.ReadFormActivity;
 import com.feirui.feiyunbangong.adapter.FormAdapter;
 import com.feirui.feiyunbangong.entity.ReadFormEntity;
@@ -18,8 +21,10 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import java.util.ArrayList;
+
 import org.apache.http.Header;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -63,6 +68,9 @@ public class FormListFragment extends Fragment {
     }
   }
 
+  /**
+   * 读取其自己的列表数据
+   */
   private void loadMyForm() {
     String url = UrlTools.pcUrl + UrlTools.MY_FORM_LIST;
     RequestParams requestParams = new RequestParams();
@@ -70,13 +78,14 @@ public class FormListFragment extends Fragment {
       @Override
       public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
         Gson gson = new Gson();
-        ReadFormEntity readFormEntity = gson
-            .fromJson(new String(responseBody), ReadFormEntity.class);
+        ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
         mFormAdapter.setData(readFormEntity.getInfor());
       }
     });
   }
-
+  /**
+   * 读取其他人的列表数据
+   */
   private void loadOtherForm() {
     String url = UrlTools.pcUrl + UrlTools.OTHER_FORM_LIST;
     RequestParams requestParams = new RequestParams();
@@ -84,9 +93,8 @@ public class FormListFragment extends Fragment {
       @Override
       public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
         Gson gson = new Gson();
-        ReadFormEntity readFormEntity = gson
-            .fromJson(new String(responseBody), ReadFormEntity.class);
-        mFormAdapter.setData(readFormEntity.getInfor());
+        ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
+          mFormAdapter.setData(readFormEntity.getInfor());
       }
     });
   }
@@ -104,16 +112,31 @@ public class FormListFragment extends Fragment {
   @Override
   public void onDetach() {
     super.onDetach();
-    mListener = null;
+   // mListener = null;
   }
 
   private void initView(View view) {
-    mFormAdapter = new FormAdapter(new ArrayList<InforBean>(), getContext());
+    mFormAdapter = new FormAdapter(new ArrayList<InforBean>(), getActivity());
 
     list = (RecyclerView) view.findViewById(R.id.list);
-    list.setLayoutManager(
-        new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    list.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     list.setAdapter(mFormAdapter);
+
+    mFormAdapter.setItemClickListener(new FormAdapter.MyItemClickListener(){
+
+      @Override
+      public void onItemClick(View view, int position) {
+        view.getId();
+        Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("position",position);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+      }
+    });
+
+
   }
 
   public interface OnListFragmentInteractionListener {

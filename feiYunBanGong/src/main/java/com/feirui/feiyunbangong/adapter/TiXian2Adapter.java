@@ -52,7 +52,7 @@ public class TiXian2Adapter extends BaseAdapter {
 			view = LayoutInflater.from(context).inflate(
 					R.layout.item_tixianjilu, null);
 			holder.tv_num = (TextView) view.findViewById(R.id.tv_num);
-			holder.tv_time = (TextView) view.findViewById(R.id.tv_time);
+			holder.tv_time = (TextView) view.findViewById(R.id.tv_form_time);
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();

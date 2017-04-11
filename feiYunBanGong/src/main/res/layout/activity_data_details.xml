@@ -49,7 +49,7 @@
                         android:text="J先生（UI设计）       设计部" />
 
                     <TextView
-                        android:id="@+id/tv_time"
+                        android:id="@+id/tv_form_time"
                         style="@style/huise_38"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

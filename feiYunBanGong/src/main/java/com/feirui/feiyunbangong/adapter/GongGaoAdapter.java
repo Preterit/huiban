@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -45,7 +44,7 @@ public class GongGaoAdapter extends MyBaseAdapter<GongGao> {
 			holder.iv_head = (TextImageView) v.findViewById(R.id.tiv_head);
 			holder.tv_name = (TextView) v.findViewById(R.id.tv_name);
 			holder.tv_content = (TextView) v.findViewById(R.id.tv_content);
-			holder.tv_time = (TextView) v.findViewById(R.id.tv_time);
+			holder.tv_time = (TextView) v.findViewById(R.id.tv_form_time);
 			v.setTag(holder);
 
 			if (activity != null) {
