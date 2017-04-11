@@ -20,7 +20,7 @@ import com.feirui.feiyunbangong.adapter.HeaderViewRecyclerAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
-import com.feirui.feiyunbangong.entity.TuanDui;
+import com.feirui.feiyunbangong.entity.TeamList_entity.Infor;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -70,12 +70,15 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         addFriendAdapterRc = new HeaderViewRecyclerAdapter(addFriendAdapter);
         addFriendAdapterRc.addFooterView(footerFriendPic);
         //添加团队
-       addTeamAdapter=new AddTeamAdapter(new ArrayList<TuanDui>());
+       addTeamAdapter=new AddTeamAdapter(new ArrayList<Infor>());
         addTeamAdapterRc=new HeaderViewRecyclerAdapter(addTeamAdapter);
         addTeamAdapterRc.addFooterView(footerTeamPic);
         //把头像放进来
 
         addPicFriend = (ImageView) footerFriendPic.findViewById(R.id.iv_add_pic_footer);
+        //把团队的头像添加进来
+        addPicTeam=(ImageView) footerTeamPic.findViewById(R.id.iv_add_pic_footer);
+
         //点击加号
         footerFriendPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +87,14 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
                 startActivityForResult(intent, 102);// 请求码；
             }
         });
+
+//        footerTeamPic.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(ReleaseTask.this,SelectorTeamActivity.class);
+//                startActivityForResult(intent,103);
+//            }
+//        });
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("写任务");
@@ -133,7 +144,14 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
             params.put("chooser", sb_id.deleteCharAt(sb_id.length() - 1)
                     .toString());
         }
-
+//        ArrayList<Infor> teamList=addTeamAdapter.getDataSet();
+//        StringBuffer team_id=new StringBuffer();
+//        for(int i=0;i<teamList.size();i++){
+//            team_id.append(teamList.get(i).getTeam_id()+",");
+//        }
+//        if(team_id!=null){
+//             // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
+//        }
         String url = UrlTools.pcUrl + UrlTools.TASK_ADDTASK;
         Utils.doPost(LoadingDialog.getInstance(ReleaseTask.this), ReleaseTask.this, url,
                 params, new Utils.HttpCallBack() {
@@ -184,6 +202,12 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
                 }
                 addFriendAdapter.addFriend(spr);
                 break;
+            case 103:
+                Infor infor=(Infor)data.getSerializableExtra("Team");
+                if(infor.getTeam_id()==0){
+                    return;
+                }
+                addTeamAdapter.addTeam(infor);
         }
 
     }

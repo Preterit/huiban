@@ -64,5 +64,7 @@
     <string name="shenpi_shiyou">请假事由</string>
     <string name="title_activity_release_task">ReleaseTask</string>
     <string name="title_activity_task_info">TaskInfoActivity</string>
+    <string name="title_activity_selector_team">SelectorTeamActivity</string>
+    <string name="title_activity_wo_de_task">WoDeTaskActivity</string>
 
 </resources>

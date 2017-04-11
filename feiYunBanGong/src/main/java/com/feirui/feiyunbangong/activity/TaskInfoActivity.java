@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -73,31 +74,41 @@ public class TaskInfoActivity extends BaseActivity {
             public void onClick(View v) {
                 String url = UrlTools.pcUrl + UrlTools.TASK_ACCEPT; //接收任务的接口
                 final RequestParams requestParams = new RequestParams();
-                requestParams.put("id", taskinfo.getId());
-                requestParams.put("button", 1);
+                if (taskinfo != null) {
+                    requestParams.put("id", taskinfo.getId()+"");
+
+                    requestParams.put("button", 1 + "");
+                }
                 AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         super.onSuccess(statusCode, headers, responseBody);
 
                         Gson gson = new Gson();
+                        Log.e("orz", "onSuccess: " +new String(responseBody));
                         ReceiveBean receive = gson.fromJson(new String(responseBody), ReceiveBean.class);
+                                                Log.e("TAG","此处的对象是"+receive+ " 状态码是 "+receive.getCode());
 
-                        if (receive.getCode() == 200) {
-                            Toast.makeText(TaskInfoActivity.this, "您已成功接受任务", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent();
-                            intent.putExtra("Position", position);
-                            setResult(RESULT_OK, intent);
-                            finish();
+                                                if (receive.getCode() == 200) {
+                                                    Toast.makeText(TaskInfoActivity.this, receive.getMsg(), Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent();
+                                                    intent.putExtra("Position", position);
+                                                    setResult(RESULT_OK, intent);
+                                                    finish();
 
 
-                        } else {
-                            Toast.makeText(TaskInfoActivity.this, "接受任务失败", Toast.LENGTH_SHORT).show();
+                                                } else if(receive.getCode() == -400){
+                                                    Toast.makeText(TaskInfoActivity.this,receive.getMsg() , Toast.LENGTH_SHORT).show();
 
-                        }
+                                                }
 
                     }
 
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        super.onFailure(statusCode, headers, responseBody, error);
+                        Log.e("orz", "onFailure: "+"wft" );
+                    }
                 });
 
 

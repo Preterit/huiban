@@ -28,7 +28,7 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
     public void setStatus(int position) {
         InfoBean infoBean = mList.get(position);
 
-        infoBean.setStatue(1);
+        infoBean.setType(1);
 
         notifyDataSetChanged();
 
@@ -50,9 +50,14 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
         holder.tvPubNameTaskItem.setText(mList.get(position).getName());
         holder.tvPubTime.setText(mList.get(position).getTime());
 
-        if (mList.get(position).getStatue()== 1) {
+        if (mList.get(position).getType()== 1) {
             holder.tvBgTaskItem.setBackgroundColor(Color.GRAY);
             holder.ivLabelTaskItem.setImageResource(R.drawable.label_grey);
+            holder.tvBgTaskItem.setText("接收完成");
+        }else{
+            holder.tvBgTaskItem.setBackgroundColor(Color.GREEN);
+            holder.ivLabelTaskItem.setImageResource(R.drawable.label_blue);
+            holder.tvBgTaskItem.setText("任务接收中");
         }
     }
 

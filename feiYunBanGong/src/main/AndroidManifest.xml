@@ -497,6 +497,14 @@
             android:name=".activity.TaskInfoActivity"
             android:label="@string/title_activity_task_info">
         </activity>
+        <activity
+            android:name=".activity.SelectorTeamActivity"
+            android:label="@string/title_activity_selector_team">
+        </activity>
+        <activity
+            android:name=".activity.WoDeTaskActivity"
+            android:label="@string/title_activity_wo_de_task">
+        </activity>
     </application>
 
 </manifest>

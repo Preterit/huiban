@@ -38,16 +38,16 @@
       android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
     <TextView
-        android:id="@+id/tvPubNameTaskItem"
-        style="@style/tvBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toRightOf="@+id/tvTaskTitle"
-        tools:text="发布人:wrd"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        tools:layout_editor_absoluteY="22dp"/>
+      android:id="@+id/tvPubNameTaskItem"
+      style="@style/tvBody"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:textSize="12sp"
+      app:layout_constraintBaseline_toBaselineOf="@+id/tvTaskTitle"
+      app:layout_constraintLeft_toRightOf="@+id/tvTaskTitle"
+      tools:text="发布人:wrd"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
     <TextView
       android:id="@+id/tvPubTime"
@@ -70,21 +70,7 @@
       android:layout_width="0dp"
       tools:layout_editor_absoluteX="0dp"/>
 
-    <TextView
-      android:id="@+id/tvBgTaskItem"
-      android:layout_width="72dp"
-      android:layout_height="30dp"
-      android:layout_marginTop="@dimen/activity_vertical_margin"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:background="@color/main_color"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/divTaskItem"
-      android:text="任务接收中"
-      android:gravity="center"
-      android:textColor="#ffffff"
 
-
-      android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/tvContentTaskItem"
@@ -100,7 +86,9 @@
         app:layout_constraintTop_toBottomOf="@+id/divTaskItem"
         tools:text="哈哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈安徽安徽啊哈哈哈哈哈哈安徽啊aafekejjrfkkfja"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintHorizontal_bias="0.0"/>
+        app:layout_constraintHorizontal_bias="0.0"
+
+        />
   </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,7 +16,6 @@ import com.feirui.feiyunbangong.adapter.RecyclerViewTaskAdapter;
 import com.feirui.feiyunbangong.entity.TaskListEntity;
 import com.feirui.feiyunbangong.entity.TaskListEntity.InfoBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
-import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -77,7 +77,7 @@ public class TasksListActivity extends BaseActivity {
                                         startActivity(new Intent(TasksListActivity.this, ReleaseTask.class));
                                         break;
                                     case 1:
-                                        T.showShort(TasksListActivity.this, "正在开发中");
+                                        startActivity(new Intent(TasksListActivity.this, WoDeTaskActivity.class));
                                         break;
                                 }
 
@@ -139,7 +139,7 @@ public class TasksListActivity extends BaseActivity {
            // setResult(RESULT_OK, data);
             Bundle bundle = data.getExtras();
             int position = bundle.getInt("Position");
-
+            Log.i("TAG","传来的下标是"+position);
             mTaskListAdapter.setStatus(position);
 
 

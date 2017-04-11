@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.feirui.feiyunbangong.activity.WoDeTaskActivity">
+
+    <include
+        android:id="@+id/includeIdd"
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        />
+   <RadioGroup
+       android:id="@+id/taskSelectGroup"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:layout_below="@+id/includeIdd"
+       android:orientation="horizontal"
+       >
+       <RadioButton
+           android:id="@+id/receiveButton"
+           android:layout_width="0dp"
+           android:layout_height="50dp"
+           android:layout_weight="1"
+           android:text="接收的任务"
+           android:button="@null"
+           android:gravity="center"
+           android:textColor="@color/mytask_button_text_color"
+           android:checked="true"
+           />
+       <View
+           android:id="@+id/releaseButton"
+           android:layout_width="2dp"
+           android:layout_height="40dp"
+           android:layout_gravity="center"
+           android:background="@color/a4cbeff"
+           />
+       <RadioButton
+           android:layout_width="0dp"
+           android:layout_height="50dp"
+           android:layout_weight="1"
+           android:text="发布的任务"
+           android:button="@null"
+           android:gravity="center"
+           android:textColor="@color/mytask_button_text_color"
+
+           />
+   </RadioGroup>
+<RelativeLayout
+    android:id="@+id/containerId"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/taskSelectGroup"
+    ></RelativeLayout>
+
+</RelativeLayout>

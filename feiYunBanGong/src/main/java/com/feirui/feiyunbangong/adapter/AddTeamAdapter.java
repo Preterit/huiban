@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.entity.TuanDui;
+import com.feirui.feiyunbangong.entity.TeamList_entity.Infor;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class AddTeamAdapter extends  RecyclerView.Adapter<AddTeamAdapter.ViewHolder> {
 
 
-    private ArrayList<TuanDui> mList;
+    private ArrayList<Infor> mList;
     private DisplayImageOptions mDisplayImageOptions;
 
-    public AddTeamAdapter(ArrayList<TuanDui> list) {
+    public AddTeamAdapter(ArrayList<Infor> list) {
         mList = list;
         mDisplayImageOptions = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.drawable.fragment_head) //
@@ -35,7 +35,7 @@ public class AddTeamAdapter extends  RecyclerView.Adapter<AddTeamAdapter.ViewHol
                 .build();
     }
 
-    public void setList(ArrayList<TuanDui> list) {
+    public void setList(ArrayList<Infor> list) {
         mList = list;
         notifyDataSetChanged();
     }
@@ -48,7 +48,8 @@ public class AddTeamAdapter extends  RecyclerView.Adapter<AddTeamAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.name.setText(mList.get(position).getName());
+        holder.teamname.setText(mList.get(position).getTeam_name());
+
 
        // ImageLoader.getInstance().displayImage(mList.get(position).getHead(), holder.ivHead, mDisplayImageOptions);
     }
@@ -65,25 +66,23 @@ public class AddTeamAdapter extends  RecyclerView.Adapter<AddTeamAdapter.ViewHol
         return mList.size();
     }
 
-    public void addShenPiRen(TuanDui spr) {
+    public void addTeam(Infor spr) {
         mList.add(spr);
         notifyDataSetChanged();
     }
 
-    public ArrayList<TuanDui> getDataSet() {
+    public ArrayList<Infor> getDataSet() {
         return mList;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivHead;
-        TextView name;
-
-
+        TextView teamname;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivHead = (ImageView) itemView.findViewById(R.id.iv_shenpi_item);
-            name = (TextView) itemView.findViewById(R.id.tv_shenpi_item);
+            teamname = (TextView) itemView.findViewById(R.id.tv_shenpi_item);
 
             ivHead.setOnClickListener(new View.OnClickListener() {
                 @Override
