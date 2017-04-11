@@ -51,7 +51,7 @@ public class ClientAddActivity extends BaseActivity {
 
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.tv_time: // 提交
+		case R.id.tv_form_time: // 提交
 			// 点击了选择日期按钮
 			DateTimePickDialogUtil dateTimePicker = new DateTimePickDialogUtil(
 					this, "");

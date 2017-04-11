@@ -18,7 +18,7 @@
             android:text="J先生" />
 
         <TextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_form_time"
             style="@style/a000000_48"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

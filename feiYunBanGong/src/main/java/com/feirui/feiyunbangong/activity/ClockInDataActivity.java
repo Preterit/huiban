@@ -96,7 +96,7 @@ public class ClockInDataActivity extends BaseActivity {
 
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.tv_time: // 选择日期
+		case R.id.tv_form_time: // 选择日期
 			// 点击了选择日期按钮
 			DateTimePickDialogUtil dateTimePicker = new DateTimePickDialogUtil(
 					this, "");

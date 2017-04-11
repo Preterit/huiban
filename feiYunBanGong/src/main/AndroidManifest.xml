@@ -406,7 +406,10 @@
         <activity
             android:name=".activity.ReadFormActivity"
             android:theme="@style/StyledIndicators"></activity>
-        <activity android:name=".activity.CheckBaobiaoActivity"></activity>
+
+        <activity android:name=".activity.CheckBaobiaoActivity"
+
+           ></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.Log;
@@ -29,7 +30,7 @@ import static com.feirui.feiyunbangong.R.color.ffa44b;
  */
 
 public class FormAdapter extends Adapter<ViewHolder> {
-
+  private MyItemClickListener mItemClickListener;
   private List<InforBean> mBeanList;
   private Context mContext;
 
@@ -40,16 +41,14 @@ public class FormAdapter extends Adapter<ViewHolder> {
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return new ViewHolder(
-        LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.read_form_list_item, parent, false));
+    return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.read_form_list_item, parent, false),mItemClickListener);
   }
 
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
     ImageLoader.getInstance().displayImage(mBeanList.get(position).getPic(), holder.ivHeadFormItem,
-        ImageLoaderUtils.getSimpleOptions());
+            ImageLoaderUtils.getSimpleOptions());
 
     holder.tvNameFormItem.setText(mBeanList.get(position).getName());
     holder.tvTimeFormItem.setText(mBeanList.get(position).getForm_time());
@@ -75,6 +74,7 @@ public class FormAdapter extends Adapter<ViewHolder> {
         //业绩报表
         break;
     }
+
   }
 
   @Override
@@ -84,25 +84,33 @@ public class FormAdapter extends Adapter<ViewHolder> {
 
   public void setData(List<InforBean> data) {
     mBeanList.clear();
-    //////////////报错2222222222222,第二处,添加了一个try catch
-    try{mBeanList.addAll(data);}catch(Exception e){
-      Log.d("tag","setData错误");
+    try {
+      mBeanList.addAll(data);
+    } catch (Exception e) {
+      Log.d("tag", "setData错误");
     }
 
     notifyDataSetChanged();
   }
 
 
-  class ViewHolder extends RecyclerView.ViewHolder {
 
+
+  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private MyItemClickListener mListener;
     ImageView ivHeadFormItem;
     TextView tvNameFormItem;
     TextView tvTimeFormItem;
     TextView tvLabelFormItem;
+    ConstraintLayout list_lookfrom_layout;
 
-    public ViewHolder(View itemView) {
+    public ViewHolder(View itemView , MyItemClickListener myItemClickListener) {
       super(itemView);
       initView(itemView);
+
+      //将全局的监听赋值给接口
+      this.mListener = myItemClickListener;
+      itemView.setOnClickListener(this);
     }
 
     private void initView(View itemView) {
@@ -110,6 +118,37 @@ public class FormAdapter extends Adapter<ViewHolder> {
       tvNameFormItem = (TextView) itemView.findViewById(R.id.tvNameFormItem);
       tvTimeFormItem = (TextView) itemView.findViewById(R.id.tvTimeFormItem);
       tvLabelFormItem = (TextView) itemView.findViewById(R.id.tvLabelFormItem);
+      list_lookfrom_layout= (ConstraintLayout)itemView.findViewById(R.id.list_lookfrom_layout);
+    }
+
+
+    /**
+     * 实现OnClickListener接口重写的方法
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+      if (mListener != null) {
+        mListener.onItemClick(v, getPosition());
+      }
+
     }
   }
+
+
+  /**
+   * 创建一个回调接口
+   */
+  public interface MyItemClickListener {
+    void onItemClick(View view, int position);
+  }
+  /**
+   * 在activity里面adapter就是调用的这个方法,将点击事件监听传递过来,并赋值给全局的监听
+   *
+   * @param myItemClickListener
+   */
+  public void setItemClickListener(MyItemClickListener myItemClickListener) {
+    this.mItemClickListener = myItemClickListener;
+  }
 }
+

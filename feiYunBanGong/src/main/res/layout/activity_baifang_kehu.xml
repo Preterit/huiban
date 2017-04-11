@@ -40,7 +40,7 @@
                     android:text="当前时间" />
 
                 <TextView
-                    android:id="@+id/tv_time"
+                    android:id="@+id/tv_form_time"
                     style="@style/huise_38"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
