@@ -1,106 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  app:cardPreventCornerOverlap="false"
-  app:cardUseCompatPadding="true">
 
-  <android.support.constraint.ConstraintLayout
+
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_height="140dp"
 
-    <ImageView
-        android:id="@+id/ivLabelTaskItem"
-        android:layout_width="14dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:src="@drawable/label_blue"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"/>
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/shape_tasklist_bg"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true"
+        >
 
-    <TextView
-      android:id="@+id/tvTaskTitle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/activity_vertical_margin"
-      android:layout_marginLeft="@dimen/activity_horizontal_margin"
-      android:textColor="@color/main_color"
-      android:textSize="18sp"
-      app:layout_constraintLeft_toRightOf="@+id/ivLabelTaskItem"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="项目会议"
-      android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+        <ImageView
+            android:id="@+id/ivLabelTaskItem"
+            android:layout_width="14dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:src="@drawable/label_blue"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="8dp"/>
 
-    <TextView
-        android:id="@+id/tvPubNameTaskItem"
-        style="@style/tvBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toRightOf="@+id/tvTaskTitle"
-        tools:text="发布人:wrd"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        tools:layout_editor_absoluteY="22dp"/>
+        <TextView
+            android:id="@+id/tvTaskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/main_color"
+            android:textSize="18sp"
+            android:text="项目会议"
+            android:layout_below="@+id/ivLabelTaskItem"
+            android:layout_toEndOf="@+id/ivLabelTaskItem"
+            android:layout_marginLeft="10dp"
+            />
 
-    <TextView
-      android:id="@+id/tvPubTime"
-      style="@style/tvBody"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:textSize="12sp"
-      app:layout_constraintBaseline_toBaselineOf="@+id/tvTaskTitle"
-      app:layout_constraintRight_toRightOf="parent"
-      tools:text="2014.12.1"
-      android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+        <TextView
+            android:id="@+id/tvPubNameTaskItem"
+            style="@style/tvBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="12sp"
+            android:text="发布人"
+            android:layout_marginStart="26dp"
+            android:layout_alignBottom="@+id/tvTaskTitle"
+            android:layout_toEndOf="@+id/tvTaskTitle"/>
 
-    <View
-      android:id="@+id/divTaskItem"
-      style="@style/div"
-      android:layout_marginTop="@dimen/activity_vertical_margin"
-      app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
-      android:layout_height="0dp"
-      android:layout_width="0dp"
-      tools:layout_editor_absoluteX="0dp"/>
+        <TextView
+            android:id="@+id/tvPubTime"
+            style="@style/tvBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textSize="12sp"
+            android:text="发布时间"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/tvTaskTitle"
+            />
 
-    <TextView
-      android:id="@+id/tvBgTaskItem"
-      android:layout_width="72dp"
-      android:layout_height="30dp"
-      android:layout_marginTop="@dimen/activity_vertical_margin"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:background="@color/main_color"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/divTaskItem"
-      android:text="任务接收中"
-      android:gravity="center"
-      android:textColor="#ffffff"
+        <View
+            android:id="@+id/divTaskItem"
+            style="@style/div"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/divTaskItem"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/tvContentTaskItem"
+                style="@style/tvStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="18sp"
+                android:text="所有员工10:00去会议室开会"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                />
+            <TextView
+                android:id="@+id/tvBgTaskItem"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@color/main_color"
+                android:text="任务接收中"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                />
 
 
-      android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
-
-    <TextView
-        android:id="@+id/tvContentTaskItem"
-        style="@style/tvStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:ellipsize="end"
-        android:maxLines="2"
-        app:layout_constraintLeft_toLeftOf="@+id/tvTaskTitle"
-        app:layout_constraintRight_toLeftOf="@+id/tvBgTaskItem"
-        app:layout_constraintTop_toBottomOf="@+id/divTaskItem"
-        tools:text="哈哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈安徽安徽啊哈哈哈哈哈哈安徽啊aafekejjrfkkfja"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintHorizontal_bias="0.0"/>
-  </android.support.constraint.ConstraintLayout>
-
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
+
+

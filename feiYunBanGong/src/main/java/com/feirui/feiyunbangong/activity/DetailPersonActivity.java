@@ -278,7 +278,9 @@ public class DetailPersonActivity extends BaseActivity implements
 
     private void getUser() {
         Log.e("TAG", "开始获取用户信息.........");
-        AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.DETAIL_ME,
+        String url=UrlTools.url+UrlTools.DETAIL_ME;
+        final RequestParams params=new RequestParams();
+        AsyncHttpServiceHelper.post(url,params,
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {

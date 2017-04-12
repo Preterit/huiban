@@ -120,6 +120,7 @@ public class TasksListActivity extends BaseActivity {
                             // intent.putExtra("Task",data);
                             bundle.putInt("Position", position);
                             // intent.putExtra("Position",position);
+
                             intent.putExtras(bundle);
                             startActivityForResult(intent, 101);
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //工作圈消息item;
-public class ItemEntity {
+public class  ItemEntity {
     private String id;// 信息id;
     private String staffId;//用户id
     private String avatar; // 用户头像URL

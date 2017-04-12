@@ -1,15 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.Header;
-
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,8 +41,8 @@ import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.dialog.MyAleartDialog;
-import com.feirui.feiyunbangong.dialog.UseMessageDialog;
 import com.feirui.feiyunbangong.dialog.MyAleartDialog.AlertCallBack;
+import com.feirui.feiyunbangong.dialog.UseMessageDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.MyUser;
 import com.feirui.feiyunbangong.fragment.Fragment1;
@@ -69,7 +60,6 @@ import com.feirui.feiyunbangong.utils.JPushUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
-import com.feirui.feiyunbangong.utils.TestinUtils;
 import com.feirui.feiyunbangong.utils.UpdateManager;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -79,6 +69,11 @@ import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.apache.http.Header;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 主页面设置四个fragment跳转
@@ -159,7 +154,8 @@ public class MainActivity extends BaseActivity
 
     private void getUser() {
 
-        AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.DETAIL_ME, new AsyncHttpResponseHandler() {
+        RequestParams params=new RequestParams();
+        AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.DETAIL_ME, params,new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
@@ -592,7 +588,8 @@ public class MainActivity extends BaseActivity
     // 退出登录：
     private void out() {
         String url = UrlTools.url + UrlTools.OUT;
-        AsyncHttpServiceHelper.post(url, new AsyncHttpResponseHandler() {
+        RequestParams params=new RequestParams();
+        AsyncHttpServiceHelper.post(url, params,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
                 finish();

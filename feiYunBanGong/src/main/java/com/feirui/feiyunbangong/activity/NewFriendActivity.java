@@ -1,11 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.Header;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +35,12 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 添加新朋友：
@@ -115,7 +115,8 @@ public class NewFriendActivity extends BaseActivity implements
 	}
 
 	private void setData() {
-		AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.SHENQING_LIEBIAO,
+		RequestParams params=new RequestParams();
+		AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.SHENQING_LIEBIAO,params,
 				new AsyncHttpResponseHandler() {
 					@Override
 					public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
@@ -162,7 +163,7 @@ public class NewFriendActivity extends BaseActivity implements
 				TextView tv = (TextView) tag[1];
 				Log.e("TAG", tv.getText().toString() + "选择的是类型是：");
 				if (tv.getText().equals("请选择")) {
-					Toast.makeText(NewFriendActivity.this, "请选择分组！", 0).show();
+					Toast.makeText(NewFriendActivity.this, "请选择分组！", Toast.LENGTH_SHORT).show();
 					return true;
 				}
 				jieshou(Integer.parseInt(tag[0] + ""), tv.getText().toString());
@@ -235,7 +236,7 @@ public class NewFriendActivity extends BaseActivity implements
 								@Override
 								public void run() {
 									Toast.makeText(NewFriendActivity.this,
-											bean.getMsg(), 0).show();
+											bean.getMsg(), Toast.LENGTH_SHORT).show();
 								}
 							});
 						}
@@ -280,7 +281,7 @@ public class NewFriendActivity extends BaseActivity implements
 								@Override
 								public void run() {
 									Toast.makeText(NewFriendActivity.this,
-											bean.getMsg(), 0).show();
+											bean.getMsg(), Toast.LENGTH_SHORT).show();
 								}
 							});
 						}
@@ -310,12 +311,12 @@ public class NewFriendActivity extends BaseActivity implements
 				}
 				adapter.add(lxrs);
 			} else if (msg.what == 1) {
-				Toast.makeText(NewFriendActivity.this, "拒绝成功！", 0).show();
+				Toast.makeText(NewFriendActivity.this, "拒绝成功！", Toast.LENGTH_SHORT).show();
 			} else {
 				// 发第一条消息给对方：
 				IMUtil.sendMsg(phone);
 				
-				Toast.makeText(NewFriendActivity.this, "添加成功！", 0).show();
+				Toast.makeText(NewFriendActivity.this, "添加成功！", Toast.LENGTH_SHORT).show();
 				setData();
 			}
 		};

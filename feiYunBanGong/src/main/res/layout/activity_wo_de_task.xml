@@ -19,6 +19,7 @@
        android:layout_height="50dp"
        android:layout_below="@+id/includeIdd"
        android:orientation="horizontal"
+
        >
        <RadioButton
            android:id="@+id/receiveButton"
@@ -32,13 +33,14 @@
            android:checked="true"
            />
        <View
-           android:id="@+id/releaseButton"
+           android:id="@+id/releaseView"
            android:layout_width="2dp"
            android:layout_height="40dp"
            android:layout_gravity="center"
            android:background="@color/a4cbeff"
            />
        <RadioButton
+           android:id="@+id/releaseButton"
            android:layout_width="0dp"
            android:layout_height="50dp"
            android:layout_weight="1"
@@ -48,12 +50,19 @@
            android:textColor="@color/mytask_button_text_color"
 
            />
+
    </RadioGroup>
-<RelativeLayout
-    android:id="@+id/containerId"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/taskSelectGroup"
-    ></RelativeLayout>
+    <View
+        android:id="@+id/groupView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/taskSelectGroup"
+        android:background="#c8c8c8"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/containerId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/groupView" />
 
 </RelativeLayout>
