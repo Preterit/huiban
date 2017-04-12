@@ -22,6 +22,7 @@ import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.lidroid.xutils.http.RequestParams;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -56,8 +57,8 @@ public class ShenPiRenActivity extends BaseActivity implements
     }
 
     private void request() {
-
-        AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.SHENPIREN_LIEBIAO,
+        RequestParams params=new RequestParams();
+        AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.SHENPIREN_LIEBIAO,params,
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {

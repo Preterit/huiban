@@ -9,17 +9,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.entity.MyTaskEntity.MyTaskInfo;
+import com.feirui.feiyunbangong.entity.MyTaskReleEntity.ReleaseInfo;
 
 import java.util.List;
 
-public class MyReceiveTaskAdapter extends BaseAdapter {
+public class MyReleaseTaskAdapter extends BaseAdapter {
     private Context context;
-    private List<MyTaskInfo> list;
+    private List<ReleaseInfo> list;
     private LayoutInflater inflater;
 
 
-    public MyReceiveTaskAdapter(Context context,List<MyTaskInfo> list){
+    public MyReleaseTaskAdapter(Context context, List<ReleaseInfo> list){
 
         this.context=context;
         this.list=list;
@@ -32,7 +32,7 @@ public class MyReceiveTaskAdapter extends BaseAdapter {
     }
 
     @Override
-    public MyTaskInfo getItem(int position) {
+    public ReleaseInfo getItem(int position) {
         return list.get(position);
     }
 
@@ -54,9 +54,9 @@ public class MyReceiveTaskAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }
         holder= (ViewHolder) convertView.getTag();
-        MyTaskInfo task = getItem(position);
+        ReleaseInfo task = getItem(position);
         holder.tvContentTaskItem.setText(task.getTask_txt());
-        holder.tvPubNameTaskItem.setText(task.getName());
+        holder.tvPubNameTaskItem.setText("");
         holder.tvPubTime.setText(task.getTime());
         holder.tvTaskTitle.setText(task.getSubject());
 

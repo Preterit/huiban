@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public class TaskInfoActivity extends BaseActivity {
 
     private Button acceptbutton;     //接受按钮
     private Button cancelButton;     //取消按钮
+    private ImageView acceptoverImage;  //接收完任务的盖章
+
     private int position;
 
     @Override
@@ -44,6 +47,21 @@ public class TaskInfoActivity extends BaseActivity {
         initViews();
         //给数据赋值
         setTaskInfo();
+      acceptStatus();  //判断接收状态的方法
+
+    }
+
+    private void acceptStatus() {
+ if(taskinfo.getType()==1){
+     acceptbutton.setVisibility(View.GONE);
+     cancelButton.setVisibility(View.GONE);
+     acceptoverImage.setVisibility(View.VISIBLE);
+ }else{
+     acceptbutton.setVisibility(View.VISIBLE);
+     cancelButton.setVisibility(View.VISIBLE);
+
+ }
+
 
     }
 
@@ -54,7 +72,7 @@ public class TaskInfoActivity extends BaseActivity {
         TaskCountInfo = (TextView) findViewById(R.id.TaskCountInfo);
         acceptbutton = (Button) findViewById(R.id.acceptbutton);
         cancelButton = (Button) findViewById(R.id.cancelButton);
-
+        acceptoverImage=(ImageView)findViewById(R.id.acceptoverImage);
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务详情");
@@ -72,46 +90,7 @@ public class TaskInfoActivity extends BaseActivity {
         acceptbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = UrlTools.pcUrl + UrlTools.TASK_ACCEPT; //接收任务的接口
-                final RequestParams requestParams = new RequestParams();
-                if (taskinfo != null) {
-                    requestParams.put("id", taskinfo.getId()+"");
-
-                    requestParams.put("button", 1 + "");
-                }
-                AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        super.onSuccess(statusCode, headers, responseBody);
-
-                        Gson gson = new Gson();
-                        Log.e("orz", "onSuccess: " +new String(responseBody));
-                        ReceiveBean receive = gson.fromJson(new String(responseBody), ReceiveBean.class);
-                                                Log.e("TAG","此处的对象是"+receive+ " 状态码是 "+receive.getCode());
-
-                                                if (receive.getCode() == 200) {
-                                                    Toast.makeText(TaskInfoActivity.this, receive.getMsg(), Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent();
-                                                    intent.putExtra("Position", position);
-                                                    setResult(RESULT_OK, intent);
-                                                    finish();
-
-
-                                                } else if(receive.getCode() == -400){
-                                                    Toast.makeText(TaskInfoActivity.this,receive.getMsg() , Toast.LENGTH_SHORT).show();
-
-                                                }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        super.onFailure(statusCode, headers, responseBody, error);
-                        Log.e("orz", "onFailure: "+"wft" );
-                    }
-                });
-
-
+                acceptMethod();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +101,53 @@ public class TaskInfoActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void acceptMethod() {
+        {
+            String url = UrlTools.pcUrl + UrlTools.TASK_ACCEPT; //接收任务的接口
+            final RequestParams requestParams = new RequestParams();
+            if (taskinfo != null) {
+                requestParams.put("id", taskinfo.getId()+"");
+
+                requestParams.put("button", 1 + "");
+            }
+            AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    super.onSuccess(statusCode, headers, responseBody);
+
+                    Gson gson = new Gson();
+                    Log.e("orz", "onSuccess: " +new String(responseBody));
+                    ReceiveBean receive = gson.fromJson(new String(responseBody), ReceiveBean.class);
+                    Log.e("TAG","此处的对象是"+receive+ " 状态码是 "+receive.getCode());
+
+                    if (receive.getCode() == 200) {
+                        Toast.makeText(TaskInfoActivity.this, receive.getMsg(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        intent.putExtra("Position", position);
+                        setResult(RESULT_OK, intent);
+
+                        acceptoverImage.setVisibility(View.VISIBLE);
+                        finish();
+
+                    } else if(receive.getCode() == -400){
+                        Toast.makeText(TaskInfoActivity.this,receive.getMsg() , Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    super.onFailure(statusCode, headers, responseBody, error);
+                    Log.e("orz", "onFailure: "+"wft" );
+                }
+            });
+
+
+        }
     }
 
 }

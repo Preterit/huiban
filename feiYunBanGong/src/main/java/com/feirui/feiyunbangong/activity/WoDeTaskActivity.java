@@ -1,26 +1,38 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.adapter.FragPagerAdapter;
 import com.feirui.feiyunbangong.fragment.MyReceiveTaskFragment;
 import com.feirui.feiyunbangong.fragment.MyReleaseTaskFragment;
+
+import java.util.ArrayList;
 
 public class WoDeTaskActivity extends BaseActivity  {
     private MyReceiveTaskFragment receiveFrg;
     private MyReleaseTaskFragment releaseFrg;
-    private RelativeLayout containerId;
+    private ViewPager containerId;
     private RadioGroup taskSelectGroup;
+    private ArrayList<Fragment> frgs;
+    private RadioButton receiveButton;
+    private RadioButton releaseButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wo_de_task);
-        containerId=(RelativeLayout) findViewById(R.id.containerId);
+        containerId=(ViewPager) findViewById(R.id.containerId);
+
         taskSelectGroup=(RadioGroup)findViewById(R.id.taskSelectGroup);
+        receiveButton=(RadioButton)taskSelectGroup.findViewById(R.id.receiveButton);
+        releaseButton=(RadioButton)taskSelectGroup.findViewById(R.id.releaseButton);
+
         receiveFrg = new MyReceiveTaskFragment();
         releaseFrg=new MyReleaseTaskFragment();
         FragmentTransaction ts=getSupportFragmentManager().beginTransaction();
@@ -31,6 +43,15 @@ public class WoDeTaskActivity extends BaseActivity  {
         ts.commit();
         setListeners();
         initView();
+        setAdapter();
+    }
+
+    private void setAdapter() {
+        frgs=new ArrayList<Fragment>();
+        frgs.add(new MyReceiveTaskFragment());
+        frgs.add(new MyReleaseTaskFragment());
+        FragPagerAdapter adapter = new FragPagerAdapter(getSupportFragmentManager(), frgs);
+        containerId.setAdapter(adapter);
     }
 
     private void initView() {
@@ -41,12 +62,40 @@ public class WoDeTaskActivity extends BaseActivity  {
     }
 
     private void setListeners() {
+        containerId.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position){
+                    case 0:
+                        receiveButton.setChecked(true);
+                        break;
+                    case 1:
+                        releaseButton.setChecked(true);
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
         taskSelectGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
                 FragmentTransaction  frgt=getSupportFragmentManager().beginTransaction();
                 switch (checkedId){
                     case R.id.receiveButton:
+                        containerId.setCurrentItem(0);
                         if(receiveFrg!=null){
                             frgt.show(receiveFrg);
                             frgt.hide(releaseFrg);
@@ -57,6 +106,7 @@ public class WoDeTaskActivity extends BaseActivity  {
                         }
                         break;
                     case R.id.releaseButton:
+                        containerId.setCurrentItem(1);
                         if(releaseFrg!=null){
                             frgt.show(releaseFrg);
                             frgt.hide(receiveFrg);
@@ -65,6 +115,7 @@ public class WoDeTaskActivity extends BaseActivity  {
                             releaseFrg=new MyReleaseTaskFragment();
                             frgt.add(R.id.containerId,releaseFrg);
                         }
+                        break;
                 }
 
             }

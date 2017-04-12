@@ -34,7 +34,16 @@
             android:layout_weight="1"
             android:background="@drawable/shape_taskinfo_bg"
             >
-
+<ImageView
+    android:id="@+id/acceptoverImage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/accoverimage"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:visibility="gone"
+    android:layout_margin="10dp"
+    />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,6 +146,7 @@
                 android:background="@drawable/task_button_selector"
                 android:layout_margin="10dp"
                 android:text="取消"
+                android:visibility="gone"
                 android:textColor="#ffffff"
                 />
 
@@ -148,6 +158,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/task_button_selector"
                 android:text="接受"
+                android:visibility="gone"
                 android:textColor="#ffffff"/>
 
         </LinearLayout>
