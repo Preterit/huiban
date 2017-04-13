@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.feirui.feiyunbangong.activity.WoDeTaskActivity">
+
+    >
 
     <include
         android:id="@+id/includeIdd"
@@ -48,10 +47,10 @@
            android:button="@null"
            android:gravity="center"
            android:textColor="@color/mytask_button_text_color"
-
            />
 
    </RadioGroup>
+
     <View
         android:id="@+id/groupView"
         android:layout_width="match_parent"
@@ -60,7 +59,7 @@
         android:background="#c8c8c8"
         />
     <android.support.v4.view.ViewPager
-        android:id="@+id/containerId"
+        android:id="@+id/viewPagerId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/groupView" />

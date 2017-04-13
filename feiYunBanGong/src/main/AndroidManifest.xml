@@ -505,7 +505,7 @@
             android:name=".activity.WoDeTaskActivity"
             android:label="@string/title_activity_wo_de_task">
         </activity>
-        <activity android:name=".activity.CheckBaobiaoActivity"
+        <activity android:name=".activity.CheckBaobiaoActivity"/>
     </application>
 
 </manifest>
