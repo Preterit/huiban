@@ -248,7 +248,7 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/ll_clockIn"
+                android:id="@+id/llTaskList"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -329,7 +329,7 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/llTaskList"
+                android:id="@+id/ll_clockIn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
