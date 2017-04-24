@@ -8,9 +8,9 @@ public class MyTaskEntity {
     public class MyTaskInfo {
         private int id;
 
-        private String subject;
+        private String subject;   //标题
 
-        private String task_txt;
+        private String task_txt;   //任务内容
 
         private String time;
 

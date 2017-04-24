@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/shape_tasklist_bg"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="10dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
@@ -25,17 +24,24 @@
             android:src="@drawable/label_blue"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="8dp"/>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/ivLabelTaskItem"
+    android:layout_toEndOf="@+id/ivLabelTaskItem"
+    android:layout_marginLeft="10dp"
+    >
         <TextView
             android:id="@+id/tvTaskTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:textColor="@color/main_color"
+            android:maxEms="4"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textSize="18sp"
             android:text="项目会议"
-            android:layout_below="@+id/ivLabelTaskItem"
-            android:layout_toEndOf="@+id/ivLabelTaskItem"
-            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             />
 
         <TextView
@@ -43,26 +49,24 @@
             style="@style/tvBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
             android:textSize="12sp"
             android:text="发布人"
             android:layout_marginStart="26dp"
-            android:layout_alignBottom="@+id/tvTaskTitle"
-            android:layout_toEndOf="@+id/tvTaskTitle"/>
+           />
 
         <TextView
             android:id="@+id/tvPubTime"
             style="@style/tvBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+
             android:textSize="12sp"
             android:text="发布时间"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/tvTaskTitle"
+            android:layout_weight="1"
             />
-
+</LinearLayout>
         <View
             android:id="@+id/divTaskItem"
             style="@style/div"

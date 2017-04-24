@@ -52,10 +52,12 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
 
         if (mList.get(position).getType()== 1) {
             holder.tvBgTaskItem.setBackgroundColor(Color.GRAY);
+            holder.tvBgTaskItem.setBackgroundResource(R.drawable.shape_team_task_itemhui);
             holder.ivLabelTaskItem.setImageResource(R.drawable.label_grey);
             holder.tvBgTaskItem.setText("接收完成");
         }else{
             holder.tvBgTaskItem.setBackgroundColor(Color.GREEN);
+            holder.tvBgTaskItem.setBackgroundResource(R.drawable.shape_team_task_item);
             holder.ivLabelTaskItem.setImageResource(R.drawable.label_blue);
             holder.tvBgTaskItem.setText("任务接收中");
         }

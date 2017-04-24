@@ -336,7 +336,7 @@
                     android:layout_width="@dimen/size160"
                     android:layout_height="@dimen/size160"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/tasks" />
+                    android:src="@drawable/taskss" />
 
                 <TextView
                     style="@style/tasks"

@@ -132,8 +132,8 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         }
         RequestParams params = new RequestParams();
 
-        params.put("task_txt", tvTaskTitle.getText().toString().trim());
-        params.put("subject", tvTaskCount.getText().toString().trim());
+        params.put("subject", tvTaskTitle.getText().toString().trim());
+        params.put("task_txt", tvTaskCount.getText().toString().trim());
 
         ArrayList<ShenPiRen> friendList = addFriendAdapter.getDataSet();
         StringBuffer sb_id = new StringBuffer();

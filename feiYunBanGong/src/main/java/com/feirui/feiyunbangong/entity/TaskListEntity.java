@@ -62,7 +62,7 @@ public class TaskListEntity  implements Serializable{
 
     private int id;
     private String task_txt;
-    private String subject;
+    private String subject;   //标题
     private String time;
     private int staff_id;
     private String choose_team;
