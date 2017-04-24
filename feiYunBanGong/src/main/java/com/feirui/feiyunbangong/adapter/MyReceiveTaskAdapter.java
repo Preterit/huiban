@@ -64,11 +64,10 @@ public class MyReceiveTaskAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        TextView tvTaskTitle;
+        TextView tvTaskTitle;     //发布的任务标题
         TextView tvPubNameTaskItem; //发任务的人名
         TextView tvPubTime;     //发任务的时间
         TextView tvContentTaskItem;  //发任务的具体内容
-
 
     }
 }

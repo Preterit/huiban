@@ -171,83 +171,6 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/ll_clockIn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/size160"
-                    android:layout_height="@dimen/size160"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/fragment1_a" />
-
-                <TextView
-                    style="@style/ff99cb_54"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
-                    android:text="打卡" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_customer"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/size160"
-                    android:layout_height="@dimen/size160"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/fragment1_e" />
-
-                <TextView
-                    style="@style/a66c8ff_54"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
-                    android:text="客户管理" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_project"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/size160"
-                    android:layout_height="@dimen/size160"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/fragment1_c" />
-
-                <TextView
-                    style="@style/d6a5f4_54"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
-                    android:text="项目" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_weight="1">
-
-            <LinearLayout
                 android:id="@+id/ll_examine"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -314,18 +237,18 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y6"
                     android:text="查看报表" />
+
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/llTaskList"
+                android:id="@+id/ll_clockIn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -345,6 +268,87 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y6"
                     android:text="任务单" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_customer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size160"
+                    android:layout_height="@dimen/size160"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_e" />
+
+                <TextView
+                    style="@style/a66c8ff_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="客户管理" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_project"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size160"
+                    android:layout_height="@dimen/size160"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_c" />
+
+                <TextView
+                    style="@style/d6a5f4_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="项目" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/llTaskList"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/size160"
+                    android:layout_height="@dimen/size160"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_a" />
+
+                <TextView
+                    style="@style/ff99cb_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="打卡" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -359,7 +363,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
