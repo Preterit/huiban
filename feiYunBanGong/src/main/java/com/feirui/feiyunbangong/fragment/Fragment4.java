@@ -140,7 +140,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         ll_chaungjiantuandui.setOnClickListener(this);
         ll_jiarutuandui.setOnClickListener(this);
         lv_tuandui.setOnItemClickListener(this);
-        tv_sousuolianxiren.setOnClickListener(this);
+       // tv_sousuolianxiren.setOnClickListener(this);
 
         // 设置列表点击滑动监听
         handler = new Handler();
@@ -161,8 +161,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                 .findViewById(R.id.ll_add_team);
         ll_jiarutuandui = (LinearLayout) header_view
                 .findViewById(R.id.ll_add_to_team);
-        tv_sousuolianxiren = (TextView) header_view
-                .findViewById(R.id.tv_sousuolianxiren);
+
     }
 
     @Override
@@ -184,11 +183,11 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
                         R.anim.aty_zoomout);
                 break;
-            case R.id.tv_sousuolianxiren:
+            /**case R.id.tv_sousuolianxiren:
                 startActivity(new Intent(getActivity(), SouSuoTuanDuiActivity.class));
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
                         R.anim.aty_zoomout);
-                break;
+                break;*/
         }
     }
 
