@@ -299,7 +299,8 @@ public class MainActivity extends BaseActivity
 
     private void setListView() {
         adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin, R.id.tv,
-                new String[]{"个人资料", "添加员工", "我的小店", "意见反馈", "清理缓存", "帮助", "关于我们", "邀请奖励", "退出登录"});
+                new String[]{"个人资料", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
+                        "关于我们", "邀请奖励", "我的余额","退出登录"});
         lv_left.setAdapter(adapter);
 
 		/*
@@ -410,7 +411,7 @@ public class MainActivity extends BaseActivity
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 1:
-                        // 添加员工：
+                        // 添加员工：改为代注册
                         startActivity(new Intent(MainActivity.this, AddYuanGongActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
@@ -453,6 +454,10 @@ public class MainActivity extends BaseActivity
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 8:
+                        // 我的余额：
+
+                        break;
+                    case 9:
                         // 退出账号登录：
                         outLogin();
                         break;
