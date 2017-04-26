@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x100" >
+
+        <com.feirui.feiyunbangong.view.TextImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/size120"
+            android:layout_height="@dimen/size120"
+            android:src="@drawable/fragment_head" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x80"
+            android:layout_weight="1"
+            android:text="张三" />
+
+        <LinearLayout
+            android:id="@+id/ll_biaoqian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@drawable/shape_bt_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/size20"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/tv_biaoqian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他" />
+
+            <ImageView
+                android:layout_width="@dimen/size30"
+                android:layout_height="@dimen/size30"
+                android:layout_marginLeft="@dimen/x10"
+                android:src="@drawable/jiantou_xia" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_jianhao"
+            android:layout_width="@dimen/size55"
+            android:layout_height="@dimen/size55"
+            android:layout_marginLeft="@dimen/x38"
+            android:src="@drawable/hongcha" />
+
+        <!-- 设置为管理员 -->
+
+        <ImageView
+            android:id="@+id/iv_set_manager"
+            android:layout_width="@dimen/size60"
+            android:layout_height="@dimen/size60"
+            android:layout_marginLeft="@dimen/x48"
+            android:layout_marginRight="@dimen/x68"
+            android:src="@drawable/set"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</LinearLayout>

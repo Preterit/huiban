@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class ChildItem implements Serializable {
 
-	private String title;// 子项显示的文字
+	private String title;// 子项显示的文字 用户名
 	private String markerImgId;// 每个子项的图标
 	private String phone;
 	private String id;// 子项id;

@@ -6,6 +6,14 @@
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
+
+    <ImageView
+        android:id="@+id/iv_01"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/y50"
+        android:src="@drawable/jianhao" />
+
     <TextView
         android:id="@+id/tv_01"
         style="@style/huise_38"
@@ -14,11 +22,6 @@
         android:layout_height="wrap_content"
         android:text="J先生" />
 
-    <ImageView
-        android:id="@+id/iv_01"
-        android:layout_marginLeft="@dimen/x20"
-        android:layout_width="@dimen/x50"
-        android:layout_height="@dimen/y50"
-        android:src="@drawable/jianhao" />
+
     
 </LinearLayout>

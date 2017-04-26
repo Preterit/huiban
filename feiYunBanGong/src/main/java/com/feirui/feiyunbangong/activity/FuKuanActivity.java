@@ -1,11 +1,14 @@
 package com.feirui.feiyunbangong.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.http.Header;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,10 +22,13 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
+import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
 import com.feirui.feiyunbangong.dialog.SelectZTDialog;
 import com.feirui.feiyunbangong.entity.AddShenHe;
+import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
+import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
@@ -50,9 +56,11 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 	// 添加审批人
 	@PView(click = "onClick")
 	ImageView iv_add, iv_01;
+	private ArrayList<JsonBean> list1 = new ArrayList<>();
 	@PView
 	ListView lv_add_shenpiren;
-	AddShenHeAdapter adapter;
+//	AddShenHeAdapter adapter;
+	AddShenHeUpdateAdapter adapter;
 	@PView
 	ScrollView sv_caigou;
 
@@ -68,7 +76,9 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("付款");
 		setRightVisibility(false);
-		adapter = new AddShenHeAdapter(getLayoutInflater(), FuKuanActivity.this);
+//		adapter = new AddShenHeAdapter(getLayoutInflater(), FuKuanActivity.this);
+
+		adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,FuKuanActivity.this);
 		lv_add_shenpiren.setAdapter(adapter);
 		lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
@@ -87,19 +97,25 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		switch (requestCode) {
-		case 101:
-			ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-			if (spr.getId() == 0) {
-				return;
+		if (requestCode == 200 && resultCode == 100) {
+			@SuppressWarnings("unchecked")
+			ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
+					.getSerializableExtra("childs");
+			HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+			childs.add(
+					0,
+					new ChildItem(hm.get("staff_name") + "", hm
+							.get("staff_head") + "", hm.get("staff_mobile")
+							+ "", hm.get("id") + "", 0));
+			//去掉自己
+			childs.remove(0);
+			if (childs != null && childs.size() > 0) {
+				adapter.addList(childs);
 			}
-			AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());
-			adapter.add(ash);
-			break;
 
+			super.onActivityResult(requestCode, resultCode, data);
 		}
-	};
+	}
 
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -122,11 +138,15 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 			dialog.show();
 			break;
 		case R.id.iv_01:
-			adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
+//			adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
 			break;
 		case R.id.iv_add:
-			Intent intent = new Intent(this, ShenPiRenActivity.class);
-			startActivityForResult(intent, 101);// 请求码；
+//			Intent intent = new Intent(this, ShenPiRenActivity.class);
+//			startActivityForResult(intent, 101);// 请求码；
+
+			Intent intent = new Intent(this,AddChengYuanActivity.class);
+			startActivityForResult(intent,200);
+			overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomout);
 
 			break;
 		case R.id.tv_riqi:
@@ -150,13 +170,20 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 			params.put("payment_time", tv_riqi.getText().toString().trim());
 			params.put("opening_bank", et_kaihuhang.getText().toString().trim());
 			params.put("account", et_zhanghao.getText().toString().trim());
+
+			//从适配器中取出审批人集合
+			List<ChildItem> shenPi = adapter.getList();
 			StringBuffer sb_id = new StringBuffer();
-			for (int i = 0; i < adapter.getCount(); i++) {
-				AddShenHe ash = (AddShenHe) adapter.getItem(i);
-				sb_id.append(ash.getId() + ",");
+			// 循环拼接添加成员id,每个id后加逗号
+			for (int i = 0; i < shenPi.size(); i++) {
+				sb_id.append(shenPi.get(i).getId());
+				sb_id.append(",");
+				Log.d("adapterTag","适配器上的数据"+sb_id);
 			}
+
 			params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1)
 					.toString());
+
 			String url = UrlTools.url + UrlTools.BUY_ADD_BUY;
 			L.e("审批-付款url" + url + " params" + params);
 			AsyncHttpServiceHelper.post(url, params,

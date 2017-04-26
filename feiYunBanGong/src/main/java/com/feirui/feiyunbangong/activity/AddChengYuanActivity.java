@@ -31,7 +31,7 @@ import com.loopj.android.http.RequestParams;
 
 /**
  * 添加成员：
- *
+ * 添加审批人也跳转到该页面
  */
 public class AddChengYuanActivity extends BaseActivity implements
 		OnClickListener, OnGroupStateChangedListener {
@@ -91,7 +91,7 @@ public class AddChengYuanActivity extends BaseActivity implements
 		if (type != null) {
 			setCenterString("添加名片");
 		} else {
-			setCenterString("添加成员");
+			setCenterString("选择人员");
 		}
 		setRightVisibility(false);
 	}

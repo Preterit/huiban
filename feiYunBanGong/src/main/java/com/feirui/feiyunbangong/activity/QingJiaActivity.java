@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,10 +18,14 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
+import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
+import com.feirui.feiyunbangong.adapter.ChuangJianTuanDuiAdapter;
 import com.feirui.feiyunbangong.dialog.SelectZTDialog;
 import com.feirui.feiyunbangong.entity.AddShenHe;
+import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
+import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
@@ -36,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import static com.feirui.feiyunbangong.R.id.et_tianshu;
 
@@ -54,9 +61,12 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     // 添加审批人
     @PView(click = "onClick")
     ImageView iv_add, iv_01;
+    private ArrayList<JsonBean> list1 = new ArrayList<>();
+
+
     @PView
     ListView lv_add_shenpiren;
-    AddShenHeAdapter adapter;
+    AddShenHeUpdateAdapter adapter;
     @PView
     ScrollView sv_caigou;
 
@@ -69,7 +79,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qingjia);
+        setContentView(R.layout.activity_qingjia_update);
         initView();
     }
 
@@ -80,9 +90,13 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("请假");
         setRightVisibility(false);
-        adapter = new AddShenHeAdapter(getLayoutInflater(),
-                QingJiaActivity.this);
+//        adapter = new AddShenHeAdapter(getLayoutInflater(),
+//                QingJiaActivity.this);
+        list1 = new ArrayList<>();
+        list1.add(new JsonBean("其他"));
+        adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,QingJiaActivity.this);
         lv_add_shenpiren.setAdapter(adapter);
+
         lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -105,30 +119,37 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 200 && resultCode == 100) {
+            @SuppressWarnings("unchecked")
+             ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
+                    .getSerializableExtra("childs");
+            HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+            childs.add(
+                    0,
+                    new ChildItem(hm.get("staff_name") + "", hm
+                            .get("staff_head") + "", hm.get("staff_mobile")
+                            + "", hm.get("id") + "", 0));
+            //去掉自己
+            childs.remove(0);
+            if (childs != null && childs.size() > 0) {
+                adapter.addList(childs);
+            }
 
-        switch (requestCode) {
-            case 101:
-                ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-                if (spr.getId() == 0) {
-                    return;
-                }
-                AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());
-                adapter.add(ash);
-                break;
-
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    ;
 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_01:
-                adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
+//                adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
                 break;
             case R.id.iv_add:
-                final Intent intent = new Intent(this, ShenPiRenActivity.class);
-                startActivityForResult(intent, 101);// 请求码；
+                //跳转到添加成员页面
+                final Intent intent = new Intent(this, AddChengYuanActivity.class);
+                startActivityForResult(intent, 200);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                //startActivityForResult(intent, 101);// 请求码；
 
                 break;
             case R.id.tv_leixing:// 请假类型
@@ -245,11 +266,22 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                         .trim());
                 params.put("leave_days", mTianshu.getText().toString().trim());
                 params.put("leave_reason", et_shiyou.getText().toString().trim());
+
+                //从适配器中取出审批人集合
+                List<ChildItem> shenPi = adapter.getList();
                 StringBuffer sb_id = new StringBuffer();
-                for (int i = 0; i < adapter.getCount(); i++) {
-                    AddShenHe ash = (AddShenHe) adapter.getItem(i);
-                    sb_id.append(ash.getId() + ",");
+                // 循环拼接添加成员id,每个id后加逗号
+                for (int i = 0; i < shenPi.size(); i++) {
+                    sb_id.append(shenPi.get(i).getId());
+                    sb_id.append(",");
+                    Log.d("adapterTag","适配器上的数据"+sb_id);
                 }
+
+//                for (int i = 0; i < adapter.getCount(); i++) {
+//                    AddShenHe ash = (AddShenHe) adapter.getItem(i);
+//                    sb_id.append(ash.getId() + ",");
+//                }
+
                 if (TextUtils.isEmpty(sb_id.toString().trim())) {
                     T.showShort(this, "请选择审批人");
                     return;
@@ -286,6 +318,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                             @Override
                             public void onFailure(int arg0, Header[] arg1,
                                                   byte[] arg2, Throwable arg3) {
+                                Log.e("W",arg3.getMessage().toString());
                                 super.onFailure(arg0, arg1, arg2, arg3);
 
                             }

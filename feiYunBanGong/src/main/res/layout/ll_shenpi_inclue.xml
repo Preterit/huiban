@@ -222,33 +222,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y450"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x20"
         android:layout_marginRight="@dimen/x20"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/y20"
-        android:paddingTop="@dimen/y20" >
-
+        android:paddingTop="@dimen/y20">
         <TextView
             style="@style/a000000_48"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="审批人：" />
-
-        <ListView
-            android:id="@+id/lv_add_shenpiren"
-            android:layout_width="@dimen/x460"
-            android:layout_height="@dimen/y400"
-            android:divider="@color/ffffff"
-            android:dividerHeight="@dimen/y15" >
-        </ListView>
-
+            android:text="审批人："/>
         <ImageView
             android:id="@+id/iv_add"
             android:layout_width="@dimen/x100"
             android:layout_height="@dimen/y100"
-            android:src="@drawable/tianjia" />
+            android:src="@drawable/tianjia"
+            android:layout_gravity="center_horizontal"/>
+
+        <ListView
+            android:id="@+id/lv_add_shenpiren"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y400"
+            android:divider="@color/fenge"
+            android:dividerHeight="@dimen/y4"></ListView>
     </LinearLayout>
 
     <Button

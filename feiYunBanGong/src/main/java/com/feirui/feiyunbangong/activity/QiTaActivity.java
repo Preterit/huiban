@@ -17,9 +17,12 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
+import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
 import com.feirui.feiyunbangong.entity.AddShenHe;
+import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
+import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
@@ -30,6 +33,10 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 审批-其他
@@ -49,7 +56,10 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 	ImageView iv_add, iv_01;
 	@PView
 	ListView lv_add_shenpiren;
-	AddShenHeAdapter adapter;
+//	AddShenHeAdapter adapter;
+	AddShenHeUpdateAdapter adapter;
+	private ArrayList<JsonBean> list1 = new ArrayList<>();
+
 	@PView
 	ScrollView sv_caigou;
 
@@ -65,7 +75,7 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("其他");
 		setRightVisibility(false);
-		adapter = new AddShenHeAdapter(getLayoutInflater(), QiTaActivity.this);
+		adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1, QiTaActivity.this);
 		lv_add_shenpiren.setAdapter(adapter);
 		lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
@@ -85,27 +95,36 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		switch (requestCode) {
-		case 101:
-			ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-			if (spr.getId() == 0) {
-				return;
+		if(requestCode == 200 && resultCode == 100) {
+			@SuppressWarnings("unchecked")
+			ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
+					.getSerializableExtra("childs");
+			HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+			childs.add(
+					0,
+					new ChildItem(hm.get("staff_name") + "", hm
+							.get("staff_head") + "", hm.get("staff_mobile")
+							+ "", hm.get("id") + "", 0));
+			//去掉自己
+			childs.remove(0);
+			if (childs != null && childs.size() > 0) {
+				adapter.addList(childs);
 			}
-			AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());
-			adapter.add(ash);
-			break;
 
+			super.onActivityResult(requestCode, resultCode, data);
 		}
 	};
 
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.iv_01:
-			adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
+//			adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
 			break;
 		case R.id.iv_add:
-			Intent intent = new Intent(this, ShenPiRenActivity.class);
-			startActivityForResult(intent, 101);// 请求码；
+			Intent intent = new Intent(this, AddChengYuanActivity.class);
+			startActivityForResult(intent,200);
+			overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomout);
+//			startActivityForResult(intent, 101);// 请求码；
 
 			break;
 		case R.id.tv_shijian:
@@ -125,9 +144,9 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 
 			params.put("describe", et_miaoshu.getText().toString().trim());
 			StringBuffer sb_id = new StringBuffer();
-			for (int i = 0; i < adapter.getCount(); i++) {
-				AddShenHe ash = (AddShenHe) adapter.getItem(i);
-				sb_id.append(ash.getId() + ",");
+			List<ChildItem> shenPi = adapter.getList();
+			for (int i = 0; i < shenPi.size(); i++) {
+				sb_id.append(shenPi.get(i).getId() + ",");
 			}
 			params.put("approval", sb_id.deleteCharAt(sb_id.length() - 1)
 					.toString());

@@ -16,7 +16,8 @@
     <ScrollView
         android:id="@+id/sv_caigou"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="none" >
 
         <LinearLayout
@@ -176,48 +177,48 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y450"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:layout_marginRight="@dimen/x20"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/y20"
-                android:paddingTop="@dimen/y20" >
-
+                android:paddingTop="@dimen/y20">
                 <TextView
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="审批人：" />
-
-                <ListView
-                    android:id="@+id/lv_add_shenpiren"
-                    android:layout_width="@dimen/x350"
-                    android:layout_height="@dimen/y400"
-                    android:divider="@color/ffffff"
-                    android:dividerHeight="@dimen/y15" >
-                </ListView>
-
+                    android:text="审批人："/>
                 <ImageView
                     android:id="@+id/iv_add"
                     android:layout_width="@dimen/x100"
                     android:layout_height="@dimen/y100"
-                    android:src="@drawable/tianjia" />
-            </LinearLayout>
+                    android:src="@drawable/tianjia"
+                    android:layout_gravity="center_horizontal"/>
 
-            <Button
-                android:id="@+id/btn_submit"
-                style="@style/ffffff_60"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x114"
-                android:layout_marginBottom="@dimen/y150"
-                android:layout_marginLeft="@dimen/x140"
-                android:layout_marginRight="@dimen/x140"
-                android:layout_marginTop="@dimen/y50"
-                android:background="@drawable/blue_bt_selector"
-                android:gravity="center"
-                android:text="提交" />
+                <ListView
+                    android:id="@+id/lv_add_shenpiren"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y400"
+                    android:divider="@color/fenge"
+                    android:dividerHeight="@dimen/y4"></ListView>
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/ffffff_60"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x114"
+        android:layout_marginBottom="@dimen/y50"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/blue_bt_selector"
+        android:gravity="center"
+        android:text="提交"/>
 
 </LinearLayout>

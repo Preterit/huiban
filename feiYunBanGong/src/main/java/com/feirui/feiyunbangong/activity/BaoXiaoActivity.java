@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,10 +24,13 @@ import android.widget.ScrollView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
+import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.AddShenHe;
+import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
+import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -36,6 +40,9 @@ import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.RequestParams;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 审批-报销
@@ -52,9 +59,14 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     // 添加审批人
     @PView(click = "onClick")
     ImageView iv_add, iv_01, iv_tupian1, iv_tupian2, iv_tupian3;
+    private ArrayList<JsonBean> list1 ;
+
+    @SuppressWarnings("unchecked")
+    private ArrayList<ChildItem> childs ; //添加的审批人员
     @PView
     ListView lv_add_shenpiren;
-    AddShenHeAdapter adapter;
+//    AddShenHeAdapter adapter;
+    AddShenHeUpdateAdapter adapter;
     @PView
     ScrollView sv_caigou;
 
@@ -70,8 +82,12 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("报销");
         setRightVisibility(false);
-        adapter = new AddShenHeAdapter(getLayoutInflater(),
-                BaoXiaoActivity.this);
+
+        list1 = new ArrayList<>();
+//        adapter = new AddShenHeAdapter(getLayoutInflater(),
+//                BaoXiaoActivity.this);
+        adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,BaoXiaoActivity.this);
+
         lv_add_shenpiren.setAdapter(adapter);
         lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
@@ -119,15 +135,24 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (requestCode == 200 && resultCode == 100) {
+            childs = (ArrayList<ChildItem>) data
+                    .getSerializableExtra("childs");
+            HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+            childs.add(
+                    0,
+                    new ChildItem(hm.get("staff_name") + "", hm
+                            .get("staff_head") + "", hm.get("staff_mobile")
+                            + "", hm.get("id") + "", 0));
+            //去掉自己
+            childs.remove(0);
+            if (childs != null && childs.size() > 0) {
+                adapter.addList(childs);
+            }
+            Log.d("mytag","添加人员："+childs.get(0).toString());
+        }
+
         switch (requestCode) {
-            case 101:
-                ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-                if (spr.getId() == 0) {
-                    return;
-                }
-                AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());
-                adapter.add(ash);
-                break;
             case 1:
                 if (resultCode == Activity.RESULT_OK) {
                     startPhotoZoom(data.getData());
@@ -167,9 +192,10 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 }
                 break;
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
-    ;
+
 
     /**
      * 调节图片大小工具
@@ -220,11 +246,13 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 startActivityForResult(i2, 1);
                 break;
             case R.id.iv_01:
-                adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
+//                adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
                 break;
             case R.id.iv_add:
-                Intent intent = new Intent(this, ShenPiRenActivity.class);
-                startActivityForResult(intent, 101);// 请求码；
+                Intent intent = new Intent(this, AddChengYuanActivity.class);
+                startActivityForResult(intent, 200);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+//                startActivityForResult(intent, 101);// 请求码；
                 break;
         }
     }
@@ -271,11 +299,15 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             params.put("pic", sb_pic.deleteCharAt(sb_pic.length() - 1)
                     .toString());
         }
-        StringBuffer sb_id = new StringBuffer();
 
-        for (int i = 0; i < adapter.getCount(); i++) {
-            AddShenHe ash = (AddShenHe) adapter.getItem(i);
-            sb_id.append(ash.getId() + ",");
+        //从适配器中取出审批人集合
+        List<ChildItem> shenPi = adapter.getList();
+        StringBuffer sb_id = new StringBuffer();
+        // 循环拼接添加成员id,每个id后加逗号
+        for (int i = 0; i < shenPi.size(); i++) {
+            sb_id.append(shenPi.get(i).getId());
+            sb_id.append(",");
+            Log.d("adapterTag","适配器上的数据"+sb_id);
         }
 
         params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1)
@@ -300,7 +332,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                         }
                     });
                 } else {
-
+                    T.showShort(BaoXiaoActivity.this, bean.getMsg());
                 }
             }
 

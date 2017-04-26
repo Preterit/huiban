@@ -161,7 +161,7 @@
 
   <style name="a000000_48">
     <item name="android:textColor">@color/a000000</item>
-    <item name="android:textSize">@dimen/size48</item>
+    <item name="android:textSize">@dimen/size45</item>
   </style>
 
   <style name="tv_hint">
