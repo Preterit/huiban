@@ -58,6 +58,8 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         mSpinner = (Spinner) findViewById(R.id.spinner_lei_xing);
         mAdapter = new ArrayAdapter<String>(this, R.layout.sp_item, R.id.tv, leixing);
         mSpinner.setAdapter(mAdapter);
+        //监听选择类型
+        mSpinner.setOnItemSelectedListener(this);
 
         mPager = (ViewPager) findViewById(R.id.viewPagerContent);
         mRgTools = (RadioGroup) findViewById(R.id.rgTools);
@@ -81,6 +83,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                 switch (position){
                     case 0:
                         mTiJiao.setChecked(true);
+                        postQingQiu(str);
                         break;
                     case 1:
                         mShenPi.setChecked(true);
@@ -100,7 +103,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                     case R.id.rb_ti_jiao:
                         mPager.setCurrentItem(0);
                         postQingQiu(str);
-                        Log.d("qing","请求的类型"+str);
+                        Log.d("qing","请求的类型："+str);
                         break;
                     case R.id.rb_shen_pi:
                         mPager.setCurrentItem(1);
@@ -128,6 +131,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0 : //选择审批类型
+                Log.e("qing","yyyyy");
                 setListener("选择审批类型");
                 break;
         }

@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class TiJiaoFragment extends BaseFragment {
     }
 
     private void receiveTaskList() {
+        Log.e("rr","请稍后。。。。"+string);
         RequestParams params = new RequestParams();
         String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL_ALL;
         if (!"选择审批类型".equals(string)) {
