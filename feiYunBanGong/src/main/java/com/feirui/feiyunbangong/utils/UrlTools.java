@@ -160,7 +160,7 @@ public class UrlTools {
    */
   public static String OTHER_OTHER_ADD = "Other/other_add";
   /**
-   * 审批里我发起点进去显示所有的信息
+   * 审批里我发起点进去显示所有的信息(我提交的)
    */
   public static String APPROVAL_APPROVAL_ALL = "Approval/approval_all";
   /**

@@ -7,8 +7,8 @@
     <TextView 
         android:id="@+id/tv"
         android:layout_width="@dimen/x400"
-        android:layout_height="@dimen/y180"
-		style="@style/a000000_58"
+        android:layout_height="@dimen/y90"
+		style="@style/a000000_42"
 		android:paddingLeft="@dimen/x20"
 		android:paddingRight="@dimen/x20"
 		android:gravity="center"     

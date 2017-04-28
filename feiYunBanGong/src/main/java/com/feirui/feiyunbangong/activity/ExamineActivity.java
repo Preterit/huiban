@@ -42,7 +42,7 @@ public class ExamineActivity extends BaseActivity {
 			break;
 		case R.id.ll_record: // 操作记录
 			startActivity(new Intent(ExamineActivity.this,
-					CaoZuoJiLuActivity.class));
+					CaoZuoJiLuUpdataActivity.class));
 			break;
 		case R.id.ll_leave: // 请假
 			startActivity(new Intent(ExamineActivity.this,

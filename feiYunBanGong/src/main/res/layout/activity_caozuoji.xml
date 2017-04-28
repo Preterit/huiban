@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"/>
+
+    <Spinner
+        android:id="@+id/spinner_lei_xing"
+        android:layout_width="@dimen/x400"
+        android:layout_height="@dimen/x120"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"></Spinner>
+
+    <RadioGroup
+        android:id="@+id/rgTools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <RadioButton
+            android:id="@+id/rb_ti_jiao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="我提交的"
+            android:textColor="@color/mytask_button_text_color"
+            style="@style/a000000_48"
+           android:checked="true"
+            android:gravity="center_horizontal"/>
+        <RadioButton
+            android:id="@+id/rb_shen_pi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="我审批的"
+            style="@style/a000000_48"
+            android:textColor="@color/mytask_button_text_color"
+            android:gravity="center_horizontal"/>
+    </RadioGroup>
+   <android.support.v4.view.ViewPager
+       android:id="@+id/viewPagerContent"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+
+   </android.support.v4.view.ViewPager>
+
+</LinearLayout>

@@ -161,6 +161,7 @@ public class BaseActivity extends FragmentActivity {
 
 	}
 
+
 	private void initInjectedView(Activity activity) {
 		initInjectedView(activity, activity.getWindow().getDecorView());
 

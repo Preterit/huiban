@@ -27,15 +27,18 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * 待审批操作 别人提交给自己的
+ */
 
 public class DaiShenPiActivity extends BaseActivity implements
         OnItemSelectedListener {
-    private static final int ON_REFRESH = 1;
-    private static final int ON_LOAD_MORE = 2;
+    private static final int ON_REFRESH = 1;  //刷新常量
+    private static final int ON_LOAD_MORE = 2;  //加载常量
     @PView
     private Spinner sp_daishenpi;
 
-    private ArrayAdapter<String> adt;
+    private ArrayAdapter<String> adt;  //审批类型的适配器
     private ShenPiAdapter adapter;
     private String[] leixing = new String[]{"选择审批类型", "请假", "报销", "外出", "付款",
             "采购"};
@@ -89,6 +92,7 @@ public class DaiShenPiActivity extends BaseActivity implements
         adapter = new ShenPiAdapter(DaiShenPiActivity.this, new ArrayList<HashMap<String, Object>>());
         mPullListView.setAdapter(adapter);
 
+        //查看各种审批类型的详情
         adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
             @Override
             public void onChakanClick(HashMap<String, Object> data, int position) {

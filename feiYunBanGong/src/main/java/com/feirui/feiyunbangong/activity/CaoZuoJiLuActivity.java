@@ -1,12 +1,19 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -22,14 +29,15 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 /**
  * 审批-操作记录
  *
  * @author Lesgod
  */
-public class CaoZuoJiLuActivity extends BaseActivity {
+public class CaoZuoJiLuActivity extends BaseActivity implements OnItemSelectedListener {
     @PView(click = "onClick")
-    private Spinner sp_daishenpi;
+    private Spinner sp_daishenpi; //审批类型的下拉框
     private ArrayAdapter<String> adt;
     private String[] leixing = new String[]{"选择审批类型", "请假", "报销", "外出", "付款",
             "采购", "其他"};
@@ -39,15 +47,38 @@ public class CaoZuoJiLuActivity extends BaseActivity {
     private JsonBean json;
     // list的适配器
     private ShenPiAdapter adapter;
-    // 当前数据页码
-    private int pageindex = -1;
+
 
 
     private PullToRefreshLayout mPullToRefreshLayout;
     private PullListView mListView;
     private int ON_REFRESH = 1;
     private int ON_LOAD_MORE = 2;
-    private int currentPage = 1;
+    private int currentPage = 1; // 当前数据页码
+
+    //异步自动加载数据
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case Constant.REFRESH:
+                    break;
+                case Constant.LOAD:
+                    break;
+                case Constant.PUBLIC_TYPE_ONE:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * activity出现之后自动请求数据
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData(currentPage,ON_LOAD_MORE);
+    }
 
     @Override
 
@@ -71,20 +102,28 @@ public class CaoZuoJiLuActivity extends BaseActivity {
         mListView = (PullListView) findViewById(R.id.caozuo_jilu_list);
         mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.caozuo_jilu_pullRefresh);
 
-//        sp_daishenpi.setOnItemSelectedListener(this);
 
-        adt = new ArrayAdapter<>(this, R.layout.sp_item, R.id.tv, leixing);
-        sp_daishenpi.setAdapter(adt);
-
+        //监听选择类型
+        sp_daishenpi.setOnItemSelectedListener(this);
         adapter = new ShenPiAdapter(CaoZuoJiLuActivity.this, new ArrayList<HashMap<String, Object>>());
         mListView.setAdapter(adapter);
 
         adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
             @Override
             public void onChakanClick(HashMap<String, Object> data, int position) {
-//                Intent intent = new Intent(DaiShenPiActivity.this, ShenPiQingJaDetailActivity.class);
-//                intent.putExtra("data", data);
-//                startActivity(new Intent(intent));
+                String approval_type = (String) data.get("approval_type");
+                switch (approval_type) {
+                    case "请假":
+                        Intent intent = new Intent(CaoZuoJiLuActivity.this, ShenPiQingJaDetailActivity.class);
+                        intent.putExtra("data", data);
+                        startActivity(intent);
+                        break;
+                    case "报销":
+                        Intent baoxiaoIntent = new Intent(CaoZuoJiLuActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        baoxiaoIntent.putExtra("data", data);
+                        startActivity(baoxiaoIntent);
+                        break;
+                }
             }
         });
         mPullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
@@ -104,6 +143,7 @@ public class CaoZuoJiLuActivity extends BaseActivity {
     }
 
 
+
     /**
      * 加载数据、刷新数据
      */
@@ -116,7 +156,7 @@ public class CaoZuoJiLuActivity extends BaseActivity {
         }
         params.put("current_page", page + "");
         params.put("pagesize", "15");
-        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+        AsyncHttpServiceHelper.post(url, params,    new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
@@ -139,4 +179,19 @@ public class CaoZuoJiLuActivity extends BaseActivity {
             }
         });
     }
+
+    //选中每一个类型的加载内容
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View iew, int position, long id) {
+         Object itemAtPosition = parent.getItemAtPosition(position);
+         String type =(String) itemAtPosition;
+         loadData(1,ON_REFRESH);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+//        loadData(1,ON_LOAD_MORE);
+    }
 }
+
+
