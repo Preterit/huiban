@@ -48,20 +48,20 @@ public class UseMessageDialog extends MyBaseDialog {
 	}
 
 	/**
-	 * 获取版本号
+	 * 获取版本号改为版本名
 	 * 
 	 * @return
 	 */
-	public int getVersionCode() {
+	public String getVersionCode() {
 		PackageManager manager = context.getPackageManager();// 获取包管理器
 		try {
 			// 通过当前的包名获取包的信息
 			PackageInfo info = manager.getPackageInfo(context.getPackageName(),
 					0);// 获取包对象信息
-			return info.versionCode;
+			return info.versionName;
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return null;
 	}
 }
