@@ -43,7 +43,7 @@
         android:layout_marginBottom="@dimen/y20"
         android:layout_marginTop="@dimen/y60"
         android:layout_weight="1"
-        android:divider="@color/ffffff"
+        android:divider="@color/jiange"
         android:dividerHeight="@dimen/y1" >
     </ListView>
 
