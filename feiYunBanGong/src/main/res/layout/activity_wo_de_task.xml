@@ -25,6 +25,7 @@
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:text="接收的任务"
+           android:layout_weight="1"
            android:button="@null"
            android:gravity="center"
            android:textColor="@color/mytask_button_text_color"
