@@ -195,6 +195,7 @@ public class MainActivity extends BaseActivity
             }
         }).start();
 
+        //极光推送
         JPushUtil.jOnResume(this);
         super.onResume();
     }

@@ -44,6 +44,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 聊天界面的输入框所需内容
+ */
 public class MyIMChattingPageOperateion extends IMChattingPageOperateion
         implements OnSendCardListener {
 

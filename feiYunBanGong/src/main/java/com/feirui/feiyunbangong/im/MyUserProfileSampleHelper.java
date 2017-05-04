@@ -57,7 +57,9 @@ public class MyUserProfileSampleHelper {
 						Intent intent = new Intent(fragment.getActivity(),
 								FriendInfoActivity.class);
 						intent.putExtra("phone", user_id);
+						Log.d("tag","私聊的吗。。。。");
 						fragment.getActivity().startActivity(intent);
+
 					}
 
 					// 点击群头像回调：

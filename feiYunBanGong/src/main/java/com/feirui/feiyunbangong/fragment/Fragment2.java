@@ -87,8 +87,10 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   private ExpandableListView expandlist;
   private MyBaseExpandableListAdapter adapter;
   private Map<Integer, List<ChildItem>> map;
-  private List<Group> groups;// 分组信息；
+  private List<Group> groups;
+
   private LinearLayout ll_tianjia, ll_qunliao, ll_saosao, inclue;
+
   private boolean isShow = false;
   private EditText et_sousuo;
   private SwipeRefreshLayout swipe_container;
@@ -252,8 +254,10 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     ll_qunliao.setOnTouchListener(this);
     ll_tianjia.setOnTouchListener(this);
     et_sousuo.setOnKeyListener(this);
+    //
     expandlist.setOnTouchListener(this);
     expandlist.setOnGroupClickListener(this);
+
     fl_main2.setOnTouchListener(this);
   }
 
