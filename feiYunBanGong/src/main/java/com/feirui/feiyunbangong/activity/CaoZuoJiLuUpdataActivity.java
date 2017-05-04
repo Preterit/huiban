@@ -106,6 +106,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                         break;
                     case 1:
                         mShenPi.setChecked(true);
+                        postQingQiu(str);
                         break;
                 }
             }
@@ -127,7 +128,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                         break;
                     case R.id.rb_shen_pi:
                         mPager.setCurrentItem(1);
-
+                        postQingQiu(str);
                         break;
                 }
             }
@@ -138,7 +139,12 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         Log.d("qing","请求的类型："+str);
 
         tiJiaoFragment = new TiJiaoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("data",str);
+        tiJiaoFragment.setArguments(bundle);
+
         shenPiFragment = new ShenPiFragment();
+        shenPiFragment.setArguments(bundle);
 
         mFragments = new ArrayList<>();
         mFragments.add(tiJiaoFragment);
@@ -146,9 +152,6 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         FragPagerAdapter pagerAdapter = new FragPagerAdapter(getSupportFragmentManager(),mFragments);
         mPager.setAdapter(pagerAdapter);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("data",str);
-        tiJiaoFragment.setArguments(bundle);
 
     }
 
