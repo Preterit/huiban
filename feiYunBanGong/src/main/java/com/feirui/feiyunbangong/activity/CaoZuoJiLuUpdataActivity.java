@@ -9,14 +9,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.FragPagerAdapter;
+import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
+import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.fragment.ShenPiFragment;
 import com.feirui.feiyunbangong.fragment.TiJiaoFragment;
+import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.UrlTools;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 
@@ -32,11 +42,16 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
             "采购", "其他"};
 
     private ArrayList<Fragment> mFragments;
+    private TiJiaoFragment tiJiaoFragment;
+    private ShenPiFragment shenPiFragment;
     private int mIndex;
     private ViewPager mPager;
     private RadioButton mTiJiao;
     private RadioButton mShenPi;
     private RadioGroup mRgTools;
+
+    private ListView mListView;
+    private ShenPiAdapter adapter;
 
 
     @Override
@@ -44,9 +59,9 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         super.onCreate(arg0);
         setContentView(R.layout.activity_caozuoji);
         initView();
-//        postQingQiu("选择审批类型");
+        Log.d("tag","Oncreate====="+mSpinner.getSelectedItem().toString());
+        postQingQiu(mSpinner.getSelectedItem().toString());
     }
-
 
 
     private void initView() {
@@ -67,6 +82,8 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         mTiJiao = (RadioButton) findViewById(R.id.rb_ti_jiao);
         mShenPi = (RadioButton) findViewById(R.id.rb_shen_pi);
 
+
+
     }
 
     /**
@@ -85,6 +102,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                     case 0:
                         mTiJiao.setChecked(true);
                         postQingQiu(str);
+                        Log.d("group","group的："+mSpinner.getSelectedItem().toString());
                         break;
                     case 1:
                         mShenPi.setChecked(true);
@@ -104,10 +122,12 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                     case R.id.rb_ti_jiao:
                         mPager.setCurrentItem(0);
                         postQingQiu(str);
-                        Log.d("qing","请求的类型："+str);
+                        Log.d("group","group的："+mSpinner.getSelectedItem().toString());
+
                         break;
                     case R.id.rb_shen_pi:
                         mPager.setCurrentItem(1);
+
                         break;
                 }
             }
@@ -115,9 +135,10 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
     }
 
     private void postQingQiu(String str) {
+        Log.d("qing","请求的类型："+str);
 
-        TiJiaoFragment tiJiaoFragment = new TiJiaoFragment(str);
-        ShenPiFragment shenPiFragment = new ShenPiFragment();
+        tiJiaoFragment = new TiJiaoFragment();
+        shenPiFragment = new ShenPiFragment();
 
         mFragments = new ArrayList<>();
         mFragments.add(tiJiaoFragment);
@@ -125,8 +146,40 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         FragPagerAdapter pagerAdapter = new FragPagerAdapter(getSupportFragmentManager(),mFragments);
         mPager.setAdapter(pagerAdapter);
 
+        Bundle bundle = new Bundle();
+        bundle.putString("data",str);
+        tiJiaoFragment.setArguments(bundle);
+
     }
 
+    public void loadData(String str){
+        Log.d("TAG","点击1位置传到这里，，，，");
+
+
+        RequestParams params = new RequestParams();
+        String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL_ALL;
+        if (!"选择审批类型".equals(mSpinner.getSelectedItem().toString())) {
+            params.put("type", mSpinner.getSelectedItem().toString());
+
+        }
+        Log.d("TAG","点击1位置传到这里，，，，"+mSpinner.getSelectedItem().toString());
+        mListView = (ListView) findViewById(R.id.receiveTaskList);
+        AsyncHttpServiceHelper.post(url, params,    new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
+                Log.d("json","JsonBean----"+jsonBean.getInfor());
+
+                if (jsonBean.getCode().equals("200")) {
+
+                    adapter=new ShenPiAdapter(CaoZuoJiLuUpdataActivity.this,jsonBean.getInfor());
+//                    adapter.addAll(jsonBean.getInfor());
+                    mListView.setAdapter(adapter);
+                }
+            }
+        });
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -137,27 +190,34 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                 break;
             case 1:
                 setListener("请假");
+
                 Log.d("TAG","点击1位置");
+                loadData("请假");
                 break;
             case 2:
                 setListener("报销");
                 Log.d("TAG","点击2位置");
+                loadData("报销");
                 break;
             case 3:
                 setListener("外出");
                 Log.d("TAG","点击3位置");
+                loadData("外出");
                 break;
             case 4:
                 setListener("付款");
                 Log.d("TAG","点击4位置");
+                loadData("付款");
                 break;
             case 5:
                 setListener("采购");
                 Log.d("TAG","点击5位置");
+                loadData("采购");
                 break;
             case 6:
                 setListener("其他");
                 Log.d("TAG","点击6位置");
+                loadData("其他");
                 break;
         }
     }

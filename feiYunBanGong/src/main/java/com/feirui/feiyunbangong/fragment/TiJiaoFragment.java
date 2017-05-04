@@ -25,35 +25,35 @@ import static com.feirui.feiyunbangong.R.id.receiveTaskList;
  */
 
 public class TiJiaoFragment extends BaseFragment {
-    private String string; //传过来的数据类型
     private ListView mListView;
     private ShenPiAdapter adapter;
 
-    public  TiJiaoFragment(String string){
-        super();
-        this.string = string;
-    }
+    public TiJiaoFragment(){}
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_ti_jiao, container, false);
         mListView = (ListView) v.findViewById(receiveTaskList);
 
-        receiveTaskList();
+        requestData();
 
         return v;
 
     }
 
-    private void receiveTaskList() {
-        Log.e("rr","请稍后。。。。"+string);
+    private void requestData() {
+      Bundle bundle =   getArguments();
+       String string = bundle.getString("data");
+        Log.d("tag","传过来的---"+string);
+
         RequestParams params = new RequestParams();
         String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL_ALL;
         if (!"选择审批类型".equals(string)) {
             params.put("type", string);
 
         }
-        Log.e("type","选择的审批类型："+string);
         AsyncHttpServiceHelper.post(url, params,    new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

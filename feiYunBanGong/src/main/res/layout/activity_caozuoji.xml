@@ -44,6 +44,7 @@
             android:textColor="@color/mytask_button_text_color"
             android:gravity="center_horizontal"/>
     </RadioGroup>
+
    <android.support.v4.view.ViewPager
        android:id="@+id/viewPagerContent"
        android:layout_width="match_parent"
