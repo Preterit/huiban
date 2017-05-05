@@ -57,6 +57,8 @@ public class MyChatUI extends IMChattingPageUI {
 		return true;
 	}
 
+
+
 	/**
 	 * 聊天界面顶部展示的自定义View,这里的具体场景是当群消息屏蔽时展示的提示条
 	 *
@@ -92,7 +94,7 @@ public class MyChatUI extends IMChattingPageUI {
 		String conversationId = conversation.getConversationId();// 获取到联系人手机号；
 		Log.e("TAG", conversationId + "--------conversation.getConversationId()");
 		final String phone = conversationId.substring(
-				conversationId.length() - 9, conversationId.length());
+				conversationId.length() - 11, conversationId.length());
 		Log.e("TAG", phone + "--------conversation.getConversationId()");
 		Log.d("tag","一个聊天的------");
 		String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
