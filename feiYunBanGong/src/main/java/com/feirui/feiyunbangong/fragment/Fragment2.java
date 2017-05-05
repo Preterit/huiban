@@ -1,10 +1,5 @@
 package com.feirui.feiyunbangong.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -42,6 +37,7 @@ import com.feirui.feiyunbangong.activity.FenZuGuanLiActivity;
 import com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.NewFriendActivity;
 import com.feirui.feiyunbangong.activity.WorkCircleActivity;
+import com.feirui.feiyunbangong.activity.tribe.EditTribeInfoActivity;
 import com.feirui.feiyunbangong.adapter.MyBaseExpandableListAdapter;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog.CallBack;
@@ -71,6 +67,11 @@ import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.RequestParams;
 import com.zxing.activity.CaptureActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 联系人
  *
@@ -89,7 +90,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   private Map<Integer, List<ChildItem>> map;
   private List<Group> groups;
 
-  private LinearLayout ll_tianjia, ll_qunliao, ll_saosao, inclue;
+  private LinearLayout ll_tianjia, ll_qunliao, ll_saosao, inclue,ll_quntalk,ll_taolun;
 
   private boolean isShow = false;
   private EditText et_sousuo;
@@ -253,6 +254,10 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     ll_saosao.setOnTouchListener(this);
     ll_qunliao.setOnTouchListener(this);
     ll_tianjia.setOnTouchListener(this);
+    //创建群聊
+    ll_quntalk.setOnTouchListener(this);
+    ll_taolun.setOnTouchListener(this);
+
     et_sousuo.setOnKeyListener(this);
     //
     expandlist.setOnTouchListener(this);
@@ -269,7 +274,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
       if (keyCode == KeyEvent.KEYCODE_ENTER) {
         Log.e("TAG", "keydown");
         if (!Utils.isPhone(et_sousuo.getText().toString())) {
-          Toast.makeText(getActivity(), "手机号格式错误！", 0).show();
+          Toast.makeText(getActivity(), "手机号格式错误！", Toast.LENGTH_SHORT).show();
           return false;
         }
         search(et_sousuo.getText().toString());
@@ -323,7 +328,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
           @Override
           public void failure(String msg) {
-            Toast.makeText(getActivity(), msg, 0).show();
+            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
           }
 
           @Override
@@ -375,6 +380,16 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
               R.anim.aty_zoomout);
         }
         return true;// 消费该监听事件，不再传递；
+
+      case R.id.ll_quntalk: //创建群
+          startActivity(new Intent(getActivity(), EditTribeInfoActivity.class));
+        getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+        return  true;
+
+      case R.id.ll_taolun:
+
+        return  true;
+
       case R.id.ll_saoyisao:
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
           saoyisao();
@@ -504,7 +519,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (resultCode == -1) {
       if (requestCode == 123) {
-        Toast.makeText(getActivity(), "扫描成功！", 0).show();
+        Toast.makeText(getActivity(), "扫描成功！", Toast.LENGTH_SHORT).show();
         Bundle bundle = data.getExtras();
         String scanResult = bundle.getString("result");
         if (Utils.isPhone(scanResult)) {
@@ -512,7 +527,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         } else if (scanResult.charAt(0) == 'T') {
           addTeam(scanResult.substring(1, scanResult.length()));// 加入团队；
         } else {
-          Toast.makeText(getActivity(), "无法识别该二维码！", 0).show();
+          Toast.makeText(getActivity(), "无法识别该二维码！", Toast.LENGTH_SHORT).show();
         }
         Log.e("TAG", scanResult);
       }
@@ -557,6 +572,10 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     setCenterString("联系人");
     setRightDrawable(R.drawable.jia);
     ll_tianjia = (LinearLayout) view.findViewById(R.id.ll_tianjia);
+
+    ll_quntalk = (LinearLayout) view.findViewById(R.id.ll_quntalk) ;
+    ll_taolun = (LinearLayout) view.findViewById(R.id.ll_taolun);
+
     inclue = (LinearLayout) view.findViewById(R.id.inclue_add);
     ll_qunliao = (LinearLayout) view.findViewById(R.id.ll_qunliao);
     ll_saosao = (LinearLayout) view.findViewById(R.id.ll_saoyisao);
@@ -717,14 +736,14 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
               new HttpCallBack() {
                 @Override
                 public void success(JsonBean bean) {
-                  Toast.makeText(getActivity(), "转移成功！", 0)
+                  Toast.makeText(getActivity(), "转移成功！", Toast.LENGTH_SHORT)
                       .show();
                   requestGroup();// 获取分组信息；
                 }
 
                 @Override
                 public void failure(String msg) {
-                  Toast.makeText(getActivity(), msg, 0)
+                  Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT)
                       .show();
                 }
 

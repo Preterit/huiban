@@ -14,6 +14,7 @@ import com.alibaba.mobileim.contact.IYWContactService;
 import com.alibaba.mobileim.contact.IYWCrossContactProfileCallback;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.lib.model.contact.Contact;
+import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.FriendInfoActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
@@ -44,7 +45,7 @@ public class MyUserProfileSampleHelper {
 		}
 		final IYWContactService contactManager = imKit.getContactService();
 
-		// 私聊头像点击的回调（开发者可以按需设置）
+		// 消息界面  头像点击的回调（开发者可以按需设置）
 		contactManager
 				.setContactHeadClickListener(new IYWContactHeadClickListener() {
 
@@ -65,8 +66,8 @@ public class MyUserProfileSampleHelper {
 					// 点击群头像回调：
 					@Override
 					public void onTribeHeadClick(Fragment arg0,
-							YWConversation arg1, long arg2) {
-
+							YWConversation arg1, long tribeId) {
+						IMNotificationUtils.getInstance().showToast(arg0.getActivity(), "你点击了群 " + tribeId + " 的头像");
 					}
 
 					// 点击自定义会话头像回调：

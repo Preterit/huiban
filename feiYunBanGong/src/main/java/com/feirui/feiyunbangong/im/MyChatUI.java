@@ -90,12 +90,16 @@ public class MyChatUI extends IMChattingPageUI {
 		});
 
 		String conversationId = conversation.getConversationId();// 获取到联系人手机号；
+		Log.e("TAG", conversationId + "--------conversation.getConversationId()");
 		final String phone = conversationId.substring(
-				conversationId.length() - 11, conversationId.length());
-		Log.e("TAG", phone + "conversation.getConversationId()");
+				conversationId.length() - 9, conversationId.length());
+		Log.e("TAG", phone + "--------conversation.getConversationId()");
+		Log.d("tag","一个聊天的------");
 		String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
 				.getShowName();
 		// tv_name.setText(name);
+
+
 
 		// 如果不是手机号的话则直接显示：
 		if (!Utils.isPhone(name)) {

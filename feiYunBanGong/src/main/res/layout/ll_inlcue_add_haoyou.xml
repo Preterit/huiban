@@ -98,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="创建群聊"
+                android:text="创建群组"
                 android:textSize="@dimen/size50" />
         </LinearLayout>
 

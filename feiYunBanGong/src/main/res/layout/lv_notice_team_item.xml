@@ -144,6 +144,7 @@
     <!-- 团队成员 -->
 
     <LinearLayout
+        android:id="@+id/llChengYuan"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
         android:background="@color/ffffff"
@@ -155,7 +156,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x50"
             android:src="@drawable/td_chengyuan"/>
-
         <TextView
             android:id="@+id/tv_chenyuan"
             style="@style/a000000_44"
@@ -165,6 +165,13 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="团队成员"/>
+        <ImageView
+            android:layout_width="@dimen/size21"
+            android:layout_height="@dimen/size37"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x50"
+            android:src="@drawable/td_jiantou"/>
     </LinearLayout>
 
 </LinearLayout>

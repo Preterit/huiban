@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aliwx_common_bg_white_color"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.tribe.EditTribeInfoActivity">
+    <include
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_below="@+id/title_self_state">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/head_layout"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/tribe_header"
+                android:gravity="center">
+
+                <com.alibaba.mobileim.fundamental.widget.WXNetworkImageView
+                    android:id="@+id/head"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/aliwx_common_head_size"
+                    android:src="@drawable/aliwx_tribe_head_default" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tribe_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/head_layout"
+                android:background="@color/aliwx_white"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/more_item_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="群名称：" />
+
+                <EditText
+                    android:id="@+id/tribe_name"
+                    style="@style/more_item_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="群名称"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:textSize="@dimen/aliwx_font_second_grade"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tribe_description_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tribe_name_layout"
+                android:layout_marginTop="@dimen/aliwx_column_up_unit_margin"
+                android:background="@color/aliwx_white"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/more_item_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="群公告：" />
+
+                <EditText
+                    android:id="@+id/tribe_description"
+                    style="@style/more_item_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="群公告"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:textSize="@dimen/aliwx_font_second_grade"
+                    android:background="@null"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/bt_add_qun"
+        style="@style/ffffff_49"
+        android:layout_width="@dimen/x800"
+        android:layout_height="@dimen/y114"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/y36"
+        android:layout_marginTop="@dimen/y36"
+        android:background="@drawable/blue_bt_selector"
+        android:gravity="center"
+        android:text="创建" />
+
+</LinearLayout>

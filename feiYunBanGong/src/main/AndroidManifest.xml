@@ -508,6 +508,11 @@
             android:label="@string/title_activity_wo_de_task">
         </activity>
         <activity android:name=".activity.CheckBaobiaoActivity"/>
+
+        <!--所有群聊的-->
+        <activity android:name=".activity.tribe.EditTribeInfoActivity"/>
+
+
     </application>
 
 </manifest>

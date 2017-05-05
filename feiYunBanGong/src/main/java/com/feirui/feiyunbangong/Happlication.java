@@ -1,5 +1,6 @@
 package com.feirui.feiyunbangong;
 
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -12,7 +13,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
-
 public class Happlication extends Application {
     // application实例
     private static Happlication instance;

@@ -39,6 +39,15 @@
     <item name="android:textSize">@dimen/size46</item>
   </style>
 
+  <style name="more_item_style">
+    <item name="android:paddingLeft">10dip</item>
+    <item name="android:paddingRight">10dip</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textColor">#ff333333</item>
+    <item name="android:textSize">15sp</item>
+    <item name="android:focusable">true</item>
+  </style>
+
   <style name="a6a6a6a_46">
     <item name="android:textColor">@color/a6a6a6a</item>
     <item name="android:textSize">@dimen/size46</item>

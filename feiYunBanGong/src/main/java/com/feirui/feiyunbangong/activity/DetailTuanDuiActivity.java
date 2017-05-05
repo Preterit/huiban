@@ -1,11 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.Header;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ChengYuanAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -45,6 +40,12 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.apache.http.Header;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * 查看已创建的团队：
  *
@@ -59,9 +60,14 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     private ArrayList<TuanDuiChengYuan> tdcys;
     private TuanDui td;
     private Button bt_add;// 添加成员
-    private LinearLayout ll_tuanduigonggao, ll_tuanduiquan;// 团队公告；
+    private LinearLayout ll_tuanduigonggao, ll_tuanduiquan,ll_tuanduichengyuan;// 团队公告 、成员；
     private TextView tv_message_num, tv_chenyuan;// 团队公告消息数量；
     private View header_view;// 头部；
+
+    //群聊相关
+    private TribeAndRoomList mTribeAndRoomList;  //群聊集合
+    private List<YWTribe> mTribeList;
+    private List<YWTribe> mRoomsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,6 +226,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         lv_chengyuan.setOnItemClickListener(this);
         bt_add.setOnClickListener(this);
         ll_tuanduigonggao.setOnClickListener(this);
+        ll_tuanduichengyuan.setOnClickListener(this);
 
         rightll.setOnClickListener(new OnClickListener() {
             @Override
@@ -273,6 +280,8 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
         ll_tuanduigonggao = (LinearLayout) header_view
                 .findViewById(R.id.ll_tuanduigonggao);
+        ll_tuanduichengyuan = (LinearLayout)header_view.findViewById(R.id.llChengYuan);
+
         tv_chenyuan = (TextView) header_view.findViewById(R.id.tv_chenyuan);
         // bt_out_team = (Button) findViewById(R.id.bt_out_team);
 
@@ -284,6 +293,10 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
         ll_tuanduiquan = (LinearLayout) header_view
                 .findViewById(R.id.ll_tuanduiquan);
+
+        mTribeList = new ArrayList<YWTribe>();
+        mRoomsList = new ArrayList<YWTribe>();
+        mTribeAndRoomList = new TribeAndRoomList(mTribeList,mRoomsList);
 
     }
 
@@ -330,6 +343,12 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             case R.id.llTeamTask:
                 Intent teamTaskIntent = new Intent(this, TasksListActivity.class);
                 startActivity(teamTaskIntent);
+                break;
+            case R.id.llChengYuan: //打开团队聊天窗口
+//                YWTribe tribe = ;
+//                Intent talkInternt = AppStore.mIMKit.getTribeChattingActivityIntent();
+
+
                 break;
         }
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
