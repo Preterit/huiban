@@ -14,10 +14,14 @@ import android.widget.TextView;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMChattingPageUI;
+import com.alibaba.mobileim.channel.util.AccountUtils;
 import com.alibaba.mobileim.conversation.YWConversation;
+import com.alibaba.mobileim.conversation.YWConversationType;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.Utils;
+
+import static com.alibaba.mobileim.conversation.YWConversationType.P2P;
 
 //聊天页面自定义；
 public class MyChatUI extends IMChattingPageUI {
@@ -91,32 +95,48 @@ public class MyChatUI extends IMChattingPageUI {
 			}
 		});
 
-		String conversationId = conversation.getConversationId();// 获取到联系人手机号；
-		Log.e("TAG", conversationId + "--------conversation.getConversationId()");
-		final String phone = conversationId.substring(
-				conversationId.length() - 11, conversationId.length());
-		Log.e("TAG", phone + "--------conversation.getConversationId()");
-		Log.d("tag","一个聊天的------");
-		String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
-				.getShowName();
-		// tv_name.setText(name);
+        Log.e("TAG", "SHOP--------conversation.getConversationId()"+conversation.getConversationType());
+		String conversationId = conversation.getConversationId();// 获取到联系人手机号或者群号；
 
+		if(conversation.getConversationType() ==YWConversationType.P2P){
+			final String phone = conversationId.substring(
+					conversationId.length() - 11, conversationId.length());
+			Log.e("TAG", phone + "P2P--------conversation.getConversationId()"+ P2P);
 
+			String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
+					.getShowName();
 
-		// 如果不是手机号的话则直接显示：
-		if (!Utils.isPhone(name)) {
-			tv_name.setText(name);
-		}
-
-		// 0.5秒后再次显示昵称，0.5秒的时间应该可以从后台获取到昵称了，刚开始显示的可能是手机号：
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
-						.getShowName();
+			// 如果不是手机号的话则直接显示：
+			if (!Utils.isPhone(name)) {
 				tv_name.setText(name);
 			}
-		}, 500);
+
+			// 0.5秒后再次显示昵称，0.5秒的时间应该可以从后台获取到昵称了，刚开始显示的可能是手机号：
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
+							.getShowName();
+					tv_name.setText(name);
+				}
+			}, 300);
+
+		} else if(conversation.getConversationType() == YWConversationType.Tribe){
+			final  String tribeId = conversationId.substring(conversationId.length() - 9,conversationId.length());
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    String  title = AccountUtils.getShortUserID(tribeId);
+                    tv_name.setText(title);
+                    Log.d("tag","一个聊天的------"+title);
+                }
+            }, 300);
+
+
+		}
+
+
+
 
 		return v;
 	}

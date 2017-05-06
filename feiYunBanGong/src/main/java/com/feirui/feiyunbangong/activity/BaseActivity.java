@@ -78,6 +78,8 @@ public class BaseActivity extends FragmentActivity {
 				@Override
 				public void onClick(View v) {
 					finish();
+
+					Log.d("tag","_____---------___________");
 					overridePendingTransition(R.anim.aty_zoomclosein,
 							R.anim.aty_zoomcloseout);
 				}

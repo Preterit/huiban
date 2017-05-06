@@ -1,9 +1,11 @@
 package com.feirui.feiyunbangong.activity.tribe;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
@@ -38,20 +40,21 @@ public class EditTribeInfoActivity extends BaseActivity {
 
     private Button mChuangjian;  //创建群的按钮
 
+    public ImageView leftIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tribe_info);
-        init();
-    }
-
-    private void init() {
-
+        Log.d("tag","_____---------");
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("创建群组");
         setRightVisibility(false);
+        init();
+    }
+
+    private void init() {
 
         mChuangjian = (Button)findViewById(R.id.bt_add_qun);
         mChuangjian.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +193,8 @@ public class EditTribeInfoActivity extends BaseActivity {
 //                    Intent intent = new Intent(EditTribeInfoActivity.this, TribeInfoActivity.class);
 //                    intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
 //                    startActivity(intent);
-                    finish();
+                   EditTribeInfoActivity.this.finish();
+                    Log.d("TAG", "onSuccess:---------- ");
                 }
             }
 
