@@ -14,12 +14,18 @@ import android.widget.TextView;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMChattingPageUI;
-import com.alibaba.mobileim.channel.util.AccountUtils;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
+import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
+import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
+import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.Utils;
+
+import java.util.List;
 
 import static com.alibaba.mobileim.conversation.YWConversationType.P2P;
 
@@ -27,6 +33,7 @@ import static com.alibaba.mobileim.conversation.YWConversationType.P2P;
 public class MyChatUI extends IMChattingPageUI {
 
 	private YWConversation conversation;
+	private IYWTribeService mTribeService;
 
 	public MyChatUI(Pointcut pointcut) {
 		super(pointcut);
@@ -74,7 +81,7 @@ public class MyChatUI extends IMChattingPageUI {
 	 */
 	@SuppressLint("InflateParams")
 	@Override
-	public View getChattingFragmentCustomViewAdvice(Fragment fragment,
+	public View getChattingFragmentCustomViewAdvice(final Fragment fragment,
 			Intent intent) {
 
 		YWIMKit mIMKit = AppStore.mIMKit;
@@ -86,6 +93,9 @@ public class MyChatUI extends IMChattingPageUI {
 		View v = context.getLayoutInflater()
 				.inflate(R.layout.ll_chat_top, null);
 		final TextView tv_name = (TextView) v.findViewById(R.id.tv_name);
+		ImageView btn = (ImageView) v.findViewById(R.id.title_button);
+		btn.setImageResource(R.drawable.aliwx_tribe_info_icon);
+
 		ImageView iv_back = (ImageView) v.findViewById(R.id.iv_back);
 		iv_back.setOnClickListener(new OnClickListener() {
 
@@ -99,6 +109,7 @@ public class MyChatUI extends IMChattingPageUI {
 		String conversationId = conversation.getConversationId();// 获取到联系人手机号或者群号；
 
 		if(conversation.getConversationType() ==YWConversationType.P2P){
+			btn.setVisibility(View.INVISIBLE);
 			final String phone = conversationId.substring(
 					conversationId.length() - 11, conversationId.length());
 			Log.e("TAG", phone + "P2P--------conversation.getConversationId()"+ P2P);
@@ -122,15 +133,69 @@ public class MyChatUI extends IMChattingPageUI {
 			}, 300);
 
 		} else if(conversation.getConversationType() == YWConversationType.Tribe){
-			final  String tribeId = conversationId.substring(conversationId.length() - 9,conversationId.length());
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    String  title = AccountUtils.getShortUserID(tribeId);
-                    tv_name.setText(title);
-                    Log.d("tag","一个聊天的------"+title);
-                }
-            }, 300);
+			mTribeService = mIMKit.getTribeService();  //获取群管理器
+
+
+			final  String tribeId = conversationId.substring(5,conversationId.length());
+
+//			Log.d("tag", "一个聊天的------" +conversationId);
+
+			//从服务器获取所有群列表
+			mTribeService.getAllTribesFromServer(new IWxCallback() {
+				@Override
+				public void onSuccess(Object... objects) {
+
+					if (objects != null || objects.length > 0){
+
+						 	List<YWTribe> list = (List<YWTribe>) objects[0];
+						for (int i = 0; i < list.size(); i++ ) {
+							final YWTribe ywTribe = list.get(i);
+							tv_name.setText(tribeId);
+							if (String.valueOf(ywTribe.getTribeId()).equals(tribeId)) {
+								Log.d("tag", "一个聊天的------" + ywTribe.getTribeId());
+
+								new Handler().postDelayed(new Runnable() {
+									@Override
+									public void run() {
+
+										String title = ywTribe.getTribeName();
+										tv_name.setText(title);
+
+									}
+								}, 300);
+
+							}
+						}
+					}
+
+				}
+
+				@Override
+				public void onError(int i, String s) {
+
+				}
+
+				@Override
+				public void onProgress(int i) {
+
+				}
+			});
+
+
+			//群聊标题栏显示的群聊信息图标
+
+			btn.setVisibility(View.VISIBLE);
+			btn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(fragment.getActivity(),TribeInfoActivity.class);
+					intent.putExtra(TribeConstants.TRIBE_ID, Long.parseLong(tribeId));
+
+					fragment.getActivity().startActivity(intent);
+					Log.d("tag", "一个聊天的------" +  "--------" + Long.parseLong(tribeId));
+
+				}
+			});
 
 
 		}

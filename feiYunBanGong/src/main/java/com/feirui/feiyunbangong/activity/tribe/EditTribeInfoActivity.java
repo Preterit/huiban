@@ -1,5 +1,6 @@
 package com.feirui.feiyunbangong.activity.tribe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -83,7 +84,7 @@ public class EditTribeInfoActivity extends BaseActivity {
 //        mTribeNotice = (EditText) findViewById(R.id.tribe_description);
 
         //群接口
-//        YWTribe tribe = mTribeService.getTribe(mTribeId);
+        YWTribe tribe = mTribeService.getTribe(mTribeId);
 //        if (tribe != null) {
 //            oldTribeName = tribe.getTribeName();  //群名称
 //
@@ -186,14 +187,14 @@ public class EditTribeInfoActivity extends BaseActivity {
                     if (type.equals(YWTribeType.CHATTING_TRIBE)) {
                         IMNotificationUtils.getInstance().showToast(EditTribeInfoActivity.this, "创建群组成功！");
                     }
-//                    else {
-//                        IMNotificationUtils.getInstance().showToast(EditTribeInfoActivity.this, "创建讨论组成功！");
-//                    }
-                      //跳转到群名片
-//                    Intent intent = new Intent(EditTribeInfoActivity.this, TribeInfoActivity.class);
-//                    intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
-//                    startActivity(intent);
-                   EditTribeInfoActivity.this.finish();
+                    else {
+                        IMNotificationUtils.getInstance().showToast(EditTribeInfoActivity.this, "创建讨论组成功！");
+                    }
+//                      跳转到群名片
+                    Intent intent = new Intent(EditTribeInfoActivity.this, TribeInfoActivity.class);
+                    intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
+                    startActivity(intent);
+                    finish();
                     Log.d("TAG", "onSuccess:---------- ");
                 }
             }

@@ -78,7 +78,7 @@
                 android:layout_marginTop="@dimen/aliwx_column_up_unit_margin"
                 android:background="@color/aliwx_white"
                 android:orientation="vertical"
-                android:visibility="gone">
+                >
 
                 <TextView
                     style="@style/more_item_style"

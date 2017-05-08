@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_pic_bg">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/aliwx_common_simple_title" />
+
+    <View
+        android:id="@+id/start_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/title"
+
+        android:background="@color/common_line_color" />
+
+    <RelativeLayout
+        android:id="@+id/no_verification_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124"
+        android:layout_below="@id/start_line">
+
+        <TextView
+            style="@style/more_item_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/y40"
+            android:text="允许任何人加入" />
+
+        <ImageView
+            android:id="@+id/no_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/y40"
+            android:src="@drawable/icon_checkmark" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/no_verification_layout_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/no_verification_layout"
+        android:background="@color/common_line_color" />
+
+    <RelativeLayout
+        android:id="@+id/pwd_verification_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124"
+        android:layout_below="@id/no_verification_layout_divider">
+
+        <TextView
+            style="@style/more_item_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/y40"
+            android:text="需要密码" />
+
+        <ImageView
+            android:id="@+id/pwd_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/y40"
+            android:src="@drawable/icon_checkmark" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/pwd_verification_layout_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/pwd_verification_layout"
+        android:background="@color/common_line_color" />
+
+    <RelativeLayout
+        android:id="@+id/id_verification_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124"
+        android:layout_below="@id/pwd_verification_layout_divider">
+
+        <TextView
+            style="@style/more_item_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/y40"
+            android:text="需要身份验证" />
+
+        <ImageView
+            android:id="@+id/id_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/y40"
+            android:src="@drawable/icon_checkmark" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/id_verification_layout_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/id_verification_layout"
+        android:background="@color/common_line_color" />
+
+    <RelativeLayout
+        android:id="@+id/nobody_join_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y124"
+        android:layout_below="@id/id_verification_layout_divider">
+
+        <TextView
+            style="@style/more_item_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/y40"
+            android:text="不允许任何人主动加入群" />
+
+        <ImageView
+            android:id="@+id/nobody_join"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/y40"
+            android:src="@drawable/icon_checkmark" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/end_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/nobody_join_layout"
+        android:background="@color/common_line_color" />
+
+</RelativeLayout>

@@ -67,4 +67,15 @@
     <string name="title_activity_selector_team">SelectorTeamActivity</string>
     <string name="title_activity_wo_de_task">WoDeTaskActivity</string>
 
+    <string name="tribe_check_mode">身份验证</string>
+    <string name="no_verification">允许任何人加入</string>
+    <string name="pwd_verification">需要密码</string>
+    <string name="id_verification">需要身份验证</string>
+    <string name="nobody_join">不允许任何人主动加入群</string>
+    <string name="set_tribe_pwd">设置群密码</string>
+    <string name="set_tribe_pwd_desc">密码必须由6-20个英文字母或数字(0-9)组成，区分大小写</string>
+    <string name="input_tribe_pwd">请输入密码</string>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
 </resources>

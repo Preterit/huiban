@@ -65,6 +65,7 @@
     <color name="header">#58567D</color>
     <color name="grgray">#686868</color>
     <color name="white">#ffffff</color>
+    <color name="more_line_color">#cccccc</color>
     <!-- 白色 -->
     <color name="ivory">#fffff0</color>
     <!-- 象牙色 -->
@@ -364,5 +365,12 @@
     <color name="price_color">#4d8eb4</color>
 
     <color name="main_color_darker">@color/price_color</color>
+
+    <!-- 群组 -->
+    <color name="tribe_host">#FFBD04 </color>
+    <color name="tribe_manager">#45D282 </color>
+    <color name="third_text_color">#999999</color>
+    <color name="common_line_color">#cccccc</color>
+    <color name="common_text_color2">#ff666666</color>
 
 </resources>

@@ -511,6 +511,12 @@
 
         <!--所有群聊的-->
         <activity android:name=".activity.tribe.EditTribeInfoActivity"/>
+        <activity android:name=".activity.tribe.TribeInfoActivity"/>
+        <activity android:name=".activity.tribe.TribeMembersActivity"/>
+        <activity android:name=".activity.tribe.InviteTribeMemberActivity"/>
+        <activity android:name=".activity.tribe.SetTribeCheckModeActivity"/>
+        <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity"/>
+        <activity android:name=".activity.tribe.EditMyTribeProfileActivity"/>
 
 
     </application>

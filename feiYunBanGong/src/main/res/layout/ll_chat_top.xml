@@ -1,40 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="@dimen/aliwx_title_bar_height"
+    android:gravity="center_vertical"
+    android:background="@color/main_color">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar"
-        android:background="@color/main_color"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/size50"
-            android:layout_height="@dimen/size50"
-            android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/arrows_left" />
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrows_left"
+        />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/ffffff_49"
+    <TextView
+        android:id="@+id/tv_name"
+
+        style="@style/ffffff_49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="" />
+
+    <ImageView
+        android:id="@+id/title_button"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/aliwx_title_bar_height"
+        android:layout_alignParentRight="true"
+        android:paddingRight="@dimen/aliwx_column_up_unit_margin"
+        android:scaleType="center"
+        android:src="@drawable/tribe_info_icon" />
+
+
+    <RelativeLayout
+        android:id="@+id/aliwx_at_content"
+        android:layout_width="@dimen/aliwx_title_bar_height"
+        android:layout_height="@dimen/aliwx_title_bar_height"
+        android:layout_toLeftOf="@id/title_button"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+        <!--这里包一层的原因是在Android 5.1上alignTop无效,所以改为alignParentTop-->
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:layout_centerInParent="true">
+            <ImageView
+                android:id="@+id/aliwx_at_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/aliwx_tribe_at_icon"
+                android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/aliwx_at_msg_unread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_alignRight="@+id/aliwx_at_image"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/aliwx_topbar_at_icon_new" />
+        </RelativeLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/x100"
-            android:layout_weight="1" />
-    </LinearLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
