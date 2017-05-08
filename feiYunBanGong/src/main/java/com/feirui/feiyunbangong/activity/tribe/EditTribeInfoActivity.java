@@ -48,10 +48,6 @@ public class EditTribeInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tribe_info);
         Log.d("tag","_____---------");
-        initTitle();
-        setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("创建群组");
-        setRightVisibility(false);
         init();
     }
 
@@ -94,11 +90,16 @@ public class EditTribeInfoActivity extends BaseActivity {
 //
 //            mTribeNotice.setText(tribe.getTribeNotice());
 //        }
+        initUI();
 
     }
 
 
-    //    private void initTitle() {
+        private void initUI() {
+            initTitle();
+            setLeftDrawable(R.drawable.arrows_left);
+            setCenterString("创建群组");
+            setRightVisibility(false);
 //        RelativeLayout titleBar = (RelativeLayout) findViewById(R.id.title_bar);
 //        titleBar.setBackgroundColor(Color.parseColor("#00b4ff"));
 //        titleBar.setVisibility(View.VISIBLE);
@@ -139,7 +140,7 @@ public class EditTribeInfoActivity extends BaseActivity {
 //                }
 //            }
 //        });
-//    }
+    }
 
 
     /**

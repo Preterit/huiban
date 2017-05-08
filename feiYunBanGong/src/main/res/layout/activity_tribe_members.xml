@@ -1,8 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/aliwx_common_bg_color">
-
+    android:background="@color/aliwx_common_bg_color"
+    android:orientation="vertical">
+    <include
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar" />
 
     <TextView
         android:id="@+id/add_tribe_members"
@@ -48,4 +52,4 @@
         android:fastScrollEnabled="true"
         android:listSelector="#00000000" />
 
-</RelativeLayout>
+</LinearLayout>

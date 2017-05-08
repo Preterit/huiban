@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -65,7 +64,6 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
     private EditText mAppKey;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    private ImageView  rightIv,leftIv;
     /**
      * 用于筛选需要处理的ProfileUpdate通知
      */
@@ -81,6 +79,20 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
 
     private void init() {
         initUI();
+
+
+        rightIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YWTribe tribe = mTribeService.getTribe(mTribeId);
+                //群的普通成员没有加入权限，所以因此加入view
+                if (tribe.getTribeType() == YWTribeType.CHATTING_TRIBE && getLoginUserRole() == YWTribeMember.ROLE_NORMAL) {
+                    IMNotificationUtils.getInstance().showToast(TribeMembersActivity.this, "您不是群管理员，没有管理权限~");
+                } else {
+                    mAddTribeMembers.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.tribe_members_list);
         mPullToRefreshListView.setMode(YWPullToRefreshBase.Mode.PULL_DOWN_TO_REFRESH);
@@ -136,25 +148,10 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
     private void initUI() {
 
         initTitle();
-        leftIv = (ImageView) findViewById(R.id.leftIv);
-        rightIv = (ImageView) findViewById(R.id.rightIv);
-        leftIv.setImageResource(R.drawable.arrows_left);
-        rightIv.setImageResource(R.drawable.qun_guanli);
+        setLeftDrawable(R.drawable.arrows_left);
+        setRightDrawable(R.drawable.qun_guanli);
         setCenterString("群资料");
 
-
-        rightIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YWTribe tribe = mTribeService.getTribe(mTribeId);
-                //群的普通成员没有加入权限，所以因此加入view
-                if (tribe.getTribeType() == YWTribeType.CHATTING_TRIBE && getLoginUserRole() == YWTribeMember.ROLE_NORMAL) {
-                    IMNotificationUtils.getInstance().showToast(TribeMembersActivity.this, "您不是群管理员，没有管理权限~");
-                } else {
-                    mAddTribeMembers.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
     private void initContactProfileUpdateListener() {
         mContactProfileUpdateListener = new IContactProfileUpdateListener() {
