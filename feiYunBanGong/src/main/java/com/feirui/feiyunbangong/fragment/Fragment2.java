@@ -383,13 +383,19 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         return true;// 消费该监听事件，不再传递；
 
       case R.id.ll_quntalk: //创建群
+        if (event.getAction() == MotionEvent.ACTION_DOWN){
           startActivity(new Intent(getActivity(), EditTribeInfoActivity.class));
-        getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+          getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+        }
+
         return  true;
 
       case R.id.ll_taolun:
-        startActivity(new Intent(getActivity(),EditGroupInfoActivity.class));
-        getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+        if (event.getAction() == MotionEvent.ACTION_DOWN){
+          startActivity(new Intent(getActivity(),EditGroupInfoActivity.class));
+          getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+        }
+
         return  true;
 
       case R.id.ll_saoyisao:

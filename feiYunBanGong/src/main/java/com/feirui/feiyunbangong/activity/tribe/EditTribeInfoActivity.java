@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
@@ -41,19 +40,17 @@ public class EditTribeInfoActivity extends BaseActivity {
 
     private Button mChuangjian;  //创建群的按钮
 
-    public ImageView leftIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tribe_info);
         Log.d("tag","_____---------");
+        initUI();
         init();
     }
 
     private void init() {
-
-        mChuangjian = (Button)findViewById(R.id.bt_add_qun);
         mChuangjian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +87,7 @@ public class EditTribeInfoActivity extends BaseActivity {
 //
 //            mTribeNotice.setText(tribe.getTribeNotice());
 //        }
-        initUI();
+
 
     }
 
@@ -100,6 +97,7 @@ public class EditTribeInfoActivity extends BaseActivity {
             setLeftDrawable(R.drawable.arrows_left);
             setCenterString("创建群组");
             setRightVisibility(false);
+            mChuangjian = (Button)findViewById(R.id.bt_add_qun);
 //        RelativeLayout titleBar = (RelativeLayout) findViewById(R.id.title_bar);
 //        titleBar.setBackgroundColor(Color.parseColor("#00b4ff"));
 //        titleBar.setVisibility(View.VISIBLE);
@@ -177,7 +175,7 @@ public class EditTribeInfoActivity extends BaseActivity {
         param.setTribeType(type);
         param.setTribeName(mTribeName.getText().toString());
 
-//        param.setNotice(mTribeNotice.getText().toString());
+        param.setNotice(mTribeNotice.getText().toString());
 
 
         mTribeService.createTribe(new IWxCallback() {

@@ -142,78 +142,7 @@ public class EditGroupInfoActivity extends BaseActivity implements
         }
     }
 
-    private void submit() {
 
-        if (TextUtils.isEmpty(et_name_tuandui.getText().toString())) {
-            Toast.makeText(this, "请输入群名称！", 0).show();
-            return;
-        }
-        String url = UrlTools.url + UrlTools.CHUANGIJAN_TUANDUI;
-
-        StringBuffer sb01 = new StringBuffer();
-
-        for (int i = 0; i < tvs.size(); i++) {
-            sb01.append(tvs.get(i).getText());
-            sb01.append(",");
-        }
-
-        Log.e("TAG", sb01.toString());
-
-        RequestParams params = new RequestParams();
-        List<ChildItem> list = adapter.getList();
-        if (list.size() < 2) {
-            Toast.makeText(this, "请至少选择两名成员！", 0).show();
-            return;
-        }
-        StringBuffer sb = new StringBuffer();
-        // 循环拼接添加成员id,每个id后加逗号
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i).getId());
-            sb.append(",");
-        }
-        // 循环拼接标签名,每个标签后加逗号
-        StringBuffer sb1 = new StringBuffer();
-        for (int i = 0; i < list1.size(); i++) {
-            sb1.append(list1.get(i).getMsg());
-            sb1.append(",");
-        }
-        // 拼接每个成员对应的标签名：
-        StringBuffer sb2 = new StringBuffer();
-        for (int i = 0; i < adapter.getTags().size(); i++) {
-            sb2.append(adapter.getTags().get(i));
-            sb2.append(",");
-        }
-
-        params.put("team_name", et_name_tuandui.getText().toString());
-        params.put("staff_id", sb.toString());
-        params.put("tag_name", sb1.toString());
-        params.put("tag_id", sb2.toString());
-
-        Log.e("TAG", params.toString());
-
-        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
-                new HttpCallBack() {
-                    @Override
-                    public void success(JsonBean bean) {
-                        T.showShort(EditGroupInfoActivity.this,
-                                bean.getMsg());
-                        EditGroupInfoActivity.this.finish();
-                        overridePendingTransition(R.anim.aty_zoomin,
-                                R.anim.aty_zoomout);
-                    }
-
-                    @Override
-                    public void failure(String msg) {
-                        Toast.makeText(EditGroupInfoActivity.this, msg, 0)
-                                .show();
-                    }
-
-                    @Override
-                    public void finish() {
-
-                    }
-                });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -245,7 +174,10 @@ public class EditGroupInfoActivity extends BaseActivity implements
         mIMKit = AppStore.mIMKit;
         mTribeService = mIMKit.getTribeService();  //获取群管理器
 
-
+        if (TextUtils.isEmpty(et_name_tuandui.getText().toString())) {
+            Toast.makeText(this, "请输入群名称！", 0).show();
+            return;
+        }
 //        param.setNotice(mTribeNotice.getText().toString());
 
 
@@ -279,6 +211,10 @@ public class EditGroupInfoActivity extends BaseActivity implements
                 // 返回值为刚刚成功创建的群
                 YWTribe tribe = (YWTribe) result[0];
                 tribe.getTribeId();// 群ID，用于唯一标识一个群
+             //        跳转到群名片
+                Intent intent = new Intent(EditGroupInfoActivity.this, TribeInfoActivity.class);
+                intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
+                startActivity(intent);
                 finish();
             }
         }, tribeCreationParam);
