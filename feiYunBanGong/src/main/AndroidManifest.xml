@@ -517,7 +517,7 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity"/>
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity"/>
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity"/>
-
+        <activity android:name=".activity.tribe.EditGroupInfoActivity"/>
 
     </application>
 

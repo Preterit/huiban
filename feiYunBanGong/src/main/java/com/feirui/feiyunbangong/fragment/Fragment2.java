@@ -37,6 +37,7 @@ import com.feirui.feiyunbangong.activity.FenZuGuanLiActivity;
 import com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.NewFriendActivity;
 import com.feirui.feiyunbangong.activity.WorkCircleActivity;
+import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.EditTribeInfoActivity;
 import com.feirui.feiyunbangong.adapter.MyBaseExpandableListAdapter;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
@@ -387,7 +388,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         return  true;
 
       case R.id.ll_taolun:
-
+        startActivity(new Intent(getActivity(),EditGroupInfoActivity.class));
+        getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
         return  true;
 
       case R.id.ll_saoyisao:

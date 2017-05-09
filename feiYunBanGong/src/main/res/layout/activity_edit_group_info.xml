@@ -1,0 +1,142 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_huise"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity" >
+
+    <!-- bar -->
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginTop="@dimen/y20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/a000000_44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="群聊名称" />
+
+        <EditText
+            android:id="@+id/et_name_tuandui"
+            style="@style/a000000_42"
+            android:layout_width="@dimen/x450"
+            android:layout_height="@dimen/y100"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@drawable/shape_bt_bg"
+            android:hint="请输入名称"
+            android:padding="@dimen/size20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="※必填"
+            android:textColor="@color/red" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/a000000_44"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x50"
+        android:text="管理标签"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y16"
+        android:paddingTop="@dimen/y16"
+        android:visibility="gone" >
+
+        <com.feirui.feiyunbangong.view.MyGridView
+            android:id="@+id/gridView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:horizontalSpacing="2dp"
+            android:numColumns="3"
+            android:verticalSpacing="2dp" >
+        </com.feirui.feiyunbangong.view.MyGridView>
+
+        <ImageView
+            android:id="@+id/iv_jia"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y80"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/tuandui_jia" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/a000000_44"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y50"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x50"
+        android:text="添加群成员" />
+
+    <LinearLayout
+        android:id="@+id/ll_add_chengyuan"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x50" >
+
+        <ImageView
+            android:layout_width="@dimen/size60"
+            android:layout_height="@dimen/size60"
+            android:src="@drawable/tianjia" />
+
+        <TextView
+            style="@style/a42baff_46"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x20"
+            android:gravity="center"
+            android:text="添加群成员" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/fenge" />
+
+    <ListView
+        android:id="@+id/lv_zuyuan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y4" >
+    </ListView>
+
+    <Button
+        android:id="@+id/bt_submit"
+        style="@style/ffffff_49"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="立即创建" />
+
+</LinearLayout>

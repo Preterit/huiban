@@ -57,7 +57,7 @@ public class EditTribeInfoActivity extends BaseActivity {
         mChuangjian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    createTribe(YWTribeType.CHATTING_TRIBE);
+                createTribe(YWTribeType.CHATTING_TRIBE);
             }
         });
 
