@@ -3,7 +3,6 @@ package com.feirui.feiyunbangong.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,28 +87,8 @@ public class Fragment1 extends BaseFragment {
             ll_examine = (ConstraintLayout) view.findViewById(R.id.ll_examine);
             bar_num = (TextView) view.findViewById(R.id.bar_num);
 
-            //bar_num.setVisibility(view.GONE);
-            bar_num.setText("15");
+            bar_num.setVisibility(view.GONE);
             loadData();
-            Log.d("查看count数值", "count: " + count);
-
-
-             final Handler handler = new Handler();
-             Runnable runnable = new Runnable() {
-                public void run () {
-                    loadData();
-                    Log.d("在handler中", "run: ");
-                    handler.postDelayed(this,1000);
-                }
-            };
-
-            //开始计时
-            handler.removeCallbacks(runnable);
-            handler.postDelayed(runnable,1000);
-            //停止计时
-            handler.removeCallbacks(runnable);
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
