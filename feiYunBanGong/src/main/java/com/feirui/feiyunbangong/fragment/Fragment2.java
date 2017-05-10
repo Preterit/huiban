@@ -39,7 +39,6 @@ import com.feirui.feiyunbangong.activity.NewFriendActivity;
 import com.feirui.feiyunbangong.activity.WorkCircleActivity;
 import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.EditTribeInfoActivity;
-import com.feirui.feiyunbangong.activity.tribe.TribeActivity;
 import com.feirui.feiyunbangong.adapter.MyBaseExpandableListAdapter;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog.CallBack;
@@ -252,6 +251,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
       }
     });
 
+    rl_chuangjian.setOnClickListener(this);
     rl_qunliebiao.setOnClickListener(this);
     rl_newfriend.setOnClickListener(this);
     ll_saosao.setOnTouchListener(this);
@@ -512,9 +512,9 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
           R.anim.aty_zoomout);
     } else if (v.getId() == rl_qunliebiao.getId()) { //获取群列表
       inclue.setVisibility(View.GONE);
-      startActivity(new Intent(getActivity(), TribeActivity.class));
-      getActivity().overridePendingTransition(R.anim.aty_zoomin,
-              R.anim.aty_zoomout);
+//      startActivity(new Intent(getActivity(), TribeActivity.class));
+//      getActivity().overridePendingTransition(R.anim.aty_zoomin,
+//              R.anim.aty_zoomout);
     }else if (v.getId() == rl_newfriend.getId()) {
       inclue.setVisibility(View.GONE);
       startActivity(new Intent(getActivity(), NewFriendActivity.class));

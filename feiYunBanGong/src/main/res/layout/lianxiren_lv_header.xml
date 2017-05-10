@@ -108,7 +108,7 @@
         android:id="@+id/rl_qunliebiao"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y140"
-        android:layout_marginTop="@dimen/y30"
+        android:layout_marginTop="@dimen/y4"
         android:background="@color/ffffff">
 
         <ImageView
