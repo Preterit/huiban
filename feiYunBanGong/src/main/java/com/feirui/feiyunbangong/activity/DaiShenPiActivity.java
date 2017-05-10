@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -43,7 +44,8 @@ public class DaiShenPiActivity extends BaseActivity implements
     private String[] leixing = new String[]{"选择审批类型", "请假", "报销", "外出", "付款",
             "采购"};
 
-    private JsonBean json;
+    private  JsonBean json;
+    private static int count;
     // 当前数据页码
 
     private PullListView mPullListView;
@@ -160,6 +162,7 @@ public class DaiShenPiActivity extends BaseActivity implements
                 super.onSuccess(statusCode, headers, responseBody);
 
                 JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
+                Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
                 if (jsonBean.getCode().equals("200")) {
 
                     if (onRefreshOrLoadMore == ON_REFRESH) {
@@ -177,5 +180,7 @@ public class DaiShenPiActivity extends BaseActivity implements
             }
         });
     }
+
+
 
 }
