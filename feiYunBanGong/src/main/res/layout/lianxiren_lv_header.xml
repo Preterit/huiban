@@ -102,4 +102,43 @@
             android:visibility="invisible"/>
     </RelativeLayout>
 
+    <!-- 群组 -->
+
+    <RelativeLayout
+        android:id="@+id/rl_qunliebiao"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@color/ffffff">
+
+        <ImageView
+            android:id="@+id/img_left_qun"
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/y90"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/qun_lie_biao"/>
+
+        <TextView
+            android:id="@+id/tv_group_text03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@+id/img_left_qun"
+            android:text="群组"
+            android:textSize="@dimen/size48"/>
+
+        <ImageView
+            android:id="@+id/img_indicator03"
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/y40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x100"
+            android:scaleType="fitXY"
+            android:src="@drawable/jiantou_you"/>
+    </RelativeLayout>
+
 </LinearLayout>

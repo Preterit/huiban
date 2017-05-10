@@ -18,6 +18,7 @@
             android:layout_height="@dimen/y100"
             android:orientation="horizontal" 
             android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/y20"
             >
 
             <ImageView
@@ -76,6 +77,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/y40"
             android:gravity="center_vertical"
+            android:visibility="gone"
             >
 
             <ImageView
@@ -115,7 +117,7 @@
                 android:layout_width="@dimen/x70"
                 android:layout_height="@dimen/y70"
                 android:layout_marginLeft="@dimen/x50"
-                android:src="@drawable/taolun" />
+                android:src="@drawable/qunliao" />
             <!-- <ImageView
                 android:id="@+id/iv_hongdian"
                 android:layout_width="@dimen/size25"

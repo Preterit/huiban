@@ -114,6 +114,6 @@
         android:layout_marginTop="@dimen/y36"
         android:background="@drawable/blue_bt_selector"
         android:gravity="center"
-        android:text="创建" />
+        android:text="提交" />
 
 </LinearLayout>

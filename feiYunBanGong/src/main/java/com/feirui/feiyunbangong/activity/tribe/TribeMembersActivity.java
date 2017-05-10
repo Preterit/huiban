@@ -81,22 +81,6 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
         initUI();
 
 
-//        rightIv.setMaxHeight(R.dimen.y40);
-//        rightIv.setMaxHeight(R.dimen.y40);
-
-//        rightIv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                YWTribe tribe = mTribeService.getTribe(mTribeId);
-//                //群的普通成员没有加入权限，所以因此加入view
-////                if (tribe.getTribeType() == YWTribeType.CHATTING_TRIBE && getLoginUserRole() == YWTribeMember.ROLE_NORMAL) {
-////                    IMNotificationUtils.getInstance().showToast(TribeMembersActivity.this, "您不是群管理员，没有管理权限~");
-////                } else {
-//                    mAddTribeMembers.setVisibility(View.VISIBLE);
-////                }
-//            }
-//        });
-
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.tribe_members_list);
         mPullToRefreshListView.setMode(YWPullToRefreshBase.Mode.PULL_DOWN_TO_REFRESH);
         mPullToRefreshListView.setShowIndicator(false);

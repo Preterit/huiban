@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -102,19 +103,19 @@ public class SetTribeCheckModeActivity  extends Activity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.no_verification_layout:
+            case R.id.no_verification_layout: //允许任何人加入
                 modifyTribeCheckMode(YWTribeCheckMode.NO_VERIFICATION.type, null);
                 break;
-            case R.id.pwd_verification_layout:
+            case R.id.pwd_verification_layout: //需要密码
                 if (mTribeCheckMode == YWTribeCheckMode.PWD_VERIFICATION.type){
                     return;
                 }
                 showPwdDialog();
                 break;
-            case R.id.id_verification_layout:
+            case R.id.id_verification_layout: //需要身份验证
                 modifyTribeCheckMode(YWTribeCheckMode.ID_VERIFICATION.type, null);
                 break;
-            case R.id.nobody_join_layout:
+            case R.id.nobody_join_layout:  //不许任何人加入
                 modifyTribeCheckMode(YWTribeCheckMode.NOBODY_JOIN.type, null);
                 break;
             default:
@@ -153,6 +154,7 @@ public class SetTribeCheckModeActivity  extends Activity implements View.OnClick
 
     private void updateCheckModeView(final int checkMode){
         mTribeCheckMode = checkMode;
+        Log.d("tag","验证码——————————"+checkMode);
         if (checkMode == YWTribeCheckMode.NO_VERIFICATION.type) {
             mNoVerify.setVisibility(View.VISIBLE);
             mPwdVerify.setVisibility(View.GONE);

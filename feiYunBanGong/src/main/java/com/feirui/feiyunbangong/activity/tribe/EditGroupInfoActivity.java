@@ -28,16 +28,10 @@ import com.feirui.feiyunbangong.activity.AddChengYuanActivity;
 import com.feirui.feiyunbangong.activity.BaseActivity;
 import com.feirui.feiyunbangong.adapter.ChuangJianTuanDuiAdapter;
 import com.feirui.feiyunbangong.adapter.GridAdapter;
-import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.dialog.TianJiaBIaoQianDialog;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
-import com.feirui.feiyunbangong.utils.T;
-import com.feirui.feiyunbangong.utils.UrlTools;
-import com.feirui.feiyunbangong.utils.Utils;
-import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
-import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,9 +153,9 @@ public class EditGroupInfoActivity extends BaseActivity implements
                 adapter.addList(childs);
             }
         }
-        for (int i = 0;i < childs.size();i++){
-            Log.d("tag","获取到的群成员--------"+childs.get(i));
-        }
+//        for (int i = 0;i < childs.size();i++){
+//            Log.d("tag","获取到的群成员--------"+childs.get(i));
+//        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -180,6 +174,11 @@ public class EditGroupInfoActivity extends BaseActivity implements
         }
 //        param.setNotice(mTribeNotice.getText().toString());
 
+        List<ChildItem> list = adapter.getList();
+        if (list.size() < 2) {
+            Toast.makeText(this, "至少添加一名成员哦！", 0).show();
+            return;
+        }
 
         if (mTribeService == null) {
             return;

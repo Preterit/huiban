@@ -22,7 +22,9 @@ import com.feirui.feiyunbangong.state.AppStore;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 用于创建权限群、编辑群名称以及群公告
+ */
 public class EditTribeInfoActivity extends BaseActivity {
 
     private YWIMKit mIMKit;
@@ -45,48 +47,41 @@ public class EditTribeInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tribe_info);
-        Log.d("tag","_____---------");
         initUI();
         init();
     }
 
     private void init() {
-        mChuangjian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createTribe(YWTribeType.CHATTING_TRIBE);
-            }
-        });
 
         mIMKit = AppStore.mIMKit;
         mTribeService = mIMKit.getTribeService();  //获取群管理器
 
-//        mTribeOp = getIntent().getStringExtra(TribeConstants.TRIBE_OP);
-//        Log.d("tag","群类型-------"+mTribeOp);
-//        if (mTribeOp.equals(TribeConstants.TRIBE_CREATE)){  //创建群
-//            mTribeType = getIntent().getStringExtra(TribeConstants.TRIBE_TYPE);  //群类型
-//        }
-//        else if(mTribeOp.equals(TribeConstants.TRIBE_EDIT)){ //编辑群信息
-//            mTribeId = getIntent().getLongExtra(TribeConstants.TRIBE_ID, 0);   //群ID
-//        }
+        mTribeOp = getIntent().getStringExtra(TribeConstants.TRIBE_OP);
+        Log.d("tag","群类型-------"+mTribeOp);
+        if (mTribeOp.equals(TribeConstants.TRIBE_CREATE)){  //创建群
+            mTribeType = getIntent().getStringExtra(TribeConstants.TRIBE_TYPE);  //群类型
+        }
+        else if(mTribeOp.equals(TribeConstants.TRIBE_EDIT)){ //编辑群信息
+            mTribeId = getIntent().getLongExtra(TribeConstants.TRIBE_ID, 0);   //群ID
+        }
 
         WXNetworkImageView headView = (WXNetworkImageView) findViewById(R.id.head);
 
         mTribeName = (EditText) findViewById(R.id.tribe_name);
 
-//        mTribeNotice = (EditText) findViewById(R.id.tribe_description);
+        mTribeNotice = (EditText) findViewById(R.id.tribe_description);
 
         //群接口
         YWTribe tribe = mTribeService.getTribe(mTribeId);
-//        if (tribe != null) {
-//            oldTribeName = tribe.getTribeName();  //群名称
-//
-//            oldTribeNotice = tribe.getTribeNotice(); //群公告
-//
-//            mTribeName.setText(tribe.getTribeName());
-//
-//            mTribeNotice.setText(tribe.getTribeNotice());
-//        }
+        if (tribe != null) {
+            oldTribeName = tribe.getTribeName();  //原来的群名称
+
+            oldTribeNotice = tribe.getTribeNotice(); //原来的群公告
+
+            mTribeName.setText(tribe.getTribeName());
+
+            mTribeNotice.setText(tribe.getTribeNotice());
+        }
 
 
     }
@@ -95,49 +90,22 @@ public class EditTribeInfoActivity extends BaseActivity {
         private void initUI() {
             initTitle();
             setLeftDrawable(R.drawable.arrows_left);
-            setCenterString("创建群组");
+            setCenterString("群组");
             setRightVisibility(false);
             mChuangjian = (Button)findViewById(R.id.bt_add_qun);
-//        RelativeLayout titleBar = (RelativeLayout) findViewById(R.id.title_bar);
-//        titleBar.setBackgroundColor(Color.parseColor("#00b4ff"));
-//        titleBar.setVisibility(View.VISIBLE);
-//
-//        TextView titleView = (TextView) findViewById(R.id.title_self_title);
-//        TextView leftButton = (TextView) findViewById(R.id.left_button);
-//        leftButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.demo_common_back_btn_white, 0, 0, 0);
-//        leftButton.setTextColor(Color.WHITE);
-//        leftButton.setText("返回");
-//        leftButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-//
-//        titleView.setTextColor(Color.WHITE);
-//        if (TextUtils.isEmpty(mTribeType)){
-//            titleView.setText("编辑群信息");
-//        } else if (mTribeType.equals(YWTribeType.CHATTING_GROUP.toString())) {
-//            titleView.setText("创建讨论组");
-//        } else if (mTribeType.equals(YWTribeType.CHATTING_TRIBE.toString())) {
-//            titleView.setText("创建群组");
-//        }
-//
-//        TextView rightButton = (TextView) findViewById(R.id.right_button);
-//        rightButton.setText("提交");
-//        rightButton.setTextColor(Color.WHITE);
-//        rightButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (mTribeOp.equals(TribeConstants.TRIBE_EDIT)){
-//                    updateTribeInfo();
-//                } else if (mTribeType.equals(YWTribeType.CHATTING_GROUP.toString())) {
-//                    createTribe(YWTribeType.CHATTING_GROUP);
-//                } else if (mTribeType.equals(YWTribeType.CHATTING_TRIBE.toString())) {
-//                    createTribe(YWTribeType.CHATTING_TRIBE);
-//                }
-//            }
-//        });
+
+            mChuangjian.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mTribeOp.equals(TribeConstants.TRIBE_EDIT)) {
+                        updateTribeInfo();
+                    } else if (mTribeType.equals(YWTribeType.CHATTING_GROUP.toString())) {
+                        createTribe(YWTribeType.CHATTING_GROUP);
+                    } else if (mTribeType.equals(YWTribeType.CHATTING_TRIBE.toString())) {
+                        createTribe(YWTribeType.CHATTING_TRIBE);
+                    }
+                }
+            });
     }
 
 

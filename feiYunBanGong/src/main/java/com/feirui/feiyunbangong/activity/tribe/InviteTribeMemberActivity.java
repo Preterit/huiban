@@ -13,10 +13,10 @@ import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.channel.util.YWLog;
 import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribeType;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.ui.contact.ContactsFragment;
-import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.BaseActivity;
 import com.feirui.feiyunbangong.adapter.AddChengYuanExpandableListAdapter;
@@ -148,6 +148,9 @@ public class InviteTribeMemberActivity extends BaseActivity implements
 
     // 提交：
     private void submit() {
+        /**
+         * 创建群权限群后不能添加成员
+         */
         List<Integer> gp = adapter.getGp();
         List<Integer> cp = adapter.getCp();
 
@@ -163,7 +166,8 @@ public class InviteTribeMemberActivity extends BaseActivity implements
             return;
         }
 
-        final YWTribeType tribeType = mTribeService.getTribe(mTribeId).getTribeType();
+         YWTribeType tribeTypew = mTribeService.getTribe(mTribeId).getTribeType();
+        final YWTribeType tribeType = YWTribeType.CHATTING_GROUP;
         Log.d("tag","添加的群成员-------"+tribeType);
         List<IYWContact> list = new ArrayList<>();
         for (int i = 0;i < childs.size();i++){
@@ -172,31 +176,41 @@ public class InviteTribeMemberActivity extends BaseActivity implements
             Log.d("tag","添加的群成员-------"+list.get(i)+childs.get(i).getPhone());
         }
 
-        mTribeService.inviteMembers(mTribeId, list, new IWxCallback() {
+        mTribeService.inviteMembers(mTribeId, list,new MyCallback() {
             @Override
-            public void onSuccess(Object... objects) {
-                Integer retCode = (Integer)objects[0];
-                Log.d("tag","添加的群成员-------");
-                if (retCode == 0){
-                    if (tribeType == YWTribeType.CHATTING_TRIBE) {
-                        IMNotificationUtils.getInstance().showToast(InviteTribeMemberActivity.this, "添加群成员成功！");
-                    }
-                    finish();
-                }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                IMNotificationUtils.getInstance().showToast(InviteTribeMemberActivity.this, "添加群成员失败，code = " + i + ", info = " + s);
-            }
-
-            @Override
-            public void onProgress(int i) {
-
+            public void onSuccess(Object... result) {
+                // 返回值为刚刚成功创建的群
+                YWTribe tribe = (YWTribe) result[0];
+                tribe.getTribeId();// 群ID，用于唯一标识一个群
+                Log.d("tag","添加的群成员-------"+ tribe.getTribeId());
+                //        跳转到群名片
+                Intent intent = new Intent(InviteTribeMemberActivity.this, TribeInfoActivity.class);
+                intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
+                startActivity(intent);
+                finish();
             }
         });
 
         finish();
+    }
+
+    /**
+     * 请求回调
+     *
+     * @author zhaoxu
+     *
+     */
+    private static abstract class MyCallback implements IWxCallback {
+
+        @Override
+        public void onError(int arg0, String arg1) {
+            YWLog.e("TribeSampleHelper", "code=" + arg0 + " errInfo=" + arg1);
+        }
+
+        @Override
+        public void onProgress(int arg0) {
+
+        }
     }
 
     private void setListView() {
