@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   package="com.feirui.feiyunbangong"
-  android:versionCode="33"
-  android:versionName="1.3.3">
+  android:versionCode="34"
+  android:versionName="1.3.4">
 
     <uses-sdk
       android:minSdkVersion="17"
@@ -517,7 +517,7 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity"/>
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity"/>
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity"/>
-
+        <activity android:name=".activity.tribe.EditGroupInfoActivity"/>
 
     </application>
 

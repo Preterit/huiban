@@ -81,19 +81,6 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
         initUI();
 
 
-        rightIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YWTribe tribe = mTribeService.getTribe(mTribeId);
-                //群的普通成员没有加入权限，所以因此加入view
-                if (tribe.getTribeType() == YWTribeType.CHATTING_TRIBE && getLoginUserRole() == YWTribeMember.ROLE_NORMAL) {
-                    IMNotificationUtils.getInstance().showToast(TribeMembersActivity.this, "您不是群管理员，没有管理权限~");
-                } else {
-                    mAddTribeMembers.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.tribe_members_list);
         mPullToRefreshListView.setMode(YWPullToRefreshBase.Mode.PULL_DOWN_TO_REFRESH);
         mPullToRefreshListView.setShowIndicator(false);
@@ -121,6 +108,10 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
 
         getTribeMembers();
 
+        /**
+         * 添加群成员的
+         */
+
         mAddTribeMembers = (TextView) findViewById(R.id.add_tribe_members);
         mAddTribeMembers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,9 +121,14 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
                 startActivity(intent);
             }
         });
-        mAddTribeMembers.setVisibility(View.GONE);
+//        mAddTribeMembers.setVisibility(View.GONE);
+        mAddTribeMembers.setVisibility(View.VISIBLE);
 
+        /**
+         * 邀请群成员  该功能暂时没用
+         */
         mInviteToJoinTribe = (TextView) findViewById(R.id.invite_tribe_members);
+        mInviteToJoinTribe.setVisibility(View.GONE);
         mInviteToJoinTribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,8 +145,8 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
 
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setRightDrawable(R.drawable.qun_guanli);
         setCenterString("群资料");
+        setRightVisibility(false);
 
     }
     private void initContactProfileUpdateListener() {
@@ -445,6 +441,9 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
 //        startActivity(intent);
 //        finish();
     }
+
+
+
 
     private void ShowInviteToJoinTribeDialog(){
         View view = View.inflate(this, R.layout.dialog_invite_tribe_member, null);

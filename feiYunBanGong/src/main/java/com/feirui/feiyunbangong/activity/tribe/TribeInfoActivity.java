@@ -150,6 +150,7 @@ public class TribeInfoActivity extends BaseActivity{
             }
         });
 
+        //编辑群信息
         mEditTribeInfoLayout = (RelativeLayout) findViewById(R.id.edit_tribe_info_layout);
         mEditTribeInfoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +165,7 @@ public class TribeInfoActivity extends BaseActivity{
         mMyTribeNick = (TextView) findViewById(R.id.my_tribe_nick);
         mMyTribeNick.setText(getLoginUserTribeNick());
         mEditMyTribeProfileLayout = (RelativeLayout) findViewById(R.id.my_tribe_profile_layout);
+
         //修改我的群名片
         mEditMyTribeProfileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +177,7 @@ public class TribeInfoActivity extends BaseActivity{
             }
         });
 
+        //个人设置
         mEditPersonalSettings = (RelativeLayout) findViewById(R.id.personal_tribe_setting_layout);
         mEditPersonalSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +218,7 @@ public class TribeInfoActivity extends BaseActivity{
         });
 
 
-        //设置加入群的权限
+        //设置加入群的权限、身份验证
         mTribeCheckModeLayout = (RelativeLayout) findViewById(R.id.tribe_verify_layout);
         mTribeCheckMode = (TextView) findViewById(R.id.tribe_verify);
         mTribeCheckModeLayout.setOnClickListener(new View.OnClickListener() {

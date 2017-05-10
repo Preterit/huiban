@@ -37,7 +37,9 @@ import com.feirui.feiyunbangong.activity.FenZuGuanLiActivity;
 import com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.NewFriendActivity;
 import com.feirui.feiyunbangong.activity.WorkCircleActivity;
+import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.EditTribeInfoActivity;
+import com.feirui.feiyunbangong.activity.tribe.TribeActivity;
 import com.feirui.feiyunbangong.adapter.MyBaseExpandableListAdapter;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog.CallBack;
@@ -97,9 +99,9 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   private SwipeRefreshLayout swipe_container;
   // private ImageView iv_hongdian;// 红点；
   private TextView tv_num;
-  private RelativeLayout rl_chuangjian, rl_newfriend;// 创建团队；
+  private RelativeLayout rl_chuangjian, rl_newfriend,rl_qunliebiao;// 创建团队,新朋友，群组；
   private FrameLayout fl_main2;
-  private View header_view;// 头部；朋友圈，新的朋友；
+  private View header_view;// 头部；朋友圈，新的朋友，群列表；
   private MyBroadCastReceiver receiver;
   private SelectZTDialog dialog;
   private OnNewFriendNumChanged friendNumListener;
@@ -249,7 +251,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         isShow = !isShow;
       }
     });
-    rl_chuangjian.setOnClickListener(this);
+
+    rl_qunliebiao.setOnClickListener(this);
     rl_newfriend.setOnClickListener(this);
     ll_saosao.setOnTouchListener(this);
     ll_qunliao.setOnTouchListener(this);
@@ -382,11 +385,18 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         return true;// 消费该监听事件，不再传递；
 
       case R.id.ll_quntalk: //创建群
+        if (event.getAction() == MotionEvent.ACTION_DOWN){
           startActivity(new Intent(getActivity(), EditTribeInfoActivity.class));
-        getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+          getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+        }
+
         return  true;
 
       case R.id.ll_taolun:
+        if (event.getAction() == MotionEvent.ACTION_DOWN){
+          startActivity(new Intent(getActivity(),EditGroupInfoActivity.class));
+          getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
+        }
 
         return  true;
 
@@ -500,7 +510,12 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
       startActivity(new Intent(getActivity(), WorkCircleActivity.class));
       getActivity().overridePendingTransition(R.anim.aty_zoomin,
           R.anim.aty_zoomout);
-    } else if (v.getId() == rl_newfriend.getId()) {
+    } else if (v.getId() == rl_qunliebiao.getId()) { //获取群列表
+      inclue.setVisibility(View.GONE);
+      startActivity(new Intent(getActivity(), TribeActivity.class));
+      getActivity().overridePendingTransition(R.anim.aty_zoomin,
+              R.anim.aty_zoomout);
+    }else if (v.getId() == rl_newfriend.getId()) {
       inclue.setVisibility(View.GONE);
       startActivity(new Intent(getActivity(), NewFriendActivity.class));
       getActivity().overridePendingTransition(R.anim.aty_zoomin,
@@ -575,6 +590,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
     ll_quntalk = (LinearLayout) view.findViewById(R.id.ll_quntalk) ;
     ll_taolun = (LinearLayout) view.findViewById(R.id.ll_taolun);
+//    ll_taolun.setVisibility(View.INVISIBLE);
 
     inclue = (LinearLayout) view.findViewById(R.id.inclue_add);
     ll_qunliao = (LinearLayout) view.findViewById(R.id.ll_qunliao);
@@ -589,6 +605,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     tv_num = (TextView) header_view.findViewById(R.id.tv_num);
     rl_chuangjian = (RelativeLayout) header_view
         .findViewById(R.id.rl_chuangjian);
+    rl_qunliebiao = (RelativeLayout)header_view.findViewById(R.id.rl_qunliebiao);
     fl_main2 = (FrameLayout) view.findViewById(R.id.fl_main2);
     rl_newfriend = (RelativeLayout) header_view
         .findViewById(R.id.rl_newfriend);

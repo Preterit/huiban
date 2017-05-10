@@ -153,7 +153,7 @@ public class MyUserProfileSampleHelper {
 													nick, staff_head, userId,
 													appKey);
 
-											Log.e("TAG", contact.toString());
+											Log.e("TAG","--------"+ contact.toString()+"--------");
 
 											// todo
 											// 更新内存中的用户信息，这里必须要更新内存中的数据，以便IMSDK刷新UI时可以直接从内存中拿到数据
