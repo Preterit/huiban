@@ -14,18 +14,22 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x170" >
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_wait"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center_horizontal" >
+            android:gravity="center_horizontal">
 
             <ImageView
                 android:layout_width="@dimen/x120"
                 android:layout_height="@dimen/y120"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/fragment1_d_a" />
+                android:src="@drawable/fragment1_d_a"
+                android:id="@+id/imageView4"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="32dp" />
 
             <TextView
                 style="@style/a000000_48"
@@ -33,8 +37,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x9"
-                android:text="待审批" />
-        </LinearLayout>
+                android:text="待审批"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/imageView4" />
+
+            <TextView
+                android:id="@+id/bar_num_dsp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/red_dot"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/imageView4"
+                android:layout_marginStart="30dp" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_record"
