@@ -1,16 +1,17 @@
 package com.feirui.feiyunbangong.dialog;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 
+/**
+ * 更新提示
+ */
 public class UpdateDialog extends MyBaseDialog {
 
 	Button bt_update, bt_cancel;

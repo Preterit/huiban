@@ -37,7 +37,7 @@ public class MyChatUI extends IMChattingPageUI {
 
 	private YWConversation conversation;
 	private IYWTribeService mTribeService;
-	private IMChattingBizService chattingBizService;
+
 
 	public MyChatUI(Pointcut pointcut) {
 		super(pointcut);
@@ -220,6 +220,21 @@ public class MyChatUI extends IMChattingPageUI {
 		}
 
 		return v;
+	}
+
+	private IMChattingBizService chattingBizService;
+
+	@Override
+	public void onInitFinished(final IMChattingBizService bizService){
+		chattingBizService = bizService;
+//        final Context context = chattingBizService.getFragment().getContext();
+//        IYWChattingReplyBar replyBar = chattingBizService.getChattingReplyBar();
+//        replyBar.setInputEditTextRightDrawable(context.getResources().getDrawable(R.drawable.ww_chat_voice), new OnEditTextDrawableClickListener() {
+//            @Override
+//            public void onClick() {
+//                IMNotificationUtils.getInstance().showToast(context, "啦啦啦啦啦啦啦！");
+//            }
+//        });
 	}
 
 }
