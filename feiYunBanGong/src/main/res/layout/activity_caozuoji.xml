@@ -15,13 +15,6 @@
         android:layout_gravity="center_horizontal"
         android:background="@null"></Spinner>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerContent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v4.view.ViewPager>
-
     <RadioGroup
         android:id="@+id/rgTools"
         android:layout_width="match_parent"
@@ -46,10 +39,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:text="我审核的"
+            android:text="我审批的"
             style="@style/a000000_48"
             android:textColor="@color/mytask_button_text_color"
             android:gravity="center_horizontal"/>
     </RadioGroup>
+
+   <android.support.v4.view.ViewPager
+       android:id="@+id/viewPagerContent"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+
+   </android.support.v4.view.ViewPager>
 
 </LinearLayout>

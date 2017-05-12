@@ -35,10 +35,14 @@ public class MyUserProfileSampleHelper {
 
 	public static Activity activity;
 
+
+
 	// 初始化，建议放在登录之前
 	public static void initProfileCallback() {
 
+
 		YWIMKit imKit = AppStore.mIMKit;
+
 		// 非空校验：
 		if (imKit == null) {
 			return;
