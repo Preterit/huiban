@@ -17,14 +17,10 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
-import com.feirui.feiyunbangong.adapter.ChuangJianTuanDuiAdapter;
 import com.feirui.feiyunbangong.dialog.SelectZTDialog;
-import com.feirui.feiyunbangong.entity.AddShenHe;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -220,16 +216,26 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                         tv_jieshushijian.setText(str);
 
                         //计算请假时间
-                        mCalendar.setTime(startTime);
-                        int startDay = mCalendar.get(Calendar.DAY_OF_MONTH);
-                        int startHour = mCalendar.get(Calendar.HOUR_OF_DAY);
-                        mCalendar.setTime(endTime);
-                        int endDay = mCalendar.get(Calendar.DAY_OF_MONTH);
-                        int endHour = mCalendar.get(Calendar.HOUR_OF_DAY);
+                        int intervalDay;
+                       int mo =(int) ((endTime.getTime() - startTime.getTime()) % (1000*3600*24));
+                        if (mo == 0) {
+                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24));
+                            mTianshu.setText(intervalDay + "");
+                        } else {
+                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24)) + 1;
+                            mTianshu.setText(intervalDay + "");
+                        }
 
-                        String intervalDay = endDay - startDay + "天";
+//                        mCalendar.setTime(startTime);
+//                        int startDay = mCalendar.get(Calendar.DAY_OF_MONTH);
+//                        int startHour = mCalendar.get(Calendar.HOUR_OF_DAY);
+//                        mCalendar.setTime(endTime);
+//                        int endDay = mCalendar.get(Calendar.DAY_OF_MONTH);
+//                        int endHour = mCalendar.get(Calendar.HOUR_OF_DAY);
+//
+//                        String intervalDay = endDay - startDay + "天";
 
-                        mTianshu.setText(intervalDay);
+
                     }
                 })
                         .setRange(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.YEAR) + 1)
