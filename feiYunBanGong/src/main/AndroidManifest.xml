@@ -430,10 +430,15 @@
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
         <activity android:name=".activity.tribe.EditGroupInfoActivity" />
+
+
+        <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
         <activity android:name=".activity.ShenPiFuKuanDetailActivity" />
         <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
-        <activity android:name=".activity.ShenPiQiTaDetailActivity"></activity>
+        <activity android:name=".activity.ShenPiQiTaDetailActivity">
+
+        </activity>
     </application>
 
 </manifest>
