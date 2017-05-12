@@ -30,8 +30,8 @@
         <EditText
             android:id="@+id/et_mingcheng"
             style="@style/a000000_38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
             android:background="@null"
             android:hint="请输入名称" />
     </LinearLayout>
@@ -58,8 +58,8 @@
         <EditText
             android:id="@+id/et_number"
             style="@style/a000000_38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
             android:background="@null"
             android:hint="请输入数量" />
     </LinearLayout>
@@ -86,8 +86,8 @@
         <EditText
             android:id="@+id/et_price"
             style="@style/a000000_38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
             android:background="@null"
             android:hint="请输入价格" />
     </LinearLayout>

@@ -55,8 +55,8 @@
         <EditText
             android:id="@+id/et_caigouleixing"
             style="@style/a000000_38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
             android:background="@null"
             android:hint="请输入采购类型" />
     </LinearLayout>
@@ -83,9 +83,10 @@
         <TextView
             android:id="@+id/tv_qiwangriqi"
             style="@style/a000000_38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
             android:background="@null"
+            android:gravity="center_vertical"
             android:hint="请输入期望日期" />
     </LinearLayout>
 
@@ -163,8 +164,8 @@
         <EditText
             android:id="@+id/et_beizhu"
             style="@style/a000000_38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
             android:background="@null"
             android:hint="请输入备注！" />
     </LinearLayout>

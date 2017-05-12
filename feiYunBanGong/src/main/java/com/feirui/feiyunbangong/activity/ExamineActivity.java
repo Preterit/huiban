@@ -115,6 +115,6 @@ public class ExamineActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadData();//18  17
+		loadData();//
 	}
 }

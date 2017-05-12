@@ -110,6 +110,27 @@ public class DaiShenPiActivity extends BaseActivity implements
                         baoxiaoIntent.putExtra("data", data);
                         startActivity(baoxiaoIntent);
                         break;
+                    //--------------------------未完成------------------
+                    case "外出":
+                        Intent waichuIntent = new Intent(DaiShenPiActivity.this, ShenPiWaiChuDetailActivity.class);
+                        waichuIntent.putExtra("data", data);
+                        startActivity(waichuIntent);
+                        break;
+                    case "付款":
+                        Intent fukuanIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        fukuanIntent.putExtra("data", data);
+                        startActivity(fukuanIntent);
+                        break;
+                    case "采购":
+                        Intent caigouIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        caigouIntent.putExtra("data", data);
+                        startActivity(caigouIntent);
+                        break;
+                    case "其他":
+                        Intent qitaIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        qitaIntent.putExtra("data", data);
+                        startActivity(qitaIntent);
+                        break;
                 }
 
             }
