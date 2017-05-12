@@ -11,4 +11,8 @@
   <dimen name="shenpi_div_line_width">333dp</dimen>
   <dimen name="text_margin">16dp</dimen>
 
+  <dimen name="demo_at_msg_list_empty_view_image_top_margin">200dp</dimen>
+  <dimen name="demo_at_msg_list_empty_view_image_text_margin">280dp</dimen>
+
+
 </resources>

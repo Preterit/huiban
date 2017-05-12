@@ -13,15 +13,18 @@ import android.widget.TextView;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.aop.Pointcut;
+import com.alibaba.mobileim.aop.custom.IMChattingBizService;
 import com.alibaba.mobileim.aop.custom.IMChattingPageUI;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
+import com.alibaba.mobileim.conversation.YWTribeConversationBody;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
 import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
+import com.feirui.feiyunbangong.activity.tribe.YWSDKGlobalConfigSample;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.Utils;
 
@@ -34,6 +37,7 @@ public class MyChatUI extends IMChattingPageUI {
 
 	private YWConversation conversation;
 	private IYWTribeService mTribeService;
+
 
 	public MyChatUI(Pointcut pointcut) {
 		super(pointcut);
@@ -200,10 +204,37 @@ public class MyChatUI extends IMChattingPageUI {
 
 		}
 
-
-
+		//群会话则显示@图标
+		if (YWSDKGlobalConfigSample.getInstance().enableTheTribeAtRelatedCharacteristic()) {
+			if (conversation.getConversationBody() instanceof YWTribeConversationBody) {
+				View atView =v.findViewById(R.id.aliwx_at_content);
+				atView.setVisibility(View.VISIBLE);
+				atView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = chattingBizService.getIMKit().getAtMsgListActivityIntent(context, conversation);
+						context.startActivity(intent);
+					}
+				});
+			}
+		}
 
 		return v;
+	}
+
+	private IMChattingBizService chattingBizService;
+
+	@Override
+	public void onInitFinished(final IMChattingBizService bizService){
+		chattingBizService = bizService;
+//        final Context context = chattingBizService.getFragment().getContext();
+//        IYWChattingReplyBar replyBar = chattingBizService.getChattingReplyBar();
+//        replyBar.setInputEditTextRightDrawable(context.getResources().getDrawable(R.drawable.ww_chat_voice), new OnEditTextDrawableClickListener() {
+//            @Override
+//            public void onClick() {
+//                IMNotificationUtils.getInstance().showToast(context, "啦啦啦啦啦啦啦！");
+//            }
+//        });
 	}
 
 }

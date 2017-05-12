@@ -6,6 +6,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.alibaba.mobileim.YWAPI;
+import com.alibaba.tcms.env.YWEnvType;
 import com.alibaba.wxlib.util.SysUtil;
 import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
@@ -13,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
+
 public class Happlication extends Application {
     // application实例
     private static Happlication instance;
@@ -21,6 +23,8 @@ public class Happlication extends Application {
     // 应用程序中创建的每个activity
     private static ArrayList<Activity> activitylist = new ArrayList<Activity>();
     public static String APP_KEY = "23529997";
+    public static YWEnvType sEnvType = YWEnvType.TEST;
+
 
     /**
      * 实现单例模式
@@ -46,9 +50,11 @@ public class Happlication extends Application {
         // 这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
         if (SysUtil.isMainProcess()) {
             YWAPI.init(this, APP_KEY);
+
         }
 
         IMUtil.bind();// 绑定自定义会话列表等；
+
 
         // 初始化ImageLoader;
         ImageLoaderConfiguration config = ImageLoaderUtils.getNowConfig(this);
@@ -59,6 +65,8 @@ public class Happlication extends Application {
 		 * AbAppConfig.UI_HEIGHT = 1920;
 		 */
     }
+
+
 
     public static void addActivity(Activity activity) {
         activitylist.add(activity);

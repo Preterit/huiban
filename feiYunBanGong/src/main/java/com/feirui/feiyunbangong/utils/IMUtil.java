@@ -1,10 +1,5 @@
 package com.feirui.feiyunbangong.utils;
 
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.alibaba.mobileim.YWIMCore;
 import com.alibaba.mobileim.aop.AdviceBinder;
 import com.alibaba.mobileim.aop.PointCutEnum;
@@ -23,16 +18,20 @@ import com.alibaba.mobileim.contact.YWRichContentContact;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationCreater;
 import com.alibaba.mobileim.conversation.YWMessage;
-import com.alibaba.mobileim.conversation.YWMessageBody;
 import com.alibaba.mobileim.conversation.YWMessageChannel;
 import com.alibaba.mobileim.gingko.presenter.contact.IContactProfileUpdateListener;
 import com.alibaba.mobileim.lib.model.message.YWSystemMessage;
 import com.alibaba.mobileim.lib.presenter.contact.IContactListListener;
+import com.feirui.feiyunbangong.activity.tribe.AtMsgListOperationSample;
+import com.feirui.feiyunbangong.activity.tribe.AtMsgListUISample;
+import com.feirui.feiyunbangong.activity.tribe.SelectTribeAtMemberSample;
+import com.feirui.feiyunbangong.activity.tribe.SendAtMsgDetailUISample;
 import com.feirui.feiyunbangong.im.MyChatUI;
 import com.feirui.feiyunbangong.im.MyIMChattingPageOperateion;
 import com.feirui.feiyunbangong.im.MyYWSDKFlobalConfig;
 import com.feirui.feiyunbangong.state.AppStore;
-import com.google.gson.JsonObject;
+
+import java.util.List;
 
 /**
  * 即时聊天业务类：
@@ -61,6 +60,15 @@ public class IMUtil {
 		// 单聊窗口：
 		AdviceBinder.bindAdvice(PointCutEnum.CHATTING_FRAGMENT_POINTCUT,
 				MyIMChattingPageOperateion.class);
+
+		//@消息界面
+		AdviceBinder.bindAdvice(PointCutEnum.TRIBE_FRAGMENT_AT_MSG_DETAIL, SendAtMsgDetailUISample.class);
+		AdviceBinder.bindAdvice(PointCutEnum.TRIBE_ACTIVITY_AT_MSG_LIST, AtMsgListUISample.class);
+		AdviceBinder.bindAdvice(PointCutEnum.TRIBE_ACTIVITY_SELECT_AT_MEMBER, SelectTribeAtMemberSample.class);
+		AdviceBinder.bindAdvice(PointCutEnum.TRIBE_ACTIVITY_AT_MSG_LIST_OP, AtMsgListOperationSample.class);
+
+
+
 	}
 
 	// 发送第一条打招呼消息：
