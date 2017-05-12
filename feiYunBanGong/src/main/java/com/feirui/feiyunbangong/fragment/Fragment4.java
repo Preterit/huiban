@@ -1,11 +1,5 @@
 package com.feirui.feiyunbangong.fragment;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -46,6 +40,12 @@ import com.feirui.feiyunbangong.view.WordsNavigation;
 import com.feirui.feiyunbangong.view.WordsNavigation.onWordsChangeListener;
 import com.loopj.android.http.RequestParams;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * 我的团队：
  *
@@ -68,6 +68,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     private OnTeamNoticeNumChanged listener;
     private MyBroadReceiver receiver;
 
+    @SuppressLint({"NewApi", "ValidFragment"})//横竖屏切换问题
     public Fragment4(OnTeamNoticeNumChanged listener) {
         this.listener = listener;
     }
