@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -75,6 +76,8 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.feirui.feiyunbangong.state.AppStore.mIMKit;
+
 /**
  * 主页面设置四个fragment跳转
  *
@@ -90,6 +93,8 @@ public class MainActivity extends BaseActivity
     UpdateManager manager;
 
     private ImageView iv_erweima;
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
     /**
      * 当前显示的fragment
      */
@@ -214,14 +219,14 @@ public class MainActivity extends BaseActivity
         final String userid = (String) AppStore.user.getInfor().get(0).get("staff_mobile");
         // 此对象获取到后，保存为全局对象，供APP使用
         // 此对象跟用户相关，如果切换了用户，需要重新获取
-        AppStore.mIMKit = YWAPI.getIMKitInstance(userid, Happlication.APP_KEY);
+        mIMKit = YWAPI.getIMKitInstance(userid, Happlication.APP_KEY);
         // 自定义用户事件：
         MyUserProfileSampleHelper.activity = this;
         MyUserProfileSampleHelper.initProfileCallback();
 
         // 开始登陆IM:
         String password = (String) AppStore.user.getInfor().get(0).get("staff_password");
-        IYWLoginService loginService = AppStore.mIMKit.getLoginService();
+        IYWLoginService loginService = mIMKit.getLoginService();
         YWLoginParam loginParam = YWLoginParam.createLoginParam(userid, password);
         loginService.login(loginParam, new IWxCallback() {
             @Override
@@ -249,7 +254,7 @@ public class MainActivity extends BaseActivity
         IYWPushListener msgPushListener = new IYWPushListener() {
             @Override
             public void onPushMessage(IYWContact arg0, YWMessage arg1) {
-                int num = AppStore.mIMKit.getUnreadCount();// 未读消息数；
+                int num = mIMKit.getUnreadCount();// 未读消息数；
                 if (num > 0) {
                     tv_num.setVisibility(View.VISIBLE);
                     tv_num.setText("" + num);
@@ -264,7 +269,7 @@ public class MainActivity extends BaseActivity
             }
         };
 
-        IYWConversationService conversationService = AppStore.mIMKit.getConversationService();
+       final IYWConversationService conversationService = mIMKit.getConversationService();
         // 如果之前add过，请清除
         conversationService.removePushListener(msgPushListener);
         // 增加新消息到达的通知
@@ -274,29 +279,48 @@ public class MainActivity extends BaseActivity
         conversationService.addTotalUnreadChangeListener(new IYWConversationUnreadChangeListener() {
             @Override
             public void onUnreadChange() {
-                getNum();
+//                getNum();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //获取当前登录用户的所有未读数
+                        int unReadCount = conversationService.getAllUnreadCount();
+                        //设置桌面角标的未读数
+                        mIMKit.setShortcutBadger(unReadCount);
+                        if (unReadCount > 0) {
+                            tv_num.setVisibility(View.VISIBLE);
+                            if (unReadCount < 100) {
+                                tv_num.setText(unReadCount + "");
+                            } else {
+                                tv_num.setText("99+");
+                            }
+                        } else {
+                            tv_num.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
             }
         });
 
-        getNum();
+//        getNum();
     }
 
     // 获取未读消息数：
-    private void getNum() {
-        int num = AppStore.mIMKit.getUnreadCount();// 未读消息数；
-        if (num > 0) {
-            String str = "";
-            if (num > 99) {
-                str = "99+";
-            } else {
-                str = num + "";
-            }
-            tv_num.setVisibility(View.VISIBLE);
-            tv_num.setText("" + str);
-        } else {
-            tv_num.setVisibility(View.INVISIBLE);
-        }
-    }
+//    private void getNum() {
+//        int num = mIMKit.getUnreadCount();// 未读消息数；
+//        if (num > 0) {
+//            String str = "";
+//            if (num > 99) {
+//                str = "99+";
+//            } else {
+//                str = num + "";
+//            }
+//            tv_num.setVisibility(View.VISIBLE);
+//            tv_num.setText("" + str);
+//        } else {
+//            tv_num.setVisibility(View.INVISIBLE);
+//        }
+//    }
 
     private void setListView() {
         adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin, R.id.tv,
@@ -515,7 +539,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onOK() {
                 // 阿里百川登出：
-                IYWLoginService loginService = AppStore.mIMKit.getLoginService();
+                IYWLoginService loginService = mIMKit.getLoginService();
                 loginService.logout(new IWxCallback() {
 
                     @Override

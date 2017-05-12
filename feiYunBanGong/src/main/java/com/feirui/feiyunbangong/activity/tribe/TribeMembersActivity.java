@@ -41,7 +41,7 @@ import java.util.Set;
 
 /**
  * Created by xy on 2017/5/8.
- *
+ *群成员的管理
  */
 
 public class TribeMembersActivity extends BaseActivity  implements AdapterView.OnItemLongClickListener {
