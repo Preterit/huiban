@@ -30,8 +30,8 @@ public class ShenPiFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_ti_jiao, container, false);
-        mListView = (ListView) v.findViewById(R.id.receiveTaskList);
+        View v= inflater.inflate(R.layout.fragment_shen_pi, container, false);
+        mListView = (ListView) v.findViewById(R.id.receiveTaskList_shenpi);
         requestData();
 
         return v;
@@ -44,7 +44,7 @@ public class ShenPiFragment extends BaseFragment {
         Log.d("tag","传过来的---"+string);
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL_ALL;
+        String url = UrlTools.pcUrl  + UrlTools.APPROVAL_MY_APPROVAL;
         if (!"选择审批类型".equals(string)) {
             params.put("type", string);
 
@@ -54,10 +54,10 @@ public class ShenPiFragment extends BaseFragment {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                Log.d("json","JsonBean----"+jsonBean.getInfor());
+                Log.d("我审批fragment的json","JsonBean----"+jsonBean.getInfor());
                 if (jsonBean.getCode().equals("200")) {
                     adapter=new ShenPiAdapter(getActivity(),jsonBean.getInfor());
-//                        adapter.addAll(jsonBean.getInfor());
+   //                     adapter.addAll(jsonBean.getInfor());
                     mListView.setAdapter(adapter);
                 }
             }

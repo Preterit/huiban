@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
+import com.feirui.feiyunbangong.adapter.TiJiaoAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -26,7 +26,7 @@ import static com.feirui.feiyunbangong.R.id.receiveTaskList;
 
 public class TiJiaoFragment extends BaseFragment {
     private ListView mListView;
-    private ShenPiAdapter adapter;
+    private TiJiaoAdapter adapter;
 
     public TiJiaoFragment(){}
 
@@ -59,9 +59,9 @@ public class TiJiaoFragment extends BaseFragment {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                Log.d("json","JsonBean----"+jsonBean.getInfor());
+                Log.d("我提交fragment的json","JsonBean----"+jsonBean.getInfor());
                 if (jsonBean.getCode().equals("200")) {
-                    adapter=new ShenPiAdapter(getActivity(),jsonBean.getInfor());
+                    adapter=new TiJiaoAdapter(getActivity(),jsonBean.getInfor());
 //                        adapter.addAll(jsonBean.getInfor());
                     mListView.setAdapter(adapter);
                 }

@@ -102,11 +102,12 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                     case 0:
                         mTiJiao.setChecked(true);
                         postQingQiu(str);
-                        Log.d("group","group的："+mSpinner.getSelectedItem().toString());
+                        Log.d("操作记录spinner选择的group值","group的："+mSpinner.getSelectedItem().toString());
                         break;
                     case 1:
                         mShenPi.setChecked(true);
                         postQingQiu(str);
+                        Log.d("操作记录spinner选择的group值","group的："+mSpinner.getSelectedItem().toString());
                         break;
                 }
             }
@@ -160,7 +161,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
 
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL_ALL;
+        String url = UrlTools.pcUrl + UrlTools.APPROVAL_MY_APPROVAL;
         if (!"选择审批类型".equals(mSpinner.getSelectedItem().toString())) {
             params.put("type", mSpinner.getSelectedItem().toString());
 
@@ -177,7 +178,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
                 if (jsonBean.getCode().equals("200")) {
 
                     adapter=new ShenPiAdapter(CaoZuoJiLuUpdataActivity.this,jsonBean.getInfor());
-//                    adapter.addAll(jsonBean.getInfor());
+                    adapter.addAll(jsonBean.getInfor());
                     mListView.setAdapter(adapter);
                 }
             }
