@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/huise_38"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:background="@color/fenge"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x20"
+        android:text="采购明细" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="名称：" />
+
+        <EditText
+            android:id="@+id/et_mingcheng"
+            style="@style/a000000_38"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@null"
+            android:hint="请输入名称" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y5"
+        android:background="@color/jiange" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="数量：" />
+
+        <EditText
+            android:id="@+id/et_number"
+            style="@style/a000000_38"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@null"
+            android:hint="请输入数量" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y5"
+        android:background="@color/jiange" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格：" />
+
+        <EditText
+            android:id="@+id/et_price"
+            style="@style/a000000_38"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@null"
+            android:hint="请输入价格" />
+    </LinearLayout>
+    
+
+</LinearLayout>

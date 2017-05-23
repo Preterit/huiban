@@ -127,7 +127,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x50"
             android:layout_toRightOf="@+id/img_left_qun"
-            android:text="群组"
+            android:text="群聊"
             android:textSize="@dimen/size48"/>
 
         <ImageView
