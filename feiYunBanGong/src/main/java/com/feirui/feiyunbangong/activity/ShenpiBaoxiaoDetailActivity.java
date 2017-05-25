@@ -41,6 +41,7 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
         getData();
     }
 
+
     private TextView mTvType, mTvJine, tvAllBaoxiao, mTvBaoxiaoName;
     private ImageView mBaoxiaoHead, ivBaoxiaoDetail;
     private Button mBtnAccept, mBtnRefuse;
@@ -139,6 +140,7 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
 
                     String expense_money = String.valueOf(detail.get("expense_money"));
                     mTvJine.setText(expense_money);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

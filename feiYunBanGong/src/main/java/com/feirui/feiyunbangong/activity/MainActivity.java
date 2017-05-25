@@ -145,8 +145,8 @@ public class MainActivity extends BaseActivity
         JPushUtil.setJPSH(this);
 
         initUI();
-
         try {
+
             Happlication.addActivity(this);
             setupView();
             addListener();
@@ -279,53 +279,57 @@ public class MainActivity extends BaseActivity
         conversationService.addTotalUnreadChangeListener(new IYWConversationUnreadChangeListener() {
             @Override
             public void onUnreadChange() {
-//                getNum();
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //获取当前登录用户的所有未读数
-                        int unReadCount = conversationService.getAllUnreadCount();
-                        //设置桌面角标的未读数
-                        mIMKit.setShortcutBadger(unReadCount);
-                        if (unReadCount > 0) {
-                            tv_num.setVisibility(View.VISIBLE);
-                            if (unReadCount < 100) {
-                                tv_num.setText(unReadCount + "");
-                            } else {
-                                tv_num.setText("99+");
-                            }
-                        } else {
-                            tv_num.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
+                getNum();
+//                mHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //获取当前登录用户的所有未读数
+//                        int unReadCount = conversationService.getAllUnreadCount();
+//                        Log.d("获取当前登录用户的所有未读数---------", "unReadCount:-------- "+unReadCount);
+//                        //设置桌面角标的未读数
+//                        mIMKit.setShortcutBadger(unReadCount);
+//                        if (unReadCount > 0) {
+//                            tv_num.setVisibility(View.VISIBLE);
+//                            if (unReadCount < 100) {
+//                                tv_num.setText(unReadCount + "");
+//                            } else {
+//                                tv_num.setText("99+");
+//                            }
+//                        } else {
+//                            tv_num.setVisibility(View.INVISIBLE);
+//                        }
+//                    }
+//                });
             }
         });
 
-//        getNum();
+        getNum();
     }
 
     // 获取未读消息数：
-//    private void getNum() {
-//        int num = mIMKit.getUnreadCount();// 未读消息数；
-//        if (num > 0) {
-//            String str = "";
-//            if (num > 99) {
-//                str = "99+";
-//            } else {
-//                str = num + "";
-//            }
-//            tv_num.setVisibility(View.VISIBLE);
-//            tv_num.setText("" + str);
-//        } else {
-//            tv_num.setVisibility(View.INVISIBLE);
-//        }
-//    }
-
+    private void getNum() {
+        int num = mIMKit.getUnreadCount();// 未读消息数；
+        Log.d("获取未读消息数----------------", "getNum:-------------- "+num);
+        //设置桌面图标提示
+        mIMKit.setShortcutBadger(num);
+        if (num > 0) {
+            String str = "";
+            if (num > 99) {
+                str = "99+";
+            } else {
+                str = num + "";
+            }
+            tv_num.setVisibility(View.VISIBLE);
+            tv_num.setText("" + str);
+        } else {
+            tv_num.setVisibility(View.INVISIBLE);
+        }
+    }
+    //策划菜单的item设置
     private void setListView() {
         adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin, R.id.tv,
                 new String[]{"个人资料", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
-                        "关于我们", "邀请奖励", "我的余额","退出登录"});
+                        "关于我们", "邀请奖励", "退出登录"});
         lv_left.setAdapter(adapter);
 
 		/*

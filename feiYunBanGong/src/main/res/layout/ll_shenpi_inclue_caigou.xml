@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y400"
+        android:layout_height="80dp"
         android:layout_marginLeft="@dimen/x20"
         android:layout_marginRight="@dimen/x20"
         android:layout_marginTop="@dimen/y50"
@@ -21,10 +21,11 @@
             android:gravity="top"
             android:text="申请描述：" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_shenqingmiaoshu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:hint="正在读取数据"
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginLeft="@dimen/x20"
             android:layout_weight="1"
@@ -52,13 +53,13 @@
             android:layout_height="wrap_content"
             android:text="采购类型：" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_caigouleixing"
             style="@style/a000000_38"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入采购类型" />
+            android:hint="正在读取数据" />
     </LinearLayout>
 
     <View
@@ -87,7 +88,7 @@
             android:layout_height="28dp"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="请输入期望日期" />
+            android:hint="正在读取数据" />
     </LinearLayout>
 
     <LinearLayout
@@ -99,7 +100,7 @@
         <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/add_mingxi_caigou" />
+            layout="@layout/add_mingxi_caigou_shenpi" />
     </LinearLayout>
 
     <TextView
@@ -138,8 +139,8 @@
             style="@style/huise_38"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right"
-            android:text="选择方式>" />
+            android:gravity="center_vertical|left"
+            android:text="选择方式" />
     </LinearLayout>
 
     <View
@@ -230,6 +231,14 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
+
+        <ListView
+            android:id="@+id/lv_add_shenpiren"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y400"
+            android:divider="@color/fenge"
+            android:dividerHeight="@dimen/y4"></ListView>
+
         <TextView
             style="@style/a000000_48"
             android:layout_width="wrap_content"
@@ -242,25 +251,8 @@
             android:src="@drawable/tianjia"
             android:layout_gravity="center_horizontal"/>
 
-        <ListView
-            android:id="@+id/lv_add_shenpiren"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y400"
-            android:divider="@color/fenge"
-            android:dividerHeight="@dimen/y4"></ListView>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_caigou_submit"
-        style="@style/ffffff_60"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x114"
-        android:layout_marginBottom="@dimen/y150"
-        android:layout_marginLeft="@dimen/x140"
-        android:layout_marginRight="@dimen/x140"
-        android:layout_marginTop="@dimen/y50"
-        android:background="@drawable/blue_bt_selector"
-        android:gravity="center"
-        android:text="提交" />
+
 
 </LinearLayout>

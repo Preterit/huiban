@@ -27,13 +27,13 @@
             android:layout_height="wrap_content"
             android:text="名称：" />
 
-        <EditText
-            android:id="@+id/et_mingcheng"
+        <TextView
+            android:id="@+id/tv_mingcheng"
             style="@style/a000000_38"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入名称" />
+            android:hint="正在读取数据" />
     </LinearLayout>
 
     <View
@@ -55,13 +55,13 @@
             android:layout_height="wrap_content"
             android:text="数量：" />
 
-        <EditText
-            android:id="@+id/et_number"
+        <TextView
+            android:id="@+id/tv_number"
             style="@style/a000000_38"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入数量" />
+            android:hint="正在读取数据" />
     </LinearLayout>
 
     <View
@@ -83,13 +83,13 @@
             android:layout_height="wrap_content"
             android:text="价格：" />
 
-        <EditText
-            android:id="@+id/et_price"
+        <TextView
+            android:id="@+id/tv_price"
             style="@style/a000000_38"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入价格" />
+            android:hint="正在读取数据" />
     </LinearLayout>
     
 

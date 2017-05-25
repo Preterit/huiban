@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入名称" />
+            android:hint="正在读取数据" />
     </LinearLayout>
 
     <View
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入数量" />
+            android:hint="正在读取数据" />
     </LinearLayout>
 
     <View
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
-            android:hint="请输入价格" />
+            android:hint="正在读取数据" />
     </LinearLayout>
     
 

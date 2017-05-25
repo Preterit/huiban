@@ -1,9 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.feirui.feiyunbangong.activity.ShenPiQiTaDetailActivity">
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="描述：" />
+
+        <TextView
+            android:id="@+id/et_miaoshu"
+            style="@style/a000000_38"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="正在载入"
+            android:lines="5"
+            android:padding="@dimen/x26" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/jiange" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时间：" />
+
+        <TextView
+            android:id="@+id/tv_shijian"
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:hint="正在载入" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/jiange" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_pass"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_sp_2"
+            android:background="@drawable/shape_btn_shenpi_tg"
+            android:text="通过审批"
+            android:textColor="@color/white"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.963"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.687" />
+
+        <Button
+            android:id="@+id/btn_nopass"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_btn_shenpi_btg"
+            android:text="拒绝通过"
+            android:textColor="@color/white"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="26dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.732" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>

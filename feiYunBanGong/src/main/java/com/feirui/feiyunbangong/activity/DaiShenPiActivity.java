@@ -93,6 +93,7 @@ public class DaiShenPiActivity extends BaseActivity implements
 
         adapter = new ShenPiAdapter(DaiShenPiActivity.this, new ArrayList<HashMap<String, Object>>());
         mPullListView.setAdapter(adapter);
+        Log.d("页面数据列表mPullListView----", "mPullListView: "+mPullListView.toString());
 
         //查看各种审批类型的详情
         adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
@@ -117,17 +118,17 @@ public class DaiShenPiActivity extends BaseActivity implements
                         startActivity(waichuIntent);
                         break;
                     case "付款":
-                        Intent fukuanIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        Intent fukuanIntent = new Intent(DaiShenPiActivity.this, ShenPiFuKuanDetailActivity.class);
                         fukuanIntent.putExtra("data", data);
                         startActivity(fukuanIntent);
                         break;
                     case "采购":
-                        Intent caigouIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
-                        caigouIntent.putExtra("data", data);
-                        startActivity(caigouIntent);
+//                        Intent caigouIntent = new Intent(DaiShenPiActivity.this, ShenpPiCaiGouDetailActivity.class);
+//                        caigouIntent.putExtra("data", data);
+//                        startActivity(caigouIntent);
                         break;
                     case "其他":
-                        Intent qitaIntent = new Intent(DaiShenPiActivity.this, ShenpiBaoxiaoDetailActivity.class);
+                        Intent qitaIntent = new Intent(DaiShenPiActivity.this, ShenPiQiTaDetailActivity.class);
                         qitaIntent.putExtra("data", data);
                         startActivity(qitaIntent);
                         break;
