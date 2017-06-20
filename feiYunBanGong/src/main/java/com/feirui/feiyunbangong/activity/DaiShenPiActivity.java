@@ -42,7 +42,7 @@ public class DaiShenPiActivity extends BaseActivity implements
     private ArrayAdapter<String> adt;  //审批类型的适配器
     private ShenPiAdapter adapter;
     private String[] leixing = new String[]{"选择审批类型", "请假", "报销", "外出", "付款",
-            "采购"};
+            "采购","其他"};
 
     private  JsonBean json;
     private static int count;

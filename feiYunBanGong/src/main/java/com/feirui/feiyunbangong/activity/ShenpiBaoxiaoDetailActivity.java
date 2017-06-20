@@ -127,11 +127,21 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
             public void success(JsonBean bean) {
                 Log.e("orz", "success: " + bean.toString());
                 ArrayList<HashMap<String, Object>> infor = bean.getInfor();
-
+                Log.d("tag","报销获取的数据---------"+infor);  //是一个数组且只有一个数据
                 HashMap<String, Object> in_fo = infor.get(0);
+
+                //以下是infor.get(0)获取到的数据
+//                detail=[{"expense_type":"回家","expense_money":"222.00","expense_detail":"1213"}],
+//                total_money=1894949.00,
+//                        staff_department=null, staff_duties=null, ttt=待报销, id=434, detail_count=1,
+//                staff_head=http://123.57.45.74/feiybg/public/static/staff_head/434/8918267cfc972d7b6af62972c3678de6.jpeg,
+                // staff_name=XY, expense_pic0=http://123.57.45.74/feiybg/public/img/434/b8c92c4f5dd5cbe286bee29232e028c5.jpe, expense_picture=/public/img/434/b8c92c4f5dd5cbe286bee29232e028c5.jpe
+
+
                 JSONArray jsonArray = (JSONArray) in_fo.get("detail");
 
                 try {
+                    //获取json数组中的第一项
                     JSONObject detail = jsonArray.getJSONObject(0);
 
 

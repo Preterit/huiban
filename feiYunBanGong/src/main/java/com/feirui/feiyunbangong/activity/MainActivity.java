@@ -482,11 +482,11 @@ public class MainActivity extends BaseActivity
                         startActivity(new Intent(MainActivity.this, YaoQingActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
+//                    case 8:
+//                        // 我的余额：
+//
+//                        break;
                     case 8:
-                        // 我的余额：
-
-                        break;
-                    case 9:
                         // 退出账号登录：
                         outLogin();
                         break;

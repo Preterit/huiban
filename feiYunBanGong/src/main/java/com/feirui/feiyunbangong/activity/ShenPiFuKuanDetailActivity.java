@@ -58,7 +58,8 @@ public class ShenPiFuKuanDetailActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!mList_id.equals("")) {
-                    updataShenPi(mList_id, "不通过");
+                    //不能写"不通过"，要写“拒绝”
+                    updataShenPi(mList_id, "拒绝");
                 }
             }
         });
