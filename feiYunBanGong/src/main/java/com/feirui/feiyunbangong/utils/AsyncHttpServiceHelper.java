@@ -108,7 +108,7 @@ public class AsyncHttpServiceHelper {
 	 * DELETE方式请求 不带参数
 	 * 
 	 * @param url
-	 * @param params
+	 * @param
 	 * @param responseHandler
 	 */
 	public static void delete(String url,
