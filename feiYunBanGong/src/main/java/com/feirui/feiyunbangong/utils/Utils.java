@@ -2,6 +2,9 @@ package com.feirui.feiyunbangong.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
@@ -25,9 +28,57 @@ import org.apache.http.Header;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.baidu.location.h.i.ar;
-
 public class Utils {
+
+
+    /**
+     * 弹出一个Alertdialog
+     * @param context 上下文
+     * @param title	标题
+     * @param message 正文
+     * @param listener	点击确定与取消的监听
+     * @param flag	是否取消
+     * @return
+     */
+    public static AlertDialog creatDialog(Context context, CharSequence title,
+                                          CharSequence message,
+                                          final DialogListener listener,
+                                          boolean flag){
+        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        listener.onYesClick(dialog,which);
+                    }
+                })
+                .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        listener.onNoClick(dialog,which);
+                    }
+                }).create();
+        alertDialog.setCancelable(flag);
+        return alertDialog;
+
+    }
+
+
+    public interface DialogListener{
+        /**
+         * 点击确定的监听
+         * @param dialog
+         * @param which
+         */
+        public void onYesClick(DialogInterface dialog, int which);
+        /**
+         * 点击取消的监听
+         * @param dialog
+         * @param which
+         */
+        public void onNoClick(DialogInterface dialog, int which);
+    }
 
     /**
      * 将汉字转成拼音
@@ -199,6 +250,7 @@ public class Utils {
             public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
                 final JsonBean bean = JsonUtils.getMessage(new String(arg2));
                 if ("200".equals(bean.getCode())) {
+                    Log.e("tag", "AsyncHttpServiceHelper----success: " );
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -224,7 +276,7 @@ public class Utils {
 
             @Override
             public void onFinish() {
-
+                Log.e("tag", "AsyncHttpServiceHelper----onFinish: " );
                 activity.runOnUiThread(new Runnable() {
 
                     @Override
@@ -240,6 +292,7 @@ public class Utils {
 
             @Override
             public void onFailure(final int arg0, Header[] arg1, byte[] arg2, final Throwable arg3) {
+                Log.e("tag", "AsyncHttpServiceHelper----onFailure: " );
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

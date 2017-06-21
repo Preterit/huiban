@@ -88,9 +88,11 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         Utils.doPost(LoadingDialog.getInstance(ShenPiQingJaDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
+                Log.e("tag"," Utils---seccess=----------"+bean.getCode());
+
                 if (bean.getCode().equals("200")) {
                     T.showShort(ShenPiQingJaDetailActivity.this, bean.getMsg());
-
+                    Log.e("tag"," Utils---seccess=----------200--");
                     ShenPiQingJaDetailActivity.this.finish();
                 }
             }
@@ -98,6 +100,8 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
             @Override
             public void failure(String msg) {
                 T.showShort(ShenPiQingJaDetailActivity.this, msg);
+//                已审核，请勿重复提交
+                Log.e("tag"," Utils---failure----------"+msg);
             }
 
             @Override

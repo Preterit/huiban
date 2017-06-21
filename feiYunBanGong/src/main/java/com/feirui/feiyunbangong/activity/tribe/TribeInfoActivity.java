@@ -35,6 +35,7 @@ import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.BaseActivity;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -345,25 +346,36 @@ public class TribeInfoActivity extends BaseActivity{
             mQuiteTribe.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mTribeService.disbandTribe(new IWxCallback() {
-                        @Override
-                        public void onSuccess(Object... result) {
-                            YWLog.i(TAG, "解散群成功！");
-                            IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "解散群成功！");
-//                            openTribeListFragment();
-                        }
+                    Utils.creatDialog(TribeInfoActivity.this, null, "确定解散群吗",
+                            new Utils.DialogListener() {
+                                @Override
+                                public void onYesClick(DialogInterface dialog, int which) {
+                                    mTribeService.disbandTribe(new IWxCallback() {
+                                        @Override
+                                        public void onSuccess(Object... result) {
+                                            YWLog.i(TAG, "解散群成功！");
+                                            IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "解散群成功！");
+                                            TribeInfoActivity.this.finish();
+                                        }
 
-                        @Override
-                        public void onError(int code, String info) {
-                            YWLog.i(TAG, "解散群失败， code = " + code + ", info = " + info);
-                            IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "解散群失败, code = " + code + ", info = " + info);
-                        }
+                                        @Override
+                                        public void onError(int code, String info) {
+                                            YWLog.i(TAG, "解散群失败， code = " + code + ", info = " + info);
+                                            IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "解散群失败, code = " + code + ", info = " + info);
+                                        }
 
-                        @Override
-                        public void onProgress(int progress) {
+                                        @Override
+                                        public void onProgress(int progress) {
 
-                        }
-                    }, mTribeId);
+                                        }
+                                    }, mTribeId);
+                                }
+
+                                @Override
+                                public void onNoClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            },false).show();
                 }
             });
         } else {

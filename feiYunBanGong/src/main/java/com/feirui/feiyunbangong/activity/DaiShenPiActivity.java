@@ -194,7 +194,7 @@ public class DaiShenPiActivity extends BaseActivity implements
                     } else {
                         adapter.add(jsonBean.getInfor());
                         mPullToRefreshLayout.loadMoreFinish(true);
-                    }
+                       }
                 } else {
                     mPullToRefreshLayout.loadMoreFinish(true);
                     mPullToRefreshLayout.refreshFinish(true);
