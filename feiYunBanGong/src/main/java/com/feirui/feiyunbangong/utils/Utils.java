@@ -25,6 +25,8 @@ import org.apache.http.Header;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.baidu.location.h.i.ar;
+
 public class Utils {
 
     /**
@@ -237,11 +239,12 @@ public class Utils {
             }
 
             @Override
-            public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+            public void onFailure(final int arg0, Header[] arg1, byte[] arg2, final Throwable arg3) {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         call.failure("服务器异常！");
+                        Log.e("tag","服务器异常的原因--------"+arg3+"---"+arg0);
                         if (dialog != null) {
                             dialog.dismiss();
                         }
