@@ -20,14 +20,15 @@
         android:layout_weight="1"
         >
 
-        <com.xw.repo.refresh.PullListView
-            android:id="@+id/lv_work"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </com.xw.repo.refresh.PullListView>
     </com.feirui.feiyunbangong.view.RefreshLayout>
 
+
+    <com.xw.repo.refresh.PullListView
+        android:id="@+id/lv_work"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.xw.repo.refresh.PullListView>
 
     <LinearLayout
         android:id="@+id/ll_pinglun_input"

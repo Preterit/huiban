@@ -24,6 +24,7 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.List;
 
+/**查看报表*/
 public class CheckBaobiaoActivity extends FragmentActivity {
 
     private TextView today_work;
