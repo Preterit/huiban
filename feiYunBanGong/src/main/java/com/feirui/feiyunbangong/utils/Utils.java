@@ -250,7 +250,7 @@ public class Utils {
             public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
                 final JsonBean bean = JsonUtils.getMessage(new String(arg2));
                 if ("200".equals(bean.getCode())) {
-                    Log.e("tag", "AsyncHttpServiceHelper----success: " );
+                    Log.e("tag", "AsyncHttpServiceHelper----success: " +bean.getCode());
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -262,6 +262,7 @@ public class Utils {
                         }
                     });
                 } else {
+                    Log.e("tag", "AsyncHttpServiceHelper----failure: " +bean.getMsg());
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

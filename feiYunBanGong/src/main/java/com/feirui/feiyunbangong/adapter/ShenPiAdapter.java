@@ -19,7 +19,6 @@ public class ShenPiAdapter extends BaseAdapter {
 
     public interface OnChakanClickListener {
         void onChakanClick(HashMap<String, Object> data, int position);
-
     }
 
     public OnChakanClickListener getOnChakanClickListener() {

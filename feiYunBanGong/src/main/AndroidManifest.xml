@@ -437,9 +437,12 @@
         <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
         <activity android:name=".activity.ShenPiFuKuanDetailActivity" />
-        <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
         <activity android:name=".activity.ShenPiQiTaDetailActivity"></activity>
         <activity android:name=".activity.RenWuDanActivity"></activity>
+        <activity android:name=".activity.ShenPiCaiGouDetailActivity"></activity>
+
+        <!--操作记录-->
+        <activity android:name=".activity.CaoZuoJiLuActivity"/>
     </application>
 
 </manifest>

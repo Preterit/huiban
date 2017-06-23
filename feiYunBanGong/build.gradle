@@ -74,4 +74,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+
 }

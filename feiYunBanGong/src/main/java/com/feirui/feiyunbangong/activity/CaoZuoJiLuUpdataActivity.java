@@ -168,7 +168,7 @@ public class CaoZuoJiLuUpdataActivity extends BaseActivity implements OnItemSele
         }
         Log.d("TAG","点击1位置传到这里，，，，"+mSpinner.getSelectedItem().toString());
         mListView = (ListView) findViewById(R.id.receiveTaskList);
-        AsyncHttpServiceHelper.post(url, params,    new AsyncHttpResponseHandler() {
+        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);

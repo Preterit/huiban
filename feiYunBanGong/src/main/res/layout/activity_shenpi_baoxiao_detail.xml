@@ -112,8 +112,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="费用明细"
-            />
+            android:text="费用明细" />
 
         <ImageView
             android:id="@+id/iv_baoxiao_detail"
@@ -121,8 +120,7 @@
             android:layout_height="150dp"
             android:layout_marginLeft="30dp"
             android:background="@color/red_bg"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
     </LinearLayout>
 
     <View

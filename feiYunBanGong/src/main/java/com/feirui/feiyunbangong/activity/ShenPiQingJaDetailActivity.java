@@ -28,8 +28,6 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shen_pi_detail);
-
-
         initTop();
         getData();
     }
@@ -145,19 +143,15 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
                 String leave_days = bean.getInfor().get(0).get("leave_days") + "";
                 String ttt = bean.getInfor().get(0).get("ttt") + "";
 
-
                 mTvLeave.setText(leave_type);
                 mTvDays.setText(leave_days);
                 mTvEndTime.setText(leave_end);
                 mTvstartTime.setText(leave_start);
                 mTvReason.setText(leave_reason);
-
-
             }
 
             @Override
             public void failure(String msg) {
-
                 Log.e("orz", "failure: " + msg);
             }
 

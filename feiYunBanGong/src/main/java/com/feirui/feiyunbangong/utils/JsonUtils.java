@@ -1,14 +1,14 @@
 package com.feirui.feiyunbangong.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import com.feirui.feiyunbangong.entity.JsonBean;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.feirui.feiyunbangong.entity.JsonBean;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class JsonUtils {
 
@@ -55,6 +55,6 @@ public class JsonUtils {
 		}
 
 		return bean;
-	};
+	}
 
 }
