@@ -2,8 +2,9 @@ package com.feirui.feiyunbangong;
 
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.tcms.env.YWEnvType;
@@ -15,7 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 
-public class Happlication extends Application {
+public class Happlication extends MultiDexApplication {
     // application实例
     private static Happlication instance;
     public static boolean isDebug;// 是否打开调试
@@ -106,4 +107,9 @@ public class Happlication extends Application {
         }
 
     }
+
+    @Override protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this) ;
+       }
 }

@@ -30,8 +30,8 @@
                 android:layout_height="wrap_content"
                 android:text="申请描述：" />
 
-            <EditText
-                android:id="@+id/et_miaoshu"
+            <TextView
+                android:id="@+id/tv_miaoshu"
                 style="@style/a000000_38"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

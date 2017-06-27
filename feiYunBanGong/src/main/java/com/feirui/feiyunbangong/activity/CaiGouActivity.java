@@ -1,12 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.Header;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +13,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,15 +27,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.testpic.PublishedActivity;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
 import com.feirui.feiyunbangong.dialog.SelectZTDialog;
-import com.feirui.feiyunbangong.entity.AddShenHe;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
@@ -54,6 +42,13 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CaiGouActivity extends BaseActivity implements OnClickListener {
 
@@ -74,6 +69,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
     private Bitmap bitmap2;
     private Bitmap bitmap3;
     private Button btn_caigou_submit;// 提交采购信息按钮；
+    private EditText etShenQingMiaoShu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,9 +181,12 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
                 return;
         }
 
+        Log.e("tag","往下走吗--------------------------------------------");
+
         // 采购明细：
         for (int i = 0; i < ll_add_mingxi.getChildCount(); i++) {
             View v = ll_add_mingxi.getChildAt(i);
+            Log.e("tag","-------------------------------------------"+ll_add_mingxi.getChildAt(i));
             EditText et_name = (EditText) v.findViewById(R.id.et_mingcheng);
             EditText et_number = (EditText) v.findViewById(R.id.et_number);
             EditText et_price = (EditText) v.findViewById(R.id.et_price);
@@ -211,6 +210,8 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
             return;
         }
 
+        Log.e("tag","往下走吗--------------------------------------------");
+        Log.e("tag","---ets.get(0).getText().toString()------------"+etShenQingMiaoShu.getText().toString().trim());
         RequestParams params = new RequestParams();
         params.put("pur_describe", ets.get(0).getText().toString());
         params.put("pur_type", ets.get(1).getText().toString());
@@ -218,7 +219,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         params.put("pur_date", tvs.get(0).getText().toString());
         params.put("pur_pay_type", tvs.get(1).getText().toString());
 
-        Log.i("TAG", params.toString() + "......................");
+        Log.e("TAG", params.toString() + "......................"+ets.get(0).getText().toString());
         StringBuffer sb_pic = new StringBuffer();
         if (bitmap1 != null) {
             sb_pic.append(BitmapToBase64.bitmapToBase64(bitmap1) + ",");
@@ -256,15 +257,15 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         params.put("pur_money", sb_price.deleteCharAt(sb_price.length() - 1)
                 .toString());
 
-        Log.i("TAG", params.toString());
+        Log.e("TAG", "-----提交的采购信息-----" + params.toString());
 
         try {
             AsyncHttpServiceHelper.post(UrlTools.url
                             + UrlTools.ADD_CAIGOU_XINXI, params,
                     new AsyncHttpResponseHandler() {
                         @Override
-                        public void onSuccess(int arg0, Header[] arg1,
-                                              byte[] arg2) {
+                        public void onSuccess(int arg0, Header[] arg1,byte[] arg2) {
+//                            if ()
                             handler.sendEmptyMessage(0);
                         }
 
@@ -272,11 +273,12 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
                         public void onFailure(int arg0, Header[] arg1,
                                               byte[] arg2, Throwable arg3) {
                             handler.sendEmptyMessage(1);
+                            Log.e("tag","采购提交失败-----" + arg3.toString());
                         }
 
                     });
         } catch (Exception e) {
-            Log.i("TAG", e.getMessage());
+            Log.e("TAG", "采购异常-----" + e.getMessage());
         }
     }
 
@@ -354,7 +356,6 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
             }
 
         }
-
         switch (requestCode) {
 
             case 1:
@@ -490,6 +491,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         iv_add_pic_03 = (ImageView) findViewById(R.id.iv_add_pic_03);
         btn_caigou_submit = (Button) findViewById(R.id.btn_caigou_submit);
 
+        etShenQingMiaoShu = (EditText) findViewById(R.id.et_shenqingmiaoshu);
         ets.add((EditText) findViewById(R.id.et_shenqingmiaoshu));
         ets.add((EditText) findViewById(R.id.et_caigouleixing));
         ets.add((EditText) findViewById(R.id.et_beizhu));
