@@ -1,12 +1,8 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,6 +23,9 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.RequestParams;
 import com.zxing.activity.CaptureActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 添加好友：
@@ -86,7 +85,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (keyCode == KeyEvent.KEYCODE_ENTER) {
 				if (!Utils.isPhone(et_sousuolianxiren.getText().toString())) {
-					Toast.makeText(this, "手机号格式错误！", 0).show();
+					Toast.makeText(this, "手机号格式错误！", Toast.LENGTH_SHORT).show();
 					return false;
 				}
 				search(et_sousuolianxiren.getText().toString());
@@ -142,7 +141,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 
 					@Override
 					public void failure(String msg) {
-						Toast.makeText(AddFriendActivity.this, msg, 0).show();
+						Toast.makeText(AddFriendActivity.this, msg, Toast.LENGTH_SHORT).show();
 					}
 
 					@Override
@@ -170,7 +169,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 		Log.e("TAG", resultCode + "");
 		if (resultCode == -1) {
 			if (requestCode == SCANER_CODE) {
-				Toast.makeText(AddFriendActivity.this, "扫描成功！", 0).show();
+				Toast.makeText(AddFriendActivity.this, "扫描成功！", Toast.LENGTH_SHORT).show();
 				Bundle bundle = data.getExtras();
 				String scanResult = bundle.getString("result");
 				if (Utils.isPhone(scanResult)) {
@@ -178,7 +177,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 				} else if (scanResult.charAt(0) == 'T') {
 					addTeam(scanResult.substring(1, scanResult.length()));// 加入团队；
 				} else {
-					Toast.makeText(AddFriendActivity.this, "无法识别该二维码！", 0)
+					Toast.makeText(AddFriendActivity.this, "无法识别该二维码！", Toast.LENGTH_SHORT)
 							.show();
 				}
 				Log.e("TAG", scanResult);
@@ -204,7 +203,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 					public void onOK(String name) {
 						
 						if (!Utils.isPhone(name)) {
-							Toast.makeText(AddFriendActivity.this, "手机号不合法！", 0)
+							Toast.makeText(AddFriendActivity.this, "手机号不合法！", Toast.LENGTH_SHORT)
 									.show();
 							return;
 						}
