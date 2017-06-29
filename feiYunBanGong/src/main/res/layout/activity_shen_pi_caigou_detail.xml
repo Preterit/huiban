@@ -11,11 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
         layout="@layout/top" />
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/sv_caigou"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         >
         <LinearLayout
@@ -104,84 +109,21 @@
             android:background="@color/jiange" />
 
         <LinearLayout
+            android:id="@+id/ll_add_mingxi"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y140"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x20"
-            android:gravity="center_vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <TextView
-                style="@style/a000000_48"
-                android:layout_width="wrap_content"
+            <include
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="名称：" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                style="@style/a000000_48"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:hint="正在载入" />
+                layout="@layout/add_mingxi_caigou" />
         </LinearLayout>
+
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y1"
-            android:background="@color/jiange" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y140"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x20"
-            android:gravity="center_vertical">
-
-            <TextView
-                style="@style/a000000_48"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="数量：" />
-
-            <TextView
-                android:id="@+id/tv_number"
-                style="@style/a000000_48"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:hint="正在载入" />
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y1"
-            android:background="@color/jiange" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y140"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x20"
-            android:gravity="center_vertical">
-
-            <TextView
-                style="@style/a000000_48"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="价格：" />
-
-            <TextView
-                android:id="@+id/tv_jiage"
-                style="@style/a000000_48"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:hint="正在载入" />
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y1"
+            android:layout_height="@dimen/y15"
             android:background="@color/jiange" />
 
         <LinearLayout
@@ -259,7 +201,7 @@
                 android:scaleType="centerCrop" />
         </LinearLayout>
     </LinearLayout>
-
+</ScrollView>
 
     <View
         android:layout_width="match_parent"

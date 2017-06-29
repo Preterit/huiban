@@ -278,7 +278,8 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
                         public void onFailure(int arg0, Header[] arg1,
                                               byte[] arg2, Throwable arg3) {
                             JsonBean bean = JsonUtils.getMessage(new String(arg2));
-                            if (bean.getCode().equals("400")){
+                            Log.e("TAG", "-----提交的采购信息-----" + bean.getCode());
+                            if (bean.getCode().equals("-400")){
                                 handler.sendEmptyMessage(1);
                             }
 
