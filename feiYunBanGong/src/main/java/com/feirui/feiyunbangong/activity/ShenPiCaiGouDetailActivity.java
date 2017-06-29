@@ -70,7 +70,7 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
         setCenterString("采购");
         setRightVisibility(false);
         mTvMiaoShu = (TextView) findViewById(R.id.tv_miaoshu);
-        mTvLeiXing = (TextView) findViewById(R.id.tv_miaoshu);
+        mTvLeiXing = (TextView) findViewById(R.id.tv_leixing);
         mTvTime = (TextView) findViewById(R.id.tv_shijian);
         mTvName = (TextView) findViewById(R.id.tv_name);
         mTvNumber = (TextView) findViewById(R.id.tv_number);
@@ -106,7 +106,7 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
         Object approval_id = mData.get("approval_id");
         Object list_id = mData.get("list_id");
         mList_id = list_id +"";
-        String url =  UrlTools.url + UrlTools.APPROVAL_DETAIL;
+        final String url =  UrlTools.url + UrlTools.APPROVAL_DETAIL;
 
         RequestParams params = new RequestParams();
         params.put("id",id + "");
@@ -131,7 +131,7 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
 
                         ArrayList<HashMap<String,Object>> infor = bean.getInfor();
                         HashMap<String,Object> in_fo = infor.get(0);
-                        Log.e("orz", "success: " + in_fo.get("pur_describe") + "");
+                        Log.e("orz", "success: " + url + in_fo.get("pur_picture") + "");
 
                         mTvMiaoShu.setText(in_fo.get("pur_describe") + "");
                         mTvLeiXing.setText(in_fo.get("pur_type") + "");
@@ -139,7 +139,7 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
                         mTvFangShi.setText(in_fo.get("pur_pay_type") + "");
                         mTvBeiZhu.setText(in_fo.get("pur_remarks") + "");
 
-                        Glide.with(ShenPiCaiGouDetailActivity.this).load(in_fo.get("pur_picture"))
+                        Glide.with(ShenPiCaiGouDetailActivity.this).load( url + in_fo.get("pur_picture") + "")
                                 .error( R.drawable.loading_0 )
                                 .into(mIvPic);
                         JSONArray jsonArray = (JSONArray) in_fo.get("detail");

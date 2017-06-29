@@ -38,6 +38,7 @@ import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
 import com.feirui.feiyunbangong.utils.FeiKongJianYaoUtil;
+import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -265,14 +266,22 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int arg0, Header[] arg1,byte[] arg2) {
-//                            if ()
-                            handler.sendEmptyMessage(0);
+                            JsonBean bean = JsonUtils.getMessage(new String(arg2));
+                            Log.e("TAG", "-----提交的采购信息-----" + bean.getCode());
+                            if (bean.getCode().equals("200")){
+                                handler.sendEmptyMessage(0);
+                            }
+
                         }
 
                         @Override
                         public void onFailure(int arg0, Header[] arg1,
                                               byte[] arg2, Throwable arg3) {
-                            handler.sendEmptyMessage(1);
+                            JsonBean bean = JsonUtils.getMessage(new String(arg2));
+                            if (bean.getCode().equals("400")){
+                                handler.sendEmptyMessage(1);
+                            }
+
                             Log.e("tag","采购提交失败-----" + arg3.toString());
                         }
 
@@ -317,7 +326,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
     }
 
     private void addMingXi() {
-        v_add_mingxi = getLayoutInflater().inflate(R.layout.add_mingxi_caigou,
+        v_add_mingxi = getLayoutInflater().inflate(R.layout.add_mingxi_caigou_shenpi,
                 null);
         tv_title = (TextView) v_add_mingxi.findViewById(R.id.tv_title);
         tv_title.setTag(v_add_mingxi);

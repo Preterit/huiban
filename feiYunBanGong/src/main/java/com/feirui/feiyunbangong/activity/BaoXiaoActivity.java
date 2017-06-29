@@ -23,13 +23,10 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
-import com.feirui.feiyunbangong.entity.AddShenHe;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.T;
@@ -316,10 +313,12 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         params.put("expense_type", et_2.getText().toString().trim());
         params.put("expense_detail", et_3.getText().toString().trim());
         String url = UrlTools.url + UrlTools.EXPENSE_ADD_EXPENSE;
+        Log.e("tag", "报销的---------"+  params.toString());
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(final JsonBean bean) {
+                Log.e("tag", "报销的---------"+ bean.getCode());
                 if ("200".equals(bean.getCode())) {
                     runOnUiThread(new Runnable() {
                         public void run() {
