@@ -52,6 +52,10 @@ public class Statement4Activity extends Statement1Activity implements OnClickLis
             T.showShort(this, "请输入明日目标");
             return;
         }
+        if (shenpi==false) {
+            T.showShort(this, "请选择审批人");
+            return;
+        }
         RequestParams params = new RequestParams();
 
         params.put("type_id", "2");
