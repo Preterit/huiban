@@ -112,7 +112,7 @@ public class DaiShenPiActivity extends BaseActivity implements
                         baoxiaoIntent.putExtra("data", data);
                         startActivity(baoxiaoIntent);
                         break;
-                    //--------------------------未完成------------------
+
                     case "外出":
                         Intent waichuIntent = new Intent(DaiShenPiActivity.this, ShenPiWaiChuDetailActivity.class);
                         waichuIntent.putExtra("data", data);

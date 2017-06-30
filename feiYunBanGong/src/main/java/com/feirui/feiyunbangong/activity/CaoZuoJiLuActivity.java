@@ -1,6 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.util.Log;
@@ -13,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.adapter.CaoZuoJiLuAdapter;
 import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -32,7 +32,7 @@ import static com.feirui.feiyunbangong.utils.UrlTools.pcUrl;
 import static com.feirui.feiyunbangong.utils.UrlTools.url;
 
 /**
- * Created by Administrator on 2017/6/22.
+ * Created by 邢悦 on 2017/6/22.
  */
 
 public class CaoZuoJiLuActivity extends BaseActivity
@@ -50,6 +50,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
     private RadioGroup mRgTools;
 
     private ShenPiAdapter adapter;
+    private CaoZuoJiLuAdapter tiAdapter;
 
     private PullListView mPullListView;
     private PullToRefreshLayout mPullToRefreshLayout;
@@ -112,9 +113,8 @@ public class CaoZuoJiLuActivity extends BaseActivity
         tiSpinner.setVisibility(View.VISIBLE);
         mAdapter = new ArrayAdapter<String>(CaoZuoJiLuActivity.this, R.layout.sp_item, R.id.tv, leixing);
         tiSpinner.setAdapter(mAdapter);
-        adapter = new ShenPiAdapter(CaoZuoJiLuActivity.this, new ArrayList<HashMap<String, Object>>());
-        mPullListView.setAdapter(adapter);
-//        loadData(1, ON_REFRESH,tiurl);
+        tiAdapter = new CaoZuoJiLuAdapter(CaoZuoJiLuActivity.this, new ArrayList<HashMap<String, Object>>());
+        mPullListView.setAdapter(tiAdapter);
         //监听选择类型
         tiSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -146,9 +146,9 @@ public class CaoZuoJiLuActivity extends BaseActivity
                   String approval_type = (String) data.get("approval_type");
                   switch (approval_type){
                       case "请假":
-                          Intent qingjia = new Intent(CaoZuoJiLuActivity.this,MyShenPiQingJaDetailActivity.class);
-                          qingjia.putExtra("data",data);
-                          startActivity(qingjia);
+//                          Intent qingjia = new Intent(CaoZuoJiLuActivity.this,MyShenPiQingJaDetailActivity.class);
+//                          qingjia.putExtra("data",data);
+//                          startActivity(qingjia);
                           break;
 
                   }
@@ -203,46 +203,73 @@ public class CaoZuoJiLuActivity extends BaseActivity
     public void loadData(int page, final int onRefreshOrLoadMore,String url) {
 
         RequestParams params = new RequestParams();
-//        String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
 
         if (url == tiurl ){
             if (!"选择审批类型".equals(tiSpinner.getSelectedItem().toString())) {
                 Log.e("tag","leixing------"+tiSpinner.getSelectedItem().toString());
                 params.put("type", tiSpinner.getSelectedItem().toString());
             }
+
+            params.put("current_page", page + "");
+            params.put("pagesize", "15");
+            AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    super.onSuccess(statusCode, headers, responseBody);
+
+                    JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
+                    Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
+                    if (jsonBean.getCode().equals("200")) {
+
+                        if (onRefreshOrLoadMore == ON_REFRESH) {
+
+                            tiAdapter.addAll(jsonBean.getInfor());
+                            mPullToRefreshLayout.refreshFinish(true);
+                        } else {
+                            tiAdapter.add(jsonBean.getInfor());
+                            mPullToRefreshLayout.loadMoreFinish(true);
+                        }
+                    } else {
+                        tiAdapter.addAll(jsonBean.getInfor());
+                        mPullToRefreshLayout.loadMoreFinish(true);
+                        mPullToRefreshLayout.refreshFinish(true);
+                    }
+                }
+            });
         } else if (url == shenurl){
             if (!"选择审批类型".equals(shenSpinner.getSelectedItem().toString())) {
                 Log.e("tag","leixing------"+shenSpinner.getSelectedItem().toString());
                 params.put("type", shenSpinner.getSelectedItem().toString());
             }
+
+            params.put("current_page", page + "");
+            params.put("pagesize", "15");
+            AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    super.onSuccess(statusCode, headers, responseBody);
+
+                    JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
+                    Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
+                    if (jsonBean.getCode().equals("200")) {
+
+                        if (onRefreshOrLoadMore == ON_REFRESH) {
+
+                            adapter.addAll(jsonBean.getInfor());
+                            mPullToRefreshLayout.refreshFinish(true);
+                        } else {
+                            adapter.add(jsonBean.getInfor());
+                            mPullToRefreshLayout.loadMoreFinish(true);
+                        }
+                    } else {
+                        adapter.addAll(jsonBean.getInfor());
+                        mPullToRefreshLayout.loadMoreFinish(true);
+                        mPullToRefreshLayout.refreshFinish(true);
+                    }
+                }
+            });
         }
 
-        params.put("current_page", page + "");
-        params.put("pagesize", "15");
-        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                super.onSuccess(statusCode, headers, responseBody);
-
-                JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
-                if (jsonBean.getCode().equals("200")) {
-
-                    if (onRefreshOrLoadMore == ON_REFRESH) {
-
-                        adapter.addAll(jsonBean.getInfor());
-                        mPullToRefreshLayout.refreshFinish(true);
-                    } else {
-                        adapter.add(jsonBean.getInfor());
-                        mPullToRefreshLayout.loadMoreFinish(true);
-                    }
-                } else {
-                    adapter.addAll(jsonBean.getInfor());
-                    mPullToRefreshLayout.loadMoreFinish(true);
-                    mPullToRefreshLayout.refreshFinish(true);
-                }
-            }
-        });
     }
 
 }

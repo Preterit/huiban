@@ -22,6 +22,9 @@ public class UrlTools {
    */
   public static String url = "http://123.57.45.74/feiybg/public/index.php/api/";
 //    public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
+
+  public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
+
   /**
    * 注册获取验证码
    */

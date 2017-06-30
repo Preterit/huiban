@@ -71,6 +71,7 @@ public class BaifangKehuActivity extends BaseActivity {
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("拜访客户");
 		setRightVisibility(false);
+		tv_time = (TextView) findViewById(R.id.tv_form_time);
 		id = getIntent().getStringExtra("id");
 		tv_time.setText(DateUtils.getTime("yyyy-MM-dd",
 				System.currentTimeMillis()));

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -163,14 +162,10 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
                             mLayout.addView(v_add_mingxi);
                         }
 
-                        // 采购明细：
+                        // 采购明细：(动态添加布局)
                         for (int i = 0; i <  mLayout.getChildCount(); i++) {
                             View v =  mLayout.getChildAt(i);
                             Log.e("tag","-------------------------------------------"+mLayout.getChildAt(i));
-                            EditText et_name = (EditText) v.findViewById(R.id.et_mingcheng);
-                            EditText et_number = (EditText) v.findViewById(R.id.et_number);
-                            EditText et_price = (EditText) v.findViewById(R.id.et_price);
-
                             mTvName = (TextView)  v.findViewById(R.id.tv_name);
                             mTvNumber = (TextView)  v.findViewById(R.id.tv_number);
                             mTvJiaGe = (TextView)  v.findViewById(R.id.tv_jiage);
