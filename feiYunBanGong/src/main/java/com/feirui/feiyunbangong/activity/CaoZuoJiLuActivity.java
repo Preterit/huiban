@@ -1,5 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.CaoZuoJiLuAdapter;
+import com.feirui.feiyunbangong.adapter.MyShenPiAdapter;
 import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -49,7 +51,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
     private RadioButton mShenPi;
     private RadioGroup mRgTools;
 
-    private ShenPiAdapter adapter;
+    private MyShenPiAdapter adapter;
     private CaoZuoJiLuAdapter tiAdapter;
 
     private PullListView mPullListView;
@@ -136,20 +138,46 @@ public class CaoZuoJiLuActivity extends BaseActivity
           mAdapter = new ArrayAdapter<String>(CaoZuoJiLuActivity.this, R.layout.sp_item, R.id.tv, leixing);
           shenSpinner.setAdapter(mAdapter);
 
-          adapter = new ShenPiAdapter(CaoZuoJiLuActivity.this, new ArrayList<HashMap<String, Object>>());
+          adapter = new MyShenPiAdapter(CaoZuoJiLuActivity.this, new ArrayList<HashMap<String, Object>>());
           mPullListView.setAdapter(adapter);
 
           //查看每一项的详细内容
-          adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
+          adapter.setOnChakanClickListener(new MyShenPiAdapter.OnChakanClickListener() {
               @Override
               public void onChakanClick(HashMap<String, Object> data, int position) {
                   String approval_type = (String) data.get("approval_type");
                   switch (approval_type){
                       case "请假":
-//                          Intent qingjia = new Intent(CaoZuoJiLuActivity.this,MyShenPiQingJaDetailActivity.class);
-//                          qingjia.putExtra("data",data);
-//                          startActivity(qingjia);
+                          Intent qingjia = new Intent(CaoZuoJiLuActivity.this,MyShenPiQingJaDetailActivity.class);
+                          qingjia.putExtra("data",data);
+                          startActivity(qingjia);
                           break;
+                      case "报销":
+                          Intent baoxiao = new Intent(CaoZuoJiLuActivity.this,MyShenPiBaoXiaoDetailActivity.class);
+                          baoxiao.putExtra("data",data);
+                          startActivity(baoxiao);
+                          break;
+                      case "外出":
+                          Intent waichu = new Intent(CaoZuoJiLuActivity.this,MyWaiChuDetailActivity.class);
+                          waichu.putExtra("data",data);
+                          startActivity(waichu);
+                          break;
+                      case "付款":
+                          Intent fukuan = new Intent(CaoZuoJiLuActivity.this,MyFuKuanDetailActivity.class);
+                          fukuan.putExtra("data",data);
+                          startActivity(fukuan);
+                          break;
+                      case "采购":
+                          Intent caigou = new Intent(CaoZuoJiLuActivity.this,MyCaiGouDetailActivity.class);
+                          caigou.putExtra("data",data);
+                          startActivity(caigou);
+                          break;
+                      case "其他":
+                          Intent qita = new Intent(CaoZuoJiLuActivity.this,MyQiTaDetailActivity.class);
+                          qita.putExtra("data",data);
+                          startActivity(qita);
+                          break;
+
 
                   }
               }

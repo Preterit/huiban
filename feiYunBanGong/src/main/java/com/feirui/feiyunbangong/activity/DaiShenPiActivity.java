@@ -124,7 +124,6 @@ public class DaiShenPiActivity extends BaseActivity implements
                         startActivity(fukuanIntent);
                         break;
                     case "采购":
-                        Log.e("tag","--------采购的----");
                         Intent caigouIntent = new Intent(DaiShenPiActivity.this, ShenPiCaiGouDetailActivity.class);
                         caigouIntent.putExtra("data", data);
                         startActivity(caigouIntent);

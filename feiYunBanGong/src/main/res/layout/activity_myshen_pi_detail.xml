@@ -157,16 +157,6 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/shenpi_beizhu"
-                    android:layout_marginLeft="7dp"
-                    android:layout_toRightOf="@id/shenpi_beizhu"
-                    android:text="必填项"
-                    android:textColor="@color/gray_text"
-                    android:textSize="9sp" />
-
-                <TextView
                     android:id="@+id/tv_beizhu"
                     android:layout_width="352dp"
                     android:layout_height="185dp"
@@ -177,18 +167,6 @@
                     android:lines="10"
                     android:padding="17dp" />
 
-                <TextView
-                    android:id="@+id/tv_pass_no"
-                    android:layout_below="@id/tv_beizhu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   android:padding="10dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
-                    android:background="#55c2c2c2"
-                    android:text="暂不通过"
-                    android:textColor="@color/crimson"
-                    android:textSize="25sp"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

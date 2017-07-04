@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
@@ -23,8 +24,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Created by feirui1 on 2017-07-04.
+ */
 
-public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
+public class MyShenPiBaoXiaoDetailActivity extends BaseActivity{
 
     private HashMap<String, Object> mData;
     private String mList_id;
@@ -35,7 +39,7 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shenpi_baoxiao_detail);
         initView();
-        setCenterString("待报销");
+        setCenterString("查看");
         getData();
     }
 
@@ -43,12 +47,12 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
     private TextView mTvType, mTvJine, tvAllBaoxiao, mTvBaoxiaoName;
     private ImageView mBaoxiaoHead, ivBaoxiaoDetail;
     private Button mBtnAccept, mBtnRefuse;
+    private RelativeLayout mReLayout;
 
     private void initView() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setRightVisibility(false);
-
         mTvJine = ((TextView) findViewById(R.id.jine_baoxiao));
         mTvType = (TextView) findViewById(R.id.leixing_baoxiao);
         tvAllBaoxiao = (TextView) findViewById(R.id.all_baoxiao);
@@ -57,57 +61,16 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
         mTvBaoxiaoName = (TextView) findViewById(R.id.baoxiao_name);
         mBtnAccept = (Button) findViewById(R.id.btn_baoxiao_accept);
         mBtnRefuse = (Button) findViewById(R.id.btn_baoxiao_refuse);
+        mReLayout = (RelativeLayout) findViewById(R.id.baoxiao_head);
+        mReLayout.setVisibility(View.GONE);
+        mBtnAccept.setVisibility(View.GONE);
+        mBtnRefuse.setVisibility(View.GONE);
 
-        mBtnAccept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!mList_id.equals("")) {
-                    updateShenPi(mList_id, "通过");
-                }
-            }
-        });
-        mBtnRefuse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mList_id.equals("")) {
-                    updateShenPi(mList_id, "拒绝");
-                }
-            }
-        });
-    }
-
-    private void updateShenPi(String list_id, String acceptOrRefuse) {
-        RequestParams params = new RequestParams();
-        params.put("list_id", list_id + "");
-        params.put("type", acceptOrRefuse);
-
-        String url = UrlTools.url + UrlTools.APPROVAL_UPDATE;
-
-        Utils.doPost(LoadingDialog.getInstance(ShenpiBaoxiaoDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
-            @Override
-            public void success(JsonBean bean) {
-                if (bean.getCode().equals("200")) {
-                    T.showShort(ShenpiBaoxiaoDetailActivity.this, bean.getMsg());
-
-                    ShenpiBaoxiaoDetailActivity.this.finish();
-                }
-            }
-
-            @Override
-            public void failure(String msg) {
-                T.showShort(ShenpiBaoxiaoDetailActivity.this, msg);
-            }
-
-            @Override
-            public void finish() {
-
-            }
-        });
     }
 
     private void getData() {
         mData = (HashMap<String, Object>) getIntent().getSerializableExtra("data");
+        Log.e("tag","报销获取的数据---------"+mData.toString());
 
         Object id = mData.get("id");
         Object approval_type = mData.get("approval_type");

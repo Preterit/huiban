@@ -443,6 +443,13 @@
 
         <!--操作记录-->
         <activity android:name=".activity.CaoZuoJiLuActivity"/>
+        <activity android:name=".activity.MyShenPiQingJaDetailActivity"/>
+        <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity"/>
+        <activity android:name=".activity.MyWaiChuDetailActivity"/>
+        <activity android:name=".activity.MyFuKuanDetailActivity"/>
+        <activity android:name=".activity.MyCaiGouDetailActivity"/>
+        <activity android:name=".activity.MyQiTaDetailActivity"/>
+
     </application>
 
 </manifest>

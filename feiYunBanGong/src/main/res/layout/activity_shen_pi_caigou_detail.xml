@@ -208,8 +208,10 @@
         android:layout_height="@dimen/y1"
         android:background="@color/jiange" />
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/shenpi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <Button
             android:id="@+id/btn_pass"
