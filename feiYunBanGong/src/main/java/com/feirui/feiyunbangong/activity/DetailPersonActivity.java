@@ -250,6 +250,7 @@ public class DetailPersonActivity extends BaseActivity implements
                                     T.showShort(DetailPersonActivity.this,
                                             "修改成功！");
                                     getUser();
+                                    finish();
                                 } else {
                                     T.showShort(DetailPersonActivity.this,
                                             bean.getMsg());
@@ -419,8 +420,6 @@ public class DetailPersonActivity extends BaseActivity implements
                     break;
             }
         }
-
-        ;
     };
 
 }
