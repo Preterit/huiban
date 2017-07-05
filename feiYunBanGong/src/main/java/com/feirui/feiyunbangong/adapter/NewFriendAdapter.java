@@ -66,8 +66,8 @@ public class NewFriendAdapter extends MyBaseAdapter<LianXiRen> {
 			holder.jieshou.setVisibility(View.GONE);
 			holder.jvjue.setVisibility(View.GONE);
 		} else if ("拒绝".equals(lianXiRen.getState())) {
-			holder.tv_jieshou.setVisibility(View.VISIBLE);
 			holder.tv_jieshou.setText("拒绝");
+			holder.tv_jieshou.setVisibility(View.VISIBLE);
 			holder.jieshou.setVisibility(View.GONE);
 			holder.jvjue.setVisibility(View.GONE);
 		} else {

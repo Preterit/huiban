@@ -319,7 +319,7 @@ public class NewFriendActivity extends BaseActivity implements
 				Toast.makeText(NewFriendActivity.this, "添加成功！", Toast.LENGTH_SHORT).show();
 				setData();
 			}
-		};
+		}
 	};
 
 }
