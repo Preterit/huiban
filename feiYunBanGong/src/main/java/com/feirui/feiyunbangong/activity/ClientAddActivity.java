@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,9 +15,10 @@ import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
-import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * 创建拜访计划
@@ -27,13 +26,10 @@ import com.loopj.android.http.RequestParams;
  * @author admina
  *
  */
-public class ClientAddActivity extends BaseActivity {
-	@PView(click = "onClick")
-	TextView tv_time;// 时间
-	@PView
-	EditText et_name, et_dizhi;// 姓名，地址
-	@PView(click = "onClick")
-	Button btn_add;
+public class ClientAddActivity extends BaseActivity implements View.OnClickListener{
+	 private TextView tv_time;// 时间
+	 private  EditText et_name, et_dizhi;// 姓名，地址
+	 private Button btn_add;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +43,18 @@ public class ClientAddActivity extends BaseActivity {
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("创建拜访计划");
 		setRightVisibility(false);
+		tv_time = (TextView) findViewById(R.id.tv_form_time);
+		et_name = (EditText) findViewById(R.id.et_name);
+		et_dizhi = (EditText) findViewById(R.id.et_dizhi);
+		btn_add = (Button) findViewById(R.id.btn_add);
+
+		tv_time.setOnClickListener(this);
+		btn_add.setOnClickListener(this);
 	}
 
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.tv_form_time: // 提交
+		case R.id.tv_form_time:
 			// 点击了选择日期按钮
 			DateTimePickDialogUtil dateTimePicker = new DateTimePickDialogUtil(
 					this, "");

@@ -68,7 +68,8 @@ public class ShenPiWaiChuDetailActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!mList_id.equals("")) {
-                    updataShenPi(mList_id, "不通过");
+                    //不能写"不通过"，要写“拒绝”
+                    updataShenPi(mList_id, "拒绝");
                 }
             }
         });
@@ -105,7 +106,7 @@ public class ShenPiWaiChuDetailActivity extends BaseActivity {
 
     private void getData() {
         mData = (HashMap<String, Object>) getIntent().getSerializableExtra("data");
-        Log.d("从data", "getData: " + mData);
+        Log.e("tag", "getData: " + mData.toString());
 
         Object id = mData.get("id");
         Object approval_type = mData.get("approval_type");
@@ -130,15 +131,8 @@ public class ShenPiWaiChuDetailActivity extends BaseActivity {
 
                 HashMap<String, Object> in_fo = infor.get(0);
                 Log.d("审批外出界面in_fo---------", "in_fo: " + in_fo.toString());
-                //JSONArray jsonArray = (JSONArray) in_fo.get("detail");
-                //Log.d("审批外出界面jsonArray------", "jsonArray: " + jsonArray.toString());
 
                 try {
-                    //JSONObject detail = jsonArray.getJSONObject(0);
-
-                    //审批类型
-//                    String expense_type = String.valueOf( in_fo.get("expense_type"));
-//                    tv_leixing.setText(expense_type);
                     //开始时间
                     String out_start = String.valueOf(in_fo.get("out_start"));
                     tv_starttime.setText(out_start);

@@ -56,7 +56,7 @@ public class ShenPiQiTaDetailActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!mList_id.equals("")) {
-                    updataShenPi(mList_id, "不通过");
+                    updataShenPi(mList_id, "拒绝");
                 }
             }
         });

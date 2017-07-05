@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
   private SelectPicPopupWindow window;// 弹出图片选择框；
 
   AddShenHeAdapter adapter;
-
+  public boolean shenpi =false;
   private Button mBtnCommit;
   private RecyclerView mRecPic;
   private RecyclerView mRecShenPi;
@@ -99,7 +100,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     addShenPiRen.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-
+        shenpi =true;
         Intent intent = new Intent(Statement1Activity.this, ShenPiRenActivity.class);
         startActivityForResult(intent, 102);// 请求码；
 
@@ -116,8 +117,8 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     mRecShenPi = (RecyclerView) findViewById(R.id.rec_add_shenpiren);
 
     mRecPic.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-    mRecShenPi
-        .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+      //给审批人RecyclerView设置layoutManager
+    mRecShenPi.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
     mRecPic.setAdapter(mFooterAdapter);
     mRecShenPi.setAdapter(mShenpiFooterAdapter);
@@ -140,6 +141,10 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
       T.showShort(this, "请输入明日计划");
       return;
     }
+    if(shenpi==false){
+        T.showShort(this,"请选择审批人");
+        return;
+    }
     RequestParams params = new RequestParams();
 
     params.put("type_id", "1");
@@ -160,13 +165,23 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
           .toString());
     }
 
+
+
     ArrayList<ShenPiRen> shenPiRenList = mShenPiRecAdapter.getDataSet();
     StringBuffer sb_id = new StringBuffer();
     for (int i = 0; i < shenPiRenList.size(); i++) {
       sb_id.append(shenPiRenList.get(i).getId() + ",");
     }
-    params.put("form_check", sb_id.deleteCharAt(sb_id.length() - 1)
-        .toString());
+
+
+    if (sb_id.deleteCharAt(sb_id.length() - 1).toString()==null) {
+      T.showShort(this, "请选择审批人");
+      return;
+    }
+
+    params.put("form_check", sb_id.deleteCharAt(sb_id.length() - 1).toString());
+
+    Log.e("日报审批人", sb_id.deleteCharAt(sb_id.length() - 1).toString());
 
     String url = UrlTools.url + UrlTools.FORM_REPORT;
     Utils.doPost(LoadingDialog.getInstance(Statement1Activity.this), Statement1Activity.this, url,

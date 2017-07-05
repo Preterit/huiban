@@ -13,7 +13,6 @@
         layout="@layout/top" />
 
 
-
     <ListView
         android:id="@+id/lv_chengyuan"
         android:layout_width="match_parent"
@@ -21,9 +20,7 @@
         android:layout_weight="1"
         android:background="@color/ffffff"
         android:divider="@color/fenge"
-        android:dividerHeight="@dimen/y4" >
-    </ListView>
+        android:dividerHeight="@dimen/y4"></ListView>
 
-    
 
 </LinearLayout>

@@ -22,6 +22,9 @@ public class UrlTools {
    */
   public static String url = "http://123.57.45.74/feiybg/public/index.php/api/";
 //    public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
+
+  public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
+
   /**
    * 注册获取验证码
    */
@@ -173,6 +176,10 @@ public class UrlTools {
   public static String APPROVAL_APPROVAL = "Approval/approval";
 
   public static String APPROVAL_DETAIL = "Approval/approval_detaile";
+    /**
+     * 待审批的个数显示
+     * */
+    public static String APPROVAL_SHOWAPPCOUNT = "Approval/showappcount ";
   /**
    * 推广-团队工作圈
    */

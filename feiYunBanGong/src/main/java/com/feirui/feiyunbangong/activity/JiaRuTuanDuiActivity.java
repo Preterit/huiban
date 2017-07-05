@@ -138,7 +138,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 
 						if (hm.get("team_name") != null) {
 							tv_name.setText(String.valueOf(hm.get("team_name")));
-							tiv_head.setText(String.valueOf(hm.get("team_name")));
+							//tiv_head.setText(String.valueOf(hm.get("team_name")));
 						}
 
 						JSONArray array = (JSONArray) hm.get("list");

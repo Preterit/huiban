@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="9dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/jpush_richpush_btn_selector" />
+            android:background="@drawable/richpush_btn_selector" />
 
         <ImageView
             android:id="@+id/imgView"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:progress="0"
-        android:progressDrawable="@drawable/jpush_richpush_progressbar"
+        android:progressDrawable="@drawable/richpush_progressbar"
         style="?android:attr/progressBarStyleHorizontal" />
     <WebView
         android:layout_width="match_parent"

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 19
@@ -6,15 +7,29 @@ android {
 
     dexOptions {
         jumboMode true
+        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
     }
     defaultConfig {
         applicationId "com.feirui.feiyunbangong"
+        multiDexEnabled true
         minSdkVersion 17
         targetSdkVersion 19
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_7
             targetCompatibility JavaVersion.VERSION_1_7
         }
+        //极光推送
+//        ndk {
+//            //选择要添加的对应cpu类型的.so库。
+//            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+//            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+//        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "3f2df3e9e2810677bce669dc", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
 
 
@@ -39,8 +54,11 @@ dependencies {
 
     //    compile project(':baidu')
     compile files('libs/android-async-http-1.4.4.jar')
-    compile files('libs/core.jar')
-    compile files('libs/jpush-android-2.2.0.jar')
+
+    //极光推送
+    compile files('libs/core.jar')//谷歌二维码
+//    compile files('libs/jcore-android_v1.1.3.jar')
+//    compile files('libs/jpush-android-3.0.6.jar')
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/universal-image-loader-1.9.0.jar')
     compile files('libs/volley.jar')
@@ -58,6 +76,10 @@ dependencies {
     compile('com.android.support:cardview-v7:23.2.0') {
         force = true
     }
+
+    compile 'cn.jiguang.sdk:jpush:3.0.6'  // 此处以JPush 3.0.0 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.3'  // 此处以JCore 1.1.3 版本为例。
+
     compile 'com.contrarywind:Android-PickerView:3.1.1'
     compile 'com.android.support:support-v4:23.2.0'
     compile 'com.google.code.gson:gson:2.2.4'
@@ -73,5 +95,11 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
-    compile 'com.makeramen:roundedimageview:2.3.0'
+//    compile 'com.jakewharton:butterknife:8.6.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
+    compile 'com.github.bumptech.glide:glide:3.5.2'
+    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.android.support:multidex:1.0.1'
+
 }

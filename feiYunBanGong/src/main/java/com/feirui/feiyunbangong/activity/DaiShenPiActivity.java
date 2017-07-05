@@ -2,7 +2,6 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +12,6 @@ import android.widget.Spinner;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -42,7 +40,7 @@ public class DaiShenPiActivity extends BaseActivity implements
     private ArrayAdapter<String> adt;  //审批类型的适配器
     private ShenPiAdapter adapter;
     private String[] leixing = new String[]{"选择审批类型", "请假", "报销", "外出", "付款",
-            "采购"};
+            "采购","其他"};
 
     private  JsonBean json;
     private static int count;
@@ -51,32 +49,35 @@ public class DaiShenPiActivity extends BaseActivity implements
     private PullListView mPullListView;
     private PullToRefreshLayout mPullToRefreshLayout;
 
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case Constant.REFRESH:
-                    break;
-                case Constant.LOAD:
-                    break;
-                case Constant.PUBLIC_TYPE_ONE:
-                    break;
-            }
-        }
+//    private Handler handler = new Handler() {
+//        public void handleMessage(android.os.Message msg) {
+//            switch (msg.what) {
+//                case Constant.REFRESH:
+//                    Log.e("tag","----------刷新autolist-------------");
+//                    break;
+//                case Constant.LOAD:
+//                    Log.e("tag","----------加载autolist-------------");
+//                    break;
+//                case Constant.PUBLIC_TYPE_ONE:
+//                    Log.e("tag","----------公用标记-------------");
+//                    break;
+//            }
+//        }
+//
+//    };
 
-        ;
-    };
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadData(currentPage, ON_REFRESH);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dai_shen_pi);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData(currentPage, ON_REFRESH);
     }
 
     private void initView() {
@@ -93,7 +94,7 @@ public class DaiShenPiActivity extends BaseActivity implements
 
         adapter = new ShenPiAdapter(DaiShenPiActivity.this, new ArrayList<HashMap<String, Object>>());
         mPullListView.setAdapter(adapter);
-        Log.d("页面数据列表mPullListView----", "mPullListView: "+mPullListView.toString());
+        Log.e("tag", "页面数据列表mPullListView---- "+mPullListView.toString());
 
         //查看各种审批类型的详情
         adapter.setOnChakanClickListener(new ShenPiAdapter.OnChakanClickListener() {
@@ -111,7 +112,7 @@ public class DaiShenPiActivity extends BaseActivity implements
                         baoxiaoIntent.putExtra("data", data);
                         startActivity(baoxiaoIntent);
                         break;
-                    //--------------------------未完成------------------
+
                     case "外出":
                         Intent waichuIntent = new Intent(DaiShenPiActivity.this, ShenPiWaiChuDetailActivity.class);
                         waichuIntent.putExtra("data", data);
@@ -123,9 +124,10 @@ public class DaiShenPiActivity extends BaseActivity implements
                         startActivity(fukuanIntent);
                         break;
                     case "采购":
-//                        Intent caigouIntent = new Intent(DaiShenPiActivity.this, ShenpPiCaiGouDetailActivity.class);
-//                        caigouIntent.putExtra("data", data);
-//                        startActivity(caigouIntent);
+                        Log.e("tag","--------采购的----");
+                        Intent caigouIntent = new Intent(DaiShenPiActivity.this, ShenPiCaiGouDetailActivity.class);
+                        caigouIntent.putExtra("data", data);
+                        startActivity(caigouIntent);
                         break;
                     case "其他":
                         Intent qitaIntent = new Intent(DaiShenPiActivity.this, ShenPiQiTaDetailActivity.class);
@@ -160,6 +162,7 @@ public class DaiShenPiActivity extends BaseActivity implements
         String type = (String) itemAtPosition;
 
         loadData(1, ON_REFRESH);
+        Log.e("tag", "自动加载数据----"+mPullListView.toString());
     }
 
     @Override
@@ -174,6 +177,7 @@ public class DaiShenPiActivity extends BaseActivity implements
         String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
 
         if (!"选择审批类型".equals(sp_daishenpi.getSelectedItem().toString())) {
+            Log.e("tag","leixing------"+sp_daishenpi.getSelectedItem().toString());
             params.put("type", sp_daishenpi.getSelectedItem().toString());
         }
         params.put("current_page", page + "");
@@ -194,8 +198,9 @@ public class DaiShenPiActivity extends BaseActivity implements
                     } else {
                         adapter.add(jsonBean.getInfor());
                         mPullToRefreshLayout.loadMoreFinish(true);
-                    }
+                       }
                 } else {
+                    adapter.addAll(jsonBean.getInfor());
                     mPullToRefreshLayout.loadMoreFinish(true);
                     mPullToRefreshLayout.refreshFinish(true);
                 }

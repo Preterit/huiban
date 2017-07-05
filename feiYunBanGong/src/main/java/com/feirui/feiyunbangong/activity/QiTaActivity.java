@@ -1,9 +1,8 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,23 +15,21 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
-import com.feirui.feiyunbangong.entity.AddShenHe;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
 import com.feirui.feiyunbangong.utils.JsonUtils;
-import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -152,15 +149,17 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 					.toString());
 			params.put("to_time", tv_shijian.getText().toString().trim());
 			String url = UrlTools.url + UrlTools.OTHER_OTHER_ADD;
-			L.e("审批-其他url" + url + " params" + params);
+			Log.e("tag","审批-其他url" + url + " params" + params);
 			AsyncHttpServiceHelper.post(url, params,
 					new AsyncHttpResponseHandler() {
 						@Override
 						public void onSuccess(int arg0, Header[] arg1,
 								byte[] arg2) {
 							super.onSuccess(arg0, arg1, arg2);
+							Log.e("tag","审批-其他---onSuccess-----" );
 							final JsonBean json = JsonUtils
 									.getMessage(new String(arg2));
+
 							if ("200".equals(json.getCode())) {
 								runOnUiThread(new Runnable() {
 									public void run() {
@@ -182,6 +181,10 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 						public void onFailure(int arg0, Header[] arg1,
 								byte[] arg2, Throwable arg3) {
 							super.onFailure(arg0, arg1, arg2, arg3);
+							JsonBean json = JsonUtils
+									.getMessage(new String(arg2));
+							Log.e("tag","审批-其他url------" + json.getCode());
+							Log.e("tag","--------其他--"+arg3.toString());
 
 						}
 					});

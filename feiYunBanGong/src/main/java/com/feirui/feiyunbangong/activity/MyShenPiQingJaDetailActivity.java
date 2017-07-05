@@ -1,17 +1,12 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.loopj.android.http.RequestParams;
@@ -19,9 +14,12 @@ import com.loopj.android.http.RequestParams;
 import java.util.HashMap;
 
 /**
- * 审批详情
+ * Created by Administrator on 2017/6/23.
+ * 我提交的请假信息
  */
-public class ShenPiQingJaDetailActivity extends BaseActivity {
+
+class MyShenPiQingJaDetailActivity  extends BaseActivity{
+
     private HashMap<String, Object> mData;
 
     @Override
@@ -33,9 +31,8 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
     }
 
 
-    private TextView mTvLeave, mTvstartTime, mTvEndTime, mTvReason, mTvDays;
-    private EditText mEtBeizhu;
-    private Button mBtnAccept, mBtnRefuse;
+    private TextView mTvLeave, mTvstartTime, mTvEndTime, mTvReason, mTvDays, mTvBeizhu,mTvPass;
+
 
     private void initTop() {
         initTitle();
@@ -48,65 +45,10 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         mTvReason = (TextView) findViewById(R.id.shenpi_shiyou);
         mTvDays = (TextView) findViewById(R.id.shenpi_tianshu);
 
-        mEtBeizhu = (EditText) findViewById(R.id.et_beizhu);
+        mTvBeizhu = (TextView) findViewById(R.id.tv_beizhu);
 
-        mBtnAccept = (Button) findViewById(R.id.btn_shenpi_accept);
-        mBtnRefuse = (Button) findViewById(R.id.btn_shenpi_refuse);
+        mTvPass = (TextView) findViewById(R.id.tv_pass_no);
 
-        mBtnRefuse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-                    return;
-                }
-                updateShenPi(mList_id, "拒绝");
-            }
-        });
-        mBtnAccept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-                    return;
-                }
-
-                updateShenPi(mList_id, "通过");
-            }
-        });
-    }
-
-    private void updateShenPi(String list_id, String acceptOrRefuse) {
-        RequestParams params = new RequestParams();
-        params.put("list_id", list_id + "");
-        params.put("type", acceptOrRefuse);
-
-        String url = UrlTools.url + UrlTools.APPROVAL_UPDATE;
-
-        Utils.doPost(LoadingDialog.getInstance(ShenPiQingJaDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
-            @Override
-            public void success(JsonBean bean) {
-                Log.e("tag"," Utils---seccess=----------"+bean.getCode());
-
-                if (bean.getCode().equals("200")) {
-                    T.showShort(ShenPiQingJaDetailActivity.this, bean.getMsg());
-                    Log.e("tag"," Utils---seccess=----------200--");
-                    ShenPiQingJaDetailActivity.this.finish();
-                }
-            }
-
-            @Override
-            public void failure(String msg) {
-                T.showShort(ShenPiQingJaDetailActivity.this, msg);
-//                已审核，请勿重复提交
-                Log.e("tag"," Utils---failure----------"+msg);
-            }
-
-            @Override
-            public void finish() {
-
-            }
-        });
     }
 
     private String mList_id;
@@ -142,12 +84,14 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
                 String leave_reason = bean.getInfor().get(0).get("leave_reason") + "";
                 String leave_days = bean.getInfor().get(0).get("leave_days") + "";
                 String ttt = bean.getInfor().get(0).get("ttt") + "";
+                String status = bean.getInfor().get(0).get("status") + "";
 
                 mTvLeave.setText(leave_type);
                 mTvDays.setText(leave_days);
                 mTvEndTime.setText(leave_end);
                 mTvstartTime.setText(leave_start);
                 mTvReason.setText(leave_reason);
+                mTvPass.setText(status);
             }
 
             @Override

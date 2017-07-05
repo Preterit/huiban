@@ -19,7 +19,7 @@
         android:layout_marginLeft="@dimen/x20"
         android:layout_marginRight="@dimen/x20"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/a000000_48"
@@ -28,7 +28,7 @@
             android:text="名称：" />
 
         <TextView
-            android:id="@+id/tv_mingcheng"
+            android:id="@+id/tv_name"
             style="@style/a000000_38"
             android:layout_width="match_parent"
             android:layout_height="28dp"
@@ -84,12 +84,13 @@
             android:text="价格：" />
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_jiage"
             style="@style/a000000_38"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:background="@null"
             android:hint="正在读取数据" />
+
     </LinearLayout>
     
 

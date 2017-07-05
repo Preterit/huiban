@@ -24,7 +24,7 @@
             android:text="我提交的"
             android:textColor="@color/mytask_button_text_color"
             style="@style/a000000_48"
-           android:checked="true"
+            android:checked="true"
             android:gravity="center_horizontal"/>
         <RadioButton
             android:id="@+id/rb_shen_pi"
@@ -42,15 +42,32 @@
         android:layout_width="@dimen/x400"
         android:layout_height="@dimen/x120"
         android:layout_gravity="center_horizontal"
-        android:background="@null">
+        android:background="@null"
+        android:visibility="gone">
+
+    </Spinner>
+    <Spinner
+        android:id="@+id/spinner_lei"
+        android:layout_width="@dimen/x400"
+        android:layout_height="@dimen/x120"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        android:visibility="gone"
+        >
 
     </Spinner>
 
-   <android.support.v4.view.ViewPager
-       android:id="@+id/viewPagerContent"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       >
-   </android.support.v4.view.ViewPager>
+    <com.xw.repo.refresh.PullToRefreshLayout
+        android:id="@+id/daishen_pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.xw.repo.refresh.PullListView
+            android:id="@+id/haveget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.xw.repo.refresh.PullListView>
+    </com.xw.repo.refresh.PullToRefreshLayout>
 
 </LinearLayout>

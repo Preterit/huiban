@@ -187,8 +187,8 @@ public class AboutFriendActivity extends BaseActivity implements
 
 	private void submit() {
 
-		if ("请选择".equals(tv_choice.getText().toString())) {
-			Toast.makeText(this, "请选择分组！", 0).show();
+		if ("分组".equals(tv_choice.getText().toString())) {
+			Toast.makeText(this, "请选择分组！", Toast.LENGTH_SHORT).show();
 		} else {
 			String url = UrlTools.url + UrlTools.TIANJIAHAOYOU;
 			Log.e("TAG", url);
