@@ -21,15 +21,6 @@
             android:gravity="center"
             tools:text="J先生"/>
 
-        <TextView
-            android:id="@+id/tv_bumen"
-            style="@style/huise_50"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="设计部"
-            />
 
         <TextView
             android:id="@+id/tv_leixing"
@@ -39,6 +30,15 @@
             android:layout_weight="1"
             android:gravity="center"
             tools:text="请假"
+            />
+        <TextView
+            android:id="@+id/tv_shenhe"
+            style="@style/huise_50"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="已通过"
             />
 
         <Button

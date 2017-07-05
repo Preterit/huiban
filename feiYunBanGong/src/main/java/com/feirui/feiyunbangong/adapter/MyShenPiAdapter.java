@@ -12,24 +12,28 @@ import com.feirui.feiyunbangong.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ShenPiAdapter extends BaseAdapter {
+/**
+ * Created by feirui1 on 2017-07-04.
+ */
+
+public class MyShenPiAdapter  extends BaseAdapter {
     private Context context;
     private ArrayList<HashMap<String, Object>> data;
-    private OnChakanClickListener mOnChakanClickListener;
+    private MyShenPiAdapter.OnChakanClickListener mOnChakanClickListener;
 
     public interface OnChakanClickListener {
         void onChakanClick(HashMap<String, Object> data, int position);
     }
 
-    public OnChakanClickListener getOnChakanClickListener() {
+    public MyShenPiAdapter.OnChakanClickListener getOnChakanClickListener() {
         return mOnChakanClickListener;
     }
 
-    public void setOnChakanClickListener(OnChakanClickListener onChakanClickListener) {
+    public void setOnChakanClickListener(MyShenPiAdapter.OnChakanClickListener onChakanClickListener) {
         mOnChakanClickListener = onChakanClickListener;
     }
 
-    public ShenPiAdapter(Context context, ArrayList<HashMap<String, Object>> map) {
+    public MyShenPiAdapter(Context context, ArrayList<HashMap<String, Object>> map) {
         this.context = context;
         this.data = map;
     }
@@ -55,27 +59,23 @@ public class ShenPiAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
 
-        final ViewHolder holder;
+        final MyShenPiAdapter.ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.ll_item_daishenqi,
                     null);
 
-            holder = new ViewHolder(convertView);
+            holder = new MyShenPiAdapter.ViewHolder(convertView);
 
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (MyShenPiAdapter.ViewHolder) convertView.getTag();
 
         }
 
         holder.tv_name.setText((String)
                 data.get(position).get("staff_name"));
 
-        if (null == data.get(position).get("staff_department") || "null".equals("" + data.get(position).get("staff_department"))) {
-            holder.tv_shenhe.setText("");
-        } else {
-            holder.tv_shenhe.setText("" + data.get(position).get("staff_department"));
-        }
+        holder.tv_shenhe.setText((String) data.get(position).get("status"));
 
         holder.tv_leixing.setText((String) data.get(position)
                 .get("approval_type"));
@@ -107,7 +107,7 @@ public class ShenPiAdapter extends BaseAdapter {
 
 
     class ViewHolder {
-        TextView tv_name, tv_shenhe, tv_leixing;// 姓名，部门，类型
+        TextView tv_name, tv_shenhe, tv_leixing;// 姓名，类型
         Button bt_detail;
 
         public ViewHolder(View convertView) {

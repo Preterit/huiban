@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,11 @@ import com.loopj.android.http.RequestParams;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ShenPiQiTaDetailActivity extends BaseActivity {
+/**
+ * Created by feirui1 on 2017-07-04.
+ */
+
+ public class MyQiTaDetailActivity extends BaseActivity {
 
     private HashMap<String, Object> mData;
     private String mList_id;
@@ -29,6 +34,7 @@ public class ShenPiQiTaDetailActivity extends BaseActivity {
     Button btn_pass;// 审批通过
     @PView(click = "onClick")
     Button btn_nopass;// 审批拒绝
+    private ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,55 +47,11 @@ public class ShenPiQiTaDetailActivity extends BaseActivity {
     private void initView() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("待审批");
+        setCenterString("查看");
         setRightVisibility(false);
+        layout = (ConstraintLayout) findViewById(R.id.shenpi);
+        layout.setVisibility(View.GONE);
 
-        btn_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mList_id.equals("")) {
-                    updataShenPi(mList_id, "通过");
-                }
-            }
-        });
-        btn_nopass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mList_id.equals("")) {
-                    updataShenPi(mList_id, "拒绝");
-                }
-            }
-        });
-    }
-
-
-
-    private void updataShenPi(String list_id, String acceptOrRefuse) {
-        RequestParams params = new RequestParams();
-        params.put("list_id", list_id + "");
-        params.put("type", acceptOrRefuse);
-        //请求接口
-        String url = UrlTools.url + UrlTools.APPROVAL_UPDATE;
-
-        Utils.doPost(LoadingDialog.getInstance(ShenPiQiTaDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
-            @Override
-            public void success(JsonBean bean) {
-                if (bean.getCode().equals("200")) {
-                    T.showShort(ShenPiQiTaDetailActivity.this, bean.getMsg());
-                    ShenPiQiTaDetailActivity.this.finish();
-                }
-            }
-
-            @Override
-            public void failure(String msg) {
-                T.showShort(ShenPiQiTaDetailActivity.this, msg);
-            }
-
-            @Override
-            public void finish() {
-
-            }
-        });
 
     }
 

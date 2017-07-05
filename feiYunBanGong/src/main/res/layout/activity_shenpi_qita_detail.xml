@@ -68,6 +68,7 @@
         android:layout_height="@dimen/y1"
         android:background="@color/jiange" />
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/shenpi"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

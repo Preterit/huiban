@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
@@ -18,20 +19,20 @@ import java.util.HashMap;
  * 我提交的请假信息
  */
 
-class MyShenPiQingJaDetailActivity  extends BaseActivity{
+public class MyShenPiQingJaDetailActivity  extends BaseActivity{
 
     private HashMap<String, Object> mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shen_pi_detail);
+        setContentView(R.layout.activity_myshen_pi_detail);
         initTop();
         getData();
     }
 
 
-    private TextView mTvLeave, mTvstartTime, mTvEndTime, mTvReason, mTvDays, mTvBeizhu,mTvPass;
+    private TextView mTvLeave, mTvstartTime, mTvEndTime, mTvReason, mTvDays, mTvBeizhu;
 
 
     private void initTop() {
@@ -46,8 +47,7 @@ class MyShenPiQingJaDetailActivity  extends BaseActivity{
         mTvDays = (TextView) findViewById(R.id.shenpi_tianshu);
 
         mTvBeizhu = (TextView) findViewById(R.id.tv_beizhu);
-
-        mTvPass = (TextView) findViewById(R.id.tv_pass_no);
+        mTvBeizhu.setVisibility(View.INVISIBLE);
 
     }
 
@@ -84,14 +84,13 @@ class MyShenPiQingJaDetailActivity  extends BaseActivity{
                 String leave_reason = bean.getInfor().get(0).get("leave_reason") + "";
                 String leave_days = bean.getInfor().get(0).get("leave_days") + "";
                 String ttt = bean.getInfor().get(0).get("ttt") + "";
-                String status = bean.getInfor().get(0).get("status") + "";
 
                 mTvLeave.setText(leave_type);
                 mTvDays.setText(leave_days);
                 mTvEndTime.setText(leave_end);
                 mTvstartTime.setText(leave_start);
                 mTvReason.setText(leave_reason);
-                mTvPass.setText(status);
+
             }
 
             @Override

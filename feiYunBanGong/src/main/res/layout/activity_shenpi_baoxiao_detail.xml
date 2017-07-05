@@ -16,6 +16,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/baoxiao_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
