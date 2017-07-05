@@ -74,11 +74,14 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 
 		}
 
-
+//		holder.tv_shenpi.setText((String) data.get(position)
+//				.get("appname"));
 		holder.tv_leixing.setText((String) data.get(position)
 				.get("approval_type"));
-//        holder.bt_detail = (Button) convertView
-//                .findViewById(R.id.bt_detail);
+
+		holder.tv_pass.setText((String) data.get(position)
+				.get("status"));
+//		holder.tv_shenpiren.setText("审批");
 
 		holder.bt_detail.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -105,12 +108,15 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 
 
 	class ViewHolder {
-		TextView tv_name,  tv_leixing;// 姓名，部门，类型
+		TextView tv_name,tv_pass, tv_shenpi, tv_leixing,tv_shenpiren;// 姓名，部门，类型
 		Button bt_detail;
 
 		public ViewHolder(View convertView) {
 
 			tv_leixing = (TextView) convertView.findViewById(R.id.tv_leixing);
+			tv_pass = (TextView) convertView.findViewById(R.id.tv_pass);
+//			tv_shenpi = (TextView) convertView.findViewById(R.id.tv_shenpi);
+//			tv_shenpiren = (TextView) convertView.findViewById(R.id.tv_shenpiren);
 			bt_detail = (Button) convertView.findViewById(R.id.bt_detail);
 		}
 	}
