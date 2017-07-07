@@ -442,4 +442,30 @@
   <color name="shenpi_bg">#f9f9f9</color>
   <color name="shenpi_fg">#fdfdfe</color>
   <color name="heise">#b4333333</color>
+
+  <!-- YRecycleview属性 -->
+  <declare-styleable name="CircleLoadingView">
+    <attr name="progress_color" format="color" />
+  </declare-styleable>
+
+  <style name="DialogStyle">
+    <item name="android:windowFrame">@null</item>
+    <!-- 边框 -->
+    <item name="android:windowIsFloating">true</item>
+    <!-- 是否悬浮在activity上 -->
+    <item name="android:windowIsTranslucent">true</item>
+    <!-- 半透明 -->
+    <item name="android:windowNoTitle">true</item>
+    <!-- 无标题 -->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <!-- 背景透明 -->
+    <item name="android:backgroundDimEnabled">true</item>
+    <!-- 模糊 -->
+    <item name="android:backgroundDimAmount">0.5</item>
+    <!-- 灰度 -->
+    <item name="android:windowContentOverlay">@null</item>
+    <!-- 对话框是否有遮盖 -->
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <!-- 背景缓存颜色 -->
+  </style>
 </resources>

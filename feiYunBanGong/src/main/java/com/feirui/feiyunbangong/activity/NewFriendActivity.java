@@ -243,6 +243,7 @@ public class NewFriendActivity extends BaseActivity implements
 						super.onSuccess(arg0, arg1, arg2);
 					}
 				});
+		finish();
 	}
 
 	private void jieshou(Object id, Object type) {
@@ -300,10 +301,8 @@ public class NewFriendActivity extends BaseActivity implements
 					String id = String.valueOf(infor.get(i).get("id"));
 					Log.e("TAG", id + "id..................");
 					String name = String.valueOf(infor.get(i).get("name"));
-					String staff_head = String.valueOf(infor.get(i).get(
-							"staff_head"));
-					String staff_mobile = String.valueOf(infor.get(i).get(
-							"staff_mobile"));
+					String staff_head = String.valueOf(infor.get(i).get("staff_head"));
+					String staff_mobile = String.valueOf(infor.get(i).get("staff_mobile"));
 					String state = String.valueOf(infor.get(i).get("state"));
 					LianXiRen lxr = new LianXiRen(name, staff_mobile, null,
 							staff_head, id, state);

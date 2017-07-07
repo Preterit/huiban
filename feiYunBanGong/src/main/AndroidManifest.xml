@@ -6,7 +6,6 @@
     android:versionName="1.4.3">
 
     <uses-sdk
-
         android:minSdkVersion="17"
         android:targetSdkVersion="19" />
 
@@ -84,7 +83,7 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:theme,android:icon">
         <activity
             android:name=".activity.SplashActivity"
@@ -99,63 +98,63 @@
         <!-- 防止软键盘将布局弹出 -->
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
-        <activity android:name=".activity.GuideActivity"></activity>
-        <activity android:name=".activity.LoginActivity"></activity>
-        <activity android:name=".activity.RegisteActivity"></activity>
-        <activity android:name=".activity.RegisteSOLOActivity"></activity>
-        <activity android:name=".activity.RegisteFIRMActivity"></activity>
-        <activity android:name=".activity.ForgetPasswordActivity"></activity>
-        <activity android:name=".activity.ClockInActivity"></activity>
-        <activity android:name=".activity.StatementActivity"></activity>
-        <activity android:name=".activity.ProjectActivity"></activity>
-        <activity android:name=".activity.ExamineActivity"></activity>
-        <activity android:name=".activity.CustomerActivity"></activity>
-        <activity android:name=".activity.DataActivity"></activity>
-        <activity android:name=".activity.DaiShenPiActivity"></activity>
-        <activity android:name=".activity.Statement1Activity"></activity>
-        <activity android:name=".activity.Statement2Activity"></activity>
-        <activity android:name=".activity.Statement3Activity"></activity>
-        <activity android:name=".activity.Statement4Activity"></activity>
-        <activity android:name=".activity.ProjectAddActivity"></activity>
-        <activity android:name=".activity.FeedbackDetailsActivity"></activity>
-        <activity android:name=".activity.FeedbackAddActivity"></activity>
-        <activity android:name=".activity.ClientAddActivity"></activity>
-        <activity android:name=".activity.BaifangKehuActivity"></activity>
-        <activity android:name=".activity.QiTaActivity"></activity>
-        <activity android:name=".activity.QingJiaActivity"></activity>
-        <activity android:name=".activity.BaoXiaoActivity"></activity>
-        <activity android:name=".activity.WaiChuActivity"></activity>
-        <activity android:name=".activity.FuKuanActivity"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".activity.GuideActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegisteActivity" />
+        <activity android:name=".activity.RegisteSOLOActivity" />
+        <activity android:name=".activity.RegisteFIRMActivity" />
+        <activity android:name=".activity.ForgetPasswordActivity" />
+        <activity android:name=".activity.ClockInActivity" />
+        <activity android:name=".activity.StatementActivity" />
+        <activity android:name=".activity.ProjectActivity" />
+        <activity android:name=".activity.ExamineActivity" />
+        <activity android:name=".activity.CustomerActivity" />
+        <activity android:name=".activity.DataActivity" />
+        <activity android:name=".activity.DaiShenPiActivity" />
+        <activity android:name=".activity.Statement1Activity" />
+        <activity android:name=".activity.Statement2Activity" />
+        <activity android:name=".activity.Statement3Activity" />
+        <activity android:name=".activity.Statement4Activity" />
+        <activity android:name=".activity.ProjectAddActivity" />
+        <activity android:name=".activity.FeedbackDetailsActivity" />
+        <activity android:name=".activity.FeedbackAddActivity" />
+        <activity android:name=".activity.ClientAddActivity" />
+        <activity android:name=".activity.BaifangKehuActivity" />
+        <activity android:name=".activity.QiTaActivity" />
+        <activity android:name=".activity.QingJiaActivity" />
+        <activity android:name=".activity.BaoXiaoActivity" />
+        <activity android:name=".activity.WaiChuActivity" />
+        <activity android:name=".activity.FuKuanActivity" />
         <!-- <activity android:name=".activity.CaoZuoJiLuActivity"> -->
         <!-- </activity> -->
-        <activity android:name=".activity.CaoZuoJiLuUpdataActivity"></activity>
-        <activity android:name=".activity.TiXianActivity"></activity>
+        <activity android:name=".activity.CaoZuoJiLuUpdataActivity" />
+        <activity android:name=".activity.TiXianActivity" />
         <activity
             android:name=".activity.ClockInDataActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.CaiGouActivity"
-            android:label="@string/title_activity_cai_gou"></activity>
-        <activity android:name=".activity.ShenPiRenActivity"></activity>
+            android:label="@string/title_activity_cai_gou" />
+        <activity android:name=".activity.ShenPiRenActivity" />
         <activity
             android:name=".activity.AddFriendActivity"
-            android:label="@string/title_activity_add_friend"></activity>
+            android:label="@string/title_activity_add_friend" />
         <activity
             android:name=".activity.DetailLianXiRenActivity"
-            android:label="@string/title_activity_detail_lian_xi_ren"></activity>
+            android:label="@string/title_activity_detail_lian_xi_ren" />
         <activity
             android:name=".activity.DataStatement1Activity"
-            android:theme="@style/StyledIndicators"></activity>
-        <activity android:name=".activity.DataStatement2Activity"></activity>
-        <activity android:name=".activity.DataStatement3Activity"></activity>
-        <activity android:name=".activity.DataStatement4Activity"></activity>
-        <activity android:name=".activity.DataDetailsActivity"></activity>
-        <activity android:name=".activity.ImagePagerActivity"></activity>
-        <activity android:name=".activity.TuanDuiJiaActivity"></activity>
-        <activity android:name=".activity.YaoQingActivity"></activity>
-        <activity android:name=".activity.FenZuGuanLiActivity"></activity>
-        <activity android:name=".activity.HaoYouZiLiaoActivity"></activity>
+            android:theme="@style/StyledIndicators" />
+        <activity android:name=".activity.DataStatement2Activity" />
+        <activity android:name=".activity.DataStatement3Activity" />
+        <activity android:name=".activity.DataStatement4Activity" />
+        <activity android:name=".activity.DataDetailsActivity" />
+        <activity android:name=".activity.ImagePagerActivity" />
+        <activity android:name=".activity.TuanDuiJiaActivity" />
+        <activity android:name=".activity.YaoQingActivity" />
+        <activity android:name=".activity.FenZuGuanLiActivity" />
+        <activity android:name=".activity.HaoYouZiLiaoActivity" />
 
         <!-- 百度地图的appkey -->
         <meta-data
@@ -165,7 +164,7 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->
         <!-- 如：android:process=":remote" -->
@@ -231,7 +230,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
@@ -290,137 +289,137 @@
         <!-- </activity> -->
         <activity
             android:name=".activity.NewFriendActivity"
-            android:label="@string/title_activity_new_friend"></activity>
+            android:label="@string/title_activity_new_friend" />
         <activity
             android:name=".activity.AboutFriendActivity"
-            android:label="@string/title_activity_about_friend"></activity>
+            android:label="@string/title_activity_about_friend" />
         <activity
             android:name="com.zxing.activity.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.DetailPersonActivity"
-            android:label="@string/title_activity_detail_person"></activity>
+            android:label="@string/title_activity_detail_person" />
         <activity
             android:name=".activity.AddYuanGongActivity"
-            android:label="@string/title_activity_add_yuan_gong"></activity>
+            android:label="@string/title_activity_add_yuan_gong" />
         <activity
             android:name=".activity.YiJianActivity"
-            android:label="@string/title_activity_yi_jian"></activity>
+            android:label="@string/title_activity_yi_jian" />
         <!-- <activity -->
         <!-- android:name=".activity.WoDeTuanDuiActivity" -->
         <!-- android:label="@string/title_activity_chuang_jian"> -->
         <!-- </activity> -->
         <activity
             android:name=".activity.GuanLiTuanDuiActivity"
-            android:label="@string/title_activity_guan_li_tuan_dui"></activity>
+            android:label="@string/title_activity_guan_li_tuan_dui" />
         <activity
             android:name=".activity.SetGuanLIYuanActivity"
-            android:label="@string/title_activity_set_guan_liyuan"></activity>
+            android:label="@string/title_activity_set_guan_liyuan" />
         <activity
             android:name=".activity.DetailTuanDuiActivity"
-            android:label="@string/title_activity_detail_tuan_dui"></activity>
+            android:label="@string/title_activity_detail_tuan_dui" />
         <activity
             android:name=".activity.DetailChengYuanActivity"
             android:hardwareAccelerated="false"
-            android:label="@string/title_activity_detail_cheng_yuan"></activity>
+            android:label="@string/title_activity_detail_cheng_yuan" />
         <activity
             android:name=".activity.ChuangJianTuanDuiActivity"
-            android:label="@string/title_activity_chuang_jian_tuan_dui"></activity>
+            android:label="@string/title_activity_chuang_jian_tuan_dui" />
         <activity
             android:name=".activity.JiaRuTuanDuiActivity"
-            android:label="@string/title_activity_jia_ru_tuan_dui"></activity>
+            android:label="@string/title_activity_jia_ru_tuan_dui" />
         <activity
             android:name=".activity.AddChengYuanActivity"
-            android:label="@string/title_activity_add_cheng_yuan"></activity>
+            android:label="@string/title_activity_add_cheng_yuan" />
         <activity
             android:name=".activity.XiuGaiChengYuanActivity"
-            android:label="@string/title_activity_xiu_gai_cheng_yuan"></activity>
+            android:label="@string/title_activity_xiu_gai_cheng_yuan" />
         <activity
             android:name=".activity.TuanDuiGuanLiActivity"
-            android:label="@string/title_activity_tuan_dui_guan_li"></activity>
+            android:label="@string/title_activity_tuan_dui_guan_li" />
         <activity
             android:name=".activity.SouSuoTuanDuiActivity"
-            android:label="@string/title_activity_sou_suo_tuan_dui"></activity>
+            android:label="@string/title_activity_sou_suo_tuan_dui" />
         <activity
             android:name=".activity.DetailGongGaoActivity"
-            android:label="@string/title_activity_detail_gong_gao"></activity>
+            android:label="@string/title_activity_detail_gong_gao" />
         <activity
             android:name=".activity.AddGongGaoActivity"
-            android:label="@string/title_activity_add_gong_gao"></activity>
+            android:label="@string/title_activity_add_gong_gao" />
         <!-- <activity -->
         <!-- android:name=".AddWorkActivity" -->
         <!-- android:label="@string/title_activity_add_work"> -->
         <!-- </activity> -->
         <activity
             android:name="com.example.testpic.TestPicActivity"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="com.example.testpic.ImageGridActivity"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="com.example.testpic.PublishedActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="com.example.testpic.PhotoActivity"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".activity.WorkCircleActivity"
-            android:label="@string/title_activity_work_circle"></activity>
+            android:label="@string/title_activity_work_circle" />
         <!-- <activity -->
         <!-- android:name=".activity.SendMsgActivity" -->
         <!-- android:label="@string/title_activity_send_msg"> -->
         <!-- </activity> -->
         <activity
             android:name=".activity.DetailMapActivity"
-            android:label="@string/title_activity_detail_map"></activity>
+            android:label="@string/title_activity_detail_map" />
         <activity
             android:name=".activity.NoticeReadUnReadActivity"
-            android:label="@string/title_activity_notice_read_un_read"></activity>
+            android:label="@string/title_activity_notice_read_un_read" />
         <!-- <activity -->
         <!-- android:name=".activity.MainSlidingMenuActivity" -->
         <!-- android:label="@string/title_activity_main_sliding_menu"> -->
         <!-- </activity> -->
         <activity
             android:name=".activity.WifiClockActivity"
-            android:label="@string/title_activity_wifi_clock"></activity>
+            android:label="@string/title_activity_wifi_clock" />
         <activity
             android:name=".AddShopActivity"
-            android:label="@string/title_activity_add_shop"></activity>
+            android:label="@string/title_activity_add_shop" />
         <activity
             android:name=".activity.MyShopActivity"
-            android:label="@string/title_activity_my_shop"></activity>
+            android:label="@string/title_activity_my_shop" />
         <!-- <activity -->
         <!-- android:name=".FriendInfo" -->
         <!-- android:label="@string/title_activity_friend_info"> -->
         <!-- </activity> -->
         <activity
             android:name=".FriendInfoActivity"
-            android:label="@string/title_activity_friend_info"></activity>
-        <activity android:name=".activity.ShenPiQingJaDetailActivity"></activity>
-        <activity android:name=".activity.AddGoodActivity"></activity>
-        <activity android:name=".activity.ShenpiBaoxiaoDetailActivity"></activity>
-        <activity android:name=".activity.GoodDetailActivity"></activity>
-        <activity android:name=".activity.FriendShop"></activity>
-        <activity android:name=".activity.TasksListActivity"></activity>
+            android:label="@string/title_activity_friend_info" />
+        <activity android:name=".activity.ShenPiQingJaDetailActivity" />
+        <activity android:name=".activity.AddGoodActivity" />
+        <activity android:name=".activity.ShenpiBaoxiaoDetailActivity" />
+        <activity android:name=".activity.GoodDetailActivity" />
+        <activity android:name=".activity.FriendShop" />
+        <activity android:name=".activity.TasksListActivity" />
         <activity
             android:name=".activity.ReadFormActivity"
-            android:theme="@style/StyledIndicators"></activity>
+            android:theme="@style/StyledIndicators" />
         <activity
             android:name=".activity.ReleaseTask"
-            android:label="@string/title_activity_release_task"></activity>
+            android:label="@string/title_activity_release_task" />
         <activity
             android:name=".activity.TaskInfoActivity"
-            android:label="@string/title_activity_task_info"></activity>
+            android:label="@string/title_activity_task_info" />
         <activity
             android:name=".activity.SelectorTeamActivity"
-            android:label="@string/title_activity_selector_team"></activity>
+            android:label="@string/title_activity_selector_team" />
         <activity
             android:name=".activity.WoDeTaskActivity"
-            android:label="@string/title_activity_wo_de_task"></activity>
+            android:label="@string/title_activity_wo_de_task" />
         <activity android:name=".activity.CheckBaobiaoActivity" />
 
         <!-- 所有群聊的 -->
@@ -438,19 +437,19 @@
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
         <activity android:name=".activity.ShenPiFuKuanDetailActivity" />
         <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
-        <activity android:name=".activity.ShenPiQiTaDetailActivity"></activity>
-        <activity android:name=".activity.RenWuDanActivity"></activity>
+        <activity android:name=".activity.ShenPiQiTaDetailActivity" />
+        <activity android:name=".activity.RenWuDanActivity" />
 
-        <!--操作记录-->
-        <activity android:name=".activity.CaoZuoJiLuActivity"/>
-        <activity android:name=".activity.ShenPiCaiGouDetailActivity"></activity>
-        <activity android:name=".activity.MyShenPiQingJaDetailActivity"/>
-        <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity"/>
-        <activity android:name=".activity.MyWaiChuDetailActivity"/>
-        <activity android:name=".activity.MyFuKuanDetailActivity"/>
-        <activity android:name=".activity.MyCaiGouDetailActivity"/>
-        <activity android:name=".activity.MyQiTaDetailActivity"/>
-
+        <!-- 操作记录 -->
+        <activity android:name=".activity.CaoZuoJiLuActivity" />
+        <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
+        <activity android:name=".activity.MyShenPiQingJaDetailActivity" />
+        <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity" />
+        <activity android:name=".activity.MyWaiChuDetailActivity" />
+        <activity android:name=".activity.MyFuKuanDetailActivity" />
+        <activity android:name=".activity.MyCaiGouDetailActivity" />
+        <activity android:name=".activity.MyQiTaDetailActivity" />
+        <activity android:name=".activity.RenWuListActivity"></activity>
     </application>
 
 </manifest>
