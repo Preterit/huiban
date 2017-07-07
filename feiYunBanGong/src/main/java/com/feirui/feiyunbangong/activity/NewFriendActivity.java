@@ -227,6 +227,8 @@ public class NewFriendActivity extends BaseActivity implements
 						final JsonBean bean = JsonUtils.getMessage(new String(
 								arg2));
 						if ("200".equals(bean.getCode())) {
+							Log.e("TAG",  "----------------------------");
+							adapter.notifyDataSetChanged();
 							Message msg = new Message();
 							msg.what = 1;
 							msg.obj = bean;

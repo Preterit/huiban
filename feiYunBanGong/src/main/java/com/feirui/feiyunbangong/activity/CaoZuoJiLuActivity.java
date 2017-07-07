@@ -116,6 +116,50 @@ public class CaoZuoJiLuActivity extends BaseActivity
         tiSpinner.setAdapter(mAdapter);
         tiAdapter = new CaoZuoJiLuAdapter(CaoZuoJiLuActivity.this, new ArrayList<HashMap<String, Object>>());
         mPullListView.setAdapter(tiAdapter);
+
+        //查看每一项的详细内容
+        tiAdapter.setOnChakanClickListener(new CaoZuoJiLuAdapter.OnChakanClickListener() {
+            @Override
+            public void onChakanClick(HashMap<String, Object> data, int position) {
+                String approval_type = (String) data.get("approval_type");
+                switch (approval_type){
+                    case "请假":
+                        Intent qing = new Intent(CaoZuoJiLuActivity.this,MyShenPiQingJaDetailActivity.class);
+                        qing.putExtra("data",data);
+                        startActivity(qing);
+                        break;
+                    case "报销":
+                        Intent baoxiao = new Intent(CaoZuoJiLuActivity.this,MyShenPiBaoXiaoDetailActivity.class);
+                        baoxiao.putExtra("data",data);
+                        startActivity(baoxiao);
+                        break;
+                    case "外出":
+                        Intent waichu = new Intent(CaoZuoJiLuActivity.this,MyWaiChuDetailActivity.class);
+                        waichu.putExtra("data",data);
+                        startActivity(waichu);
+                        break;
+                    case "付款":
+                        Intent fukuan = new Intent(CaoZuoJiLuActivity.this,MyFuKuanDetailActivity.class);
+                        fukuan.putExtra("data",data);
+                        startActivity(fukuan);
+                        break;
+                    case "采购":
+                        Intent caigou = new Intent(CaoZuoJiLuActivity.this,MyCaiGouDetailActivity.class);
+                        caigou.putExtra("data",data);
+                        startActivity(caigou);
+                        break;
+                    case "其他":
+                        Intent qita = new Intent(CaoZuoJiLuActivity.this,MyQiTaDetailActivity.class);
+                        qita.putExtra("data",data);
+                        startActivity(qita);
+                        break;
+
+
+                }
+            }
+        });
+
+
         //监听选择类型
         tiSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
