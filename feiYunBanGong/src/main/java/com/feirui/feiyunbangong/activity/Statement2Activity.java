@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -83,7 +84,8 @@ public class Statement2Activity extends Statement1Activity implements OnClickLis
         }
         params.put("form_check", sb_id.deleteCharAt(sb_id.length() - 1)
                 .toString());
-
+        Log.e("日报审批人---------------", "日报审批人---------------" + sb_id.toString());
+        Log.e("日报审批人---------------", "日报审批人---------------" + params.toString());
         String url = UrlTools.url + UrlTools.FORM_REPORT;
         Utils.doPost(LoadingDialog.getInstance(Statement2Activity.this), Statement2Activity.this, url, params, new Utils.HttpCallBack() {
             @Override

@@ -148,14 +148,6 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 		}
 
 		switch (requestCode) {
-//		case 101:
-//			ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-//			if (spr.getId() == 0) {
-//				return;
-//			}
-//			AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());
-//			adapter.add(ash);
-//			break;
 		case 1:
 			if (resultCode == Activity.RESULT_OK) {
 				startPhotoZoom(data.getData());
@@ -293,10 +285,6 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 				Log.d("adapterTag","适配器上的数据"+sb_id);
 			}
 
-//			for (int i = 0; i < adapter.getCount(); i++) {
-//				AddShenHe ash = (AddShenHe) adapter.getItem(i);
-//				sb_id.append(ash.getId() + ",");
-//			}
 			params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1)
 					.toString());
 			StringBuffer sb_pic = new StringBuffer();

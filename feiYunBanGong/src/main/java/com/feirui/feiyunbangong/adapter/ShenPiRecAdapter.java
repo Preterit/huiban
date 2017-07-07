@@ -69,6 +69,8 @@ public class ShenPiRecAdapter extends RecyclerView.Adapter<ShenPiRecAdapter.View
         notifyDataSetChanged();
     }
 
+
+
     public ArrayList<ShenPiRen> getDataSet() {
         return mList;
     }

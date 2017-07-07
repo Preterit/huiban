@@ -91,6 +91,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     addPicDetail = (ImageView) footerAddPic.findViewById(R.id.iv_add_pic_footer);
     addShenPiRen = (ImageView) footerShenpi.findViewById(R.id.iv_add_shenpi_ren_footer);
 
+    //图片添加
     addPicDetail.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -147,7 +148,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     }
     RequestParams params = new RequestParams();
 
-    params.put("type_id", "1");
+    params.put("type_id", "2");
     params.put("option_one", et_1.getText().toString().trim());
     params.put("option_two", et_2.getText().toString().trim());
     params.put("option_three", et_3.getText().toString().trim());
@@ -162,61 +163,49 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
       params.put("picture", "");
     } else {
       params.put("picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
-          .toString());
+              .toString());
     }
-
-
-
     ArrayList<ShenPiRen> shenPiRenList = mShenPiRecAdapter.getDataSet();
     StringBuffer sb_id = new StringBuffer();
     for (int i = 0; i < shenPiRenList.size(); i++) {
       sb_id.append(shenPiRenList.get(i).getId() + ",");
     }
-
-
-    if (sb_id.deleteCharAt(sb_id.length() - 1).toString()==null) {
-      T.showShort(this, "请选择审批人");
-      return;
-    }
-
-    params.put("form_check", sb_id.deleteCharAt(sb_id.length() - 1).toString());
-
-    Log.e("日报审批人", sb_id.deleteCharAt(sb_id.length() - 1).toString());
-
+    params.put("form_check", sb_id.deleteCharAt(sb_id.length() - 1)
+            .toString());
+    Log.e("日报审批人---------------", "日报审批人---------------" + params.toString());
     String url = UrlTools.url + UrlTools.FORM_REPORT;
-    Utils.doPost(LoadingDialog.getInstance(Statement1Activity.this), Statement1Activity.this, url,
-        params, new Utils.HttpCallBack() {
-          @Override
-          public void success(final JsonBean bean) {
-            if ("200".equals(bean.getCode())) {
-              runOnUiThread(new Runnable() {
-                public void run() {
-                  T.showShort(Statement1Activity.this,
+    Utils.doPost(LoadingDialog.getInstance(Statement1Activity.this), Statement1Activity.this, url, params, new Utils.HttpCallBack() {
+      @Override
+      public void success(final JsonBean bean) {
+        if ("200".equals(bean.getCode())) {
+          runOnUiThread(new Runnable() {
+            public void run() {
+              T.showShort(Statement1Activity.this,
                       bean.getMsg());
 
-                  Statement1Activity.this.finish();
-                  overridePendingTransition(
+              Statement1Activity.this.finish();
+              overridePendingTransition(
                       R.anim.aty_zoomclosein,
                       R.anim.aty_zoomcloseout);
-                }
-              });
-
-            } else {
-              T.showShort(Statement1Activity.this,
-                  bean.getMsg());
             }
-          }
+          });
 
-          @Override
-          public void failure(String msg) {
-            T.showShort(Statement1Activity.this, msg);
-          }
+        } else {
+          T.showShort(Statement1Activity.this,
+                  bean.getMsg());
+        }
+      }
 
-          @Override
-          public void finish() {
+      @Override
+      public void failure(String msg) {
+        T.showShort(Statement1Activity.this, msg);
+      }
 
-          }
-        });
+      @Override
+      public void finish() {
+
+      }
+    });
   }
 
   private String mFileName;
@@ -237,7 +226,8 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
         if (resultCode == Activity.RESULT_OK) {
 
           mFileName = getFileName();
-          startPhotoZoom(data.getData(), new File(getExternalCacheDir(), mFileName));
+//          startPhotoZoom(data.getData(), new File(getExternalCacheDir(), mFileName));
+          startPhotoZoom(data.getData());
         }
         break;
 
@@ -247,7 +237,8 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
               + "/caigou.jpg");
 
           mFileName = getFileName();
-          startPhotoZoom(Uri.fromFile(temp), new File(getExternalCacheDir(), mFileName));
+//          startPhotoZoom(Uri.fromFile(temp), new File(getExternalCacheDir(), mFileName));
+          startPhotoZoom(Uri.fromFile(temp));
         }
         break;
 
@@ -264,7 +255,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
   /**
    * 调节图片大小工具
    */
-  public void startPhotoZoom(Uri uri, File outPutFile) {
+  public void startPhotoZoom(Uri uri) {
     Intent intent = new Intent("com.android.camera.action.CROP");
     intent.setDataAndType(uri, "image/*");
     // 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
@@ -274,8 +265,8 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     // // outputX outputY 是裁剪图片宽高
     intent.putExtra("outputX", 250);
     intent.putExtra("outputY", 250);
-//        intent.putExtra("return-data", true);
-    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(outPutFile));//返回file
+        intent.putExtra("return-data", true);
+//    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(outPutFile));//返回file
     startActivityForResult(intent, 3);
   }
 
