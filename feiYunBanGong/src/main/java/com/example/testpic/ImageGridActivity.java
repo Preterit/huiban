@@ -24,6 +24,9 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+/**
+ * 相册选择类
+ */
 public class ImageGridActivity extends Activity {
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 
@@ -55,7 +58,7 @@ public class ImageGridActivity extends Activity {
 
 		setContentView(R.layout.activity_image_grid);
 
-		helper = AlbumHelper.getHelper();
+		helper = AlbumHelper.getHelper();  //手机的所以图片专辑
 		helper.init(getApplicationContext());
 
 		dataList = (List<ImageItem>) getIntent().getSerializableExtra(

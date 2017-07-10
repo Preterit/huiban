@@ -84,7 +84,6 @@ public class ShenPiRecAdapter extends RecyclerView.Adapter<ShenPiRecAdapter.View
             super(itemView);
             ivHead = (ImageView) itemView.findViewById(R.id.iv_shenpi_item);
             name = (TextView) itemView.findViewById(R.id.tv_shenpi_item);
-
             ivHead.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

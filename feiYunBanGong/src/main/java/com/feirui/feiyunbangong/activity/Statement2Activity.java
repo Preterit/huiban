@@ -1,11 +1,13 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.testpic.Bimp;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -67,16 +69,28 @@ public class Statement2Activity extends Statement1Activity implements OnClickLis
         params.put("remarks", et_beizhu.getText().toString().trim());
         StringBuffer sb_pic = new StringBuffer();
 
-        ArrayList<String> dataSet = mPicAdapter.getDataSet();
-        for (int i = 0; i < dataSet.size(); i++) {
-            sb_pic.append(BitmapToBase64.bitmapToBase64(BitMapUtils.getBitmap(dataSet.get(i))) + ",");
+//        ArrayList<String> dataSet = mPicAdapter.getDataSet();
+//        for (int i = 0; i < dataSet.size(); i++) {
+//            sb_pic.append(BitmapToBase64.bitmapToBase64(BitMapUtils.getBitmap(dataSet.get(i))) + ",");
+//        }
+//        if (dataSet.size() == 0) {
+//            params.put("picture", "");
+//        } else {
+//            params.put("picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
+//                    .toString());
+//        }
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < Bimp.bmp.size(); i++) {
+            Bitmap bt = Bimp.bmp.get(i);
+            sb.append(BitmapToBase64.bitmapToBase64(bt));
+            sb.append(",");
         }
-        if (dataSet.size() == 0) {
-            params.put("picture", "");
-        } else {
-            params.put("picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
-                    .toString());
+
+        if (sb.length() > 0) {
+            sb.delete(sb.length() - 1, sb.length());
         }
+        params.put("picture", sb.toString());
         ArrayList<ShenPiRen> shenPiRenList = mShenPiRecAdapter.getDataSet();
         StringBuffer sb_id = new StringBuffer();
         for (int i = 0; i < shenPiRenList.size(); i++) {

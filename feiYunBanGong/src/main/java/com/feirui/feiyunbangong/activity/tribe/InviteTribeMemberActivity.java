@@ -336,7 +336,5 @@ public class InviteTribeMemberActivity extends BaseActivity implements
                 });
     }
 
-
-
 }
 
