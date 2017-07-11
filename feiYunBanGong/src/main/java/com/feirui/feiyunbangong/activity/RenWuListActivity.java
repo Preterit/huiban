@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.feirui.feiyunbangong.R;
@@ -15,6 +14,9 @@ import com.feirui.feiyunbangong.fragment.TaskJieDanFragment;
 import com.feirui.feiyunbangong.fragment.TaskJinXingZhongFragment;
 import com.feirui.feiyunbangong.fragment.TaskQuanBuRenWuFragment;
 import com.feirui.feiyunbangong.fragment.TaskYiWanChengFragment;
+/**
+ * 新建立的任务单页面
+ * */
 
 public class RenWuListActivity extends AppCompatActivity {
     private ImageView iv_back;
@@ -30,7 +32,7 @@ public class RenWuListActivity extends AppCompatActivity {
 
     private void initView() {
         iv_back= (ImageView) findViewById(R.id.iv_back);
-        iv_back.setOnClickListener((View.OnClickListener) this);
+//        iv_back.setOnClickListener((View.OnClickListener) this);
         viewPager= (ViewPager) findViewById(R.id.vp_renwudan);
         tabLayout= (TabLayout) findViewById(R.id.tl_tab_renwudan);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(this.getSupportFragmentManager());

@@ -511,4 +511,11 @@ public class UrlTools {
   public static String DELETE_GOOD = "news/delete";
   //删除朋友圈
   public static String DELETE_CIRCLE = "circle/delCircle";
+
+
+  /**
+   * 新任务单-全部任务接口
+   * */
+  public static String RENWU_QB="Task/alltask";
+
 }

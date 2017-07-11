@@ -232,7 +232,7 @@ public class Fragment1 extends BaseFragment {
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
                         R.anim.aty_zoomout);
                 break;
-            case R.id.llTaskList:
+            case R.id.llTaskList://任务单列表
                 startActivity(new Intent(getActivity(), RenWuListActivity.class));
                 getActivity().overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                 break;
