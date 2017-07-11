@@ -15,7 +15,8 @@
     <ScrollView
         android:id="@+id/sv_caigou"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="none"
         >
 
@@ -137,7 +138,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
                     android:background="@null"
                     android:gravity="top"
                     android:hint="备注"
@@ -167,15 +167,19 @@
 
                     android:textColor="@color/tv_hint"/>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/dialy_pic_recycler"
+                <GridView
+                    android:id="@+id/noScrollgridview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin">
-
-                </android.support.v7.widget.RecyclerView>
+                    android:layout_height="@dimen/y950"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginRight="@dimen/x50"
+                    android:layout_marginTop="@dimen/y10"
+                    android:horizontalSpacing="@dimen/size5"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    android:verticalSpacing="@dimen/size10"
+                    android:layout_marginBottom="@dimen/x20">
+                </GridView>
 
             </LinearLayout>
 
@@ -235,21 +239,29 @@
                     </android.support.v7.widget.RecyclerView>
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_submit_dialy"
-                    style="@style/ffffff_60"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x114"
-                    android:layout_marginBottom="@dimen/y150"
-                    android:layout_marginLeft="@dimen/x140"
-                    android:layout_marginRight="@dimen/x140"
-                    android:layout_marginTop="@dimen/y50"
-                    android:background="@drawable/blue_bt_selector"
-                    android:text="提交"
-                    />
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/ffffff">
+        <Button
+            android:id="@+id/btn_submit_dialy"
+            style="@style/ffffff_60"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x114"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginLeft="@dimen/x140"
+            android:layout_marginRight="@dimen/x140"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/blue_bt_selector"
+            android:text="提交"
+            />
+    </LinearLayout>
+
+
 
 </LinearLayout>

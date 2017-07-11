@@ -85,6 +85,7 @@ public class FormAdapter extends Adapter<ViewHolder> {
     mBeanList.clear();
     try {
       mBeanList.addAll(data);
+      Log.d("tag", "setData错误------------" + data.toString());
     } catch (Exception e) {
       Log.d("tag", "setData错误");
     }

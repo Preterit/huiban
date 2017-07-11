@@ -1,9 +1,11 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -11,10 +13,12 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.FormAdapter;
+import com.feirui.feiyunbangong.adapter.NoScrollGridAdapter;
 import com.feirui.feiyunbangong.entity.ReadFormEntity;
 import com.feirui.feiyunbangong.fragment.FormListFragment;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.NoScrollGridView;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -30,9 +34,6 @@ public class CheckBaobiaoActivity extends FragmentActivity {
     private TextView unfinish_work;
     private TextView tomorrow_work;
     private TextView remark_work;
-    private ImageView img_remark1;
-    private ImageView img_remark2;
-    private ImageView img_remark3;
     private TextView form_time;
     private static final String FORM_TYPE = "formType";
     private FormListFragment.OnListFragmentInteractionListener mListener;
@@ -46,68 +47,38 @@ public class CheckBaobiaoActivity extends FragmentActivity {
     public ImageView leftIv, rightIv;
     public LinearLayout leftll, rightll;
     public RelativeLayout top;
-
+    private NoScrollGridView gridview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_baobiao);
-
-
-
+        initUI();
+        initView();
         Bundle bundle = this.getIntent().getExtras();
 
         position = bundle.getInt("position");
-        mBeanList = new ArrayList<ReadFormEntity.InforBean>();
-
-
-
-
+        mFormType = bundle.getInt("type");
+        mBeanList = new ArrayList<>();
 
         if (mFormType == ReadFormActivity.MY_FORM) {
             loadMyForm();
+            Log.d("条目类型---------------","条目类型---------------" + ReadFormActivity.MY_FORM + "");
         }
         if (mFormType == ReadFormActivity.OTHER_FORM) {
             loadOtherForm();
+            Log.d("条目类型---------------", "条目类型---------------" + ReadFormActivity.OTHER_FORM + "");
         }
 
-        initUI();
-        initView();
-
-        Log.d("条目类型---------------", mBeanList.toString());
+//        Log.d("条目类型---------------", mBeanList.toString());
 
     }
 
 
-    // [InforBean{id=313, staff_id=415, option_one='今天完成工作', option_two='未完成工作', option_three='明日工作计划', picture='', remarks='备注备注备注', form_time='2017-04-11 15:46:30', company_id=100172, type_id=1, name='李策', pic='http://123.57.45.74/feiybg/public/static/staff_head/415/793eb37f1ed73eaa94ea01b0bcedf790.jpeg', staff_duties=null},
-    // InforBean{id=311, staff_id=415, option_one='这个是月报', option_two='未完成工作', option_three='下月工作', picture='', remarks='', form_time='2017-04-07 14:17:51', company_id=100172, type_id=3, name='李策', pic='http://123.57.45.74/feiybg/public/static/staff_head/415/793eb37f1ed73eaa94ea01b0bcedf790.jpeg', staff_duties=null},
-    // InforBean{id=310, staff_id=415, option_one='这个是周报', option_two='未完成工作', option_three='下周工作', picture='', remarks='', form_time='2017-04-07 14:16:47', company_id=100172, type_id=2, name='李策', pic='http://123.57.45.74/feiybg/public/static/staff_head/415/793eb37f1ed73eaa94ea01b0bcedf790.jpeg', staff_duties=null}, InforBean{id=309, staff_id=415, option_one='这个是日报', option_two='这个是未完成工作', option_three='这是明天的工作', picture='', remarks='', form_time='2017-04-07 14:16:01', company_id=100172, type_id=1, name='李策', pic='http://123.57.45.74/feiybg/public/static/staff_head/415/793eb37f1ed73eaa94ea01b0bcedf790.jpeg', staff_duties=null}]
-
-
     private void initView() {
-
         initTitle();
         leftIv.setImageResource(R.drawable.arrows_left);
-        centerTv.setText("列表详细页面");
-  //     Log.d("条目类型---------------", mBeanList.get(position).toString());
-//        switch (mBeanList.get(position).getType_id()) {
-//            case 1:
-//                //日报
-//                centerTv.setText("日报");
-//                break;
-//            case 2:
-//                centerTv.setText("周报");
-//                //周报
-//                break;
-//            case 3:
-//                centerTv.setText("月报");
-//                //月报
-//                break;
-//            case 4:
-//                centerTv.setText("业绩报表");
-//                //业绩报表
-//                break;
-//        }
+        centerTv.setText("查看报表");
     }
 
     private void initTitle() {
@@ -134,6 +105,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
      * 读取其自己的列表数据
      */
     private void loadMyForm() {
+        final ArrayList<String> imageUrls = new ArrayList<String>();
         String url = UrlTools.pcUrl + UrlTools.MY_FORM_LIST;
         RequestParams requestParams = new RequestParams();
         AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
@@ -153,17 +125,50 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                 }
 
                 Log.d("mBeanList的值", "onSuccess: "+mBeanList.toString());
+                Log.d("mBeanList的值", "onSuccess: "+ "------" + position );
                 form_time.setText(mBeanList.get(position).getForm_time());
                 today_work.setText(mBeanList.get(position).getOption_one());//获取今天的工作
                 unfinish_work.setText(mBeanList.get(position).getOption_two());//获取今天未完成的工作
                 tomorrow_work.setText(mBeanList.get(position).getOption_three());//获取今天未完成的工作
                 remark_work.setText(mBeanList.get(position).getRemarks());//获取备注
 
+                String picUrls =  mBeanList.get(position).getPicture();
+                String[] str=picUrls.split(",");
+                for (int i = 0; i < str.length; i++){
+                    imageUrls.add("http://123.57.45.74/feiybg".trim() + str[i]);
+                }
+                Log.d("mBeanList的值", "onSuccess: "+imageUrls.toString());
+                // 发表的内容图片显示与隐藏：
+               mBeanList.get(position).getPicture();
+                if (imageUrls == null || imageUrls.size() == 0) {
+                    gridview.setVisibility(View.GONE);
+                } else {
+                   gridview.setVisibility(View.VISIBLE);
+                   gridview.setAdapter(new NoScrollGridAdapter(CheckBaobiaoActivity.this,
+                            imageUrls));
+                }
                // img_remark1.setImageURI(mBeanList.get(position).);
             }
         });
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                imageBrower(position, imageUrls);
+            }
+        });
+
     }
 
+    protected void imageBrower(int position, ArrayList<String> urls2) {
+        Intent intent = new Intent(CheckBaobiaoActivity.this, ImagePagerActivity.class);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+        startActivity(intent);
+        overridePendingTransition(R.anim.aty_zoomin,
+                R.anim.aty_zoomout);
+    }
     public void setData(List<ReadFormEntity.InforBean> data) {
         mBeanList.clear();
         try {
@@ -178,6 +183,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
      * 读取其他人的列表数据
      */
     private void loadOtherForm() {
+        final ArrayList<String> imageUrls = new ArrayList<String>();
         String url = UrlTools.pcUrl + UrlTools.OTHER_FORM_LIST;
         RequestParams requestParams = new RequestParams();
         AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
@@ -201,8 +207,32 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                 unfinish_work.setText(mBeanList.get(position).getOption_two());//获取今天未完成的工作
                 tomorrow_work.setText(mBeanList.get(position).getOption_three());//获取明天的工作
                 remark_work.setText(mBeanList.get(position).getRemarks());//获取备注
+
+                String picUrls =  mBeanList.get(position).getPicture();
+                String[] str=picUrls.split(",");
+                for (int i = 0; i < str.length; i++){
+                    imageUrls.add(str[i]);
+                }
+                Log.d("mBeanList的值", "onSuccess: "+imageUrls.toString());
+                // 发表的内容图片显示与隐藏：
+                mBeanList.get(position).getPicture();
+                if (imageUrls == null || imageUrls.size() == 0) {
+                    gridview.setVisibility(View.GONE);
+                } else {
+                    gridview.setVisibility(View.VISIBLE);
+                    gridview.setAdapter(new NoScrollGridAdapter(CheckBaobiaoActivity.this,
+                            imageUrls));
+                }
             }
         });
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                imageBrower(position, imageUrls);
+            }
+        });
+
     }
 
 
@@ -211,10 +241,8 @@ public class CheckBaobiaoActivity extends FragmentActivity {
         unfinish_work = (TextView) findViewById(R.id.today_unfinish_work);
         tomorrow_work = (TextView) findViewById(R.id.tomorrow_work);
         remark_work = (TextView) findViewById(R.id.remark_work);
-        img_remark1 = (ImageView) findViewById(R.id.img_remark1);
-        img_remark2 = (ImageView) findViewById(R.id.img_remark2);
-        img_remark3 = (ImageView) findViewById(R.id.img_remark3);
         form_time = (TextView) findViewById(R.id.tv_form_time);
+       gridview = (NoScrollGridView)findViewById(R.id.gridview_work);
 
     }
 }

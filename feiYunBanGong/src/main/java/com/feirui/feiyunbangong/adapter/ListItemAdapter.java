@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
@@ -143,6 +144,7 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
 
         // 发表的内容图片显示与隐藏：
         final ArrayList<String> imageUrls = itemEntity.getImageUrls();
+        Log.d("mBeanList的值", "onSuccess: "+imageUrls.toString());
         if (imageUrls == null || imageUrls.size() == 0) {
             holder.gridview.setVisibility(View.GONE);
         } else {

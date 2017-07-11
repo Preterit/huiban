@@ -17,6 +17,9 @@ import android.widget.ImageView;
 
 import com.feirui.feiyunbangong.R;
 
+/**
+ * 相册展示
+ */
 public class TestPicActivity extends Activity {
 	// ArrayList<Entity> dataList;//阎剑娼电慭锻版祰閺佺增宓佸┃镒留壸掓銆?
 	List<ImageBucket> dataList;
@@ -85,7 +88,7 @@ public class TestPicActivity extends Activity {
 				 */
 				// adapter.notifyDataSetChanged();
 				Intent intent = new Intent(TestPicActivity.this,
-						ImageGridActivity.class);
+						ImageGridActivity.class); //跳转到相册选择
 				intent.putExtra(TestPicActivity.EXTRA_IMAGE_LIST,
 						(Serializable) dataList.get(position).imageList);
 				startActivity(intent);

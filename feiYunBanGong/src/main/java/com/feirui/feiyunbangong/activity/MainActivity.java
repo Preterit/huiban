@@ -280,26 +280,6 @@ public class MainActivity extends BaseActivity
             @Override
             public void onUnreadChange() {
                 getNum();
-//                mHandler.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //获取当前登录用户的所有未读数
-//                        int unReadCount = conversationService.getAllUnreadCount();
-//                        Log.d("获取当前登录用户的所有未读数---------", "unReadCount:-------- "+unReadCount);
-//                        //设置桌面角标的未读数
-//                        mIMKit.setShortcutBadger(unReadCount);
-//                        if (unReadCount > 0) {
-//                            tv_num.setVisibility(View.VISIBLE);
-//                            if (unReadCount < 100) {
-//                                tv_num.setText(unReadCount + "");
-//                            } else {
-//                                tv_num.setText("99+");
-//                            }
-//                        } else {
-//                            tv_num.setVisibility(View.INVISIBLE);
-//                        }
-//                    }
-//                });
             }
         });
 
@@ -710,7 +690,5 @@ public class MainActivity extends BaseActivity
         }
 
     }
-
-    ;
 
 }
