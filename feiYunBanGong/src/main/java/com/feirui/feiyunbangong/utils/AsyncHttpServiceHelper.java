@@ -49,10 +49,10 @@ public class AsyncHttpServiceHelper {
 	/**
 	 * POST方式请求 不带参数
 	 *  @param url
-	 * @param params
+	 * @param params   com.lidroid.xutils.http.RequestParams params,
      * @param responseHandler
      */
-	public static void post(String url, com.lidroid.xutils.http.RequestParams params, AsyncHttpResponseHandler responseHandler) {
+	public static void post(String url, AsyncHttpResponseHandler responseHandler) {
 		if (!NetUtils.isConnected(con)) {
 			T.showShort(con, "当前设备无网络！");
 

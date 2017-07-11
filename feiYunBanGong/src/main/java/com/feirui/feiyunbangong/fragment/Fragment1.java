@@ -17,8 +17,8 @@ import com.feirui.feiyunbangong.activity.CustomerActivity;
 import com.feirui.feiyunbangong.activity.ExamineActivity;
 import com.feirui.feiyunbangong.activity.ProjectActivity;
 import com.feirui.feiyunbangong.activity.ReadFormActivity;
+import com.feirui.feiyunbangong.activity.RenWuListActivity;
 import com.feirui.feiyunbangong.activity.StatementActivity;
-import com.feirui.feiyunbangong.activity.TasksListActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.GlideImageLoader;
@@ -232,8 +232,8 @@ public class Fragment1 extends BaseFragment {
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
                         R.anim.aty_zoomout);
                 break;
-            case R.id.llTaskList:
-                startActivity(new Intent(getActivity(), TasksListActivity.class));
+            case R.id.llTaskList://任务单列表
+                startActivity(new Intent(getActivity(), RenWuListActivity.class));
                 getActivity().overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                 break;
         }

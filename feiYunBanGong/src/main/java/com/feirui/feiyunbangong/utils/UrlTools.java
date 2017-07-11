@@ -176,6 +176,10 @@ public class UrlTools {
   public static String APPROVAL_APPROVAL = "Approval/approval";
 
   public static String APPROVAL_DETAIL = "Approval/approval_detaile";
+    /**
+     * 待审批的个数显示
+     * */
+    public static String APPROVAL_SHOWAPPCOUNT = "Approval/showappcount ";
   /**
    * 推广-团队工作圈
    */
@@ -507,4 +511,11 @@ public class UrlTools {
   public static String DELETE_GOOD = "news/delete";
   //删除朋友圈
   public static String DELETE_CIRCLE = "circle/delCircle";
+
+
+  /**
+   * 新任务单-全部任务接口
+   * */
+  public static String RENWU_QB="Task/alltask";
+
 }

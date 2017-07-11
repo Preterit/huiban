@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.CaoZuoJiLuAdapter;
 import com.feirui.feiyunbangong.adapter.MyShenPiAdapter;
-import com.feirui.feiyunbangong.adapter.ShenPiAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;

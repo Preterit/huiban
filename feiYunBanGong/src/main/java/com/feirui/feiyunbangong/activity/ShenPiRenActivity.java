@@ -22,7 +22,7 @@ import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
-import com.lidroid.xutils.http.RequestParams;
+import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;

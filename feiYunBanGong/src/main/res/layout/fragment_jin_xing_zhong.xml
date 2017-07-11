@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.feirui.feiyunbangong.fragment.TaskJinXingZhongFragment">
+
+    <com.feirui.feiyunbangong.view.YRecycleview
+        android:id="@+id/yrv_renwu_jinxingzhong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </com.feirui.feiyunbangong.view.YRecycleview>
+
+</FrameLayout>

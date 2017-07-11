@@ -373,4 +373,8 @@
     <color name="common_line_color">#cccccc</color>
     <color name="common_text_color2">#ff666666</color>
 
+    <color name="renwu_list_jingxingzhong">#FB4475</color>
+    <color name="renwu_list_jieshu">#A4A4A4</color>
+    <color name="renwu_list_daijiedan">#50B3FD</color>
+
 </resources>

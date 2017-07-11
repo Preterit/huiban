@@ -6,7 +6,6 @@
     android:versionName="1.4.5">
 
     <uses-sdk
-
         android:minSdkVersion="17"
         android:targetSdkVersion="19" />
 
@@ -84,7 +83,7 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:theme,android:icon">
         <activity
             android:name=".activity.SplashActivity"
@@ -436,19 +435,20 @@
         <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
         <activity android:name=".activity.ShenPiFuKuanDetailActivity" />
-        <activity android:name=".activity.ShenPiQiTaDetailActivity"></activity>
-        <activity android:name=".activity.RenWuDanActivity"></activity>
-        <activity android:name=".activity.ShenPiCaiGouDetailActivity"></activity>
+        <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
+        <activity android:name=".activity.ShenPiQiTaDetailActivity" />
+        <activity android:name=".activity.RenWuDanActivity" />
 
-        <!--操作记录-->
-        <activity android:name=".activity.CaoZuoJiLuActivity"/>
-        <activity android:name=".activity.MyShenPiQingJaDetailActivity"/>
-        <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity"/>
-        <activity android:name=".activity.MyWaiChuDetailActivity"/>
-        <activity android:name=".activity.MyFuKuanDetailActivity"/>
-        <activity android:name=".activity.MyCaiGouDetailActivity"/>
-        <activity android:name=".activity.MyQiTaDetailActivity"/>
-
+        <!-- 操作记录 -->
+        <activity android:name=".activity.CaoZuoJiLuActivity" />
+        <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
+        <activity android:name=".activity.MyShenPiQingJaDetailActivity" />
+        <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity" />
+        <activity android:name=".activity.MyWaiChuDetailActivity" />
+        <activity android:name=".activity.MyFuKuanDetailActivity" />
+        <activity android:name=".activity.MyCaiGouDetailActivity" />
+        <activity android:name=".activity.MyQiTaDetailActivity" />
+        <activity android:name=".activity.RenWuListActivity"></activity>
     </application>
 
 </manifest>
