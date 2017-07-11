@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,16 +57,6 @@ public class FormListFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    if (getArguments() != null) {
-      mFormType = getArguments().getInt(FORM_TYPE);
-      if (mFormType == ReadFormActivity.MY_FORM) {
-        loadMyForm();
-      }
-      if (mFormType == ReadFormActivity.OTHER_FORM) {
-        loadOtherForm();
-      }
-    }
   }
 
   /**
@@ -116,26 +107,53 @@ public class FormListFragment extends Fragment {
   }
 
   private void initView(View view) {
+    final ArrayList<Integer> value = new ArrayList<>();
     mFormAdapter = new FormAdapter(new ArrayList<InforBean>(), getActivity());
 
     list = (RecyclerView) view.findViewById(R.id.list);
     list.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     list.setAdapter(mFormAdapter);
 
-    mFormAdapter.setItemClickListener(new FormAdapter.MyItemClickListener(){
+    if (getArguments() != null) {
+      mFormType = getArguments().getInt(FORM_TYPE);
+      if (mFormType == ReadFormActivity.MY_FORM) {
+        loadMyForm();
+        //查看报表
+        mFormAdapter.setItemClickListener(new FormAdapter.MyItemClickListener(){
 
-      @Override
-      public void onItemClick(View view, int position) {
-        view.getId();
-        Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("position",position);
-        intent.putExtras(bundle);
-
-        startActivity(intent);
+          @Override
+          public void onItemClick(View view, int position) {
+            view.getId();
+            Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
+            Bundle bundle = new Bundle();
+//            value.add(mFormType);  //传递报表类型
+//            value.add(position);   //传递报表所在的位置
+            bundle.putInt("position",position);
+            Log.d("mBeanList的值", "onSuccess: "+position);
+            bundle.putIntegerArrayList("positionType",value);
+            intent.putExtras(bundle);
+            startActivity(intent);
+          }
+        });
       }
-    });
+      if (mFormType == ReadFormActivity.OTHER_FORM) {
+        loadOtherForm();
+        //查看报表
+        mFormAdapter.setItemClickListener(new FormAdapter.MyItemClickListener(){
 
+          @Override
+          public void onItemClick(View view, int position) {
+            view.getId();
+            Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
+            Bundle bundle = new Bundle();
+            value.add(mFormType);  //传递报表类型
+            value.add(position);   //传递报表所在的位置
+            intent.putIntegerArrayListExtra("positionType",value);
+            startActivity(intent);
+          }
+        });
+      }
+    }
 
   }
 
