@@ -517,5 +517,17 @@ public class UrlTools {
    * 新任务单-全部任务接口
    * */
   public static String RENWU_QB="Task/alltask";
+  /**
+   * 新任务单-待接单任务接口
+   * */
+  public static String RENWU_DJD="task/wait";
+  /**
+   * 新任务单-进行中任务接口
+   * */
+  public static String RENWU_JXZ="task/task_ing";
+/**
+ * 新任务单-已完成任务接口
+ * */
+public static String RENWU_YWC="task/alltask";//接口不对
 
 }

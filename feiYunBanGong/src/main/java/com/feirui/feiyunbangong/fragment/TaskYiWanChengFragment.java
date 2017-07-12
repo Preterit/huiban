@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.TaskDaiJieDanAdapter;
+import com.feirui.feiyunbangong.adapter.TaskWanChengAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class TaskYiWanChengFragment extends BaseFragment implements YRecycleview.OnRefreshAndLoadMoreListener {
 
     private YRecycleview yRecycleview;
-    private TaskDaiJieDanAdapter adapter;
+    private TaskWanChengAdapter adapter;
     private boolean isRefreshState = true;//是否刷新
     private JsonBean json;
 
@@ -44,13 +44,13 @@ public class TaskYiWanChengFragment extends BaseFragment implements YRecycleview
         yRecycleview = (YRecycleview) v.findViewById(R.id.yrv_renwu_wancheng);
         yRecycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
         yRecycleview.setRefreshAndLoadMoreListener(this);
-        adapter = new TaskDaiJieDanAdapter(getActivity(), new ArrayList<HashMap<String, Object>>());
+        adapter = new TaskWanChengAdapter(getActivity(), new ArrayList<HashMap<String, Object>>());
         yRecycleview.setAdapter(adapter);
     }
 
     private void initData() {
         RequestParams params = new RequestParams();
-        String url = UrlTools.pcUrl+ UrlTools.RENWU_QB;
+        String url = UrlTools.pcUrl+ UrlTools.RENWU_YWC;
         AsyncHttpServiceHelper.post(url,new AsyncHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -3,7 +3,6 @@ package com.feirui.feiyunbangong.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,26 +46,9 @@ public class TaskJingXingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((ViewHolder) holder).tv_qbrw_time.setText(a1[0]);
         ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("task_txt")+"");
         ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg/"+data.get(position).get("staff_head"), ((ViewHolder) holder).iv_qbrw_tx, ImageLoaderUtils.getSimpleOptions());
-
-        Log.e("适配器", "onBindViewHolder: " +context);
-
-        if(data.get(position).get("state").equals(0)){
-            ((ViewHolder) holder).tv_qbrw_state.setText("待接单");
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#50B3FD"));
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.icon_daijiedan);
-        }else if (data.get(position).get("state").equals(1)){
-            ((ViewHolder) holder).tv_qbrw_state.setText("进行中");
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#FB4475"));
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.ongoing);
-        }else if (data.get(position).get("state").equals(2)){
-            ((ViewHolder) holder).tv_qbrw_state.setText("完成");
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
-        }else if (data.get(position).get("state").equals(3)){
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
-            ((ViewHolder) holder).tv_qbrw_state.setText("拒绝");
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
-        }
+        ((ViewHolder) holder).tv_qbrw_state.setText("进行中");
+        ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#FB4475"));
+        ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.ongoing);
         ((ViewHolder) holder).tv_qbrw_target.setText(data.get(position).get("task_time")+"完成");
     }
 

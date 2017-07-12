@@ -49,7 +49,7 @@ public class TaskJieDanFragment extends BaseFragment implements YRecycleview.OnR
 
     private void initData() {
         RequestParams params = new RequestParams();
-        String url = UrlTools.pcUrl+ UrlTools.RENWU_QB;
+        String url = UrlTools.pcUrl+ UrlTools.RENWU_DJD;
         AsyncHttpServiceHelper.post(url,new AsyncHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
