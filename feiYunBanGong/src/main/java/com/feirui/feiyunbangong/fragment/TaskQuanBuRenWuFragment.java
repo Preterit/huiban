@@ -61,6 +61,9 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
                 Log.e("获得全部任务URLjsonBean", "onSuccess:" + json.toString());
                 //yRecycleview.setReFreshComplete();
                 //setAdapter();
+                if(json.getInfor()==null){
+                    return;
+                }
                 adapter.addAll(json.getInfor());
 
             }

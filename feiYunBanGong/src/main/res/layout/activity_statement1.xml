@@ -28,7 +28,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -55,6 +55,7 @@
                     android:lines="3"
                     android:padding="@dimen/x26"
                     />
+
             </LinearLayout>
 
             <View
@@ -64,7 +65,7 @@
             <LinearLayout
                 android:id="@+id/ll_zongjie"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"

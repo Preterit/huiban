@@ -51,6 +51,7 @@ public class FormAdapter extends Adapter<ViewHolder> {
 
     holder.tvNameFormItem.setText(mBeanList.get(position).getName());
     holder.tvTimeFormItem.setText(mBeanList.get(position).getForm_time());
+//    Log.e("tag", "setData错误------------" + mBeanList.get(position).getType_id());
     switch (mBeanList.get(position).getType_id()) {
       case 1:
         //日报

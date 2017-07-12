@@ -39,13 +39,14 @@
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/today_work"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +74,7 @@
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/today_unfinish_work"
                     android:layout_gravity="center_vertical"
@@ -105,13 +106,14 @@
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tomorrow_work"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -137,7 +139,7 @@
             </android.support.constraint.ConstraintLayout>
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/remark_work"
                     android:layout_gravity="center_vertical"

@@ -71,6 +71,7 @@ public class FormListFragment extends Fragment {
         Gson gson = new Gson();
         ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
         mFormAdapter.setData(readFormEntity.getInfor());
+        Log.e("tag","报表信息-------------------" + readFormEntity.getInfor().toString());
       }
     });
   }
@@ -130,7 +131,7 @@ public class FormListFragment extends Fragment {
 //            value.add(position);   //传递报表所在的位置
             bundle.putInt("position",position);
             Log.d("mBeanList的值", "onSuccess: "+position);
-            bundle.putIntegerArrayList("positionType",value);
+            bundle.putInt("type",mFormType);
             intent.putExtras(bundle);
             startActivity(intent);
           }
@@ -146,9 +147,12 @@ public class FormListFragment extends Fragment {
             view.getId();
             Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
             Bundle bundle = new Bundle();
-            value.add(mFormType);  //传递报表类型
-            value.add(position);   //传递报表所在的位置
-            intent.putIntegerArrayListExtra("positionType",value);
+//            value.add(mFormType);  //传递报表类型
+//            value.add(position);   //传递报表所在的位置
+            bundle.putInt("position",position);
+            Log.d("mBeanList的值", "onSuccess: "+position);
+            bundle.putInt("type",mFormType);
+            intent.putExtras(bundle);
             startActivity(intent);
           }
         });
