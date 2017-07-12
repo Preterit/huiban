@@ -60,7 +60,7 @@ public class Statement4Activity extends Statement1Activity implements OnClickLis
         }
         RequestParams params = new RequestParams();
 
-        params.put("type_id", "2");
+        params.put("type_id", "4");
         params.put("option_one", et_1.getText().toString().trim());
         params.put("option_two", et_2.getText().toString().trim());
         params.put("option_three", et_3.getText().toString().trim());

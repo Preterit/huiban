@@ -71,6 +71,7 @@ public class FormListFragment extends Fragment {
         Gson gson = new Gson();
         ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
         mFormAdapter.setData(readFormEntity.getInfor());
+        Log.e("tag","报表信息-------------------" + readFormEntity.getInfor().toString());
       }
     });
   }

@@ -67,18 +67,7 @@ public class Statement2Activity extends Statement1Activity implements OnClickLis
         params.put("option_two", et_2.getText().toString().trim());
         params.put("option_three", et_3.getText().toString().trim());
         params.put("remarks", et_beizhu.getText().toString().trim());
-        StringBuffer sb_pic = new StringBuffer();
 
-//        ArrayList<String> dataSet = mPicAdapter.getDataSet();
-//        for (int i = 0; i < dataSet.size(); i++) {
-//            sb_pic.append(BitmapToBase64.bitmapToBase64(BitMapUtils.getBitmap(dataSet.get(i))) + ",");
-//        }
-//        if (dataSet.size() == 0) {
-//            params.put("picture", "");
-//        } else {
-//            params.put("picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
-//                    .toString());
-//        }
 
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < Bimp.bmp.size(); i++) {
