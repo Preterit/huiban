@@ -54,6 +54,9 @@ public class TaskJinXingZhongFragment extends BaseFragment implements YRecyclevi
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 json = JsonUtils.getMessage(new String(responseBody));
+                if(json.getInfor()==null){
+                    return;
+                }
                 adapter.addAll(json.getInfor());
             }
         });
