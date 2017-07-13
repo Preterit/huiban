@@ -528,6 +528,6 @@ public class UrlTools {
 /**
  * 新任务单-已完成任务接口
  * */
-public static String RENWU_YWC="task/alltask";//接口不对
+public static String RENWU_YWC="task/taskend";//接口不对
 
 }
