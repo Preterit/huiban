@@ -12,7 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.activity.BaseActivity;
+import com.feirui.feiyunbangong.activity.CheckBaobiaoActivity;
 import com.feirui.feiyunbangong.activity.FriendShop;
+import com.feirui.feiyunbangong.activity.ImagePagerActivity;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.FriendShopBean;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -88,6 +90,7 @@ public class FriendInfoActivity extends BaseActivity {
         mRlShopFriendInfo = (RelativeLayout) findViewById(R.id.rlShopFriendInfo);
         deleteFriendInfo = (Button) findViewById(R.id.deleteFriendInfo);
         contactFriendInfo = (Button) findViewById(R.id.contactFriendInfo);
+
         /**
          *
          * 删除好友
@@ -162,6 +165,7 @@ public class FriendInfoActivity extends BaseActivity {
     private String mTargetHead;
 
     private void initData() {
+        final ArrayList<String> imageUrls = new ArrayList<String>();
         RequestParams params = new RequestParams();
         phone = getIntent().getStringExtra("phone");
         params.put("staff_mobile", phone + "");
@@ -185,6 +189,18 @@ public class FriendInfoActivity extends BaseActivity {
 
                 mStaffId = String.valueOf(map.get("id"));
                 ImageLoader.getInstance().displayImage(mTargetHead + "", mIvHeadActivityFriendInfo);
+
+                imageUrls.add(mTargetHead);
+                Log.e("tag","-------imageUrls---------" + imageUrls);
+
+                //头像的点击事件
+                mIvHeadActivityFriendInfo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        imageBrower(0,imageUrls);
+                    }
+                });
+
             }
 
             @Override
@@ -198,5 +214,14 @@ public class FriendInfoActivity extends BaseActivity {
             }
         });
 
+    }
+
+    protected void imageBrower(int position, ArrayList<String> urls2) {
+        Intent intent = new Intent(FriendInfoActivity.this, ImagePagerActivity.class);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+        startActivity(intent);
+        overridePendingTransition(R.anim.aty_zoomin,
+                R.anim.aty_zoomout);
     }
 }

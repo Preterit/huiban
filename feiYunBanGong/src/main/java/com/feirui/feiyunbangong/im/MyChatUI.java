@@ -164,7 +164,7 @@ public class MyChatUI extends IMChattingPageUI {
 
 										String title = ywTribe.getTribeName();
 										tv_name.setText(title);
-
+//										Log.d("tag", "一个聊天的------" + title);
 									}
 								}, 300);
 
