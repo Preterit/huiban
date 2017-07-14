@@ -21,8 +21,7 @@ public class UrlTools {
    * 链接地址
    */
   public static String url = "http://123.57.45.74/feiybg/public/index.php/api/";
-//    public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
-
+//public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
   public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
   /**
@@ -537,6 +536,6 @@ public class UrlTools {
 /**
  * 新任务单-已完成任务接口
  * */
-public static String RENWU_YWC="task/alltask";//接口不对
+public static String RENWU_YWC="task/taskend";//接口不对
 
 }
