@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity {
 	Button btn_login_submit;
 	// 注册，忘记密码
 	@PView(click = "onClick")
-	TextView btn_login_register, btn_login_forget;
+	TextView btn_login_register, btn_login_forget,btn_login;
 
 	String type = "personal";// 注册类型,个人注册
 
@@ -127,22 +127,6 @@ public class LoginActivity extends BaseActivity {
 			intent.putExtra("type", type);
 			startActivity(intent);
 			overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-			// SelectDialog dia = new SelectDialog(LoginActivity.this,
-			// new Callback() {
-			// @Override
-			// public void onOK(String s) {
-			// type = s;
-			// Intent intent = new Intent(LoginActivity.this,
-			// RegisteActivity.class);
-			// intent.putExtra("type", type);
-			// startActivity(intent);
-			// }
-			//
-			// @Override
-			// public void onCancel() {
-			// }
-			// });
-			// dia.show();
 			break;
 		case R.id.btn_login_submit:// 登录
 			if (TextUtils.isEmpty(et_login_username.getText().toString())
@@ -156,14 +140,13 @@ public class LoginActivity extends BaseActivity {
 				return;
 
 			}
-			// if (TextUtils
-			// .isEmpty(et_login_password.getText().toString().trim())
-			// || et_login_password.getText().toString().trim().length() < 6
-			// || et_login_password.getText().toString().trim().length() > 18) {
-			// T.showShort(getApplicationContext(), "密码长度为6~18个字符");
-			// return;
-			// }
 			LoginMain();
+			break;
+		case R.id.btn_login: //快速登录
+			intent = new Intent(LoginActivity.this,RegisteActivity.class);
+			intent.putExtra("type","denglu");
+			startActivity(intent);
+			overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomcloseout);
 			break;
 		}
 

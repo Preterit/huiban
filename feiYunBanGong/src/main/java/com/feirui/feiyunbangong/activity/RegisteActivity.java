@@ -1,27 +1,36 @@
 package com.feirui.feiyunbangong.activity;
 
 import java.util.ArrayList;
+import java.util.logging.LogRecord;
 
 import org.apache.http.Header;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.DingShiQiUtil;
+import com.feirui.feiyunbangong.utils.JsonUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.PView;
+import com.feirui.feiyunbangong.view.RevealLayout;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -40,7 +49,10 @@ public class RegisteActivity extends BaseActivity {
 	Button btn_confirm, bt_checking;
 	String type = "";// 注册类型
 	public static ArrayList<Activity> list = new ArrayList<Activity>();
-
+	private static final int LOGIN_SUCESS = 1; // 登录成功
+	private static final int LOGIN_ERROR = 2;// 登录失败
+	private static final int JSON_ERROR = 3;// json解析出错
+	private static final int SERVICE_ERROR = 4;// 链接服务器出错
 	@Override
 	protected void onDestroy() {
 		DingShiQiUtil.close();// 关闭定时器；
@@ -59,10 +71,13 @@ public class RegisteActivity extends BaseActivity {
 		type = getIntent().getStringExtra("type");
 		initTitle();
 		setLeftDrawable(R.drawable.arrows_left);
-		if (!type.equals("wangjimima")) {
-			setCenterString("注册");
-		} else {
+		if (type.equals("wangjimima")) {
 			setCenterString("忘记密码");
+		} else if (type.equals("personal")){
+			setCenterString("注册");
+		}else {
+			setCenterString("登录");
+			btn_confirm.setText("登录");
 		}
 		setRightVisibility(false);
 	}
@@ -89,46 +104,77 @@ public class RegisteActivity extends BaseActivity {
 				// 发请求
 				RequestParams params = new RequestParams();
 
-				if (!type.equals("wangjimima")) {
-					params.put("admin_mobile", et_phone.getText().toString()
-							.trim());
-					params.put("type", type);
-					url = UrlTools.url + UrlTools.ZHUCE_REGIST;
-					L.e("注册获取验证码：url " + url + "  params:" + params);
+				if (!type.equals("denglu")){
+					if (!type.equals("wangjimima")) {
+						params.put("admin_mobile", et_phone.getText().toString()
+								.trim());
+						params.put("type", type);
+						url = UrlTools.url + UrlTools.ZHUCE_REGIST;
+						L.e("注册获取验证码：url " + url + "  params:" + params);
+					} else {
+						params.put("staff_mobile", et_phone.getText().toString()
+								.trim());
+						url = UrlTools.url + UrlTools.ZHUCE_FORGET_PWD;
+						L.e("忘记密码获取验证码：url " + url + "  params:" + params);
+					}
+
+					AsyncHttpServiceHelper.post(url, params,
+							new AsyncHttpResponseHandler() {
+								@Override
+								public void onSuccess(int arg0, Header[] arg1,
+													  byte[] arg2) {
+									super.onSuccess(arg0, arg1, arg2);
+									final JsonBean json = JsonUtils
+											.getMessage(new String(arg2));
+									if ("200".equals(json.getCode())) {
+										runOnUiThread(new Runnable() {
+											public void run() {
+												T.showShort(RegisteActivity.this,
+														"验证码已发送请注意查收");
+											}
+										});
+
+									} else {
+										runOnUiThread(new Runnable() {
+											public void run() {
+												T.showShort(RegisteActivity.this,
+														json.getMsg());
+											}
+										});
+									}
+
+								}
+							});
 				} else {
-					params.put("staff_mobile", et_phone.getText().toString()
-							.trim());
-					url = UrlTools.url + UrlTools.ZHUCE_FORGET_PWD;
-					L.e("忘记密码获取验证码：url " + url + "  params:" + params);
+                    params.put("phone",et_phone.getText().toString().trim());
+					url = UrlTools.url + UrlTools.DENGLU_REGIST;
+					AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
+						@Override
+						public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+							super.onSuccess(statusCode, headers, responseBody);
+							final JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
+							Log.e("tag","验证码-------------" + jsonBean.toString());
+							if ("200".equals(jsonBean.getCode())){
+								runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										T.showShort(RegisteActivity.this,
+												"验证码已发送请注意查收");
+									}
+								});
+							}else {
+								runOnUiThread(new Runnable() {
+									public void run() {
+										T.showShort(RegisteActivity.this,
+												"验证码" + jsonBean.getMsg());
+									}
+								});
+							}
+						}
+					});
 				}
 
-				AsyncHttpServiceHelper.post(url, params,
-						new AsyncHttpResponseHandler() {
-							@Override
-							public void onSuccess(int arg0, Header[] arg1,
-									byte[] arg2) {
-								super.onSuccess(arg0, arg1, arg2);
-								final JsonBean json = JsonUtils
-										.getMessage(new String(arg2));
-								if ("200".equals(json.getCode())) {
-									runOnUiThread(new Runnable() {
-										public void run() {
-											T.showShort(RegisteActivity.this,
-													"验证码已发送请注意查收");
-										}
-									});
 
-								} else {
-									runOnUiThread(new Runnable() {
-										public void run() {
-											T.showShort(RegisteActivity.this,
-													json.getMsg());
-										}
-									});
-								}
-
-							}
-						});
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -151,90 +197,172 @@ public class RegisteActivity extends BaseActivity {
 				T.showShort(RegisteActivity.this, "验证码不能为空");
 				return;
 			}
+
+
 			try {
 				// 发请求
 				RequestParams params = new RequestParams();
-				params.put("mobile", et_phone.getText().toString().trim());
-				params.put("code", et_verify.getText().toString().trim());
 
-				String url = UrlTools.url + UrlTools.ZHUCE_CHECK_REGIST;
+				if (!type.equals("denglu")){
+					params.put("mobile", et_phone.getText().toString().trim());
+					params.put("code", et_verify.getText().toString().trim());
 
-				L.e("验证：url " + url + "  params:" + params);
+					String url = UrlTools.url + UrlTools.ZHUCE_CHECK_REGIST;
 
-				AsyncHttpServiceHelper.post(url, params,
-						new AsyncHttpResponseHandler() {
-							@Override
-							public void onSuccess(int arg0, Header[] arg1,
-									byte[] arg2) {
-								super.onSuccess(arg0, arg1, arg2);
-								final JsonBean json = JsonUtils
-										.getMessage(new String(arg2));
-								if ("200".equals(json.getCode())) {
-									runOnUiThread(new Runnable() {
-										public void run() {
-											if (type.equals("personal")) {
-												// 个人注册
-												Intent intent = new Intent(
-														RegisteActivity.this,
-														RegisteSOLOActivity.class);
-												intent.putExtra("phone",
-														et_phone.getText()
-																.toString()
-																.trim());
-												startActivity(intent);
-												overridePendingTransition(
-														R.anim.aty_zoomin,
-														R.anim.aty_zoomout);
-											} else if (type.equals("company")) {
-												// 企业注册
-												Intent intent = new Intent(
-														RegisteActivity.this,
-														RegisteFIRMActivity.class);
-												intent.putExtra("phone",
-														et_phone.getText()
-																.toString()
-																.trim());
-												startActivity(intent);
-												overridePendingTransition(
-														R.anim.aty_zoomin,
-														R.anim.aty_zoomout);
-											} else {
-												// 忘记密码
-												Intent intent = new Intent(
-														RegisteActivity.this,
-														ForgetPasswordActivity.class);
-												intent.putExtra("phone",
-														et_phone.getText()
-																.toString()
-																.trim());
-												startActivity(intent);
-												overridePendingTransition(
-														R.anim.aty_zoomin,
-														R.anim.aty_zoomout);
+					L.e("验证：url " + url + "  params:" + params);
+
+					AsyncHttpServiceHelper.post(url, params,
+							new AsyncHttpResponseHandler() {
+								@Override
+								public void onSuccess(int arg0, Header[] arg1,
+													  byte[] arg2) {
+									super.onSuccess(arg0, arg1, arg2);
+									final JsonBean json = JsonUtils
+											.getMessage(new String(arg2));
+									if ("200".equals(json.getCode())) {
+										runOnUiThread(new Runnable() {
+											public void run() {
+												if (type.equals("personal")) {
+													// 个人注册
+													Intent intent = new Intent(
+															RegisteActivity.this,
+															RegisteSOLOActivity.class);
+													intent.putExtra("phone",
+															et_phone.getText()
+																	.toString()
+																	.trim());
+													startActivity(intent);
+													overridePendingTransition(
+															R.anim.aty_zoomin,
+															R.anim.aty_zoomout);
+												} else if (type.equals("company")) {
+													// 企业注册
+													Intent intent = new Intent(
+															RegisteActivity.this,
+															RegisteFIRMActivity.class);
+													intent.putExtra("phone",
+															et_phone.getText()
+																	.toString()
+																	.trim());
+													startActivity(intent);
+													overridePendingTransition(
+															R.anim.aty_zoomin,
+															R.anim.aty_zoomout);
+												} else {
+													// 忘记密码
+													Intent intent = new Intent(
+															RegisteActivity.this,
+															ForgetPasswordActivity.class);
+													intent.putExtra("phone",
+															et_phone.getText()
+																	.toString()
+																	.trim());
+													startActivity(intent);
+													overridePendingTransition(
+															R.anim.aty_zoomin,
+															R.anim.aty_zoomout);
+												}
+
 											}
+										});
 
-										}
-									});
+									} else {
+										runOnUiThread(new Runnable() {
+											public void run() {
+												T.showShort(RegisteActivity.this,
+														json.getMsg());
+											}
+										});
+									}
 
-								} else {
-									runOnUiThread(new Runnable() {
-										public void run() {
-											T.showShort(RegisteActivity.this,
-													json.getMsg());
-										}
-									});
 								}
+							});
 
-							}
-						});
+				}else{  //快速登录
+                    login();
+				}
+
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			break;
+//		case R.id.btn_kuaisudenglu:
+//
+//			break;
 		}
 
 	}
+
+	private void login() {
+		RequestParams params = new RequestParams();
+		params.put("phone",et_phone.getText().toString().trim());
+		params.put("code",et_verify.getText().toString().trim());
+	    String url = UrlTools.url + UrlTools.QUICK_LOGIN;
+		AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+				super.onSuccess(statusCode, headers, responseBody);
+				try {
+					JsonBean json = JsonUtils.getMessage(new String(responseBody));
+					Message mes = new Message();
+					if ("200".equals(json.getCode())) {
+						mes.what = LOGIN_SUCESS;
+					} else {
+						mes.what = LOGIN_ERROR;
+					}
+					mes.obj = json;
+					handler.sendMessage(mes);
+				}catch (Exception e){
+					handler.sendEmptyMessage(JSON_ERROR);
+				}
+
+
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+				super.onFailure(statusCode, headers, responseBody, error);
+				handler.sendEmptyMessage(SERVICE_ERROR);
+			}
+		});
+
+	}
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what){
+				case LOGIN_SUCESS :
+					AppStore.user = (JsonBean) msg.obj;
+					//设置已经登录过
+					SPUtils.put(RegisteActivity.this, Constant.SP_ALREADYUSED,true);
+					// 将用户名密码缓存
+					SPUtils.put(RegisteActivity.this, Constant.SP_USERNAME,
+							et_phone.getText().toString() + "");
+					SPUtils.put(RegisteActivity.this, Constant.SP_PASSWORD,
+							"123456".trim());
+					T.showShort(RegisteActivity.this, ((JsonBean) msg.obj).getMsg());
+					startActivity(new Intent(RegisteActivity.this, MainActivity.class));
+					overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+					finish();
+					break;
+				case LOGIN_ERROR:
+					AppStore.user = null;
+					T.showShort(RegisteActivity.this, ((JsonBean) msg.obj).getMsg());
+					break;
+				case JSON_ERROR:
+					AppStore.user = null;
+					T.showShort(RegisteActivity.this, "json解析出错");
+					break;
+				case SERVICE_ERROR:
+					AppStore.user = null;
+					T.showShort(RegisteActivity.this, "服务器出错了");
+					break;
+			}
+		}
+	};
 
 }

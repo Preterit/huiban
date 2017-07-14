@@ -29,6 +29,15 @@ public class UrlTools {
    * 注册获取验证码
    */
   public static String ZHUCE_REGIST = "Zhuce/regist";
+
+  /**
+   * 登录获取验证码
+   */
+  public  static String DENGLU_REGIST ="login/logincode";
+  /**
+   * 快速登录
+   */
+  public static String QUICK_LOGIN = "login/quicklogin";
   /**
    * 忘记密码--获取验证码
    */

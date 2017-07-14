@@ -89,7 +89,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/y180" >
+        android:layout_marginTop="@dimen/y180"
+        android:id="@+id/re_next"
+       >
 
         <Button
             android:id="@+id/btn_confirm"
@@ -102,5 +104,6 @@
             android:gravity="center"
             android:text="下一步" />
     </com.feirui.feiyunbangong.view.RevealLayout>
+
 
 </LinearLayout>
