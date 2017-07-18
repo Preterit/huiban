@@ -15,7 +15,7 @@ import com.feirui.feiyunbangong.fragment.ImageDetailFragment;
 import com.feirui.feiyunbangong.view.HackyViewPager;
 
 /**
- * 图片查看�?
+ * 图片查看器
  */
 public class ImagePagerActivity extends BaseActivity {
 	private static final String STATE_POSITION = "STATE_POSITION";
