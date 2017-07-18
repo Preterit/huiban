@@ -21,6 +21,7 @@ public class UrlTools {
    * 链接地址
    */
   public static String url = "http://123.57.45.74/feiybg/public/index.php/api/";
+  public static String url1 = "http://123.57.45.74/feiybg/public/index.php/index/";
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
   public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
@@ -149,6 +150,10 @@ public class UrlTools {
    * 新增外出信息
    */
   public static String OUT_ADD_OUT = "Out/add_out";
+  /**
+   * 新增外出信息(添加抄送人)
+   */
+  public static String OUT_ADD_OUT1 = "Out/add_out1";
   /**
    * 付款新增
    */
