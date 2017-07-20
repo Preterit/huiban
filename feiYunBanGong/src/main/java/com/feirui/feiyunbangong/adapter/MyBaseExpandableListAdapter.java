@@ -1,9 +1,5 @@
 package com.feirui.feiyunbangong.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +19,10 @@ import com.feirui.feiyunbangong.myinterface.AllInterface;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.TextImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ExpandListView的适配器，继承自BaseExpandableListAdapter
@@ -102,8 +102,12 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
 			childHolder.rl_child = (RelativeLayout) convertView
 					.findViewById(R.id.rl_child);
 			convertView.setTag(childHolder);
+			//设置初始头像
+			childHolder.childImg.setImageResource(R.drawable.acquiesce_in);
 		} else {
 			childHolder = (ChildHolder) convertView.getTag();
+			//设置初始头像
+			childHolder.childImg.setImageResource(R.drawable.acquiesce_in);
 		}
 		ChildItem childItem = childMap.get(groupPosition).get(childPosition);
 		// 图片上加字：

@@ -227,7 +227,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         bt_add.setOnClickListener(this);
         ll_tuanduigonggao.setOnClickListener(this);
         ll_tuanduichengyuan.setOnClickListener(this);
-
+        //跳转到团队加页面
         rightll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
