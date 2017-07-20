@@ -49,6 +49,7 @@
             android:layout_weight="1"
             android:background="@drawable/shape_bt_bg"
             android:hint="说点什么呢？"
+            android:focusable="true"
             android:padding="@dimen/size30"
             >
         </EditText>

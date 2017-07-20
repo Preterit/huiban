@@ -63,8 +63,8 @@ public class LoginActivity extends BaseActivity {
 				// 将用户名密码缓存
 				SPUtils.put(LoginActivity.this, Constant.SP_USERNAME,
 						et_login_username.getText().toString() + "");
-//				SPUtils.put(LoginActivity.this, Constant.SP_PASSWORD,
-//						et_login_password.getText().toString() + "");
+				SPUtils.put(LoginActivity.this, Constant.SP_PASSWORD,
+						et_login_password.getText().toString() + "");
 				T.showShort(LoginActivity.this, ((JsonBean) msg.obj).getMsg());
 				startActivity(new Intent(LoginActivity.this, MainActivity.class));
 				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
