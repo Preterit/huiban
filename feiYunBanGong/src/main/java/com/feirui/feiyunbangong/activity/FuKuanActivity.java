@@ -1,11 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.Header;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +15,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
 import com.feirui.feiyunbangong.dialog.SelectZTDialog;
-import com.feirui.feiyunbangong.entity.AddShenHe;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil;
@@ -39,6 +30,12 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 审批-付款
@@ -55,12 +52,15 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 	EditText et_miaoshu, et_jine, et_duixiang, et_kaihuhang, et_zhanghao;// 付款描述，付款金额，付款对象，开户行，银行账户
 	// 添加审批人
 	@PView(click = "onClick")
-	ImageView iv_add, iv_01;
+	ImageView iv_add,iv_add_chaosong, iv_01;
 	private ArrayList<JsonBean> list1 = new ArrayList<>();
 	@PView
 	ListView lv_add_shenpiren;
+	@PView
+	ListView lv_add_chaosong;
 //	AddShenHeAdapter adapter;
 	AddShenHeUpdateAdapter adapter;
+	AddShenHeUpdateAdapter adapter1;
 	@PView
 	ScrollView sv_caigou;
 
@@ -94,6 +94,23 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 
+        //抄送人列表
+        adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,FuKuanActivity.this);
+        lv_add_chaosong.setAdapter(adapter1);
+        lv_add_chaosong.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sv_caigou.requestDisallowInterceptTouchEvent(false);
+                } else {
+                    sv_caigou.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            }
+        });
+
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -115,11 +132,26 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 
 			super.onActivityResult(requestCode, resultCode, data);
 		}
+
+        if (requestCode == 300 && resultCode == 100 ) {
+            ArrayList<ChildItem> childs1 = (ArrayList<ChildItem>)data.getSerializableExtra("childs");
+            Log.e("tag", "onActivityResult: ----------" + childs1 );
+            HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+            Log.e("tag", "onActivityResult: ----------" + hm );
+            childs1.add(0, new ChildItem(hm.get("staff_name") + "", hm.get("staff_head") + "", hm.get("staff_mobile")
+                    + "", hm.get("id") + "", 0));
+            //去掉自己
+            childs1.remove(0);
+            if (childs1 != null && childs1.size() > 0) {
+                adapter1.addList(childs1);
+            }
+            Log.d("mytag","添加人员："+childs1.get(0).toString());
+        }
 	}
 
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.tv_fangshi:// 付款方式
+            case R.id.tv_fangshi:// 付款方式
 			ArrayList<String> list = new ArrayList<>();
 			list.add("支付宝");
 			list.add("微信支付");
@@ -137,18 +169,23 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 					});
 			dialog.show();
 			break;
-		case R.id.iv_01:
+
+            case R.id.iv_01:
 //			adapter.reduce(((AddShenHe) view.getTag()));// 删除审批人；
 			break;
-		case R.id.iv_add:
-//			Intent intent = new Intent(this, ShenPiRenActivity.class);
-//			startActivityForResult(intent, 101);// 请求码；
 
+            case R.id.iv_add:
 			Intent intent = new Intent(this,AddChengYuanActivity.class);
 			startActivityForResult(intent,200);
 			overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomout);
+                break;
 
-			break;
+            case R.id.iv_add_chaosong:
+                final Intent intent1 = new Intent(this, AddChengYuanActivity.class);
+                startActivityForResult(intent1, 300);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                break;
+
 		case R.id.tv_riqi:
 			// 点击了选择日期按钮
 			DateTimePickDialogUtil kaishishijian = new DateTimePickDialogUtil(
@@ -181,10 +218,21 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 				Log.d("adapterTag","适配器上的数据"+sb_id);
 			}
 
-			params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1)
-					.toString());
+            //从适配器中取出抄送人集合
+            List<ChildItem> chaoSong = adapter1.getList();
+            StringBuffer cs_id = new StringBuffer();
+            // 循环拼接添加成员id,每个id后加逗号
+            for (int i = 0; i < chaoSong.size(); i++) {
+                cs_id.append(chaoSong.get(i).getId());
+                cs_id.append(",");
+                Log.d("adapterTag","适配器上的数据"+cs_id);
+            }
 
-			String url = UrlTools.url + UrlTools.BUY_ADD_BUY;
+
+			params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
+            params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
+
+			String url = UrlTools.url1 + UrlTools.BUY_ADD_BUY1;
 			L.e("审批-付款url" + url + " params" + params);
 			AsyncHttpServiceHelper.post(url, params,
 					new AsyncHttpResponseHandler() {

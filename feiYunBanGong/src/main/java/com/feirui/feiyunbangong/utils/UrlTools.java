@@ -167,10 +167,19 @@ public class UrlTools {
    * 付款新增
    */
   public static String BUY_ADD_BUY = "buy/add_buy";
+
+  /**
+   * 付款新增1
+   */
+  public static String BUY_ADD_BUY1 = "buy/add_buy1";
   /**
    * 新增采购信息：
    */
   public static final String ADD_CAIGOU_XINXI = "Purchase/add_purchase";
+  /**
+   * 新增采购信息：http://123.57.45.74/feiybg/public/index.php/index/Purchase/add_purchase1
+   */
+  public static final String ADD_CAIGOU_XINXI1 = "Purchase/add_purchase1";
   /**
    * 待审批其他新增
    */
