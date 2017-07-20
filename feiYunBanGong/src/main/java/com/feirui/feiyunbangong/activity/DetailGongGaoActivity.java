@@ -194,7 +194,6 @@ public class DetailGongGaoActivity extends BaseActivity implements
 				"确定删除该公告吗？", this, new AlertCallBack() {
 					@Override
 					public void onOK() {
-
 						// 删除：
 						String url = UrlTools.url + UrlTools.TEAM_NOTICE_DELETE;
 						RequestParams params = new RequestParams();

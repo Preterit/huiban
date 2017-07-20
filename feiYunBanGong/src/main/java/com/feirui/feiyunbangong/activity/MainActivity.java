@@ -217,6 +217,7 @@ public class MainActivity extends BaseActivity
     private void loginALi() {
         // 此实现不一定要放在Application onCreate中
         final String userid = (String) AppStore.user.getInfor().get(0).get("staff_mobile");
+
         // 此对象获取到后，保存为全局对象，供APP使用
         // 此对象跟用户相关，如果切换了用户，需要重新获取
         mIMKit = YWAPI.getIMKitInstance(userid, Happlication.APP_KEY);
@@ -226,8 +227,11 @@ public class MainActivity extends BaseActivity
 
         // 开始登陆IM:
         String password = (String) AppStore.user.getInfor().get(0).get("staff_password");
+        Log.e("tag", "loginALi: =-------------------" + password);
+
         IYWLoginService loginService = mIMKit.getLoginService();
         YWLoginParam loginParam = YWLoginParam.createLoginParam(userid, password);
+        Log.e("tag", "loginALi: =-------------------" + loginParam );
         loginService.login(loginParam, new IWxCallback() {
             @Override
             public void onSuccess(Object... arg0) {
@@ -305,7 +309,7 @@ public class MainActivity extends BaseActivity
             tv_num.setVisibility(View.INVISIBLE);
         }
     }
-    //策划菜单的item设置
+    //侧滑菜单的item设置
     private void setListView() {
         adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin, R.id.tv,
                 new String[]{"个人资料", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
@@ -522,13 +526,15 @@ public class MainActivity extends BaseActivity
 
             @Override
             public void onOK() {
-                // 阿里百川登出：
+                // 阿里百川退出：
                 IYWLoginService loginService = mIMKit.getLoginService();
                 loginService.logout(new IWxCallback() {
 
                     @Override
                     public void onSuccess(Object... arg0) {
                         Log.e("TAG", "退出阿里成功！");
+                        //必须结束 否则在登录后会再出现主页面
+                        finish();
                     }
 
                     @Override
@@ -551,7 +557,7 @@ public class MainActivity extends BaseActivity
                                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                                 overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                                 finish();
-
+//                                Happlication.getActivities().remove(this);
                             }
 
                             @Override
@@ -625,6 +631,8 @@ public class MainActivity extends BaseActivity
                     JsonBean bean = (JsonBean) msg.obj;
                     ArrayList<HashMap<String, Object>> infor = bean.getInfor();
                     HashMap<String, Object> hashMap = infor.get(0);
+                    Log.e("tag", "handleMessage: ---------------------" + hashMap );
+
                     String name = String.valueOf(hashMap.get("staff_name"));
                     String duty = String.valueOf(hashMap.get("staff_duties"));
                     String department = String.valueOf(hashMap.get("staff_department"));

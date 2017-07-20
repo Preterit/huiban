@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,13 +57,14 @@ public class LoginActivity extends BaseActivity {
 			switch (msg.what) {
 			case LOGIN_SUCESS:
 				AppStore.user = (JsonBean) msg.obj;
+				Log.e("tag", "handleMessage:-------------- " + AppStore.user.toString() );
 				// 设置已经登陆过
 				SPUtils.put(LoginActivity.this, Constant.SP_ALREADYUSED, true);
 				// 将用户名密码缓存
 				SPUtils.put(LoginActivity.this, Constant.SP_USERNAME,
 						et_login_username.getText().toString() + "");
-				SPUtils.put(LoginActivity.this, Constant.SP_PASSWORD,
-						et_login_password.getText().toString() + "");
+//				SPUtils.put(LoginActivity.this, Constant.SP_PASSWORD,
+//						et_login_password.getText().toString() + "");
 				T.showShort(LoginActivity.this, ((JsonBean) msg.obj).getMsg());
 				startActivity(new Intent(LoginActivity.this, MainActivity.class));
 				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
@@ -78,7 +80,7 @@ public class LoginActivity extends BaseActivity {
 				break;
 			case SERVICE_ERROR:
 				AppStore.user = null;
-				T.showShort(LoginActivity.this, "服务器出错了");
+				T.showShort(LoginActivity.this, "网络开小差了");
 				break;
 			}
 		};
@@ -147,6 +149,7 @@ public class LoginActivity extends BaseActivity {
 			intent.putExtra("type","denglu");
 			startActivity(intent);
 			overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomcloseout);
+//			finish();
 			break;
 		}
 
@@ -196,6 +199,7 @@ public class LoginActivity extends BaseActivity {
 					}
 
 				});
+
 	}
 
 	@Override
