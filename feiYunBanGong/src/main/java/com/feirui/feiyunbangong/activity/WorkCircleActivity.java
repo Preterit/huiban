@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,11 +19,13 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -49,9 +52,6 @@ import com.feirui.feiyunbangong.view.RefreshLayout.OnLoadListener;
 import com.loopj.android.http.RequestParams;
 import com.xw.repo.refresh.PullListView;
 
-import static com.feirui.feiyunbangong.R.drawable.icon_data_select;
-import static com.feirui.feiyunbangong.R.drawable.msg;
-import static com.feirui.feiyunbangong.R.id.ifRoom;
 import static com.feirui.feiyunbangong.R.id.swipe_container;
 
 /**
@@ -73,7 +73,7 @@ public class WorkCircleActivity extends BaseActivity implements
     private int position = 1;// 当前页数；
     private ListItemAdapter adapter;
 
-    private LinearLayout ll_pinglun_input;// 评论布局
+    private LinearLayout ll_pinglun_input,rv_work;// 评论布局
     private EditText et_pinglun;
     private Button bt_send;// 发送评论；
 
@@ -137,6 +137,8 @@ public class WorkCircleActivity extends BaseActivity implements
 
         lv_work.addHeaderView(header);
 
+
+
         ll_pinglun_input = (LinearLayout) findViewById(R.id.ll_pinglun_input);
         et_pinglun = (EditText) findViewById(R.id.et_pinglun);
         bt_send = (Button) findViewById(R.id.bt_send);
@@ -154,6 +156,8 @@ public class WorkCircleActivity extends BaseActivity implements
 
             }
         });
+
+
         adapter.setMyLongClickListener(new ListItemAdapter.MyLongClickListener() {
             @Override
             public void onLongClick(final ItemEntity itemEntity, final int position) {
@@ -177,6 +181,8 @@ public class WorkCircleActivity extends BaseActivity implements
                 }
             }
         });
+        rv_work = (LinearLayout) findViewById(R.id.rl_work);
+
     }
 
     /**
@@ -442,6 +448,8 @@ public class WorkCircleActivity extends BaseActivity implements
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) et_pinglun.getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
         switch (v.getId()) {
             case R.id.bt_send:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -459,6 +467,7 @@ public class WorkCircleActivity extends BaseActivity implements
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     int position = (int) v.getTag();
                     dianzan(position);
+                    setShowHide(v);
                     tv.setTextColor(Color.BLACK);
                 } else {
                     tv.setTextColor(Color.WHITE);
@@ -468,11 +477,17 @@ public class WorkCircleActivity extends BaseActivity implements
                 TextView t = (TextView) v;
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     pos_pinglun = (int) v.getTag();
+                    setShowHide(v);
                     // 如果评论输入框显示：
                     if (ll_pinglun_input.isShown()) {
                         ll_pinglun_input.setVisibility(View.GONE);
                     } else {
+                        Log.e("tag", "onTouch:------------显示了吗----------- " );
                         ll_pinglun_input.setVisibility(View.VISIBLE);
+
+                        et_pinglun.requestFocus();
+                        imm.toggleSoftInput(0,InputMethodManager.SHOW_FORCED);
+
                     }
                     t.setTextColor(Color.BLACK);
                 } else {
@@ -487,6 +502,10 @@ public class WorkCircleActivity extends BaseActivity implements
                     setShowHide(v);
                 }
                 return true;
+//            case R.id.lv_work:
+//                ll_pinglun_input.setVisibility(View.GONE);
+//                imm.hideSoftInputFromWindow(v.getWindowToken(), 0); //强制隐藏键盘
+//                return true;
         }
         return false;
     }
@@ -524,7 +543,7 @@ public class WorkCircleActivity extends BaseActivity implements
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(WorkCircleActivity.this, msg, 0).show();
+                        Toast.makeText(WorkCircleActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -543,4 +562,5 @@ public class WorkCircleActivity extends BaseActivity implements
             ll_pinglun_input.setVisibility(View.GONE);
         }
     }
+
 }
