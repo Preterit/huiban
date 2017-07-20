@@ -129,6 +129,7 @@ public class AboutFriendActivity extends BaseActivity implements
 						
 					}
 				});
+		strGroups.add("+");
 	}
 
 	private void initUI() {

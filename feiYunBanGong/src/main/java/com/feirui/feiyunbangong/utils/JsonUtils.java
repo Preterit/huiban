@@ -1,5 +1,7 @@
 package com.feirui.feiyunbangong.utils;
 
+import android.util.Log;
+
 import com.feirui.feiyunbangong.entity.JsonBean;
 
 import org.json.JSONArray;
@@ -21,6 +23,7 @@ public class JsonUtils {
 			bean.setMsg(jo.getString("msg"));
 
 			ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+			Log.e("tag", "getMessage: ---------------" + jo.getString("code") );
 			if (jo.getString("code").equals("200")) {
 				try {
 					JSONObject job = jo.getJSONObject("infor");

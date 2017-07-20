@@ -1,7 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
 import java.util.ArrayList;
-import java.util.logging.LogRecord;
 
 import org.apache.http.Header;
 
@@ -16,13 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.DingShiQiUtil;
-import com.feirui.feiyunbangong.utils.JsonUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.SPUtils;
@@ -30,7 +30,6 @@ import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.PView;
-import com.feirui.feiyunbangong.view.RevealLayout;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -126,6 +125,7 @@ public class RegisteActivity extends BaseActivity {
 									super.onSuccess(arg0, arg1, arg2);
 									final JsonBean json = JsonUtils
 											.getMessage(new String(arg2));
+									Log.e("tag","验证码-------------" + json.getCode());
 									if ("200".equals(json.getCode())) {
 										runOnUiThread(new Runnable() {
 											public void run() {
@@ -146,14 +146,13 @@ public class RegisteActivity extends BaseActivity {
 								}
 							});
 				} else {
-                    params.put("phone",et_phone.getText().toString().trim());
+                    params.put("mobile",et_phone.getText().toString().trim());
 					url = UrlTools.url + UrlTools.DENGLU_REGIST;
 					AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
 						@Override
 						public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 							super.onSuccess(statusCode, headers, responseBody);
 							final JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-							Log.e("tag","验证码-------------" + jsonBean.toString());
 							if ("200".equals(jsonBean.getCode())){
 								runOnUiThread(new Runnable() {
 									@Override
@@ -166,7 +165,7 @@ public class RegisteActivity extends BaseActivity {
 								runOnUiThread(new Runnable() {
 									public void run() {
 										T.showShort(RegisteActivity.this,
-												"验证码" + jsonBean.getMsg());
+												"验证码--" + jsonBean.getMsg());
 									}
 								});
 							}
@@ -288,62 +287,65 @@ public class RegisteActivity extends BaseActivity {
 			}
 
 			break;
-//		case R.id.btn_kuaisudenglu:
-//
-//			break;
 		}
 
 	}
 
 	private void login() {
 		RequestParams params = new RequestParams();
-		params.put("phone",et_phone.getText().toString().trim());
+		params.put("mobile",et_phone.getText().toString().trim());
 		params.put("code",et_verify.getText().toString().trim());
-	    String url = UrlTools.url + UrlTools.QUICK_LOGIN;
-		AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
+	    String url = UrlTools.url + UrlTools.QUICK_LOGIN.trim();
+		L.e("登录url=" + url + " params=" + params);
+
+		Utils.doPost(LoadingDialog.getInstance(RegisteActivity.this), this, url, params, new Utils.HttpCallBack() {
 			@Override
-			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-				super.onSuccess(statusCode, headers, responseBody);
+			public void success(JsonBean json) {
 				try {
-					JsonBean json = JsonUtils.getMessage(new String(responseBody));
-					Message mes = new Message();
+					Log.e("tag", "onSuccess: ==----------" + json.getCode() );
+					final Message mse = new Message();
+
 					if ("200".equals(json.getCode())) {
-						mes.what = LOGIN_SUCESS;
+
+						mse.what = LOGIN_SUCESS;
 					} else {
-						mes.what = LOGIN_ERROR;
+
+						mse.what = LOGIN_ERROR;
+
 					}
-					mes.obj = json;
-					handler.sendMessage(mes);
-				}catch (Exception e){
+					mse.obj = json;
+					handler.sendMessage(mse);
+				} catch (Exception e) {
+					e.printStackTrace();
 					handler.sendEmptyMessage(JSON_ERROR);
 				}
-
-
 			}
 
 			@Override
-			public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-				super.onFailure(statusCode, headers, responseBody, error);
+			public void failure(String msg) {
+				Log.e("tag", "failure:===-------------- " + msg );
 				handler.sendEmptyMessage(SERVICE_ERROR);
 			}
-		});
 
+			@Override
+			public void finish() {
+
+			}
+		});
 	}
 
 	private Handler handler = new Handler() {
-		@Override
 		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			switch (msg.what){
-				case LOGIN_SUCESS :
+			switch (msg.what) {
+				case LOGIN_SUCESS:
 					AppStore.user = (JsonBean) msg.obj;
-					//设置已经登录过
-					SPUtils.put(RegisteActivity.this, Constant.SP_ALREADYUSED,true);
+					Log.e("tag", "handleMessage:-------------- " + AppStore.user.toString() );
+					// 设置已经登陆过
+					SPUtils.put(RegisteActivity.this, Constant.SP_ALREADYUSED, true);
 					// 将用户名密码缓存
 					SPUtils.put(RegisteActivity.this, Constant.SP_USERNAME,
 							et_phone.getText().toString() + "");
-					SPUtils.put(RegisteActivity.this, Constant.SP_PASSWORD,
-							"123456".trim());
+
 					T.showShort(RegisteActivity.this, ((JsonBean) msg.obj).getMsg());
 					startActivity(new Intent(RegisteActivity.this, MainActivity.class));
 					overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
@@ -359,10 +361,16 @@ public class RegisteActivity extends BaseActivity {
 					break;
 				case SERVICE_ERROR:
 					AppStore.user = null;
-					T.showShort(RegisteActivity.this, "服务器出错了");
+					T.showShort(RegisteActivity.this, "网络开小差了");
 					break;
 			}
 		}
+
 	};
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Happlication.getInstance().exit();
+	}
 }
