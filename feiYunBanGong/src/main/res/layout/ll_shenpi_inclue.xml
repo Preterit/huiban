@@ -94,12 +94,12 @@
         android:id="@+id/ll_add_mingxi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <include
+            layout="@layout/add_mingxi_caigou_shenpi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/add_mingxi_caigou_shenpi" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <TextView

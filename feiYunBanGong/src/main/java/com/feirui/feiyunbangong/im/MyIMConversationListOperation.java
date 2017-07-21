@@ -4,8 +4,10 @@ import android.support.v4.app.Fragment;
 
 import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMConversationListOperation;
+
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
+
 
 /**
  * 最近会话界面的定制点(根据需要实现相应的接口来达到自定义会话列表界面)，不设置则使用openIM默认的实现 调用方设置的回调，必须继承BaseAdvice
@@ -27,8 +29,9 @@ public class MyIMConversationListOperation extends IMConversationListOperation {
 	}
 
 	/**
-	 * 返回自定义会话和群会话的头像 url 该方法只适用设置自定义会话和群会话的头像，设置单聊会话头像请参考
-	 * {@link com.taobao.openimui.sample.UserProfileSampleHelper}
+	 * 返回自定义会话和群会话的头像 url 该方法只适用设置自定义会话和群会话的头像，
+	 * 设置单聊会话头像请参考
+	 *
 	 *
 	 * @param fragment
 	 * @param conversation
@@ -50,7 +53,5 @@ public class MyIMConversationListOperation extends IMConversationListOperation {
 
 		return "http://tp2.sinaimg.cn/1721410501/50/40033657718/0";
 	}
-
-	
 
 }

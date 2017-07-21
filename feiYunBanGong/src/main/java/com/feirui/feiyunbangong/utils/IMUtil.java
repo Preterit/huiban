@@ -28,6 +28,7 @@ import com.feirui.feiyunbangong.activity.tribe.SelectTribeAtMemberSample;
 import com.feirui.feiyunbangong.activity.tribe.SendAtMsgDetailUISample;
 import com.feirui.feiyunbangong.im.MyChatUI;
 import com.feirui.feiyunbangong.im.MyIMChattingPageOperateion;
+import com.feirui.feiyunbangong.im.MyIMConversationListOperation;
 import com.feirui.feiyunbangong.im.MyYWSDKFlobalConfig;
 import com.feirui.feiyunbangong.state.AppStore;
 
@@ -39,15 +40,15 @@ import java.util.List;
 public class IMUtil {
 
 	public static void bind() {
-		// 会话列表：
+		//会话列表UI相关
 		AdviceBinder.bindAdvice(PointCutEnum.CONVERSATION_FRAGMENT_UI_POINTCUT,
 				ConversationListUICustomSample.class);
 
-		/*
-		 * // 会话列表： AdviceBinder.bindAdvice(
-		 * PointCutEnum.CONVERSATION_FRAGMENT_OPERATION_POINTCUT,
-		 * MyIMConversationListOperation.class);
-		 */
+		//会话列表业务相关
+		 AdviceBinder.bindAdvice(
+		 PointCutEnum.CONVERSATION_FRAGMENT_OPERATION_POINTCUT,
+		  MyIMConversationListOperation.class);
+
 
 		// 单聊列表：
 		AdviceBinder.bindAdvice(PointCutEnum.CHATTING_FRAGMENT_UI_POINTCUT,

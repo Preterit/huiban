@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/huise_38"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:background="@color/fenge"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x20"
+        android:text="报销明细" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginTop="@dimen/y16"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="报销金额："/>
+
+        <EditText
+            android:id="@+id/et_1"
+            style="@style/a000000_38"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入..."
+            android:inputType="number"
+            android:padding="@dimen/x26"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/jiange"/>
+
+    <LinearLayout
+        android:id="@+id/ll_zongjie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="报销类别："/>
+
+        <EditText
+            android:id="@+id/et_2"
+            style="@style/a000000_38"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入..."
+            android:padding="@dimen/x26"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/jiange"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_3"
+            style="@style/a000000_48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="费用明细："/>
+
+        <EditText
+            android:id="@+id/et_3"
+            style="@style/a000000_38"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入..."
+            android:padding="@dimen/x26"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/jiange"/>
+
+</LinearLayout>
