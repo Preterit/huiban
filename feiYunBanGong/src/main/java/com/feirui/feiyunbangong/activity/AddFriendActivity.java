@@ -84,10 +84,10 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (keyCode == KeyEvent.KEYCODE_ENTER) {
-				if (!Utils.isPhone(et_sousuolianxiren.getText().toString())) {
-					Toast.makeText(this, "手机号格式错误！", Toast.LENGTH_SHORT).show();
-					return false;
-				}
+//				if (!Utils.isPhone(et_sousuolianxiren.getText().toString())) {
+//					Toast.makeText(this, "手机号格式错误！", Toast.LENGTH_SHORT).show();
+//					return false;
+//				}
 				search(et_sousuolianxiren.getText().toString());
 			}
 		}

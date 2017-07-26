@@ -56,12 +56,15 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     EditText et_shiyou;// 请假天数，请假事由
     // 添加审批人
     @PView(click = "onClick")
-    ImageView iv_add, iv_01;
+    ImageView iv_add,iv_add_chaosong, iv_01;
     private ArrayList<JsonBean> list1 = new ArrayList<>();
 
 
     @PView
     ListView lv_add_shenpiren;
+    @PView
+    ListView lv_add_chaosong;
+    AddShenHeUpdateAdapter adapter1;
     AddShenHeUpdateAdapter adapter;
     @PView
     ScrollView sv_caigou;
@@ -107,6 +110,22 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
             }
         });
 
+        //抄送人列表
+        adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,QingJiaActivity.this);
+        lv_add_chaosong.setAdapter(adapter1);
+        lv_add_chaosong.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sv_caigou.requestDisallowInterceptTouchEvent(false);
+                } else {
+                    sv_caigou.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            }
+        });
 
         mCalendar = Calendar.getInstance();
         mCalendar.setTime(new Date());
@@ -133,6 +152,21 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
 
             super.onActivityResult(requestCode, resultCode, data);
         }
+
+        if (requestCode == 300 && resultCode == 100 ) {
+            ArrayList<ChildItem> childs1 = (ArrayList<ChildItem>)data.getSerializableExtra("childs");
+            Log.e("tag", "onActivityResult: ----------" + childs1 );
+            HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+            Log.e("tag", "onActivityResult: ----------" + hm );
+            childs1.add(0, new ChildItem(hm.get("staff_name") + "", hm.get("staff_head") + "", hm.get("staff_mobile")
+                    + "", hm.get("id") + "", 0));
+            //去掉自己
+            childs1.remove(0);
+            if (childs1 != null && childs1.size() > 0) {
+                adapter1.addList(childs1);
+            }
+            Log.d("mytag","添加人员："+childs1.get(0).toString());
+        }
     }
 
     public void onClick(View view) {
@@ -148,6 +182,14 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                 //startActivityForResult(intent, 101);// 请求码；
 
                 break;
+
+            case R.id.iv_add_chaosong:
+                final Intent intent1 = new Intent(this, AddChengYuanActivity.class);
+                startActivityForResult(intent1, 300);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+//			startActivityForResult(intent, 101);// 请求码；
+                break;
+
             case R.id.tv_leixing:// 请假类型
                 ArrayList<String> list = new ArrayList<>();
                 list.add("事假");
@@ -283,6 +325,16 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                     Log.d("adapterTag","适配器上的数据"+sb_id);
                 }
 
+                //从适配器中取出抄送人集合
+                List<ChildItem> chaoSong = adapter1.getList();
+                StringBuffer cs_id = new StringBuffer();
+                // 循环拼接添加成员id,每个id后加逗号
+                for (int i = 0; i < chaoSong.size(); i++) {
+                    cs_id.append(chaoSong.get(i).getId());
+                    cs_id.append(",");
+                    Log.d("adapterTag","适配器上的数据"+cs_id);
+                }
+
 //                for (int i = 0; i < adapter.getCount(); i++) {
 //                    AddShenHe ash = (AddShenHe) adapter.getItem(i);
 //                    sb_id.append(ash.getId() + ",");
@@ -292,9 +344,9 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                     T.showShort(this, "请选择审批人");
                     return;
                 }
-                params.put("leave_approvers", sb_id
-                        .deleteCharAt(sb_id.length() - 1).toString());
-                String url = UrlTools.url + UrlTools.LEAVE_ADD_LEAVE;
+                params.put("leave_approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
+                params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
+                String url = UrlTools.url1 + UrlTools.LEAVE_ADD_LEAVE1;
                 L.e("审批-请假url" + url + " params" + params);
                 AsyncHttpServiceHelper.post(url, params,
                         new AsyncHttpResponseHandler() {

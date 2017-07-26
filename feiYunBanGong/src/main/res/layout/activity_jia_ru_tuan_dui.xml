@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
         layout="@layout/top" />
-    <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y500"
         android:background="@color/a42baff"
@@ -63,7 +64,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lv_yijiaru"
+         android:id="@+id/lv_yijiaru"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/y10"

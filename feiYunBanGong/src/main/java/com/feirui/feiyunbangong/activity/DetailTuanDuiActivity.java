@@ -16,6 +16,7 @@ import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -63,6 +64,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     private LinearLayout ll_tuanduigonggao, ll_tuanduiquan,ll_tuanduichengyuan;// 团队公告 、成员；
     private TextView tv_message_num, tv_chenyuan;// 团队公告消息数量；
     private View header_view;// 头部；
+    private ImageView iv_tjcy;
 
     //群聊相关
     private TribeAndRoomList mTribeAndRoomList;  //群聊集合
@@ -224,7 +226,8 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
     private void setListener() {
         lv_chengyuan.setOnItemClickListener(this);
-        bt_add.setOnClickListener(this);
+        //bt_add.setOnClickListener(this);
+        iv_tjcy.setOnClickListener(this);
         ll_tuanduigonggao.setOnClickListener(this);
         ll_tuanduichengyuan.setOnClickListener(this);
         //跳转到团队加页面
@@ -267,11 +270,10 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         adapter = new ChengYuanAdapter(getLayoutInflater());
         tdcys = new ArrayList<>();
 
-        View footer_view = getLayoutInflater().inflate(
-                R.layout.lv_footer_tuandui_chengyuan, null);
-        bt_add = (Button) footer_view.findViewById(R.id.bt_add);
-
-        lv_chengyuan.addFooterView(footer_view);
+//        View footer_view = getLayoutInflater().inflate(R.layout.lv_footer_tuandui_chengyuan, null);
+//        bt_add = (Button) footer_view.findViewById(R.id.bt_add);
+//
+//        lv_chengyuan.addFooterView(footer_view);
 
         header_view = getLayoutInflater().inflate(R.layout.lv_notice_team_item,
                 null);
@@ -293,6 +295,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
         ll_tuanduiquan = (LinearLayout) header_view
                 .findViewById(R.id.ll_tuanduiquan);
+        iv_tjcy = (ImageView)header_view.findViewById(R.id.iv_tjcy);
 
         mTribeList = new ArrayList<YWTribe>();
         mRoomsList = new ArrayList<YWTribe>();
@@ -323,7 +326,11 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.bt_add:
+//            case R.id.bt_add:
+//                Intent intent = new Intent(this, AddChengYuanActivity.class);
+//                startActivityForResult(intent, 300);
+//                break;
+            case R.id.iv_tjcy:
                 Intent intent = new Intent(this, AddChengYuanActivity.class);
                 startActivityForResult(intent, 300);
                 break;
