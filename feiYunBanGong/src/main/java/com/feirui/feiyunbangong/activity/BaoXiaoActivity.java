@@ -1,9 +1,11 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,8 +21,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddShenHeUpdateAdapter;
@@ -49,14 +54,23 @@ import java.util.List;
 public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     Button btn_submit;// 提交
     @PView
-    EditText et_1, et_2, et_3, et_4;// 完成，未完成，明天计划,备注
+    EditText et_1, et_2, et_3,et_4;// 完成，未完成，明天计划,备注
     private SelectPicPopupWindow window;// 弹出图片选择框；
     private int select;// 点击上传图片位置；
     private Bitmap bitmap1, bitmap2, bitmap3;
+    public int totle = 0;
     // 添加审批人
     @PView(click = "onClick")
     ImageView iv_add,iv_add_chaosong, iv_01, iv_tupian1, iv_tupian2, iv_tupian3;
     private ArrayList<JsonBean> list1 ;
+
+    @PView(click = "onClick")
+    TextView mTvAdd,tv_title;
+//    @PView
+//    TextView et_4;
+    @PView
+    LinearLayout ll_add_mingxi;
+    private View v_add_mingxi;
 
     @SuppressWarnings("unchecked")
     private ArrayList<ChildItem> childs ; //添加的审批人员
@@ -148,6 +162,9 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 commit();
             }
         });
+        mTvAdd = (TextView) findViewById(R.id.tv_add_mingxi);
+        mTvAdd.setOnClickListener(this);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -292,23 +309,71 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 //			startActivityForResult(intent, 101);// 请求码；
                 break;
+            case R.id.tv_add_mingxi:
+                addMingXi(); //添加明细
+                break;
+            case R.id.tv_title:
+                ll_add_mingxi.removeView((View) view.getTag());// 移除明细；
+                break;
         }
+    }
+
+    private void addMingXi() {
+        v_add_mingxi = getLayoutInflater().inflate(R.layout.add_mingxi_baoxiao_shenpi,
+                null);
+        tv_title = (TextView) v_add_mingxi.findViewById(R.id.tv_title);
+        tv_title.setTag(v_add_mingxi);
+        tv_title.setOnClickListener(this);
+        ll_add_mingxi.addView(v_add_mingxi);
+        tv_title.setText("删除明细");
+        tv_title.setTextColor(Color.RED);
     }
 
     public void commit() {
 
-        if (TextUtils.isEmpty(et_1.getText().toString().trim())) {
-            T.showShort(this, "请输入报销金额");
-            return;
+        StringBuffer sb_price = new StringBuffer();
+        StringBuffer sb_leixing = new StringBuffer();
+        StringBuffer sb_mingxi = new StringBuffer();
+
+//        int totle = 0;
+        // 采购明细：
+        for (int i = 0; i < ll_add_mingxi.getChildCount(); i++) {
+            View v = ll_add_mingxi.getChildAt(i);
+            final EditText et_1 = (EditText) v.findViewById(R.id.et_1);
+            EditText et_2 = (EditText) v.findViewById(R.id.et_2);
+            EditText et_3 = (EditText) v.findViewById(R.id.et_3);
+//            et_1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//                @Override
+//                public void onFocusChange(View v, boolean hasFocus) {
+//                    Log.e("tag","-------------------------------------------");
+//                    if (hasFocus){
+//                        //获得焦点
+//                        et_4.setText(totle + "");
+//                    }else {
+//
+//                    }
+//
+//                }
+//            });
+
+            if (TextUtils.isEmpty(et_1.getText().toString().trim())) {
+                Toast.makeText(this, "请输入报销金额！",  Toast.LENGTH_SHORT).show();
+                return;
+            } else if (TextUtils.isEmpty(et_2.getText().toString().trim())) {
+                Toast.makeText(this, "请输入报销类型！",  Toast.LENGTH_SHORT).show();
+                return;
+            } else if (TextUtils.isEmpty(et_3.getText().toString().trim())) {
+                Toast.makeText(this, "请输入报销明细！",  Toast.LENGTH_SHORT).show();
+                return;
+            }
+            sb_price.append(et_1.getText().toString().trim() + ",");
+            sb_leixing.append(et_2.getText().toString().trim() + ",");
+            sb_mingxi.append(et_3.getText().toString().trim() + ",");
+
+//            totle += Integer.parseInt(et_1.getText().toString().trim());
         }
-        if (TextUtils.isEmpty(et_2.getText().toString().trim())) {
-            T.showShort(this, "请输入报销类型");
-            return;
-        }
-        if (TextUtils.isEmpty(et_3.getText().toString().trim())) {
-            T.showShort(this, "请输入报销明细");
-            return;
-        }
+
+//        et_4.setText(totle + "");
         if (TextUtils.isEmpty(et_4.getText().toString().trim())) {
             T.showShort(this, "请输入报销总金额");
             return;
@@ -317,7 +382,6 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             T.showShort(this, "请选择审批人");
             return;
         }
-
 
 
         RequestParams params = new RequestParams();

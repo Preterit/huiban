@@ -23,7 +23,7 @@ import com.feirui.feiyunbangong.view.PView;
 
 /**
  * 信息
- *
+ * 聊天记录
  * @author Lesgod
  */
 public class Fragment3 extends BaseFragment implements OnClickListener {
