@@ -267,6 +267,11 @@ public class BaifangKehuActivity extends BaseActivity {
 
 		}
 
+		@Override
+		public void onConnectHotSpotMessage(String s, int i) {
+
+		}
+
 
 	}
 }
