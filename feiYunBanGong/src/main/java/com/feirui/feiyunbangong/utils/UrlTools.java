@@ -151,10 +151,19 @@ public class UrlTools {
    * 新增请假信息
    */
   public static String LEAVE_ADD_LEAVE = "leave/add_leave";
+    /**
+     * 新增请假信息,带抄送人
+     */
+    public static String LEAVE_ADD_LEAVE1 = "leave/add_leave1";
   /**
    * 新增报销信息
    */
   public static String EXPENSE_ADD_EXPENSE = "Expense/add_expense";
+  /**
+   * 新增报销信息
+   */
+  public static String EXPENSE_ADD_EXPENSE1 = "Expense/add_expense1";
+
   /**
    * 新增外出信息
    */
@@ -167,14 +176,27 @@ public class UrlTools {
    * 付款新增
    */
   public static String BUY_ADD_BUY = "buy/add_buy";
+
+  /**
+   * 付款新增1
+   */
+  public static String BUY_ADD_BUY1 = "buy/add_buy1";
   /**
    * 新增采购信息：
    */
   public static final String ADD_CAIGOU_XINXI = "Purchase/add_purchase";
   /**
+   * 新增采购信息：http://123.57.45.74/feiybg/public/index.php/index/Purchase/add_purchase1
+   */
+  public static final String ADD_CAIGOU_XINXI1 = "Purchase/add_purchase1";
+  /**
    * 待审批其他新增
    */
   public static String OTHER_OTHER_ADD = "Other/other_add";
+  /**
+   * 待审批其他新增,带抄送人
+   */
+  public static String OTHER_OTHER_ADD1 = "Other/other_add1";
   /**
    * 审批里我发起点进去显示所有的信息(我提交的)
    */
@@ -192,7 +214,7 @@ public class UrlTools {
     /**
      * 待审批的个数显示
      * */
-    public static String APPROVAL_SHOWAPPCOUNT = "Approval/showappcount ";
+    public static String APPROVAL_SHOWAPPCOUNT = "Approval/showappcount";
   /**
    * 推广-团队工作圈
    */

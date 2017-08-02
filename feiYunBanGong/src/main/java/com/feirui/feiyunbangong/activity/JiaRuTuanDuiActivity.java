@@ -85,6 +85,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 		switch (v.getId()) {
 		case R.id.tv_jiaru:
 			jiaru();
+			finish();
 			break;
 		}
 	}
@@ -102,6 +103,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
 								.show();
 						addData();
+
 					}
 
 					@Override
@@ -182,7 +184,6 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 					@Override
 					public void finish() {
 						// TODO Auto-generated method stub
-						
 					}
 				});
 	}

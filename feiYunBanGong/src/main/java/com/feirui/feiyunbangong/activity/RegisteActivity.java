@@ -1,9 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-
-import org.apache.http.Header;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +28,10 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+
+import java.util.ArrayList;
 
 /**
  * 注册,忘记密码第一页获取验证码

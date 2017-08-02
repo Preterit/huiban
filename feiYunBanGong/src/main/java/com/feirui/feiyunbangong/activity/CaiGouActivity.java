@@ -40,6 +40,7 @@ import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
 import com.feirui.feiyunbangong.utils.FeiKongJianYaoUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -56,7 +57,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
     private ListView lv_add;
     //添加审批人的
     private ArrayList<JsonBean> list1 = new ArrayList<>();
-    private ImageView iv_add, iv_add_pic_01, iv_add_pic_02, iv_add_pic_03;
+    private ImageView iv_add,iv_add_cs, iv_add_pic_01, iv_add_pic_02, iv_add_pic_03;
 //    AddShenHeAdapter adapter;
     AddShenHeUpdateAdapter adapter;
     private ScrollView sv_caigou;
@@ -71,7 +72,11 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
     private Bitmap bitmap3;
     private Button btn_caigou_submit;// 提交采购信息按钮；
     private EditText etShenQingMiaoShu;
-
+    //抄送人
+    @PView
+    ListView lv_add_chaosong;
+    AddShenHeUpdateAdapter adapter1;
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +105,11 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         try {
             if (v.getId() == iv_add.getId()) {
                 addShenPiRen();
+            }else if(v.getId() == iv_add_cs.getId()){
+                Log.e("抄送人", "onClick: "+"-----" );
+                final Intent intent1 = new Intent(this, AddChengYuanActivity.class);
+                startActivityForResult(intent1, 300);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
             } else if (tv_add_mingxi.getId() == v.getId()) {
                 addMingXi();// 添加明细；
             } else if (tv_title != null && tv_title.getId() == v.getId()) {
@@ -210,6 +220,10 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
             Toast.makeText(this, "请选择审批人！",  Toast.LENGTH_SHORT).show();
             return;
         }
+        if (adapter1.getList().get(0) == null) {
+            Toast.makeText(this, "请选择审批人！",  Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Log.e("tag","往下走吗--------------------------------------------");
         Log.e("tag","---ets.get(0).getText().toString()------------"+etShenQingMiaoShu.getText().toString().trim());
@@ -233,9 +247,9 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         }
 
         if (bitmap1 == null && bitmap2 == null && bitmap3 == null) {
-            params.put("pic", "");
+            params.put("pur_picture", "");
         } else {
-            params.put("pic", sb_pic.deleteCharAt(sb_pic.length() - 1)
+            params.put("pur_picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
                     .toString());
         }
 
@@ -248,8 +262,20 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
             sb_id.append(",");
             Log.d("adapterTag","适配器上的数据"+sb_id);
         }
-        params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1)
-                .toString());
+
+        //从适配器中取出抄送人集合
+        List<ChildItem> chaoSong = adapter1.getList();
+        StringBuffer cs_id = new StringBuffer();
+        // 循环拼接添加成员id,每个id后加逗号
+        for (int i = 0; i < shenPi.size(); i++) {
+            cs_id.append(shenPi.get(i).getId());
+            cs_id.append(",");
+            Log.d("adapterTag","适配器上的数据"+cs_id);
+        }
+
+
+        params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());//审批人id
+        params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
 
         params.put("pur_name", sb_name.deleteCharAt(sb_name.length() - 1)
                 .toString());
@@ -258,16 +284,16 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         params.put("pur_money", sb_price.deleteCharAt(sb_price.length() - 1)
                 .toString());
 
-        Log.e("TAG", "-----提交的采购信息-----" + params.toString());
+        Log.e("TAG123", "-----提交的采购信息-----" + params.toString());
 
         try {
-            AsyncHttpServiceHelper.post(UrlTools.url
-                            + UrlTools.ADD_CAIGOU_XINXI, params,
+            AsyncHttpServiceHelper.post(UrlTools.url1
+                            + UrlTools.ADD_CAIGOU_XINXI1, params,
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int arg0, Header[] arg1,byte[] arg2) {
                             JsonBean bean = JsonUtils.getMessage(new String(arg2));
-                            Log.e("TAG", "-----提交的采购信息-----" + bean.getCode());
+                            Log.e("TAG456", "-----提交的采购信息-----" + bean.toString());//bean.getCode()
                             if (bean.getCode().equals("200")){
                                 handler.sendEmptyMessage(0);
                             }
@@ -278,7 +304,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
                         public void onFailure(int arg0, Header[] arg1,
                                               byte[] arg2, Throwable arg3) {
                             JsonBean bean = JsonUtils.getMessage(new String(arg2));
-                            Log.e("TAG", "-----提交的采购信息-----" + bean.getCode());
+                            Log.e("TAG789", "-----提交的采购信息-----" + bean.getCode());
                             if (bean.getCode().equals("-400")){
                                 handler.sendEmptyMessage(1);
                             }
@@ -366,6 +392,22 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
             }
 
         }
+        //页面回调方法，返回抄送人的数据
+        if (requestCode == 300 && resultCode == 100 ) {
+            ArrayList<ChildItem> childs1 = (ArrayList<ChildItem>)data.getSerializableExtra("childs");
+            Log.e("tag", "onActivityResult: ----------" + childs1 );
+            HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+            Log.e("tag", "onActivityResult: ----------" + hm );
+            childs1.add(0, new ChildItem(hm.get("staff_name") + "", hm.get("staff_head") + "", hm.get("staff_mobile")
+                    + "", hm.get("id") + "", 0));
+            //去掉自己
+            childs1.remove(0);
+            if (childs1 != null && childs1.size() > 0) {
+                adapter1.addList(childs1);
+            }
+            Log.d("mytag","添加人员："+childs1.get(0).toString());
+        }
+
         switch (requestCode) {
 
             case 1:
@@ -443,6 +485,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
 
     private void setListener() {
         iv_add.setOnClickListener(this);
+        iv_add_cs.setOnClickListener(this);
         tv_qiwangriqi.setOnClickListener(this);
         tv_xuanze_zhifufangshi.setOnClickListener(this);
         lv_add.setOnTouchListener(new OnTouchListener() {
@@ -493,6 +536,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         setRightVisibility(false);
         lv_add = (ListView) findViewById(R.id.lv_add_shenpiren);
         iv_add = (ImageView) findViewById(R.id.iv_add);
+        iv_add_cs = (ImageView) findViewById(R.id.iv_add_chaosong);
         sv_caigou = (ScrollView) findViewById(R.id.sv_caigou);
         tv_add_mingxi = (TextView) findViewById(R.id.tv_add_mingxi);
         ll_add_mingxi = (LinearLayout) findViewById(R.id.ll_add_mingxi);
@@ -515,6 +559,22 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
 
         adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,CaiGouActivity.this);
         lv_add.setAdapter(adapter);
+
+        adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,CaiGouActivity.this);
+        lv_add_chaosong.setAdapter(adapter1);
+        lv_add_chaosong.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sv_caigou.requestDisallowInterceptTouchEvent(false);
+                } else {
+                    sv_caigou.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            }
+        });
     }
 
 

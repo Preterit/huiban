@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -33,11 +31,13 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.zxing.encoding.EncodingHandler;
 
+import org.apache.http.Header;
+
 /**
  * 团队——加
  * 
  * @author admina
- *
+ *(团队退出按钮)
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
 	@PView(click = "onClick")
