@@ -85,6 +85,7 @@ public class MyReceiver extends BroadcastReceiver {
             } else if ("add_leave".equals("key")) {
                 context.sendBroadcast(new Intent(Constant.NEED_TO_SHEN_HE));
             } else {
+                Log.e(TAG, "onReceive: -------------添加好友-----------------" );
                 context.sendBroadcast(new Intent(
                         Constant.GET_BROADCAST_ABOUT_FRIEND));
             }
@@ -92,6 +93,8 @@ public class MyReceiver extends BroadcastReceiver {
         } catch (Exception e) {
             Log.e("TAG", e.getMessage());
         }
+
+        Log.e(TAG, "onReceive: -------------添加好友-----------------" );
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
             /*
              * String regId = bundle
@@ -235,6 +238,7 @@ public class MyReceiver extends BroadcastReceiver {
     // 打开添加朋友页面：
     public void openAdd(Context context, Bundle bundle) {
         Intent i = new Intent(context, NewFriendActivity.class);
+
         i.putExtras(bundle); //
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
