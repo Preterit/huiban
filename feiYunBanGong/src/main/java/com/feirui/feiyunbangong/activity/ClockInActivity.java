@@ -217,6 +217,10 @@ public class ClockInActivity extends BaseActivity {
 
 		}
 
+		@Override
+		public void onConnectHotSpotMessage(String s, int i) {
+
+		}
 
 
 	}
