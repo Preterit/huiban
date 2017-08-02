@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.activity.BaseActivity;
-import com.feirui.feiyunbangong.activity.CheckBaobiaoActivity;
 import com.feirui.feiyunbangong.activity.FriendShop;
 import com.feirui.feiyunbangong.activity.ImagePagerActivity;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -98,6 +97,13 @@ public class FriendInfoActivity extends BaseActivity {
         deleteFriendInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            }
+        });
+
+        mRlBzFriendInfo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

@@ -240,9 +240,9 @@ public class Utils {
     public static void doPost(final LoadingDialog dialog, final Activity activity, String url, RequestParams params,
                               final HttpCallBack call) {
 
-        if (dialog != null) {
-            dialog.show();
-        }
+//        if (dialog != null) {
+//            dialog.show();
+//        }
 
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
 

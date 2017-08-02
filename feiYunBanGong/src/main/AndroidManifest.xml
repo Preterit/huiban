@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="49"
-    android:versionName="1.4.9">
+    android:versionCode="50"
+    android:versionName="1.5.0">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -124,7 +124,7 @@
         <activity android:name=".activity.QiTaActivity" />
         <activity android:name=".activity.QingJiaActivity" />
         <activity android:name=".activity.BaoXiaoActivity" />
-        <activity android:name=".activity.WaiChuActivity" />
+        <activity android:name=".activity.WoDeTaskActivity$WaiChuActivity" />
         <activity android:name=".activity.FuKuanActivity" />
         <!-- <activity android:name=".activity.CaoZuoJiLuActivity"> -->
         <!-- </activity> -->
@@ -452,7 +452,9 @@
         <activity
             android:name=".activity.RenWuDetailActivity"
             android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.GongGaoXiangXiActivity" />
+        <activity android:name=".BeiZhuActivity"></activity>
     </application>
 
 </manifest>

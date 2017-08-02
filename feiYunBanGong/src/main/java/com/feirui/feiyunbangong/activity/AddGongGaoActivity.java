@@ -16,7 +16,9 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.RequestParams;
-
+/**
+ * 发布公告
+ * */
 public class AddGongGaoActivity extends BaseActivity implements OnClickListener {
 
 	private EditText et_gonggao;
@@ -76,9 +78,8 @@ public class AddGongGaoActivity extends BaseActivity implements OnClickListener 
 
 					@Override
 					public void success(JsonBean bean) {
-						Toast.makeText(AddGongGaoActivity.this, "提交成功！", 0)
-								.show();
-						finish();
+						Toast.makeText(AddGongGaoActivity.this, "提交成功！", 0).show();
+						AddGongGaoActivity.this.finish();
 					}
 
 					@Override
@@ -89,7 +90,7 @@ public class AddGongGaoActivity extends BaseActivity implements OnClickListener 
 					@Override
 					public void finish() {
 						// TODO Auto-generated method stub
-						
+
 					}
 				});
 
