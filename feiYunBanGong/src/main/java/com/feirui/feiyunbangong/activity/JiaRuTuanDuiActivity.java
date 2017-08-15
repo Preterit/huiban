@@ -28,6 +28,7 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.TextImageView;
 import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class JiaRuTuanDuiActivity extends BaseActivity implements
 		OnClickListener {
@@ -137,7 +138,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 						ArrayList<HashMap<String, Object>> infor = bean
 								.getInfor();
 						HashMap<String, Object> hm = infor.get(0);
-
+						ImageLoader.getInstance().displayImage(hm.get("tiv_head").toString(), tiv_head);
 						if (hm.get("team_name") != null) {
 							tv_name.setText(String.valueOf(hm.get("team_name")));
 							//tiv_head.setText(String.valueOf(hm.get("team_name")));

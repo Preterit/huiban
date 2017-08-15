@@ -11,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.mobileim.contact.IYWContact;
 import com.feirui.feiyunbangong.activity.BaseActivity;
 import com.feirui.feiyunbangong.activity.FriendShop;
 import com.feirui.feiyunbangong.activity.ImagePagerActivity;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.dialog.SelectZTDialog;
+import com.feirui.feiyunbangong.dialog.XiuGaiDialog;
 import com.feirui.feiyunbangong.entity.FriendShopBean;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
+import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.T;
@@ -38,7 +43,7 @@ import java.util.HashMap;
  *
  * @author rubing
  */
-public class FriendInfoActivity extends BaseActivity {
+public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.MyDailogCallback {
 
     private ImageView mIvHeadActivityFriendInfo;
     private TextView mTvNameFriendInfo;
@@ -47,8 +52,11 @@ public class FriendInfoActivity extends BaseActivity {
     private TextView mTvBZFriendInfo;
     private RelativeLayout mRlBzFriendInfo;
     private RelativeLayout mRlShopFriendInfo;
+    //private RelativeLayout xiugaifenzu;
     private Button deleteFriendInfo;
     private Button contactFriendInfo;
+
+    private SelectZTDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +95,10 @@ public class FriendInfoActivity extends BaseActivity {
         mTvBZFriendInfo = (TextView) findViewById(R.id.tvBZFriendInfo);
         mRlBzFriendInfo = (RelativeLayout) findViewById(R.id.rlBzFriendInfo);
         mRlShopFriendInfo = (RelativeLayout) findViewById(R.id.rlShopFriendInfo);
+        //xiugaifenzu = (RelativeLayout) findViewById(R.id.xiugaifenzu);
         deleteFriendInfo = (Button) findViewById(R.id.deleteFriendInfo);
         contactFriendInfo = (Button) findViewById(R.id.contactFriendInfo);
+
 
         /**
          *
@@ -100,10 +110,45 @@ public class FriendInfoActivity extends BaseActivity {
             }
         });
 
+
         mRlBzFriendInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                AppStore.phone = phone;
+                Log.e("好友资料", "phone: "+phone.toString());
+                Log.e("好友资料", "phone: "+mStaffId);
+                XiuGaiDialog tianjia = new XiuGaiDialog("修改备注", mStaffId
+                        + "", "请输入新备注", FriendInfoActivity.this, new XiuGaiDialog.AlertCallBack1() {
 
+                    @Override
+                    public void onOK(final String name) {
+                        Log.e("联系人页面", "name:--------------------- "+MyUserProfileSampleHelper.mUserInfo.get(phone) );
+
+                        // 如果内存缓存中存在该用户，则修改内存缓存中该用户的备注：
+                        if (MyUserProfileSampleHelper.mUserInfo.containsKey(phone)) {
+                            IYWContact iywContact = MyUserProfileSampleHelper.mUserInfo
+                                    .get(phone);
+
+                            IYWContact contact = new MyUserProfileSampleHelper.UserInfo(name, iywContact
+                                    .getAvatarPath(), iywContact.getUserId(),
+                                    iywContact.getAppKey());
+
+                            Log.e("联系人页面", "name: "+name );
+
+                            MyUserProfileSampleHelper.mUserInfo.remove(phone); // 移除临时的IYWContact对象
+                            MyUserProfileSampleHelper.mUserInfo.put(phone, contact); // 保存从服务器获取到的数据
+                        }
+
+                        //requestFriend(groupPosition);
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+                tianjia.show();
             }
         });
 
@@ -181,6 +226,7 @@ public class FriendInfoActivity extends BaseActivity {
             public void success(JsonBean bean) {
                 ArrayList<HashMap<String, Object>> infor = bean.getInfor();
                 HashMap<String, Object> map = infor.get(0);
+                Log.e("好友资料页面", "map集合"+map.toString() );
 
 
                 mTargetHead = String.valueOf(map.get("staff_head"));
@@ -191,13 +237,14 @@ public class FriendInfoActivity extends BaseActivity {
 
                 mTvNameFriendInfo.setText(mTargetName);
                 mTvNumberFriendInfo.setText(String.valueOf("手机号 :" + mTargetPhone));
-                mTvBZFriendInfo.setText(mTargetAddress);
 
+                mTvBZFriendInfo.setText("地址 :"+mTargetAddress);
+                Log.e("好友资料页面", "mTargetHead: "+mTargetHead.toString() );
                 mStaffId = String.valueOf(map.get("id"));
-                ImageLoader.getInstance().displayImage(mTargetHead + "", mIvHeadActivityFriendInfo);
+                ImageLoader.getInstance().displayImage(mTargetHead, mIvHeadActivityFriendInfo);
 
                 imageUrls.add(mTargetHead);
-                Log.e("tag","-------imageUrls---------" + imageUrls);
+                Log.e("好友资料页面","-------imageUrls---------" + imageUrls);
 
                 //头像的点击事件
                 mIvHeadActivityFriendInfo.setOnClickListener(new View.OnClickListener() {
@@ -222,6 +269,8 @@ public class FriendInfoActivity extends BaseActivity {
 
     }
 
+
+
     protected void imageBrower(int position, ArrayList<String> urls2) {
         Intent intent = new Intent(FriendInfoActivity.this, ImagePagerActivity.class);
         intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
@@ -229,5 +278,14 @@ public class FriendInfoActivity extends BaseActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin,
                 R.anim.aty_zoomout);
+    }
+
+    @Override
+    public void onOK(String s) {
+    }
+
+    @Override
+    public void onCancel() {
+
     }
 }

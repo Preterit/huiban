@@ -17,7 +17,13 @@
         android:background="@color/a42baff"
         android:orientation="vertical" >
 
-        <com.feirui.feiyunbangong.view.TextImageView
+        <!--<com.feirui.feiyunbangong.view.TextImageView-->
+            <!--android:id="@+id/tiv_head"-->
+            <!--android:layout_width="@dimen/size200"-->
+            <!--android:layout_height="@dimen/size200"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="@dimen/y60" />-->
+        <ImageView
             android:id="@+id/tiv_head"
             android:layout_width="@dimen/size200"
             android:layout_height="@dimen/size200"

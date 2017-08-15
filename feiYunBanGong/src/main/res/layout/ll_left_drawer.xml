@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/x700"
     android:layout_height="match_parent"
-    android:background="@color/a42baff"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -16,7 +16,7 @@
             style="@style/a66c8ff_49"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="个人中心"
+            android:text=""
             />
     </LinearLayout>
 

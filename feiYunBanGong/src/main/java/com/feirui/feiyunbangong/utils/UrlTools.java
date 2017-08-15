@@ -31,6 +31,11 @@ public class UrlTools {
   public static String ZHUCE_REGIST = "Zhuce/regist";
 
   /**
+   * 修改备注
+   */
+  public static String XIUGAI_BEIZHU = "User/updatremark";
+
+  /**
    * 登录获取验证码
    */
   public  static String DENGLU_REGIST ="login/logincode";

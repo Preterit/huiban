@@ -1,6 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -330,6 +329,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     }
 
     public void commit() {
+        Log.e("开始提交", "start");
 
         StringBuffer sb_price = new StringBuffer();
         StringBuffer sb_leixing = new StringBuffer();
@@ -369,6 +369,10 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             sb_price.append(et_1.getText().toString().trim() + ",");
             sb_leixing.append(et_2.getText().toString().trim() + ",");
             sb_mingxi.append(et_3.getText().toString().trim() + ",");
+
+            Log.e("报销类型", "sb_price: "+sb_price.toString());
+            Log.e("报销金额", "sb_leixing: "+sb_leixing.toString() );
+            Log.e("报销明细", "sb_mingxi: "+sb_mingxi.toString() );
 
 //            totle += Integer.parseInt(et_1.getText().toString().trim());
         }
@@ -441,13 +445,14 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                                     bean.getMsg());
                             BaoXiaoActivity.this.finish();
                             overridePendingTransition(
-                                    R.anim.aty_zoomclosein,
+                                     R.anim.aty_zoomclosein,
                                     R.anim.aty_zoomcloseout);
                         }
                     });
                 } else {
                     T.showShort(BaoXiaoActivity.this, bean.getMsg());
                 }
+                Log.e("结束", "success ");
             }
 
             @Override

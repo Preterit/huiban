@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,6 +19,8 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * 忘记密码第2页
@@ -47,7 +47,7 @@ public class ForgetPasswordActivity extends BaseActivity {
 	private void initView() {
 		initTitle();
 		setLeftDrawable(R.drawable.arrows_left);
-		setCenterString("忘记密码");
+		setCenterString("修改密码");
 		setRightVisibility(false);
 		et_phone.setText(getIntent().getStringExtra("phone"));
 	}

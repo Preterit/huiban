@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +25,8 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * 登录界面

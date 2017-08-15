@@ -63,6 +63,7 @@
                 tools:text="手机号:132341412424"/>
 
             <TextView
+                android:visibility="invisible"
                 android:id="@+id/tvBZFriendInfo"
                 style="@style/tvStyle"
                 android:layout_width="wrap_content"
@@ -125,6 +126,30 @@
             android:src="@drawable/jiantou_you"
             />
     </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/xiugaifenzu"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/y120"-->
+        <!--android:background="@color/white">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+            <!--android:gravity="center"-->
+            <!--android:text="修改分组"-->
+            <!--/>-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/y120"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+            <!--android:src="@drawable/jiantou_you"-->
+            <!--/>-->
+    <!--</RelativeLayout>-->
 
     <Button
         android:id="@+id/contactFriendInfo"
