@@ -130,6 +130,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   }
 
   private void regist() {
+    Log.e("tag", "regist: --------------添加好友--------------------" );
     IntentFilter filter = new IntentFilter();
     filter.addAction(Constant.GET_BROADCAST_ABOUT_FRIEND);
     receiver = new MyBroadCastReceiver();
@@ -582,6 +583,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
     @Override
     public void onReceive(Context context, Intent intent) {
+      Log.e("tag", "regist: --------------添加好友--------------------" );
       requestGroup();// 获取分组；
       getNewFriendNum();// 获取新申请好友个数；
     }
