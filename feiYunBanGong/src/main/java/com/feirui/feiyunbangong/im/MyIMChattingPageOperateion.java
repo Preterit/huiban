@@ -3,15 +3,19 @@ package com.feirui.feiyunbangong.im;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.aop.Pointcut;
@@ -32,6 +36,7 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.AboutFriendActivity;
 import com.feirui.feiyunbangong.activity.AddChengYuanActivity;
 import com.feirui.feiyunbangong.activity.DetailMapActivity;
+import com.feirui.feiyunbangong.activity.WebViewActivity;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.Friend;
 import com.feirui.feiyunbangong.myinterface.AllInterface.ISelectContactListener;
@@ -348,6 +353,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
 
         activity = fragment.getActivity();
         Log.e("TAG", message.getSubType() + "message.getSubType()");
+        Log.e("TAG", message.getContent() + "-----------------message-------");
         Log.e("TAG", YWMessage.SUB_MSG_TYPE.IM_CARD
                 + "YWMessage.SUB_MSG_TYPE.IM_CARD");
         // 位置消息：
@@ -400,6 +406,19 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             }
 
             return true;
+        }else if (message.getMessageBody() != null &&
+                Patterns.WEB_URL.matcher(message.getMessageBody().getContent()).matches()){
+            try {
+                Intent intent = new Intent(activity, WebViewActivity.class);
+                intent.putExtra("uri",message.getMessageBody().getContent());
+//                intent.setData(Uri.parse(message.getMessageBody().getContent()));//Url 就是你要打开的网址
+//                intent.setAction(Intent.ACTION_VIEW);
+                activity.startActivity(intent); //启动浏览器
+            } catch (Exception e){
+                Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+            return true;
+
         }
         // 其他情况返回false:
         return false;

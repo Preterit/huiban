@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="54"
-    android:versionName="1.5.4">
+    android:versionCode="55"
+    android:versionName="1.5.5">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -457,6 +457,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activity.GongGaoXiangXiActivity" />
         <activity android:name=".activity.BeiZhuActivity"></activity>
+        <activity android:name=".activity.WebViewActivity"/>
     </application>
 
 </manifest>
