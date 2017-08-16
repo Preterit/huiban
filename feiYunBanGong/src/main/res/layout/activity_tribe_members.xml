@@ -27,6 +27,7 @@
         android:background="@color/more_line_color" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/invite_tribe_members"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -45,7 +46,7 @@
         android:layout_below="@+id/invite_tribe_members"
         android:background="@color/more_line_color" />
 
-    <include layout="@layout/aliwx_title_bar_shadow" />
+    <!--<include layout="@layout/aliwx_title_bar_shadow" />-->
 
     <com.alibaba.mobileim.fundamental.widget.refreshlist.YWPullToRefreshListView
         android:id="@+id/tribe_members_list"

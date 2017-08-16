@@ -130,6 +130,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   }
 
   private void regist() {
+    Log.e("tag", "regist: --------------添加好友--------------------" );
     IntentFilter filter = new IntentFilter();
     filter.addAction(Constant.GET_BROADCAST_ABOUT_FRIEND);
     receiver = new MyBroadCastReceiver();
@@ -270,6 +271,9 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     fl_main2.setOnTouchListener(this);
   }
 
+  /**
+   * 联系人搜索框点击事件
+   * */
   @Override
   public boolean onKey(View v, int keyCode, KeyEvent event) {
     Log.e("TAG", keyCode + "");
@@ -277,16 +281,19 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
       Log.e("TAG", keyCode + "");
       if (keyCode == KeyEvent.KEYCODE_ENTER) {
         Log.e("TAG", "keydown");
-        if (!Utils.isPhone(et_sousuo.getText().toString())) {
-          Toast.makeText(getActivity(), "手机号格式错误！", Toast.LENGTH_SHORT).show();
-          return false;
-        }
+//        if (!Utils.isPhone(et_sousuo.getText().toString())) {//判断手机号格式
+//          Toast.makeText(getActivity(), "手机号格式错误！", Toast.LENGTH_SHORT).show();
+//          return false;
+//        }
         search(et_sousuo.getText().toString());
       }
     }
     return false;
   }
 
+  /**
+   * 联系人搜索功能
+   * */
   private void search(String phone) {
     String url = UrlTools.url + UrlTools.SOUSUO_LIANXIREN;
     RequestParams params = new RequestParams();
@@ -319,8 +326,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
               }
               Friend friend = new Friend(name, phone, address,
                   head);
-              Intent intent = new Intent(getActivity(),
-                  AboutFriendActivity.class);
+              Log.e("联系人页面", "friend: "+friend.toString());
+              Intent intent = new Intent(getActivity(), AboutFriendActivity.class);
               intent.putExtra("friend", friend);
               startActivity(intent);
               getActivity().overridePendingTransition(
@@ -576,6 +583,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
     @Override
     public void onReceive(Context context, Intent intent) {
+      Log.e("tag", "regist: --------------添加好友--------------------" );
       requestGroup();// 获取分组；
       getNewFriendNum();// 获取新申请好友个数；
     }
@@ -635,8 +643,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   private void requestFriend(final int groupPosition) {
     String url = UrlTools.url + UrlTools.GET_CHILD_OF_GROUP;
     RequestParams params = new RequestParams();
-    params.put("group_id",
-        ((Group) adapter.getGroup(groupPosition)).getId() + "");
+    params.put("group_id", ((Group) adapter.getGroup(groupPosition)).getId() + "");
     L.e("获取某组的好友url" + url + " params" + params);
     Utils.doPost(null, getActivity(), url, params, new HttpCallBack() {
 
@@ -694,28 +701,26 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   @Override
   public void onOK(String s) {
     if ("修改备注".equals(s)) {
+      Log.e("联系人页面", "item.getPhone(): "+item.getPhone().toString());
       AppStore.phone = item.getPhone();
-
+      Log.e("联系人页面", "item.getPhone(): "+item.getPerson_id());
       XiuGaiDialog tianjia = new XiuGaiDialog("修改备注", item.getPerson_id()
           + "", "请输入新备注", getActivity(), new AlertCallBack1() {
 
         @Override
         public void onOK(final String name) {
+          Log.e("联系人页面", "item.getPhone(): "+item.getPhone().toString());
 
           // 如果内存缓存中存在该用户，则修改内存缓存中该用户的备注：
-          if (MyUserProfileSampleHelper.mUserInfo.containsKey(item
-              .getPhone())) {
-            IYWContact iywContact = MyUserProfileSampleHelper.mUserInfo
-                .get(item.getPhone());
+          if (MyUserProfileSampleHelper.mUserInfo.containsKey(item.getPhone())) {
 
-            IYWContact contact = new UserInfo(name, iywContact
-                .getAvatarPath(), iywContact.getUserId(),
-                iywContact.getAppKey());
+            IYWContact iywContact = MyUserProfileSampleHelper.mUserInfo.get(item.getPhone());
 
-            MyUserProfileSampleHelper.mUserInfo.remove(item
-                .getPhone()); // 移除临时的IYWContact对象
-            MyUserProfileSampleHelper.mUserInfo.put(
-                item.getPhone(), contact); // 保存从服务器获取到的数据
+            IYWContact contact = new UserInfo(name, iywContact.getAvatarPath(), iywContact.getUserId(), iywContact.getAppKey());
+
+            Log.e("联系人页面", "name: "+name );
+
+            MyUserProfileSampleHelper.mUserInfo.remove(item.getPhone()); // 移除临时的IYWContact对象
           }
 
           requestFriend(groupPosition);

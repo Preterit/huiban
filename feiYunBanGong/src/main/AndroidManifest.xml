@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="47"
-    android:versionName="1.4.7">
+    android:versionCode="54"
+    android:versionName="1.5.4">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -124,7 +124,7 @@
         <activity android:name=".activity.QiTaActivity" />
         <activity android:name=".activity.QingJiaActivity" />
         <activity android:name=".activity.BaoXiaoActivity" />
-        <activity android:name=".activity.WaiChuActivity" />
+        <activity android:name=".activity.WoDeTaskActivity$WaiChuActivity" />
         <activity android:name=".activity.FuKuanActivity" />
         <!-- <activity android:name=".activity.CaoZuoJiLuActivity"> -->
         <!-- </activity> -->
@@ -158,7 +158,7 @@
         <!-- 百度地图的appkey -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Lr2G6GNpTHybSMBTjN2SMEB4" />
+            android:value="SISVtGbSNGrUCdRlYx7sHanT5QWHNCTK" />
         <!-- 百度地图的后台服务 -->
         <service
             android:name="com.baidu.location.f"
@@ -429,7 +429,9 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity" />
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
-        <activity android:name=".activity.tribe.EditGroupInfoActivity" />
+        <activity
+            android:name=".activity.tribe.EditGroupInfoActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
 
         <!-- 查看待审批页面 -->
@@ -452,7 +454,9 @@
         <activity
             android:name=".activity.RenWuDetailActivity"
             android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.GongGaoXiangXiActivity" />
+        <activity android:name=".activity.BeiZhuActivity"></activity>
     </application>
 
 </manifest>

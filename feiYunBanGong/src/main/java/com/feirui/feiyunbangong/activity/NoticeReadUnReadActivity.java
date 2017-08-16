@@ -1,12 +1,15 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.R.drawable;
-import com.feirui.feiyunbangong.R.id;
-import com.feirui.feiyunbangong.R.layout;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.fragment.ReadFragment;
@@ -19,12 +22,8 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.RequestParams;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class NoticeReadUnReadActivity extends BaseActivity implements
 		OnClickListener {
@@ -39,6 +38,8 @@ public class NoticeReadUnReadActivity extends BaseActivity implements
 	private NoticeCallBack callback_read, callback_unread;
 	private FragmentManager fm;
 	private int id;// 公告id;
+	private String gonggao;
+	private TextView tv_gonggao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class NoticeReadUnReadActivity extends BaseActivity implements
 	// 获取数据：
 	private void requestData() {
 		id = getIntent().getIntExtra("id", 0);
+
 		String url = UrlTools.url + UrlTools.TEAM_MESSAGE_READ_UNREAD;
 
 		RequestParams params = new RequestParams();
@@ -108,6 +110,9 @@ public class NoticeReadUnReadActivity extends BaseActivity implements
 		setCenterString("公告已读未读");
 		setLeftDrawable(R.drawable.arrows_left);
 		setRightVisibility(false);
+		tv_gonggao = (TextView) findViewById(R.id.tv_gonggao);
+		gonggao = getIntent().getStringExtra("content");
+		tv_gonggao.setText(gonggao);
 
 		read_fragment = new ReadFragment();
 		unread_fragment = new UnReadFragment();

@@ -191,6 +191,37 @@
                     android:divider="@color/fenge"
                     android:dividerHeight="@dimen/y4"></ListView>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y20"
+                android:paddingTop="@dimen/y20">
+                <TextView
+                    style="@style/a000000_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="抄送人："/>
+                <ImageView
+                    android:id="@+id/iv_add_chaosong"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y100"
+                    android:src="@drawable/tianjia"
+                    android:layout_gravity="center_horizontal"/>
+
+                <ListView
+                    android:id="@+id/lv_add_chaosong"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y400"
+                    android:divider="@color/fenge"
+                    android:dividerHeight="@dimen/y4"></ListView>
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <Button

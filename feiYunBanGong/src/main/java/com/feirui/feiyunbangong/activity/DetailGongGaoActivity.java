@@ -32,7 +32,9 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.RequestParams;
-
+/**
+ * 团队公告
+ * */
 public class DetailGongGaoActivity extends BaseActivity implements
 		OnRefreshListener, OnItemClickListener, OnItemLongClickListener {
 	@PView(click = "onClick")
@@ -156,6 +158,7 @@ public class DetailGongGaoActivity extends BaseActivity implements
 
 		Intent intent = new Intent(this, NoticeReadUnReadActivity.class);
 		intent.putExtra("id", ggs.get(position).getId());
+		intent.putExtra("content", ggs.get(position).getContent());
 		startActivity(intent);
 
 	}

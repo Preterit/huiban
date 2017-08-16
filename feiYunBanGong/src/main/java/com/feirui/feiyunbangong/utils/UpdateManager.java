@@ -98,7 +98,7 @@ public class UpdateManager {
 		final RequestParams params = new RequestParams();
 		params.put("version", versionCode + "");
 		params.put("type", 1 + "");
-		Log.e("TAG", params.toString());
+		Log.e("版本更新参数输出", params.toString());
 		Utils.doPost(null, this.mContext, UrlTools.url + UrlTools.UPDATE_URL,
 				params, new HttpCallBack() {
 					@Override

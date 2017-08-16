@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="${relativePackage}.${activityClass}">
+              tools:context="com.feirui.feiyunbangong.activity.DetailPersonActivity">
 
     <include
         layout="@layout/top"
@@ -231,14 +231,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/Lin"
-            android:gravity="center"
-            android:textColor="@color/base_white"
-            android:textSize="@dimen/size10"
-            android:visibility="invisible"/>
+        <!--<TextView-->不知道有什么用，先隐藏了
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toRightOf="@+id/Lin"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/base_white"-->
+            <!--android:textSize="@dimen/size10"-->
+            <!--android:visibility="invisible"/>-->
     </RelativeLayout>
 
 </LinearLayout>

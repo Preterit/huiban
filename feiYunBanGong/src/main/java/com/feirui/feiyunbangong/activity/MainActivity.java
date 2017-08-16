@@ -312,7 +312,7 @@ public class MainActivity extends BaseActivity
     //侧滑菜单的item设置
     private void setListView() {
         adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin, R.id.tv,
-                new String[]{"个人资料", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
+                new String[]{"个人资料","修改密码", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
                         "关于我们", "邀请奖励", "退出登录"});
         lv_left.setAdapter(adapter);
 
@@ -424,29 +424,34 @@ public class MainActivity extends BaseActivity
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 1:
+                        //修改密码
+                        startActivity(new Intent(MainActivity.this, ForgetPasswordActivity.class));
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                        break;
+                    case 2:
                         // 添加员工：改为代注册
                         startActivity(new Intent(MainActivity.this, AddYuanGongActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
-                    case 2:
+                    case 3:
 
                         toMyShpOrAddShop();
                         // 我的小店：
                         // startActivity(new Intent(MainActivity.this,
                         // AddShopActivity.class));
                         break;
-                    case 3:
+                    case 4:
                         // 意见反馈：
                         startActivity(new Intent(MainActivity.this, YiJianActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
-                    case 4:
+                    case 5:
                         // 清理缓存：
                         ImageLoader.getInstance().clearMemoryCache();// 清除内存图片；
                         ImageLoader.getInstance().clearDiscCache();// 清除sd卡图片；
                         T.showShort(this, "清理完成！");
                         break;
-                    case 5:
+                    case 6:
                         // 帮助
                         try {
                             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:13366664598"));
@@ -456,12 +461,12 @@ public class MainActivity extends BaseActivity
                             // TODO: handle exception
                         }
                         break;
-                    case 6:
+                    case 7:
                         // 关于我们
                         UseMessageDialog dialog1 = new UseMessageDialog(this);
                         dialog1.show();
                         break;
-                    case 7:
+                    case 8:
                         // 邀请奖励
                         startActivity(new Intent(MainActivity.this, YaoQingActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
@@ -470,10 +475,11 @@ public class MainActivity extends BaseActivity
 //                        // 我的余额：
 //
 //                        break;
-                    case 8:
+                    case 9:
                         // 退出账号登录：
                         outLogin();
                         break;
+
                 }
                 break;
 
@@ -628,6 +634,7 @@ public class MainActivity extends BaseActivity
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
+                    final ArrayList<String> imageUrls = new ArrayList<String>();
                     JsonBean bean = (JsonBean) msg.obj;
                     ArrayList<HashMap<String, Object>> infor = bean.getInfor();
                     HashMap<String, Object> hashMap = infor.get(0);
@@ -657,6 +664,17 @@ public class MainActivity extends BaseActivity
                     } else {
                         ImageLoader.getInstance().displayImage(head, iv_head);
                     }
+
+                    imageUrls.add(head);
+                    //头像的点击事件
+                    iv_head.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            imageBrower(0,imageUrls);
+                        }
+                    });
+
+
                     MyUser user = new MyUser(name, duty, head, department, sex, birthday, address, phone);
                     user.setId(id);
                     AppStore.myuser = user;
@@ -664,8 +682,17 @@ public class MainActivity extends BaseActivity
             }
         }
 
-        ;
+
     };
+
+    protected void imageBrower(int position, ArrayList<String> urls2) {
+        Intent intent = new Intent(MainActivity.this, ImagePagerActivity.class);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+        startActivity(intent);
+        overridePendingTransition(R.anim.aty_zoomin,
+                R.anim.aty_zoomout);
+    }
 
     protected void onDestroy() {
 

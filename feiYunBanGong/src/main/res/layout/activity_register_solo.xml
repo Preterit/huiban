@@ -179,14 +179,14 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入邀请码"
-            android:inputType="textPassword" />
+            />
 
         <TextView
             style="@style/hongse_38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/x50"
-            android:text="选填" />
+            android:text="可不填" />
     </LinearLayout>
 
     <com.feirui.feiyunbangong.view.RevealLayout

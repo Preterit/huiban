@@ -2,10 +2,8 @@ package com.feirui.feiyunbangong.utils;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -13,9 +11,9 @@ import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMConversationListUI;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
+import com.alibaba.mobileim.conversation.YWSystemConversation;
 import com.alibaba.mobileim.kit.contact.YWContactHeadLoadHelper;
-import com.alibaba.mobileim.lib.presenter.conversation.CustomViewConversation;
-import com.lidroid.xutils.view.annotation.event.OnItemClick;
+import com.feirui.feiyunbangong.state.AppStore;
 
 /**
  * 最近会话界面的定制点(根据需要实现相应的接口来达到自定义会话列表界面)，不设置则使用openIM默认的实现 调用方设置的回调，必须继承BaseAdvice
@@ -64,6 +62,71 @@ public class ConversationListUICustomSample extends IMConversationListUI {
 		textView.setTextSize(18);
 		return textView;
 	}
-	
-	
+
+	/*********** 以下是定制会话item view的示例代码 ***********/
+	//有几种自定义，数组元素就需要几个，数组元素值从0开始
+	//private final int[] viewTypeArray = {0,1,2,3}，这样就有4种自定义View
+	private final int[] viewTypeArray = {0};
+	/**
+	 * 自定义item view的种类数
+	 * @return 种类数
+	 */
+	@Override
+	public int getCustomItemViewTypeCount() {
+		return viewTypeArray.length;
+	}
+	@Override
+	public int getCustomItemViewType(YWConversation conversation) {
+		if (conversation.getConversationType() == YWConversationType.Custom) {
+			if (conversation.getConversationId().equals("sysTribe")){
+				//得到系统对话
+				YWSystemConversation mConversation = AppStore.mIMKit.getConversationService().getSystemConversation();
+//				List<YWMessage> mList = new ArrayList<YWMessage>();
+//				mList = mConversation.getMessageLoader().loadMessage(20, null);
+				AppStore.mIMKit.getConversationService().markReaded(conversation); //标记当前的conversion为已读 提示消息不再出现
+//				for (int i = 0; i < mList.size();i++){
+//					mList.get(i).setMsgReadStatus(YWMessage.MSG_READED_STATUS);  // 标记消息为已读（本地）
+//					mConversation.setMsgReadedStatusToServer(mList.get(i), new IWxCallback() { //标记消息为已读（后台）
+//						@Override
+//						public void onSuccess(Object... objects) {
+//
+//						}
+//
+//						@Override
+//						public void onError(int i, String s) {
+//
+//						}
+//
+//						@Override
+//						public void onProgress(int i) {
+//
+//						}
+//					});
+//				}
+
+				return viewTypeArray[0];
+			}
+		}
+		//这里必须调用基类方法返回！！
+
+		return super.getCustomItemViewType(conversation);
+	}
+
+	/**
+	 *
+	 * @param fragment
+	 * @param conversation
+	 * @param convertView
+	 * @param viewType
+	 * @param headLoadHelper
+	 * @param parent
+	 * @return  返回一个空的view 系统提示不再出现
+	 */
+	@Override
+	public View getCustomItemView(Fragment fragment, YWConversation conversation, View convertView, int viewType, YWContactHeadLoadHelper headLoadHelper, ViewGroup parent) {
+		if (viewType == viewTypeArray[0]){
+			return new View(fragment.getContext());
+		}
+		return super.getCustomItemView(fragment, conversation, convertView, viewType, headLoadHelper, parent);
+	}
 }

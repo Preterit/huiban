@@ -143,14 +143,14 @@ public class Utils {
     public static boolean isPhone(String phone) {
         boolean flag = false;
         if (phone == null || TextUtils.isEmpty(phone)) {
-            return flag;
+                return flag;
         }
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(14[57])|(17[0])|(17[6])|(17[7])|(18[0,0-9]))\\d{8}$");
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$");
+        //"^((13[0-9])|(15[^4,\\D])|(14[57])|(17[0])|(17[6])|(17[7])|(18[0,0-9]))\\d{8}$"
 
         Matcher m = p.matcher(phone);
 
         System.out.println(m.matches() + "---");
-
         return m.matches();
     }
 
@@ -240,9 +240,9 @@ public class Utils {
     public static void doPost(final LoadingDialog dialog, final Activity activity, String url, RequestParams params,
                               final HttpCallBack call) {
 
-        if (dialog != null) {
-            dialog.show();
-        }
+//        if (dialog != null) {
+//            dialog.show();
+//        }
 
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
 

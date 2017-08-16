@@ -1,6 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -61,7 +60,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     public int totle = 0;
     // 添加审批人
     @PView(click = "onClick")
-    ImageView iv_add, iv_01, iv_tupian1, iv_tupian2, iv_tupian3;
+    ImageView iv_add,iv_add_chaosong, iv_01, iv_tupian1, iv_tupian2, iv_tupian3;
     private ArrayList<JsonBean> list1 ;
 
     @PView(click = "onClick")
@@ -76,8 +75,11 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     private ArrayList<ChildItem> childs ; //添加的审批人员
     @PView
     ListView lv_add_shenpiren;
+    @PView
+    ListView lv_add_chaosong;
 //    AddShenHeAdapter adapter;
     AddShenHeUpdateAdapter adapter;
+    AddShenHeUpdateAdapter adapter1;
     @PView
     ScrollView sv_caigou;
 
@@ -101,6 +103,23 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 
         lv_add_shenpiren.setAdapter(adapter);
         lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sv_caigou.requestDisallowInterceptTouchEvent(false);
+                } else {
+                    sv_caigou.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            }
+        });
+
+        //抄送人列表
+        adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,BaoXiaoActivity.this);
+        lv_add_chaosong.setAdapter(adapter1);
+        lv_add_chaosong.setOnTouchListener(new OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -164,6 +183,21 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 adapter.addList(childs);
             }
             Log.d("mytag","添加人员："+childs.get(0).toString());
+        }
+
+        if (requestCode == 300 && resultCode == 100 ) {
+            ArrayList<ChildItem> childs1 = (ArrayList<ChildItem>)data.getSerializableExtra("childs");
+            Log.e("tag", "onActivityResult: ----------" + childs1 );
+            HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+            Log.e("tag", "onActivityResult: ----------" + hm );
+            childs1.add(0, new ChildItem(hm.get("staff_name") + "", hm.get("staff_head") + "", hm.get("staff_mobile")
+                    + "", hm.get("id") + "", 0));
+            //去掉自己
+            childs1.remove(0);
+            if (childs1 != null && childs1.size() > 0) {
+                adapter1.addList(childs1);
+            }
+            Log.d("mytag","添加人员："+childs1.get(0).toString());
         }
 
         switch (requestCode) {
@@ -268,6 +302,12 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 //                startActivityForResult(intent, 101);// 请求码；
                 break;
+            case R.id.iv_add_chaosong:
+                final Intent intent1 = new Intent(this, AddChengYuanActivity.class);
+                startActivityForResult(intent1, 300);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+//			startActivityForResult(intent, 101);// 请求码；
+                break;
             case R.id.tv_add_mingxi:
                 addMingXi(); //添加明细
                 break;
@@ -289,6 +329,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     }
 
     public void commit() {
+        Log.e("开始提交", "start");
 
         StringBuffer sb_price = new StringBuffer();
         StringBuffer sb_leixing = new StringBuffer();
@@ -328,6 +369,10 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             sb_price.append(et_1.getText().toString().trim() + ",");
             sb_leixing.append(et_2.getText().toString().trim() + ",");
             sb_mingxi.append(et_3.getText().toString().trim() + ",");
+
+            Log.e("报销类型", "sb_price: "+sb_price.toString());
+            Log.e("报销金额", "sb_leixing: "+sb_leixing.toString() );
+            Log.e("报销明细", "sb_mingxi: "+sb_mingxi.toString() );
 
 //            totle += Integer.parseInt(et_1.getText().toString().trim());
         }
@@ -369,15 +414,24 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         for (int i = 0; i < shenPi.size(); i++) {
             sb_id.append(shenPi.get(i).getId());
             sb_id.append(",");
-            Log.d("adapterTag","适配器上的数据"+sb_id);
+            Log.d("adapterTag", "适配器上的数据" + sb_id);
         }
+        //从适配器中取出抄送人集合
+        List<ChildItem> chaoSong = adapter1.getList();
+        StringBuffer cs_id = new StringBuffer();
 
-        params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1)
-                .toString());
+        // 循环拼接添加成员id,每个id后加逗号
+        for (int i = 0; i < chaoSong.size(); i++) {
+            cs_id.append(chaoSong.get(i).getId());
+            cs_id.append(",");
+            Log.d("adapterTag","适配器上的数据"+cs_id);
+        }
+        params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
+        params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
         params.put("expense_money", et_1.getText().toString().trim());
         params.put("expense_type", et_2.getText().toString().trim());
         params.put("expense_detail", et_3.getText().toString().trim());
-        String url = UrlTools.url + UrlTools.EXPENSE_ADD_EXPENSE;
+        String url = UrlTools.url1 + UrlTools.EXPENSE_ADD_EXPENSE1;
         Log.e("tag", "报销的---------"+  params.toString());
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
@@ -391,13 +445,14 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                                     bean.getMsg());
                             BaoXiaoActivity.this.finish();
                             overridePendingTransition(
-                                    R.anim.aty_zoomclosein,
+                                     R.anim.aty_zoomclosein,
                                     R.anim.aty_zoomcloseout);
                         }
                     });
                 } else {
                     T.showShort(BaoXiaoActivity.this, bean.getMsg());
                 }
+                Log.e("结束", "success ");
             }
 
             @Override

@@ -96,10 +96,10 @@ public class DetailPersonActivity extends BaseActivity implements
     }
 
     private void initUI() {
-        initTitle();
-        setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("个人信息");
-        setRightVisibility(false);
+            initTitle();
+            setLeftDrawable(R.drawable.arrows_left);
+            setCenterString("个人信息");
+            setRightVisibility(false);
         iv_erweima = (ImageView) findViewById(R.id.iv_erweima);
         iv_head = (CircleImageView) findViewById(R.id.iv_head);
 
