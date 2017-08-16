@@ -42,6 +42,16 @@ public class PictureUtil {
 		activity.startActivityForResult(i, 2);
 		return path;
 	}
+	// 拍照File：
+	public static File paiZhaoFile(SelectPicPopupWindow window, Activity activity) {
+		window.dismiss();
+		Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		File file = new File(Environment.getExternalStorageDirectory(),
+				System.currentTimeMillis() + ".jpg");
+		i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+		activity.startActivityForResult(i, 2);
+		return file;
+	}
 
 	// 从相册选择：
 	public static void xiangCe(SelectPicPopupWindow window, Activity activity) {

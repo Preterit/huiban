@@ -117,8 +117,8 @@ public class MyChatUI extends IMChattingPageUI {
 //			btn.setVisibility(View.INVISIBLE);
 			final String phone = conversationId.substring(
 					conversationId.length() - 11, conversationId.length());
-			Log.e("TAG", phone + "P2P--------conversation.getConversationId()"+ P2P);
-
+			Log.e("TAG", phone + "P2P--------conversation.getConversationId()"+ conversation.getConversationBody().toString());
+//            conversation.getConversationBody().toString()
 			String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
 					.getShowName();
 

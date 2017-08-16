@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity {
 			switch (msg.what) {
 			case LOGIN_SUCESS:
 				AppStore.user = (JsonBean) msg.obj;
-				Log.e("tag", "handleMessage:-------------- " + AppStore.user.toString() );
+				Log.e("tag", "handleMessage:-----个人信息--------- " + AppStore.user.toString() );
 				// 设置已经登陆过
 				SPUtils.put(LoginActivity.this, Constant.SP_ALREADYUSED, true);
 				// 将用户名密码缓存

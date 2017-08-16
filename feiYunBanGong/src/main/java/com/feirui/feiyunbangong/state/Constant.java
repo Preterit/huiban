@@ -20,8 +20,8 @@ public class Constant {
     public static final int REFRESH = -101;
     // 加载autolist
     public static final int LOAD = -102;
-    public static final String SP_PASSWORD = "PASSWORD";// 用户名
-    public static final String SP_USERNAME = "USERNAME";// 密码
+    public static final String SP_PASSWORD = "PASSWORD";// 密码
+    public static final String SP_USERNAME = "USERNAME";// 用户名
 
     // 接受到好友申请信息发出的广播：
     public static final String GET_BROADCAST_ABOUT_FRIEND = "com.feirui.feiyunbangong.friend.mes";
