@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +24,8 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * 邀请奖励
@@ -243,8 +243,7 @@ public class YaoQingActivity extends BaseActivity {
 
 							if (Utils.isPhone(name)) {
 
-								String url = UrlTools.url
-										+ UrlTools.APPLICATION_INVITATIONMESSAGE;
+								String url = UrlTools.url + UrlTools.APPLICATION_INVITATIONMESSAGE;
 
 								RequestParams params = new RequestParams();
 								params.put("staff_mobile", name);

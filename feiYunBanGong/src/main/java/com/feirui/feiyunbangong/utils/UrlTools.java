@@ -419,7 +419,7 @@ public class UrlTools {
   /**
    * 加入团队显示团队信息：
    */
-  public static String JIARU_TUANDUI = "Team/team_get";
+  public static String JIARU_TUANDUI = "Team/team_get1";
 
   /**
    * 解散团队：

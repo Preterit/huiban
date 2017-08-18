@@ -1,19 +1,12 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +23,18 @@ import com.feirui.feiyunbangong.view.TextImageView;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class JiaRuTuanDuiActivity extends BaseActivity implements
 		OnClickListener {
 
-	private TextImageView tiv_head;
+	private ImageView tiv_head;
 	private TextView tv_name, tv_team_num, tv_num;
 	private Button tv_jiaru;
 	private ListView lv_yijiaru;
@@ -56,10 +57,12 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 	}
 
 	private void setListView() {
+		Log.e("加入团队页面", "setListView: ");
 		lv_yijiaru.setAdapter(adapter);
 	}
 
 	private void setListener() {
+		Log.e("加入团队页面", "setListener ");
 		tv_jiaru.setOnClickListener(this);
 	}
 
@@ -70,6 +73,9 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 		setRightVisibility(false);
 		Intent intent = getIntent();
 		id = intent.getStringExtra("id");
+
+		Log.e("加入团队页面--initView", "id: "+id );
+
 		tv_name = (TextView) findViewById(R.id.tv_name);
 		tv_team_num = (TextView) findViewById(R.id.tv_team_num);
 		tv_team_num.setText(id);
@@ -77,8 +83,8 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 		tv_jiaru = (Button) findViewById(R.id.tv_jiaru);
 		lv_yijiaru = (ListView) findViewById(R.id.lv_yijiaru);
 		adapter = new ChengYuanAdapter(getLayoutInflater());
-		tiv_head = (TextImageView) findViewById(R.id.tiv_head);
-		tiv_head.setText("团队");
+		tiv_head = (ImageView) findViewById(R.id.tiv_head);
+		//tiv_head.setText("团队");
 	}
 
 	@Override
@@ -123,7 +129,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 
 	// 添加数据：
 	private void addData() {
-
+		Log.e("加入团队页面", "id: "+id.toString() );
 		String url = UrlTools.url + UrlTools.JIARU_TUANDUI;
 		RequestParams params = new RequestParams();
 		params.put("id", id);
@@ -132,13 +138,11 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 				new HttpCallBack() {
 					@Override
 					public void success(JsonBean bean) {
-
 						tdcys.removeAll(tdcys);
-
-						ArrayList<HashMap<String, Object>> infor = bean
-								.getInfor();
+						ArrayList<HashMap<String, Object>> infor = bean.getInfor();
+						Log.e("加入团队页面", "infor: "+infor.toString());
 						HashMap<String, Object> hm = infor.get(0);
-						ImageLoader.getInstance().displayImage(hm.get("tiv_head").toString(), tiv_head);
+						ImageLoader.getInstance().displayImage(hm.get("team_head").toString(), tiv_head);
 						if (hm.get("team_name") != null) {
 							tv_name.setText(String.valueOf(hm.get("team_name")));
 							//tiv_head.setText(String.valueOf(hm.get("team_name")));
