@@ -35,19 +35,19 @@
             android:text="" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="系统升级，奖励暂停，恢复时另行通知"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="20sp"-->
+        <!--android:text="系统升级，奖励暂停，恢复时另行通知"/>-->
     <!-- 恢复的时候把所有的控件隐藏取消 -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y540"
         android:background="@color/a42baff"
-        android:visibility="invisible">
+        >
 
         <TextView
             style="@style/ffffff_38"
@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <TextView
-        android:visibility="invisible"
+
         style="@style/huise_40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         android:text="注册奖励1元" />
 
     <Button
-        android:visibility="invisible"
+
         android:id="@+id/btn_duanxin"
         style="@style/ffffff_60"
         android:layout_width="match_parent"
@@ -95,13 +95,13 @@
         android:text="继续邀请更多好友" />
 
     <ImageView
-        android:visibility="invisible"
+
         android:layout_width="match_parent"
         android:layout_height="@dimen/y124"
         android:src="@drawable/yaoqing2" />
 
     <ListView
-        android:visibility="invisible"
+
         android:id="@+id/lv_yiyaoqing"
         android:layout_width="match_parent"
         android:layout_height="0dp"
