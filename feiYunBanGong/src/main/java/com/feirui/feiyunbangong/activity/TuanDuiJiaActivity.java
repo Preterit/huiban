@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
+import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -41,7 +44,7 @@ import org.apache.http.Header;
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
 	@PView(click = "onClick")
-	LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg;// 扫码，推广，管理,短信邀请；
+	LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg,ll_send_talk;// 扫码，推广，管理,短信邀请；团队聊天
 	private TuanDui td;
 	private Button bt_out_team;//退出团队；
 
@@ -66,6 +69,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		AppStore.acts.add(this);
 
 		Intent intent = getIntent();
+		//传过来的团队
 		td = (TuanDui) intent.getSerializableExtra("td");
 		bt_out_team=(Button) findViewById(R.id.bt_out_team);
 
@@ -153,7 +157,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 					});
 			break;
 
-		case R.id.ll_guanli:
+		case R.id.ll_guanli:  //团长管理团队 将整个团队传过去
 			Intent intent = new Intent(this, TuanDuiGuanLiActivity.class);
 			intent.putExtra("td", td);
 			startActivityForResult(intent, 500);
@@ -214,6 +218,16 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 			dialog1.show();
 
 			break;
+        case R.id.ll_send_talk:
+            YWIMKit mIMKit = AppStore.mIMKit;
+            IYWTribeService tribeService = mIMKit.getTribeService();  //获取群管理器;
+
+//            YWTribe tribe = tribeService.getAllTribes() ;
+//            YWIMKit imKit = AppStore.mIMKit;
+//            //参数为群ID号
+//            Intent intent = imKit.getTribeChattingActivityIntent(tribe.getTribeId());
+//            startActivity(intent);
+            break;
 		}
 	}
 

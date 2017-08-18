@@ -400,9 +400,11 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
         return  true;
 
-      case R.id.ll_taolun:
+      case R.id.ll_taolun: //发起群聊
         if (event.getAction() == MotionEvent.ACTION_DOWN){
-          startActivity(new Intent(getActivity(),EditGroupInfoActivity.class));
+          Intent intent = new Intent(getActivity(),EditGroupInfoActivity.class);
+          intent.putExtra("code",0);
+          startActivity(intent);
           getActivity().overridePendingTransition(R.anim.aty_zoomclosein,R.anim.aty_zoomcloseout);
         }
 
@@ -597,8 +599,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     setRightDrawable(R.drawable.jia);
     ll_tianjia = (LinearLayout) view.findViewById(R.id.ll_tianjia);
 
-    ll_quntalk = (LinearLayout) view.findViewById(R.id.ll_quntalk) ;
-    ll_taolun = (LinearLayout) view.findViewById(R.id.ll_taolun);
+    ll_quntalk = (LinearLayout) view.findViewById(R.id.ll_quntalk) ; //不用
+    ll_taolun = (LinearLayout) view.findViewById(R.id.ll_taolun);  //发起群聊
 //    ll_taolun.setVisibility(View.INVISIBLE);
 
     inclue = (LinearLayout) view.findViewById(R.id.inclue_add);

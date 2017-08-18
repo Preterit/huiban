@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -55,6 +56,7 @@ public class TribeInfoActivity extends BaseActivity{
     private IYWTribeService mTribeService;
     private YWTribe mTribe;
     private long mTribeId;
+    private int code;
     private String mTribeOp;
     private int mTribeMemberCount;
     List<YWTribeMember> mList = new ArrayList<YWTribeMember>();
@@ -74,6 +76,8 @@ public class TribeInfoActivity extends BaseActivity{
     private RelativeLayout mEditTribeInfoLayout;
     private RelativeLayout mEditMyTribeProfileLayout;
     private RelativeLayout mEditPersonalSettings;
+    private RelativeLayout tribe_verify_layout,edit_tribe_info_layout; //群公告 编辑群信息
+    private LinearLayout tribe_description_layout; //身份验证
 
     private RelativeLayout mTribeMsgRecTypeLayout;
     private TextView mTribeMsgRecType;
@@ -103,6 +107,8 @@ public class TribeInfoActivity extends BaseActivity{
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
+        code = intent.getIntExtra("code",-1);
+
         Log.d("tag","群的id------"+mTribeId);
         mTribeOp = intent.getStringExtra(TribeConstants.TRIBE_OP);
 
@@ -129,6 +135,11 @@ public class TribeInfoActivity extends BaseActivity{
 
     private void initView() {
         initUI();
+
+        tribe_description_layout = (LinearLayout) findViewById(R.id.tribe_description_layout);
+        edit_tribe_info_layout = (RelativeLayout) findViewById(R.id.edit_tribe_info_layout);
+        tribe_verify_layout = (RelativeLayout) findViewById(R.id.tribe_verify_layout);
+
         mTribeName = (TextView) findViewById(R.id.tribe_name);
         final TextView tribeId = (TextView) findViewById(R.id.tribe_id);
         tribeId.setText("群号 " + mTribeId);
@@ -254,6 +265,17 @@ public class TribeInfoActivity extends BaseActivity{
                 }
             }
         });
+
+        //判断是普通群还是团队创建的群
+//        if (code == 1){
+//            tribe_description_layout.setVisibility(View.GONE);
+//            edit_tribe_info_layout.setVisibility(View.GONE);
+//            tribe_verify_layout.setVisibility(View.GONE);
+//        } else {
+            tribe_description_layout.setVisibility(View.VISIBLE);
+            edit_tribe_info_layout.setVisibility(View.VISIBLE);
+            tribe_verify_layout.setVisibility(View.VISIBLE);
+//        }
     }
 
     /**

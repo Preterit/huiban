@@ -203,6 +203,8 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     break;
                 case 3:
                     // 添加成功！
+                    JsonBean bean04 = (JsonBean) msg.obj;
+                    Log.e("chengyuan", "handleMessage: -----------------" + bean04.getInfor() );
                     Toast.makeText(DetailTuanDuiActivity.this, "添加成员成功！", 0).show();
                     getData();// 更新数据；
                     break;
@@ -236,6 +238,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent(DetailTuanDuiActivity.this,
                         TuanDuiJiaActivity.class);
+                //将整个团队传过去
                 intent.putExtra("td", td);
                 startActivity(intent);
                 overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
@@ -252,6 +255,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
         AppStore.acts.add(this);
 
+        //传过来的团队
         Intent intent = getIntent();
         td = (TuanDui) intent.getSerializableExtra("tuanDui");
 
@@ -415,6 +419,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             sb.append(",");
         }
 
+        //团队
         String url = UrlTools.url + UrlTools.ADD_CHENGYUAN;
         RequestParams params = new RequestParams();
         params.put("team_id", td.getId());
@@ -431,7 +436,9 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                         JsonBean bean = JsonUtils.getMessage(new String(arg2));
                         if ("200".equals(bean.getCode())) {
                             Message msg = handler.obtainMessage(3);
+                            msg.obj = bean;
                             handler.sendMessage(msg);
+                            Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor() );
                         } else {
                             Message msg = handler.obtainMessage(4);
                             msg.obj = bean;
