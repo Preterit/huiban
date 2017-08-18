@@ -36,6 +36,11 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.RequestParams;
 
+import java.io.File;
+
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
+
 /**
  * 发布动态：
  */
@@ -109,13 +114,14 @@ public class PublishedActivity extends Activity implements OnClickListener {
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(tv_content.getText().toString().trim())) {
-                    Toast.makeText(PublishedActivity.this, "请输入内容！", 0).show();
+                    Toast.makeText(PublishedActivity.this, "请输入内容！", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 StringBuffer sb = new StringBuffer();
                 for (int i = 0; i < Bimp.bmp.size(); i++) {
                     Bitmap bt = Bimp.bmp.get(i);
+                    Log.e("tag", "Bimp.bmp.size():-------------------------- " + bt);
                     sb.append(BitmapToBase64.bitmapToBase64(bt));
                     sb.append(",");
                 }
@@ -138,14 +144,15 @@ public class PublishedActivity extends Activity implements OnClickListener {
                             @Override
                             public void success(JsonBean bean) {
                                 Toast.makeText(PublishedActivity.this, "发表成功！",
-                                        0).show();
+                                        Toast.LENGTH_SHORT).show();
 
                                 PublishedActivity.this.finish();
                             }
 
                             @Override
                             public void failure(String msg) {
-                                Toast.makeText(PublishedActivity.this, msg, 0)
+                                Log.e("tag", "failure:-------------------------- " + msg);
+                                Toast.makeText(PublishedActivity.this, msg, Toast.LENGTH_SHORT)
                                         .show();
                             }
 
@@ -243,12 +250,37 @@ public class PublishedActivity extends Activity implements OnClickListener {
                 public void run() {
                     try {
                         for (int i = Bimp.bmp.size(); i < Bimp.drr.size(); i++) {
-                            String path = Bimp.drr.get(i);
-                            // Bitmap bm = Bimp.revitionImageSize(path);
+                            final String path = Bimp.drr.get(i);
+                            File file = new File(path);
+//                          Bitmap bm = Bimp.revitionImageSize(path);
                             // 注意：必须得压缩，否则极有可能报oom;上传服务器也比较慢；
-                            Bitmap bm = ImageUtil.getimage(path);
-                            Bimp.bmp.add(bm);
-                            Bimp.max += 1;
+//                            Bitmap bm = ImageUtil.getimage(path);
+//                            Bimp.bmp.add(bm);
+//                            Bimp.max += 1;
+
+                            //鲁班压缩
+                            Luban.with(PublishedActivity.this)
+                                    .load(file)
+                                    .setCompressListener(new OnCompressListener() {
+                                        @Override
+                                        public void onStart() {
+
+                                        }
+
+                                        @Override
+                                        public void onSuccess(File file) {
+                                            // TODO 压缩成功后调用，返回压缩后的图片文件
+                                            Bitmap bm = BitmapFactory.decodeFile(path);
+                                            Bimp.bmp.add(bm);
+                                            Bimp.max += 1;
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable e) {
+
+                                        }
+                                    }).launch();
+
                         }
                         runOnUiThread(new Runnable() {
                             @Override

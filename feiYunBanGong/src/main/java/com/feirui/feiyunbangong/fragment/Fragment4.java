@@ -67,6 +67,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     private int allNoticce;// 所有未读数数量；
     private OnTeamNoticeNumChanged listener;
     private MyBroadReceiver receiver;
+//    private LoadingDialog dialog = LoadingDialog.getInstance(getActivity());
 
     @SuppressLint({"NewApi", "ValidFragment"})//横竖屏切换问题
     public Fragment4(OnTeamNoticeNumChanged listener) {
@@ -156,6 +157,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         adapter = new TuanDuiAdapter(getActivity().getLayoutInflater());
         adapter2 = new MyAdapter(getActivity(), tds);
         tds = new ArrayList<>();
+        //创建加入团队
         header_view = getActivity().getLayoutInflater().inflate(
                 R.layout.ll_team_header, null);
         ll_chaungjiantuandui = (LinearLayout) header_view
@@ -245,6 +247,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
             }
         }
 
+        //[TuanDui [id=100149, name=123456], TuanDui [id=100140, name=Android]
         // 对集合排序
         Collections.sort(tds, new Comparator<TuanDui>() {
             @Override
@@ -253,6 +256,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                 return lhs.getHeadword().compareTo(rhs.getHeadword());
             }
         });
+        Log.e("tag", "setData: ----------------" + tds );
         adapter2.add(tds);
     }
 
@@ -332,5 +336,10 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(receiver);
+        //关闭Dialog以防内存泄露
+//        if (dialog != null){
+//            dialog.dismiss();
+//        }
+
     }
 }

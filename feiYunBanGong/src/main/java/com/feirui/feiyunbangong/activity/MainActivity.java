@@ -254,7 +254,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        // 监听消息接收。。。。。。。
+        // 监听消息接收。。。。。。。显示在导航栏的消息处
         IYWPushListener msgPushListener = new IYWPushListener() {
             @Override
             public void onPushMessage(IYWContact arg0, YWMessage arg1) {
@@ -404,6 +404,7 @@ public class MainActivity extends BaseActivity
             btnArray[i].setOnClickListener(myButtonListener);
         }
         lv_left.setOnItemClickListener(this);
+
 
         inclue.setOnTouchListener(new OnTouchListener() {
             @Override
