@@ -79,7 +79,7 @@ import java.util.HashMap;
 import static com.feirui.feiyunbangong.state.AppStore.mIMKit;
 
 /**
- * 主页面设置四个fragment跳转
+ * 主页面设置四个fragment跳转F
  *
  * @author feirui1
  */
