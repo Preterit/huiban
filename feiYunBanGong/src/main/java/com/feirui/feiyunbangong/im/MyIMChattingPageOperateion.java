@@ -356,6 +356,8 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
         Log.e("TAG", message.getContent() + "-----------------message-------");
         Log.e("TAG", YWMessage.SUB_MSG_TYPE.IM_CARD
                 + "YWMessage.SUB_MSG_TYPE.IM_CARD");
+        String str = message.getContent().substring(message.getContent().length() - 2);
+        Log.e("TAG", str + "-----------------message-------");
         // 位置消息：
         if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GEO) {
 
@@ -406,8 +408,12 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             }
 
             return true;
-        }else if (message.getMessageBody() != null &&
+
+        }else if (message.getMessageBody() != null && (!str.equals("ww")) &&
                 Patterns.WEB_URL.matcher(message.getMessageBody().getContent()).matches()){
+//        ile.do?type=1&fileId=d7cc55e78bf392e8270550fd6413768b.png&suffix=png&width=1080
+//                &height=1920&mediaSize=388146&fromId=ib3mbd6s13911858822&toId=ib3mbd6s18210532546&YWOriginalImage=1
+//                &YWShowOriginal=1&wangxintype=1_388146&client=ww
             try {
                 Intent intent = new Intent(activity, WebViewActivity.class);
                 intent.putExtra("uri",message.getMessageBody().getContent());

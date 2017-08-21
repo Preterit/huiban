@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="55"
-    android:versionName="1.5.5">
+    android:versionCode="57"
+    android:versionName="1.5.7">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -454,6 +454,7 @@
             android:name=".activity.RenWuDetailActivity"
             android:label="@string/title_activity_ren_wu_detail"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".activity.WebViewActivity"/>
     </application>
 
 </manifest>

@@ -107,7 +107,6 @@ public class TribeInfoActivity extends BaseActivity{
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
-        code = intent.getIntExtra("code",-1);
 
         Log.d("tag","群的id------"+mTribeId);
         mTribeOp = intent.getStringExtra(TribeConstants.TRIBE_OP);

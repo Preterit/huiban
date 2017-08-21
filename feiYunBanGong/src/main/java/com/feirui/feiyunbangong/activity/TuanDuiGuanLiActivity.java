@@ -232,10 +232,9 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				YWTribe tribe = (YWTribe) result[0];
 				tribe.getTribeId();// 群ID，用于唯一标识一个群
 				//提交群ID
-				qunID(tribe.getTribeId());
+//				qunID(tribe.getTribeId());
 				//        跳转到群名片
 				Intent intent = new Intent(TuanDuiGuanLiActivity.this, TribeInfoActivity.class);
-				intent.putExtra("code",1);
 				intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
 				startActivity(intent);
 				finish();

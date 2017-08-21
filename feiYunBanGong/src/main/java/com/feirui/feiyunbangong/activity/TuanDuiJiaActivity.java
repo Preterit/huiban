@@ -16,6 +16,7 @@ import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.tribe.TribeActivity;
 import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -219,6 +220,9 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 
 			break;
         case R.id.ll_send_talk:
+			startActivity(new Intent(TuanDuiJiaActivity.this, TribeActivity.class));
+			this.overridePendingTransition(R.anim.aty_zoomin,
+					R.anim.aty_zoomout);
             YWIMKit mIMKit = AppStore.mIMKit;
             IYWTribeService tribeService = mIMKit.getTribeService();  //获取群管理器;
 
