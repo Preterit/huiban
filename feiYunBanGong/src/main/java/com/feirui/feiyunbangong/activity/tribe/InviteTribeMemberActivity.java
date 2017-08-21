@@ -13,10 +13,12 @@ import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.channel.util.YWLog;
 import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.contact.YWContactFactory;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribeType;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.ui.contact.ContactsFragment;
+import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.BaseActivity;
 import com.feirui.feiyunbangong.adapter.AddChengYuanExpandableListAdapter;
@@ -78,6 +80,7 @@ public class InviteTribeMemberActivity extends BaseActivity implements
 
         mIMKit = AppStore.mIMKit;
         mTribeService = mIMKit.getTribeService();
+        //获取群ID
         mTribeId = getIntent().getLongExtra(TribeConstants.TRIBE_ID, 0);
 
         initUI();
@@ -166,32 +169,20 @@ public class InviteTribeMemberActivity extends BaseActivity implements
             return;
         }
 
-         YWTribeType tribeTypew = mTribeService.getTribe(mTribeId).getTribeType();
-        final YWTribeType tribeType = YWTribeType.CHATTING_GROUP;
-        Log.d("tag","添加的群成员-------"+tribeType);
         List<IYWContact> list = new ArrayList<>();
         for (int i = 0;i < childs.size();i++){
-            IYWContact iywContact = MyUserProfileSampleHelper.mUserInfo.get(childs.get(i).getPhone());
+            IYWContact iywContact =  YWContactFactory.createAPPContact(childs.get(i).getPhone(), Happlication.APP_KEY);
             list.add(iywContact);
-            Log.d("tag","添加的群成员-------"+list.get(i)+childs.get(i).getPhone());
+            Log.d("tag","添加的群成员-------"+list.get(i) + "------------ "+childs.get(i).getPhone());
         }
 
         mTribeService.inviteMembers(mTribeId, list,new MyCallback() {
             @Override
             public void onSuccess(Object... result) {
-                // 返回值为刚刚成功创建的群
-                YWTribe tribe = (YWTribe) result[0];
-                tribe.getTribeId();// 群ID，用于唯一标识一个群
-                Log.d("tag","添加的群成员-------"+ tribe.getTribeId());
-                //        跳转到群名片
-                Intent intent = new Intent(InviteTribeMemberActivity.this, TribeInfoActivity.class);
-                intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
-                startActivity(intent);
                 finish();
             }
         });
 
-        finish();
     }
 
     /**

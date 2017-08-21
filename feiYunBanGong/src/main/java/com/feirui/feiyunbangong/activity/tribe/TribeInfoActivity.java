@@ -35,8 +35,14 @@ import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.BaseActivity;
+import com.feirui.feiyunbangong.activity.TuanDuiGuanLiActivity;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.T;
+import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +63,7 @@ public class TribeInfoActivity extends BaseActivity{
     private YWTribe mTribe;
     private long mTribeId;
     private int code;
+    private String teamId;
     private String mTribeOp;
     private int mTribeMemberCount;
     List<YWTribeMember> mList = new ArrayList<YWTribeMember>();
@@ -107,7 +114,8 @@ public class TribeInfoActivity extends BaseActivity{
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
-
+        code = intent.getIntExtra("code",-1);
+        teamId = intent.getStringExtra("id");
         Log.d("tag","群的id------"+mTribeId);
         mTribeOp = intent.getStringExtra(TribeConstants.TRIBE_OP);
 
@@ -122,6 +130,41 @@ public class TribeInfoActivity extends BaseActivity{
         initTribeInfo();
         initView();
         getTribeMsgRecSettings();
+        if (code == 0){
+            //提交群ID
+            qunID(mTribeId);
+        }
+    }
+
+    public void qunID(long id){
+        Log.e("chengyuan", "qunID: ------------------------" + id );
+        String url = UrlTools.url + UrlTools.QUN_ID;
+        RequestParams params = new RequestParams();
+        params.put("team_talk",id + "");
+        params.put("team_id",teamId);
+        Log.e("chengyuan", "qunID:-------------------- " + params.toString() );
+        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
+                new Utils.HttpCallBack() {
+
+                    @Override
+                    public void success(JsonBean bean) {
+                        if ("200".equals(bean.getCode())){
+                            Log.e("chengyuan", "qunID:-------------------- " + bean.getMsg() );
+                            T.showShort(TribeInfoActivity.this, "团聊创建成功！");
+                        }
+//                        TribeInfoActivity.this.finish();
+                    }
+
+                    @Override
+                    public void failure(String msg) {
+                        T.showShort(TribeInfoActivity.this, msg);
+                    }
+
+                    @Override
+                    public void finish() {
+
+                    }
+                });
     }
 
     private void initUI() {

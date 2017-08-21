@@ -415,7 +415,10 @@ public class UrlTools {
    * 添加成员：
    */
   public static String ADD_CHENGYUAN = "Team/team_member_add";
-
+  /**
+   * 获取团队对应的团聊id
+   */
+  public static String GET_TUANLIAOID = "Team/teamtalk";
   /**
    * 加入团队显示团队信息：
    */
