@@ -21,7 +21,9 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 
 import java.util.List;
-
+/**
+ * 选择团队界面
+ * */
 public class SelectorTeamActivity extends BaseActivity implements OnItemClickListener {
     private TeamListAdapter adapter;
     private ListView teamListView;

@@ -10,6 +10,7 @@ public class TuanDuiChengYuan implements Serializable {
 	private String id;// 列表中的id;
 	private String staff_id;// 员工id
 	private String name;
+	private String introduction;
 	private String head;
 	private String type;
 	private String phone;
@@ -107,6 +108,13 @@ public class TuanDuiChengYuan implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 
 	public String getPhone() {
 		return phone;
@@ -153,9 +161,10 @@ public class TuanDuiChengYuan implements Serializable {
 	}
 
 	public TuanDuiChengYuan(String id, String staff_id, String name,
-			String head, String type, String phone, String email) {
+			String head, String type, String phone, String email,String introduction) {
 		super();
 		this.id = id;
+		this.introduction=introduction;
 		this.staff_id = staff_id;
 		this.name = name;
 		this.head = head;
@@ -165,10 +174,11 @@ public class TuanDuiChengYuan implements Serializable {
 	}
 
 	public TuanDuiChengYuan(String id, String staff_id, String name,
-			String head, String type, String phone, String email, String tag) {
+			String head, String type, String phone, String email, String tag,String introduction) {
 		super();
 		this.id = id;
 		this.staff_id = staff_id;
+		this.introduction=introduction;
 		this.name = name;
 		this.head = head;
 		this.type = type;
@@ -192,10 +202,11 @@ public class TuanDuiChengYuan implements Serializable {
 		return "TuanDuiChengYuan [id=" + id + ", staff_id=" + staff_id
 				+ ", name=" + name + ", head=" + head + ", type=" + type
 				+ ", phone=" + phone + ", email=" + email + ", tag=" + tag
-				+ ", tag_name=" + tag_name + "]";
+				+ ", tag_name=" + tag_name +", introduction="+introduction+ "]";
 	}
 
 	public TuanDuiChengYuan() {
 	}
+
 
 }

@@ -8,7 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.feirui.feiyunbangong.R;
-
+/**
+ * 任务单详情界面
+ * */
 public class RenWuDetailActivity extends AppCompatActivity {
 
     @Override

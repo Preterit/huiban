@@ -146,17 +146,18 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                         tdcys.removeAll(tdcys);
                         for (int i = 0; i < infor.size(); i++) {
                             HashMap<String, Object> hm = infor.get(i);
-                            TuanDuiChengYuan tdcy = new TuanDuiChengYuan(hm
-                                    .get("id") + "", String.valueOf(hm
-                                    .get("staff_id")), String.valueOf(hm
-                                    .get("staff_name")), String.valueOf(hm
-                                    .get("staff_head")), hm.get("type") + "",
+                            TuanDuiChengYuan tdcy = new TuanDuiChengYuan(
+                                    hm.get("id") + "",
+                                    String.valueOf(hm.get("staff_id")),
+                                    String.valueOf(hm.get("staff_name")),
+                                    String.valueOf(hm.get("staff_head")),
+                                    hm.get("type") + "",
                                     String.valueOf(hm.get("staff_mobile")),
-                                    String.valueOf(hm.get("staff_email")), hm
-                                    .get("tag_name") + "");
+                                    String.valueOf(hm.get("staff_email")),
+                                    hm.get("tag_name") + "",
+                                    String.valueOf(hm.get("introduction")));
 
-                            tdcy.setTeam_member_list_id(hm
-                                    .get("team_member_list_id") + "");
+                            tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
 
                             tdcy.setState(Integer.parseInt(hm.get("state") + ""));
 
@@ -175,8 +176,6 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                             if ("副团长".equals(tdcy.getType())) {
                                 td.getDcmoes().add(tdcy.getStaff_id());
                             }
-                            // Log.e("TAG", tdcy.toString());
-
                             tdcys.add(tdcy);
                         }
                         adapter.add(tdcys);
@@ -269,7 +268,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         lv_chengyuan = (ListView) findViewById(R.id.lv_chengyuan);
         adapter = new ChengYuanAdapter(getLayoutInflater());
         tdcys = new ArrayList<>();
-
+//原来的添加好友按键
 //        View footer_view = getLayoutInflater().inflate(R.layout.lv_footer_tuandui_chengyuan, null);
 //        bt_add = (Button) footer_view.findViewById(R.id.bt_add);
 //
@@ -330,7 +329,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 //                Intent intent = new Intent(this, AddChengYuanActivity.class);
 //                startActivityForResult(intent, 300);
 //                break;
-            case R.id.iv_tjcy:
+            case R.id.iv_tjcy://添加成员
                 Intent intent = new Intent(this, AddChengYuanActivity.class);
                 startActivityForResult(intent, 300);
                 break;
@@ -420,7 +419,6 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         params.put("team_id", td.getId());
         params.put("staff_id", sb.toString());
 
-        Log.e("TAG", params.toString());
 
         AsyncHttpServiceHelper.post(url, params,
                 new AsyncHttpResponseHandler() {

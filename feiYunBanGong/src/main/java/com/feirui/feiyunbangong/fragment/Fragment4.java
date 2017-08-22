@@ -206,6 +206,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                             long id) {
         // 注意从1开始，因为有header;
         TuanDui tuanDui = tds.get(position - 1);
+        //TuanDui tuanDui = tds.get(position);
         Intent intent = new Intent(getActivity(), DetailTuanDuiActivity.class);
         intent.putExtra("tuanDui", tuanDui);
         startActivity(intent);
