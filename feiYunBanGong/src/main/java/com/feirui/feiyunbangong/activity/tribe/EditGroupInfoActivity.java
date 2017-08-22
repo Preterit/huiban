@@ -31,6 +31,7 @@ import com.feirui.feiyunbangong.adapter.GridAdapter;
 import com.feirui.feiyunbangong.dialog.TianJiaBIaoQianDialog;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.state.AppStore;
 
 import java.util.ArrayList;
@@ -83,6 +84,8 @@ public class EditGroupInfoActivity extends BaseActivity implements
         et_name_tuandui = (EditText) findViewById(R.id.et_name_tuandui);
         ll_add_chengyuan = (LinearLayout) findViewById(R.id.ll_add_chengyuan);
         bt_submit = (Button) findViewById(R.id.bt_submit);
+
+
     }
 
     private void setListener() {

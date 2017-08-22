@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,8 +35,14 @@ import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.BaseActivity;
+import com.feirui.feiyunbangong.activity.TuanDuiGuanLiActivity;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.T;
+import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +62,8 @@ public class TribeInfoActivity extends BaseActivity{
     private IYWTribeService mTribeService;
     private YWTribe mTribe;
     private long mTribeId;
+    private int code;
+    private String teamId;
     private String mTribeOp;
     private int mTribeMemberCount;
     List<YWTribeMember> mList = new ArrayList<YWTribeMember>();
@@ -74,6 +83,8 @@ public class TribeInfoActivity extends BaseActivity{
     private RelativeLayout mEditTribeInfoLayout;
     private RelativeLayout mEditMyTribeProfileLayout;
     private RelativeLayout mEditPersonalSettings;
+    private RelativeLayout tribe_verify_layout,edit_tribe_info_layout; //群公告 编辑群信息
+    private LinearLayout tribe_description_layout; //身份验证
 
     private RelativeLayout mTribeMsgRecTypeLayout;
     private TextView mTribeMsgRecType;
@@ -103,6 +114,8 @@ public class TribeInfoActivity extends BaseActivity{
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
+        code = intent.getIntExtra("code",-1);
+        teamId = intent.getStringExtra("id");
         Log.d("tag","群的id------"+mTribeId);
         mTribeOp = intent.getStringExtra(TribeConstants.TRIBE_OP);
 
@@ -117,6 +130,41 @@ public class TribeInfoActivity extends BaseActivity{
         initTribeInfo();
         initView();
         getTribeMsgRecSettings();
+        if (code == 0){
+            //提交群ID
+            qunID(mTribeId);
+        }
+    }
+
+    public void qunID(long id){
+        Log.e("chengyuan", "qunID: ------------------------" + id );
+        String url = UrlTools.url + UrlTools.QUN_ID;
+        RequestParams params = new RequestParams();
+        params.put("team_talk",id + "");
+        params.put("team_id",teamId);
+        Log.e("chengyuan", "qunID:-------------------- " + params.toString() );
+        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
+                new Utils.HttpCallBack() {
+
+                    @Override
+                    public void success(JsonBean bean) {
+                        if ("200".equals(bean.getCode())){
+                            Log.e("chengyuan", "qunID:-------------------- " + bean.getMsg() );
+                            T.showShort(TribeInfoActivity.this, "团聊创建成功！");
+                        }
+//                        TribeInfoActivity.this.finish();
+                    }
+
+                    @Override
+                    public void failure(String msg) {
+                        T.showShort(TribeInfoActivity.this, msg);
+                    }
+
+                    @Override
+                    public void finish() {
+
+                    }
+                });
     }
 
     private void initUI() {
@@ -129,6 +177,11 @@ public class TribeInfoActivity extends BaseActivity{
 
     private void initView() {
         initUI();
+
+        tribe_description_layout = (LinearLayout) findViewById(R.id.tribe_description_layout);
+        edit_tribe_info_layout = (RelativeLayout) findViewById(R.id.edit_tribe_info_layout);
+        tribe_verify_layout = (RelativeLayout) findViewById(R.id.tribe_verify_layout);
+
         mTribeName = (TextView) findViewById(R.id.tribe_name);
         final TextView tribeId = (TextView) findViewById(R.id.tribe_id);
         tribeId.setText("群号 " + mTribeId);
@@ -254,6 +307,17 @@ public class TribeInfoActivity extends BaseActivity{
                 }
             }
         });
+
+        //判断是普通群还是团队创建的群
+//        if (code == 1){
+//            tribe_description_layout.setVisibility(View.GONE);
+//            edit_tribe_info_layout.setVisibility(View.GONE);
+//            tribe_verify_layout.setVisibility(View.GONE);
+//        } else {
+            tribe_description_layout.setVisibility(View.VISIBLE);
+            edit_tribe_info_layout.setVisibility(View.VISIBLE);
+            tribe_verify_layout.setVisibility(View.VISIBLE);
+//        }
     }
 
     /**

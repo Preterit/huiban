@@ -396,6 +396,10 @@ public class UrlTools {
    * 没有管理员的团队成员，删除成员用；
    */
   public static String CHENGYUAN_WU_GUANLIYUAN = "Team/team_member_list";
+  /**
+   * 团队创建团聊用的  群ID
+   */
+  public static String QUN_ID = "Team/team_talk";
 
   /**
    * 删除团队成员：
@@ -411,7 +415,10 @@ public class UrlTools {
    * 添加成员：
    */
   public static String ADD_CHENGYUAN = "Team/team_member_add";
-
+  /**
+   * 获取团队对应的团聊id
+   */
+  public static String GET_TUANLIAOID = "Team/teamtalk";
   /**
    * 加入团队显示团队信息：
    */

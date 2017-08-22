@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="55"
-    android:versionName="1.5.5">
+    android:versionCode="57"
+    android:versionName="1.5.7">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -124,7 +124,7 @@
         <activity android:name=".activity.QiTaActivity" />
         <activity android:name=".activity.QingJiaActivity" />
         <activity android:name=".activity.BaoXiaoActivity" />
-        <activity android:name=".activity.WoDeTaskActivity$WaiChuActivity" />
+        <activity android:name=".activity.WaiChuActivity" />
         <activity android:name=".activity.FuKuanActivity" />
         <!-- <activity android:name=".activity.CaoZuoJiLuActivity"> -->
         <!-- </activity> -->
@@ -429,8 +429,7 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity" />
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
-        <activity
-            android:name=".activity.tribe.EditGroupInfoActivity"
+        <activity android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
 
@@ -454,9 +453,7 @@
         <activity
             android:name=".activity.RenWuDetailActivity"
             android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activity.GongGaoXiangXiActivity" />
-        <activity android:name=".activity.BeiZhuActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.WebViewActivity"/>
     </application>
 

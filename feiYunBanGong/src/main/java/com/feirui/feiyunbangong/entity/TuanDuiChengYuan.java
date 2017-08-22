@@ -92,6 +92,13 @@ public class TuanDuiChengYuan implements Serializable {
 		this.name = name;
 		this.head = head;
 	}
+    public TuanDuiChengYuan(String id, String name, String head,String phone) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.head = head;
+        this.phone = phone;
+    }
 
 	public String getTag() {
 		return tag;

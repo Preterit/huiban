@@ -5,18 +5,26 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
+import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.tribe.TribeActivity;
 import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
+import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -33,6 +41,9 @@ import com.zxing.encoding.EncodingHandler;
 
 import org.apache.http.Header;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * 团队——加
  * 
@@ -41,9 +52,10 @@ import org.apache.http.Header;
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
 	@PView(click = "onClick")
-	LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg;// 扫码，推广，管理,短信邀请；
+	LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg,ll_send_talk;// 扫码，推广，管理,短信邀请；团队聊天
 	private TuanDui td;
 	private Button bt_out_team;//退出团队；
+	private String mTuanLiaoID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		AppStore.acts.add(this);
 
 		Intent intent = getIntent();
+		//传过来的团队
 		td = (TuanDui) intent.getSerializableExtra("td");
 		bt_out_team=(Button) findViewById(R.id.bt_out_team);
 
@@ -153,7 +166,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 					});
 			break;
 
-		case R.id.ll_guanli:
+		case R.id.ll_guanli:  //团长管理团队 将整个团队传过去
 			Intent intent = new Intent(this, TuanDuiGuanLiActivity.class);
 			intent.putExtra("td", td);
 			startActivityForResult(intent, 500);
@@ -214,6 +227,20 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 			dialog1.show();
 
 			break;
+        case R.id.ll_send_talk:  //团队聊天
+			getTuanLiaoId(); //获取该团聊的ID
+//			startActivity(new Intent(TuanDuiJiaActivity.this, TribeActivity.class));
+//			this.overridePendingTransition(R.anim.aty_zoomin,
+//					R.anim.aty_zoomout);
+            YWIMKit mIMKit = AppStore.mIMKit;
+			if (mTuanLiaoID != null){
+				//参数为群ID号
+				Intent intent2 = mIMKit.getTribeChattingActivityIntent(Long.parseLong(mTuanLiaoID));
+				startActivity(intent2);
+			}else {
+				Toast.makeText(this,"提醒团长创建团聊哦~",Toast.LENGTH_SHORT).show();
+			}
+            break;
 		}
 	}
 
@@ -244,12 +271,39 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 					});
 
 		}
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * 团队团聊Id
+	 */
+	public void getTuanLiaoId(){
+		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+		RequestParams params = new RequestParams();
+		params.put("team_id",td.getId());
+		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+
+				JsonBean bean = JsonUtils.getMessage(new String(arg2));
+				if ("200".equals(bean.getCode())) {
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
+					mTuanLiaoID = bean.getInfor().get(0).get("team_talk") + "";
+				} else {
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getMsg() );
+				}
+				super.onSuccess(arg0, arg1, arg2);
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+								  Throwable arg3) {
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+		});
+
+	}
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {

@@ -20,7 +20,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.YWIMCore;
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.channel.util.YWLog;
+import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.contact.YWContactFactory;
+import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
+import com.alibaba.mobileim.gingko.model.tribe.YWTribeType;
+import com.alibaba.mobileim.tribe.IYWTribeService;
+import com.alibaba.mobileim.tribe.YWTribeCreationParam;
+import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
+import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
+import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.adapter.GuanLiChengYuanAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.dialog.MyAleartDialog;
@@ -38,6 +52,8 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import static com.feirui.feiyunbangong.utils.T.result;
+
 /**
  * 团队管理：
  * 
@@ -52,12 +68,20 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	private List<TuanDuiChengYuan> tdcys;
 	private ListView lv_chengyuan;
 	private int pos;// 点击的item位置；
-	private Button bt_dissolve_team;// 解散团队按钮；
+	private Button bt_dissolve_team,bt_set_team;// 解散团队按钮；创建团聊
+	//群聊的
+	private YWIMKit mIMKit;
+	YWTribe tribe;
+	private IYWTribeService mTribeService;
+	private long mTribeId; //团聊的ID
+	private TuanDuiChengYuan mTuanDui;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tuan_dui_guan_li);
+		mIMKit = AppStore.mIMKit;
+		mTribeService = mIMKit.getTribeService();  //获取群管理器
 		initView();
 		setListener();
 		setListView();
@@ -102,6 +126,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 	private void setListener() {
 		bt_dissolve_team.setOnClickListener(this);
+        bt_set_team.setOnClickListener(this);
 		lv_chengyuan.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -124,6 +149,8 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 		tdcys = new ArrayList<>();
 		lv_chengyuan = (ListView) findViewById(R.id.lv_chengyuan);
 		bt_dissolve_team = (Button) findViewById(R.id.bt_dissolve_team);
+		bt_set_team = (Button) findViewById(R.id.bt_set_team);
+
 	}
 
 	@Override
@@ -162,6 +189,9 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 			dissolve_dialog.show();
 
 			break;
+		case R.id.bt_set_team: //创建群聊的
+			createTribe(YWTribeType.CHATTING_GROUP);
+			break;
 		default:
 			MyAleartDialog delete_dialog = new MyAleartDialog("删除团队成员",
 					"确定删除团队该成员吗？", this, new AlertCallBack() {
@@ -179,6 +209,65 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * 创建团聊
+	 */
+	private void createTribe(final YWTribeType type) {
+
+		YWTribeCreationParam tribeCreationParam = new YWTribeCreationParam();
+		tribeCreationParam.setTribeName(td.getName());
+		tribeCreationParam.setTribeType(type);
+		if (type == YWTribeType.CHATTING_GROUP){
+			//讨论组需要指定用户
+			final List<String> userList = new ArrayList<String>();
+			final YWIMCore core = mIMKit.getIMCore();
+
+			userList.add(core.getLoginUserId());// 当前登录的用户ID，这个必须要传
+			Log.e("tag","获取到的群成员--------");
+			for (int i = 0;i < tdcys.size();i++){
+				userList.add(tdcys.get(i).getPhone());
+				Log.e("tag","获取到的群成员--------"+tdcys.get(i).getPhone());
+			}
+
+			tribeCreationParam.setUsers(userList);
+		}
+
+		mTribeService.createTribe(new MyCallback() {
+			@Override
+			public void onSuccess(Object... result) {
+				// 返回值为刚刚成功创建的群
+				tribe = (YWTribe) result[0];
+				tribe.getTribeId();// 群ID，用于唯一标识一个群
+				//        跳转到群名片
+				Intent intent = new Intent(TuanDuiGuanLiActivity.this, TribeInfoActivity.class);
+				intent.putExtra("code",0);
+				intent.putExtra("id",td.getId());
+				intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
+				startActivity(intent);
+				finish();
+			}
+		},tribeCreationParam);
+
+	}
+
+	/**
+	 * 请求回调
+	 *
+	 * @author zhaoxu
+	 *
+	 */
+	private static abstract class MyCallback implements IWxCallback {
+
+		@Override
+		public void onError(int arg0, String arg1) {
+			YWLog.e("TribeSampleHelper", "code=" + arg0 + " errInfo=" + arg1);
+		}
+
+		@Override
+		public void onProgress(int arg0) {
+
+		}
+	}
 	// 解散团队：
 	private void dissolve() {
 		String url = UrlTools.url + UrlTools.DISSOLVE_TEAM;
@@ -250,12 +339,12 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 	private void delete(View v) {
 
-		final TuanDuiChengYuan tdcy = (TuanDuiChengYuan) v.getTag();
+		final TuanDuiChengYuan  tdcy = (TuanDuiChengYuan) v.getTag();
 
 		String url = UrlTools.url + UrlTools.DELETE_TUANDUI_CHENGYUAN;
 		RequestParams params = new RequestParams();
 		params.put("id", tdcy.getId());
-
+		mTuanDui = tdcy;
 		AsyncHttpServiceHelper.post(url, params,
 				new AsyncHttpResponseHandler() {
 
@@ -287,6 +376,69 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * 团队团聊Id
+	 */
+	public void getTuanLiaoId(){
+		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+		RequestParams params = new RequestParams();
+		params.put("team_id",td.getId());
+		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+
+				JsonBean bean = JsonUtils.getMessage(new String(arg2));
+				if ("200".equals(bean.getCode())) {
+					Message msg = handler.obtainMessage(6);
+					msg.obj = bean;
+					handler.sendMessage(msg);
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
+				} else {
+					Message msg = handler.obtainMessage(1);
+					msg.obj = bean;
+					handler.sendMessage(msg);
+				}
+				super.onSuccess(arg0, arg1, arg2);
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+								  Throwable arg3) {
+				Message msg = handler.obtainMessage(5);
+				handler.sendMessage(msg);
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+		});
+
+	}
+	/**
+	 * 团队聊天自动删除人
+	 * @param qunID   团聊的ID
+	 */
+	public void  deleteTuanLiao(String qunID){
+		mTribeId = Long.valueOf(qunID) ;
+		Log.e("chengyuan", "mTribeId: -----------------" + mTribeId + "----------" + mTuanDui.getPhone());
+
+		IYWContact iywContact =  YWContactFactory.createAPPContact(mTuanDui.getPhone(), Happlication.APP_KEY);
+		Log.e("chengyuan", "iywContact: -----------------" + iywContact );
+		mTribeService.expelMember(mTribeId, iywContact, new IWxCallback() {
+			@Override
+			public void onSuccess(Object... objects) {
+
+			}
+
+			@Override
+			public void onError(int i, String s) {
+
+			}
+
+			@Override
+			public void onProgress(int i) {
+
+			}
+		});
+	}
 	Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
@@ -300,9 +452,10 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 					TuanDuiChengYuan tdcy = new TuanDuiChengYuan(
 							String.valueOf(hm.get("id")), String.valueOf(hm
 									.get("staff_name")), String.valueOf(hm
-									.get("staff_head")));
+									.get("staff_head")),String.valueOf(hm.get("staff_mobile")));
 					tdcy.setStaff_id(hm.get("staff_id") + "");
 					tdcys.add(tdcy);
+					Log.e("tag", "handleMessage:----------------- " + tdcys.get(0));
 				}
 				if (tdcys != null && tdcys.size() != 0) {
 					adapter.add(tdcys);
@@ -320,6 +473,8 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				// 删除成功！
 				TuanDuiChengYuan item = (TuanDuiChengYuan) msg.obj;
 				adapter.reduce(item);
+				//团队群Id
+				getTuanLiaoId();
 				break;
 			case 4:
 				// 删除失败：
@@ -330,9 +485,18 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				// 删除失败：
 				Toast.makeText(TuanDuiGuanLiActivity.this, "删除失败！", 0).show();
 				break;
+			case 6:
+				JsonBean bean6 = (JsonBean) msg.obj;
+				Log.e("chengyuan", "JsonBean: -----------------" + bean6.getInfor().get(0).get("team_talk") );
+				//删除团聊成员
+				if (bean6.getInfor().get(0).get("team_talk") != null){
+					deleteTuanLiao(bean6.getInfor().get(0).get("team_talk") + "");
+				}
+				break;
 			}
 
 		};
 	};
+
 
 }

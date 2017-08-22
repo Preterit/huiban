@@ -21,6 +21,7 @@
     </ListView>
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -78,5 +79,16 @@
         android:layout_marginTop="@dimen/y50"
         android:background="@drawable/shape_delete"
         android:text="解散团队" />
+     <Button
+         android:id="@+id/bt_set_team"
+         style="@style/ffffff_49"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/y120"
+         android:layout_marginBottom="@dimen/y50"
+         android:layout_marginLeft="@dimen/x100"
+         android:layout_marginRight="@dimen/x100"
+         android:layout_marginTop="@dimen/y50"
+         android:background="@drawable/shape_delete"
+         android:text="创建团聊" />
 
 </LinearLayout>

@@ -41,6 +41,7 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setAllowFileAccess(true);
         webSettings.setBuiltInZoomControls(true);
         mView.loadUrl(uri);
+
         //加载数据
         mView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -53,7 +54,8 @@ public class WebViewActivity extends BaseActivity {
                 }
             }
         });
-       //这个是当网页上的连接被点击的时候
+
+       //这个是当网页上的链接被点击的时候
         mView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(final WebView view,
                                                     final String url) {
