@@ -3,11 +3,9 @@ package com.feirui.feiyunbangong.im;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.YWIMCore;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMChattingPageOperateion;
@@ -60,6 +59,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
 
     YWIMKit mIMKit = AppStore.mIMKit;
     public static Activity activity;
+    YWIMCore core = mIMKit.getIMCore();
 
     public MyIMChattingPageOperateion(Pointcut pointcut) {
         super(pointcut);
@@ -356,8 +356,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
         Log.e("TAG", message.getContent() + "-----------------message-------");
         Log.e("TAG", YWMessage.SUB_MSG_TYPE.IM_CARD
                 + "YWMessage.SUB_MSG_TYPE.IM_CARD");
-        String str = message.getContent().substring(message.getContent().length() - 2);
-        Log.e("TAG", str + "-----------------message-------");
+
         // 位置消息：
         if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GEO) {
 
@@ -409,11 +408,9 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
 
             return true;
 
-        }else if (message.getMessageBody() != null && (!str.equals("ww")) &&
+        }else if (message.getMessageBody() != null &&
+                message.getMessageBody().getContent().contains("ib3mbd6s" + core.getLoginUserId()) == false && //当前用户的id
                 Patterns.WEB_URL.matcher(message.getMessageBody().getContent()).matches()){
-//        ile.do?type=1&fileId=d7cc55e78bf392e8270550fd6413768b.png&suffix=png&width=1080
-//                &height=1920&mediaSize=388146&fromId=ib3mbd6s13911858822&toId=ib3mbd6s18210532546&YWOriginalImage=1
-//                &YWShowOriginal=1&wangxintype=1_388146&client=ww
             try {
                 Intent intent = new Intent(activity, WebViewActivity.class);
                 intent.putExtra("uri",message.getMessageBody().getContent());
