@@ -42,7 +42,7 @@ public class YiJianActivity extends BaseActivity implements OnClickListener {
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("意见反馈");
 		setRightVisibility(false);
-		cb = (CheckBox) findViewById(R.id.cb_niming);
+//		cb = (CheckBox) findViewById(R.id.cb_niming);
 		et = (EditText) findViewById(R.id.et_fankui);
 		bt = (Button) findViewById(R.id.bt_submit);
 	}
@@ -67,7 +67,8 @@ public class YiJianActivity extends BaseActivity implements OnClickListener {
 
 		RequestParams params = new RequestParams();
 		params.put("content", content);
-		params.put("anonymous", cb.isChecked() ? "0" : "1");
+//		params.put("anonymous", cb.isChecked() ? "0" : "1");
+		params.put("anonymous", "1");
 		String url = UrlTools.url + UrlTools.FANKUI;
 
 		AsyncHttpServiceHelper.post(url, params,

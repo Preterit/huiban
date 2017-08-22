@@ -207,13 +207,15 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
         // 注意从1开始，因为有header;
-        TuanDui tuanDui = tds.get(position - 1);
-        //TuanDui tuanDui = tds.get(position);
-        Intent intent = new Intent(getActivity(), DetailTuanDuiActivity.class);
-        intent.putExtra("tuanDui", tuanDui);
-        startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.aty_zoomin,
-                R.anim.aty_zoomout);
+        if (position > 0 && position <= tds.size()){
+            TuanDui tuanDui = tds.get(position - 1);
+            Intent intent = new Intent(getActivity(), DetailTuanDuiActivity.class);
+            intent.putExtra("tuanDui", tuanDui);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.aty_zoomin,
+                    R.anim.aty_zoomout);
+        }
+
     }
 
     private void setData(JsonBean bean) {
@@ -293,7 +295,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
         // 当滑动列表的时候，更新右侧字母列表的选中状态
-        if (firstVisibleItem != 0) {
+        if (firstVisibleItem > 0 && firstVisibleItem <= tds.size()) {
             word.setTouchIndex(tds.get(firstVisibleItem - 1).getHeadword());
         }
     }
