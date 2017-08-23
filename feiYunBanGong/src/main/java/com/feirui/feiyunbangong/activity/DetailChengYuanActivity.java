@@ -1,9 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +27,10 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.TextImageView;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 查看团队成员资料：
@@ -66,13 +66,12 @@ public class DetailChengYuanActivity extends BaseActivity implements
 		String url = UrlTools.url + UrlTools.UPDATE_TEAM_STATE;
 		RequestParams params = new RequestParams();
 		params.put("team_member_list_id", tdcy.getTeam_member_list_id() + "");
-		Log.e("TAG", params.toString() + "params.toString()");
 		Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
 				new HttpCallBack() {
 
 					@Override
 					public void success(JsonBean bean) {
-						Log.e("TAG", "成功");
+						Log.e("团队成员界面", "成功"+bean.toString());
 					}
 
 					@Override
@@ -104,10 +103,15 @@ public class DetailChengYuanActivity extends BaseActivity implements
 			tv_name_02.setText("姓名：" + tdcy.getName().toString());
 		}
 
-		if (tdcy.getEmail() != null && !tdcy.getEmail().equals("null")) {
-			tv_email.setText("个 人 邮 箱 ：" + tdcy.getEmail().toString());
+//		if (tdcy.getEmail() != null && !tdcy.getEmail().equals("null")) {
+//			tv_email.setText("个 人 签 名 ：" + tdcy.getEmail().toString());
+//		} else {
+//			tv_email.setText("个 人 签 名 ：");
+//		}
+		if (tdcy.getIntroduction() != null && !tdcy.getIntroduction().equals("null")) {
+			tv_email.setText("个 人 签 名 ：" + tdcy.getIntroduction().toString());
 		} else {
-			tv_email.setText("个 人 邮 箱 ：");
+			tv_email.setText("个 人 签 名 ：");
 		}
 		tv_phone.setText("手机号：" + tdcy.getPhone().toString());
 
@@ -236,7 +240,6 @@ public class DetailChengYuanActivity extends BaseActivity implements
 				params.put("group_id", groups.get(pos).getId() + "");
 				params.put("staff_mobile", tdcy.getPhone());
 
-				Log.e("TAG", params.toString());
 
 				L.e("添加好友：url " + url + "  params:" + params);
 				Utils.doPost(
@@ -320,6 +323,7 @@ public class DetailChengYuanActivity extends BaseActivity implements
 			Intent intent) {
 		if (requestCode == 100 && resultCode == 200) {
 			tdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
+			tv_email.setText("个 人 签 名 ：" + tdcy.getIntroduction().toString());
 			initData(tdcy);
 		}
 	}

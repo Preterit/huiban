@@ -39,13 +39,11 @@
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="3dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="5dp"
-
-            >
-
-        </View>
+            android:background="#F5F5F5"
+            />
     </RelativeLayout>
     <View
         android:layout_width="360dp"
@@ -80,17 +78,94 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="3dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="5dp"
-
-            ></View>
+            android:background="#F5F5F5"
+            />
     </RelativeLayout>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="3dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:background="#F5F5F5"-->
+        <!--/>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--&gt;-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="开始时间"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_marginStart="13dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="请选择"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginEnd="14dp" />-->
+    <!--</RelativeLayout>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--&gt;-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="位置记录"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_marginStart="13dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="请选择"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginEnd="14dp" />-->
+    <!--</RelativeLayout>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--&gt;-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="开始时间"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_marginStart="13dp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="请选择"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginEnd="14dp" />-->
+    <!--</RelativeLayout>-->
+
     <View
-        android:layout_width="360dp"
-        android:layout_height="1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/back_huise"/>
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:background="#F5F5F5"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -123,10 +198,12 @@
             />
     </RelativeLayout>
     <View
-        android:layout_width="360dp"
-        android:layout_height="1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/back_huise"/>
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:background="#F5F5F5"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -170,16 +247,16 @@
 
         >
 
-        <Button
-            android:id="@+id/quxiaoButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:text="取消"
-            android:background="@drawable/task_button_selector"
-            android:textColor="#ffffff"/>
+        <!--<Button-->
+            <!--android:id="@+id/quxiaoButton"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="取消"-->
+            <!--android:background="@drawable/task_button_selector"-->
+            <!--android:textColor="#ffffff"/>-->
 
         <Button
             android:id="@+id/quedingButton"

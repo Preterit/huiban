@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -64,8 +65,8 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
 			tv_name.setText(tdcy.getName());
 		}
 
-		if (tdcy.getEmail() != null && !tdcy.getEmail().equals("null")) {
-			et_email.setText("" + tdcy.getEmail().toString());
+		if (tdcy.getIntroduction() != null && !tdcy.getIntroduction().equals("null")) {
+			et_email.setText("" + tdcy.getIntroduction().toString());
 		}
 		tv_phone.setText("手机号：" + tdcy.getPhone().toString());
 		et_remark.setText(tdcy.getT_remark() + "");
@@ -115,21 +116,22 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
 	}
 
 	private void update() {
-
-		if (!TextUtils.isEmpty(et_email.getText().toString())) {
-			if (!Utils.isEmail(et_email.getText().toString())) {
-				Toast.makeText(this, "邮箱格式不合法！", 0).show();
-				return;
-			}
-		}
+//邮箱改成个人签名
+//		if (!TextUtils.isEmpty(et_email.getText().toString())) {
+//			if (!Utils.isEmail(et_email.getText().toString())) {
+//				Toast.makeText(this, "邮箱格式不合法！", 0).show();
+//				return;
+//			}
+//		}
 
 		String url = UrlTools.url + UrlTools.XIUGAI_YOUXIANG;
 		RequestParams params = new RequestParams();
 
 		params.put("id", tdcy.getId());
-		params.put("staff_email", et_email.getText().toString() + "");
+//		params.put("staff_email", et_email.getText().toString() + "");
+		params.put("introduction", et_email.getText().toString() + "");
 		params.put("t_remark", et_remark.getText().toString() + "");
-
+		Log.e("修改个人简介", "id: " +tdcy.getId().toString());
 		AsyncHttpServiceHelper.post(url, params,
 				new AsyncHttpResponseHandler() {
 
@@ -163,8 +165,11 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
 			switch (msg.what) {
 			case 0:
 				Toast.makeText(XiuGaiChengYuanActivity.this, "修改成功！", 0).show();
-				tdcy.setEmail(et_email.getText().toString() + "");
+				//tdcy.setEmail(et_email.getText().toString() + "");
+				Log.e("修改成员界面", "et_email: "+et_email.getText().toString() );
+				tdcy.setIntroduction(et_email.getText().toString());
 				tdcy.setT_remark(et_remark.getText().toString() + "");
+				Log.e("修改成员界面", "tdcy: "+tdcy.toString() );
 				setResult(200, new Intent().putExtra("tdcy", tdcy));
 				finish();
 				break;

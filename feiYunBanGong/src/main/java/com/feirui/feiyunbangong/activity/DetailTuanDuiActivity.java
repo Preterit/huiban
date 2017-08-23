@@ -172,8 +172,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                                     String.valueOf(hm.get("staff_email")), hm
                                     .get("tag_name") + "");
 
-                            tdcy.setTeam_member_list_id(hm
-                                    .get("team_member_list_id") + "");
+                            tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
 
                             tdcy.setState(Integer.parseInt(hm.get("state") + ""));
 
@@ -192,8 +191,6 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                             if ("副团长".equals(tdcy.getType())) {
                                 td.getDcmoes().add(tdcy.getStaff_id());
                             }
-                            // Log.e("TAG", tdcy.toString());
-
                             tdcys.add(tdcy);
                         }
                         adapter.add(tdcys);
