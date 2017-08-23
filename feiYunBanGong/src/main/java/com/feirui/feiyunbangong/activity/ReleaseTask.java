@@ -58,7 +58,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         tvTaskCount=(EditText) findViewById(R.id.tvTaskCount);
         tvTaskTitle=(EditText) findViewById(R.id.tvTaskTitle);
         quedingButton=(Button) findViewById(R.id.quedingButton);
-        quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
+//        quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
         friend_pic_recycler=(RecyclerView)findViewById(R.id.friend_pic_recycler1);
         team_pic_recycler=(RecyclerView)findViewById(R.id.team_pic_recycler);
 
