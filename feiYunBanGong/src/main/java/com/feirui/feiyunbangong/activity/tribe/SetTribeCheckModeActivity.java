@@ -53,6 +53,7 @@ public class SetTribeCheckModeActivity  extends Activity implements View.OnClick
     private ImageView mClearButton;
 
     private int mTribeCheckMode = -1;
+    private int checkMo;
     private long mTribeId;
     private YWIMKit mIMKit;
     private IYWTribeService mTribeService;
@@ -74,7 +75,8 @@ public class SetTribeCheckModeActivity  extends Activity implements View.OnClick
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
+//                onBackPressed();
             }
         });
         TextView title = (TextView) findViewById(R.id.title_text);
@@ -96,8 +98,9 @@ public class SetTribeCheckModeActivity  extends Activity implements View.OnClick
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
-        int checkMode = intent.getIntExtra(TribeConstants.TRIBE_CHECK_MODE, 0);
-        updateCheckModeView(checkMode);
+        checkMo = intent.getIntExtra(TribeConstants.TRIBE_CHECK_MODE,0);
+        Log.e("checkMode", "initView: ----------" + checkMo );
+        updateCheckModeView(checkMo);
     }
 
     @Override

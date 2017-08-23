@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -26,8 +27,16 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
 import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.YWSDKGlobalConfigSample;
+import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 import java.util.List;
 
@@ -38,7 +47,7 @@ public class MyChatUI extends IMChattingPageUI {
 
 	private YWConversation conversation;
 	private IYWTribeService mTribeService;
-
+    private String teamId ;
 
 	public MyChatUI(Pointcut pointcut) {
 		super(pointcut);
@@ -149,73 +158,88 @@ public class MyChatUI extends IMChattingPageUI {
 				}
 			});
 
-		} else if(conversation.getConversationType() == YWConversationType.Tribe){
-			mTribeService = mIMKit.getTribeService();  //获取群管理器
-			btn.setImageResource(R.drawable.aliwx_tribe_info_icon);
+		} else {
+            if (conversation.getConversationType() == YWConversationType.Tribe) {
+                mTribeService = mIMKit.getTribeService();  //获取群管理器
+                btn.setImageResource(R.drawable.aliwx_tribe_info_icon);
 
-			final  String tribeId = conversationId.substring(5,conversationId.length());
+                final String tribeId = conversationId.substring(5, conversationId.length());
+                //获取团聊所对的团队id
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getTuanDuiId(tribeId);
+                    }
+                });
 
 //			Log.d("tag", "一个聊天的------" +conversationId);
 
-			//从服务器获取所有群列表
-			mTribeService.getAllTribesFromServer(new IWxCallback() {
-				@Override
-				public void onSuccess(Object... objects) {
+                //从服务器获取所有群列表
+                mTribeService.getAllTribesFromServer(new IWxCallback() {
+                    @Override
+                    public void onSuccess(Object... objects) {
 
-					if (objects != null || objects.length > 0){
+                        if (objects != null || objects.length > 0) {
 
-						List<YWTribe> list = (List<YWTribe>) objects[0];
-						for (int i = 0; i < list.size(); i++ ) {
-							final YWTribe ywTribe = list.get(i);
-							tv_name.setText(tribeId);
-							if (String.valueOf(ywTribe.getTribeId()).equals(tribeId)) {
-								Log.d("tag", "一个聊天的------" + ywTribe.getTribeId());
+                            List<YWTribe> list = (List<YWTribe>) objects[0];
+                            for (int i = 0; i < list.size(); i++) {
+                                final YWTribe ywTribe = list.get(i);
+                                tv_name.setText(tribeId);
+                                if (String.valueOf(ywTribe.getTribeId()).equals(tribeId)) {
+                                    Log.d("tag", "一个聊天的------" + ywTribe.getTribeId());
 
-								new Handler().postDelayed(new Runnable() {
-									@Override
-									public void run() {
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
 
-										String title = ywTribe.getTribeName();
-										tv_name.setText(title);
+                                            String title = ywTribe.getTribeName();
+                                            tv_name.setText(title);
 //										Log.d("tag", "一个聊天的------" + title);
-									}
-								}, 300);
+                                        }
+                                    }, 300);
 
-							}
-						}
-					}
+                                }
+                            }
+                        }
+                    }
 
-				}
+                    @Override
+                    public void onError(int i, String s) {
+                    }
 
-				@Override
-				public void onError(int i, String s) {
-
-				}
-
-				@Override
-				public void onProgress(int i) {
-
-				}
-			});
+                    @Override
+                    public void onProgress(int i) {
+                    }
+                });
 
 
-			//群聊标题栏显示的群聊信息图标
+                //群聊标题栏显示的群聊信息图标
 
-			btn.setVisibility(View.VISIBLE);
-			btn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(fragment.getActivity(),TribeInfoActivity.class);
-					intent.putExtra(TribeConstants.TRIBE_ID, Long.parseLong(tribeId));
+                btn.setVisibility(View.VISIBLE);
+                btn.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!"".equals(teamId)) {
+                            Log.e("teamId", "teamId群聊: -----------------" + teamId);
+                            Intent intent = new Intent(fragment.getActivity(), TribeInfoActivity.class);
+                            intent.putExtra(TribeConstants.TRIBE_ID, Long.parseLong(tribeId));
+                            intent.putExtra("code", 100);
+                            intent.putExtra("id",teamId);
+                            fragment.getActivity().startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(fragment.getActivity(), TribeInfoActivity.class);
+                            intent.putExtra(TribeConstants.TRIBE_ID, Long.parseLong(tribeId));
+                            fragment.getActivity().startActivity(intent);
+                        }
 
-					fragment.getActivity().startActivity(intent);
-					Log.d("tag", "一个聊天的------" +  "--------" + Long.parseLong(tribeId));
+                        Log.d("tag", "一个聊天的------" + "--------" + Long.parseLong(tribeId));
 
-				}
-			});
+                    }
+                });
 
 
-		}
+            }
+        }
 
 		//群会话则显示@图标
 		if (YWSDKGlobalConfigSample.getInstance().enableTheTribeAtRelatedCharacteristic()) {
@@ -233,6 +257,40 @@ public class MyChatUI extends IMChattingPageUI {
 		}
 
 		return v;
+	}
+
+	/**
+	 * 获取团队的id
+	 * @param tribeId 群的id
+	 */
+	private void getTuanDuiId(String tribeId){
+        String url = UrlTools.url + UrlTools.GET_TEAMID;
+		RequestParams params = new RequestParams();
+		params.put("team_talk",tribeId);
+		Log.e("teamId", "tribeId: -----------------" + tribeId);
+		AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				JsonBean bean = JsonUtils.getMessage(new String(arg2));
+				if ("200".equals(bean.getCode())) {
+					teamId = bean.getInfor().get(0).get("id") + "";
+					Log.e("teamId", "--- o -----------------" + teamId );
+
+				} else {
+					Log.e("teamId", "--- o -----------------" + bean.getMsg() );
+				}
+				super.onSuccess(arg0, arg1, arg2);
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+								  Throwable arg3) {
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+
+		});
+
 	}
 
 	private IMChattingBizService chattingBizService;

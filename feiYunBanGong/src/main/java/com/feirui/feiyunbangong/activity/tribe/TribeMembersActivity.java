@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -63,6 +64,7 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
     private EditText mUserId;
     private EditText mAppKey;
     private Handler mHandler = new Handler(Looper.getMainLooper());
+    private String teamId;
 
     /**
      * 用于筛选需要处理的ProfileUpdate通知
@@ -74,6 +76,7 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tribe_members);
+
         init();
     }
 
@@ -103,6 +106,8 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
+        teamId = intent.getStringExtra("teamId");
+        Log.e("teamId", "init   liebiao: -----------" + teamId );
         mIMKit = AppStore.mIMKit;
         mTribeService = mIMKit.getTribeService();
 
@@ -122,7 +127,12 @@ public class TribeMembersActivity extends BaseActivity  implements AdapterView.O
             }
         });
 //        mAddTribeMembers.setVisibility(View.GONE);
-        mAddTribeMembers.setVisibility(View.VISIBLE);
+        if (teamId != null){
+            mAddTribeMembers.setVisibility(View.GONE);
+        }else {
+            mAddTribeMembers.setVisibility(View.VISIBLE);
+        }
+
 
         /**
          * 邀请群成员  该功能暂时没用

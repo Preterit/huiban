@@ -36,7 +36,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/y40"
-            android:src="@drawable/icon_checkmark" />
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <View
@@ -66,7 +67,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/y40"
-            android:src="@drawable/icon_checkmark" />
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <View
@@ -96,7 +98,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/y40"
-            android:src="@drawable/icon_checkmark" />
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <View
@@ -126,7 +129,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/y40"
-            android:src="@drawable/icon_checkmark" />
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <View
