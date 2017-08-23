@@ -5,14 +5,18 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
@@ -21,6 +25,7 @@ import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
+import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -37,6 +42,9 @@ import com.zxing.encoding.EncodingHandler;
 
 import org.apache.http.Header;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * 团队——加
  * 
@@ -48,11 +56,16 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 	LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg,ll_send_talk;// 扫码，推广，管理,短信邀请；团队聊天
 	private TuanDui td;
 	private Button bt_out_team;//退出团队；
+	private String mTuanLiaoID;
+	private IYWTribeService mService;
+	private YWIMKit mYWIMkit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tuan_dui_jia);
+		mYWIMkit = AppStore.mIMKit;
+		mService = mYWIMkit.getTribeService();
 		initView();
 		setListener();
 	}
@@ -86,6 +99,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 			setCenterString(td.getName());
 		}
 		setRightVisibility(false);
+		getTuanLiaoId(); //获取该团聊的ID
 	}
 
 	// 设置管理员的显示与隐藏：
@@ -219,18 +233,14 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 			dialog1.show();
 
 			break;
-        case R.id.ll_send_talk:
-			startActivity(new Intent(TuanDuiJiaActivity.this, TribeActivity.class));
-			this.overridePendingTransition(R.anim.aty_zoomin,
-					R.anim.aty_zoomout);
+        case R.id.ll_send_talk:  //团队聊天
+//			startActivity(new Intent(TuanDuiJiaActivity.this, TribeActivity.class));
+//			this.overridePendingTransition(R.anim.aty_zoomin,
+//					R.anim.aty_zoomout);
             YWIMKit mIMKit = AppStore.mIMKit;
-            IYWTribeService tribeService = mIMKit.getTribeService();  //获取群管理器;
-
-//            YWTribe tribe = tribeService.getAllTribes() ;
-//            YWIMKit imKit = AppStore.mIMKit;
-//            //参数为群ID号
-//            Intent intent = imKit.getTribeChattingActivityIntent(tribe.getTribeId());
-//            startActivity(intent);
+				//参数为群ID号
+			Intent intent2 = mIMKit.getTribeChattingActivityIntent(Long.parseLong(mTuanLiaoID));
+			startActivity(intent2);
             break;
 		}
 	}
@@ -249,6 +259,9 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 							for(int i=0;i<AppStore.acts.size();i++){
 								AppStore.acts.get(i).finish();
 							}
+							if (!"".equals(mTuanLiaoID) || mTuanLiaoID != null ){
+								outQun();  //退出团队群聊
+							}
 						}
 						@Override
 						public void failure(String msg) {
@@ -262,12 +275,44 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 					});
 
 		}
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * 团队团聊Id
+	 */
+	public void getTuanLiaoId(){
+		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+		RequestParams params = new RequestParams();
+		params.put("team_id",td.getId());
+		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+
+				JsonBean bean = JsonUtils.getMessage(new String(arg2));
+				if ("200".equals(bean.getCode())) {
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
+					mTuanLiaoID = bean.getInfor().get(0).get("team_talk") + "";
+					if ("".equals(mTuanLiaoID) || mTuanLiaoID == null){
+						ll_send_talk.setVisibility(View.GONE);
+					}else {
+						ll_send_talk.setVisibility(View.VISIBLE);
+					}
+				} else {
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getMsg() );
+				}
+				super.onSuccess(arg0, arg1, arg2);
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+								  Throwable arg3) {
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+		});
+
+	}
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
@@ -278,4 +323,31 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		super.onActivityResult(requestCode, resultCode, intent);
 	}
 
+	/**
+	 * 退出群聊
+	 */
+	public void outQun(){
+		mService.exitFromTribe(new MyCallBack() {
+			@Override
+			public void onSuccess(Object... objects) {
+
+			}
+
+			@Override
+			public void onError(int i, String s) {
+                T.showShort(TuanDuiJiaActivity.this,"退出团聊失败--" + s);
+			}
+		}, Long.parseLong(mTuanLiaoID));
+	}
+
+
+	/**
+	 * 请求回调的接口
+	 */
+	public static abstract class MyCallBack implements IWxCallback{
+		@Override
+		public void onProgress(int i) {
+
+		}
+	}
 }

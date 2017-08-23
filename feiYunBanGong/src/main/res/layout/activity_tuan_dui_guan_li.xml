@@ -89,6 +89,7 @@
          android:layout_marginRight="@dimen/x100"
          android:layout_marginTop="@dimen/y50"
          android:background="@drawable/shape_delete"
-         android:text="创建团聊" />
+         android:text="创建团聊"
+         android:visibility="gone"/>
 
 </LinearLayout>

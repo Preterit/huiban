@@ -11,18 +11,27 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ChengYuanAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
+import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.TextImageView;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,11 +50,17 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 	private String id;// 团队id;
 	private ChengYuanAdapter adapter;
 	private List<TuanDuiChengYuan> tdcys = new ArrayList<>();
+	private String mTuanLiaoID; //团聊的Id
+	private IYWTribeService mService;
+	private YWIMKit mYWIMkit;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_jia_ru_tuan_dui);
+		mYWIMkit = AppStore.mIMKit;
+		mService = mYWIMkit.getTribeService();
 		try {
 			initView();
 			setListener();
@@ -85,6 +100,38 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 		adapter = new ChengYuanAdapter(getLayoutInflater());
 		tiv_head = (ImageView) findViewById(R.id.tiv_head);
 		//tiv_head.setText("团队");
+		getTuanLiaoId(); //获取该团聊的ID
+	}
+
+	/**
+	 * 团队团聊Id
+	 */
+	public void getTuanLiaoId(){
+		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+		RequestParams params = new RequestParams();
+		params.put("team_id",id);
+		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+
+				JsonBean bean = JsonUtils.getMessage(new String(arg2));
+				if ("200".equals(bean.getCode())) {
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
+					mTuanLiaoID = bean.getInfor().get(0).get("team_talk") + "";
+				} else {
+					Log.e("chengyuan", "handleMessage: -----------------" + bean.getMsg() );
+				}
+				super.onSuccess(arg0, arg1, arg2);
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+								  Throwable arg3) {
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+		});
+
 	}
 
 	@Override
@@ -110,7 +157,9 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
 								.show();
 						addData();
-
+						if (!"".equals(mTuanLiaoID) || mTuanLiaoID != null){
+							addTuanLiao();
+						}
 					}
 
 					@Override
@@ -191,5 +240,33 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 						// TODO Auto-generated method stub
 					}
 				});
+	}
+
+	/**
+	 * 主动加入团聊
+	 */
+	public void addTuanLiao(){
+		mService.joinTribe(new MyCallBack() {
+			@Override
+			public void onSuccess(Object... objects) {
+
+			}
+
+			@Override
+			public void onError(int i, String s) {
+				T.showShort(JiaRuTuanDuiActivity.this,"加入团聊失败---" + s);
+			}
+		},Long.parseLong(mTuanLiaoID));
+	}
+
+
+	/**
+	 * 请求回调
+	 */
+	public static abstract class MyCallBack implements IWxCallback{
+		@Override
+		public void onProgress(int i) {
+
+		}
 	}
 }

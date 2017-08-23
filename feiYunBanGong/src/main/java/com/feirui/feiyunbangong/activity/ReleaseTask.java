@@ -29,7 +29,9 @@ import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 
-
+/**
+ * 写任务
+ * */
 public class ReleaseTask extends BaseActivity  implements OnClickListener {
     AddShenHeAdapter adapter;
 

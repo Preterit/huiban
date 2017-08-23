@@ -74,7 +74,7 @@
         android:background="@color/ffffff"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x50"
-        android:text="个人邮箱" />
+        android:text="个人签名" />
 
     <TextView
         android:id="@+id/tv_email"
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x100"
         android:layout_marginTop="@dimen/y50"
-        android:text="个 人 邮 箱 ：1126455314@qq.com" />
+        android:text="个 人 签 名 ：" />
 
     <TextView
         android:id="@+id/tv_remark"

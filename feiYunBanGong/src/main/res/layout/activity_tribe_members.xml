@@ -18,7 +18,8 @@
         android:textSize="@dimen/aliwx_font_first_grade"
         android:textColor="@color/aliwx_common_text_color"
         android:background="@color/aliwx_white"
-        android:text="添加群成员" />
+        android:text="添加群成员"
+        android:visibility="gone"/>
     <View
         android:id="@+id/line2"
         android:layout_width="fill_parent"

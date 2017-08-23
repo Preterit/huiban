@@ -22,14 +22,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.channel.util.YWLog;
+import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.contact.YWContactFactory;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
+import com.alibaba.mobileim.tribe.IYWTribeService;
+import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.tribe.InviteTribeMemberActivity;
+import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
+import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.adapter.ChengYuanAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
+import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -70,11 +81,17 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     private TribeAndRoomList mTribeAndRoomList;  //群聊集合
     private List<YWTribe> mTribeList;
     private List<YWTribe> mRoomsList;
+    private YWIMKit mIMKit;
+    private IYWTribeService mTribeService;
+    private long mTribeId; //团聊的ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tuan_dui);
+
+        mIMKit = AppStore.mIMKit;
+        mTribeService = mIMKit.getTribeService();
 
         initView();
         setListener();
@@ -155,8 +172,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                                     String.valueOf(hm.get("staff_email")), hm
                                     .get("tag_name") + "");
 
-                            tdcy.setTeam_member_list_id(hm
-                                    .get("team_member_list_id") + "");
+                            tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
 
                             tdcy.setState(Integer.parseInt(hm.get("state") + ""));
 
@@ -175,8 +191,6 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                             if ("副团长".equals(tdcy.getType())) {
                                 td.getDcmoes().add(tdcy.getStaff_id());
                             }
-                            // Log.e("TAG", tdcy.toString());
-
                             tdcys.add(tdcy);
                         }
                         adapter.add(tdcys);
@@ -203,9 +217,10 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     break;
                 case 3:
                     // 添加成功！
-                    JsonBean bean04 = (JsonBean) msg.obj;
-                    Log.e("chengyuan", "handleMessage: -----------------" + bean04.getInfor() );
                     Toast.makeText(DetailTuanDuiActivity.this, "添加成员成功！", 0).show();
+                    //团队群Id
+                    getTuanLiaoId();
+                    Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
                     getData();// 更新数据；
                     break;
                 case 4:
@@ -214,6 +229,12 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                             .show();
                     break;
                 case 5:
+                    JsonBean bean = (JsonBean) msg.obj;
+                    Log.e("chengyuan", "JsonBean: -----------------" + bean.getInfor().get(0).get("team_talk") );
+                    //添加团聊成员
+                    if (bean.getInfor().get(0).get("team_talk") != null){
+                        addTuanLiaoChengYuan(bean.getInfor().get(0).get("team_talk") + "");
+                    }
                     break;
             }
         }
@@ -334,7 +355,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 //                Intent intent = new Intent(this, AddChengYuanActivity.class);
 //                startActivityForResult(intent, 300);
 //                break;
-            case R.id.iv_tjcy:
+            case R.id.iv_tjcy: //添加成员
                 Intent intent = new Intent(this, AddChengYuanActivity.class);
                 startActivityForResult(intent, 300);
                 break;
@@ -395,7 +416,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                             }
                         }
                     }
-                    if (!isHave) {
+                    if (!isHave) {  //团队还没有该成员
                         tdcy_add.add(tdcy.get(i));
                     }
                 }
@@ -405,8 +426,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    List<TuanDuiChengYuan> tdcy_add;
-
+    List<TuanDuiChengYuan> tdcy_add;  //添加的新成员
     private void addChengYuan() {
 
         if (tdcy_add == null || tdcy_add.size() == 0) {
@@ -425,7 +445,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         params.put("team_id", td.getId());
         params.put("staff_id", sb.toString());
 
-        Log.e("TAG", params.toString());
+        Log.e("TAG", "------------成员------" + params.toString());
 
         AsyncHttpServiceHelper.post(url, params,
                 new AsyncHttpResponseHandler() {
@@ -457,6 +477,65 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                 });
     }
 
+    /**
+     * 团队团聊Id
+     */
+    public void getTuanLiaoId(){
+        String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+        RequestParams params = new RequestParams();
+        params.put("team_id",td.getId());
+        AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+
+                JsonBean bean = JsonUtils.getMessage(new String(arg2));
+                if ("200".equals(bean.getCode())) {
+                    Message msg = handler.obtainMessage(5);
+                    msg.obj = bean;
+                    handler.sendMessage(msg);
+                    Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
+                } else {
+                    Message msg = handler.obtainMessage(4);
+                    msg.obj = bean;
+                    handler.sendMessage(msg);
+                }
+                super.onSuccess(arg0, arg1, arg2);
+            }
+
+            @Override
+            public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+                                  Throwable arg3) {
+                Message msg = handler.obtainMessage(5);
+                handler.sendMessage(msg);
+                super.onFailure(arg0, arg1, arg2, arg3);
+            }
+        });
+
+    }
+
+    /**
+     * 团队聊天自动加人
+     * @param qunID   团聊的ID
+     */
+    public void  addTuanLiaoChengYuan(String qunID){
+        mTribeId = Long.valueOf(qunID) ;
+        Log.e("chengyuan", "mTribeId: -----------------" + mTribeId );
+
+        List<IYWContact> list = new ArrayList<>();
+        for (int i = 0;i < tdcy_add.size();i++){
+            IYWContact iywContact =  YWContactFactory.createAPPContact(tdcy_add.get(i).getPhone(), Happlication.APP_KEY);
+            list.add(iywContact);
+            Log.e("chengyuan", "iywContact: -----------------" + list.get(i) );
+        }
+        mTribeService.inviteMembers(mTribeId, list,new MyCallback() {
+            @Override
+            public void onSuccess(Object... result) {
+//                finish();
+            }
+        });
+    }
+
     // 广播接收器，接收团队成员加入的广播：
     public class MyReceiver extends BroadcastReceiver {
 
@@ -476,5 +555,22 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             }
         }
     }
+    /**
+     * 请求回调
+     *
+     * @author zhaoxu
+     *
+     */
+    private static abstract class MyCallback implements IWxCallback {
 
+        @Override
+        public void onError(int arg0, String arg1) {
+            YWLog.e("TribeSampleHelper", "code=" + arg0 + " errInfo=" + arg1);
+        }
+
+        @Override
+        public void onProgress(int arg0) {
+
+        }
+    }
 }

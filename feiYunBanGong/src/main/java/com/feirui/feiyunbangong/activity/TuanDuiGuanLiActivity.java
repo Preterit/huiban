@@ -24,10 +24,13 @@ import com.alibaba.mobileim.YWIMCore;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.channel.util.YWLog;
+import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.contact.YWContactFactory;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribeType;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.tribe.YWTribeCreationParam;
+import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
@@ -49,7 +52,6 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import static com.feirui.feiyunbangong.utils.T.result;
 
 /**
  * 团队管理：
@@ -68,12 +70,18 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	private Button bt_dissolve_team,bt_set_team;// 解散团队按钮；创建团聊
 	//群聊的
 	private YWIMKit mIMKit;
+	YWTribe tribe;
 	private IYWTribeService mTribeService;
+	private long mTribeId; //团聊的ID
+	private String mTbID;
+	private TuanDuiChengYuan mTuanDui;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tuan_dui_guan_li);
+		mIMKit = AppStore.mIMKit;
+		mTribeService = mIMKit.getTribeService();  //获取群管理器
 		initView();
 		setListener();
 		setListView();
@@ -114,6 +122,8 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 					}
 
 				});
+		//获取团队群Id
+		getTuanLiaoId();
 	}
 
 	private void setListener() {
@@ -205,8 +215,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	 * 创建团聊
 	 */
 	private void createTribe(final YWTribeType type) {
-		mIMKit = AppStore.mIMKit;
-		mTribeService = mIMKit.getTribeService();  //获取群管理器
+
 		YWTribeCreationParam tribeCreationParam = new YWTribeCreationParam();
 		tribeCreationParam.setTribeName(td.getName());
 		tribeCreationParam.setTribeType(type);
@@ -229,46 +238,19 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 			@Override
 			public void onSuccess(Object... result) {
 				// 返回值为刚刚成功创建的群
-				YWTribe tribe = (YWTribe) result[0];
+				tribe = (YWTribe) result[0];
 				tribe.getTribeId();// 群ID，用于唯一标识一个群
-				//提交群ID
-//				qunID(tribe.getTribeId());
 				//        跳转到群名片
 				Intent intent = new Intent(TuanDuiGuanLiActivity.this, TribeInfoActivity.class);
+				intent.putExtra("postId","postId");
+				intent.putExtra("code",100);
+				intent.putExtra("id",td.getId());
 				intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
 				startActivity(intent);
 				finish();
 			}
 		},tribeCreationParam);
 
-	}
-
-	public void qunID(long id){
-		String url = UrlTools.url + UrlTools.QUN_ID;
-		RequestParams params = new RequestParams();
-		params.put("team_talk",id);
-		params.put("team_id",td.getId());
-		Log.e("chengyuan", "qunID:-------------------- " + params.toString() );
-		Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
-				new HttpCallBack() {
-
-					@Override
-					public void success(JsonBean bean) {
-						Log.e("chengyuan", "qunID:-------------------- " + bean.getMsg() );
-//						T.showShort(TuanDuiGuanLiActivity.this, "团队已解散！");
-						TuanDuiGuanLiActivity.this.finish();
-					}
-
-					@Override
-					public void failure(String msg) {
-						T.showShort(TuanDuiGuanLiActivity.this, msg);
-					}
-
-					@Override
-					public void finish() {
-
-					}
-				});
 	}
 
 	/**
@@ -289,7 +271,10 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 		}
 	}
-	// 解散团队：
+
+	/**
+	 * 解散团队之后解散团队所在的团聊
+	 */
 	private void dissolve() {
 		String url = UrlTools.url + UrlTools.DISSOLVE_TEAM;
 		RequestParams params = new RequestParams();
@@ -305,6 +290,9 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 						for (int i = 0; i < AppStore.acts.size(); i++) {
 							AppStore.acts.get(i).finish();
 						}
+						if (!"".equals(mTbID)){
+							jieSanQun();
+						}
 					}
 
 					@Override
@@ -318,6 +306,28 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 					}
 				});
 
+	}
+
+	/**
+	 * 解散团聊
+	 */
+	public void jieSanQun(){
+		mTribeService.disbandTribe(new IWxCallback() {
+			@Override
+			public void onSuccess(Object... objects) {
+
+			}
+
+			@Override
+			public void onError(int i, String s) {
+                T.showShort(TuanDuiGuanLiActivity.this,"解散团聊失败--" + s);
+			}
+
+			@Override
+			public void onProgress(int i) {
+
+			}
+		},Long.parseLong(mTbID));
 	}
 
 	// 移交管理员：
@@ -360,12 +370,12 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 	private void delete(View v) {
 
-		final TuanDuiChengYuan tdcy = (TuanDuiChengYuan) v.getTag();
+		final TuanDuiChengYuan  tdcy = (TuanDuiChengYuan) v.getTag();
 
 		String url = UrlTools.url + UrlTools.DELETE_TUANDUI_CHENGYUAN;
 		RequestParams params = new RequestParams();
 		params.put("id", tdcy.getId());
-
+		mTuanDui = tdcy;
 		AsyncHttpServiceHelper.post(url, params,
 				new AsyncHttpResponseHandler() {
 
@@ -397,6 +407,68 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * 团队团聊Id
+	 */
+	public void getTuanLiaoId(){
+		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+		RequestParams params = new RequestParams();
+		params.put("team_id",td.getId());
+		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				JsonBean bean = JsonUtils.getMessage(new String(arg2));
+				if ("200".equals(bean.getCode()) ) {
+					if ((bean.getInfor().get(0).get("team_talk") + "").equals("")){
+						Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
+						bt_set_team.setVisibility(View.VISIBLE);
+					}else {
+						mTbID = bean.getInfor().get(0).get("team_talk") + "" ;
+						bt_set_team.setVisibility(View.GONE);
+					}
+
+				} else {
+					T.showShort(TuanDuiGuanLiActivity.this,bean.getMsg());
+				}
+				super.onSuccess(arg0, arg1, arg2);
+			}
+
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+								  Throwable arg3) {
+				super.onFailure(arg0, arg1, arg2, arg3);
+			}
+		});
+
+	}
+	/**
+	 * 团队聊天自动删除人
+	 * @param
+	 */
+	public void  deleteTuanLiao(){
+		mTribeId = Long.parseLong(mTbID);
+		Log.e("chengyuan", "mTribeId: -----------------" + mTribeId + "----------" + mTuanDui.getPhone());
+
+		IYWContact iywContact =  YWContactFactory.createAPPContact(mTuanDui.getPhone(), Happlication.APP_KEY);
+		Log.e("chengyuan", "iywContact: -----------------" + iywContact );
+		mTribeService.expelMember(mTribeId, iywContact, new IWxCallback() {
+			@Override
+			public void onSuccess(Object... objects) {
+
+			}
+
+			@Override
+			public void onError(int i, String s) {
+
+			}
+
+			@Override
+			public void onProgress(int i) {
+
+			}
+		});
+	}
 	Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
@@ -431,6 +503,10 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				// 删除成功！
 				TuanDuiChengYuan item = (TuanDuiChengYuan) msg.obj;
 				adapter.reduce(item);
+				//删除团聊成员
+				if (mTbID != null || !"".equals(mTbID)){
+					deleteTuanLiao();
+				}
 				break;
 			case 4:
 				// 删除失败：
@@ -441,9 +517,14 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				// 删除失败：
 				Toast.makeText(TuanDuiGuanLiActivity.this, "删除失败！", 0).show();
 				break;
+			case 6:
+				JsonBean bean6 = (JsonBean) msg.obj;
+				Log.e("chengyuan", "JsonBean: -----------------" + bean6.getInfor().get(0).get("team_talk") );
+				break;
 			}
 
 		};
 	};
+
 
 }

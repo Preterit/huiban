@@ -35,8 +35,14 @@ import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.BaseActivity;
+import com.feirui.feiyunbangong.activity.TuanDuiGuanLiActivity;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.T;
+import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +63,8 @@ public class TribeInfoActivity extends BaseActivity{
     private YWTribe mTribe;
     private long mTribeId;
     private int code;
+    private String postId;
+    private String teamId;
     private String mTribeOp;
     private int mTribeMemberCount;
     List<YWTribeMember> mList = new ArrayList<YWTribeMember>();
@@ -107,8 +115,10 @@ public class TribeInfoActivity extends BaseActivity{
 
         Intent intent = getIntent();
         mTribeId = intent.getLongExtra(TribeConstants.TRIBE_ID, 0);
-
-        Log.d("tag","群的id------"+mTribeId);
+        code = intent.getIntExtra("code",-1);
+        postId = intent.getStringExtra("postId");
+        teamId = intent.getStringExtra("id");
+        Log.e("tag","teamId------"+teamId);
         mTribeOp = intent.getStringExtra(TribeConstants.TRIBE_OP);
 
         mIMKit = AppStore.mIMKit;
@@ -122,6 +132,41 @@ public class TribeInfoActivity extends BaseActivity{
         initTribeInfo();
         initView();
         getTribeMsgRecSettings();
+        if ("postId".equals(postId)){
+            //提交群ID
+            qunID(mTribeId);
+        }
+    }
+
+    public void qunID(long id){
+        Log.e("chengyuan", "qunID: ------------------------" + id );
+        String url = UrlTools.url + UrlTools.QUN_ID;
+        RequestParams params = new RequestParams();
+        params.put("team_talk",id + "");
+        params.put("team_id",teamId);
+        Log.e("chengyuan", "qunID:-------------------- " + params.toString() );
+        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
+                new Utils.HttpCallBack() {
+
+                    @Override
+                    public void success(JsonBean bean) {
+                        if ("200".equals(bean.getCode())){
+                            Log.e("chengyuan", "qunID:-------------------- " + bean.getMsg() );
+                            T.showShort(TribeInfoActivity.this, "团聊创建成功！");
+                        }
+//                        TribeInfoActivity.this.finish();
+                    }
+
+                    @Override
+                    public void failure(String msg) {
+                        T.showShort(TribeInfoActivity.this, msg);
+                    }
+
+                    @Override
+                    public void finish() {
+
+                    }
+                });
     }
 
     private void initUI() {
@@ -150,14 +195,22 @@ public class TribeInfoActivity extends BaseActivity{
 
         mMangeTribeMembers = (TextView) findViewById(R.id.manage_tribe_members);
 
-        //群成员管理的
+        //群成员管理的    群成员列表
         mMangeTribeMembersLayout = (RelativeLayout) findViewById(R.id.manage_tribe_members_layout);
         mMangeTribeMembersLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TribeInfoActivity.this, TribeMembersActivity.class);
-                intent.putExtra(TribeConstants.TRIBE_ID, mTribeId);
-                startActivity(intent);
+                if (!"".equals(teamId)){
+                    Intent intent = new Intent(TribeInfoActivity.this, TribeMembersActivity.class);
+                    intent.putExtra(TribeConstants.TRIBE_ID, mTribeId);
+                    intent.putExtra("teamId",teamId);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(TribeInfoActivity.this, TribeMembersActivity.class);
+                    intent.putExtra(TribeConstants.TRIBE_ID, mTribeId);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -236,7 +289,8 @@ public class TribeInfoActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TribeInfoActivity.this, SetTribeCheckModeActivity.class);
-                intent.putExtra(TribeConstants.TRIBE_CHECK_MODE, mTribe.getTribeCheckMode());
+                intent.putExtra(TribeConstants.TRIBE_CHECK_MODE, mTribe.getTribeCheckMode().type);
+                Log.e("checkMode", "initView: ----------" + mTribe.getTribeCheckMode().type);
                 intent.putExtra(TribeConstants.TRIBE_ID, mTribe.getTribeId());
                 startActivityForResult(intent, SET_TRIBE_CHECK_MODE_REQUEST_CODE);
             }
@@ -265,16 +319,24 @@ public class TribeInfoActivity extends BaseActivity{
             }
         });
 
+        edit_tribe_info_layout.setVisibility(View.VISIBLE);
+        tribe_description_layout.setVisibility(View.VISIBLE);
+        if (code == 100){
+            tribe_verify_layout.setVisibility(View.GONE);
+        }else{
+
+            tribe_verify_layout.setVisibility(View.VISIBLE);
+        }
+
         //判断是普通群还是团队创建的群
 //        if (code == 1){
 //            tribe_description_layout.setVisibility(View.GONE);
 //            edit_tribe_info_layout.setVisibility(View.GONE);
 //            tribe_verify_layout.setVisibility(View.GONE);
 //        } else {
-            tribe_description_layout.setVisibility(View.VISIBLE);
-            edit_tribe_info_layout.setVisibility(View.VISIBLE);
-            tribe_verify_layout.setVisibility(View.VISIBLE);
+
 //        }
+
     }
 
     /**
@@ -338,7 +400,13 @@ public class TribeInfoActivity extends BaseActivity{
     }
 
     private void updateView() {
-        mTribeName.setText(mTribe.getTribeName());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mTribeName.setText(mTribe.getTribeName());
+            }
+        },500);
+
         IYWContact master = mTribe.getTribeMaster();
         if (master != null) {
             mTribeMaster.setText(master.getUserId());
@@ -363,6 +431,7 @@ public class TribeInfoActivity extends BaseActivity{
         if (getLoginUserRole() == YWTribeRole.TRIBE_HOST.type) {
             mMangeTribeMembers.setText("群成员管理");
             mEditTribeInfoLayout.setVisibility(View.VISIBLE);
+            mQuiteTribe.setVisibility(View.VISIBLE);
             mQuiteTribe.setText("解散群");
             mQuiteTribe.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -402,31 +471,36 @@ public class TribeInfoActivity extends BaseActivity{
         } else {
             mMangeTribeMembers.setText("群成员列表");
             mEditTribeInfoLayout.setVisibility(View.GONE);
-            mQuiteTribe.setText("退出群");
-            mQuiteTribe.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mTribeService.exitFromTribe(new IWxCallback() {
-                        @Override
-                        public void onSuccess(Object... result) {
-                            YWLog.i(TAG, "退出群成功！");
-                            IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "退出群成功！");
+            if (code == 100){
+                mQuiteTribe.setVisibility(View.GONE);
+            }else {
+                mQuiteTribe.setVisibility(View.VISIBLE);
+                mQuiteTribe.setText("退出群");
+                mQuiteTribe.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mTribeService.exitFromTribe(new IWxCallback() {
+                            @Override
+                            public void onSuccess(Object... result) {
+                                YWLog.i(TAG, "退出群成功！");
+                                IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "退出群成功！");
 //                            openTribeListFragment();
-                        }
+                            }
 
-                        @Override
-                        public void onError(int code, String info) {
-                            YWLog.i(TAG, "退出群失败， code = " + code + ", info = " + info);
-                            IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "退出群失败, code = " + code + ", info = " + info);
-                        }
+                            @Override
+                            public void onError(int code, String info) {
+                                YWLog.i(TAG, "退出群失败， code = " + code + ", info = " + info);
+                                IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "退出群失败, code = " + code + ", info = " + info);
+                            }
 
-                        @Override
-                        public void onProgress(int progress) {
+                            @Override
+                            public void onProgress(int progress) {
 
-                        }
-                    }, mTribeId);
-                }
-            });
+                            }
+                        }, mTribeId);
+                    }
+                });
+            }
         }
 
         if (!TextUtils.isEmpty(mTribeOp)) {

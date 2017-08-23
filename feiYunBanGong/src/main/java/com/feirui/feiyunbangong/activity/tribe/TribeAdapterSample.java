@@ -78,8 +78,11 @@ public class TribeAdapterSample extends YWAsyncBaseAdapter {
             holder.name = (TextView) convertView
                     .findViewById(R.id.select_name);
             convertView.setTag(holder);
+
+            holder.headView.setImageResource(R.drawable.aliwx_tribe_head_default);
         } else {
             holder = (ViewHolder) convertView.getTag();
+            holder.headView.setImageResource(R.drawable.aliwx_tribe_head_default);
         }
         if (mList != null) {
             if (position == 0 && mList.getTribeList().size() > 0) {
