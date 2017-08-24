@@ -420,6 +420,10 @@ public class UrlTools {
    */
   public static String GET_TUANLIAOID = "Team/teamtalk";
   /**
+   * 获取团聊对应的团队id
+   */
+  public static String GET_TEAMID = "Team/teamid";
+  /**
    * 加入团队显示团队信息：
    */
   public static String JIARU_TUANDUI = "Team/team_get1";

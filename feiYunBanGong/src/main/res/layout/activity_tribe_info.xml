@@ -104,7 +104,7 @@
                 android:background="@color/aliwx_white"
                 android:layout_below="@+id/tribe_master_layout"
                 android:orientation="vertical"
-                android:visibility="gone"
+
                 >
 
                 <TextView
@@ -123,14 +123,13 @@
                     android:layout_marginBottom="20dp"
                     android:textSize="@dimen/aliwx_font_second_grade"
                     android:text="群公告" />
-
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/more_line_color" />
             </LinearLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1px"
-                android:layout_below="@+id/tribe_description_layout"
-                android:background="@color/more_line_color" />
+
 
             <RelativeLayout
                 android:id="@+id/my_tribe_profile_layout"
@@ -412,7 +411,9 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/more_line_color" />
+                android:background="@color/more_line_color"
+                android:layout_marginBottom="20dp"
+                />
 
             <TextView
                 android:id="@+id/quite_tribe"
@@ -427,6 +428,7 @@
                 android:text="退出群"
                 android:textColor="@color/aliwx_setting_bg_nor"
                 android:textSize="@dimen/aliwx_common_text_size"
+                android:visibility="gone"
                />
 
         </LinearLayout>

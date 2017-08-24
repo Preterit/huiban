@@ -242,7 +242,8 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				tribe.getTribeId();// 群ID，用于唯一标识一个群
 				//        跳转到群名片
 				Intent intent = new Intent(TuanDuiGuanLiActivity.this, TribeInfoActivity.class);
-				intent.putExtra("code",0);
+				intent.putExtra("postId","postId");
+				intent.putExtra("code",100);
 				intent.putExtra("id",td.getId());
 				intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
 				startActivity(intent);
@@ -289,7 +290,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 						for (int i = 0; i < AppStore.acts.size(); i++) {
 							AppStore.acts.get(i).finish();
 						}
-						if (!"".equals(mTbID) || mTbID != null){
+						if (!"".equals(mTbID)){
 							jieSanQun();
 						}
 					}
@@ -419,7 +420,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 				JsonBean bean = JsonUtils.getMessage(new String(arg2));
 				if ("200".equals(bean.getCode()) ) {
-					if ((bean.getInfor().get(0).get("team_talk") + "").equals("") || (bean.getInfor().get(0).get("team_talk") + "") == null){
+					if ((bean.getInfor().get(0).get("team_talk") + "").equals("")){
 						Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
 						bt_set_team.setVisibility(View.VISIBLE);
 					}else {
