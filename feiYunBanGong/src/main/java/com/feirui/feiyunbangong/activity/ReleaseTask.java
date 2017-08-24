@@ -37,6 +37,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
     private HeaderViewRecyclerAdapter addFriendAdapterRc;
     private HeaderViewRecyclerAdapter addTeamAdapterRc;
+    private HeaderViewRecyclerAdapter addFenZuAdapterRc;
     private SelectPicPopupWindow window;// 弹出图片选择框；
     private EditText tvTaskTitle;   //发布任务的标题
     private EditText tvTaskCount;   //发布任务的内容
@@ -46,6 +47,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
     private ImageView addPicTeam;    //添加团队
     private RecyclerView team_pic_recycler;  //添加朋友的RecyclerView
     private RecyclerView friend_pic_recycler; //添加团队的RecyclerView
+    private RecyclerView fenzu_pic_recycler; //添加分组的RecyclerView
     private Button quedingButton;
     private Button quxiaoButton;
     @Override
@@ -60,14 +62,15 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         tvTaskCount=(EditText) findViewById(R.id.tvTaskCount);
         tvTaskTitle=(EditText) findViewById(R.id.tvTaskTitle);
         quedingButton=(Button) findViewById(R.id.quedingButton);
-        quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
+//       quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
         friend_pic_recycler=(RecyclerView)findViewById(R.id.friend_pic_recycler1);
         team_pic_recycler=(RecyclerView)findViewById(R.id.team_pic_recycler);
+        fenzu_pic_recycler=(RecyclerView)findViewById(R.id.team_pic_recycler);
 
 
         View footerFriendPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
         View footerTeamPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
-     //添加好友
+        //添加好友
         addFriendAdapter=new AddFriendAdapter(new ArrayList<ShenPiRen>());
         addFriendAdapterRc = new HeaderViewRecyclerAdapter(addFriendAdapter);
         addFriendAdapterRc.addFooterView(footerFriendPic);
@@ -76,7 +79,6 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         addTeamAdapterRc=new HeaderViewRecyclerAdapter(addTeamAdapter);
         addTeamAdapterRc.addFooterView(footerTeamPic);
         //把头像放进来
-
         addPicFriend = (ImageView) footerFriendPic.findViewById(R.id.iv_add_pic_footer);
         //把团队的头像添加进来
         addPicTeam=(ImageView) footerTeamPic.findViewById(R.id.iv_add_pic_footer);

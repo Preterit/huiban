@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x100"
         android:layout_marginTop="@dimen/y50"
+        android:visibility="invisible"
         android:text="手机号：" />
 
     <TextView

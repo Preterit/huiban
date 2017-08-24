@@ -169,8 +169,9 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                                     .get("staff_name")), String.valueOf(hm
                                     .get("staff_head")), hm.get("type") + "",
                                     String.valueOf(hm.get("staff_mobile")),
-                                    String.valueOf(hm.get("staff_email")), hm
-                                    .get("tag_name") + "");
+                                    String.valueOf(hm.get("staff_email")),
+                                    hm.get("tag_name") + "",
+                                    String.valueOf(hm.get("introduction")));
 
                             tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
 
@@ -337,6 +338,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         // 查看团队某个成员信息：
         TuanDuiChengYuan tdcy = tdcys.get(position - 1);
         Intent intent = new Intent(this, DetailChengYuanActivity.class);
+        Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);

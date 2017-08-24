@@ -8,6 +8,13 @@
     android:background="#ffffff"
     android:orientation="vertical"
     tools:context="com.feirui.feiyunbangong.activity.ReleaseTask">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <include
         android:layout_width="match_parent"
@@ -16,7 +23,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp">
         <TextView
             android:id="@+id/tvTasktitle"
             android:layout_width="wrap_content"
@@ -46,14 +53,14 @@
             />
     </RelativeLayout>
     <View
-        android:layout_width="360dp"
-        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/back_huise"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="130dp">
 
         <TextView
             android:id="@+id/tvreleCount"
@@ -84,17 +91,17 @@
             android:background="#F5F5F5"
             />
     </RelativeLayout>
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="3dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginLeft="5dp"-->
-        <!--android:background="#F5F5F5"-->
-        <!--/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:background="#F5F5F5"
+        />
 
-    <!--<RelativeLayout-->
+    <!--<android.support.constraint.ConstraintLayout-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_height="40dp"-->
         <!--&gt;-->
 
         <!--<TextView-->
@@ -103,7 +110,18 @@
             <!--android:text="开始时间"-->
             <!--android:layout_alignParentTop="true"-->
             <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_marginStart="13dp" />-->
+            <!--android:layout_marginStart="13dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginRight="42dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintVertical_bias="0.571"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--android:id="@+id/textView7" />-->
 
         <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
@@ -111,12 +129,22 @@
             <!--android:text="请选择"-->
             <!--android:layout_alignParentTop="true"-->
             <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_marginEnd="14dp" />-->
-    <!--</RelativeLayout>-->
+            <!--android:layout_marginEnd="14dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.949"-->
+            <!--app:layout_constraintVertical_bias="0.333" />-->
+    <!--</android.support.constraint.ConstraintLayout>-->
 
-    <!--<RelativeLayout-->
+    <!--<android.support.constraint.ConstraintLayout-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_height="40dp"-->
         <!--&gt;-->
 
         <!--<TextView-->
@@ -125,38 +153,219 @@
             <!--android:text="位置记录"-->
             <!--android:layout_alignParentTop="true"-->
             <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_marginStart="13dp" />-->
+            <!--android:layout_marginStart="13dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:id="@+id/textView8"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintVertical_bias="0.571"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.008" />-->
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="请选择"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_marginEnd="14dp" />-->
-    <!--</RelativeLayout>-->
+        <!--<com.feirui.feiyunbangong.view.SwitchView-->
+            <!--android:id="@+id/switch_wz"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.976" />-->
 
-    <!--<RelativeLayout-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--<android.support.constraint.ConstraintLayout-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_height="50dp"-->
         <!--&gt;-->
 
         <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
-            <!--android:text="开始时间"-->
-            <!--android:layout_alignParentTop="true"-->
+            <!--android:text="悬  赏"-->
+            <!--android:layout_marginStart="13dp"-->
+            <!--android:id="@+id/textView6"-->
+            <!--android:layout_centerVertical="true"-->
             <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_marginStart="13dp" />-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.022"-->
+            <!--app:layout_constraintVertical_bias="0.529" />-->
 
+        <!--<com.feirui.feiyunbangong.view.SwitchView-->
+            <!--android:id="@+id/switch_xs"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.976" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+            <!--<android.support.constraint.ConstraintLayout-->
+                <!--android:id="@+id/layout_xsje"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="悬赏金额"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintHorizontal_bias="0.023"-->
+                    <!--app:layout_constraintVertical_bias="0.529" />-->
+
+                <!--<EditText-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:background="@null"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintHorizontal_bias="0.888"-->
+                    <!--android:id="@+id/editText2" />-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="元/时"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--app:layout_constraintHorizontal_bias="1.0"-->
+                    <!--app:layout_constraintVertical_bias="0.529" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F5F5F5"
+        />
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp">-->
         <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
-            <!--android:text="请选择"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_marginEnd="14dp" />-->
-    <!--</RelativeLayout>-->
+            <!--android:text="人数限制"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_marginStart="13dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintVertical_bias="0.529"-->
+            <!--android:layout_marginLeft="26dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--android:id="@+id/textView9" />-->
+
+        <!--<com.feirui.feiyunbangong.view.SwitchView-->
+            <!--android:id="@+id/switch_rsxz"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.976" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+            <!--<android.support.constraint.ConstraintLayout-->
+                <!--android:id="@+id/layout_xzrs"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="限制人数"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintHorizontal_bias="0.023"-->
+                    <!--app:layout_constraintVertical_bias="0.529"-->
+                    <!--android:id="@+id/textView12" />-->
+
+                <!--<EditText-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:background="@null"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintHorizontal_bias="0.894"-->
+                    <!--android:id="@+id/editText" />-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="/人"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintHorizontal_bias="0.978"-->
+                    <!--app:layout_constraintVertical_bias="0.529" />-->
+            <!--</android.support.constraint.ConstraintLayout>-->
 
     <View
         android:layout_width="match_parent"
@@ -165,7 +374,6 @@
         android:layout_marginLeft="5dp"
         android:background="#F5F5F5"
         />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -197,7 +405,68 @@
             android:layout_marginLeft="5dp"
             />
     </RelativeLayout>
-    <View
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/tvSelectTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="选择团队" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/team_pic_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvSelectTeam"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp" />
+            </RelativeLayout>
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_marginTop="5dp">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvSelectFenZu"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:text="选择分组" />-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/fenzu_pic_recycler"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/tvSelectFenZu"-->
+                    <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+                    <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+                    <!--android:layout_marginRight="@dimen/activity_horizontal_margin">-->
+
+                <!--</android.support.v7.widget.RecyclerView>-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_marginLeft="5dp" />-->
+            <!--</RelativeLayout>-->
+
+            <View
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_alignParentBottom="true"
@@ -205,37 +474,7 @@
         android:background="#F5F5F5"
         />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="5dp"
-        >
-        <TextView
-            android:id="@+id/tvSelectTeam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选择团队"
-            android:layout_marginLeft="5dp"
-            />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/team_pic_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_below="@+id/tvSelectTeam"
-            >
-
-        </android.support.v7.widget.RecyclerView>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="5dp"
-            />
-    </RelativeLayout>
-    <View
+            <View
         android:layout_width="360dp"
         android:layout_height="1dp"
         android:layout_gravity="center_horizontal"
@@ -269,5 +508,6 @@
             android:text="确定"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
