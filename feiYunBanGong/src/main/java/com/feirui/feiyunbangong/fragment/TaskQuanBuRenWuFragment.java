@@ -1,12 +1,15 @@
 package com.feirui.feiyunbangong.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.ReleaseDetailActivity;
 import com.feirui.feiyunbangong.adapter.TaskQuanBuAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -20,6 +23,7 @@ import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 /**
  * 任务单-全部任务页面
@@ -44,6 +48,23 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
         yRecycleview.setRefreshAndLoadMoreListener(this);
         adapter = new TaskQuanBuAdapter(getActivity(), new ArrayList<HashMap<String, Object>> ());
         yRecycleview.setAdapter(adapter);
+        adapter.setOnItemClickListener(new TaskQuanBuAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view , int position){
+                Log.e("全部页面的点击时间", "onItemClick: "+ position);
+                Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("json", json.getInfor().get(position-1)+"");
+                bundle.putInt("id", (Integer)json.getInfor().get(position-1).get("id"));
+                bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
+                bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
+                bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
+                bundle.putString("staff_head", "http://123.57.45.74/feiybg/"+json.getInfor().get(position-1).get("staff_head"));
+                Log.e("全部任务", "onItemClick position: "+position );
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initData() {
@@ -58,7 +79,6 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                  json = JsonUtils.getMessage(new String(responseBody));
-                Log.e("获得全部任务URLjsonBean", "onSuccess:" + json.toString());
                 //yRecycleview.setReFreshComplete();
                 //setAdapter();
                 if(json.getInfor()==null){
@@ -69,6 +89,10 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
             }
         });
 
+
+    }
+
+    public void onItemClick(View view) {
 
     }
 

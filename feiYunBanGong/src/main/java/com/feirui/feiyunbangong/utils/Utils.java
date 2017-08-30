@@ -145,7 +145,8 @@ public class Utils {
         if (phone == null || TextUtils.isEmpty(phone)) {
                 return flag;
         }
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$");
+        Pattern p = Pattern.compile("^1(3|4|5|7|8)\\d{9}$");
+        //^((13[0-9])|(15[^4])|(18[0,2,3,4,5-9])|(17[0-8])|(147))\d{8}$
         //"^((13[0-9])|(15[^4,\\D])|(14[57])|(17[0])|(17[6])|(17[7])|(18[0,0-9]))\\d{8}$"
 
         Matcher m = p.matcher(phone);

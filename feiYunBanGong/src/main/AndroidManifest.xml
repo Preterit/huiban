@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="58"
-    android:versionName="1.5.8">
+    android:versionCode="59"
+    android:versionName="1.5.9">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -429,7 +429,8 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity" />
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
-        <activity android:name=".activity.tribe.EditGroupInfoActivity"
+        <activity
+            android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
 
@@ -453,8 +454,9 @@
         <activity
             android:name=".activity.RenWuDetailActivity"
             android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".activity.WebViewActivity"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.ReleaseDetailActivity"></activity>
     </application>
 
 </manifest>
