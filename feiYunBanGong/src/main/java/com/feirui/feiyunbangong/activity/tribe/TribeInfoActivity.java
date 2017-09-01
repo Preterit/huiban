@@ -24,6 +24,7 @@ import com.alibaba.mobileim.contact.IYWContact;
 import com.alibaba.mobileim.contact.IYWContactService;
 import com.alibaba.mobileim.conversation.IYWConversationService;
 import com.alibaba.mobileim.conversation.YWConversation;
+import com.alibaba.mobileim.fundamental.widget.WXNetworkImageView;
 import com.alibaba.mobileim.fundamental.widget.WxAlertDialog;
 import com.alibaba.mobileim.gingko.model.settings.YWTribeSettingsModel;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
@@ -107,6 +108,7 @@ public class TribeInfoActivity extends BaseActivity{
 
     private RelativeLayout enableAtAllLayout;
     private ImageView enableAtAllSwitch;
+    private WXNetworkImageView head;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,6 +330,15 @@ public class TribeInfoActivity extends BaseActivity{
             tribe_verify_layout.setVisibility(View.VISIBLE);
         }
 
+        //修改群头像
+        head = (WXNetworkImageView) findViewById(R.id.head);
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         //判断是普通群还是团队创建的群
 //        if (code == 1){
 //            tribe_description_layout.setVisibility(View.GONE);
@@ -484,6 +495,7 @@ public class TribeInfoActivity extends BaseActivity{
                             public void onSuccess(Object... result) {
                                 YWLog.i(TAG, "退出群成功！");
                                 IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "退出群成功！");
+                                TribeInfoActivity.this.finish();
 //                            openTribeListFragment();
                             }
 

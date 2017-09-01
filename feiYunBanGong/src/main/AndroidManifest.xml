@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="58"
-    android:versionName="1.5.8">
+    android:versionCode="59"
+    android:versionName="1.5.9">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -455,6 +455,10 @@
             android:label="@string/title_activity_ren_wu_detail"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.WebViewActivity"/>
+
+        //微信支付
+        <activity android:name=".wxapi.WXPayEntryActivity"/>
+
     </application>
 
 </manifest>

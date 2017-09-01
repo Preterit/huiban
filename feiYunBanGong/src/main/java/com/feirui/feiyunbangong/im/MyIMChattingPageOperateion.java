@@ -168,7 +168,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             replyBarItem.setItemId(ITEM_ID_1);
             replyBarItem.setItemImageRes(R.drawable.demo_reply_bar_location);
             replyBarItem.setItemLabel("位置");
-            replyBarItem.setOnClicklistener(new View.OnClickListener() {
+            replyBarItem.setOnClicklistener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mConversation = conversation;

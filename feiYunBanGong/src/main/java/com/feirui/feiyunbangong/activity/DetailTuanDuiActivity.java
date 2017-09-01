@@ -96,10 +96,12 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         initView();
         setListener();
         setListView();
-        registReceiver();// 注册广播接收器
 
     }
 
+    /**
+     * 动态注册广播
+     */
     private void registReceiver() {
 
         IntentFilter filter = new IntentFilter();
@@ -111,10 +113,12 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
     @Override
     protected void onResume() {
+        registReceiver();// 注册广播接收器
         getData();
         getMessageNum();// 获得消息数量；
         super.onResume();
     }
+
 
     private void getMessageNum() {
 
