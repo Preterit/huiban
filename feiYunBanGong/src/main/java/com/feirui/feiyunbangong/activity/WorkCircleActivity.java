@@ -1,13 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,7 +11,6 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,6 +42,14 @@ import com.feirui.feiyunbangong.view.RefreshLayout;
 import com.feirui.feiyunbangong.view.RefreshLayout.OnLoadListener;
 import com.loopj.android.http.RequestParams;
 import com.xw.repo.refresh.PullListView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static com.feirui.feiyunbangong.R.id.swipe_container;
 
@@ -333,7 +332,7 @@ public class WorkCircleActivity extends BaseActivity implements
         RequestParams params = new RequestParams();
         params.put("current_page", "" + page);
         params.put("pagesize", 10 + "");
-        params.put("team_id", team_id);
+       // params.put("team_id", team_id);
         Log.e("TAG", params.toString());
 
         Utils.doPost(null, WorkCircleActivity.this, url, params,

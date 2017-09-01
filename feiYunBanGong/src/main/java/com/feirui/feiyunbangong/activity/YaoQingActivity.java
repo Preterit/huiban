@@ -1,9 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,15 +56,15 @@ public class YaoQingActivity extends BaseActivity {
 		initTitle();
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("邀请奖励");
-		setRightDrawable(R.drawable.jianglitixian);
-		rightll.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(YaoQingActivity.this,
-						TiXianActivity.class));
-				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-			}
-		});
+//		setRightDrawable(R.drawable.jianglitixian);
+//		rightll.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				startActivity(new Intent(YaoQingActivity.this,
+//						TiXianActivity.class));
+//				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+//			}
+//		});
 	}
 
 	/**

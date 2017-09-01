@@ -237,7 +237,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     JsonBean bean = (JsonBean) msg.obj;
                     Log.e("chengyuan", "JsonBean: -----------------" + bean.getInfor().get(0).get("team_talk") );
                     //添加团聊成员
-                    if (bean.getInfor().get(0).get("team_talk") != null){
+                    if (!bean.getInfor().get(0).get("team_talk").equals("")){
                         addTuanLiaoChengYuan(bean.getInfor().get(0).get("team_talk") + "");
                     }
                     break;

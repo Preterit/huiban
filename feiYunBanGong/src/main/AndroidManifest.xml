@@ -455,10 +455,6 @@
             android:label="@string/title_activity_ren_wu_detail"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.WebViewActivity"/>
-
-        //微信支付
-        <activity android:name=".wxapi.WXPayEntryActivity"/>
-
     </application>
 
 </manifest>

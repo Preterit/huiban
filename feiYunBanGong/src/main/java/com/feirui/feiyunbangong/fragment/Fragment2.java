@@ -614,8 +614,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         .findViewById(R.id.et_sousuolianxiren);
     // iv_hongdian = (ImageView) view.findViewById(R.id.iv_hongdian);
     tv_num = (TextView) header_view.findViewById(R.id.tv_num);
-    rl_chuangjian = (RelativeLayout) header_view
-        .findViewById(R.id.rl_chuangjian);
+    rl_chuangjian = (RelativeLayout) header_view.findViewById(R.id.rl_chuangjian);
     rl_qunliebiao = (RelativeLayout)header_view.findViewById(R.id.rl_qunliebiao);
     fl_main2 = (FrameLayout) view.findViewById(R.id.fl_main2);
     rl_newfriend = (RelativeLayout) header_view

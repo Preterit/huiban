@@ -43,11 +43,11 @@
         <!--android:text="系统升级，奖励暂停，恢复时另行通知"/>-->
     <!-- 恢复的时候把所有的控件隐藏取消 -->
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y540"
+        android:layout_height="230dp"
         android:background="@color/a42baff"
-        >
+        android:weightSum="1">
 
         <TextView
             style="@style/ffffff_38"
@@ -55,21 +55,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x56"
             android:layout_marginTop="@dimen/y56"
-            android:text="奖励总金额" />
+            android:text="奖励总金额"
+            android:id="@+id/textView17" />
 
         <TextView
             android:id="@+id/tv_zongjine"
             style="@style/ffffff_49"
-            android:layout_width="@dimen/x420"
-            android:layout_height="@dimen/y420"
+            android:layout_width="132dp"
+            android:layout_height="132dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="@dimen/y36"
             android:layout_marginLeft="@dimen/x72"
-            android:layout_marginTop="@dimen/y36"
             android:background="@drawable/yaoqing1"
             android:gravity="center"
-            android:text="￥ 00.00" />
-    </LinearLayout>
+            android:text="￥ 00.00"
+            android:layout_below="@+id/textView17"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            style="@style/ffffff_38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.83"
+            android:text="奖励金额用于平台内消费"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
     <TextView
 
@@ -81,7 +95,6 @@
         android:text="注册奖励1元" />
 
     <Button
-
         android:id="@+id/btn_duanxin"
         style="@style/ffffff_60"
         android:layout_width="match_parent"
