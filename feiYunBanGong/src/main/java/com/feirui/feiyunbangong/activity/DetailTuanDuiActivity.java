@@ -85,6 +85,8 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     private IYWTribeService mTribeService;
     private long mTribeId; //团聊的ID
 
+    private BroadcastReceiver receiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +108,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.ON_RECEIVE_NEW_MEMBER_ADD);
-        BroadcastReceiver receiver = new MyReceiver();
+        receiver = new MyReceiver();
         registerReceiver(receiver, filter);
 
     }
@@ -119,6 +121,15 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         super.onResume();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //销毁在onResume()方法中的广播
+        if (receiver != null){
+            unregisterReceiver(receiver);
+        }
+
+    }
 
     private void getMessageNum() {
 

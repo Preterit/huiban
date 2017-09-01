@@ -155,7 +155,13 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
         contactFriendInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                // 打开聊天窗口：
+                Intent intent = AppStore.mIMKit.getChattingActivityIntent(phone,
+                        Happlication.APP_KEY);
+                intent.putExtra("name", mTargetName);
+                startActivity(intent);
+                overridePendingTransition(R.anim.aty_zoomin,
+                        R.anim.aty_zoomout);
             }
         });
         /**

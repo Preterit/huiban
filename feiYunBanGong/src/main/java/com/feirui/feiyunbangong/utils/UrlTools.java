@@ -402,6 +402,10 @@ public class UrlTools {
   public static String QUN_ID = "Team/team_talk";
 
   /**
+   * 解散团队群聊
+   */
+  public  static String JIESAN_QUN = "Team/dissolutionGroup";
+  /**
    * 删除团队成员：
    */
   public static String DELETE_TUANDUI_CHENGYUAN = "Team/team_member_del";

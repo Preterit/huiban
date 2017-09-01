@@ -409,7 +409,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             return true;
 
         }else if (message.getMessageBody() != null &&
-                message.getMessageBody().getContent().contains("ib3mbd6s" + core.getLoginUserId()) == false && //当前用户的id
+                message.getMessageBody().getContent().contains("ib3mbd6s") == false && //当前用户的id
                 Patterns.WEB_URL.matcher(message.getMessageBody().getContent()).matches()){
             try {
                 Intent intent = new Intent(activity, WebViewActivity.class);
