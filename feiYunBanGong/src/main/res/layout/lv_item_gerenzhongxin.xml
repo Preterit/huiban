@@ -6,15 +6,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y130" >
-
+        android:layout_height="@dimen/y130"
+        android:orientation="horizontal"
+        >
+    <ImageView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+          android:src="@drawable/zhinengduixiang"
+        android:layout_gravity="center"
+        android:visibility="gone"
+    />
         <TextView
             android:id="@+id/tv"
             style="@style/a000000_48"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="center" />
+            android:text="hhhh"
+            android:gravity="center"
+             />
     </LinearLayout>
 
 </LinearLayout>

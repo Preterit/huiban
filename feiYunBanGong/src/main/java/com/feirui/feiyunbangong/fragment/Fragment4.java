@@ -84,7 +84,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         initView();
         setListener();
         setListView();
-        regist();// 注册广播接收器;
         return v;
     }
 
@@ -128,8 +127,19 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
     @Override
     public void onResume() {
+        regist();// 注册广播接收器;
         initData();
         super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (receiver !=null){
+            //注销广播
+            getActivity().unregisterReceiver(receiver);
+        }
+
     }
 
     private void setListView() {
@@ -338,11 +348,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(receiver);
-        //关闭Dialog以防内存泄露
-//        if (dialog != null){
-//            dialog.dismiss();
-//        }
+//        getActivity().unregisterReceiver(receiver);
 
     }
 }

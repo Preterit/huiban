@@ -24,6 +24,7 @@ import com.alibaba.mobileim.contact.IYWContact;
 import com.alibaba.mobileim.contact.IYWContactService;
 import com.alibaba.mobileim.conversation.IYWConversationService;
 import com.alibaba.mobileim.conversation.YWConversation;
+import com.alibaba.mobileim.fundamental.widget.WXNetworkImageView;
 import com.alibaba.mobileim.fundamental.widget.WxAlertDialog;
 import com.alibaba.mobileim.gingko.model.settings.YWTribeSettingsModel;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
@@ -107,6 +108,7 @@ public class TribeInfoActivity extends BaseActivity{
 
     private RelativeLayout enableAtAllLayout;
     private ImageView enableAtAllSwitch;
+    private WXNetworkImageView head;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +120,7 @@ public class TribeInfoActivity extends BaseActivity{
         code = intent.getIntExtra("code",-1);
         postId = intent.getStringExtra("postId");
         teamId = intent.getStringExtra("id");
-        Log.e("tag","teamId------"+teamId);
+
         mTribeOp = intent.getStringExtra(TribeConstants.TRIBE_OP);
 
         mIMKit = AppStore.mIMKit;
@@ -144,14 +146,12 @@ public class TribeInfoActivity extends BaseActivity{
         RequestParams params = new RequestParams();
         params.put("team_talk",id + "");
         params.put("team_id",teamId);
-        Log.e("chengyuan", "qunID:-------------------- " + params.toString() );
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
                 new Utils.HttpCallBack() {
 
                     @Override
                     public void success(JsonBean bean) {
                         if ("200".equals(bean.getCode())){
-                            Log.e("chengyuan", "qunID:-------------------- " + bean.getMsg() );
                             T.showShort(TribeInfoActivity.this, "团聊创建成功！");
                         }
 //                        TribeInfoActivity.this.finish();
@@ -328,6 +328,15 @@ public class TribeInfoActivity extends BaseActivity{
             tribe_verify_layout.setVisibility(View.VISIBLE);
         }
 
+        //修改群头像
+        head = (WXNetworkImageView) findViewById(R.id.head);
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         //判断是普通群还是团队创建的群
 //        if (code == 1){
 //            tribe_description_layout.setVisibility(View.GONE);
@@ -399,6 +408,35 @@ public class TribeInfoActivity extends BaseActivity{
         }
     }
 
+    /**
+     * 解散团队的群聊
+     */
+    private void disQun(){
+        Log.e("tag","teamId------"+teamId);
+        String url = UrlTools.url + UrlTools.JIESAN_QUN;
+        RequestParams params = new RequestParams();
+        params.put("id",teamId);
+        Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
+            @Override
+            public void success(JsonBean bean) {
+                if ("200".equals(bean.getCode())){
+                    YWLog.i(TAG, "团聊的群解散群成功！");
+                }
+            }
+
+            @Override
+            public void failure(String msg) {
+                YWLog.i(TAG, "团聊的群解散群失败！----------" + msg);
+            }
+
+            @Override
+            public void finish() {
+
+            }
+        });
+
+    }
+
     private void updateView() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -445,6 +483,15 @@ public class TribeInfoActivity extends BaseActivity{
                                         public void onSuccess(Object... result) {
                                             YWLog.i(TAG, "解散群成功！");
                                             IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "解散群成功！");
+                                            if (code == 100){//判断是否是团队的群聊
+                                                mHandler.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        disQun();
+                                                    }
+                                                });
+                                            }
+
                                             TribeInfoActivity.this.finish();
                                         }
 
@@ -471,7 +518,7 @@ public class TribeInfoActivity extends BaseActivity{
         } else {
             mMangeTribeMembers.setText("群成员列表");
             mEditTribeInfoLayout.setVisibility(View.GONE);
-            if (code == 100){
+            if (code == 100){ //判断是否是团队的群聊
                 mQuiteTribe.setVisibility(View.GONE);
             }else {
                 mQuiteTribe.setVisibility(View.VISIBLE);
@@ -484,6 +531,7 @@ public class TribeInfoActivity extends BaseActivity{
                             public void onSuccess(Object... result) {
                                 YWLog.i(TAG, "退出群成功！");
                                 IMNotificationUtils.getInstance().showToast(TribeInfoActivity.this, "退出群成功！");
+                                TribeInfoActivity.this.finish();
 //                            openTribeListFragment();
                             }
 

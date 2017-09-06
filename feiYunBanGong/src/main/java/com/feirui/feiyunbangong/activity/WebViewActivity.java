@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -35,12 +36,18 @@ public class WebViewActivity extends BaseActivity {
     private void initData() {
         Intent intent = getIntent();
         String uri =  intent.getStringExtra("uri");
+        Log.e("uri", "initData: --------------------" + uri);
         mView.getSettings().setJavaScriptEnabled(true);
         mView.setScrollBarStyle(0);
         WebSettings webSettings = mView.getSettings();
         webSettings.setAllowFileAccess(true);
         webSettings.setBuiltInZoomControls(true);
-        mView.loadUrl(uri);
+        Log.e("uri", "initData: --------------------" + uri.substring(0,7));
+        if (!"http://".equals(uri.substring(0,7)) && !"https://".equals(uri.substring(0,8))){
+            mView.loadUrl("http://" + uri);
+        }else {
+            mView.loadUrl(uri);
+        }
 
         //加载数据
         mView.setWebChromeClient(new WebChromeClient() {
