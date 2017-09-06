@@ -85,6 +85,41 @@
             android:text="获取验证码" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x140"
+        android:layout_marginRight="@dimen/x140"
+        android:layout_marginTop="@dimen/y120"
+        android:background="@drawable/et_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:text="验证码：" />
+
+        <EditText
+            android:id="@+id/et_phoneCodes"
+            style="@style/a000000_42"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y120"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入验证码"
+            />
+
+        <ImageView
+            android:id="@+id/iv_showCode"
+            android:layout_width="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
     <com.feirui.feiyunbangong.view.RevealLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,6 +138,7 @@
             android:background="@drawable/blue_bt_selector"
             android:gravity="center"
             android:text="下一步" />
+
     </com.feirui.feiyunbangong.view.RevealLayout>
 
 

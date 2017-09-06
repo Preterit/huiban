@@ -1,23 +1,6 @@
 package com.feirui.feiyunbangong;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.xmlpull.v1.XmlPullParserException;
-
-import com.feirui.feiyunbangong.activity.AddFriendActivity;
-import com.feirui.feiyunbangong.activity.BaoXiaoActivity;
-import com.feirui.feiyunbangong.activity.BaseActivity;
-import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
-import com.feirui.feiyunbangong.dialog.LoadingDialog;
-import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.Province;
-import com.feirui.feiyunbangong.utils.T;
-import com.feirui.feiyunbangong.utils.UrlTools;
-import com.feirui.feiyunbangong.utils.Utils;
-import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
-import com.lidroid.xutils.http.RequestParams;
-
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -25,10 +8,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -37,6 +18,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.feirui.feiyunbangong.activity.BaseActivity;
+import com.feirui.feiyunbangong.activity.WebViewActivity;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.Province;
+import com.feirui.feiyunbangong.utils.T;
+import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.utils.Utils;
+import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class AddShopActivity extends BaseActivity {
 
 	private Spinner mSpPro;
@@ -44,11 +40,20 @@ public class AddShopActivity extends BaseActivity {
 	private Button mBtnCommit;
 	private EditText mEtShopName;
 	private EditText mEtShopDesc;
+	private EditText weidianUrl;
+	private Button weidianBtn;
+	private String Url;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_shop);
+		//新添加的
+		weidianUrl=(EditText)findViewById(R.id.weidianUrl);   //微店的地址
+		weidianBtn=(Button)findViewById(R.id.weidianBtn);     //按钮
+
+//		Url=weidianUrl.getText().toString().trim();  //获取微店地址并去掉空格
+
 
 		mSpPro = (Spinner) findViewById(R.id.spPro);
 		mSpCity = (Spinner) findViewById(R.id.spCity);
@@ -70,13 +75,31 @@ public class AddShopActivity extends BaseActivity {
 					return;
 				}
 				commitData();
+			}
+		});
+		initView();
+		setListeners();
+		initSpinner();
+	}
+
+	private void setListeners() {
+		weidianBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Url=weidianUrl.getText().toString().trim();  //获取微店地址并去掉空格
+				Intent intent=new Intent();
+				intent.putExtra("uri",Url);
+				intent.setClass(AddShopActivity.this, WebViewActivity.class);
+
+				if(Url.isEmpty()){
+					Toast.makeText(AddShopActivity.this,"您还没有输入微店地址",Toast.LENGTH_SHORT).show();
+				}else{
+					startActivity(intent);
+
+				}
 
 			}
-
 		});
-
-		initView();
-		initSpinner();
 
 	}
 
@@ -192,30 +215,30 @@ public class AddShopActivity extends BaseActivity {
 			while (eventCode != XmlResourceParser.END_DOCUMENT) {
 				switch (eventCode) {
 
-				case XmlResourceParser.START_DOCUMENT:// start read xml
-					break;
-				case XmlResourceParser.START_TAG:// start read tag
+					case XmlResourceParser.START_DOCUMENT:// start read xml
+						break;
+					case XmlResourceParser.START_TAG:// start read tag
 
-					if (xrp.getName().equals("province")) {
-						province = new Province();
-						cityList = new ArrayList<String>();
+						if (xrp.getName().equals("province")) {
+							province = new Province();
+							cityList = new ArrayList<String>();
 
-						String provinceName = xrp.getAttributeValue(null, "name");
-						province.setProvinceName(provinceName);
-					}
-					if (xrp.getName().equals("item")) {
+							String provinceName = xrp.getAttributeValue(null, "name");
+							province.setProvinceName(provinceName);
+						}
+						if (xrp.getName().equals("item")) {
 
-						cityList.add(xrp.nextText());
-					}
-					break;
-				case XmlResourceParser.END_TAG:
+							cityList.add(xrp.nextText());
+						}
+						break;
+					case XmlResourceParser.END_TAG:
 
-					if (xrp.getName().equals("province")) {
-						provinces.add(province);
-						province.setCityList(cityList);
-					}
+						if (xrp.getName().equals("province")) {
+							provinces.add(province);
+							province.setCityList(cityList);
+						}
 
-					break;
+						break;
 				}
 				eventCode = xrp.next();
 			}

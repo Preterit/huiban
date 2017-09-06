@@ -101,7 +101,9 @@ public class SouSuoTuanDuiActivity extends BaseActivity implements
 						tds.removeAll(tds);
 						ArrayList<HashMap<String, Object>> infor = bean
 								.getInfor();
+						Log.e("搜索团队", "infor: "+infor.toString() );
 						HashMap<String, Object> hm = infor.get(0);
+						Log.e("搜索团队", "hm: "+hm.toString() );
 						TuanDui td = new TuanDui(String.valueOf(hm.get("id")),
 								String.valueOf(hm.get("team_name")));
 						tds.add(td);

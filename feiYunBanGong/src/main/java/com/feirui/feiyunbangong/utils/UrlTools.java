@@ -340,7 +340,7 @@ public class UrlTools {
   /**
    * 工作圈：
    */
-  public static String WORK_QUAN = "Circle/circlelist1";
+  public static String WORK_QUAN = "Circle/circle_list";
 
   /**
    * 工作圈发表文章：
@@ -583,14 +583,18 @@ public class UrlTools {
   /**
    * 新任务单-发布人
    **/
-  public static String RENWU_FBR="Task/task_detial_in";
+  public static String RENWU_FBR="Task/task_detial_out";
   /**
    * 新任务单-接单人
    **/
-  public static String RENWU_JDR="Task/task_detial_out";
+  public static String RENWU_JDR="Task/task_detial_in";
   /**
    * 新任务单-任务信息
    **/
   public static String RENWU_RWXX="Task/task_detial";
+    /**
+     * 新任务单-确认接单
+     **/
+    public static String RENWU_QRJD="task/task_accept";
 
 }
