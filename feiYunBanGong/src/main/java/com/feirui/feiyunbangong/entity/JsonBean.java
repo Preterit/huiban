@@ -10,6 +10,7 @@ public class JsonBean implements Serializable {
      */
     private String code;
     private String msg;
+
     private ArrayList<HashMap<String, Object>> infor;
 
 

@@ -99,6 +99,7 @@ public class Fragment3 extends BaseFragment implements OnClickListener {
     @SuppressWarnings("deprecation")
     @Override
     public void onResume() {
+
         if (mLocalActivityManager != null) {
             mLocalActivityManager.dispatchResume();
         }

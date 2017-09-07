@@ -168,7 +168,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             replyBarItem.setItemId(ITEM_ID_1);
             replyBarItem.setItemImageRes(R.drawable.demo_reply_bar_location);
             replyBarItem.setItemLabel("位置");
-            replyBarItem.setOnClicklistener(new View.OnClickListener() {
+            replyBarItem.setOnClicklistener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mConversation = conversation;
@@ -409,7 +409,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             return true;
 
         }else if (message.getMessageBody() != null &&
-                message.getMessageBody().getContent().contains("ib3mbd6s" + core.getLoginUserId()) == false && //当前用户的id
+                message.getMessageBody().getContent().contains("ib3mbd6s") == false && //当前用户的id
                 Patterns.WEB_URL.matcher(message.getMessageBody().getContent()).matches()){
             try {
                 Intent intent = new Intent(activity, WebViewActivity.class);

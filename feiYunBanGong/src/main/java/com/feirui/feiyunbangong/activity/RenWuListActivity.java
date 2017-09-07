@@ -47,7 +47,7 @@ public class RenWuListActivity extends AppCompatActivity {
         iv_rw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CharSequence items[] = {"发布任务", "个人任务详情"};
+                final CharSequence items[] = {"发布任务", "个人任务详情","微信支付"};
 
                 AlertDialog alertDialog = new AlertDialog.Builder(RenWuListActivity.this).setIcon(R.drawable.selectimage)
                         .setTitle("请选择方式").setItems(items, new DialogInterface.OnClickListener() {
@@ -59,6 +59,9 @@ public class RenWuListActivity extends AppCompatActivity {
                                         break;
                                     case 1:
                                         startActivity(new Intent(RenWuListActivity.this, WoDeTaskActivity.class));
+                                        break;
+                                    case 2:
+                                        startActivity(new Intent(RenWuListActivity.this,PayActivity.class));
                                         break;
                                 }
 

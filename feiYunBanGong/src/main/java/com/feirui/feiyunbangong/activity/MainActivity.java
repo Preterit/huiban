@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -108,7 +109,7 @@ public class MainActivity extends BaseActivity
     public DrawerLayout drawerlayout;
     @PView
     private ListView lv_left;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter adapter;
 
     @PView
     private LinearLayout inclue;
@@ -315,7 +316,6 @@ public class MainActivity extends BaseActivity
                 new String[]{"个人资料","修改密码", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
                         "关于我们", "邀请奖励", "退出登录"});
         lv_left.setAdapter(adapter);
-
 		/*
          * adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin,
 		 * R.id.tv, new String[] { "消息通知" }); lv_right.setAdapter(adapter);

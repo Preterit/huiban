@@ -63,7 +63,7 @@ public class WorkCircleActivity extends BaseActivity implements
 
     private RefreshLayout swipeLayout;
 
-    private ArrayList<ItemEntity> itemEntities = new ArrayList<>();
+    private ArrayList<ItemEntity> itemEntities = new ArrayList<>();//团队圈list
     private PullListView lv_work;
     private View header;
 
@@ -98,7 +98,7 @@ public class WorkCircleActivity extends BaseActivity implements
 
         Intent intent = getIntent();
         team_id = intent.getStringExtra("team_id");
-        Log.e("TAG", team_id + "team_id");
+        Log.e("朋友圈", "team_id" +team_id );
 
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
@@ -330,6 +330,9 @@ public class WorkCircleActivity extends BaseActivity implements
 
         String url = UrlTools.url + UrlTools.WORK_QUAN;
         RequestParams params = new RequestParams();
+        if(team_id!=null){
+            params.put("team_id", "" + team_id);
+        }
         params.put("current_page", "" + page);
         params.put("pagesize", 10 + "");
         Log.e("团队圈", "page: "+page );

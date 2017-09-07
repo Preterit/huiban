@@ -114,7 +114,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
       initView();
       setListView();
       setListener();
-      regist();// 注册广播接收器；
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -139,6 +138,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
   @Override
   public void onResume() {
+    regist();// 注册广播接收器；
     requestGroup();// 获取分组信息；
     getNewFriendNum();// 获取新申请的朋友个数；
     // 合上：
@@ -147,6 +147,16 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     }
     inclue.setVisibility(View.GONE);
     super.onResume();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    //注销广播
+    if (receiver != null){
+      getActivity().unregisterReceiver(receiver);
+    }
+
   }
 
   // 获取分组信息：
@@ -628,8 +638,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
   @Override
   public void onDestroy() {
-    // 解除广播里接受器：
-    getActivity().unregisterReceiver(receiver);
     super.onDestroy();
   }
 

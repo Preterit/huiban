@@ -290,7 +290,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 						for (int i = 0; i < AppStore.acts.size(); i++) {
 							AppStore.acts.get(i).finish();
 						}
-						if (!"".equals(mTbID)){
+						if (mTbID!=null){//!"".equals(mTbID)
 							jieSanQun();
 						}
 					}
