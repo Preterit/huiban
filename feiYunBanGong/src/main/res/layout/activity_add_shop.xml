@@ -37,7 +37,7 @@
         android:id="@+id/weidianBtn"
         android:layout_width="@dimen/x800"
         android:layout_height="@dimen/y120"
-        android:text="进入微店"
+        android:text="进入并创建微店"
         android:background="@drawable/blue_bt_selector"
         android:textColor="@color/white"
         android:layout_gravity="center"

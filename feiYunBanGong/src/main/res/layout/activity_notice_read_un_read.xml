@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="公告"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:enabled="true"
             android:textIsSelectable="true"
             android:focusable="true"

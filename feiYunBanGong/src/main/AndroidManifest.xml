@@ -429,7 +429,8 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity" />
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
-        <activity android:name=".activity.tribe.EditGroupInfoActivity"
+        <activity
+            android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
 
@@ -442,7 +443,6 @@
 
         <!-- 操作记录 -->
         <activity android:name=".activity.CaoZuoJiLuActivity" />
-        <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
         <activity android:name=".activity.MyShenPiQingJaDetailActivity" />
         <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity" />
         <activity android:name=".activity.MyWaiChuDetailActivity" />
@@ -450,11 +450,16 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
+        <activity android:name=".activity.ReleaseDetailActivity" />
         <activity
             android:name=".activity.RenWuDetailActivity"
             android:label="@string/title_activity_ren_wu_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.WebViewActivity" />
+        <activity
+            android:name=".activity.Release_FanKuiActivity"
+            android:label="@string/title_activity_release__fan_kui"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".activity.WebViewActivity"/>
     </application>
 
 </manifest>

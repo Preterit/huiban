@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tool="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/top"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="我的商品"
+            android:text="我的小店"
             android:textColor="@color/white"
             android:textSize="@dimen/size67"/>
 
@@ -107,61 +107,94 @@
             android:textSize="@dimen/size30"/>
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y30"
-        android:gravity="center"
-        android:password="@dimen/size10"
-        android:text="店铺介绍"
-        android:textSize="@dimen/size48"/>
+
+    <Button
+        android:id="@+id/EntweidianBtn"
+        android:layout_width="@dimen/x800"
+        android:layout_height="@dimen/y120"
+        android:text="进入我的微店"
+        android:background="@drawable/blue_bt_selector"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        />
 
     <TextView
-        android:id="@+id/tv_content_my_shop"
+        android:id="@+id/updataText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改地址"
+        android:layout_marginTop="40dp"
+        android:textSize="16sp"
+        android:layout_gravity="end"
+        android:layout_marginRight="50dp"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/y20"
-        android:gravity="center_vertical"
-        android:lineSpacingMultiplier="1.5"
-        android:padding="@dimen/size5"
-        android:password="@dimen/size10"
-        android:textSize="@dimen/size36"
-        tool:text="\t\t一天，山羊爷爷买来锄头和铁锹，在森林里忙碌开来。他找到一块没有树木的空地，先铲除杂草，接着挖起一个个小土坑来。挖完这一块空地，他又找另一块空地接着挖。"/>
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y2"
-        android:background="@color/hui"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/y30"
             android:gravity="center"
             android:password="@dimen/size10"
-            android:text="我的推荐"
-            android:textSize="@dimen/size45"
-            />
+            android:text="店铺介绍"
+            android:textSize="@dimen/size48"/>
 
         <TextView
-            android:id="@+id/tv_edit_gv"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_content_my_shop"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:text="编辑"
-            android:textColor="@color/main_color"
-            android:textSize="17dp"
-            />
-    </RelativeLayout>
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/y20"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.5"
+            android:padding="@dimen/size5"
+            android:password="@dimen/size10"
+            android:textSize="@dimen/size36"
+            tool:text="\t\t一天，山羊爷爷买来锄头和铁锹，在森林里忙碌开来。他找到一块没有树木的空地，先铲除杂草，接着挖起一个个小土坑来。挖完这一块空地，他又找另一块空地接着挖。"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y2"
+            android:background="@color/hui"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/y30"
+                android:gravity="center"
+                android:password="@dimen/size10"
+                android:text="我的推荐"
+                android:textSize="@dimen/size45"
+                />
+
+            <TextView
+                android:id="@+id/tv_edit_gv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="编辑"
+                android:textColor="@color/main_color"
+                android:textSize="17dp"
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
     <Button
         android:id="@+id/btn_delete_good"
         style="@style/btn"
