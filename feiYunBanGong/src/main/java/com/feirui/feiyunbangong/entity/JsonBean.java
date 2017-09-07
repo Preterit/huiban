@@ -12,6 +12,7 @@ public class JsonBean implements Serializable {
     private String msg;
     private ArrayList<HashMap<String, Object>> infor;
 
+
     public String getCode() {
         return code;
     }

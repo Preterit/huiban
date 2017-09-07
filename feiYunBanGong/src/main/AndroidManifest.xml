@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="59"
-    android:versionName="1.5.9">
+    android:versionCode="63"
+    android:versionName="1.6.3">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -443,7 +443,7 @@
 
         <!-- 操作记录 -->
         <activity android:name=".activity.CaoZuoJiLuActivity" />
-        <activity android:name=".activity.ShenPiCaiGouDetailActivity" />
+
         <activity android:name=".activity.MyShenPiQingJaDetailActivity" />
         <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity" />
         <activity android:name=".activity.MyWaiChuDetailActivity" />

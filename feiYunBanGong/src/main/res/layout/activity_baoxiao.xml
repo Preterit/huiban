@@ -74,6 +74,14 @@
                     android:hint="请输入..."
                     android:inputType="number"
                     android:padding="@dimen/x26"/>
+                <Button
+                    android:id="@+id/jisuanBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="计算总额"
+                    android:background="@drawable/blue_bt_selector"
+                    android:textColor="@color/ffffff"
+                    />
             </LinearLayout>
 
             <View

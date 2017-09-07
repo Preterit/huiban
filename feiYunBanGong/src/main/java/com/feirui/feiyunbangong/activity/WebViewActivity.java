@@ -7,6 +7,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.RelativeLayout;
 
 import com.feirui.feiyunbangong.R;
 
@@ -16,6 +17,8 @@ import com.feirui.feiyunbangong.R;
 
 public class WebViewActivity extends BaseActivity {
     private WebView mView;
+    private RelativeLayout actionBar;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -25,6 +28,7 @@ public class WebViewActivity extends BaseActivity {
     }
 
     private void initView() {
+
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("会办");
@@ -35,8 +39,9 @@ public class WebViewActivity extends BaseActivity {
     private void initData() {
         Intent intent = getIntent();
         String uri =  intent.getStringExtra("uri");
+
         mView.getSettings().setJavaScriptEnabled(true);
-        mView.setScrollBarStyle(0);
+        //mView.setScrollBarStyle(0);
         WebSettings webSettings = mView.getSettings();
         webSettings.setAllowFileAccess(true);
         webSettings.setBuiltInZoomControls(true);
@@ -73,6 +78,7 @@ public class WebViewActivity extends BaseActivity {
     // goBack()表示返回webView的上一页面
     public boolean onKeyDown(int keyCoder, KeyEvent event) {
         if (mView.canGoBack() && keyCoder == KeyEvent.KEYCODE_BACK) {
+
             mView.goBack();
             return true;
         }

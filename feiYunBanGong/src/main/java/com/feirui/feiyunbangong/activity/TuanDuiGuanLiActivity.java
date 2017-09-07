@@ -504,7 +504,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				TuanDuiChengYuan item = (TuanDuiChengYuan) msg.obj;
 				adapter.reduce(item);
 				//删除团聊成员
-				if (mTbID != null || !"".equals(mTbID)){
+				if (mTbID != null){
 					deleteTuanLiao();
 				}
 				break;

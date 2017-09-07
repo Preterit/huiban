@@ -31,16 +31,12 @@ import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.activity.tribe.InviteTribeMemberActivity;
-import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
-import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.adapter.ChengYuanAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
-import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -91,7 +87,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         setContentView(R.layout.activity_detail_tuan_dui);
 
         mIMKit = AppStore.mIMKit;
-        mTribeService = mIMKit.getTribeService();
+
 
         initView();
         setListener();
@@ -379,6 +375,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                 startActivity(teamTaskIntent);
                 break;
             case R.id.llChengYuan: //打开团队聊天窗口
+
 //                YWTribe tribe = ;
 //                Intent talkInternt = AppStore.mIMKit.getTribeChattingActivityIntent();
 
@@ -521,6 +518,8 @@ public class DetailTuanDuiActivity extends BaseActivity implements
      * @param qunID   团聊的ID
      */
     public void  addTuanLiaoChengYuan(String qunID){
+        mTribeService = mIMKit.getTribeService();
+
         mTribeId = Long.valueOf(qunID) ;
         Log.e("chengyuan", "mTribeId: -----------------" + mTribeId );
 
@@ -530,12 +529,15 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             list.add(iywContact);
             Log.e("chengyuan", "iywContact: -----------------" + list.get(i) );
         }
-        mTribeService.inviteMembers(mTribeId, list,new MyCallback() {
-            @Override
-            public void onSuccess(Object... result) {
+        if(list != null || list.size() > 0){
+            mTribeService.inviteMembers(mTribeId, list,new MyCallback() {
+                @Override
+                public void onSuccess(Object... result) {
 //                finish();
-            }
-        });
+                }
+            });
+        }
+
     }
 
     // 广播接收器，接收团队成员加入的广播：

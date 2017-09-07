@@ -10,6 +10,41 @@
         android:layout_height="@dimen/title_bar"
         layout="@layout/top" />
 
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y100"
+        android:text="设置微店地址"
+        android:layout_gravity="center"
+
+        />
+
+    <EditText
+       android:id="@+id/weidianUrl"
+        android:layout_width="@dimen/x900"
+        android:layout_height="@dimen/y600"
+        android:layout_marginTop="@dimen/y40"
+        android:background="@drawable/blue_bg_kuang"
+        android:gravity="top"
+        android:lines="10"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/weidianBtn"
+        android:layout_width="@dimen/x800"
+        android:layout_height="@dimen/y120"
+        android:text="进入并创建微店"
+        android:background="@drawable/blue_bt_selector"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +52,9 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"

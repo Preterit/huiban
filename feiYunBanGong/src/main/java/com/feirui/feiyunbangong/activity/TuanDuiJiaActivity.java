@@ -5,27 +5,21 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
-import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.activity.tribe.TribeActivity;
 import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
-import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -41,9 +35,6 @@ import com.loopj.android.http.RequestParams;
 import com.zxing.encoding.EncodingHandler;
 
 import org.apache.http.Header;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * 团队——加
@@ -65,7 +56,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tuan_dui_jia);
 		mYWIMkit = AppStore.mIMKit;
-		mService = mYWIMkit.getTribeService();
+
 		initView();
 		setListener();
 	}
@@ -259,7 +250,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 							for(int i=0;i<AppStore.acts.size();i++){
 								AppStore.acts.get(i).finish();
 							}
-							if (!"".equals(mTuanLiaoID) || mTuanLiaoID != null ){
+							if (!"".equals(mTuanLiaoID)){
 								outQun();  //退出团队群聊
 							}
 						}
@@ -327,6 +318,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 	 * 退出群聊
 	 */
 	public void outQun(){
+		mService = mYWIMkit.getTribeService();
 		mService.exitFromTribe(new MyCallBack() {
 			@Override
 			public void onSuccess(Object... objects) {

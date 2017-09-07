@@ -332,6 +332,7 @@ public class WorkCircleActivity extends BaseActivity implements
         RequestParams params = new RequestParams();
         params.put("current_page", "" + page);
         params.put("pagesize", 10 + "");
+        Log.e("团队圈", "page: "+page );
        // params.put("team_id", team_id);
         Log.e("TAG", params.toString());
 

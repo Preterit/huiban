@@ -489,11 +489,14 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    private void toMyShpOrAddShop() {
+
+
+    private void  toMyShpOrAddShop() {
         // TODO Auto-generated method stub
 
         String postUrl = UrlTools.url + UrlTools.XIAODIAN_MY_SHOP;
         RequestParams requestParams = new RequestParams();
+
         Utils.doPost(LoadingDialog.getInstance(this), this, postUrl, requestParams, new HttpCallBack() {
 
             @Override

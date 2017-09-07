@@ -10,10 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.Code;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
@@ -40,18 +43,24 @@ import java.util.ArrayList;
  *
  */
 public class RegisteActivity extends BaseActivity {
+    //public EditText et_phoneCodes;
 	// 手机号，验证码
 	@PView
-	EditText et_phone, et_verify;
+	EditText et_phone, et_verify,et_phoneCodes;
+	@PView(click = "onClick")
+	ImageView iv_showCode;
 	// 下一步,获取验证码
 	@PView(click = "onClick")
 	Button btn_confirm, bt_checking;
+
 	String type = "";// 注册类型
 	public static ArrayList<Activity> list = new ArrayList<Activity>();
 	private static final int LOGIN_SUCESS = 1; // 登录成功
 	private static final int LOGIN_ERROR = 2;// 登录失败
 	private static final int JSON_ERROR = 3;// json解析出错
 	private static final int SERVICE_ERROR = 4;// 链接服务器出错
+	//产生的验证码
+	private String realCode;
 	@Override
 	protected void onDestroy() {
 		DingShiQiUtil.close();// 关闭定时器；
@@ -64,10 +73,15 @@ public class RegisteActivity extends BaseActivity {
 		setContentView(R.layout.activity_register);
 		initView();
 		list.add(this);
+
+		//将验证码用图片的形式显示出来
+		iv_showCode.setImageBitmap(Code.getInstance().createBitmap());
+		realCode = Code.getInstance().getCode().toLowerCase();
 	}
 
 	private void initView() {
-		type = getIntent().getStringExtra("type");
+        //et_phoneCodes = (EditText) findViewById(R.id.et_phoneCodes);
+        type = getIntent().getStringExtra("type");
 		initTitle();
 		setLeftDrawable(R.drawable.arrows_left);
 		if (type.equals("wangjimima")) {
@@ -83,7 +97,13 @@ public class RegisteActivity extends BaseActivity {
 
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.bt_checking:// 获取验证码
+			case R.id.iv_showCode:
+				iv_showCode.setImageBitmap(Code.getInstance().createBitmap());
+				realCode = Code.getInstance().getCode().toLowerCase();
+				Log.v("注册页面验证码","realCode"+realCode);
+				break;
+
+			case R.id.bt_checking:// 获取验证码
 			String phone = et_phone.getText().toString().trim();
 			if (TextUtils.isEmpty(phone)) {
 				T.showShort(RegisteActivity.this, "手机号不能为空！");
@@ -182,7 +202,10 @@ public class RegisteActivity extends BaseActivity {
 			break;
 
 		case R.id.btn_confirm:
-			// 下一步
+			//获取验证码
+
+
+				// 下一步
 			if (TextUtils.isEmpty(et_phone.getText().toString().trim())) {
 				T.showShort(RegisteActivity.this, "手机号不能为空");
 				return;
@@ -193,14 +216,21 @@ public class RegisteActivity extends BaseActivity {
 			}
 
 			if (TextUtils.isEmpty(et_verify.getText().toString().trim())) {
-				T.showShort(RegisteActivity.this, "验证码不能为空");
+				T.showShort(RegisteActivity.this, "短信验证码不能为空");
 				return;
 			}
-
 
 			try {
 				// 发请求
 				RequestParams params = new RequestParams();
+				//图片验证码
+				String phoneCodes = et_phoneCodes.getText().toString().toLowerCase();
+				if (phoneCodes.equals(realCode)) {
+					params.put("str", 1);
+				}else{
+					Toast.makeText(RegisteActivity.this, phoneCodes + "图片验证码错误,请重新输入", Toast.LENGTH_SHORT).show();
+					return;
+				}
 
 				if (!type.equals("denglu")){
 					params.put("mobile", et_phone.getText().toString().trim());
@@ -373,4 +403,6 @@ public class RegisteActivity extends BaseActivity {
 		super.onBackPressed();
 		Happlication.getInstance().exit();
 	}
+
+
 }

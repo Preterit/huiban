@@ -10,11 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.mobileim.contact.IYWContact;
 import com.feirui.feiyunbangong.activity.BaseActivity;
-import com.feirui.feiyunbangong.activity.FriendShop;
 import com.feirui.feiyunbangong.activity.ImagePagerActivity;
+import com.feirui.feiyunbangong.activity.WebViewActivity;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.dialog.SelectZTDialog;
 import com.feirui.feiyunbangong.dialog.XiuGaiDialog;
@@ -22,7 +23,6 @@ import com.feirui.feiyunbangong.entity.FriendShopBean;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
 import com.feirui.feiyunbangong.state.AppStore;
-import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -57,7 +57,7 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
     private Button contactFriendInfo;
 
     private SelectZTDialog dialog;
-
+   private FriendShopBean.InfoBean infoBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,8 +185,8 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
                                     if (friendShopBean.getInfo() == null) {
                                         T.showShort(FriendInfoActivity.this, friendShopBean.getMsg());
                                     } else {
-                                        Intent intent = new Intent(FriendInfoActivity.this, FriendShop.class);
-                                        FriendShopBean.InfoBean infoBean = friendShopBean.getInfo().get(0);
+                                        //Intent intent = new Intent(FriendInfoActivity.this, FriendShop.class);
+                                        infoBean = friendShopBean.getInfo().get(0);
                                         if (infoBean == null) {
                                             return;
                                         }
@@ -194,8 +194,9 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
                                         infoBean.setTargetHead(mTargetHead);
                                         infoBean.setTargetName(mTargetName);
                                         infoBean.setTargetPhoe(mTargetPhone);
-                                        intent.putExtra(Constant.INTENT_SERIALIZABLE_DATA, infoBean);
-                                        startActivity(intent);
+                                        setPosturl();
+//                                        intent.putExtra(Constant.INTENT_SERIALIZABLE_DATA, infoBean);
+//                                        startActivity(intent);
                                     }
                                 } else {
                                     T.showShort(FriendInfoActivity.this, friendShopBean.getMsg());
@@ -206,6 +207,37 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
                 });
             }
         });
+    }
+
+    private void setPosturl() {
+        String postUrl="http://123.57.45.74/feiybg/public/index.php/api/Store/enter_store_other";
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("staff_id",infoBean.getStaff_id()+"");
+        Toast.makeText(getApplicationContext(),"传过去的ID"+infoBean.getStaff_id(),Toast.LENGTH_SHORT).show();
+        Utils.doPost(LoadingDialog.getInstance(this), this, postUrl, requestParams, new Utils.HttpCallBack() {
+            @Override
+            public void success(JsonBean bean) {
+                ArrayList<HashMap<String, Object>> edurl = bean.getInfor();
+                Log.e("Tag","获得的微店地址"+edurl.get(0).get("store_url"));
+                String urll = (String)edurl.get(0).get("store_url");
+                Intent intent=new Intent();
+                intent.putExtra("uri",urll);
+                intent.putExtra("TAG","1");
+                intent.setClass(getApplicationContext(),WebViewActivity.class);
+                startActivity(intent);
+            }
+            @Override
+            public void failure(String msg) {
+
+            }
+
+            @Override
+            public void finish() {
+
+            }
+        });
+
+
     }
 
     private String phone;
@@ -253,7 +285,6 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
                         imageBrower(0,imageUrls);
                     }
                 });
-
             }
 
             @Override
@@ -268,8 +299,6 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
         });
 
     }
-
-
 
     protected void imageBrower(int position, ArrayList<String> urls2) {
         Intent intent = new Intent(FriendInfoActivity.this, ImagePagerActivity.class);
