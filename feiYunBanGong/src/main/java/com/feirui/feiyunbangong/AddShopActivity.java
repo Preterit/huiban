@@ -27,6 +27,7 @@ import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+import com.loopj.android.http.RequestParams;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -89,14 +90,41 @@ public class AddShopActivity extends BaseActivity {
 				Url=weidianUrl.getText().toString().trim();  //获取微店地址并去掉空格
 				Intent intent=new Intent();
 				intent.putExtra("uri",Url);
+				intent.putExtra("TAG","1");
 				intent.setClass(AddShopActivity.this, WebViewActivity.class);
 
 				if(Url.isEmpty()){
 					Toast.makeText(AddShopActivity.this,"您还没有输入微店地址",Toast.LENGTH_SHORT).show();
 				}else{
 					startActivity(intent);
-
+					addpostWD();
+					finish();
 				}
+
+			}
+		});
+
+	}
+
+	private void addpostWD() {
+		//Toast.makeText(getApplication(),"请求成功",Toast.LENGTH_SHORT).show();
+		String postUrl="http://123.57.45.74/feiybg/public/index.php/api/store/edit_info";
+
+		RequestParams requestParams = new RequestParams();
+		requestParams.put("store_url",Url);
+		Utils.doPost(LoadingDialog.getInstance(this), this, postUrl, requestParams, new HttpCallBack() {
+			@Override
+			public void success(JsonBean bean) {
+            Toast.makeText(getApplication(),"创建微店成功",Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void failure(String msg) {
+				//Toast.makeText(getApplication(),msg.toString(),Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void finish() {
 
 			}
 		});

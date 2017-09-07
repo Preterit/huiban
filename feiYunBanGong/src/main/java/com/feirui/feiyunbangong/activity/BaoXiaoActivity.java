@@ -45,6 +45,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.R.attr.port;
+
 /**
  * 审批-报销
  *
@@ -65,8 +67,8 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 
     @PView(click = "onClick")
     TextView mTvAdd,tv_title;
-//    @PView
-//    TextView et_4;
+    //    @PView
+
     @PView
     LinearLayout ll_add_mingxi;
     private View v_add_mingxi;
@@ -77,11 +79,14 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     ListView lv_add_shenpiren;
     @PView
     ListView lv_add_chaosong;
-//    AddShenHeAdapter adapter;
+    //    AddShenHeAdapter adapter;
     AddShenHeUpdateAdapter adapter;
     AddShenHeUpdateAdapter adapter1;
     @PView
     ScrollView sv_caigou;
+    private Button jisuanBtn;
+    private int num=0;
+    private int port1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +105,13 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 //        adapter = new AddShenHeAdapter(getLayoutInflater(),
 //                BaoXiaoActivity.this);
         adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,BaoXiaoActivity.this);
-
+        jisuanBtn=(Button)findViewById(R.id.jisuanBtn);
+        jisuanBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              jisuan();
+            }
+        });
         lv_add_shenpiren.setAdapter(adapter);
         lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
@@ -115,7 +126,6 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                 return false;
             }
         });
-
         //抄送人列表
         adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,BaoXiaoActivity.this);
         lv_add_chaosong.setAdapter(adapter1);
@@ -155,6 +165,8 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         });
 
         btn_submit = (Button) findViewById(R.id.btn_submit);
+
+
         btn_submit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +176,31 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         mTvAdd = (TextView) findViewById(R.id.tv_add_mingxi);
         mTvAdd.setOnClickListener(this);
 
+    }
+
+    private void jisuan() {
+
+        for (int i = 0; i < ll_add_mingxi.getChildCount(); i++) {
+            View v = ll_add_mingxi.getChildAt(i);
+            EditText et_1 = (EditText) v.findViewById(R.id.et_1);
+            //计算总金额
+            String numText=et_1.getText().toString().trim();
+            try{
+                if("".equals(numText)){
+                    et_4.setText("0.0");
+                    return;
+                }
+                port1 = Integer.parseInt(numText);
+            }catch (NumberFormatException e){
+                port1=3000;
+            }
+            Log.e("tag", "转换后的数据 ----------" + port1 );
+
+            num=num+port;
+
+            Log.e("tag", "获的总额 ----------" + num );
+        }
+        et_4.setText(num+"");
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -337,24 +374,12 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 
 //        int totle = 0;
         // 采购明细：
+
         for (int i = 0; i < ll_add_mingxi.getChildCount(); i++) {
             View v = ll_add_mingxi.getChildAt(i);
             final EditText et_1 = (EditText) v.findViewById(R.id.et_1);
             EditText et_2 = (EditText) v.findViewById(R.id.et_2);
             EditText et_3 = (EditText) v.findViewById(R.id.et_3);
-//            et_1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View v, boolean hasFocus) {
-//                    Log.e("tag","-------------------------------------------");
-//                    if (hasFocus){
-//                        //获得焦点
-//                        et_4.setText(totle + "");
-//                    }else {
-//
-//                    }
-//
-//                }
-//            });
 
             if (TextUtils.isEmpty(et_1.getText().toString().trim())) {
                 Toast.makeText(this, "请输入报销金额！",  Toast.LENGTH_SHORT).show();
@@ -377,7 +402,6 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 //            totle += Integer.parseInt(et_1.getText().toString().trim());
         }
 
-//        et_4.setText(totle + "");
         if (TextUtils.isEmpty(et_4.getText().toString().trim())) {
             T.showShort(this, "请输入报销总金额");
             return;
@@ -445,7 +469,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
                                     bean.getMsg());
                             BaoXiaoActivity.this.finish();
                             overridePendingTransition(
-                                     R.anim.aty_zoomclosein,
+                                    R.anim.aty_zoomclosein,
                                     R.anim.aty_zoomcloseout);
                         }
                     });
@@ -465,5 +489,9 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
 
             }
         });
+
+
     }
+
+
 }
