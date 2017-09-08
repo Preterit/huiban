@@ -12,7 +12,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.feirui.feiyunbangong.AddShopActivity;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.GoodsAdapter;
 import com.feirui.feiyunbangong.adapter.HeaderViewRecyclerAdapter;
@@ -44,6 +46,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
     private String store_id;
     private TextView tvEdit;
     private View mHeader;
+    private Button entWD;
+    private TextView updataText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
     private void initHeader() {
         mHeader = getLayoutInflater().inflate(R.layout.myshop_layout, null);
+        entWD=(Button)mHeader.findViewById(R.id.EntweidianBtn);
+        updataText=(TextView)mHeader.findViewById(R.id.updataText);
         TextView tvName = (TextView) mHeader.findViewById(R.id.tv_name);
         TextView tvAddress = (TextView) mHeader.findViewById(R.id.tv_address);
         TextView tvPhone = (TextView) mHeader.findViewById(R.id.tv_phone);
@@ -98,6 +104,8 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
 
     private void setListener() {
         leftll.setOnClickListener(this);
+        entWD.setOnClickListener(this);
+        updataText.setOnClickListener(this);
     }
 
     @Override
@@ -124,16 +132,12 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
                     String good_name = String.valueOf(map.get("goods_name"));
                     String price = String.valueOf(map.get("goods_price"));
                     String pic = String.valueOf(map.get("main_pic"));
-
                     good.setGood_name(good_name);
                     good.setPrivce(price);
                     good.setImgUrl(pic);
                     good.setId((Integer) map.get("id"));
-
                     goods.add(good);
                 }
-
-
                 Log.e("orz", "" + goods);
                 mShopAdapter.setData(goods);
             }
@@ -228,6 +232,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         mShopAdapter = new ShopAdapter(new ArrayList<Good>());
         mHeaderViewRecyclerAdapter = new HeaderViewRecyclerAdapter(mShopAdapter);
         footer = LayoutInflater.from(this).inflate(R.layout.add_good_footer, null, false);
+        footer.setVisibility(View.GONE);
         mHeaderViewRecyclerAdapter.addFooterView(footer);
         mRecyclerView.setAdapter(mHeaderViewRecyclerAdapter);
         mHeaderViewRecyclerAdapter.addHeaderView(mHeader);
@@ -271,7 +276,53 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
             case R.id.leftll:
                 finish();
                 break;
+            case R.id.EntweidianBtn:
+                enterWd();
+                break;
+            case R.id.updataText:
+                updataUrl();
+                break;
         }
+    }
+
+    private void updataUrl() {
+        startActivity(new Intent(MyShopActivity.this, AddShopActivity.class));
+        finish();
+    }
+    private void enterWd() {
+        String postUrl="http://123.57.45.74/feiybg/public/index.php/api/Store/enter_store";
+        RequestParams requestParams = new RequestParams();
+        Utils.doPost(LoadingDialog.getInstance(this), this, postUrl, requestParams, new HttpCallBack() {
+            @Override
+            public void success(JsonBean  bean) {
+//                T.showShort(MyShopActivity.this, "获取微店地址成功");
+                ArrayList<HashMap<String, Object>> edurl = bean.getInfor();
+                //Log.e("Tag","获得的微店地址"+edurl.get(0).get("store_url"));
+                String urll = (String)edurl.get(0).get("store_url");
+                if("0".equals(urll)){
+                    Toast.makeText(MyShopActivity.this,"您需要先添加微店地址",Toast.LENGTH_SHORT).show();
+                }else{
+                    setListenerss(urll);
+                }
+            }
+            @Override
+            public void failure(String msg) {
+
+            }
+
+            @Override
+            public void finish() {
+
+            }
+        });
+    }
+    private void setListenerss(String edurl) {
+        Intent intent =new Intent();
+        intent.putExtra("uri",edurl);
+        intent.putExtra("TAG","1");
+        intent.setClass(MyShopActivity.this,WebViewActivity.class);
+        startActivity(intent);
+
     }
 
 }

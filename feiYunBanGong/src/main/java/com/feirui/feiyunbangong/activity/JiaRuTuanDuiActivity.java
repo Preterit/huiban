@@ -157,7 +157,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
 								.show();
 						addData();
-						if (!"".equals(mTuanLiaoID) || mTuanLiaoID != null){
+						if (!"".equals(mTuanLiaoID)){
 							addTuanLiao();
 						}
 					}

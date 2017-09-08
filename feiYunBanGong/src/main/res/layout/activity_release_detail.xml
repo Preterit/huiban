@@ -299,8 +299,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已接单人员："
-            android:textSize="18sp"
-            android:textColor="#333333"
             />
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -308,8 +306,10 @@
 
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/rwd_rec_jdr"
                 android:layout_width="379dp"
                 android:layout_height="100dp"
+                android:layout_centerVertical="true"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -329,7 +329,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/rwd_btn_qrjd"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#63B8FF"
+            android:text="确认接单"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
