@@ -3,7 +3,6 @@ package com.feirui.feiyunbangong.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -107,7 +106,7 @@ public class NoticeReadUnReadActivity extends BaseActivity implements
 	private void initView() {
 
 		initTitle();
-		setCenterString("公告已读未读");
+		setCenterString("公告");
 		setLeftDrawable(R.drawable.arrows_left);
 		setRightVisibility(false);
 		tv_gonggao = (TextView) findViewById(R.id.tv_gonggao);

@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * 任务单详情界面?好像多建立的，没用可以删掉
+ * 新的任务单详情界面
+ * lice
  * */
 public class ReleaseDetailActivity extends BaseActivity implements View.OnClickListener{
     public String staff_name,time,task_txt,staff_head;
@@ -154,7 +155,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 RequestParams params2 = new RequestParams();
                 String url2 = UrlTools.pcUrl+ UrlTools.RENWU_QRJD;
                 params2.put("id",id);
-                params2.put("button",1);
+                params2.put("button",0);
                 Log.e("全部任务获取成功-确认接单", "id: " + id);
 
                 Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
@@ -169,7 +170,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                     }
                     @Override
                     public void finish() {
-
+                        //finish();
                     }
                 });
 
