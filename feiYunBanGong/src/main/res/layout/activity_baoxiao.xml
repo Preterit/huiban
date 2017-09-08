@@ -81,6 +81,8 @@
                     android:text="计算总额"
                     android:background="@drawable/blue_bt_selector"
                     android:textColor="@color/ffffff"
+                    android:textSize="12sp"
+                    android:padding="5dp"
                     />
             </LinearLayout>
 

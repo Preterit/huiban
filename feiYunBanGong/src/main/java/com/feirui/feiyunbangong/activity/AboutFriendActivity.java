@@ -215,7 +215,7 @@ public class AboutFriendActivity extends BaseActivity implements
 						@Override
 						public void success(JsonBean bean) {
 							Toast.makeText(AboutFriendActivity.this,
-									"已发出加好友申请！", 0).show();
+									"已发出加好友申请！", Toast.LENGTH_SHORT).show();
 							finish();
 						}
 
