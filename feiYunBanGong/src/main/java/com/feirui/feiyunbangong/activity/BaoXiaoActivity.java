@@ -45,8 +45,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static android.R.attr.port;
-
 /**
  * 审批-报销
  *
@@ -86,7 +84,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     ScrollView sv_caigou;
     private Button jisuanBtn;
     private int num=0;
-    private int port1;
+    private int p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,28 +177,30 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     }
 
     private void jisuan() {
-
+        Log.e("tag", "有几个布局 ----------" + ll_add_mingxi.getChildCount());
         for (int i = 0; i < ll_add_mingxi.getChildCount(); i++) {
             View v = ll_add_mingxi.getChildAt(i);
             EditText et_1 = (EditText) v.findViewById(R.id.et_1);
             //计算总金额
             String numText=et_1.getText().toString().trim();
+            Log.e("tag", "用户输入的钱数 ----------" + numText );
             try{
                 if("".equals(numText)){
                     et_4.setText("0.0");
                     return;
                 }
-                port1 = Integer.parseInt(numText);
+                p = Integer.parseInt(numText);
             }catch (NumberFormatException e){
-                port1=3000;
+                Log.e("tag", "jisuan: -------------------" + e.getMessage());
             }
-            Log.e("tag", "转换后的数据 ----------" + port1 );
+            Log.e("tag", "转换后的数据 ----------" + p );
 
-            num=num+port;
+            num = num + p;
 
             Log.e("tag", "获的总额 ----------" + num );
         }
         et_4.setText(num+"");
+        num=0;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
