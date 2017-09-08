@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="63"
-    android:versionName="1.6.3">
+    android:versionCode="64"
+    android:versionName="1.6.4">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -449,10 +449,9 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
-        <activity
-            android:name=".activity.RenWuDetailActivity"
-            android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 任务单-->
+        <activity android:name=".activity.ReleaseDetailActivity"/>
+
         <activity android:name=".activity.WebViewActivity" />
         <activity
             android:name=".activity.Release_FanKuiActivity"

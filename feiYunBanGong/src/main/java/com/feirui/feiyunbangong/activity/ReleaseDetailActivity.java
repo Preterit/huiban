@@ -155,7 +155,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 RequestParams params2 = new RequestParams();
                 String url2 = UrlTools.pcUrl+ UrlTools.RENWU_QRJD;
                 params2.put("id",id);
-                params2.put("button",0);
+                params2.put("button",1);
                 Log.e("全部任务获取成功-确认接单", "id: " + id);
 
                 Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
@@ -163,10 +163,11 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                     public void success(JsonBean bean) {
 
                         ArrayList<HashMap<String,Object>> infor = bean.getInfor();
+                        Log.e("详细任务-确认接单按钮", "成功");
                     }
                     @Override
                     public void failure(String msg) {
-                        Log.e("全部任务获取成功-确认接单", "返回值: " + msg);
+                        Log.e("详细任务-确认接单按钮", "返回值: " + msg);
                     }
                     @Override
                     public void finish() {
