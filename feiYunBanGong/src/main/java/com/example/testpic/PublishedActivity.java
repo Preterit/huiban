@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.utils.BitmapFileSetting;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.ImageUtil;
 import com.feirui.feiyunbangong.utils.PictureUtil;
@@ -35,6 +36,12 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.RequestParams;
+
+import java.io.File;
+import java.io.IOException;
+
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * 发布动态：
@@ -63,7 +70,7 @@ public class PublishedActivity extends Activity implements OnClickListener {
     public void Init() {
 
         team_id = getIntent().getStringExtra("team_id");
-        Log.e("发布动态页面", team_id + "发布team_id");
+        Log.e("TAG", team_id + "发布team_id");
 
         iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_content = (TextView) findViewById(R.id.tv_content);
@@ -104,64 +111,7 @@ public class PublishedActivity extends Activity implements OnClickListener {
 
         activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
 
-        activity_selectimg_send.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-
-                if (TextUtils.isEmpty(tv_content.getText().toString().trim())) {
-                    Toast.makeText(PublishedActivity.this, "请输入内容！", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                StringBuffer sb = new StringBuffer();
-                for (int i = 0; i < Bimp.bmp.size(); i++) {
-                    Bitmap bt = Bimp.bmp.get(i);
-                    Log.e("发布朋友圈", "Bimp.bmp.size():-------------------------- " + bt.toString());
-                    sb.append(BitmapToBase64.bitmapToBase64(bt));
-                    sb.append(",");
-                }
-
-                if (sb.length() > 0) {
-                    sb.delete(sb.length() - 1, sb.length());
-                }
-
-                String url = UrlTools.url + UrlTools.FABIAO_WENZHANG;
-                RequestParams params = new RequestParams();
-                Log.e("发布朋友圈", "sb.toString: "+sb.toString() );
-                params.put("picture", sb.toString());
-                params.put("text", tv_content.getText().toString());
-                Log.e("发布朋友圈", "text: "+tv_content.getText().toString() );
-                params.put("type", "公开");
-                params.put("team_id", team_id);
-
-                Utils.doPost(LoadingDialog.getInstance(PublishedActivity.this),
-                        PublishedActivity.this, url, params,
-                        new HttpCallBack() {
-
-                            @Override
-                            public void success(JsonBean bean) {
-                                Toast.makeText(PublishedActivity.this, "发表成功！",
-                                        Toast.LENGTH_SHORT).show();
-
-                                PublishedActivity.this.finish();
-                            }
-
-                            @Override
-                            public void failure(String msg) {
-                                Log.e("tag", "failure:-------------------------- " + msg);
-                                Toast.makeText(PublishedActivity.this, msg, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-
-                            @Override
-                            public void finish() {
-                                // TODO Auto-generated method stub
-
-                            }
-                        });
-
-            }
-        });
+        activity_selectimg_send.setOnClickListener(this);
     }
 
     @SuppressLint("HandlerLeak")
@@ -248,47 +198,47 @@ public class PublishedActivity extends Activity implements OnClickListener {
                     try {
                         for (int i = Bimp.bmp.size(); i < Bimp.drr.size(); i++) {
                             final String path = Bimp.drr.get(i);
+//                             注意：必须得压缩，否则极有可能报oom;上传服务器也比较慢；
+//                            Bitmap bm = ImageUtil.getimage(path);
+//                            Bimp.bmp.add(bm);
+//                            Bimp.max += 1;
 
-                            //注意：必须得压缩，否则极有可能报oom;上传服务器也比较慢；
-                            Bitmap bm = ImageUtil.getimage(path);
-                            Bimp.bmp.add(bm);
-                            Bimp.max += 1;
+                            File file = new File(path);
+                            //鲁班压缩
+                            Luban.with(PublishedActivity.this)
+                                    .load(file)
+                                    .setCompressListener(new OnCompressListener() {
+                                        @Override
+                                        public void onStart() {
 
+                                        }
 
+                                        @Override
+                                        public void onSuccess(File file) {
+                                            // TODO 压缩成功后调用，返回压缩后的图片文件
+                                            Bitmap bm = null;
+                                            try {
+                                                bm = BitmapFileSetting.decodeFile(file);
+                                                Bimp.bmp.add(bm);
+                                                Bimp.max += 1;
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    adapter.notifyDataSetChanged();
+                                                }
+                                            });
+                                        }
 
+                                        @Override
+                                        public void onError(Throwable e) {
 
-//                            //鲁班压缩
-//                            File file = new File(path);
-//                            Bitmap bm = Bimp.revitionImageSize(path);
-//                            Luban.with(PublishedActivity.this)
-//                                    .load(file)
-//                                    .setCompressListener(new OnCompressListener() {
-//                                        @Override
-//                                        public void onStart() {
-//
-//                                        }
-//
-//                                        @Override
-//                                        public void onSuccess(File file) {
-//                                            // TODO 压缩成功后调用，返回压缩后的图片文件
-//                                            Bitmap bm = BitmapFactory.decodeFile(path);
-//                                            Bimp.bmp.add(bm);
-//                                            Bimp.max += 1;
-//                                        }
-//
-//                                        @Override
-//                                        public void onError(Throwable e) {
-//
-//                                        }
-//                                    }).launch();
+                                        }
+                                    }).launch();
 
                         }
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -306,7 +256,34 @@ public class PublishedActivity extends Activity implements OnClickListener {
         switch (requestCode) {
             case 2:
                 if (resultCode == Activity.RESULT_OK) {
-                    Bitmap bitmap = ImageUtil.getimage(path);
+                    Log.e("path", "onActivityResult:-------------------------- " + path );
+//                    Bitmap bitmap = ImageUtil.getimage(path);
+                    File file = new File(path);
+                    //鲁班压缩
+                    Luban.with(PublishedActivity.this)
+                            .load(file)
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+
+                                }
+
+                                @Override
+                                public void onSuccess(File file) {
+                                    // TODO 压缩成功后调用，返回压缩后的图片文件
+                                    Bitmap bm = null;
+                                    try {
+                                        bm = BitmapFileSetting.decodeFile(file);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+
+                                }
+                            }).launch();
                     if (Bimp.drr.size() < 9) {
                         Bimp.drr.add(path);
                     }
@@ -322,6 +299,7 @@ public class PublishedActivity extends Activity implements OnClickListener {
             case R.id.view_camero_rl_takephoto:
                 window.dismiss();
                 path = PictureUtil.paiZhao(window, this);
+                Log.e("path", "onActivityResult:-------------------------- " + path );
                 break;
             // 从相册选择：
             case R.id.view_camero_rl_selectphoto:
@@ -333,7 +311,64 @@ public class PublishedActivity extends Activity implements OnClickListener {
             case R.id.iv_back:
                 finish();
                 break;
-        }
+            case  R.id.activity_selectimg_send:  //发送
+                if (Utils.isFastDoubleClick()){//防止多次点击
+                    return;
+                }else {
+                    if (TextUtils.isEmpty(tv_content.getText().toString().trim())) {
+                        Toast.makeText(PublishedActivity.this, "请输入内容！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    StringBuffer sb = new StringBuffer();
+                    for (int i = 0; i < Bimp.bmp.size(); i++) {
+                        Bitmap bt = Bimp.bmp.get(i);
+                        Log.e("tag", "Bimp.bmp.size():-------------------------- " + bt);
+                        sb.append(BitmapToBase64.bitmapToBase64(bt));
+                        sb.append(",");
+                    }
+
+                    if (sb.length() > 0) {
+                        sb.delete(sb.length() - 1, sb.length());
+                    }
+
+                    String url = UrlTools.url + UrlTools.FABIAO_WENZHANG;
+                    RequestParams params = new RequestParams();
+                    params.put("picture", sb.toString());
+                    params.put("text", tv_content.getText().toString());
+                    params.put("type", "公开");
+                    params.put("team_id", team_id);
+
+                    Utils.doPost(LoadingDialog.getInstance(PublishedActivity.this),
+                            PublishedActivity.this, url, params,
+                            new HttpCallBack() {
+
+                                @Override
+                                public void success(JsonBean bean) {
+                                    Toast.makeText(PublishedActivity.this, "发表成功！",
+                                            Toast.LENGTH_SHORT).show();
+
+                                    PublishedActivity.this.finish();
+                                }
+
+                                @Override
+                                public void failure(String msg) {
+                                    Log.e("tag", "failure:-------------------------- " + msg);
+                                    Toast.makeText(PublishedActivity.this, msg, Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+
+                                @Override
+                                public void finish() {
+                                    // TODO Auto-generated method stub
+
+                                }
+                            });
+
+                }
+                break;
+
+         }
 
     }
 
