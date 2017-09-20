@@ -52,6 +52,7 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
             @Override
             public void onItemClick(View view , int position){
                 Log.e("全部页面的点击时间", "onItemClick: "+ position);
+                //Intent intent = new Intent(getActivity(), Release_FanKuiActivity.class);
                 Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("json", json.getInfor().get(position-1)+"");
@@ -59,7 +60,7 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
                 bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
-                bundle.putString("staff_head", "http://123.57.45.74/feiybg/"+json.getInfor().get(position-1).get("staff_head"));
+                bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
                 Log.e("全部任务", "onItemClick position: "+position );
                 intent.putExtras(bundle);
                 startActivity(intent);

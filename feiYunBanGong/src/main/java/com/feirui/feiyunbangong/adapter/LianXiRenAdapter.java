@@ -1,9 +1,5 @@
 package com.feirui.feiyunbangong.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +27,10 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 
 	private Activity activity;
@@ -47,6 +47,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 		this.activity = activity;
 		this.type = type;
 		this.strGroups = strGroups;
+
 
 	}
 
@@ -94,6 +95,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 												return;
 											} else {
 												st = res;
+												Log.e("电话好友列表","groups==="+groups);
 												addFriend(list.get(pos)
 														.getPhone(), pos,
 														groups);
@@ -150,6 +152,48 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 	// 添加分组：
 	private void addGroup() {
 
+		String url01 = UrlTools.url + UrlTools.GET_FRIEND_GROUP;
+
+		Utils.doPost(LoadingDialog.getInstance(activity),
+				activity, url01, null, new HttpCallBack() {
+					@Override
+					public void success(JsonBean bean) {
+						ArrayList<HashMap<String, Object>> infor = bean
+								.getInfor();
+						groups.removeAll(groups);
+						strGroups.removeAll(strGroups);
+
+						for (int i = 0; i < infor.size(); i++) {
+							int id = (int) infor.get(i).get("id");
+							String name = infor.get(i).get("name") + "";
+							int default_num = (int) infor.get(i).get("default");
+							int count = (int) infor.get(i).get("count");
+							Group group = new Group(id, name, default_num,
+									count);
+
+							groups.add(group);
+							strGroups.add(group.getName());
+						}
+
+						strGroups.add("+");
+
+						Log.e("电话好友列表", "strGroups"+strGroups.toString());
+					}
+
+
+					@Override
+					public void failure(String msg) {
+
+					}
+
+					@Override
+					public void finish() {
+						// TODO Auto-generated method stub
+
+					}
+				});
+		Log.e("电话好友列表", "strGroups----adapter"+strGroups.toString());
+
 		XiuGaiDialog tianjia = new XiuGaiDialog("添加分组", "添加", "输入新增组名",
 				activity, new AlertCallBack1() {
 					@Override
@@ -205,14 +249,18 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 
 	// 添加好友：
 	private void addFriend(String phone, final int pos, ArrayList<Group> groups) {
+
 		final RequestParams params = new RequestParams();
 		int id = 0;
 		for (int i = 0; i < groups.size(); i++) {
 			if (st.equals(groups.get(i).getName())) {
 				id = groups.get(i).getId();
+				Log.e("电话好友列表--------","groupid"+id);
 				break;
 			}
 		}
+		Log.e("电话好友列表","group_id==="+id);
+		Log.e("电话好友列表","groups.size()==="+groups.size());
 		params.put("group_id", id + "");
 		params.put("staff_mobile", phone);
 		String url = UrlTools.url + UrlTools.TIANJIAHAOYOU;

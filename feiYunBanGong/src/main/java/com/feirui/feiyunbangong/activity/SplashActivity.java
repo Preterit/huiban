@@ -63,7 +63,7 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 		iv = (ImageView) findViewById(R.id.imageView1);
 		// 压缩：
 		iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
-				getResources(), R.drawable.welcome_logo, 480, 800));
+				getResources(), R.drawable.welcome_logo, 1000, 1500));
 
 		update();// 检查更新：
 

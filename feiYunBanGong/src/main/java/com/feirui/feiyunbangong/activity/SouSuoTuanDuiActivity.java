@@ -14,7 +14,9 @@ import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
@@ -38,6 +40,7 @@ public class SouSuoTuanDuiActivity extends BaseActivity implements
 
 	private EditText et_sousuolianxiren;
 	private ListView lv_tuandui;
+	private TextView iv_search;
 	private TuanDuiAdapter adapter;
 	List<TuanDui> tds = new ArrayList<>();
 
@@ -55,6 +58,7 @@ public class SouSuoTuanDuiActivity extends BaseActivity implements
 	}
 
 	private void setListener() {
+		et_sousuolianxiren.setHint("请输入团队名或团队号");
 		et_sousuolianxiren.setOnKeyListener(this);
 		lv_tuandui.setOnItemClickListener(this);
 	}
@@ -64,6 +68,14 @@ public class SouSuoTuanDuiActivity extends BaseActivity implements
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("搜索团队");
 		setRightVisibility(false);
+		iv_search = (TextView) findViewById(R.id.iv_search);
+		iv_search.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String id = et_sousuolianxiren.getText().toString().trim();
+				search(id);
+			}
+		});
 		et_sousuolianxiren = (EditText) findViewById(R.id.et_sousuolianxiren);
 		lv_tuandui = (ListView) findViewById(R.id.lv_tuandui);
 		adapter = new TuanDuiAdapter(getLayoutInflater());

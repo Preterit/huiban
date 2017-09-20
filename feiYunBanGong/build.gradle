@@ -86,7 +86,6 @@ dependencies {
 
     compile('com.android.support:cardview-v7:23.2.0') { force = true }
     //鲁班压缩
-    
 
     //微信支付
     compile 'org.apache.httpcomponents:httpcore:4.4.2'

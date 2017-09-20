@@ -108,7 +108,7 @@ public class AddShopActivity extends BaseActivity {
 
 	private void addpostWD() {
 		//Toast.makeText(getApplication(),"请求成功",Toast.LENGTH_SHORT).show();
-		String postUrl="http://123.57.45.74/feiybg/public/index.php/api/store/edit_info";
+		String postUrl="http://123.57.45.74/feiybg1/public/index.php/api/store/edit_info";
 
 		RequestParams requestParams = new RequestParams();
 		requestParams.put("store_url",Url);

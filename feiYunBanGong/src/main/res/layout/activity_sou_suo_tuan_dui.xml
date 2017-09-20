@@ -4,17 +4,38 @@
     android:layout_height="match_parent"
     android:background="@color/back_huise"
     android:orientation="vertical"
-    tools:context="com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity" >
+    tools:context="com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity">
 
     <include
+        layout="@layout/top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar"
-        layout="@layout/top" />
+        android:layout_height="@dimen/title_bar" />
 
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        layout="@layout/ll_search" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+        <include
+            layout="@layout/ll_search"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/iv_search"
+            android:text="搜索"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="#42BAFF"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            />
+
+    </LinearLayout>
+
 
     <ListView
         android:id="@+id/lv_tuandui"
@@ -22,7 +43,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/y50"
         android:divider="@color/fenge"
-        android:dividerHeight="@dimen/y4" >
-    </ListView>
+        android:dividerHeight="@dimen/y4"></ListView>
 
 </LinearLayout>

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="64"
-    android:versionName="1.6.4">
+    android:versionCode="69"
+    android:versionName="1.6.9">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -429,7 +429,8 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity" />
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
-        <activity android:name=".activity.tribe.EditGroupInfoActivity"
+        <activity
+            android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
 
@@ -442,7 +443,6 @@
 
         <!-- 操作记录 -->
         <activity android:name=".activity.CaoZuoJiLuActivity" />
-
         <activity android:name=".activity.MyShenPiQingJaDetailActivity" />
         <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity" />
         <activity android:name=".activity.MyWaiChuDetailActivity" />
@@ -450,14 +450,14 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
-        <!-- 任务单-->
-        <activity android:name=".activity.ReleaseDetailActivity"/>
-
+        <!-- 任务单 -->
+        <activity android:name=".activity.ReleaseDetailActivity" />
         <activity android:name=".activity.WebViewActivity" />
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.ReleaseDetail_FanKuiActivity"></activity>
     </application>
 
 </manifest>

@@ -113,18 +113,20 @@
             android:textSize="15sp"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp" />
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView13" />
 
         <Button
             android:id="@+id/xiaodian"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:text="查看小店"
             android:textSize="13dp"
             android:textColor="#FFFFFF"
             android:background="#42BAFF"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp" />
 
 
 

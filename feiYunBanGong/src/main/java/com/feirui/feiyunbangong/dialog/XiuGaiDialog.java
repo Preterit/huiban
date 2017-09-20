@@ -1,9 +1,6 @@
 package com.feirui.feiyunbangong.dialog;
 
-import org.apache.http.Header;
-
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,18 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
-import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 public class XiuGaiDialog extends MyBaseDialog {
 
@@ -63,17 +60,17 @@ public class XiuGaiDialog extends MyBaseDialog {
 
 				if ("修改备注".equals(title)) {
 					// 修改阿里百川缓存数据：
-					Log.e("TAG", AppStore.phone + "备注信息id");
+					Log.e("修改备注弹框--", AppStore.phone + "备注信息id");
 
 					/*
 					 * IMUtil.remark(AppStore.phone,
 					 * tv_alert.getText().toString(), new IWxCallback() {
-					 * 
+					 *
 					 * @Override public void onSuccess(Object... arg0) {
 					 * Log.e("TAG", "修改成功！！！！！！！！！！！！！！！！"); }
-					 * 
+					 *
 					 * @Override public void onProgress(int arg0) { }
-					 * 
+					 *
 					 * @Override public void onError(int arg0, String arg1) { }
 					 * });
 					 */
@@ -82,10 +79,10 @@ public class XiuGaiDialog extends MyBaseDialog {
 						return;
 					}
 
-					params.put("person_id", id);
+					params.put("friend_id", id);
 					params.put("remark", tv_alert.getText().toString().trim());
 					url = UrlTools.url + UrlTools.USER_UPDATREMARK;
-					L.e("修改备注url" + url + " params" + params);
+					L.e("修改备注弹框--修改备注url" + url + " params  " + params);
 				} else if ("添加".equals(id)) {
 
 					if (TextUtils.isEmpty(tv_alert.getText().toString().trim())) {

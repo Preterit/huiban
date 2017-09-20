@@ -115,8 +115,7 @@ public class DetailLianXiRenActivity extends BaseActivity {
 
 		rg_phone.check(R.id.rb_add);
 
-		fm.beginTransaction().add(R.id.ll_container, add)
-				.add(R.id.ll_container, msg).show(add).commit();
+		fm.beginTransaction().add(R.id.ll_container, add).add(R.id.ll_container, msg).show(add).commit();
 	}
 
 	LoadingDialog dialog;
@@ -134,7 +133,7 @@ public class DetailLianXiRenActivity extends BaseActivity {
 
 				str = LianXiRenUtil.readConnect(DetailLianXiRenActivity.this);
 
-				Log.e("TAG", str[0] + "姓名，电话" + str[1]);
+				Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
 
 				RequestParams params = new RequestParams();
 				params.put("phone", str[1]);

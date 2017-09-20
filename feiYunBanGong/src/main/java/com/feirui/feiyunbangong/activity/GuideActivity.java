@@ -1,12 +1,10 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,6 +15,9 @@ import android.widget.LinearLayout;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.GuideAdapter;
 import com.feirui.feiyunbangong.utils.ImageUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 新手指导页
@@ -33,9 +34,9 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 	private Button button;
 
 	// 引导图片资源
-	private static final int[] pics = { R.drawable.guide1, R.drawable.guide2 };
+	private static final int[] pics = { R.drawable.guide4, R.drawable.guide5 ,R.drawable.guide6};
 
-	// 底部小店图片
+	// 底部小点图片
 	private ImageView[] dots;
 
 	// 记录当前选中位置
@@ -61,7 +62,7 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 			iv.setLayoutParams(mParams);
 			iv.setScaleType(ScaleType.FIT_XY);
 			iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
-					getResources(), pics[i], 280, 600));
+					getResources(), pics[i], 1000, 1500));
 			views.add(iv);
 		}
 		vp = (ViewPager) findViewById(R.id.viewpager_guide);
@@ -88,11 +89,12 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 		LinearLayout ll = (LinearLayout) findViewById(R.id.ll_guide);
 
 		dots = new ImageView[pics.length];
-
+		Log.e("欢迎页面", "pics.length"+pics.length );
 		// 循环取得小点图片
 		for (int i = 0; i < pics.length; i++) {
+			Log.e("欢迎页面", "dots[i]"+dots[i] );
 			dots[i] = (ImageView) ll.getChildAt(i);
-			dots[i].setEnabled(true);// 都设为灰色
+			//dots[i].setEnabled(true);// 都设为灰色
 			dots[i].setOnClickListener(this);
 			dots[i].setTag(i);// 设置位置tag，方便取出与当前位置对应
 		}
@@ -143,7 +145,7 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 	public void onPageSelected(int arg0) {
 		// 设置底部小点选中状态
 		setCurDot(arg0);
-		if (arg0 == 1) {
+		if (arg0 == 2) {
 			button.setVisibility(View.VISIBLE);
 		} else {
 			button.setVisibility(View.GONE);

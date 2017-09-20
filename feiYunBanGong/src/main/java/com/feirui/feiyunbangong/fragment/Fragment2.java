@@ -54,6 +54,7 @@ import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.Friend;
 import com.feirui.feiyunbangong.entity.Group;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.LianXiRen;
 import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
 import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper.UserInfo;
 import com.feirui.feiyunbangong.myinterface.AllInterface.OnGroupStateChangedListener;
@@ -61,6 +62,7 @@ import com.feirui.feiyunbangong.myinterface.AllInterface.OnNewFriendNumChanged;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.LianXiRenUtil;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -91,7 +93,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   private MyBaseExpandableListAdapter adapter;
   private Map<Integer, List<ChildItem>> map;
   private List<Group> groups;
-
+  private String[] str;// 存放联系人姓名和手机号的数组；
+  private ArrayList<LianXiRen> lxrs01 = new ArrayList<>();// 已经注册过得联系人集合；
   private LinearLayout ll_tianjia, ll_qunliao, ll_saosao, inclue,ll_quntalk,ll_taolun;
 
   private boolean isShow = false;
@@ -105,6 +108,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   private MyBroadCastReceiver receiver;
   private SelectZTDialog dialog;
   private OnNewFriendNumChanged friendNumListener;
+  public int friend_size;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -222,7 +226,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
             int num = Integer.parseInt(String.valueOf(object));
             if (num > 0) {
               tv_num.setVisibility(View.VISIBLE);
-              tv_num.setText(num + "");
+              tv_num.setText(num +friend_size+ "");
             } else {
               tv_num.setVisibility(View.INVISIBLE);
             }
@@ -634,7 +638,61 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     list.add("修改分组");
     list.add("修改备注");
     dialog = new SelectZTDialog(getActivity(), "好友管理", list, this);
+    //asd();
   }
+
+  public void asd(){
+    str = LianXiRenUtil.readConnect(getActivity());
+
+    Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+
+    RequestParams params = new RequestParams();
+    params.put("phone", str[1]);
+    String url = UrlTools.url + UrlTools.SHOUJILIANXIREN;
+
+    Utils.doPost(null, getActivity(), url, params,
+            new HttpCallBack() {
+              @Override
+              public void success(JsonBean bean) {
+                ArrayList<HashMap<String, Object>> info = bean.getInfor();
+                Log.e("通讯录好友列表", "info.size() "+ info.size());
+                friend_size=info.size();
+                tv_num.setVisibility(View.VISIBLE);
+                tv_num.setText(friend_size+"");
+                if(friend_size>0){
+                  tv_num.setVisibility(View.VISIBLE);
+                  tv_num.setText(friend_size+"");
+                }
+
+              }
+
+              @Override
+              public void failure(String msg) {
+              }
+
+              @Override
+              public void finish() {
+                dialog.dismiss();
+              }
+            });
+    }
+
+
+
+private void addData(JsonBean bean) {
+        ArrayList<HashMap<String, Object>> info = bean.getInfor();
+        Log.e("TAG", info.size() + "info.size");
+        if (info != null) {
+          lxrs01.removeAll(lxrs01);
+          for (int i = 0; i < info.size(); i++) {
+            HashMap<String, Object> map = info.get(i);
+            LianXiRen lxr = new LianXiRen((String) map.get("staff_name"),
+                    (String) map.get("phone"), (String) map.get("type"),
+                    (String) map.get("staff_head"));
+            lxrs01.add(lxr);
+          }
+          }
+        }
 
   @Override
   public void onDestroy() {
@@ -710,10 +768,11 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
   @Override
   public void onOK(String s) {
     if ("修改备注".equals(s)) {
-      Log.e("联系人页面", "item.getPhone(): "+item.getPhone().toString());
+      Log.e("联系人页面修改备注", "item.getPhone(): "+item.getPhone().toString());
+      Log.e("联系人页面修改备注", "item: "+item.toString());
       AppStore.phone = item.getPhone();
       Log.e("联系人页面", "item.getPhone(): "+item.getPerson_id());
-      XiuGaiDialog tianjia = new XiuGaiDialog("修改备注", item.getPerson_id()
+      XiuGaiDialog tianjia = new XiuGaiDialog("修改备注", item.getId()
           + "", "请输入新备注", getActivity(), new AlertCallBack1() {
 
         @Override

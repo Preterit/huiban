@@ -290,7 +290,7 @@ public class MyShopActivity extends BaseActivity implements OnClickListener {
         finish();
     }
     private void enterWd() {
-        String postUrl="http://123.57.45.74/feiybg/public/index.php/api/Store/enter_store";
+        String postUrl="http://123.57.45.74/feiybg1/public/index.php/api/Store/enter_store";
         RequestParams requestParams = new RequestParams();
         Utils.doPost(LoadingDialog.getInstance(this), this, postUrl, requestParams, new HttpCallBack() {
             @Override
