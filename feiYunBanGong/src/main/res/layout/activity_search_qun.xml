@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_huise"
+    android:orientation="vertical">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_below="@+id/inclue"
+        android:layout_marginLeft="@dimen/x60"
+        android:layout_marginRight="@dimen/x60"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@drawable/shape_sousuo"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/iv_sousuo"
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/sousuo" />
+
+        <EditText
+            android:id="@+id/et_sousuolianxiren"
+            style="@style/a000000_48"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_sousuo"
+            android:background="@null"
+            android:focusable="true"
+            android:gravity="left|center_vertical"
+            android:hint="请输入群号"
+            android:imeOptions="actionSearch"
+            android:maxLength="11"
+            android:paddingLeft="@dimen/x50"
+            android:singleLine="true"
+            android:textColorHint="@color/d1d1d1" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_tuandui"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y50"
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y4" >
+    </ListView>
+
+</LinearLayout>

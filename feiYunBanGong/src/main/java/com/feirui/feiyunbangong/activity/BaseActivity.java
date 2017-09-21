@@ -72,14 +72,13 @@ public class BaseActivity extends FragmentActivity {
 		leftIv = (ImageView) findViewById(R.id.leftIv);
 		centerTv = (TextView) findViewById(R.id.centerTv);
 		rightIv = (ImageView) findViewById(R.id.rightIv);
+//		righttv = (TextView) findViewById(R.id.righttv);
 		if (leftIv != null) {
 			leftll.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					finish();
-
-					Log.d("tag","_____---------___________");
 					overridePendingTransition(R.anim.aty_zoomclosein,
 							R.anim.aty_zoomcloseout);
 				}

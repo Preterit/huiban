@@ -50,11 +50,9 @@ public class Happlication extends MultiDexApplication {
         // 第一个参数是Application Context
         // 这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
         if (SysUtil.isMainProcess()) {
+            IMUtil.bind();// 绑定自定义会话列表等；
             YWAPI.init(this, APP_KEY);
         }
-
-        IMUtil.bind();// 绑定自定义会话列表等；
-
 
         // 初始化ImageLoader;
         ImageLoaderConfiguration config = ImageLoaderUtils.getNowConfig(this);

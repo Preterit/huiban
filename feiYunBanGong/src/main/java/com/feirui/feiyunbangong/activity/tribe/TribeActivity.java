@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
@@ -51,6 +52,7 @@ public class TribeActivity extends BaseActivity implements AdapterView.OnItemCli
         private List<YWTribe> mList;
         private List<YWTribe> mTribeList;
         private List<YWTribe> mRoomsList;
+        private TextView righttv;
 
 
         private YWIMKit mIMKit;
@@ -93,7 +95,15 @@ public class TribeActivity extends BaseActivity implements AdapterView.OnItemCli
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("群列表");
         setRightVisibility(false);
-
+        righttv = (TextView) findViewById(R.id.righttv);
+        righttv.setVisibility(View.VISIBLE);
+        righttv.setText("搜索群");
+        righttv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TribeActivity.this,SearchTribeActivity.class));
+            }
+        });
 
         mList = new ArrayList<YWTribe>();
         mTribeList = new ArrayList<YWTribe>();

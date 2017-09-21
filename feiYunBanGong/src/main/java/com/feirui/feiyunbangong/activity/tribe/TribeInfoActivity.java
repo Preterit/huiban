@@ -140,7 +140,7 @@ public class TribeInfoActivity extends BaseActivity{
         }
     }
 
-    public void qunID(long id){
+    public void qunID(final long id){
         Log.e("chengyuan", "qunID: ------------------------" + id );
         String url = UrlTools.url + UrlTools.QUN_ID;
         RequestParams params = new RequestParams();
@@ -151,10 +151,12 @@ public class TribeInfoActivity extends BaseActivity{
 
                     @Override
                     public void success(JsonBean bean) {
+                        TribeInfoActivity.this.finish();
                         if ("200".equals(bean.getCode())){
                             T.showShort(TribeInfoActivity.this, "团聊创建成功！");
                         }
-//                        TribeInfoActivity.this.finish();
+                        Intent intent2 = mIMKit.getTribeChattingActivityIntent(id);
+                        startActivity(intent2);
                     }
 
                     @Override
