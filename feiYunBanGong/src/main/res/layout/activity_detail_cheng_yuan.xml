@@ -94,6 +94,44 @@
         android:layout_marginLeft="@dimen/x100"
         android:layout_marginTop="@dimen/y50"
         android:text="团队备注名：张三" />
+    <TextView
+        style="@style/a000000_48"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@color/ffffff"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x50"
+        android:text="个人小店" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人小店"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView13" />
+
+        <Button
+            android:id="@+id/xiaodian"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="查看小店"
+            android:textSize="13dp"
+            android:textColor="#FFFFFF"
+            android:background="#42BAFF"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp" />
+
+
+
+    </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -111,7 +149,7 @@
             android:id="@+id/bt_addfriend"
             style="@style/ffffff_38"
             android:layout_width="0dp"
-            android:layout_height="@dimen/y130"
+            android:layout_height="45dp"
             android:layout_weight="1"
             android:background="@color/main_color"
             android:gravity="center"
@@ -121,7 +159,7 @@
             android:id="@+id/bt_liaotian"
             style="@style/ffffff_38"
             android:layout_width="0dp"
-            android:layout_height="@dimen/y130"
+            android:layout_height="45dp"
             android:layout_marginLeft="@dimen/x50"
             android:layout_weight="1"
             android:background="@color/main_color"

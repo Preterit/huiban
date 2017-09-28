@@ -43,7 +43,7 @@ public class DetailChengYuanActivity extends BaseActivity implements
 
 	private TextImageView iv_head;
 	private TextView tv_name, tv_email, tv_phone, tv_name_02, tv_remark;
-	private Button bt_liaotian, bt_addfriend;
+	private Button bt_liaotian, bt_addfriend,xiaodian;
 	private LinearLayout ll_add_goto;
 	private List<Group> groups = new ArrayList<>();// 分组信息；
 	private ArrayList<String> group_name = new ArrayList<>();// 组名；
@@ -165,13 +165,15 @@ public class DetailChengYuanActivity extends BaseActivity implements
 				startActivityForResult(intent02, 100);
 			}
 		});
-
+		xiaodian = (Button) findViewById(R.id.xiaodian);
 		iv_head = (TextImageView) findViewById(R.id.iv_head);
 		tv_name = (TextView) findViewById(R.id.tv_name);
 		tv_email = (TextView) findViewById(R.id.tv_email);
 		tv_name_02 = (TextView) findViewById(R.id.tv_name_02);
 		bt_liaotian = (Button) findViewById(R.id.bt_liaotian);
 		tv_phone = (TextView) findViewById(R.id.tv_phone);
+
+		xiaodian.setOnClickListener(this);
 
 		if (tdcy.getFriendstate() == 1) {
 			bt_addfriend.setEnabled(false);
@@ -214,6 +216,15 @@ public class DetailChengYuanActivity extends BaseActivity implements
 			break;
 		case R.id.bt_addfriend:
 			addFriend();// 添加好友；
+			break;
+
+			case R.id.xiaodian:
+				Log.e("团队成员资料页面", "Store_url: "+tdcy.getStore_url() );
+				Intent intent1=new Intent();
+				intent1.putExtra("uri",tdcy.getStore_url());//////////////////////////////////////////////
+				intent1.putExtra("TAG","1");
+				intent1.setClass(getApplicationContext(),WebViewActivity.class);
+				startActivity(intent1);
 			break;
 		}
 	}

@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,6 +13,8 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * 反馈-详情
@@ -50,8 +50,7 @@ public class FeedbackDetailsActivity extends BaseActivity {
 		params.put("id", id);
 		String url = UrlTools.url + UrlTools.CUSTOMER_FEEDBACK_LIST;
 		L.e("反馈-详情url" + url + " params" + params);
-		AsyncHttpServiceHelper.post(url, params,
-				new AsyncHttpResponseHandler() {
+		AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
 					@Override
 					public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 						super.onSuccess(arg0, arg1, arg2);

@@ -43,7 +43,7 @@ public class JieDanRenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Log.e("接单人adapter", "staff_name: "+ data.get(position).get("staff_name"));
         Log.e("接单人adapter", "staff_head: "+ data.get(position).get("staff_head"));
         ((ViewHolder) holder).rwd_tv_name.setText(data.get(position).get("staff_name")+"");
-        ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg/"+data.get(position).get("staff_head"), ((ViewHolder) holder).rwd_im_head, ImageLoaderUtils.getSimpleOptions());
+        ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg1/"+data.get(position).get("staff_head"), ((ViewHolder) holder).rwd_im_head, ImageLoaderUtils.getSimpleOptions());
 
     }
 

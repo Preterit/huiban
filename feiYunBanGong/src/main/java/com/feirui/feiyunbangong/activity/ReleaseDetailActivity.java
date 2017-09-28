@@ -13,11 +13,16 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.JieDanRenAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +30,12 @@ import java.util.HashMap;
 /**
  * 新的任务单详情界面
  * lice
- * */
-public class ReleaseDetailActivity extends BaseActivity implements View.OnClickListener{
-    public String staff_name,time,task_txt,staff_head;
+ */
+public class ReleaseDetailActivity extends BaseActivity implements View.OnClickListener {
+    public String staff_name, time, task_txt, staff_head;
     int id;
     ImageView rwd_im_tx;
-    TextView rwd_tv_mz,rwd_tv_rq,rwd_tv_zt,rwd_tv_xq,rwd_tv_sj,rwd_tv_wz,rwd_tv_xs,rwd_tv_xz;
+    TextView rwd_tv_mz, rwd_tv_rq, rwd_tv_zt, rwd_tv_xq, rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz;
     RecyclerView rwd_rec_jdr;
     Button rwd_btn_qrjd;
     private JsonBean json;
@@ -46,7 +51,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         time = getIntent().getStringExtra("time");
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
-        id = getIntent().getIntExtra("id",-1);
+        id = getIntent().getIntExtra("id", -1);
 
         initDate();
         initView();
@@ -54,8 +59,8 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
 
     private void initDate() {
         RequestParams params = new RequestParams();
-        String url = UrlTools.pcUrl+ UrlTools.RENWU_JDR;
-        params.put("id",id+"");
+        String url = UrlTools.pcUrl + UrlTools.RENWU_JDR;
+        params.put("id", id + "");
         Log.e("任务单--全部任务URL", "url: " + url);
         Log.e("任务单--全部任务URL-Date", "params: " + params.toString());
 
@@ -63,12 +68,12 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
             @Override
             public void success(JsonBean bean) {
 
-                ArrayList<HashMap<String,Object>> infor = bean.getInfor();
-                Log.e("全部任务获取成功-接单人", "success: "+bean);
-                Log.e("全部任务获取成功-接单人", "success: "+infor);
+                ArrayList<HashMap<String, Object>> infor = bean.getInfor();
+                Log.e("全部任务获取成功-接单人", "success: " + bean);
+                Log.e("全部任务获取成功-接单人", "success: " + infor);
                 HashMap<String, HashMap<String, Object>> in_fo = new HashMap<>();
-                for (int i=0;i<infor.size();i++){
-                    in_fo.put(i+"",infor.get(i));
+                for (int i = 0; i < infor.size(); i++) {
+                    in_fo.put(i + "", infor.get(i));
                 }
 
                 adapter.addAll(infor);
@@ -85,17 +90,16 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
 
-        String url1 = UrlTools.pcUrl+ UrlTools.RENWU_FBR;
+        String url1 = UrlTools.pcUrl + UrlTools.RENWU_FBR;
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url1, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
 
-                ArrayList<HashMap<String,Object>> infor = bean.getInfor();
+                ArrayList<HashMap<String, Object>> infor = bean.getInfor();
                 Log.e("全部任务获取成功-发布人", "bean: " + bean);
                 Log.e("全部任务获取成功-发布人", "infor: " + infor);
                 Log.e("全部任务获取成功-发布人", "infor-staff_head: " + infor.get(0).get("staff_head"));
-
 
             }
 
@@ -137,42 +141,67 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rwd_rec_jdr.setLayoutManager(linearLayoutManager);
         //设置适配器
-        adapter = new JieDanRenAdapter(this,new ArrayList<HashMap<String, Object>>());
+        adapter = new JieDanRenAdapter(this, new ArrayList<HashMap<String, Object>>());
         rwd_rec_jdr.setAdapter(adapter);
 
 
         rwd_tv_mz.setText(staff_name);
         rwd_tv_rq.setText(time);
         rwd_tv_xq.setText(task_txt);
-        // ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg/"+staff_head, rwd_im_tx);
+        //ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg/"+staff_head, rwd_im_tx);
         ImageLoader.getInstance().displayImage(staff_head, rwd_im_tx, ImageLoaderUtils.getSimpleOptions());
     }
 
+
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rwd_btn_qrjd://确认接单
+
                 RequestParams params2 = new RequestParams();
-                String url2 = UrlTools.pcUrl+ UrlTools.RENWU_QRJD;
-                params2.put("id",id);
-                params2.put("button",0);
+                //String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
+                String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/Task/task_accept";
+                params2.put("id", id);
+                params2.put("button", 1);
                 Log.e("全部任务获取成功-确认接单", "id: " + id);
-
-                Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
+                AsyncHttpServiceHelper.post(url2,params2,new AsyncHttpResponseHandler(){
                     @Override
-                    public void success(JsonBean bean) {
-
-                        ArrayList<HashMap<String,Object>> infor = bean.getInfor();
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        super.onSuccess(statusCode, headers, responseBody);
+                        final JsonBean json = JsonUtils.getMessage(new String(responseBody));
+                        if ("-400".equals(json.getCode())) {
+                            Log.e("详细任务-确认接单按钮", "成功"+json.toString());
+                        }else {
+                            Log.e("详细任务-确认接单按钮", "失败"+json.toString());
+                        }
                     }
+
                     @Override
-                    public void failure(String msg) {
-                        Log.e("全部任务获取成功-确认接单", "返回值: " + msg);
-                    }
-                    @Override
-                    public void finish() {
-                        //finish();
+                    public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+                                          Throwable arg3) {
+                        super.onFailure(arg0, arg1, arg2, arg3);
                     }
                 });
+
+//                Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
+//                    @Override
+//                    public void success(JsonBean bean) {
+//
+//                        ArrayList<HashMap<String, Object>> infor = bean.getInfor();
+//                        Log.e("详细任务-确认接单按钮", "成功");
+//                    }
+//
+//                    @Override
+//                    public void failure(String msg) {
+//                        Log.e("详细任务-确认接单按钮", "失败，返回值: " + msg);
+//                    }
+//
+//                    @Override
+//                    public void finish() {
+//                        //finish();
+//                    }
+//                });
 
                 break;
         }

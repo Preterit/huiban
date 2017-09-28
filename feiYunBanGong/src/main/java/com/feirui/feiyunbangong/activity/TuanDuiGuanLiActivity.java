@@ -483,22 +483,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 		IYWContact iywContact =  YWContactFactory.createAPPContact(mTuanDui.getPhone(), Happlication.APP_KEY);
 		Log.e("chengyuan", "iywContact: -----------------" + iywContact );
-		mTribeService.expelMember(mTribeId, iywContact, new IWxCallback() {
-			@Override
-			public void onSuccess(Object... objects) {
-
-			}
-
-			@Override
-			public void onError(int i, String s) {
-
-			}
-
-			@Override
-			public void onProgress(int i) {
-
-			}
-		});
+//
 	}
 	Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {

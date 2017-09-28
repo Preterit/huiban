@@ -10,8 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.HeaderViewRecyclerAdapter;
 import com.feirui.feiyunbangong.adapter.ShopAdapter;
@@ -22,6 +21,7 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.CircleImageView2;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -119,10 +119,10 @@ public class FriendShop extends BaseActivity {
     }
 
     private void setPosturl() {
-        String postUrl="http://123.57.45.74/feiybg/public/index.php/api/Store/enter_store_other";
+        String postUrl="http://123.57.45.74/feiybg1/public/index.php/api/Store/enter_store_other";
         RequestParams requestParams = new RequestParams();
         requestParams.put("staff_id",mInfoBean.getStaff_id());
-        Toast.makeText(getApplicationContext(),"传过去的ID"+mInfoBean.getStaff_id(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"传过去的ID"+mInfoBean.getStaff_id(),Toast.LENGTH_SHORT).show();
         Utils.doPost(LoadingDialog.getInstance(this), this, postUrl, requestParams, new HttpCallBack() {
             @Override
             public void success(JsonBean bean) {

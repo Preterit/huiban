@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
@@ -224,13 +223,13 @@ public class RegisteActivity extends BaseActivity {
 				// 发请求
 				RequestParams params = new RequestParams();
 				//图片验证码
-				String phoneCodes = et_phoneCodes.getText().toString().toLowerCase();
-				if (phoneCodes.equals(realCode)) {
-					params.put("str", 1);
-				}else{
-					Toast.makeText(RegisteActivity.this, phoneCodes + "图片验证码错误,请重新输入", Toast.LENGTH_SHORT).show();
-					return;
-				}
+//				String phoneCodes = et_phoneCodes.getText().toString().toLowerCase();
+//				if (phoneCodes.equals(realCode)) {
+//					params.put("str", 1);
+//				}else{
+//					Toast.makeText(RegisteActivity.this, phoneCodes + "图片验证码错误,请重新输入", Toast.LENGTH_SHORT).show();
+//					return;
+//				}
 
 				if (!type.equals("denglu")){
 					params.put("mobile", et_phone.getText().toString().trim());

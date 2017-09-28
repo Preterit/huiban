@@ -172,12 +172,12 @@ public class ChuangJianTuanDuiActivity extends BaseActivity implements
 			sb2.append(",");
 		}
 
-		params.put("team_name", et_name_tuandui.getText().toString());
+		params.put("team_name", et_name_tuandui.getText().toString().trim());
 		params.put("staff_id", sb.toString());
 		params.put("tag_name", sb1.toString());
 		params.put("tag_id", sb2.toString());
 
-		Log.e("TAG", params.toString());
+		Log.e("创建团队页面", params.toString());
 
 		Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
 				new HttpCallBack() {

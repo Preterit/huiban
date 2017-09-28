@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
-    tools:context=".GuideActivity" >
+    tools:context="com.feirui.feiyunbangong.activity.GuideActivity" >
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_guide"
@@ -21,34 +21,34 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="@dimen/x105"
-            android:layout_height="@dimen/x105"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:clickable="true"
             android:padding="@dimen/x30"
             android:src="@drawable/dot" />
 
         <ImageView
-            android:layout_width="@dimen/x105"
-            android:layout_height="@dimen/x105"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:clickable="true"
             android:padding="@dimen/x30"
             android:src="@drawable/dot" />
 
-        <!-- <ImageView
-            android:layout_width="@dimen/x105"
-            android:layout_height="@dimen/x105"
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:clickable="true"
             android:padding="@dimen/x30"
-            android:src="@drawable/dot" /> -->
+            android:src="@drawable/dot" />
     </LinearLayout>
 
     <Button
         android:id="@+id/button_guide"
-        android:layout_width="@dimen/x480"
-        android:layout_height="@dimen/y130"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
         android:layout_above="@id/ll_guide"
         android:layout_marginTop="@dimen/y10"
         android:layout_centerHorizontal="true"

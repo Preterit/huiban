@@ -93,7 +93,8 @@
         android:layout_marginTop="@dimen/y120"
         android:background="@drawable/et_bg"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             style="@style/tv_hint"
@@ -109,14 +110,13 @@
             android:layout_height="@dimen/y120"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="请输入验证码"
-            />
+            android:hint="输入验证码" />
 
         <ImageView
             android:id="@+id/iv_showCode"
-            android:layout_width="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_height="match_parent" />
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
 
 

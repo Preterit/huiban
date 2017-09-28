@@ -1,8 +1,5 @@
 package com.feirui.feiyunbangong.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,7 +11,6 @@ import android.widget.ListView;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.DetailLianXiRenActivity;
 import com.feirui.feiyunbangong.adapter.LianXiRenAdapter;
-import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.Group;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.LianXiRen;
@@ -23,6 +19,9 @@ import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,6 +78,7 @@ public class PhoneOfAddFragment extends Fragment {
 					strGroups.add(group.getName());
 				}
 				strGroups.add("+");
+				Log.e("好友页面", "strGroups: "+strGroups.toString());
 			}
 
 			@Override
@@ -95,8 +95,7 @@ public class PhoneOfAddFragment extends Fragment {
 
 	private void initView() {
 		lv_laixiren = (ListView) v.findViewById(R.id.lv_lianxiren);
-		adapter = new LianXiRenAdapter(getActivity(), getActivity()
-				.getLayoutInflater(), 1, strGroups);
+		adapter = new LianXiRenAdapter(getActivity(), getActivity().getLayoutInflater(), 1, strGroups);
 		lv_laixiren.setAdapter(adapter);
 	}
 

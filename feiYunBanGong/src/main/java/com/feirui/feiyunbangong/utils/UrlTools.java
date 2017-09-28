@@ -16,14 +16,14 @@ public class UrlTools {
     /**
      * 新的PC端的接口地址
      * */
-  public static String pcUrl = "http://123.57.45.74/feiybg/public/index.php/home_api/";
+  public static String pcUrl = "http://123.57.45.74/feiybg1/public/index.php/home_api/";
   /**
    * 链接地址
    */
-  public static String url = "http://123.57.45.74/feiybg1/public/index.php/api/";
+  public static String url = "http://123.57.45.74/feiybg/public/index.php/api/";
   public static String url1 = "http://123.57.45.74/feiybg/public/index.php/index/";
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
-  public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
+// public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
   /**
    * 注册获取验证码

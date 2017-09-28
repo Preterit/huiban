@@ -207,7 +207,7 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
     }
 
     private void setPosturl() {
-        String postUrl="http://123.57.45.74/feiybg/public/index.php/api/Store/enter_store_other";
+        String postUrl="http://123.57.45.74/feiybg1/public/index.php/api/Store/enter_store_other";
         RequestParams requestParams = new RequestParams();
         requestParams.put("staff_id",infoBean.getStaff_id()+"");
      //   Toast.makeText(getApplicationContext(),"传过去的ID"+infoBean.getStaff_id(),Toast.LENGTH_SHORT).show();

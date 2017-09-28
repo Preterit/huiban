@@ -8,11 +8,28 @@
         layout="@layout/top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"/>
-
-    <ListView
-        android:id="@+id/lv_newfriend"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.feirui.feiyunbangong.view.MyListView
+                android:id="@+id/lv_lxr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.feirui.feiyunbangong.view.MyListView>
+
+            <com.feirui.feiyunbangong.view.MyListView
+                android:id="@+id/lv_newfriend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.feirui.feiyunbangong.view.MyListView>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
