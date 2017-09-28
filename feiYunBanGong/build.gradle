@@ -111,6 +111,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'top.zibin:Luban:1.1.2'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    compile 'org.litepal.android:core:1.6.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
 }
 
 
