@@ -87,10 +87,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tuan_dui);
-
         mIMKit = AppStore.mIMKit;
-
-
         initView();
         setListener();
         setListView();
@@ -131,7 +128,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
         String url = UrlTools.url + UrlTools.TEAM_MESSAGE_NUM;
         RequestParams params = new RequestParams();
-        params.put("teamid", td.getId());
+        params.put("teamid", td.getTid());
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
                 new HttpCallBack() {
 
@@ -163,7 +160,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         String url = UrlTools.url + UrlTools.DETAIL_TUANDUICHENGYUAN;
 
         RequestParams params = new RequestParams();
-        params.put("id", td.getId());
+        params.put("id", td.getTid());
         L.e("获取团队成员url" + url + " params" + params);
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
                 new HttpCallBack() {
@@ -205,6 +202,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                             }
                             tdcys.add(tdcy);
                         }
+                        Log.e("123", "success: ------------------" + tdcys );
                         adapter.add(tdcys);
                     }
 
@@ -376,13 +374,13 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                 Intent intent02 = new Intent(this, DetailGongGaoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("tdcys", tdcys);
-                bundle.putString("id", td.getId());
+                bundle.putString("id", td.getTid());
                 intent02.putExtras(bundle);
                 startActivity(intent02);
                 break;
             case R.id.ll_tuanduiquan:
                 Intent intent03 = new Intent(this, WorkCircleActivity.class);
-                intent03.putExtra("team_id", td.getId());
+                intent03.putExtra("team_id", td.getTid());
                 startActivity(intent03);
                 break;
             case R.id.llTeamTask:
@@ -456,7 +454,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         //团队
         String url = UrlTools.url + UrlTools.ADD_CHENGYUAN;
         RequestParams params = new RequestParams();
-        params.put("team_id", td.getId());
+        params.put("team_id", td.getTid());
         params.put("staff_id", sb.toString());
 
         Log.e("TAG", "------------成员------" + params.toString());
@@ -497,7 +495,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     public void getTuanLiaoId(){
         String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
         RequestParams params = new RequestParams();
-        params.put("team_id",td.getId());
+        params.put("team_id",td.getTid());
         AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
 
             @Override
@@ -569,7 +567,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             // 判断团队id是否和传过来的团队id一致，如果一致则刷新页面；否则不做处理；
             String id = intent.getStringExtra("id");
 
-            if (td.getId().equals(id)) {
+            if (td.getTid().equals(id)) {
                 getData();// 更新数据；
             }
         }

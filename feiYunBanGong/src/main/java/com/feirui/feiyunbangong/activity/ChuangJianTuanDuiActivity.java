@@ -27,6 +27,7 @@ import com.feirui.feiyunbangong.dialog.TianJiaBIaoQianDialog;
 import com.feirui.feiyunbangong.dialog.TianJiaBIaoQianDialog.AlertCallBack1;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -184,6 +185,7 @@ public class ChuangJianTuanDuiActivity extends BaseActivity implements
 					public void success(JsonBean bean) {
 						T.showShort(ChuangJianTuanDuiActivity.this,
 								bean.getMsg());
+						setResult(1001,new Intent());
 						ChuangJianTuanDuiActivity.this.finish();
 						overridePendingTransition(R.anim.aty_zoomin,
 								R.anim.aty_zoomout);

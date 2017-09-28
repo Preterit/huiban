@@ -77,6 +77,7 @@ public class MyReceiver extends BroadcastReceiver {
                 i.setAction(Constant.ON_RECEIVE_NEW_MEMBER_ADD);
                 i.putExtra("id", json.get("team_id") + "");
                 context.sendBroadcast(i);
+                Log.e("TAG", "团队新增成员、。走了吗是。。。");
                 // 您被邀请加入团队：刷新团队列表接口：
             } else if ("team_member_add".equals(json.get("key"))) {
                 Log.e("TAG", "您被邀请加入团队");
@@ -157,7 +158,7 @@ public class MyReceiver extends BroadcastReceiver {
                     Object id = json.get("team_id");
                     Object name = json.get("team_name");
                     TuanDui td = new TuanDui();
-                    td.setId(id + "");
+                    td.setTid(id + "");
                     td.setName(name + "");
                     // 跳转到查看团队页面：
                     openDetailTeam(context, td);
@@ -171,7 +172,7 @@ public class MyReceiver extends BroadcastReceiver {
                     Object id = json.get("team_id");
                     Object name = json.get("team_name");
                     TuanDui td = new TuanDui();
-                    td.setId(id + "");
+                    td.setTid(id + "");
                     td.setName(name + "");
                     // 跳转到查看团队页面：
                     openDetailTeam(context, td);

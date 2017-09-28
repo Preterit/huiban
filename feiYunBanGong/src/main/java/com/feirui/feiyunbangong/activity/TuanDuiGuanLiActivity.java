@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.litepal.crud.DataSupport;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -96,7 +97,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 		String url = UrlTools.url + UrlTools.CHENGYUAN_WU_GUANLIYUAN;
 		RequestParams params = new RequestParams();
-		params.put("team_id", td.getId());
+		params.put("team_id", td.getTid());
 		AsyncHttpServiceHelper.post(url, params,
 				new AsyncHttpResponseHandler() {
 
@@ -244,7 +245,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				Intent intent = new Intent(TuanDuiGuanLiActivity.this, TribeInfoActivity.class);
 				intent.putExtra("postId","postId");
 				intent.putExtra("code",100);
-				intent.putExtra("id",td.getId());
+				intent.putExtra("id",td.getTid());
 				intent.putExtra(TribeConstants.TRIBE_ID, tribe.getTribeId());
 				startActivity(intent);
 				finish();
@@ -278,13 +279,15 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	private void dissolve() {
 		String url = UrlTools.url + UrlTools.DISSOLVE_TEAM;
 		RequestParams params = new RequestParams();
-		params.put("team_id", td.getId());
+		params.put("team_id", td.getTid());
 
 		Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
 				new HttpCallBack() {
 
 					@Override
 					public void success(JsonBean bean) {
+						//移除本地缓存的团队
+						DataSupport.deleteAll(TuanDui.class, "tid = ?", td.getTid());
 						T.showShort(TuanDuiGuanLiActivity.this, "团队已解散！");
 						TuanDuiGuanLiActivity.this.finish();
 						for (int i = 0; i < AppStore.acts.size(); i++) {
@@ -328,6 +331,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 			}
 		},Long.parseLong(mTbID));
+
 	}
 
 	// 移交管理员：
@@ -336,7 +340,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 		String url = UrlTools.url + UrlTools.SET_TEEM_MANAGER;
 		RequestParams params = new RequestParams();
 
-		params.put("team_id", td.getId());
+		params.put("team_id", td.getTid());
 		params.put("staff_id", tdcy.getStaff_id());
 		params.put("oldstaff_id", td.getGuanli_id());
 
@@ -349,7 +353,10 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 						Intent intent = new Intent(TuanDuiGuanLiActivity.this,
 								TuanDuiJiaActivity.class);
 						setResult(100, intent);
-						finish();
+						if (mTbID!=null){//!"".equals(mTbID)
+//							jieSanQun();
+						}
+						TuanDuiGuanLiActivity.this.finish();
 						Toast.makeText(TuanDuiGuanLiActivity.this, "移交管理员成功", 0)
 								.show();
 					}
@@ -365,6 +372,30 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 					}
 				});
+
+		//失败原因  你不是该团队的团长
+		String url2 = UrlTools.url + UrlTools.JIESAN_QUN;
+		RequestParams params2 = new RequestParams();
+		params.put("id",td.getTid());
+		Log.e("yag", "团聊的群解散群失败！--td.getTid()--------" + td.getTid());
+		Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
+			@Override
+			public void success(JsonBean bean) {
+				if ("200".equals(bean.getCode())){
+					Log.e("yag", "团聊的群解散群成功！");
+				}
+			}
+
+			@Override
+			public void failure(String msg) {
+				Log.e("yag", "团聊的群解散群失败！----------" + msg);
+			}
+
+			@Override
+			public void finish() {
+
+			}
+		});
 
 	}
 
@@ -413,7 +444,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	public void getTuanLiaoId(){
 		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
 		RequestParams params = new RequestParams();
-		params.put("team_id",td.getId());
+		params.put("team_id",td.getTid());
 		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
 
 			@Override

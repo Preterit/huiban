@@ -826,4 +826,16 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
         }
     }
 
+    /**
+     * 系统消息文案
+     * @param fragment     聊天窗口fragment
+     * @param conversation 当前聊天窗口对应的会话
+     * @param content      默认系统消息文案
+     * @return 如果是NULL，则不显示，如果是空字符串，则使用SDK默认的文案，如果返回非空串，则使用用户自定义的
+     */
+    @Override
+    public String getSystemMessageContent(Fragment fragment, YWConversation conversation, String content) {
+        return null;
+    }
+
 }

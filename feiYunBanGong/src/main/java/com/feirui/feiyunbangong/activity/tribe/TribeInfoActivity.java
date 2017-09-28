@@ -144,8 +144,8 @@ public class TribeInfoActivity extends BaseActivity{
         Log.e("chengyuan", "qunID: ------------------------" + id );
         String url = UrlTools.url + UrlTools.QUN_ID;
         RequestParams params = new RequestParams();
-        params.put("team_talk",id + "");
-        params.put("team_id",teamId);
+        params.put("team_talk",id + ""); //群id
+        params.put("team_id",teamId); //团队的id
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
                 new Utils.HttpCallBack() {
 

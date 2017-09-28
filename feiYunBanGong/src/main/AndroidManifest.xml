@@ -237,7 +237,7 @@
         <receiver
             android:name=".receiver.MyReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
 
                 <!-- Required 用户注册SDK的intent -->
@@ -252,6 +252,18 @@
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
 
                 <category android:name="com.feirui.feiyunbangong" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".fragment.Fragment4$MyBroadReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+
+                <!-- //自定义Action -->
+                <action android:name="com.feirui.feiyunbangong.getteam" />
+                <action android:name="com.feirui.feiyunbangong.onadd.team" />
+                <action android:name="com.feirui.feiyunbangong.onadd.team.member" />
             </intent-filter>
         </receiver>
 
@@ -429,10 +441,11 @@
         <activity android:name=".activity.tribe.SetTribeCheckModeActivity" />
         <activity android:name=".activity.tribe.TribeMsgRecTypeSetActivity" />
         <activity android:name=".activity.tribe.EditMyTribeProfileActivity" />
-        <activity android:name=".activity.tribe.EditGroupInfoActivity"
+        <activity
+            android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
-        <activity android:name=".activity.tribe.SearchTribeActivity"/>
+        <activity android:name=".activity.tribe.SearchTribeActivity" />
 
         <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
@@ -443,7 +456,6 @@
 
         <!-- 操作记录 -->
         <activity android:name=".activity.CaoZuoJiLuActivity" />
-
         <activity android:name=".activity.MyShenPiQingJaDetailActivity" />
         <activity android:name=".activity.MyShenPiBaoXiaoDetailActivity" />
         <activity android:name=".activity.MyWaiChuDetailActivity" />
@@ -459,7 +471,8 @@
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
     </application>
 
 </manifest>

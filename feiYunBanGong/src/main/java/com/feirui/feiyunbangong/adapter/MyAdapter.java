@@ -67,7 +67,7 @@ public class MyAdapter extends BaseAdapter {
 		holder.tv_word.setText(word);
 
 		holder.tv_name.setText(list.get(position).getName());
-		holder.tv_number.setText(list.get(position).getId() + "");
+		holder.tv_number.setText(list.get(position).getTid() + "");
 		TuanDui td = (TuanDui) getItem(position);
 
 		if (td.isHave()) {

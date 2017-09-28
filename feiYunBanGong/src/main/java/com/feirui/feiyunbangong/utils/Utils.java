@@ -30,20 +30,6 @@ import java.util.regex.Pattern;
 
 public class Utils {
 
-    /**
-     * 增加判断是否重复点击
-     */
-    private static long lastClickTime;
-    public static final int MIN_CLICK_DELAY_TIME = 1000;
-    public static boolean isFastDoubleClick() {
-        long time = System.currentTimeMillis();
-        long timeD = time - lastClickTime;
-        if (0 < timeD && timeD < MIN_CLICK_DELAY_TIME) {
-            return true;
-        }
-        return  false;
-    }
-
 
     /**
      * 弹出一个Alertdialog
