@@ -1,15 +1,22 @@
 package com.feirui.feiyunbangong.im;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.text.ClipboardManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,13 +28,22 @@ import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMChattingPageOperateion;
 import com.alibaba.mobileim.aop.model.ReplyBarItem;
 import com.alibaba.mobileim.aop.model.YWChattingPlugin;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.contact.IYWContactProfileCallback;
+import com.alibaba.mobileim.contact.IYWCrossContactProfileCallback;
+import com.alibaba.mobileim.contact.YWContactFactory;
+import com.alibaba.mobileim.conversation.EServiceContact;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
 import com.alibaba.mobileim.conversation.YWGeoMessageBody;
 import com.alibaba.mobileim.conversation.YWMessage;
 import com.alibaba.mobileim.conversation.YWMessageBody;
 import com.alibaba.mobileim.conversation.YWMessageChannel;
+import com.alibaba.mobileim.conversation.YWP2PConversationBody;
+import com.alibaba.mobileim.conversation.YWTribeConversationBody;
+import com.alibaba.mobileim.fundamental.widget.WxAlertDialog;
+import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
@@ -342,6 +358,27 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
     }
 
     /**
+     * 单聊ui界面，点击url的事件拦截 返回true;表示自定义处理，返回false，由默认处理
+     *
+     * @param fragment 可以通过 fragment.getActivity拿到Context
+     * @param message  点击的url所属的message
+     * @param url      点击的url
+     */
+    @Override
+    public boolean onUrlClick(Fragment fragment, YWMessage message, String url,
+                              YWConversation conversation) {
+//        IMNotificationUtils.getInstance().showToast(fragment.getActivity(), "用户点击了url:" + url);
+        if(!url.startsWith("http")) {
+            url = "http://" + url;
+        }
+        Intent intent = new Intent(activity, WebViewActivity.class);
+        intent.putExtra("uri",url);
+        activity.startActivity(intent); //启动浏览器
+
+        return true;
+    }
+
+    /**
      * 定制点击消息事件, 每一条消息的点击事件都会回调该方法，开发者根据消息类型，对不同类型的消息设置不同的点击事件
      *
      * @param fragment 聊天窗口fragment对象
@@ -408,24 +445,262 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
 
             return true;
 
-        }else if (message.getMessageBody() != null &&
-                message.getMessageBody().getContent().contains("ib3mbd6s") == false && //当前用户的id
-                Patterns.WEB_URL.matcher(message.getMessageBody().getContent()).matches()){
-            try {
-                Intent intent = new Intent(activity, WebViewActivity.class);
-                intent.putExtra("uri",message.getMessageBody().getContent());
-//                intent.setData(Uri.parse(message.getMessageBody().getContent()));//Url 就是你要打开的网址
-//                intent.setAction(Intent.ACTION_VIEW);
-                activity.startActivity(intent); //启动浏览器
-            } catch (Exception e){
-                Toast.makeText(activity,e.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-            return true;
-
         }
         // 其他情况返回false:
         return false;
     }
+
+    /**
+     * 开发者可以根据用户操作设置该值
+     */
+    private static boolean mUserInCallMode = false;
+
+    /**
+     * 定制长按消息事件，每一条消息的长按事件都会回调该方法，开发者根据消息类型，对不同类型的消息设置不同的长按事件
+     * @param fragment  聊天窗口fragment对象
+     * @param message   被点击的消息
+     * @return true:使用用户自定义的长按消息事件，false：使用默认的长按消息事件
+     */
+    @Override
+    public boolean onMessageLongClick(final Fragment fragment, final YWMessage message) {
+        final Activity context=fragment.getActivity();
+//        IMNotificationUtils.getInstance().showToast(context, "触发了自定义MessageLongClick事件");
+        if (message != null) {
+            final List<String> linkedList = new ArrayList<String>();
+            if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TEXT
+                    || message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GEO
+                    ) {
+                linkedList.add("转发");
+            }
+            linkedList.add("删除消息");
+
+            if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TEXT) {
+                linkedList.add("复制");
+            }
+
+            if ((message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_IMAGE || message
+                    .getSubType() == YWMessage.SUB_MSG_TYPE.IM_GIF||message.getSubType()==YWMessage.SUB_MSG_TYPE.IM_VIDEO)) {
+                String content = message.getMessageBody().getContent();
+                if (!TextUtils.isEmpty(content)&&content.startsWith("http")) {
+                    linkedList.add(0,"转发");
+                }
+            }
+            if((message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_P2P_CUS || message
+                    .getSubType() == YWMessage.SUB_MSG_TYPE.IM_TRIBE_CUS)){
+
+                if(message.getMessageBody()!=null&&message.getMessageBody().getSummary()!=null&&message.getMessageBody().getSummary().equals("阅后即焚")){
+
+                }else{
+                    linkedList.add(0,"转发");
+                }
+            }
+            if(message.getSubType()==YWMessage.SUB_MSG_TYPE.IM_AUDIO){
+                String text;
+                if (mUserInCallMode) { //当前为听筒模式
+                    text = "使用扬声器模式";
+                } else { //当前为扬声器模式
+                    text = "使用听筒模式";
+                }
+                linkedList.add(text);
+            }
+
+            final String[] strs = new String[linkedList.size()];
+            linkedList.toArray(strs);
+
+            final YWConversation conversation =AppStore.mIMKit.getConversationService().getConversationByConversationId(message.getConversationId());
+            AlertDialog dialog  = new WxAlertDialog.Builder(context)
+                    .setTitle(getShowName(conversation))
+                    .setItems(strs, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+                            if (which < strs.length) {
+                                if ("转发".equals(strs[which])) {
+//                                    IMNotificationUtils.getInstance().showToast(context, "暂时还不能转发哦~");
+//                                    showForwardMessageDialog(context, message);
+                                } else if ("删除消息".equals(strs[which])) {
+                                    if (conversation != null) {
+                                        conversation.getMessageLoader().deleteMessage(message);
+                                    } else {
+                                        IMNotificationUtils.getInstance().showToast(context, "删除失败，请稍后重试");
+                                    }
+                                } else if ("复制".equals(strs[which])) {
+                                    ClipboardManager clip = (ClipboardManager) context
+                                            .getSystemService(Context.CLIPBOARD_SERVICE);
+//										String content = message.getContent();
+                                    String content = message.getMessageBody().getContent();
+                                    if (TextUtils.isEmpty(content)) {
+                                        return;
+                                    }
+
+                                    try {
+                                        clip.setText(content);
+                                    } catch (NullPointerException e) {
+                                        e.printStackTrace();
+                                    } catch (IllegalStateException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if ("使用扬声器模式"
+                                        .equals(strs[which]) || "使用听筒模式"
+                                        .equals(strs[which])) {
+
+                                    if (mUserInCallMode) {
+                                        mUserInCallMode = false;
+                                    } else {
+                                        mUserInCallMode = true;
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    .setNegativeButton(
+                            context.getResources().getString(
+                                    R.string.cancel),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    dialog.cancel();
+                                }
+                            }).create();
+            dialog.show();
+            dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setBackgroundColor(Color.parseColor("#42baff"));
+
+        }
+
+        if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GEO){
+//            IMNotificationUtils.getInstance().showToast(context, "你长按了地理位置消息");
+            return true;
+        }else if(message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TEXT
+                ||message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GIF
+                ||message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_IMAGE
+                ||message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_VIDEO
+                ||message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_AUDIO){
+            return true;
+        } else if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_P2P_CUS || message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TRIBE_CUS){
+//            IMNotificationUtils.getInstance().showToast(context, "你长按了自定义消息");
+            return true;
+        }
+        return false;
+    }
+
+    private void showForwardMessageDialog(final Activity context, final YWMessage msg){
+        final IWxCallback forwardCallBack = new IWxCallback() {
+
+            @Override
+            public void onSuccess(Object... result) {
+                IMNotificationUtils.getInstance().showToast(context,"forward succeed!");
+            }
+
+            @Override
+            public void onError(int code, String info) {
+                IMNotificationUtils.getInstance().showToast(context,"forward fail!");
+
+            }
+
+            @Override
+            public void onProgress(int progress) {
+
+            }
+        };
+        AlertDialog ad = new AlertDialog.Builder(context)
+                .setTitle("转发消息")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String content = msg.getMessageBody().getContent();
+                        Log.e("tag", "onClick:-------------------- " + content );
+                        if (TextUtils.isEmpty(content)) {
+                            IMNotificationUtils.getInstance().showToast(context,"forward userid can't be empty!");
+                        }else{
+                            if(mIMKit!=null){
+                                if(mIMKit.getIMCore()!=null){
+                                    String loginId=mIMKit.getIMCore().getLoginUserId();
+                                    if(content.equals(loginId)){
+                                        IMNotificationUtils.getInstance().showToast(context,"forward userid can't be self!");
+                                    }else{
+                                        if(content.startsWith("t:")){
+                                            //转发给群示例
+                                            String replace = content.replace("t:", "");
+                                            try {
+                                                Long aLong = Long.valueOf(replace);
+                                                mIMKit.getConversationService()
+                                                        .forwardMsgToTribe(aLong.longValue()
+                                                                ,msg,forwardCallBack);
+                                                context.startActivity(mIMKit.getTribeChattingActivityIntent(aLong.longValue()));
+                                                context.finish();
+                                            }catch (Exception e ){
+
+                                            }
+
+
+                                        }else{
+                                            //转发给个人示例
+                                            IYWContact appContact = YWContactFactory.createAPPContact(content, mIMKit.getIMCore().getAppKey());
+
+                                            mIMKit.getConversationService()
+                                                    .forwardMsgToContact(appContact
+                                                            ,msg,forwardCallBack);
+                                            context.startActivity(mIMKit.getChattingActivityIntent(content));
+                                            context.finish();
+                                        }
+
+                                    }
+                                }
+
+                            }
+                            dialog.dismiss();
+                        }
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        if (!ad.isShowing()){
+            ad.show();
+        }
+    }
+
+    public String getShowName(YWConversation conversation) {
+        String conversationName;
+        //added by 照虚  2015-3-26,有点无奈
+        if (conversation == null) {
+            return "";
+        }
+
+        if (conversation.getConversationType() == YWConversationType.Tribe) {
+            conversationName = ((YWTribeConversationBody) conversation.getConversationBody()).getTribe().getTribeName();
+        } else {
+            IYWContact contact = ((YWP2PConversationBody) conversation.getConversationBody()).getContact();
+            String userId = contact.getUserId();
+            String appkey = contact.getAppKey();
+            conversationName = userId;
+            IYWCrossContactProfileCallback callback = mIMKit.getCrossProfileCallback();
+            if (callback != null) {
+                IYWContact iContact = callback.onFetchContactInfo(userId, appkey);
+                if (iContact != null && !TextUtils.isEmpty(iContact.getShowName())) {
+                    conversationName = iContact.getShowName();
+                    return conversationName;
+                }
+            } else {
+                IYWContactProfileCallback profileCallback = mIMKit.getProfileCallback();
+                if (profileCallback != null) {
+                    IYWContact iContact = profileCallback.onFetchContactInfo(userId);
+                    if (iContact != null && !TextUtils.isEmpty(iContact.getShowName())) {
+                        conversationName = iContact.getShowName();
+                        return conversationName;
+                    }
+                }
+            }
+            IYWContact iContact = mIMKit.getIMCore().getContactManager().getWXIMContact(userId);
+            if (iContact != null && !TextUtils.isEmpty(iContact.getShowName())) {
+                conversationName = iContact.getShowName();
+            }
+        }
+        return conversationName;
+    }
+
 
     public static ISelectContactListener selectContactListener = new ISelectContactListener() {
         @Override
@@ -549,6 +824,18 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             mConversation.getMessageSender().sendMessage(msg, 120, null);
 
         }
+    }
+
+    /**
+     * 系统消息文案
+     * @param fragment     聊天窗口fragment
+     * @param conversation 当前聊天窗口对应的会话
+     * @param content      默认系统消息文案
+     * @return 如果是NULL，则不显示，如果是空字符串，则使用SDK默认的文案，如果返回非空串，则使用用户自定义的
+     */
+    @Override
+    public String getSystemMessageContent(Fragment fragment, YWConversation conversation, String content) {
+        return null;
     }
 
 }

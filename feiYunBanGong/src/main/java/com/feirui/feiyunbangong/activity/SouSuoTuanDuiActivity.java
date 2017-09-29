@@ -142,8 +142,8 @@ public class SouSuoTuanDuiActivity extends BaseActivity implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Intent intent = new Intent(this, JiaRuTuanDuiActivity.class);
-		intent.putExtra("id", tds.get(position).getId());
-		startActivity(intent);
+		intent.putExtra("id", tds.get(position).getTid());
+		startActivityForResult(intent,1000);
 		overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 	}
 

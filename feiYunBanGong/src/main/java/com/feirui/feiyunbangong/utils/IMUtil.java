@@ -26,6 +26,7 @@ import com.feirui.feiyunbangong.activity.tribe.AtMsgListOperationSample;
 import com.feirui.feiyunbangong.activity.tribe.AtMsgListUISample;
 import com.feirui.feiyunbangong.activity.tribe.SelectTribeAtMemberSample;
 import com.feirui.feiyunbangong.activity.tribe.SendAtMsgDetailUISample;
+import com.feirui.feiyunbangong.activity.tribe.YWSDKGlobalConfigSample;
 import com.feirui.feiyunbangong.im.MyChatUI;
 import com.feirui.feiyunbangong.im.MyIMChattingPageOperateion;
 import com.feirui.feiyunbangong.im.MyIMConversationListOperation;
@@ -55,8 +56,10 @@ public class IMUtil {
 				MyChatUI.class);
 
 		// 全局配置；
-		AdviceBinder.bindAdvice(PointCutEnum.YWSDK_GLOBAL_CONFIG_POINTCUT,
-				MyYWSDKFlobalConfig.class);
+//		AdviceBinder.bindAdvice(PointCutEnum.YWSDK_GLOBAL_CONFIG_POINTCUT,
+//				MyYWSDKFlobalConfig.class);
+		//全局配置修改
+		AdviceBinder.bindAdvice(PointCutEnum.YWSDK_GLOBAL_CONFIG_POINTCUT, YWSDKGlobalConfigSample.class);
 
 		// 单聊窗口：
 		AdviceBinder.bindAdvice(PointCutEnum.CHATTING_FRAGMENT_POINTCUT,

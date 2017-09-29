@@ -9,10 +9,13 @@ import android.support.multidex.MultiDexApplication;
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.tcms.env.YWEnvType;
 import com.alibaba.wxlib.util.SysUtil;
+import com.facebook.stetho.Stetho;
 import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 
@@ -41,7 +44,9 @@ public class Happlication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
+        //初始化LitePal
+        LitePal.initialize(this);
+        Stetho.initializeWithDefaults(this);
         // 必须首先执行这部分代码, 如果在":TCMSSevice"进程中，无需进行云旺（OpenIM）和app业务的初始化，以节省内存;
         SysUtil.setApplication(this);
         if (SysUtil.isTCMSServiceProcess(this)) {
@@ -50,11 +55,9 @@ public class Happlication extends MultiDexApplication {
         // 第一个参数是Application Context
         // 这里的APP_KEY即应用创建时申请的APP_KEY，同时初始化必须是在主进程中
         if (SysUtil.isMainProcess()) {
+            IMUtil.bind();// 绑定自定义会话列表等；
             YWAPI.init(this, APP_KEY);
         }
-
-        IMUtil.bind();// 绑定自定义会话列表等；
-
 
         // 初始化ImageLoader;
         ImageLoaderConfiguration config = ImageLoaderUtils.getNowConfig(this);

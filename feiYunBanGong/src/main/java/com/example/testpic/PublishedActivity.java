@@ -29,6 +29,7 @@ import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.BitmapFileSetting;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
+import com.feirui.feiyunbangong.utils.ButtonUtils;
 import com.feirui.feiyunbangong.utils.PictureUtil;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -195,6 +196,12 @@ public class PublishedActivity extends Activity implements OnClickListener {
             new Thread(new Runnable() {
                 public void run() {
                     try {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
                         for (int i = Bimp.bmp.size(); i < Bimp.drr.size(); i++) {
                             final String path = Bimp.drr.get(i);
 //                             注意：必须得压缩，否则极有可能报oom;上传服务器也比较慢；
@@ -229,6 +236,7 @@ public class PublishedActivity extends Activity implements OnClickListener {
                                                     adapter.notifyDataSetChanged();
                                                 }
                                             });
+
                                         }
 
                                         @Override
@@ -311,7 +319,8 @@ public class PublishedActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case  R.id.activity_selectimg_send:  //发送
-                if (Utils.isFastDoubleClick()){//防止多次点击
+                if (ButtonUtils.isFastDoubleClick(R.id.activity_selectimg_send)){//防止多次点击
+                    Toast.makeText(this,"请勿重复发布~",Toast.LENGTH_SHORT).show();
                     return;
                 }else {
                     if (TextUtils.isEmpty(tv_content.getText().toString().trim())) {

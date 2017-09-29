@@ -191,7 +191,7 @@ public class UrlTools {
    */
   public static final String ADD_CAIGOU_XINXI = "Purchase/add_purchase";
   /**
-   * 新增采购信息：http://123.57.45.74/feiybg1/public/index.php/index/Purchase/add_purchase1
+   * 新增采购信息：http://123.57.45.74/feiybg/public/index.php/index/Purchase/add_purchase1
    */
   public static final String ADD_CAIGOU_XINXI1 = "Purchase/add_purchase1";
   /**
@@ -599,6 +599,6 @@ public class UrlTools {
     /**
      * 新任务单-确认接单
      **/
-    public static String RENWU_QRJD="Task/task_acceptCeshi";
+    public static String RENWU_QRJD="task/task_accept";
 
 }

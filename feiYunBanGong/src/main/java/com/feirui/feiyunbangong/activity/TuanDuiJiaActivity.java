@@ -35,6 +35,7 @@ import com.loopj.android.http.RequestParams;
 import com.zxing.encoding.EncodingHandler;
 
 import org.apache.http.Header;
+import org.litepal.crud.DataSupport;
 
 /**
  * 团队——加
@@ -90,6 +91,11 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 			setCenterString(td.getName());
 		}
 		setRightVisibility(false);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		getTuanLiaoId(); //获取该团聊的ID
 	}
 
@@ -115,7 +121,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 			View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima,
 					null);
 			ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
-			String id = "T" + td.getId();
+			String id = "T" + td.getTid();
 			// 根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
 			try {
 				Bitmap erweima = EncodingHandler.createQRCode(id, 350);
@@ -130,7 +136,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		case R.id.ll_tuiguang:
 			RequestParams params = new RequestParams();
 
-			params.put("teamid", td.getId());
+			params.put("teamid", td.getTid());
 			String url = UrlTools.url + UrlTools.CIRCLE_ADDTEAMCIRCLE;
 			L.e("推广——工作圈url" + url + " params" + params);
 			AsyncHttpServiceHelper.post(url, params,
@@ -182,7 +188,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 
 								RequestParams params = new RequestParams();
 								params.put("staff_mobile", name);
-								params.put("teamnum", td.getId());
+								params.put("teamnum", td.getTid());
 								Utils.doPost(LoadingDialog
 										.getInstance(TuanDuiJiaActivity.this),
 										TuanDuiJiaActivity.this, url, params,
@@ -240,12 +246,14 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		private void out() {
 			String url = UrlTools.url + UrlTools.OUT_TEAM;
 			RequestParams params = new RequestParams();
-			params.put("team_id", td.getId());
-			Log.e("TAG", td.getId() + "td.getid()");
+			params.put("team_id", td.getTid());
+			Log.e("TAG", td.getTid() + "td.getid()");
 			Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
 					new HttpCallBack() {
 						@Override
 						public void success(JsonBean bean) {
+							//从本地数据库移除
+							DataSupport.deleteAll(TuanDui.class, "tid = ?", td.getTid());
 							T.showShort(TuanDuiJiaActivity.this, "退出成功！");
 							for(int i=0;i<AppStore.acts.size();i++){
 								AppStore.acts.get(i).finish();
@@ -273,7 +281,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 	public void getTuanLiaoId(){
 		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
 		RequestParams params = new RequestParams();
-		params.put("team_id",td.getId());
+		params.put("team_id",td.getTid());
 		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
 
 			@Override
@@ -281,7 +289,6 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 
 				JsonBean bean = JsonUtils.getMessage(new String(arg2));
 				if ("200".equals(bean.getCode())) {
-					Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
 					mTuanLiaoID = bean.getInfor().get(0).get("team_talk") + "";
 					if ("".equals(mTuanLiaoID) || mTuanLiaoID == null){
 						ll_send_talk.setVisibility(View.GONE);
@@ -310,6 +317,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 		// 已经移交了管理员：
 		if (requestCode == 500 && resultCode == 100) {
 			ll_guanli.setVisibility(View.GONE);
+			ll_send_talk.setVisibility(View.GONE);
 		}
 		super.onActivityResult(requestCode, resultCode, intent);
 	}
