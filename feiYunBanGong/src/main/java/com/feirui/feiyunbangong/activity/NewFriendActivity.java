@@ -69,13 +69,14 @@ public class NewFriendActivity extends BaseActivity implements
         requestGroup();// 获取分组信息；
         setListener();
         setData();
+
         // 请求数据：
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                request();
-            }
-        }, 100);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                request();
+//            }
+//        }, 100);
     }
 
     @Override
@@ -205,7 +206,7 @@ public class NewFriendActivity extends BaseActivity implements
 
                         strGroups.add("+");
                         setListView();
-                        Log.e("电话好友列表", "requestGroup----1------"+strGroups.toString());
+                        Log.e("电话好友列表", "requestGroup----1------" + strGroups.toString());
                     }
 
 
@@ -242,7 +243,7 @@ public class NewFriendActivity extends BaseActivity implements
     private void setListView() {
         adapter = new NewFriendAdapter(this, this, this.getLayoutInflater());
         adapter1 = new LianXiRenAdapter(this, this.getLayoutInflater(), 1, strGroups);
-        Log.e("电话好友列表", "strGroups-------setListView----------newfriend"+strGroups.toString());
+        Log.e("电话好友列表", "strGroups-------setListView----------newfriend" + strGroups.toString());
         lv_newfriend.setAdapter(adapter);
         lv_lxr.setAdapter(adapter1);
 
@@ -424,8 +425,11 @@ public class NewFriendActivity extends BaseActivity implements
                             staff_head, id, state);
                     lxrs.add(lxr);
                 }
-                Log.e("新的好友", "lxrs: "+lxrs.toString());
-                adapter.add(lxrs);
+                Log.e("新的好友", "lxrs: " + lxrs.toString());
+
+
+                    adapter.add(lxrs);
+
                 //adapter1.add(lxrs);
             } else if (msg.what == 1) {
                 Toast.makeText(NewFriendActivity.this, "拒绝成功！", Toast.LENGTH_SHORT).show();
@@ -438,8 +442,6 @@ public class NewFriendActivity extends BaseActivity implements
             }
         }
     };
-
-
 
 
 }

@@ -209,7 +209,7 @@ public class UrlTools {
   /**
    * 审批流程中发给我，需要我审批的
    * */
-  public static String APPROVAL_MY_APPROVAL = "approval/my_approval";
+  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */
@@ -391,6 +391,10 @@ public class UrlTools {
    * 修改邮箱：
    */
   public static String XIUGAI_YOUXIANG = "Team/team_yx_update";
+  /**
+   * 修改成员信息页面获取成员信息：
+   */
+  public static String XIUGAI_ChengYuan = "Team/team_update";
 
   /**
    * 没有管理员的团队成员，删除成员用；

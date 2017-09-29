@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ChuangJianTuanDuiActivity;
-import com.feirui.feiyunbangong.activity.DetailTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.TuanDui_DetailActivity;
 import com.feirui.feiyunbangong.activity.GuanLiTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.SouSuoTuanDuiActivity;
 import com.feirui.feiyunbangong.adapter.MyAdapter;
@@ -219,7 +219,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         // 注意从1开始，因为有header;
         if (position > 0 && position <= tds.size()){
             TuanDui tuanDui = tds.get(position - 1);
-            Intent intent = new Intent(getActivity(), DetailTuanDuiActivity.class);
+            Intent intent = new Intent(getActivity(), TuanDui_DetailActivity.class);
             intent.putExtra("tuanDui", tuanDui);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.aty_zoomin,

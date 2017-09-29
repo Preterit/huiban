@@ -13,8 +13,8 @@
 
     <com.feirui.feiyunbangong.view.TextImageView
         android:id="@+id/iv_head"
-        android:layout_width="@dimen/size300"
-        android:layout_height="@dimen/size300"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/y50" />
 
@@ -30,7 +30,7 @@
     <TextView
         style="@style/a000000_48"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y100"
+        android:layout_height="30dp"
         android:layout_marginTop="@dimen/y20"
         android:background="@color/ffffff"
         android:gravity="center_vertical"
@@ -65,22 +65,22 @@
 
 
 
-    <TextView
-        android:id="@+id/tv_phone"
-        style="@style/a000000_42"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x100"
-        android:layout_marginTop="@dimen/y50"
-        android:text="" />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_phone"-->
+        <!--style="@style/a000000_42"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/x100"-->
+        <!--android:layout_marginTop="@dimen/y50"-->
+        <!--android:text="" />-->
 
     <!-- 个人信息 -->
 
     <TextView
         style="@style/a000000_48"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y100"
-        android:layout_marginTop="@dimen/y50"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/ffffff"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x50"
@@ -133,6 +133,36 @@
             android:padding="@dimen/size25"
             android:text="" />
     </LinearLayout>
+    <TextView
+        style="@style/a000000_48"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@color/ffffff"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x50"
+        android:text="隐身状态 " />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginTop="@dimen/y50"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/a000000_42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是 否 隐 身 ："
+            android:layout_gravity="center_vertical"/>
+
+        <com.feirui.feiyunbangong.view.SwitchView
+            android:id="@+id/sv_yinshen"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            />
+    </LinearLayout>
 
     <Button
         android:id="@+id/bt_submit"
@@ -141,7 +171,7 @@
         android:layout_height="@dimen/x114"
         android:layout_marginLeft="@dimen/x140"
         android:layout_marginRight="@dimen/x140"
-        android:layout_marginTop="@dimen/y150"
+        android:layout_marginTop="30dp"
         android:background="@drawable/blue_bt_selector"
         android:gravity="center"
         android:text="确认修改" />

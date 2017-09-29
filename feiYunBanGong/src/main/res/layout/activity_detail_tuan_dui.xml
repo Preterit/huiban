@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/back_huise"
     android:orientation="vertical"
-    tools:context="com.feirui.feiyunbangong.activity.DetailTuanDuiActivity" >
+    tools:context="com.feirui.feiyunbangong.activity.TuanDui_DetailActivity" >
 
     <include
         android:id="@+id/inclue"

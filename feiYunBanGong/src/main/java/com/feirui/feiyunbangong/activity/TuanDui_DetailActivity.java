@@ -60,7 +60,7 @@ import java.util.List;
  * @author feirui1
  */
 @SuppressLint("InflateParams")
-public class DetailTuanDuiActivity extends BaseActivity implements
+public class TuanDui_DetailActivity extends BaseActivity implements
         OnItemClickListener, OnKeyListener, OnClickListener {
 
     private ListView lv_chengyuan;
@@ -174,25 +174,22 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                         tdcys.removeAll(tdcys);
                         for (int i = 0; i < infor.size(); i++) {
                             HashMap<String, Object> hm = infor.get(i);
-                            Log.e("团队成员", "团队成员: "+hm.toString() );
-                            TuanDuiChengYuan tdcy = new TuanDuiChengYuan(hm
-                                    .get("id") + "", String.valueOf(hm
-                                    .get("staff_id")), String.valueOf(hm
-                                    .get("staff_name")), String.valueOf(hm
-                                    .get("staff_head")), hm.get("type") + "",
+                            //Log.e("团队成员", "团队成员: "+hm.toString() );
+                            TuanDuiChengYuan tdcy = new TuanDuiChengYuan(
+                                    hm.get("id") + "",
+                                    String.valueOf(hm.get("staff_id")),
+                                    String.valueOf(hm.get("staff_name")),
+                                    String.valueOf(hm.get("staff_head")),
+                                    hm.get("type") + "",
                                     String.valueOf(hm.get("staff_mobile")),
                                     String.valueOf(hm.get("staff_email")),
                                     hm.get("tag_name") + "",
-                                    String.valueOf(hm.get("introduction")),String.valueOf(hm.get("store_url")));
-
+                                    String.valueOf(hm.get("introduction")),
+                                    String.valueOf(hm.get("store_url")));
                             tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
-
                             tdcy.setState(Integer.parseInt(hm.get("state") + ""));
-
                             tdcy.setFriendstate((int) hm.get("friendstate"));// 是否是好友；
-
                             tdcy.setRemark(hm.get("remark") + "");// 设置备注；
-
                             tdcy.setT_remark(hm.get("t_remark") + "");// 设置团队备注；
                             tv_chenyuan.setText("团队成员" + "("
                                     + (String) (hm.get("Allnum") + "") + ")");
@@ -211,7 +208,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(DetailTuanDuiActivity.this, msg,Toast.LENGTH_SHORT)
+                        Toast.makeText(TuanDui_DetailActivity.this, msg,Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -230,7 +227,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     break;
                 case 3:
                     // 添加成功！
-                    Toast.makeText(DetailTuanDuiActivity.this, "添加成员成功！", 0).show();
+                    Toast.makeText(TuanDui_DetailActivity.this, "添加成员成功！", 0).show();
                     //团队群Id
                     getTuanLiaoId();
                     Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
@@ -238,7 +235,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
-                    Toast.makeText(DetailTuanDuiActivity.this, bean03.getMsg(),0)
+                    Toast.makeText(TuanDui_DetailActivity.this, bean03.getMsg(),0)
                             .show();
                     break;
                 case 5:
@@ -270,7 +267,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         rightll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailTuanDuiActivity.this,
+                Intent intent = new Intent(TuanDui_DetailActivity.this,
                         TuanDuiJiaActivity.class);
                 //将整个团队传过去
                 intent.putExtra("td", td);

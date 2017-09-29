@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,6 +62,12 @@ public class BaseActivity extends FragmentActivity {
 	public void setContentView(View view, LayoutParams params) {
 		super.setContentView(view, params);
 		initInjectedView(this);
+	}
+
+	public void yincang(View view){//隐藏输入法方法
+		InputMethodManager imm = (InputMethodManager)
+				getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 
 	/**

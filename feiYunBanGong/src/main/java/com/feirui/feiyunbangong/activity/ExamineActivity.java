@@ -73,7 +73,9 @@ public class ExamineActivity extends BaseActivity {
 					BaoXiaoActivity.class));
 			break;
 		case R.id.ll_goOut: // 外出
-			startActivity(new Intent(ExamineActivity.this, WoDeTaskActivity.WaiChuActivity.class));
+            Log.e("外出", "外出 " );
+            startActivity(new Intent(ExamineActivity.this, WaiChuActivity.class));
+
 			break;
 		case R.id.ll_payment: // 付款
 			startActivity(new Intent(ExamineActivity.this, FuKuanActivity.class));

@@ -34,7 +34,7 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 	private Button button;
 
 	// 引导图片资源
-	private static final int[] pics = { R.drawable.guide4, R.drawable.guide5 ,R.drawable.guide6};
+	private static final int[] pics = { R.drawable.guide5 ,R.drawable.guide6,R.drawable.guide4};
 
 	// 底部小点图片
 	private ImageView[] dots;

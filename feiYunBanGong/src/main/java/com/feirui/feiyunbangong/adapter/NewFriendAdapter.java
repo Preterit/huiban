@@ -1,20 +1,23 @@
 package com.feirui.feiyunbangong.adapter;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.LianXiRen;
+import com.feirui.feiyunbangong.view.TextImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
+/**
+ * 添加新朋友adapter
+ * */
 public class NewFriendAdapter extends MyBaseAdapter<LianXiRen> {
 
 	private Activity activity;
@@ -40,7 +43,7 @@ public class NewFriendAdapter extends MyBaseAdapter<LianXiRen> {
 		if (v == null) {
 			v = mInflater.inflate(R.layout.ll_newfriend_item, null);
 			holder = new ViewHolder();
-			holder.iv_head = (ImageView) v.findViewById(R.id.iv_head);
+			holder.iv_head = (TextImageView) v.findViewById(R.id.iv_head);
 			holder.tv_name = (TextView) v.findViewById(R.id.tv_name);
 			holder.tv_phone = (TextView) v.findViewById(R.id.tv_phone);
 			holder.jieshou = (Button) v.findViewById(R.id.bt_jieshou);
@@ -52,8 +55,14 @@ public class NewFriendAdapter extends MyBaseAdapter<LianXiRen> {
 			holder = (ViewHolder) v.getTag();
 		}
 		LianXiRen lianXiRen = list.get(position);
-		if ("img/1_1.png".equals(lianXiRen.getHead())) {
-			holder.iv_head.setImageResource(R.drawable.fragment_head);
+		Log.e("新朋友", "lianXiRen: "+lianXiRen.getName() );
+		Log.e("新朋友", "lianXiRen: "+lianXiRen.getId() );
+		Log.e("新朋友", "lianXiRen: "+lianXiRen.getHead() );
+
+		if ("http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(lianXiRen.getHead())
+				||"http://123.57.45.74/feiybg1/public/static/staff_head/379/8fe02470a4eb202cf7643a86f31fa39f.jpeg".equals(lianXiRen.getHead())) {
+			//holder.iv_head.setImageResource(R.drawable.fragment_head);
+			holder.iv_head.setText(lianXiRen.getName());
 		} else {
 			ImageLoader.getInstance().displayImage(lianXiRen.getHead(),
 					holder.iv_head);
@@ -91,7 +100,7 @@ public class NewFriendAdapter extends MyBaseAdapter<LianXiRen> {
 
 	class ViewHolder {
 		TextView tv_name, tv_phone, tv_jieshou, tv_choice;
-		ImageView iv_head;
+		TextImageView iv_head;
 		Button jieshou, jvjue;
 	}
 

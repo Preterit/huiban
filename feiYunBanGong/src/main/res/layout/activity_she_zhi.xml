@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    tools:context="com.feirui.feiyunbangong.activity.SheZhiActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3686FF">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/back"
+            android:onClick="onClick4">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/arrows_left"
+                android:layout_marginStart="9dp"
+                android:layout_gravity="center"
+                android:layout_alignTop="@+id/textView22"
+                android:layout_alignParentStart="true"
+                android:id="@+id/imageView7" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:id="@+id/textView22"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/back"
+            android:layout_marginStart="130dp"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/xiugaimima"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:onClick="onClick1">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/xiugaimima"
+            android:id="@+id/iv_xgmm"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改密码"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            android:layout_marginStart="35dp"
+            android:id="@+id/tv_xgmm"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/iv_xgmm" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/qinglihuancun"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:onClick="onClick2">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/qinglihuancun"
+            android:id="@+id/iv_qlhc"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="清理缓存"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            android:layout_marginStart="35dp"
+            android:id="@+id/tv_qlhc"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/iv_qlhc" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/guanyuwomen"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:onClick="onClick3">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/guanyuwomen"
+            android:id="@+id/iv_gywm"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于我们"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            android:layout_marginStart="35dp"
+            android:id="@+id/tv_gywm"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/iv_gywm" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -39,7 +39,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * 加入团队
+ * */
 public class JiaRuTuanDuiActivity extends BaseActivity implements
 		OnClickListener {
 
@@ -154,7 +156,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 				new HttpCallBack() {
 					@Override
 					public void success(JsonBean bean) {
-						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
+						Toast.makeText(JiaRuTuanDuiActivity.this, "成功加入团队", 0)
 								.show();
 						addData();
 						if (!"".equals(mTuanLiaoID)){

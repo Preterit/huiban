@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
@@ -24,12 +23,17 @@ import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+import com.feirui.feiyunbangong.view.TextImageView;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+/**
+ * 通讯录好友adapter
+ * */
 
 public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 
@@ -75,7 +79,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 			if (v == null) {
 				v = mInflater.inflate(R.layout.ll_lianxiren_item, null);
 				holder = new ViewHolder();
-				holder.iv = (ImageView) v.findViewById(R.id.iv_shenpiren);
+				holder.iv = (TextImageView) v.findViewById(R.id.iv_shenpiren);
 				holder.tv_name = (TextView) v.findViewById(R.id.tv_name);
 				holder.tv_phone = (TextView) v.findViewById(R.id.tv_phone);
 				holder.bt = (Button) v.findViewById(R.id.bt_tianjia);
@@ -116,12 +120,14 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 			LianXiRen spr = list.get(position);
 			holder.tv_name.setText(spr.getName());
 			holder.tv_phone.setText(spr.getPhone());
+			Log.e("通讯录联系人", "lianXiRen: "+spr.getName() );
+			Log.e("通讯录联系人", "lianXiRen: "+spr.getId() );
+			Log.e("通讯录联系人", "lianXiRen: "+spr.getHead() );
 
-			if ("img/1_1.png".equals(spr.getHead())) {
-				holder.iv.setImageResource(R.drawable.fragment_head);
+			if ("http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(spr.getHead())) {
+				holder.iv.setText(spr.getName());
 			} else {
-				ImageLoader.getInstance()
-						.displayImage(spr.getHead(), holder.iv);
+				ImageLoader.getInstance().displayImage(spr.getHead(), holder.iv);
 			}
 
 			holder.bt.setTag(position);
@@ -242,7 +248,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 	}
 
 	class ViewHolder {
-		ImageView iv;
+		TextImageView iv;
 		TextView tv_name, tv_phone;
 		Button bt;
 	}

@@ -38,308 +38,316 @@ import org.apache.http.Header;
 
 /**
  * 团队——加
- * 
+ *
  * @author admina
- *(团队退出按钮)
+ *         (团队退出按钮)
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
-	@PView(click = "onClick")
-	LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg,ll_send_talk;// 扫码，推广，管理,短信邀请；团队聊天
-	private TuanDui td;
-	private Button bt_out_team;//退出团队；
-	private String mTuanLiaoID;
-	private IYWTribeService mService;
-	private YWIMKit mYWIMkit;
+    @PView(click = "onClick")
+    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx;// 扫码，推广，管理,短信邀请；团队聊天;修改信息
+    private TuanDui td;
+    private Button bt_out_team;//退出团队；
+    private String mTuanLiaoID;
+    private IYWTribeService mService;
+    private YWIMKit mYWIMkit;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tuan_dui_jia);
-		mYWIMkit = AppStore.mIMKit;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tuan_dui_jia);
+        mYWIMkit = AppStore.mIMKit;
 
-		initView();
-		setListener();
-	}
+        initView();
+        setListener();
+    }
 
-	private void setListener() {
-		bt_out_team.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				out();
-			}
-		});
-	}
+    private void setListener() {
+        bt_out_team.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                out();
+            }
+        });
+    }
 
-	private void initView() {
-		AppStore.acts.add(this);
+    private void initView() {
+        AppStore.acts.add(this);
 
-		Intent intent = getIntent();
-		//传过来的团队
-		td = (TuanDui) intent.getSerializableExtra("td");
-		bt_out_team=(Button) findViewById(R.id.bt_out_team);
+        Intent intent = getIntent();
+        //传过来的团队
+        td = (TuanDui) intent.getSerializableExtra("td");
 
-		setManage(td);
+        bt_out_team = (Button) findViewById(R.id.bt_out_team);
 
-		initTitle();
-		setLeftDrawable(R.drawable.arrows_left);
+        setManage(td);
 
-		
-		if (td.getName().length() > 10) {
-			setCenterString(td.getName().substring(0, 9) + "...");
-		} else {
-			setCenterString(td.getName());
-		}
-		setRightVisibility(false);
-		getTuanLiaoId(); //获取该团聊的ID
-	}
+        initTitle();
+        setLeftDrawable(R.drawable.arrows_left);
 
-	// 设置管理员的显示与隐藏：
-	private void setManage(TuanDui td) {
-		if (td.getGuanli_id() != null
-				&& String.valueOf(td.getGuanli_id()).equals(
-						String.valueOf(AppStore.user.getInfor().get(0)
-								.get("id")))) {
-			ll_guanli.setVisibility(View.VISIBLE);
-			bt_out_team.setVisibility(View.INVISIBLE);//管理员不显示退出团队；
-		} else {
-			bt_out_team.setVisibility(View.VISIBLE);
-			ll_guanli.setVisibility(View.GONE);
-		}
-	}
 
-	@SuppressLint("InflateParams")
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.ll_saoma:
-			Dialog dialog = new Dialog(this);
-			View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima,
-					null);
-			ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
-			String id = "T" + td.getId();
-			// 根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
-			try {
-				Bitmap erweima = EncodingHandler.createQRCode(id, 350);
-				iv.setImageBitmap(erweima);
-			} catch (WriterException e) {
-				e.printStackTrace();
-			}
-			dialog.setContentView(v);
-			dialog.setTitle("扫码加入团队");
-			dialog.show();
-			break;
-		case R.id.ll_tuiguang:
-			RequestParams params = new RequestParams();
+        if (td.getName().length() > 10) {
+            setCenterString(td.getName().substring(0, 9) + "...");
+        } else {
+            setCenterString(td.getName());
+        }
+        setRightVisibility(false);
+        getTuanLiaoId(); //获取该团聊的ID
+    }
 
-			params.put("teamid", td.getId());
-			String url = UrlTools.url + UrlTools.CIRCLE_ADDTEAMCIRCLE;
-			L.e("推广——工作圈url" + url + " params" + params);
-			AsyncHttpServiceHelper.post(url, params,
-					new AsyncHttpResponseHandler() {
-						@Override
-						public void onSuccess(int arg0, Header[] arg1,
-								byte[] arg2) {
-							super.onSuccess(arg0, arg1, arg2);
-							final JsonBean json = JsonUtils
-									.getMessage(new String(arg2));
-							if ("200".equals(json.getCode())) {
-								runOnUiThread(new Runnable() {
-									public void run() {
-										T.showShort(TuanDuiJiaActivity.this,
-												json.getMsg());
-									}
-								});
+    // 设置管理员的显示与隐藏：
+    private void setManage(TuanDui td) {
+        if (td.getGuanli_id() != null
+                && String.valueOf(td.getGuanli_id()).equals(
+                String.valueOf(AppStore.user.getInfor().get(0)
+                        .get("id")))) {
+            ll_guanli.setVisibility(View.VISIBLE);
+            bt_out_team.setVisibility(View.INVISIBLE);//管理员不显示退出团队；
+        } else {
+            bt_out_team.setVisibility(View.VISIBLE);
+            ll_guanli.setVisibility(View.GONE);
+        }
+    }
 
-							} else {
-								T.showShort(TuanDuiJiaActivity.this,
-										json.getMsg());
-							}
-						}
+    @SuppressLint("InflateParams")
+    public void onClick(View view) {
+        switch (view.getId()) {
 
-						@Override
-						public void onFailure(int arg0, Header[] arg1,
-								byte[] arg2, Throwable arg3) {
-							super.onFailure(arg0, arg1, arg2, arg3);
-						}
-					});
-			break;
+            case R.id.ll_saoma:
+                Dialog dialog = new Dialog(this);
+                View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima,
+                        null);
+                ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
+                String id = "T" + td.getId();
+                // 根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
+                try {
+                    Bitmap erweima = EncodingHandler.createQRCode(id, 350);
+                    iv.setImageBitmap(erweima);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+                dialog.setContentView(v);
+                dialog.setTitle("扫码加入团队");
+                dialog.show();
+                break;
+            case R.id.ll_tuiguang:
+                RequestParams params = new RequestParams();
 
-		case R.id.ll_guanli:  //团长管理团队 将整个团队传过去
-			Intent intent = new Intent(this, TuanDuiGuanLiActivity.class);
-			intent.putExtra("td", td);
-			startActivityForResult(intent, 500);
-			break;
-		case R.id.ll_send_msg:
+                params.put("teamid", td.getId());
+                String url = UrlTools.url + UrlTools.CIRCLE_ADDTEAMCIRCLE;
+                L.e("推广——工作圈url" + url + " params" + params);
+                AsyncHttpServiceHelper.post(url, params,
+                        new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int arg0, Header[] arg1,
+                                                  byte[] arg2) {
+                                super.onSuccess(arg0, arg1, arg2);
+                                final JsonBean json = JsonUtils
+                                        .getMessage(new String(arg2));
+                                if ("200".equals(json.getCode())) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            T.showShort(TuanDuiJiaActivity.this,
+                                                    json.getMsg());
+                                        }
+                                    });
 
-			EtDialog dialog1 = new EtDialog("短信邀请", "请输入手机号",
-					TuanDuiJiaActivity.this, new EtDialog.AlertCallBack1() {
+                                } else {
+                                    T.showShort(TuanDuiJiaActivity.this,
+                                            json.getMsg());
+                                }
+                            }
 
-						@Override
-						public void onOK(String name) {
+                            @Override
+                            public void onFailure(int arg0, Header[] arg1,
+                                                  byte[] arg2, Throwable arg3) {
+                                super.onFailure(arg0, arg1, arg2, arg3);
+                            }
+                        });
+                break;
+            case R.id.ll_xgxx:
+                Intent intent1 = new Intent(this,XiuGaiChengYuanActivity.class);
+                intent1.putExtra("td",td);
+                startActivity(intent1);
+                break;
+            case R.id.ll_guanli:  //团长管理团队 将整个团队传过去
+                Intent intent = new Intent(this, TuanDuiGuanLiActivity.class);
+                intent.putExtra("td", td);
+                startActivityForResult(intent, 500);
+                break;
+            case R.id.ll_send_msg:
 
-							if (Utils.isPhone(name)) {
+                EtDialog dialog1 = new EtDialog("短信邀请", "请输入手机号",
+                        TuanDuiJiaActivity.this, new EtDialog.AlertCallBack1() {
 
-								String url = UrlTools.url + UrlTools.SEND_MSG;
+                    @Override
+                    public void onOK(String name) {
 
-								RequestParams params = new RequestParams();
-								params.put("staff_mobile", name);
-								params.put("teamnum", td.getId());
-								Utils.doPost(LoadingDialog
-										.getInstance(TuanDuiJiaActivity.this),
-										TuanDuiJiaActivity.this, url, params,
-										new HttpCallBack() {
+                        if (Utils.isPhone(name)) {
 
-											@Override
-											public void success(JsonBean bean) {
-												T.showShort(
-														TuanDuiJiaActivity.this,
-														"发送成功！");
-											}
+                            String url = UrlTools.url + UrlTools.SEND_MSG;
 
-											@Override
-											public void failure(String msg) {
-												T.showShort(
-														TuanDuiJiaActivity.this,
-														msg);
-											}
+                            RequestParams params = new RequestParams();
+                            params.put("staff_mobile", name);
+                            params.put("teamnum", td.getId());
+                            Utils.doPost(LoadingDialog
+                                            .getInstance(TuanDuiJiaActivity.this),
+                                    TuanDuiJiaActivity.this, url, params,
+                                    new HttpCallBack() {
 
-											@Override
-											public void finish() {
-												// TODO Auto-generated method stub
-												
-											}
-										});
+                                        @Override
+                                        public void success(JsonBean bean) {
+                                            T.showShort(
+                                                    TuanDuiJiaActivity.this,
+                                                    "发送成功！");
+                                        }
 
-							} else {
+                                        @Override
+                                        public void failure(String msg) {
+                                            T.showShort(
+                                                    TuanDuiJiaActivity.this,
+                                                    msg);
+                                        }
 
-							}
+                                        @Override
+                                        public void finish() {
+                                            // TODO Auto-generated method stub
 
-						}
+                                        }
+                                    });
 
-						@Override
-						public void onCancel() {
+                        } else {
 
-						}
-					});
+                        }
 
-			dialog1.show();
+                    }
 
-			break;
-        case R.id.ll_send_talk:  //团队聊天
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+                dialog1.show();
+
+                break;
+            case R.id.ll_send_talk:  //团队聊天
 //			startActivity(new Intent(TuanDuiJiaActivity.this, TribeActivity.class));
 //			this.overridePendingTransition(R.anim.aty_zoomin,
 //					R.anim.aty_zoomout);
-            YWIMKit mIMKit = AppStore.mIMKit;
-				//参数为群ID号
-			Intent intent2 = mIMKit.getTribeChattingActivityIntent(Long.parseLong(mTuanLiaoID));
-			startActivity(intent2);
-            break;
-		}
-	}
+                YWIMKit mIMKit = AppStore.mIMKit;
+                //参数为群ID号
+                Intent intent2 = mIMKit.getTribeChattingActivityIntent(Long.parseLong(mTuanLiaoID));
+                startActivity(intent2);
+                break;
+        }
+    }
 
-	// 退出团队：
-		private void out() {
-			String url = UrlTools.url + UrlTools.OUT_TEAM;
-			RequestParams params = new RequestParams();
-			params.put("team_id", td.getId());
-			Log.e("TAG", td.getId() + "td.getid()");
-			Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
-					new HttpCallBack() {
-						@Override
-						public void success(JsonBean bean) {
-							T.showShort(TuanDuiJiaActivity.this, "退出成功！");
-							for(int i=0;i<AppStore.acts.size();i++){
-								AppStore.acts.get(i).finish();
-							}
-							if (!"".equals(mTuanLiaoID)){
-								outQun();  //退出团队群聊
-							}
-						}
-						@Override
-						public void failure(String msg) {
-							T.showShort(TuanDuiJiaActivity.this, msg);
-						}
-						@Override
-						public void finish() {
-							// TODO Auto-generated method stub
-							
-						}
-					});
+    // 退出团队：
+    private void out() {
+        String url = UrlTools.url + UrlTools.OUT_TEAM;
+        RequestParams params = new RequestParams();
+        params.put("team_id", td.getId());
+        Log.e("TAG", td.getId() + "td.getid()");
+        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
+                new HttpCallBack() {
+                    @Override
+                    public void success(JsonBean bean) {
+                        T.showShort(TuanDuiJiaActivity.this, "退出成功！");
+                        for (int i = 0; i < AppStore.acts.size(); i++) {
+                            AppStore.acts.get(i).finish();
+                        }
+                        if (!"".equals(mTuanLiaoID)) {
+                            outQun();  //退出团队群聊
+                        }
+                    }
 
-		}
+                    @Override
+                    public void failure(String msg) {
+                        T.showShort(TuanDuiJiaActivity.this, msg);
+                    }
 
-	/**
-	 * 团队团聊Id
-	 */
-	public void getTuanLiaoId(){
-		String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
-		RequestParams params = new RequestParams();
-		params.put("team_id",td.getId());
-		AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void finish() {
+                        // TODO Auto-generated method stub
 
-			@Override
-			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+                    }
+                });
 
-				JsonBean bean = JsonUtils.getMessage(new String(arg2));
-				if ("200".equals(bean.getCode())) {
-					Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
-					mTuanLiaoID = bean.getInfor().get(0).get("team_talk") + "";
-					if ("".equals(mTuanLiaoID) || mTuanLiaoID == null){
-						ll_send_talk.setVisibility(View.GONE);
-					}else {
-						ll_send_talk.setVisibility(View.VISIBLE);
-					}
-				} else {
-					Log.e("chengyuan", "handleMessage: -----------------" + bean.getMsg() );
-				}
-				super.onSuccess(arg0, arg1, arg2);
-			}
+    }
 
-			@Override
-			public void onFailure(int arg0, Header[] arg1, byte[] arg2,
-								  Throwable arg3) {
-				super.onFailure(arg0, arg1, arg2, arg3);
-			}
-		});
+    /**
+     * 团队团聊Id
+     */
+    public void getTuanLiaoId() {
+        String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
+        RequestParams params = new RequestParams();
+        params.put("team_id", td.getId());
+        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
 
-	}
+            @Override
+            public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 
+                JsonBean bean = JsonUtils.getMessage(new String(arg2));
+                if ("200".equals(bean.getCode())) {
+                    Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk"));
+                    mTuanLiaoID = bean.getInfor().get(0).get("team_talk") + "";
+                    if ("".equals(mTuanLiaoID) || mTuanLiaoID == null) {
+                        ll_send_talk.setVisibility(View.GONE);
+                    } else {
+                        ll_send_talk.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Log.e("chengyuan", "handleMessage: -----------------" + bean.getMsg());
+                }
+                super.onSuccess(arg0, arg1, arg2);
+            }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent intent) {
-		// 已经移交了管理员：
-		if (requestCode == 500 && resultCode == 100) {
-			ll_guanli.setVisibility(View.GONE);
-		}
-		super.onActivityResult(requestCode, resultCode, intent);
-	}
+            @Override
+            public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+                                  Throwable arg3) {
+                super.onFailure(arg0, arg1, arg2, arg3);
+            }
+        });
 
-	/**
-	 * 退出群聊
-	 */
-	public void outQun(){
-		mService = mYWIMkit.getTribeService();
-		mService.exitFromTribe(new MyCallBack() {
-			@Override
-			public void onSuccess(Object... objects) {
-
-			}
-
-			@Override
-			public void onError(int i, String s) {
-                T.showShort(TuanDuiJiaActivity.this,"退出团聊失败--" + s);
-			}
-		}, Long.parseLong(mTuanLiaoID));
-	}
+    }
 
 
-	/**
-	 * 请求回调的接口
-	 */
-	public static abstract class MyCallBack implements IWxCallback{
-		@Override
-		public void onProgress(int i) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent intent) {
+        // 已经移交了管理员：
+        if (requestCode == 500 && resultCode == 100) {
+            ll_guanli.setVisibility(View.GONE);
+        }
+        super.onActivityResult(requestCode, resultCode, intent);
+    }
 
-		}
-	}
+    /**
+     * 退出群聊
+     */
+    public void outQun() {
+        mService = mYWIMkit.getTribeService();
+        mService.exitFromTribe(new MyCallBack() {
+            @Override
+            public void onSuccess(Object... objects) {
+
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                T.showShort(TuanDuiJiaActivity.this, "退出团聊失败--" + s);
+            }
+        }, Long.parseLong(mTuanLiaoID));
+    }
+
+
+    /**
+     * 请求回调的接口
+     */
+    public static abstract class MyCallBack implements IWxCallback {
+        @Override
+        public void onProgress(int i) {
+
+        }
+    }
 }

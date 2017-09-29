@@ -47,13 +47,14 @@
 
     <Button
         android:id="@+id/button_guide"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_above="@id/ll_guide"
-        android:layout_marginTop="@dimen/y10"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
+        android:text="开启会办"
+        android:textColor="#3586FF"
+        android:background="@drawable/button"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/ll_guide"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/lijitiyan"
-        android:visibility="gone"
-         />
+        />
 
 </RelativeLayout>

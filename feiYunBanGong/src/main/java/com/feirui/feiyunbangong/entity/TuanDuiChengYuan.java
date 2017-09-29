@@ -100,6 +100,42 @@ public class TuanDuiChengYuan implements Serializable {
         this.head = head;
         this.phone = phone;
     }
+	public TuanDuiChengYuan(String id, String staff_id, String name,
+							String head, String type, String phone, String email,String introduction) {
+		super();
+		this.id = id;
+		this.introduction=introduction;
+		this.staff_id = staff_id;
+		this.name = name;
+		this.head = head;
+		this.type = type;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public TuanDuiChengYuan(String id, String staff_id, String name,
+							String head, String type, String phone, String email, String tag,String introduction,String store_url) {
+		super();
+		this.id = id;
+		this.staff_id = staff_id;
+		this.introduction=introduction;
+		this.name = name;
+		this.head = head;
+		this.type = type;
+		this.phone = phone;
+		this.email = email;
+		this.tag = tag;
+		this.store_url = store_url;
+	}
+
+	public TuanDuiChengYuan(String id, String name, String head, String type, String phone) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.head = head;
+		this.type = type;
+		this.phone = phone;
+	}
 
 	public String getTag() {
 		return tag;
@@ -175,43 +211,7 @@ public class TuanDuiChengYuan implements Serializable {
 		return serialVersionUID;
 	}
 
-	public TuanDuiChengYuan(String id, String staff_id, String name,
-			String head, String type, String phone, String email,String introduction) {
-		super();
-		this.id = id;
-		this.introduction=introduction;
-		this.staff_id = staff_id;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-		this.email = email;
-	}
 
-	public TuanDuiChengYuan(String id, String staff_id, String name,
-			String head, String type, String phone, String email, String tag,String introduction,String store_url) {
-		super();
-		this.id = id;
-		this.staff_id = staff_id;
-		this.introduction=introduction;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-		this.email = email;
-		this.tag = tag;
-		this.store_url = store_url;
-	}
-
-	public TuanDuiChengYuan(String id, String name, String head, String type,
-			String phone) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-	}
 
 	@Override
 	public String toString() {

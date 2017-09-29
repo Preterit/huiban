@@ -114,8 +114,7 @@ public class RegisteActivity extends BaseActivity {
 				return;
 			}
 
-			DingShiQiUtil.init(bt_checking);
-			DingShiQiUtil.open();
+
 
 			try {
 				String url = "";
@@ -152,6 +151,8 @@ public class RegisteActivity extends BaseActivity {
 														"验证码已发送请注意查收");
 											}
 										});
+										DingShiQiUtil.init(bt_checking);
+										DingShiQiUtil.open();
 
 									} else {
 										runOnUiThread(new Runnable() {
@@ -180,6 +181,8 @@ public class RegisteActivity extends BaseActivity {
 												"验证码已发送请注意查收");
 									}
 								});
+								DingShiQiUtil.init(bt_checking);
+								DingShiQiUtil.open();
 							}else {
 								runOnUiThread(new Runnable() {
 									public void run() {

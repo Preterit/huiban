@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.feirui.feiyunbangong.activity.DaiShenPiActivity;
 import com.feirui.feiyunbangong.activity.DetailGongGaoActivity;
-import com.feirui.feiyunbangong.activity.DetailTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.TuanDui_DetailActivity;
 import com.feirui.feiyunbangong.activity.MainActivity;
 import com.feirui.feiyunbangong.activity.NewFriendActivity;
 import com.feirui.feiyunbangong.entity.TuanDui;
@@ -217,7 +217,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     // 跳转到查看团队页面：
     private void openDetailTeam(Context context, TuanDui td) {
-        Intent i = new Intent(context, DetailTuanDuiActivity.class);
+        Intent i = new Intent(context, TuanDui_DetailActivity.class);
         i.putExtra("tuanDui", td);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK

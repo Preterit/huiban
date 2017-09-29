@@ -89,10 +89,8 @@ public class LianXiRen implements Serializable{
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
-
 
 	public String getName() {
 		return name;
@@ -130,7 +128,7 @@ public class LianXiRen implements Serializable{
 	}
 	
 	
-	
+
 	
 	
 	

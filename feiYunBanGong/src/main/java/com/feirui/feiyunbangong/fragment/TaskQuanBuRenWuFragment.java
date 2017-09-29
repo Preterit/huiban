@@ -60,7 +60,7 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
                 bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
-                bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
+                bundle.putString("staff_head", UrlTools.pcUrl+json.getInfor().get(position-1).get("staff_head"));
                 Log.e("全部任务", "onItemClick position: "+position );
                 intent.putExtras(bundle);
                 startActivity(intent);

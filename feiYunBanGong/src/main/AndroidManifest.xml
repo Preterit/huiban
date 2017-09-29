@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="69"
-    android:versionName="1.6.9">
+    android:versionCode="70"
+    android:versionName="1.7.0">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -318,7 +318,7 @@
             android:name=".activity.SetGuanLIYuanActivity"
             android:label="@string/title_activity_set_guan_liyuan" />
         <activity
-            android:name=".activity.DetailTuanDuiActivity"
+            android:name=".activity.TuanDui_DetailActivity"
             android:label="@string/title_activity_detail_tuan_dui" />
         <activity
             android:name=".activity.DetailChengYuanActivity"
@@ -457,7 +457,8 @@
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activity.ReleaseDetail_FanKuiActivity"></activity>
+        <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
+        <activity android:name=".activity.SheZhiActivity"></activity>
     </application>
 
 </manifest>
