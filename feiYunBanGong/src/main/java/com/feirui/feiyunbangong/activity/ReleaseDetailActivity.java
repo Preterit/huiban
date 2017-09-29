@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.JieDanRenAdapter;
@@ -31,9 +32,9 @@ import java.util.HashMap;
  * 新的任务单详情界面
  * lice
  */
-public class ReleaseDetailActivity extends BaseActivity implements View.OnClickListener {
+public class  ReleaseDetailActivity extends BaseActivity implements View.OnClickListener {
     public String staff_name, time, task_txt, staff_head;
-    int id;
+    String  id;
     ImageView rwd_im_tx;
     TextView rwd_tv_mz, rwd_tv_rq, rwd_tv_zt, rwd_tv_xq, rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz;
     RecyclerView rwd_rec_jdr;
@@ -51,8 +52,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         time = getIntent().getStringExtra("time");
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
-        id = getIntent().getIntExtra("id", -1);
-
+        id = getIntent().getStringExtra("id");
         initDate();
         initView();
     }
@@ -72,10 +72,9 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 Log.e("全部任务获取成功-接单人", "success: " + bean);
                 Log.e("全部任务获取成功-接单人", "success: " + infor);
                 HashMap<String, HashMap<String, Object>> in_fo = new HashMap<>();
-                for (int i = 0; i < infor.size(); i++) {
+                for (int i = 0; i < infor.size(  ); i++) {
                     in_fo.put(i + "", infor.get(i));
                 }
-
                 adapter.addAll(infor);
             }
 
@@ -163,18 +162,28 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 //String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
                 String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/Task/task_accept";
                 params2.put("id", id);
-                params2.put("button", 1);
+                params2.put("button", "1");
                 Log.e("全部任务获取成功-确认接单", "id: " + id);
                 AsyncHttpServiceHelper.post(url2,params2,new AsyncHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         super.onSuccess(statusCode, headers, responseBody);
                         final JsonBean json = JsonUtils.getMessage(new String(responseBody));
-                        if ("-400".equals(json.getCode())) {
-                            Log.e("详细任务-确认接单按钮", "成功"+json.toString());
+                        if ("200".equals(json.getCode())) {
+                            if ("已经接受了".equals(json.getMsg())){
+                                Toast.makeText(ReleaseDetailActivity.this, "您已接过该任务!", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(ReleaseDetailActivity.this, "接单成功!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
                         }else {
-                            Log.e("详细任务-确认接单按钮", "失败"+json.toString());
+                            Toast.makeText(ReleaseDetailActivity.this, "数据异常", Toast.LENGTH_SHORT).show();
                         }
+//                        if ("-400".equals(json.getCode())) {
+//                            Log.e("详细任务-确认接单按钮", "成功"+json.toString());
+//                        }else {
+//                            Log.e("详细任务-确认接单按钮", "失败"+json.toString());
+//                        }
                     }
 
                     @Override
