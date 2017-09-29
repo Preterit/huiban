@@ -1,5 +1,7 @@
 package com.feirui.feiyunbangong.entity;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +12,12 @@ import java.util.List;
  * @author feirui1
  *
  */
-public class TuanDui implements Serializable {
+public class TuanDui  extends DataSupport implements Serializable {
 
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private String tid;
 	private String name;//团队名称
 	private String pinyin;//团队名称的拼音；
 	private String headword;//团队名称拼音的首字母；
@@ -32,6 +34,14 @@ public class TuanDui implements Serializable {
 	public void setPinyin(String pinyin) {
 		String upperCase = pinyin.toUpperCase();//转为大写
 		this.pinyin = upperCase;
+	}
+
+	public String getTid() {
+		return tid;
+	}
+
+	public void setTid(String tid) {
+		this.tid = tid;
 	}
 
 	public String getHeadword() {
@@ -70,13 +80,6 @@ public class TuanDui implements Serializable {
 		this.guanli_id = guanli_id;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -98,12 +101,12 @@ public class TuanDui implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TuanDui [id=" + id + ", name=" + name + "]";
+		return "TuanDui [tid=" + tid + ", name=" + name + "]";
 	}
 
-	public TuanDui(String id, String name) {
+	public TuanDui(String tid, String name) {
 		super();
-		this.id = id;
+		this.tid = tid;
 		this.name = name;
 	}
 

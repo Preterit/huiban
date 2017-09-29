@@ -140,21 +140,23 @@ public class TribeInfoActivity extends BaseActivity{
         }
     }
 
-    public void qunID(long id){
+    public void qunID(final long id){
         Log.e("chengyuan", "qunID: ------------------------" + id );
         String url = UrlTools.url + UrlTools.QUN_ID;
         RequestParams params = new RequestParams();
-        params.put("team_talk",id + "");
-        params.put("team_id",teamId);
+        params.put("team_talk",id + ""); //群id
+        params.put("team_id",teamId); //团队的id
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
                 new Utils.HttpCallBack() {
 
                     @Override
                     public void success(JsonBean bean) {
+                        TribeInfoActivity.this.finish();
                         if ("200".equals(bean.getCode())){
                             T.showShort(TribeInfoActivity.this, "团聊创建成功！");
                         }
-//                        TribeInfoActivity.this.finish();
+                        Intent intent2 = mIMKit.getTribeChattingActivityIntent(id);
+                        startActivity(intent2);
                     }
 
                     @Override

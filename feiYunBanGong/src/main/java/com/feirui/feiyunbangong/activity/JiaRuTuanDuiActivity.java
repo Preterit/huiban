@@ -18,6 +18,7 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.ChengYuanAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -55,6 +56,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 	private String mTuanLiaoID; //团聊的Id
 	private IYWTribeService mService;
 	private YWIMKit mYWIMkit;
+	private String teamName = "";
 
 
 	@Override
@@ -156,9 +158,15 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 				new HttpCallBack() {
 					@Override
 					public void success(JsonBean bean) {
-						Toast.makeText(JiaRuTuanDuiActivity.this, "成功加入团队", 0)
+						//本地数据库缓存
+//						TuanDui tuanDui = new TuanDui();
+//						tuanDui.setTid(id);
+//						tuanDui.setName(teamName);
+//						tuanDui.save();
+						setResult(1001,new Intent());
+						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
 								.show();
-						addData();
+//						addData();
 						if (!"".equals(mTuanLiaoID)){
 							addTuanLiao();
 						}
@@ -197,6 +205,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 						if (hm.get("team_name") != null) {
 							tv_name.setText(String.valueOf(hm.get("team_name")));
 							//tiv_head.setText(String.valueOf(hm.get("team_name")));
+							teamName = String.valueOf(hm.get("team_name"));
 						}
 
 						JSONArray array = (JSONArray) hm.get("list");

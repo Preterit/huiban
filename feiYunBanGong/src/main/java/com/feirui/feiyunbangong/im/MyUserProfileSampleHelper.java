@@ -86,8 +86,7 @@ public class MyUserProfileSampleHelper {
 		contactManager
 				.setCrossContactProfileCallback(new IYWCrossContactProfileCallback() {
 					/**
-					 * 设置头像点击事件, 该方法已废弃，后续请使用
-					 * {@link IYWContactService#setContactHeadClickCallback(IYWContactHeadClickCallback)}
+					 *
 					 * 
 					 *            需要打开页面的用户
 					 *            需要返回个人信息的用户所属站点
@@ -139,6 +138,7 @@ public class MyUserProfileSampleHelper {
 
 											HashMap<String, Object> hm = bean
 													.getInfor().get(0);
+											Log.e("123", "success:------------------- " + bean.getInfor() + userId );
 											String name = hm.get("staff_name")
 													+ "";
 											String staff_head = hm

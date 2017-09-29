@@ -41,8 +41,8 @@ public class TuanDuiAdapter extends MyBaseAdapter<TuanDui> {
 				holder.tv_name.setText("团队：" + td.getName());
 			}
 		}
-		if (td.getId() != null) {
-			holder.tv_number.setText("团队号：" + td.getId());
+		if (td.getTid() != null) {
+			holder.tv_number.setText("团队号：" + td.getTid());
 		}
 
 		if (td.isHave()) {

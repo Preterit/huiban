@@ -113,5 +113,12 @@ public class YWSDKGlobalConfigSample extends YWSDKGlobalConfig {
     public long getReadyProfileReUpdateTimeGap(){
         return 24*60*60;
     };
-
+    /**
+     * 是否新消息的支持角标显示的开关
+     *
+     * @return
+     */
+    public boolean enableShortcutBadger() {
+        return false;
+    }
 }
