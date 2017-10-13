@@ -706,11 +706,13 @@ public class MainActivity extends BaseActivity
                     }
 
                     imageUrls.add(head);
-                    //头像的点击事件
+                    //侧滑菜单头像的点击事件
                     iv_head.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            imageBrower(0,imageUrls);
+                            //imageBrower(0,imageUrls);
+                            startActivity(new Intent(MainActivity.this, DetailPersonActivity.class));
+                            overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         }
                     });
 

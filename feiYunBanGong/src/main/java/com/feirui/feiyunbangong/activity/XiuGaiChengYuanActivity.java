@@ -60,7 +60,7 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
     private void initData() {
         String url = UrlTools.url + UrlTools.XIUGAI_ChengYuan;
         RequestParams params = new RequestParams();
-        params.put("id", td.getId());
+        params.put("id", td.getTid());
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
@@ -97,10 +97,17 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
                 if (tdcy.getIntroduction() != null && !tdcy.getIntroduction().equals("null")) {
                     et_email.setText("" + tdcy.getIntroduction().toString());
                 }
-                //tv_phone.setText("手机号：" + tdcy.getPhone().toString());
-                et_remark.setText(tdcy.getT_remark() + "");
-                if (!"".equals(tdcy.getHead()) && null != tdcy.getHead() &&
-                        !"http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(tdcy.getHead())) {
+                //tv_phone.setText("手机号：" + tdcy.getPhone().toString());//因为保护隐私,屏蔽手机号
+
+                if (tdcy.getT_remark()!=null) {//如果原来有个人签名,设置个人签名
+                    et_remark.setText(tdcy.getT_remark());
+                }
+                if(tdcy.getIntroduction()!=null){//如果原来有团队备注,设置团队备注
+                    et_email.setText(tdcy.getIntroduction());
+                }
+                if (!"".equals(tdcy.getHead()) && null!= tdcy.getHead() &&
+                        !"http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(tdcy.getHead())&&
+                        !"http://123.57.45.74/feiybg1/public/index.php/home_api/public/static/staff_head/430/c8aa160662318c6f62a068de84ed797b.jpeg".equals(tdcy.getHead())) {
                     ImageLoader.getInstance().displayImage(tdcy.getHead(), iv_head);
                 } else {
                     iv_head.setText(Utils.getPicTitle(tdcy.getName()));

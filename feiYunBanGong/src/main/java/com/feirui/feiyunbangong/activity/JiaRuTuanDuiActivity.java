@@ -164,7 +164,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 //						tuanDui.setName(teamName);
 //						tuanDui.save();
 						setResult(1001,new Intent());
-						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
+						Toast.makeText(JiaRuTuanDuiActivity.this, "加入成功", 0)
 								.show();
 //						addData();
 						if (!"".equals(mTuanLiaoID)){

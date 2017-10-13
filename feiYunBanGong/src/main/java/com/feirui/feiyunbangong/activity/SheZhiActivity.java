@@ -27,11 +27,17 @@ public class SheZhiActivity extends AppCompatActivity {
         ImageLoader.getInstance().clearDiscCache();// 清除sd卡图片；
         T.showShort(this, "清理完成！");
     }
+
     public void onClick3(View view){
         UseMessageDialog dialog1 = new UseMessageDialog(this);
         dialog1.show();
     }
+
     public void onClick4(View view){
         finish();
+    }
+    public void onClick5(View view){
+        startActivity(new Intent(SheZhiActivity.this, AddShopActivity.class));
+        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }
 }

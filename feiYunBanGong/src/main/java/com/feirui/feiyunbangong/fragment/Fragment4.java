@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -24,9 +23,9 @@ import android.widget.TextView;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ChuangJianTuanDuiActivity;
-import com.feirui.feiyunbangong.activity.TuanDui_DetailActivity;
 import com.feirui.feiyunbangong.activity.GuanLiTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.SouSuoTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.TuanDui_DetailActivity;
 import com.feirui.feiyunbangong.adapter.MyAdapter;
 import com.feirui.feiyunbangong.adapter.TuanDuiAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -183,7 +182,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
      */
     public void getData(){
         tds = DataSupport.findAll(TuanDui.class);
-        Log.e("tds", "setData: ------数据获取--------" + tds.get(2).getName());
         //获取本地数据库信息
         if (tds == null || tds.size() == 0){
             //如果数据库为空  从网络获取数据

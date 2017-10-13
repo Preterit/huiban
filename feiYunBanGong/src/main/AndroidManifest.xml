@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="70"
-    android:versionName="1.7.0">
+    android:versionCode="71"
+    android:versionName="1.7.1">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -237,7 +237,7 @@
         <receiver
             android:name=".receiver.MyReceiver"
             android:enabled="true"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
 
                 <!-- Required 用户注册SDK的intent -->
@@ -252,6 +252,17 @@
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
 
                 <category android:name="com.feirui.feiyunbangong" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".fragment.Fragment4$MyBroadReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.feirui.feiyunbangong.getteam" />
+                <action android:name="com.feirui.feiyunbangong.onadd.team.member"/>
+                <action android:name="com.feirui.feiyunbangong.onadd.team" />
             </intent-filter>
         </receiver>
 
@@ -450,17 +461,18 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
-        <activity
-            android:name=".activity.RenWuDetailActivity"
-            android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.ReleaseDetailActivity" />
         <activity android:name=".activity.WebViewActivity" />
+        <!-- 个人小店 -->
+        <activity android:name=".activity.AddShopActivity" />
+
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
         <activity android:name=".activity.SheZhiActivity"></activity>
+
     </application>
 
 </manifest>

@@ -7,6 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
@@ -62,6 +65,7 @@ import com.feirui.feiyunbangong.myinterface.AllInterface.OnNewFriendNumChanged;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.LianXiRenUtil;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -226,59 +230,84 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
     // 获取申请好友个数：
     private void getNewFriendNum() {
-        //获取通讯录中的电话在会办中卓策过的人
-//        str = LianXiRenUtil.readConnect(getActivity());
-//        Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
-//        RequestParams params = new RequestParams();
-//        params.put("phone", str[1]);
-//        String url1 = UrlTools.url + UrlTools.SHOUJILIANXIREN;
-//        Utils.doPost(null, getActivity(), url1, params,
-//                new HttpCallBack() {
-//                    @Override
-//                    public void success(JsonBean bean) {
-//                        ArrayList<HashMap<String, Object>> info = bean.getInfor();
-//                        Log.e("通讯录好友列表", "info.size() " + info.size());
-//                        friend_size = info.size();
-//                        tv_num.setVisibility(View.VISIBLE);
-//                        tv_num.setText(friend_size + "");
-//                    }
-//                    @Override
-//                    public void failure(String msg) {
-//                    }
-//                    @Override
-//                    public void finish() {
-////                        dialog.dismiss();
-//                    }
-//                });
-        //获取申请好友的个数
-        String url = UrlTools.url + UrlTools.HAOYOU_NUM;
-        Utils.doPost(LoadingDialog.getInstance(getActivity()), getActivity(),
-                url, null, new HttpCallBack() {
+//        Handler handler = new Handler(){
+//            public void handleMessage(android.os.Message msg) {}
+//        };
 
-                    @Override
-                    public void success(JsonBean bean) {
-                        Object object = bean.getInfor().get(0).get("num");
-                        int num = Integer.parseInt(String.valueOf(object));
-                        if (num + friend_size > 0) {
-                            tv_num.setVisibility(View.VISIBLE);
-                            tv_num.setText(num + friend_size + "");
-                        } else {
-                            tv_num.setVisibility(View.INVISIBLE);
-                        }
-                        friendNumListener.newFriendNumChanged(num + friend_size);
-                    }
+//        Activity activity = (Activity) getContext();
+        new Thread(){
+//        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                //获取通讯录中的电话在会办中注册过的人
+                str = LianXiRenUtil.readConnect(getActivity());
+                Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+                RequestParams params = new RequestParams();
+                params.put("phone", str[1]);
+                 String url1 = UrlTools.url + UrlTools.SHOUJILIANXIREN;
+                Utils.doPost(null, getActivity(), url1, params,
+                        new HttpCallBack() {
+                            @Override
+                            public void success(JsonBean bean) {
+                                ArrayList<HashMap<String, Object>> info = bean.getInfor();
+                                Log.e("通讯录好友列表", "info.size() " + info.size());
+                                friend_size = info.size();
+//                                tv_num.setVisibility(View.VISIBLE);
+//                                tv_num.setText(friend_size + "");
+                            }
 
-                    @Override
-                    public void failure(String msg) {
-                        T.showShort(getActivity(), msg);
-                    }
+                            @Override
+                            public void failure(String msg) {
+                            }
 
-                    @Override
-                    public void finish() {
-                        // TODO Auto-generated method stub
+                            @Override
+                            public void finish() {
+//                        dialog.dismiss();
+                            }
+                        });
+                //获取申请好友的个数
+                String url = UrlTools.url + UrlTools.HAOYOU_NUM;
 
-                    }
-                });
+                Utils.doPost(LoadingDialog.getInstance(getActivity()), getActivity(),
+                        url, null, new HttpCallBack() {
+
+                            @Override
+                            public void success(JsonBean bean) {
+                                Object object = bean.getInfor().get(0).get("num");
+                                int num = Integer.parseInt(String.valueOf(object));
+                                Message msg = new Message();
+                                msg.obj = num + friend_size;
+                                handler.sendMessage(msg);
+//                                if (num + friend_size > 0) {
+//                                    tv_num.setVisibility(View.VISIBLE);
+//                                    tv_num.setText(num + friend_size + "");
+//
+//                                } else {
+//                                    tv_num.setVisibility(View.INVISIBLE);
+//                                }
+                                //friendNumListener.newFriendNumChanged(num + friend_size);
+                            }
+
+                            @Override
+                            public void failure(String msg) {
+
+                                T.showShort(getActivity(), msg);
+
+                            }
+
+                            @Override
+                            public void finish() {
+                                // TODO Auto-generated method stub
+
+                            }
+                        });
+                Looper.loop();
+            }
+        }.start();
+
+
+
 
     }
 
@@ -874,5 +903,18 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     public void onCancel() {
 
     }
+
+    Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            Log.e("好友数量", "msg.obj="+msg.obj.toString() );
+            if ((int)msg.obj>0){
+                tv_num.setVisibility(View.VISIBLE);
+                tv_num.setText(msg.obj+"");
+                friendNumListener.newFriendNumChanged((int)msg.obj);
+            }else{
+                tv_num.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
 
 }

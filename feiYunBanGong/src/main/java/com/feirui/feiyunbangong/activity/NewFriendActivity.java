@@ -71,12 +71,12 @@ public class NewFriendActivity extends BaseActivity implements
         setData();
 
         // 请求数据：
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                request();
-//            }
-//        }, 100);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                request();
+            }
+        }, 100);
     }
 
     @Override

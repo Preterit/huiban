@@ -22,6 +22,10 @@ public class UrlTools {
    */
   public static String url = "http://123.57.45.74/feiybg1/public/index.php/api/";
   public static String url1 = "http://123.57.45.74/feiybg1/public/index.php/index/";
+  /**
+   * 后台给的图片有的地址差的url
+   * */
+  public static String url_img = "http://123.57.45.74/feiybg1";
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
 // public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
