@@ -3,19 +3,16 @@ package com.feirui.feiyunbangong.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -50,9 +47,12 @@ import java.util.Set;
  *
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
-	// 用户名，密码输入框
 	@PView
-	EditText et_login_username, et_login_password;
+	FrameLayout fl_name;
+	// 用户名，密码输入框
+	AutoCompleteTextView et_login_username;
+	@PView
+	EditText  et_login_password;
 	// 登录
 	@PView(click = "onClick")
 	Button btn_login_submit;
@@ -115,67 +115,174 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		et_login_username= (AutoCompleteTextView) findViewById(R.id.et_login_username);
+		et_login_username.setOnClickListener(this);
 		imageView= (ImageView) findViewById(R.id.iv_pic);
         imageView.setOnClickListener(this);
 	}
+	private final class  MyOnClickListener implements View.OnClickListener{
 
-
-	private void showWindow(View v) {
-								LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-					view = layoutInflater.inflate(R.layout.group_list, null);
-
-
-					lv_group = (ListView) view.findViewById(R.id.lvGroup);
-					SharedPreferences preferences = getApplicationContext().getSharedPreferences("username", Context.MODE_PRIVATE);
-
-					set = new HashSet<String>();
-
-					set = preferences.getStringSet("username", null);
-
-					if (set != null) {
-						user_list = new ArrayList(set);//转化存储到list集合中
-						adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, user_list);
-						lv_group.setAdapter(adapter);
-          // 创建一个PopuWidow对象
-						popupWindow = new PopupWindow(view, 300, 300);
-						//popupWindow.showAsDropDown(et_login_password);
-						// 使其聚集
-						popupWindow.setFocusable(true);
-						// 设置允许在外点击消失
-						popupWindow.setOutsideTouchable(true);
-
-						// 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
-						popupWindow.setBackgroundDrawable(new BitmapDrawable());
-						WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-						// 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半
-						int xPos = windowManager.getDefaultDisplay().getWidth() / 2
-								- popupWindow.getWidth() / 2;
-					//	Log.i("coder", "xPos:" + xPos);
-
-							popupWindow.showAsDropDown(et_login_username, Gravity.CENTER_HORIZONTAL, 100);
-					//	popupWindow.showAsDropDown(et_login_username);
-					}
-lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		et_login_username.setText((CharSequence) user_list.get(position));
-		popupWindow.dismiss();
-		//Toast.makeText(LoginActivity.this, (CharSequence) user_list.get(position),Toast.LENGTH_SHORT).show();
-	}
-});
-//					lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//						@Override
-//						public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//							Toast.makeText(LoginActivity.this,
-//									user_list.get(i), Toast.LENGTH_SHORT).show();
-//
-//							if (popupWindow != null) {
-//								popupWindow.dismiss();
-//							}
-//						}
-//					});
+		@Override
+		public void onClick(View view) {
+			saveHistory("history", et_login_username);
 		}
+	}
+	/**
+
+	 * 把指定AutoCompleteTextView中内容保存到sharedPreference中指定的字符段
+
+	 *
+
+	 * @param field
+
+	 *            保存在sharedPreference中的字段名
+
+	 * @param autoCompleteTextView
+
+	 *            要操作的AutoCompleteTextView
+
+	 */
+
+	private void saveHistory(String field,
+
+							 AutoCompleteTextView autoCompleteTextView) {
+
+		String text = autoCompleteTextView.getText().toString();
+
+		SharedPreferences sp = getSharedPreferences("network_url", 0);
+
+		String longhistory = sp.getString(field, "");
+
+		if (!longhistory.contains(text + ",")) {
+
+			StringBuilder sb = new StringBuilder(longhistory);
+
+			sb.insert(0, text + ",");
+
+			sp.edit().putString("history", sb.toString()).commit();
+
+		}
+
+	}
+	/**
+
+	 * 初始化AutoCompleteTextView，最多显示5项提示，使 AutoCompleteTextView在一开始获得焦点时自动提示
+
+	 *
+
+	 * @param field
+
+	 *            保存在sharedPreference中的字段名
+
+	 * @param autoCompleteTextView
+
+	 *            要操作的AutoCompleteTextView
+
+	 */
+
+	private void initAutoComplete(String field,
+
+								  final AutoCompleteTextView autoCompleteTextView) {
+		SharedPreferences sp = getSharedPreferences("network_url", 0);
+
+		String longhistory = sp.getString("history", "");
+
+		final String[] histories = longhistory.split(",");
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+
+				R.layout.item, histories);
+
+		// 只保留最近的50条的记录
+
+		if (histories.length > 3) {
+
+			String[] newHistories = new String[3];
+
+			System.arraycopy(histories, 0, newHistories, 0, 3);
+
+			adapter = new ArrayAdapter<String>(this,
+
+					R.layout.item, newHistories);
+
+		}
+
+		autoCompleteTextView.setAdapter(adapter);
+autoCompleteTextView.setThreshold(1);
+		autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+					@Override
+
+					public void onFocusChange(View v, boolean hasFocus) {
+
+						AutoCompleteTextView view = (AutoCompleteTextView) v;
+						if (hasFocus) {
+                       et_login_username.setDropDownWidth(fl_name.getWidth());
+							view.showDropDown();
+
+						}
+
+					}
+
+				});
+
+	}
+//	private void showWindow(View v) {
+//								LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//					view = layoutInflater.inflate(R.layout.group_list, null);
+//
+//
+//					lv_group = (ListView) view.findViewById(R.id.lvGroup);
+//					SharedPreferences preferences = getApplicationContext().getSharedPreferences("username", Context.MODE_PRIVATE);
+//
+//					set = new HashSet<String>();
+//
+//					set = preferences.getStringSet("username", null);
+//
+//					if (set != null) {
+//						user_list = new ArrayList(set);//转化存储到list集合中
+//						adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, user_list);
+//						lv_group.setAdapter(adapter);
+//          // 创建一个PopuWidow对象
+//						popupWindow = new PopupWindow(view, 300, 300);
+//						//popupWindow.showAsDropDown(et_login_password);
+//						// 使其聚集
+//						popupWindow.setFocusable(true);
+//						// 设置允许在外点击消失
+//						popupWindow.setOutsideTouchable(true);
+//
+//						// 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
+//						popupWindow.setBackgroundDrawable(new BitmapDrawable());
+//						WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+//						// 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半
+//						int xPos = windowManager.getDefaultDisplay().getWidth() / 2
+//								- popupWindow.getWidth() / 2;
+//					//	Log.i("coder", "xPos:" + xPos);
+//
+//							popupWindow.showAsDropDown(et_login_username, Gravity.CENTER_HORIZONTAL, 100);
+//					//	popupWindow.showAsDropDown(et_login_username);
+//					}
+//lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//	@Override
+//	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//		et_login_username.setText((CharSequence) user_list.get(position));
+//		popupWindow.dismiss();
+		//Toast.makeText(LoginActivity.this, (CharSequence) user_list.get(position),Toast.LENGTH_SHORT).show();
+//	}
+//});
+////					lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+////						@Override
+////						public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+////							Toast.makeText(LoginActivity.this,
+////									user_list.get(i), Toast.LENGTH_SHORT).show();
+////
+////							if (popupWindow != null) {
+////								popupWindow.dismiss();
+////							}
+////						}
+////					});
+//		}
 
 
 	@Override
@@ -227,7 +334,6 @@ lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				if (et_login_username.getText().toString().trim().length() != 11) {
 					T.showShort(LoginActivity.this, "请输入11位手机号");
 					return;
-
 				}
 				LoginMain();
 				break;
@@ -238,14 +344,17 @@ lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomcloseout);
 //			finish();
 				break;
-			case R.id.iv_pic: //
-				//Toast.makeText(LoginActivity.this,"adasfafa",Toast.LENGTH_SHORT).show();
-				if (popupWindow!=null){
-					popupWindow.dismiss();
-				}else {
-					showWindow(view1);
-				}
+//			case R.id.iv_pic: //
+//				//Toast.makeText(LoginActivity.this,"adasfafa",Toast.LENGTH_SHORT).show();
+//				if (popupWindow!=null){
+//					popupWindow.dismiss();
+//				}else {
+//					showWindow(view1);
+//				}
 			//finish();
+//				break;
+			case R.id.et_login_username:
+				initAutoComplete("history", et_login_username);
 				break;
 		}
 
@@ -272,7 +381,8 @@ lv_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 								mse.what = LOGIN_SUCESS;
 								//保存账号
-								saveZhangHao();
+								saveHistory("history", et_login_username);
+//								saveZhangHao();
 							} else {
 
 								mse.what = LOGIN_ERROR;

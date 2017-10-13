@@ -100,7 +100,9 @@
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.GuideActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity android:name=".activity.RegisteActivity" />
         <activity android:name=".activity.RegisteSOLOActivity" />
         <activity android:name=".activity.RegisteFIRMActivity" />
