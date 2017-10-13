@@ -336,6 +336,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 	// 移交管理员：
 	private void setManager(final View v) {
+
 		TuanDuiChengYuan tdcy = (TuanDuiChengYuan) v.getTag();
 		String url = UrlTools.url + UrlTools.SET_TEEM_MANAGER;
 		RequestParams params = new RequestParams();
@@ -354,7 +355,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 								TuanDuiJiaActivity.class);
 						setResult(100, intent);
 						if (mTbID!=null){//!"".equals(mTbID)
-//							jieSanQun();
+							jieSanQun();
 						}
 						TuanDuiGuanLiActivity.this.finish();
 						Toast.makeText(TuanDuiGuanLiActivity.this, "移交管理员成功", 0)
@@ -369,14 +370,13 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 					@Override
 					public void finish() {
 						// TODO Auto-generated method stub
-
 					}
 				});
 
-		//失败原因  你不是该团队的团长
+		//转移团长后群聊解散  需要新团长重新建群
 		String url2 = UrlTools.url + UrlTools.JIESAN_QUN;
 		RequestParams params2 = new RequestParams();
-		params.put("id",td.getTid());
+		params2.put("id",td.getTid());
 		Log.e("yag", "团聊的群解散群失败！--td.getTid()--------" + td.getTid());
 		Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
 			@Override
@@ -482,7 +482,22 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 		Log.e("chengyuan", "mTribeId: -----------------" + mTribeId + "----------" + mTuanDui.getPhone());
 
 		IYWContact iywContact =  YWContactFactory.createAPPContact(mTuanDui.getPhone(), Happlication.APP_KEY);
-		Log.e("chengyuan", "iywContact: -----------------" + iywContact );
+        mTribeService.expelMember(mTribeId, iywContact, new IWxCallback() {
+            @Override
+            public void onSuccess(Object... objects) {
+                Log.e("chengyuan", "iywContact: -------移除团聊----------");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onProgress(int i) {
+
+            }
+        });
 //
 	}
 	Handler handler = new Handler() {

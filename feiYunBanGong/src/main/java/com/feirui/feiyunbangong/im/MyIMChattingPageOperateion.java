@@ -835,7 +835,8 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
      */
     @Override
     public String getSystemMessageContent(Fragment fragment, YWConversation conversation, String content) {
-        return null;
+//        Log.e("content", "getSystemMessageContent: -------------------" + conversation.toString() + "00000000" + content );
+        return "";
     }
 
 }

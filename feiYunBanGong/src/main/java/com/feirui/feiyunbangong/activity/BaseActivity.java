@@ -62,6 +62,7 @@ public class BaseActivity extends FragmentActivity {
 		initInjectedView(this);
 	}
 
+
 	/**
 	 * 初始化头部
 	 */

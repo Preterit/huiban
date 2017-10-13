@@ -71,8 +71,8 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     private TextView tv_sousuolianxiren, tv_word;// 搜索联系人，中间位置显示的首字母；
     private static int allNoticce;// 所有未读数数量；
     private static OnTeamNoticeNumChanged listener;
-    private static Activity activity = Happlication.getActivities().get(0);
-
+    static ArrayList<Activity> activitys = Happlication.getActivities();
+    private static Activity activity ;
 
     @SuppressLint({"NewApi", "ValidFragment"})//横竖屏切换问题
     public Fragment4(OnTeamNoticeNumChanged listener) {
@@ -86,7 +86,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = setContentView(inflater, R.layout.fragment_main4);
-//        DataSupport.deleteAll(TuanDui.class, "tid = ?", "100286");
+        DataSupport.deleteAll(TuanDui.class, "tid = ?", "100144");
         initView();
         setListener();
         setListView();
@@ -116,6 +116,11 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         params.put("current_page", 1 + "");
         params.put("pagesize", 2000 + "");
 
+        if (activitys.size() == 0 || activitys == null){
+            return;
+        }else {
+            activity = activitys.get(0);
+        }
         Utils.doPost(LoadingDialog.getInstance(activity), activity,
                 url, params, new HttpCallBack() {
                     @Override
@@ -183,7 +188,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
      */
     public void getData(){
         tds = DataSupport.findAll(TuanDui.class);
-        Log.e("tds", "setData: ------数据获取--------" + tds.get(2).getName());
         //获取本地数据库信息
         if (tds == null || tds.size() == 0){
             //如果数据库为空  从网络获取数据
