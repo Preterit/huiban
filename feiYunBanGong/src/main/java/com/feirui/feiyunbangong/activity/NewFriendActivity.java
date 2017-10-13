@@ -80,7 +80,6 @@ public class NewFriendActivity extends BaseActivity implements
 
     @Override
     protected void onResume() {
-
         super.onResume();
     }
 
@@ -438,8 +437,5 @@ public class NewFriendActivity extends BaseActivity implements
             }
         }
     };
-
-
-
 
 }
