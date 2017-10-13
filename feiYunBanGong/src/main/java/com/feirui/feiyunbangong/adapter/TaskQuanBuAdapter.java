@@ -23,7 +23,8 @@ import java.util.HashMap;
  * Created by lice on 2017/7/7.全部任务单
  */
 
-public class TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
+public class
+TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
     private Context context;
     private OnItemClickListener mOnItemClickListener = null;
     private ArrayList<HashMap<String, Object>> data;

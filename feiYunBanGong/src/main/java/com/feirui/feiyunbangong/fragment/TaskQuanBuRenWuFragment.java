@@ -51,12 +51,14 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
         adapter.setOnItemClickListener(new TaskQuanBuAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
+
                 Log.e("全部页面的点击时间", "onItemClick: "+ position);
-                //Intent intent = new Intent(getActivity(), Release_FanKuiActivity.class);
+                //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
                 Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("json", json.getInfor().get(position-1)+"");
-                bundle.putInt("id", (Integer)json.getInfor().get(position-1).get("id"));
+                bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
+                Log.e("全部页面的点击时间", "id: "+(Integer)json.getInfor().get(position-1).get("id") );
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
                 bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));

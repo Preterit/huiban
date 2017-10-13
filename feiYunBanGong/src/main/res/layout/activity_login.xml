@@ -33,7 +33,7 @@
         android:layout_marginTop="@dimen/y100"
         android:background="@drawable/et_bg"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/tv_hint"
@@ -46,25 +46,25 @@
             android:id="@+id/et_login_username"
             style="@style/a000000_42"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="@dimen/y120"
             android:layout_marginRight="@dimen/x50"
-            android:background="@null" 
-            android:inputType="number"
+            android:layout_weight="1"
+            android:background="@null"
             android:hint="请输入账号"
-            />
-        
+            android:inputType="number" />
+
         <ImageView
+            android:id="@+id/iv_pic"
             android:layout_width="@dimen/size70"
             android:layout_height="@dimen/size70"
+            android:clickable="true"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/login2" 
             android:layout_marginRight="@dimen/x50"
-            />
-        
+            android:src="@drawable/login2" />
+
     </LinearLayout>
-    
-    
+
+
     <!-- 密码 -->
     <LinearLayout
         android:layout_width="match_parent"
