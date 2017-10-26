@@ -24,6 +24,7 @@
     
     <!-- 账号 -->
     <LinearLayout
+        android:id="@+id/ll_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y140"
         android:layout_marginLeft="@dimen/x120"
@@ -39,17 +40,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x40"
             android:text="账号：" />
+<FrameLayout
+    android:id="@+id/fl_name"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content">
+    <AutoCompleteTextView
+        android:id="@+id/et_login_username"
+        style="@style/a000000_42"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入账号"
+        android:background="@android:color/transparent"
+        android:dropDownHorizontalOffset="0dp"
+        android:dropDownVerticalOffset="5dp"
+        android:completionThreshold="1"
+        android:dropDownHeight="wrap_content"
+        />
+</FrameLayout>
 
-        <EditText
-            android:id="@+id/et_login_username"
-            style="@style/a000000_42"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y120"
-            android:layout_marginRight="@dimen/x50"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请输入账号"
-            android:inputType="number" />
+        <!--<EditText-->
+            <!--android:id="@+id/et_login_username"-->
+            <!--style="@style/a000000_42"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/y120"-->
+            <!--android:layout_marginRight="@dimen/x50"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@null"-->
+            <!--android:hint="请输入账号"-->
+            <!--android:inputType="number" />-->
 
         <ImageView
             android:id="@+id/iv_pic"
