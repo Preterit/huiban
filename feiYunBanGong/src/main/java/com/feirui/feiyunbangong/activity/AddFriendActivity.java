@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.adapter.SearchFriendsAdapter;
 import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.Friend;
@@ -96,60 +97,67 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 
 	private void search(String phone) {
 
-		String url = UrlTools.url + UrlTools.SOUSUO_LIANXIREN;
-		RequestParams params = new RequestParams();
-		params.put("staff_mobile", phone);
+        Intent intent = new Intent(AddFriendActivity.this,
+                SearchFriendsActivity.class);
+        intent.putExtra("friend", phone);
+        startActivity(intent);
+        overridePendingTransition(R.anim.aty_zoomin,
+                R.anim.aty_zoomout);
 
-		Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
-				new HttpCallBack() {
-
-					@Override
-					public void success(JsonBean bean) {
-						try {
-							String name = "";
-							String phone = "";
-							String address = "";
-							String head = "";
-							if (bean.getInfor().get(0).get("staff_name") != null) {
-								name = String.valueOf(bean.getInfor().get(0)
-										.get("staff_name"));
-							}
-							if (bean.getInfor().get(0).get("staff_mobile") != null) {
-								phone = String.valueOf(bean.getInfor().get(0)
-										.get("staff_mobile"));
-							}
-							if (bean.getInfor().get(0).get("address") != null) {
-								address = String.valueOf(bean.getInfor().get(0)
-										.get("address"));
-							}
-							if (bean.getInfor().get(0).get("staff_head") != null) {
-								head = String.valueOf(bean.getInfor().get(0)
-										.get("staff_head"));
-							}
-							Friend friend = new Friend(name, phone, address,
-									head);
-							Intent intent = new Intent(AddFriendActivity.this,
-									AboutFriendActivity.class);
-							intent.putExtra("friend", friend);
-							startActivity(intent);
-							overridePendingTransition(R.anim.aty_zoomin,
-									R.anim.aty_zoomout);
-						} catch (Exception e) {
-							Log.e("TAG", e.getMessage());
-						}
-					}
-
-					@Override
-					public void failure(String msg) {
-						Toast.makeText(AddFriendActivity.this, msg, Toast.LENGTH_SHORT).show();
-					}
-
-					@Override
-					public void finish() {
-						// TODO Auto-generated method stub
-
-					}
-				});
+//		String url = UrlTools.url + UrlTools.SOUSUO_LIANXIREN;
+//		RequestParams params = new RequestParams();
+//		params.put("staff_mobile", phone);
+//
+//		Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
+//				new HttpCallBack() {
+//
+//					@Override
+//					public void success(JsonBean bean) {
+//						try {
+//							String name = "";
+//							String phone = "";
+//							String address = "";
+//							String head = "";
+//							if (bean.getInfor().get(0).get("staff_name") != null) {
+//								name = String.valueOf(bean.getInfor().get(0)
+//										.get("staff_name"));
+//							}
+//							if (bean.getInfor().get(0).get("staff_mobile") != null) {
+//								phone = String.valueOf(bean.getInfor().get(0)
+//										.get("staff_mobile"));
+//							}
+//							if (bean.getInfor().get(0).get("address") != null) {
+//								address = String.valueOf(bean.getInfor().get(0)
+//										.get("address"));
+//							}
+//							if (bean.getInfor().get(0).get("staff_head") != null) {
+//								head = String.valueOf(bean.getInfor().get(0)
+//										.get("staff_head"));
+//							}
+//							Friend friend = new Friend(name, phone, address,
+//									head);
+//							Intent intent = new Intent(AddFriendActivity.this,
+//									AboutFriendActivity.class);
+//							intent.putExtra("friend", friend);
+//							startActivity(intent);
+//							overridePendingTransition(R.anim.aty_zoomin,
+//									R.anim.aty_zoomout);
+//						} catch (Exception e) {
+//							Log.e("TAG", e.getMessage());
+//						}
+//					}
+//
+//					@Override
+//					public void failure(String msg) {
+//						Toast.makeText(AddFriendActivity.this, msg, Toast.LENGTH_SHORT).show();
+//					}
+//
+//					@Override
+//					public void finish() {
+//						// TODO Auto-generated method stub
+//
+//					}
+//				});
 	}
 
 	private void saoyisao() {

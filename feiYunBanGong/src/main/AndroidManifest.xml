@@ -12,8 +12,7 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -101,9 +100,9 @@
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.GuideActivity" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity android:name=".activity.RegisteActivity" />
         <activity android:name=".activity.RegisteSOLOActivity" />
         <activity android:name=".activity.RegisteFIRMActivity" />
@@ -157,7 +156,7 @@
         <activity android:name=".activity.YaoQingActivity" />
         <activity android:name=".activity.FenZuGuanLiActivity" />
         <activity android:name=".activity.HaoYouZiLiaoActivity" />
-        <activity android:name=".activity.ReleaseDetailActivity" />
+
         <!-- 百度地图的appkey -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -475,6 +474,11 @@
             android:exported="true" />
 
         <activity android:name=".activity.MyTaskDetailActivity"></activity>
+            android:exported="true" />
+
+        <!-- 新的anctivity -->
+        <activity android:name=".activity.PersonDataActivity" />
+        <activity android:name=".activity.SearchFriendsActivity"></activity>
     </application>
 
 </manifest>

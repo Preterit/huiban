@@ -404,6 +404,7 @@ public class DetailPersonActivity extends BaseActivity implements
                     JsonBean bean = (JsonBean) msg.obj;
                     ArrayList<HashMap<String, Object>> infor = bean.getInfor();
                     HashMap<String, Object> hashMap = infor.get(0);
+                    Log.e("uesr", "handleMessage: -------------------"  + hashMap );
                     String name = String.valueOf(hashMap.get("staff_name"));
                     String duty = String.valueOf(hashMap.get("staff_duties"));
                     String department = String.valueOf(hashMap

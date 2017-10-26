@@ -25,6 +25,11 @@ public class UrlTools {
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
 // public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
+  /*
+  添加好友接口搜索
+   */
+  public static String FRIEND_SEARCH = "User/search_stranger";
+
   /**
    * 注册获取验证码
    */

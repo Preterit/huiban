@@ -5,6 +5,7 @@
     <color name="reveal_color">#1b000000</color>
     <color name="base_white">#def5f5</color>
     <color name="a42baff">#42baff</color>
+    <color name="bar">#438eff</color>
     <color name="a4cbeff">#4cbeff</color>
     <color name="a0a0a0">#a0a0a0</color>
     <color name="ffffff">#ffffff</color>
@@ -26,7 +27,8 @@
     <color name="a6a6a6a">#6a6a6a</color>
     <color name="d8d8d8">#d8d8d8</color>
     <color name="fenge">#F1F5F8</color>
-    <color name="huise">#767676</color>
+    <color name="huise">#c3c3c3</color>
+    <color name="juse">#ffb136</color>
     <color name="lanse">#41BAFF</color>
     <color name="jiange">#D4D4D4</color>
     <color name="main_color">#42baff</color>
