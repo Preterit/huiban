@@ -87,11 +87,6 @@ public class LianXiRen implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -126,11 +121,16 @@ public class LianXiRen implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
 
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "LianXiRen{" +
+				"name='" + name + '\'' +
+				", phone='" + phone + '\'' +
+				", type='" + type + '\'' +
+				", head='" + head + '\'' +
+				", id='" + id + '\'' +
+				", state='" + state + '\'' +
+				'}';
+	}
 }

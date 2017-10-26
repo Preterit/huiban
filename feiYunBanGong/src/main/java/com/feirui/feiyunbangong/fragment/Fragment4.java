@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+import com.feirui.feiyunbangong.view.RefreshLayout;
 import com.feirui.feiyunbangong.view.WordsNavigation;
 import com.feirui.feiyunbangong.view.WordsNavigation.onWordsChangeListener;
 import com.loopj.android.http.RequestParams;
@@ -55,8 +57,8 @@ import java.util.List;
  * @author feirui1
  */
 public class Fragment4 extends BaseFragment implements OnClickListener,
-        OnItemClickListener, onWordsChangeListener, OnScrollListener {
-
+        OnItemClickListener, onWordsChangeListener, OnScrollListener, SwipeRefreshLayout.OnRefreshListener, RefreshLayout.OnLoadListener {
+    private RefreshLayout swipe_container;
     private ListView lv_tuandui;// 已创建的团队列表；
     private Handler handler;
     private static TuanDuiAdapter adapter;
@@ -160,6 +162,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                     @Override
                     public void success(JsonBean bean) {
                         setNetData(bean);
+                        swipe_container.setRefreshing(false);
                     }
 
                     @Override
@@ -167,8 +170,9 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 //                        tds.removeAll(tds);
 //                        adapter.add(tds);
                         getData();
-                        T.showShort(getActivity(), "网络请求失败，请检查网络");
+//                        T.showShort(getActivity(), "网络请求失败，请检查网络");
 //                        T.showShort(getActivity(), msg);
+                        swipe_container.setRefreshing(false);
                     }
 
                     @Override
@@ -248,6 +252,8 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     }
 
     private void setListener() {
+        swipe_container.setOnRefreshListener(this);
+        swipe_container.setOnLoadListener(this);
         ll_chaungjiantuandui.setOnClickListener(this);
         ll_jiarutuandui.setOnClickListener(this);
         lv_tuandui.setOnItemClickListener(this);
@@ -260,6 +266,10 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
     @SuppressLint("InflateParams")
     private void initView() {
+        initTitle(v);
+        setLeftVisibility(false);
+        setCenterString("我的团队");
+        swipe_container = (RefreshLayout) v.findViewById(R.id.swipe_container);
         tv_word = (TextView) v.findViewById(R.id.tv);
         word = (WordsNavigation) v.findViewById(R.id.words);
         lv_tuandui = (ListView) v.findViewById(R.id.lv_tuandui);
@@ -438,6 +448,22 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
 
     }
+    //下拉执行该方法
+    @Override
+    public void onRefresh() {
+        getNetData();
+    }
+
+    @Override
+    public void onLoad() {
+
+    }
+
+    @Override
+    public void setFooterView(boolean isLoading) {
+
+    }
+
     //动态注册改为动态注册
     public static  class MyBroadReceiver extends BroadcastReceiver {
 

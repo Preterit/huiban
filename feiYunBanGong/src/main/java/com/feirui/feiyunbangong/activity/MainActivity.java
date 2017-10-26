@@ -296,9 +296,10 @@ public class MainActivity extends BaseActivity
     // 获取未读消息数：
     private void getNum() {
         int num = mIMKit.getUnreadCount();// 未读消息数；
-        Log.d("获取未读消息数----------------", "getNum:-------------- "+num);
+        Log.e("获取未读消息数----------------", "getNum:-------------- "+num);
         //设置桌面图标提示
         mIMKit.setShortcutBadger(num);
+
         if (num > 0) {
             String str = "";
             if (num > 99) {

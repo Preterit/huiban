@@ -51,7 +51,8 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xiu_gai_cheng_yuan);
         Intent intent = getIntent();
-        td = (TuanDui) intent.getSerializableExtra("td");
+        td = (TuanDui) intent.getSerializableExtra("td");/////////////////取不到值
+        Log.e("修改成员页面", "td: "+td );
         initData();
         initView();
         setListener();
@@ -60,6 +61,7 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
     private void initData() {
         String url = UrlTools.url + UrlTools.XIUGAI_ChengYuan;
         RequestParams params = new RequestParams();
+        Log.e("修改成员", "id: "+td.toString() );
         params.put("id", td.getTid());
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
@@ -174,17 +176,15 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
 
         String url = UrlTools.url + UrlTools.XIUGAI_YOUXIANG;
         RequestParams params = new RequestParams();
-
-        params.put("id", tdcy.getId());
-//		params.put("staff_email", et_email.getText().toString() + "");
+        Log.e("修改个人简介", "id " + td);
+        params.put("id", td.getTid());
+        //判断隐身  0隐身/1在线
+        params.put("stealth", sv_yinshen.isOpened()?"0":"1");
         params.put("introduction", et_email.getText().toString() + "");
         params.put("t_remark", et_remark.getText().toString() + "");
-        if (sv_yinshen.isOpened()) {//判断隐身
-            params.put("stealth", 0 + "");
-        } else {
-            params.put("stealth", 1 + "");
-        }
-        Log.e("修改个人简介", "params " + params);
+
+         Log.e("修改个人简介", "params " + params.toString());
+         Log.e("修改个人简介", "sv_yinshen " + sv_yinshen.isOpened());
         AsyncHttpServiceHelper.post(url, params,
                 new AsyncHttpResponseHandler() {
 
@@ -193,7 +193,7 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
 
                         JsonBean bean = JsonUtils.getMessage(new String(arg2));
                         if ("200".equals(bean.getCode())) {
-                            Message msg = handler.obtainMessage(0);
+                             Message msg = handler.obtainMessage(0);
                             handler.sendMessage(msg);
                         } else {
                             Message msg = handler.obtainMessage(1);

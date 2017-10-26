@@ -104,6 +104,32 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
         deleteFriendInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = UrlTools.url + UrlTools.DELETE_FRIEND;
+                 RequestParams params = new RequestParams();
+                //params.put("friend_id", item.getId());
+
+//                Utils.doPost(LoadingDialog.getInstance(getApplication()), this,
+//                        url, params, new Utils.HttpCallBack() {
+//
+//                            @Override
+//                            public void success(JsonBean bean) {
+//                                T.showShort(getApplication(), "删除好友成功！");
+//                                // TODO 获取该分组下的所有好友信息：
+////                                requestGroup();
+////                                requestFriend(groupPosition);
+//                            }
+//
+//                            @Override
+//                            public void failure(String msg) {
+//                                T.showShort(getApplication(), msg);
+//                            }
+//
+//                            @Override
+//                            public void finish() {
+//                                // TODO Auto-generated method stub
+//
+//                            }
+//                        });
             }
         });
 

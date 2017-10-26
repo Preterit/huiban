@@ -112,6 +112,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     private SelectZTDialog dialog;
     private OnNewFriendNumChanged friendNumListener;
     public int friend_size;
+    public JsonBean josnbean1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -230,28 +231,33 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
     // 获取申请好友个数：
     private void getNewFriendNum() {
-//        Handler handler = new Handler(){
-//            public void handleMessage(android.os.Message msg) {}
-//        };
 
-//        Activity activity = (Activity) getContext();
-        new Thread(){
-//        activity.runOnUiThread(new Runnable() {
+        new Thread() {
+            //        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Looper.prepare();
                 //获取通讯录中的电话在会办中注册过的人
                 str = LianXiRenUtil.readConnect(getActivity());
                 Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+                //Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
                 RequestParams params = new RequestParams();
+                if (str == null) {
+
+                } else {
+
+                }
                 params.put("phone", str[1]);
-                 String url1 = UrlTools.url + UrlTools.SHOUJILIANXIREN;
+                String url1 = UrlTools.url + UrlTools.SHOUJILIANXIREN;
                 Utils.doPost(null, getActivity(), url1, params,
                         new HttpCallBack() {
                             @Override
                             public void success(JsonBean bean) {
+                                josnbean1 = bean;
                                 ArrayList<HashMap<String, Object>> info = bean.getInfor();
                                 Log.e("通讯录好友列表", "info.size() " + info.size());
+                                Log.e("通讯录好友列表", "info " + info);
+                                Log.e("通讯录好友列表", "josnbean1 " + josnbean1);
                                 friend_size = info.size();
 //                                tv_num.setVisibility(View.VISIBLE);
 //                                tv_num.setText(friend_size + "");
@@ -305,8 +311,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                 Looper.loop();
             }
         }.start();
-
-
 
 
     }
@@ -606,9 +610,14 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                     R.anim.aty_zoomout);
         } else if (v.getId() == rl_newfriend.getId()) {
             inclue.setVisibility(View.GONE);
-            startActivity(new Intent(getActivity(), NewFriendActivity.class));
-            getActivity().overridePendingTransition(R.anim.aty_zoomin,
-                    R.anim.aty_zoomout);
+            Intent intent = new Intent(getActivity(), NewFriendActivity.class);
+
+            if (josnbean1 != null) {
+                Log.e("联系人页面", "josnbean1: " + josnbean1.toString() + "");
+                intent.putExtra("bean", josnbean1);
+            }
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
         } else {
             int[] i = ((ChildItem) ((Object[]) v.getTag())[0]).getPosition();
             int gp = i[0];
@@ -685,8 +694,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         inclue = (LinearLayout) view.findViewById(R.id.inclue_add);
         ll_qunliao = (LinearLayout) view.findViewById(R.id.ll_qunliao);
         ll_saosao = (LinearLayout) view.findViewById(R.id.ll_saoyisao);
-        swipe_container = (SwipeRefreshLayout) view
-                .findViewById(R.id.swipe_container);
+        swipe_container = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         header_view = getActivity().getLayoutInflater().inflate(
                 R.layout.lianxiren_lv_header, null);
         et_sousuo = (EditText) header_view
@@ -906,12 +914,12 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
     Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            Log.e("好友数量", "msg.obj="+msg.obj.toString() );
-            if ((int)msg.obj>0){
+            Log.e("好友数量", "msg.obj=" + msg.obj.toString());
+            if ((int) msg.obj > 0) {
                 tv_num.setVisibility(View.VISIBLE);
-                tv_num.setText(msg.obj+"");
-                friendNumListener.newFriendNumChanged((int)msg.obj);
-            }else{
+                tv_num.setText(msg.obj + "");
+                friendNumListener.newFriendNumChanged((int) msg.obj);
+            } else {
                 tv_num.setVisibility(View.INVISIBLE);
             }
         }

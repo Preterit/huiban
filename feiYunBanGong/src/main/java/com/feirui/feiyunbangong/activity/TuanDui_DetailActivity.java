@@ -267,8 +267,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         rightll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TuanDui_DetailActivity.this,
-                        TuanDuiJiaActivity.class);
+                Intent intent = new Intent(TuanDui_DetailActivity.this, TuanDuiJiaActivity.class);
                 //将整个团队传过去
                 intent.putExtra("td", td);
                 startActivity(intent);
@@ -348,7 +347,9 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         TuanDuiChengYuan tdcy = tdcys.get(position - 1);
         Intent intent = new Intent(this, DetailChengYuanActivity.class);
         Log.e("查看团队某个成员信息", "tdcy: " + tdcy.toString());
+        Log.e("查看团队某个成员信息", "td: " + td.toString());
         intent.putExtra("tdcy", tdcy);
+        intent.putExtra("td", td);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }

@@ -177,18 +177,18 @@
                     android:lines="10"
                     android:padding="17dp" />
 
-                <TextView
-                    android:id="@+id/tv_pass_no"
-                    android:layout_below="@id/tv_beizhu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   android:padding="10dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
-                    android:background="#55c2c2c2"
-                    android:text="暂不通过"
-                    android:textColor="@color/crimson"
-                    android:textSize="25sp"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_pass_no"-->
+                    <!--android:layout_below="@id/tv_beizhu"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                   <!--android:padding="10dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="16dp"-->
+                    <!--android:background="#55c2c2c2"-->
+                    <!--android:text="暂不通过"-->
+                    <!--android:textColor="@color/crimson"-->
+                    <!--android:textSize="25sp"/>-->
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
