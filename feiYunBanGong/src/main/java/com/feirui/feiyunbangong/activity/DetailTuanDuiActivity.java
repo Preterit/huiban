@@ -180,7 +180,10 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                                     String.valueOf(hm.get("staff_mobile")),
                                     String.valueOf(hm.get("staff_email")),
                                     hm.get("tag_name") + "",
-                                    String.valueOf(hm.get("introduction")),String.valueOf(hm.get("store_url")));
+                                    String.valueOf(hm.get("introduction")),String.valueOf(hm.get("store_url")),
+                                    String.valueOf(hm.get("sex")),String.valueOf(hm.get("birthday")),
+                                     String.valueOf(hm.get("address")),String.valueOf(hm.get("staff_key1")),
+                                    String.valueOf(hm.get("staff_key2")),String.valueOf(hm.get("staff_key3")));
 
                             tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
 
@@ -347,7 +350,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         }
         // 查看团队某个成员信息：
         TuanDuiChengYuan tdcy = tdcys.get(position - 1);
-        Intent intent = new Intent(this, DetailChengYuanActivity.class);
+        Intent intent = new Intent(this, PersonDataActivity.class);
         Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
         startActivity(intent);

@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y120"
+        android:layout_height="@dimen/y100"
         android:layout_below="@+id/inclue"
         android:layout_marginLeft="@dimen/x60"
         android:layout_marginRight="@dimen/x60"
@@ -33,6 +33,8 @@
             android:focusable="true"
             android:gravity="left|center_vertical"
             android:hint="请输入名字或手机号"
+            android:textSize="15sp"
+            android:textColor="#333"
             android:imeOptions="actionSearch"
             android:maxLength="11"
             android:paddingLeft="@dimen/x50"

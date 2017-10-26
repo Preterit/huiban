@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.SearchFriendsActivity">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/bar"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:paddingRight="15dp"
+      android:paddingBottom="8dp">
+      <ImageView
+          android:id="@+id/iv_search_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/arrows_left"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="5dp"/>
+      <include
+          layout="@layout/ll_search"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+  </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#f6f6f6">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好友"
+            android:textColor="#666"
+            android:textSize="12sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/re_search_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginLeft="6dp"
+                    ></android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/tv_more_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:textSize="12sp"
+                    android:textColor="#666"
+                    android:text="更多好友 》"
+                    android:gravity="center"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="#ebebeb"></View>
+                <TextView
+                    android:id="@+id/tv_no_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:textSize="12sp"
+                    android:textColor="#666"
+                    android:text="非好友"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_vertical"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/re_search_no_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginLeft="6dp"></android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/tv_more_no_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:textSize="12sp"
+                    android:textColor="#666"
+                    android:text="更多非好友 》"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>
