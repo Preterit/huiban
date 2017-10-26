@@ -76,7 +76,7 @@ public class UpdateManager {
 			default:
 				break;
 			}
-		};
+		}
 	};
 
 	public UpdateManager(Activity context) {

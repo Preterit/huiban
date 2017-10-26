@@ -100,7 +100,9 @@
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.GuideActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity android:name=".activity.RegisteActivity" />
         <activity android:name=".activity.RegisteSOLOActivity" />
         <activity android:name=".activity.RegisteFIRMActivity" />
@@ -254,14 +256,13 @@
                 <category android:name="com.feirui.feiyunbangong" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".fragment.Fragment4$MyBroadReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.feirui.feiyunbangong.getteam" />
-                <action android:name="com.feirui.feiyunbangong.onadd.team.member"/>
+                <action android:name="com.feirui.feiyunbangong.onadd.team.member" />
                 <action android:name="com.feirui.feiyunbangong.onadd.team" />
             </intent-filter>
         </receiver>
@@ -461,7 +462,10 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
-        <activity android:name=".activity.ReleaseDetailActivity" />
+        <activity
+            android:name=".activity.RenWuDetailActivity"
+            android:label="@string/title_activity_ren_wu_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activity.WebViewActivity" />
         <!-- 个人小店 -->
         <activity android:name=".activity.AddShopActivity" />
@@ -469,9 +473,15 @@
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <receiver
+            android:name=".receiver.KeepLiveReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
-        <activity android:name=".activity.SheZhiActivity"></activity>
+        <activity android:name=".activity.SheZhiActivity"/>
 
     </application>
 

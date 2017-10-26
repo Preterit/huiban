@@ -69,7 +69,6 @@ public class NewFriendActivity extends BaseActivity implements
         requestGroup();// 获取分组信息；
         setListener();
         setData();
-
         // 请求数据：
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -81,7 +80,6 @@ public class NewFriendActivity extends BaseActivity implements
 
     @Override
     protected void onResume() {
-
         super.onResume();
     }
 
@@ -426,10 +424,7 @@ public class NewFriendActivity extends BaseActivity implements
                     lxrs.add(lxr);
                 }
                 Log.e("新的好友", "lxrs: " + lxrs.toString());
-
-
                     adapter.add(lxrs);
-
                 //adapter1.add(lxrs);
             } else if (msg.what == 1) {
                 Toast.makeText(NewFriendActivity.this, "拒绝成功！", Toast.LENGTH_SHORT).show();
