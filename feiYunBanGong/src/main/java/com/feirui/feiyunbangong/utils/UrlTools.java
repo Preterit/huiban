@@ -573,6 +573,10 @@ public class UrlTools {
    * */
   public static String RENWU_QB="Task/alltask";
   /**
+   * 任务单信息task/my_task_detaile
+   */
+  public static String RENWU_DETAIL="task/task_detial";
+  /**
    * 新任务单-待接单任务接口
    * */
   public static String RENWU_DJD="task/wait";

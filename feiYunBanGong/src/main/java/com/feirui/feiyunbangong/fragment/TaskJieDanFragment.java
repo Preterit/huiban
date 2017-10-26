@@ -1,12 +1,15 @@
 package com.feirui.feiyunbangong.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.ReleaseDetailActivity;
 import com.feirui.feiyunbangong.adapter.TaskDaiJieDanAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -50,7 +53,7 @@ public class TaskJieDanFragment extends BaseFragment implements YRecycleview.OnR
     private void initData() {
         RequestParams params = new RequestParams();
         String url = UrlTools.pcUrl+ UrlTools.RENWU_DJD;
-        AsyncHttpServiceHelper.post(url,new AsyncHttpResponseHandler(){
+        AsyncHttpServiceHelper.post(url, new AsyncHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
@@ -59,6 +62,25 @@ public class TaskJieDanFragment extends BaseFragment implements YRecycleview.OnR
                     return;
                 }
                 adapter.addAll(json.getInfor());
+            }
+        });
+        adapter.setOnItemClickListener(new TaskDaiJieDanAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Log.e("全部页面的点击时间", "onItemClick: "+ position);
+                //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
+                Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("json", json.getInfor().get(position-1)+"");
+                bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
+                Log.e("全部页面的点击时间", "id: "+(Integer)json.getInfor().get(position-1).get("id") );
+                bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
+                bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
+                bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
+                bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
+                Log.e("全部任务", "onItemClick position: "+position );
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
