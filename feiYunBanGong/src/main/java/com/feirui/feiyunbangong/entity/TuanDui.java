@@ -4,7 +4,6 @@ import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 团队：

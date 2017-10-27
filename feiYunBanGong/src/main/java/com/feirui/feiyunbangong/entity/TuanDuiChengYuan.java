@@ -230,18 +230,6 @@ public class TuanDuiChengYuan implements Serializable {
 		return serialVersionUID;
 	}
 
-	public TuanDuiChengYuan(String id, String staff_id, String name,
-			String head, String type, String phone, String email,String introduction) {
-		super();
-		this.id = id;
-		this.introduction=introduction;
-		this.staff_id = staff_id;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-		this.email = email;
-	}
 
 	public TuanDuiChengYuan(String id, String staff_id, String name,
 			String head, String type, String phone, String email,

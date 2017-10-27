@@ -28,7 +28,7 @@
 
     <LinearLayout
         android:id="@+id/rightll"
-        android:layout_width="@dimen/x150"
+        android:layout_width="80dp"
         android:layout_height="@dimen/title_bar"
         android:layout_alignParentRight="true"
         android:gravity="center"
@@ -41,7 +41,7 @@
             android:layout_gravity="center" />
         <TextView
             android:id="@+id/righttv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="11"
             android:layout_gravity="center"

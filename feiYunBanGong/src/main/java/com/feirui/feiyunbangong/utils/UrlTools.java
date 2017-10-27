@@ -22,6 +22,10 @@ public class UrlTools {
    */
   public static String url = "http://123.57.45.74/feiybg1/public/index.php/api/";
   public static String url1 = "http://123.57.45.74/feiybg1/public/index.php/index/";
+  /**
+   * 后台给的图片有的地址差的url
+   * */
+  public static String url_img = "http://123.57.45.74/feiybg1";
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
 // public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
@@ -214,7 +218,7 @@ public class UrlTools {
   /**
    * 审批流程中发给我，需要我审批的
    * */
-  public static String APPROVAL_MY_APPROVAL = "approval/my_approval";
+  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */
@@ -396,6 +400,10 @@ public class UrlTools {
    * 修改邮箱：
    */
   public static String XIUGAI_YOUXIANG = "Team/team_yx_update";
+  /**
+   * 修改成员信息页面获取成员信息：
+   */
+  public static String XIUGAI_ChengYuan = "Team/team_update";
 
   /**
    * 没有管理员的团队成员，删除成员用；
@@ -577,6 +585,10 @@ public class UrlTools {
    * 新任务单-全部任务接口
    * */
   public static String RENWU_QB="Task/alltask";
+  /**
+   * 任务单信息task/my_task_detaile
+   */
+  public static String RENWU_DETAIL="task/task_detial";
   /**
    * 新任务单-待接单任务接口
    * */

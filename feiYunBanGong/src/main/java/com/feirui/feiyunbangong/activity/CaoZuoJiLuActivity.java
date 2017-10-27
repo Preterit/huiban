@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.feirui.feiyunbangong.utils.UrlTools.pcUrl;
-import static com.feirui.feiyunbangong.utils.UrlTools.url;
 
 /**
  * Created by 邢悦 on 2017/6/22.
@@ -56,8 +55,8 @@ public class CaoZuoJiLuActivity extends BaseActivity
     private PullListView mPullListView;
     private PullToRefreshLayout mPullToRefreshLayout;
 
-    private String tiurl;  //我提交的地址
-    private String shenurl; //我审批过的地址
+    private String tijiaourl;  //我提交的地址
+    private String shenpiurl; //我审批过的地址
 
 
     @Override
@@ -88,8 +87,8 @@ public class CaoZuoJiLuActivity extends BaseActivity
         shenSpinner = (Spinner) findViewById(R.id.spinner_lei);
         tiSpinner.setVisibility(View.VISIBLE);
 
-        tiurl = url + UrlTools.APPROVAL_MY_APPROVAL;
-        shenurl = pcUrl + UrlTools.APPROVAL_APPROVAL;
+        tijiaourl = pcUrl + UrlTools.APPROVAL_MY_APPROVAL;
+        shenpiurl = pcUrl + UrlTools.APPROVAL_APPROVAL;
         mTiJiao.setChecked(true);
         tiJiaoSpinner();
 
@@ -164,7 +163,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
         tiSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadData(1, ON_REFRESH,tiurl);
+                loadData(1, ON_REFRESH, tijiaourl);
                 Log.e("tag", "自动加载数据----"+mPullListView.toString());
             }
 
@@ -173,7 +172,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
 
             }
         });
-        tiCaoZuo(tiurl);
+        tiCaoZuo(tijiaourl);
     }
       public void shenPiSpinner(){
           tiSpinner.setVisibility(View.GONE);
@@ -230,7 +229,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
           shenSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
               @Override
               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                  loadData(1, ON_REFRESH,shenurl);
+                  loadData(1, ON_REFRESH, shenpiurl);
                   Log.e("tag", "自动加载数据----"+mPullListView.toString());
               }
 
@@ -239,7 +238,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
 
               }
           });
-          tiCaoZuo(shenurl);
+          tiCaoZuo(shenpiurl);
       }
 
     public void tiCaoZuo(final String url){
@@ -247,19 +246,19 @@ public class CaoZuoJiLuActivity extends BaseActivity
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 currentPage = 1;
-                if (url == tiurl){
+                if (url == tijiaourl){
                     loadData(currentPage, ON_REFRESH,url);
-                }else if (url == shenurl){
+                }else if (url == shenpiurl){
                     loadData(currentPage, ON_REFRESH,url);
                 }
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-                if (url == tiurl){
+                if (url == tijiaourl){
                     currentPage += 1;
                     loadData(currentPage, ON_LOAD_MORE,url);
-                }else if (url == shenurl){
+                }else if (url == shenpiurl){
                     currentPage += 1;
                     loadData(currentPage, ON_LOAD_MORE,url);
                 }
@@ -275,7 +274,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
 
         RequestParams params = new RequestParams();
 
-        if (url == tiurl ){
+        if (url == tijiaourl){
             if (!"选择审批类型".equals(tiSpinner.getSelectedItem().toString())) {
                 Log.e("tag","leixing------"+tiSpinner.getSelectedItem().toString());
                 params.put("type", tiSpinner.getSelectedItem().toString());
@@ -307,7 +306,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
                     }
                 }
             });
-        } else if (url == shenurl){
+        } else if (url == shenpiurl){
             if (!"选择审批类型".equals(shenSpinner.getSelectedItem().toString())) {
                 Log.e("tag","leixing------"+shenSpinner.getSelectedItem().toString());
                 params.put("type", shenSpinner.getSelectedItem().toString());

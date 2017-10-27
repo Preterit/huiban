@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    >
     <ImageView
+        android:layout_marginTop="5dp"
         android:id="@+id/rwd_im_head"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_launcher"/>
     <TextView
         android:id="@+id/rwd_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="名字"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
+        android:textSize="13sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
         />
 
 </LinearLayout>

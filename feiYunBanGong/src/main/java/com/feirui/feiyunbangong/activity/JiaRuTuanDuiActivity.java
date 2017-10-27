@@ -40,7 +40,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * 加入团队
+ * */
 public class JiaRuTuanDuiActivity extends BaseActivity implements
 		OnClickListener {
 
@@ -162,7 +164,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 //						tuanDui.setName(teamName);
 //						tuanDui.save();
 						setResult(1001,new Intent());
-						Toast.makeText(JiaRuTuanDuiActivity.this, "成功成功", 0)
+						Toast.makeText(JiaRuTuanDuiActivity.this, "加入成功", 0)
 								.show();
 //						addData();
 						if (!"".equals(mTuanLiaoID)){

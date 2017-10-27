@@ -7,13 +7,12 @@
     android:orientation="horizontal"
     android:padding="@dimen/size20" >
 
-    <ImageView
+    <com.feirui.feiyunbangong.view.TextImageView
         android:id="@+id/iv_head"
         android:layout_width="@dimen/x200"
         android:layout_height="@dimen/y200"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/x20"
-        android:scaleType="fitXY"
         android:src="@drawable/fragment_head" />
 
     <LinearLayout

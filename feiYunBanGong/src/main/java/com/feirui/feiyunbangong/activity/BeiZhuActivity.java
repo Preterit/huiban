@@ -48,7 +48,7 @@ public class BeiZhuActivity extends BaseActivity {
     private void initUi() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("修改备注");
+        setCenterString(" 请修改备注名");
         setRightVisibility(false);
 
         btn_ture.setOnClickListener(new View.OnClickListener() {

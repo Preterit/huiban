@@ -20,7 +20,6 @@ public class MyReleaseTaskAdapter extends BaseAdapter {
 
 
     public MyReleaseTaskAdapter(Context context, List<ReleaseInfo> list){
-
         this.context=context;
         this.list=list;
         this.inflater=LayoutInflater.from(context);

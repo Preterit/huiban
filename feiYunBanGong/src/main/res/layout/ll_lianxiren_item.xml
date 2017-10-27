@@ -11,12 +11,12 @@
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <ImageView
+        <com.feirui.feiyunbangong.view.TextImageView
             android:id="@+id/iv_shenpiren"
             android:layout_width="@dimen/size120"
             android:layout_height="@dimen/size120"
             android:src="@drawable/fragment_head"
-            android:scaleType="fitXY" />
+            />
 
         <TextView
             android:id="@+id/tv_name"

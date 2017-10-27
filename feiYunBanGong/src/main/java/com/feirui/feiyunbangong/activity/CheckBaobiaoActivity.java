@@ -135,7 +135,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                 String picUrls =  mBeanList.get(position).getPicture();
                 String[] str=picUrls.split(",");
                 for (int i = 0; i < str.length; i++){
-                    imageUrls.add("http://123.57.45.74/feiybg1".trim() + str[i]);
+                    imageUrls.add(UrlTools.pcUrl + str[i]);
                 }
                 Log.d("mBeanList的值", "onSuccess: "+imageUrls.toString());
                 // 发表的内容图片显示与隐藏：

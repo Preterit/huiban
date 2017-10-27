@@ -2,10 +2,12 @@ package com.feirui.feiyunbangong.activity;
 
 import org.apache.http.Header;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,6 +33,15 @@ public class YiJianActivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.activity_yi_jian);
 		initView();
 		setListener();
+		//使edittext失去光标,从而隐藏键盘的方法
+		findViewById(R.id.lay_yijian).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				InputMethodManager imm = (InputMethodManager)
+						getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+			}
+		});
 	}
 
 	private void setListener() {
