@@ -118,7 +118,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     protected void onPause() {
         super.onPause();
         //销毁在onResume()方法中的广播
-        if (receiver != null) {
+        if (receiver != null){
             unregisterReceiver(receiver);
         }
 
@@ -171,13 +171,12 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                         tdcys.removeAll(tdcys);
                         for (int i = 0; i < infor.size(); i++) {
                             HashMap<String, Object> hm = infor.get(i);
-                            //Log.e("团队成员", "团队成员: "+hm.toString() );
-                            TuanDuiChengYuan tdcy = new TuanDuiChengYuan(
-                                    hm.get("id") + "",
-                                    String.valueOf(hm.get("staff_id")),
-                                    String.valueOf(hm.get("staff_name")),
-                                    String.valueOf(hm.get("staff_head")),
-                                    hm.get("type") + "",
+                            Log.e("团队成员", "团队成员: "+hm.toString() );
+                            TuanDuiChengYuan tdcy = new TuanDuiChengYuan(hm
+                                    .get("id") + "", String.valueOf(hm
+                                    .get("staff_id")), String.valueOf(hm
+                                    .get("staff_name")), String.valueOf(hm
+                                    .get("staff_head")), hm.get("type") + "",
                                     String.valueOf(hm.get("staff_mobile")),
                                     String.valueOf(hm.get("staff_email")),
                                     hm.get("tag_name") + "",
@@ -187,9 +186,13 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                                     String.valueOf(hm.get("staff_key2")),String.valueOf(hm.get("staff_key3")));
 
                             tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
+
                             tdcy.setState(Integer.parseInt(hm.get("state") + ""));
+
                             tdcy.setFriendstate((int) hm.get("friendstate"));// 是否是好友；
+
                             tdcy.setRemark(hm.get("remark") + "");// 设置备注；
+
                             tdcy.setT_remark(hm.get("t_remark") + "");// 设置团队备注；
                             tv_chenyuan.setText("团队成员" + "("
                                     + (String) (hm.get("Allnum") + "") + ")");
@@ -203,13 +206,13 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             }
                             tdcys.add(tdcy);
                         }
-                        Log.e("123", "success: ------------------" + tdcys);
+                        Log.e("123", "success: ------------------" + tdcys );
                         adapter.add(tdcys);
                     }
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(TuanDui_DetailActivity.this, msg, Toast.LENGTH_SHORT)
+                        Toast.makeText(DetailTuanDuiActivity.this, msg,Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -241,12 +244,10 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     break;
                 case 5:
                     JsonBean bean = (JsonBean) msg.obj;
-//                    Log.e("chengyuan", "JsonBean: -----------------" + bean.getInfor().get(0).get("team_talk") );
+                    Log.e("chengyuan", "JsonBean: -----------------" + bean.getInfor().get(0).get("team_talk") );
                     //添加团聊成员
-                    if (bean.getInfor() != null) {
-                        if (!bean.getInfor().get(0).get("team_talk").equals("")) {
-                            addTuanLiaoChengYuan(bean.getInfor().get(0).get("team_talk") + "");
-                        }
+                    if (!bean.getInfor().get(0).get("team_talk").equals("")){
+                        addTuanLiaoChengYuan(bean.getInfor().get(0).get("team_talk") + "");
                     }
                     break;
             }
@@ -270,7 +271,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         rightll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TuanDui_DetailActivity.this, TuanDuiJiaActivity.class);
+                Intent intent = new Intent(DetailTuanDuiActivity.this,
+                        TuanDuiJiaActivity.class);
                 //将整个团队传过去
                 intent.putExtra("td", td);
                 startActivity(intent);
@@ -498,11 +500,11 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     /**
      * 团队团聊Id
      */
-    public void getTuanLiaoId() {
+    public void getTuanLiaoId(){
         String url = UrlTools.url + UrlTools.GET_TUANLIAOID;
         RequestParams params = new RequestParams();
-        params.put("team_id", td.getTid());
-        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+        params.put("team_id",td.getTid());
+        AsyncHttpServiceHelper.post(url,params, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
@@ -533,23 +535,22 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     /**
      * 团队聊天自动加人
-     *
-     * @param qunID 团聊的ID
+     * @param qunID   团聊的ID
      */
-    public void addTuanLiaoChengYuan(String qunID) {
+    public void  addTuanLiaoChengYuan(String qunID){
         mTribeService = mIMKit.getTribeService();
 
-        mTribeId = Long.valueOf(qunID);
-        Log.e("chengyuan", "mTribeId: -----------------" + mTribeId);
+        mTribeId = Long.valueOf(qunID) ;
+        Log.e("chengyuan", "mTribeId: -----------------" + mTribeId );
 
         List<IYWContact> list = new ArrayList<>();
-        for (int i = 0; i < tdcy_add.size(); i++) {
-            IYWContact iywContact = YWContactFactory.createAPPContact(tdcy_add.get(i).getPhone(), Happlication.APP_KEY);
+        for (int i = 0;i < tdcy_add.size();i++){
+            IYWContact iywContact =  YWContactFactory.createAPPContact(tdcy_add.get(i).getPhone(), Happlication.APP_KEY);
             list.add(iywContact);
-            Log.e("chengyuan", "iywContact: -----------------" + list.get(i));
+            Log.e("chengyuan", "iywContact: -----------------" + list.get(i) );
         }
-        if (list != null || list.size() > 0) {
-            mTribeService.inviteMembers(mTribeId, list, new MyCallback() {
+        if(list != null || list.size() > 0){
+            mTribeService.inviteMembers(mTribeId, list,new MyCallback() {
                 @Override
                 public void onSuccess(Object... result) {
 //                finish();

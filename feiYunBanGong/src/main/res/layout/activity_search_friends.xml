@@ -5,26 +5,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.feirui.feiyunbangong.activity.SearchFriendsActivity">
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@color/bar"
-      android:orientation="horizontal"
-      android:gravity="center_vertical"
-      android:paddingRight="15dp"
-      android:paddingBottom="8dp">
-      <ImageView
-          android:id="@+id/iv_search_left"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:src="@drawable/arrows_left"
-          android:layout_marginLeft="10dp"
-          android:layout_marginTop="5dp"/>
-      <include
-          layout="@layout/ll_search"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" />
-  </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bar"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:paddingRight="15dp">
+
+        <ImageView
+            android:id="@+id/iv_search_left"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/arrows_left"
+            android:layout_centerVertical="true"/>
+
+        <include
+            layout="@layout/ll_search"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_search_left" />
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:text="搜 索"
+            android:textColor="#fff"
+            android:textSize="16sp"
+           android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

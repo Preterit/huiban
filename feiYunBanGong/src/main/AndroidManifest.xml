@@ -100,9 +100,9 @@
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.GuideActivity" />
-        <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="stateHidden"
-            />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.RegisteActivity" />
         <activity android:name=".activity.RegisteSOLOActivity" />
         <activity android:name=".activity.RegisteFIRMActivity" />
@@ -491,7 +491,8 @@
 
         <!-- 新的anctivity -->
         <activity android:name=".activity.PersonDataActivity" />
-        <activity android:name=".activity.SearchFriendsActivity"></activity>
+        <activity android:name=".activity.SearchFriendsActivity" />
+        <activity android:name=".activity.MoreFriendsActivity"></activity>
     </application>
 
 </manifest>

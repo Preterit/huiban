@@ -113,7 +113,7 @@ public class Friend implements Serializable{
 		this.head = head;
 	}
 	public Friend(String name,String address,String head,String sex,String birthday,
-				  String key1,String key2,String key3,String distence,String shopUrl,String state){
+				  String key1,String key2,String key3,String distence,String shopUrl,String state,String phone){
 		this.name = name;
 		this.address = address;
 		this.head = head;
@@ -125,6 +125,7 @@ public class Friend implements Serializable{
 		this.distence = distence;
 		this.shopUrl = shopUrl;
 		this.state = state;
+		this.phone = phone;
 	}
 
 	@Override

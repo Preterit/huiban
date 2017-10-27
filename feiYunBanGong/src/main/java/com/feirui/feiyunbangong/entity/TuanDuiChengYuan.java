@@ -254,6 +254,22 @@ public class TuanDuiChengYuan implements Serializable {
 		this.key3 = key3;
 	}
 
+	public TuanDuiChengYuan( String name, String head, String phone,String store_url,String sex,
+							String birthday,String address,String key1,String key2,String key3,int friendstate) {
+		super();
+		this.name = name;
+		this.head = head;
+		this.phone = phone;
+		this.store_url = store_url;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.address = address;
+		this.key1 = key1;
+		this.key2 = key2;
+		this.key3 = key3;
+		this.friendstate = friendstate;
+	}
+
 	public TuanDuiChengYuan(String id, String name, String head, String type,
 			String phone) {
 		super();
