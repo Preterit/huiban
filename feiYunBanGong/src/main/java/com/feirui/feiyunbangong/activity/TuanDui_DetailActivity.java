@@ -181,8 +181,11 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                                     String.valueOf(hm.get("staff_mobile")),
                                     String.valueOf(hm.get("staff_email")),
                                     hm.get("tag_name") + "",
-                                    String.valueOf(hm.get("introduction")),
-                                    String.valueOf(hm.get("store_url")));
+                                    String.valueOf(hm.get("introduction")),String.valueOf(hm.get("store_url")),
+                                    String.valueOf(hm.get("sex")),String.valueOf(hm.get("birthday")),
+                                     String.valueOf(hm.get("address")),String.valueOf(hm.get("staff_key1")),
+                                    String.valueOf(hm.get("staff_key2")),String.valueOf(hm.get("staff_key3")));
+
                             tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
                             tdcy.setState(Integer.parseInt(hm.get("state") + ""));
                             tdcy.setFriendstate((int) hm.get("friendstate"));// 是否是好友；
@@ -225,15 +228,15 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     break;
                 case 3:
                     // 添加成功！
-                    Toast.makeText(TuanDui_DetailActivity.this, "添加成员成功！", 0).show();
+                    Toast.makeText(DetailTuanDuiActivity.this, "添加成员成功！", 0).show();
                     //团队群Id
                     getTuanLiaoId();
-                    Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone());
+                    Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
                     getData();// 更新数据；
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
-                    Toast.makeText(TuanDui_DetailActivity.this, bean03.getMsg(), 0)
+                    Toast.makeText(DetailTuanDuiActivity.this, bean03.getMsg(),0)
                             .show();
                     break;
                 case 5:
@@ -316,7 +319,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
         ll_tuanduigonggao = (LinearLayout) header_view
                 .findViewById(R.id.ll_tuanduigonggao);
-        ll_tuanduichengyuan = (LinearLayout) header_view.findViewById(R.id.llChengYuan);
+        ll_tuanduichengyuan = (LinearLayout)header_view.findViewById(R.id.llChengYuan);
 
         tv_chenyuan = (TextView) header_view.findViewById(R.id.tv_chenyuan);
         // bt_out_team = (Button) findViewById(R.id.bt_out_team);
@@ -329,11 +332,11 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
         ll_tuanduiquan = (LinearLayout) header_view
                 .findViewById(R.id.ll_tuanduiquan);
-        iv_tjcy = (ImageView) header_view.findViewById(R.id.iv_tjcy);
+        iv_tjcy = (ImageView)header_view.findViewById(R.id.iv_tjcy);
 
         mTribeList = new ArrayList<YWTribe>();
         mRoomsList = new ArrayList<YWTribe>();
-        mTribeAndRoomList = new TribeAndRoomList(mTribeList, mRoomsList);
+        mTribeAndRoomList = new TribeAndRoomList(mTribeList,mRoomsList);
 
     }
 
@@ -345,9 +348,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         }
         // 查看团队某个成员信息：
         TuanDuiChengYuan tdcy = tdcys.get(position - 1);
-        Intent intent = new Intent(this, DetailChengYuanActivity.class);
-        Log.e("查看团队某个成员信息", "tdcy: " + tdcy.toString());
-        Log.e("查看团队某个成员信息", "td: " + td.toString());
+        Intent intent = new Intent(this, PersonDataActivity.class);
+        Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
         intent.putExtra("td", td);
         startActivity(intent);
@@ -440,7 +442,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     }
 
     List<TuanDuiChengYuan> tdcy_add;  //添加的新成员
-
     private void addChengYuan() {
 
         if (tdcy_add == null || tdcy_add.size() == 0) {

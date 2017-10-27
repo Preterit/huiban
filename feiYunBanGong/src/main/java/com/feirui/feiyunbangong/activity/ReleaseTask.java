@@ -179,21 +179,22 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
             params.put("address_limit","1" );
         }else {
             params.put("address_limit","0");
-
         }
         //是否开启悬赏
         if(switch_xs.isOpened()){
-            params.put("reward", "1");
-            params.put("reward_limit", et_xsje.getText().toString().trim());
+            params.put("reward",  et_xsje.getText().toString().trim());
+            params.put("reward_limit","1");
         }else {
             params.put("reward", "0");
+            params.put("reward_limit","0");
         }
         //是否开启人数限制
         if(switch_rsxz.isOpened()){
-            params.put("number", "1");
-            params.put("number_limit", et_xzrs.getText().toString().trim());
+            params.put("number", et_xzrs.getText().toString().trim());
+            params.put("number_limit", "1");
         } else {
             params.put("number", "0");
+            params.put("number_limit", "0");
         }
 
         ArrayList<ShenPiRen> friendList = addFriendAdapter.getDataSet();

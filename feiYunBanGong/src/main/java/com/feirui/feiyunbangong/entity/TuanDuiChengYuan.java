@@ -23,6 +23,61 @@ public class TuanDuiChengYuan implements Serializable {
 	private String t_remark;// 团队备注名；
 	private int state;// 1.是新的成员，2.是老的成员；
 	private String team_member_list_id;// 团队成员改变状态的id;
+	private String sex;  //性别
+	private String birthday; //生日
+	private String address; //地区
+	private String key1; //关键词
+	private String key2;
+	private String key3;
+
+
+	public String getKey1() {
+		return key1;
+	}
+
+	public void setKey1(String key1) {
+		this.key1 = key1;
+	}
+
+	public String getKey2() {
+		return key2;
+	}
+
+	public void setKey2(String key2) {
+		this.key2 = key2;
+	}
+
+	public String getKey3() {
+		return key3;
+	}
+
+	public void setKey3(String key3) {
+		this.key3 = key3;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getTeam_member_list_id() {
 		return team_member_list_id;
@@ -100,42 +155,6 @@ public class TuanDuiChengYuan implements Serializable {
         this.head = head;
         this.phone = phone;
     }
-	public TuanDuiChengYuan(String id, String staff_id, String name,
-							String head, String type, String phone, String email,String introduction) {
-		super();
-		this.id = id;
-		this.introduction=introduction;
-		this.staff_id = staff_id;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-		this.email = email;
-	}
-
-	public TuanDuiChengYuan(String id, String staff_id, String name,
-							String head, String type, String phone, String email, String tag,String introduction,String store_url) {
-		super();
-		this.id = id;
-		this.staff_id = staff_id;
-		this.introduction=introduction;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-		this.email = email;
-		this.tag = tag;
-		this.store_url = store_url;
-	}
-
-	public TuanDuiChengYuan(String id, String name, String head, String type, String phone) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-	}
 
 	public String getTag() {
 		return tag;
@@ -212,17 +231,67 @@ public class TuanDuiChengYuan implements Serializable {
 	}
 
 
+	public TuanDuiChengYuan(String id, String staff_id, String name,
+			String head, String type, String phone, String email,
+			String tag,String introduction,String store_url,String sex,
+			String birthday,String address,String key1,String key2,String key3) {
+		super();
+		this.id = id;
+		this.staff_id = staff_id;
+		this.introduction=introduction;
+		this.name = name;
+		this.head = head;
+		this.type = type;
+		this.phone = phone;
+		this.email = email;
+		this.tag = tag;
+		this.store_url = store_url;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.address = address;
+		this.key1 = key1;
+		this.key2 = key2;
+		this.key3 = key3;
+	}
 
-	@Override
-	public String toString() {
-		return "TuanDuiChengYuan [id=" + id + ", staff_id=" + staff_id
-				+ ", name=" + name + ", head=" + head + ", type=" + type
-				+ ", phone=" + phone + ", email=" + email + ", tag=" + tag
-				+ ", tag_name=" + tag_name +", introduction="+introduction+", store_url="+store_url+ "]";
+	public TuanDuiChengYuan(String id, String name, String head, String type,
+			String phone) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.head = head;
+		this.type = type;
+		this.phone = phone;
 	}
 
 	public TuanDuiChengYuan() {
 	}
 
-
+	@Override
+	public String toString() {
+		return "TuanDuiChengYuan{" +
+				"id='" + id + '\'' +
+				", staff_id='" + staff_id + '\'' +
+				", name='" + name + '\'' +
+				", introduction='" + introduction + '\'' +
+				", head='" + head + '\'' +
+				", type='" + type + '\'' +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", tag='" + tag + '\'' +
+				", tag_name='" + tag_name + '\'' +
+				", store_url='" + store_url + '\'' +
+				", remark='" + remark + '\'' +
+				", friendstate=" + friendstate +
+				", t_remark='" + t_remark + '\'' +
+				", state=" + state +
+				", team_member_list_id='" + team_member_list_id + '\'' +
+				", sex='" + sex + '\'' +
+				", birthday='" + birthday + '\'' +
+				", address='" + address + '\'' +
+				", key1='" + key1 + '\'' +
+				", key2='" + key2 + '\'' +
+				", key3='" + key3 + '\'' +
+				'}';
+	}
 }

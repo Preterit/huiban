@@ -101,7 +101,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.GuideActivity" />
         <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:windowSoftInputMode="stateHidden"
             />
         <activity android:name=".activity.RegisteActivity" />
         <activity android:name=".activity.RegisteSOLOActivity" />
@@ -330,7 +330,7 @@
             android:name=".activity.SetGuanLIYuanActivity"
             android:label="@string/title_activity_set_guan_liyuan" />
         <activity
-            android:name=".activity.TuanDui_DetailActivity"
+            android:name=".activity.DetailTuanDuiActivity"
             android:label="@string/title_activity_detail_tuan_dui" />
         <activity
             android:name=".activity.DetailChengYuanActivity"
@@ -483,6 +483,14 @@
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
         <activity android:name=".activity.SheZhiActivity"/>
 
+            android:exported="true" />
+
+        <activity android:name=".activity.MyTaskDetailActivity"></activity>
+            android:exported="true" />
+
+        <!-- 新的anctivity -->
+        <activity android:name=".activity.PersonDataActivity" />
+        <activity android:name=".activity.SearchFriendsActivity"></activity>
     </application>
 
 </manifest>

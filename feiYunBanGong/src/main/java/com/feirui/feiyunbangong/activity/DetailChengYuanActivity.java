@@ -36,6 +36,7 @@ import java.util.List;
 /**
  * 查看团队成员资料：
  *
+ * 原来的
  * @author feirui1
  *
  */
@@ -140,6 +141,7 @@ public class DetailChengYuanActivity extends BaseActivity implements
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("成员资料");
+        //是个人时可以跳转修改个人信息
         setRightDrawable(R.drawable.bi);
         Intent intent = getIntent();
         tdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
@@ -149,6 +151,7 @@ public class DetailChengYuanActivity extends BaseActivity implements
         tv_remark = (TextView) findViewById(R.id.tv_remark);
 
         bt_addfriend = (Button) findViewById(R.id.bt_addfriend);
+        //判断是否是自己
         if ((AppStore.user.getInfor().get(0).get("id") + "").equals(tdcy
                 .getStaff_id())) {
             rightll.setVisibility(View.VISIBLE);
@@ -157,7 +160,7 @@ public class DetailChengYuanActivity extends BaseActivity implements
             rightll.setVisibility(View.GONE);
             ll_add_goto.setVisibility(View.VISIBLE);
         }
-
+        //自己时可以修改一些东西
         rightll.setOnClickListener(new OnClickListener() {
 
             @Override

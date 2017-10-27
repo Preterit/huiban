@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.MyReleaseTaskAdapter;
@@ -53,10 +54,14 @@ public class MyReleaseTaskFragment extends Fragment {
 
                 Gson gson=new Gson();
                 MyTaskReleEntity.Root root = gson.fromJson(new String(responseBody), Root.class);
-                List<ReleaseInfo> info = root.getInfo();
-                MyReleaseTaskAdapter adapter = new MyReleaseTaskAdapter(getActivity(),info);
+                if (root.getCode()==-400){
+                    Toast.makeText(getActivity(),"没有发布任务",Toast.LENGTH_SHORT).show();
+                }else if (root.getCode()==200){
+                    List<ReleaseInfo> info = root.getInfo();
+                    MyReleaseTaskAdapter adapter = new MyReleaseTaskAdapter(getActivity(),info);
+                    releaseTaskList.setAdapter(adapter);
+                }
 
-                releaseTaskList.setAdapter(adapter);
             }
 
             @Override

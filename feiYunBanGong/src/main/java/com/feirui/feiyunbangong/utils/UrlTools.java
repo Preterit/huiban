@@ -29,6 +29,11 @@ public class UrlTools {
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
 // public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
+  /*
+  添加好友接口搜索
+   */
+  public static String FRIEND_SEARCH = "User/search_stranger";
+
   /**
    * 注册获取验证码
    */
@@ -580,6 +585,10 @@ public class UrlTools {
    * 新任务单-全部任务接口
    * */
   public static String RENWU_QB="Task/alltask";
+  /**
+   * 任务单信息task/my_task_detaile
+   */
+  public static String RENWU_DETAIL="task/task_detial";
   /**
    * 新任务单-待接单任务接口
    * */

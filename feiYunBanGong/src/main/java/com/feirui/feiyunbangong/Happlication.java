@@ -9,6 +9,7 @@ import android.support.multidex.MultiDexApplication;
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.tcms.env.YWEnvType;
 import com.alibaba.wxlib.util.SysUtil;
+import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
 import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
@@ -67,6 +68,7 @@ public class Happlication extends MultiDexApplication {
          * // 使用andbase进行屏幕适配： AbAppConfig.UI_WIDTH = 1080;
 		 * AbAppConfig.UI_HEIGHT = 1920;
 		 */
+        SDKInitializer.initialize(getApplicationContext());
     }
 
 

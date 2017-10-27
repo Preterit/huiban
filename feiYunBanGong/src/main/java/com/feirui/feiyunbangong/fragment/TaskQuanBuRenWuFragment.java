@@ -62,7 +62,8 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
                 bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
-                bundle.putString("staff_head", UrlTools.pcUrl+json.getInfor().get(position-1).get("staff_head"));
+                bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
+                bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
                 Log.e("全部任务", "onItemClick position: "+position );
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -71,7 +72,6 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
     }
 
     private void initData() {
-
         RequestParams params = new RequestParams();
         String url =UrlTools.pcUrl+ UrlTools.RENWU_QB;
         Log.e("任务单--全部任务URL", "url: " + url);
@@ -82,6 +82,7 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                  json = JsonUtils.getMessage(new String(responseBody));
+                Log.e("任务单--全部任务URfwafeewL", "params: " + json.getInfor());
                 //yRecycleview.setReFreshComplete();
                 //setAdapter();
                 if(json.getInfor()==null){
