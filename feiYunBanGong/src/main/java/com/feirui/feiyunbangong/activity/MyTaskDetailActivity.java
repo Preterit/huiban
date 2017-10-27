@@ -1,10 +1,12 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -20,28 +22,41 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.adapter.JinDuAdapter;
+import com.feirui.feiyunbangong.entity.JinDuBean;
+import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
 import com.feirui.feiyunbangong.view.TextImageView;
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.apache.http.Header;
 
 import java.util.List;
 
+import static com.feirui.feiyunbangong.R.id.iv_fankui;
+
+
 public class MyTaskDetailActivity extends BaseActivity implements View.OnClickListener {
-    private String staff_name, time, task_txt,task_zt, staff_head, id;
+    private String staff_name, time, task_txt, task_zt, staff_head, id;
     private TextImageView iv_head;
-    private TextView tv_name, tv_time, tv_task,tv_zt,tv_complete;
-    private ImageView iv_fankui;
+    private TextView tv_name, tv_time, tv_task, tv_zt;
+    private ImageView iv_complete;
     MapView mMapView;
     BaiduMap mBaiduMap;
     BitmapDescriptor markerIcon;
     LocationClient mLocationClient = null;
     BDLocationListener myListener = new MyLocationListener();
     String address = "";
+    private ListView lv_jindu;
+    private JinDuAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_my_task_detail);
+        setContentView(R.layout.activity_my_task_detail);
         task_zt = getIntent().getStringExtra("task_zt");
         staff_name = getIntent().getStringExtra("staff_name");
         time = getIntent().getStringExtra("time");
@@ -49,29 +64,48 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         staff_head = getIntent().getStringExtra("staff_head");
         id = getIntent().getStringExtra("id");
         initView();
+        initData();
 
     }
+
+    private void initData() {
+        RequestParams params2 = new RequestParams();
+        String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/Single_details";
+        params2.put("id", id + "");
+        Log.e("infor", "onSuccess: -----------id-------------------------" + id);
+        AsyncHttpServiceHelper.post(url2, params2, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                Gson gson = new Gson();
+                JinDuBean jindu = gson.fromJson(new String(responseBody), JinDuBean.class);
+                if (jindu.getInfo1() != null) {
+                    adapter = new JinDuAdapter(MyTaskDetailActivity.this, jindu.getInfo1());
+                    lv_jindu.setAdapter(adapter);
+                } else {
+                    lv_jindu.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
     private void initView() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(true);
-
+        lv_jindu = (ListView) findViewById(R.id.lv_jindu);
         iv_head = (TextImageView) findViewById(R.id.tiv_head);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_time = (TextView) findViewById(R.id.tv_time);
         tv_task = (TextView) findViewById(R.id.tv_task);
-        tv_zt= (TextView) findViewById(R.id.tv_zt);
+        tv_zt = (TextView) findViewById(R.id.tv_zt);
         tv_zt.setText(task_zt);
         tv_name.setText(staff_name);
         tv_time.setText(time);
         tv_task.setText(task_txt);
-        tv_complete= (TextView) findViewById(R.id.righttv);
-        tv_complete.setVisibility(View.VISIBLE);
-        tv_complete.setOnClickListener(this);
-        tv_complete.setText("反馈");
-        iv_fankui= (ImageView) findViewById(R.id.iv_fankui);
-        iv_fankui.setOnClickListener(this);
+        iv_complete = (ImageView) findViewById(iv_fankui);
+        iv_complete.setOnClickListener(this);
         ImageLoader.getInstance().displayImage(staff_head, iv_head, ImageLoaderUtils.getSimpleOptions());
     }
 
@@ -82,7 +116,6 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
                 .decodeResource(getResources(), R.drawable.location));
         // 普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-
         mLocationClient = new LocationClient(MyTaskDetailActivity.this); // 声明LocationClient类
         mLocationClient.registerLocationListener(myListener); // 注册监听函数
         LocationClientOption option = new LocationClientOption();
@@ -106,12 +139,39 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.righttv:
 
                 break;
-            case R.id.iv_fankui:
-
+            case iv_fankui:
+                Intent intent = new Intent(MyTaskDetailActivity.this, MyReleaseTaskActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+//                RequestParams params2 = new RequestParams();
+//                //String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
+//                String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/taskFinish";
+//                params2.put("id", id);
+//                params2.put("button", "1");
+//                Log.e("全部任务获取成功-确认接单", "id: " + id);
+//                post(url2, params2, new AsyncHttpResponseHandler() {
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                        final JsonBean json = JsonUtils.getMessage(new String(responseBody));
+//                        if ("200".equals(json.getCode())) {
+//                                Toast.makeText(MyTaskDetailActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+//                                finish();
+//                        } else if ("-400".equals(json.getCode())) {
+//                            Toast.makeText(MyTaskDetailActivity.this, "该任务已完成", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                    @Override
+//                    public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+//                                          Throwable arg3) {
+//                        super.onFailure(arg0, arg1, arg2, arg3);
+//                    }
+//                });
                 break;
         }
     }

@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.feirui.feiyunbangong.activity.MyTaskDetailActivity">
-
+    tools:context="com.feirui.feiyunbangong.activity.MyTaskActivity">
     <include
         layout="@layout/top"
         android:layout_width="match_parent"
@@ -39,20 +37,23 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
             android:text="王子"
+            android:textColor="#000000"
             android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:textSize="12sp"
+            android:text="2017/8/25" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="16dp"
-            android:text="2017/8/25" />
+
     </LinearLayout>
 
     <TextView
@@ -116,50 +117,33 @@
         android:layout_width="match_parent"
         android:layout_height="7dp"
         android:background="#cccccc" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="22dp"
+    android:orientation="horizontal">
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="任务进程："
+        android:text="接单人数"
         android:textColor="#333333"
         android:textSize="15sp" />
-
-    <ListView
-        android:id="@+id/lv_jindu"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_marginTop="7dp"></ListView>
-
-
+    <View
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="位置记录"
+        android:text="8/10"
         android:textColor="#333333"
         android:textSize="15sp"
-        android:visibility="gone"/>
+        android:layout_marginLeft="16dp"/>
+</LinearLayout>
+    <ListView
+        android:id="@+id/lv_jiedanren"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"></ListView>
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="325dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="7dp"
-        android:visibility="gone"
-        android:clickable="true"></com.baidu.mapapi.map.MapView>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"/>
-    <ImageView
-        android:id="@+id/iv_fankui"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/fankui"
-        />
 </LinearLayout>
