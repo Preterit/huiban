@@ -34,7 +34,7 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         //绑定数据
         if (!TextUtils.isEmpty(friendList.get(position).getHead())){
             ImageLoader.getInstance().displayImage(friendList.get(position).getHead(),holder.mCir_item_head);
@@ -98,14 +98,44 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
             holder.mIv_item_add.setVisibility(View.GONE);
         }
 
+        //调用点击事件
+        if (mOnItemClickListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onClick(position);
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mOnItemClickListener.onLongClick(position);
+                    return false;
+                }
+            });
+        }
+
+
+
     }
 
+    //每一项item的点击事件
+    private OnItemClickListener mOnItemClickListener;
+    public interface OnItemClickListener{
+        void onClick(int postion);
+        void onLongClick(int postion);
+    }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.mOnItemClickListener = onItemClickListener;
+    }
 
     @Override
     public int getItemCount() {
         return friendList.size();
     }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView mCir_item_head;

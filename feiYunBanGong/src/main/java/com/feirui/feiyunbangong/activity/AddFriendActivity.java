@@ -63,6 +63,7 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 		lls.add((LinearLayout) findViewById(R.id.ll_saoyisao));
 		lls.add((LinearLayout) findViewById(R.id.ll_invite));
 		et_sousuolianxiren = (EditText) findViewById(R.id.et_sousuolianxiren);
+        et_sousuolianxiren.setHint("名字/手机号/关键词");
 	}
 
 	@Override
