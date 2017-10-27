@@ -1,7 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -67,10 +66,10 @@ public class NewFriendActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_friend);
-        //从上个页面传过来值,但是
-        Intent intent = getIntent();
-        jsonBean1 = (JsonBean) intent.getSerializableExtra("bean");
-        Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
+//        //从上个页面传过来值,但是用addData方法不太好用
+//        Intent intent = getIntent();
+//        jsonBean1 = (JsonBean) intent.getSerializableExtra("bean");
+//        Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
 
 
 

@@ -39,6 +39,7 @@ public class JieDanRenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).rwd_tv_name.setText(data.get(position).getStaff_name());
         ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg1/"+data.get(position).getStaff_head(), ((ViewHolder) holder).rwd_im_head, ImageLoaderUtils.getSimpleOptions());
+        ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg1/"+data.get(position).getStaff_head(), ((ViewHolder) holder).rwd_im_head, ImageLoaderUtils.getSimpleOptions());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

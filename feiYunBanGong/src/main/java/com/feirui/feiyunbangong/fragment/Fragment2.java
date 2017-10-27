@@ -667,6 +667,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         for (int i = 0; i < groups.size(); i++) {
             expandlist.collapseGroup(i);
         }
+        getNewFriendNum();
     }
 
     class MyBroadCastReceiver extends BroadcastReceiver {

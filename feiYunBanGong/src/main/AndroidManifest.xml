@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="74"
-    android:versionName="1.7.4">
+    android:versionCode="75"
+    android:versionName="1.7.5">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -330,7 +330,7 @@
             android:name=".activity.SetGuanLIYuanActivity"
             android:label="@string/title_activity_set_guan_liyuan" />
         <activity
-            android:name=".activity.DetailTuanDuiActivity"
+            android:name=".activity.TuanDui_DetailActivity"
             android:label="@string/title_activity_detail_tuan_dui" />
         <activity
             android:name=".activity.DetailChengYuanActivity"
@@ -462,10 +462,11 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
-        <activity
-            android:name=".activity.RenWuDetailActivity"
-            android:label="@string/title_activity_ren_wu_detail"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.ReleaseDetailActivity" />
+        <!--<activity-->
+            <!--android:name=".activity.RenWuDetailActivity"-->
+            <!--android:label="@string/title_activity_ren_wu_detail"-->
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
         <activity android:name=".activity.WebViewActivity" />
         <!-- 个人小店 -->
         <activity android:name=".activity.AddShopActivity" />
