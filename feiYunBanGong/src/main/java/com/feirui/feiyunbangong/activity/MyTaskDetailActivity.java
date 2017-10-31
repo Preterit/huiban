@@ -65,14 +65,11 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         id = getIntent().getStringExtra("id");
         initView();
         initData();
-
     }
-
     private void initData() {
         RequestParams params2 = new RequestParams();
         String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/Single_details";
         params2.put("id", id + "");
-        Log.e("infor", "onSuccess: -----------id-------------------------" + id);
         AsyncHttpServiceHelper.post(url2, params2, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
