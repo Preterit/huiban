@@ -60,7 +60,7 @@ import java.util.List;
  * @author feirui1
  */
 @SuppressLint("InflateParams")
-public class DetailTuanDuiActivity extends BaseActivity implements
+public class TuanDui_DetailActivity extends BaseActivity implements
         OnItemClickListener, OnKeyListener, OnClickListener {
 
     private ListView lv_chengyuan;
@@ -68,7 +68,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
     private ArrayList<TuanDuiChengYuan> tdcys;
     private TuanDui td;
     private Button bt_add;// 添加成员
-    private LinearLayout ll_tuanduigonggao, ll_tuanduiquan,ll_tuanduichengyuan;// 团队公告 、成员；
+    private LinearLayout ll_tuanduigonggao, ll_tuanduiquan, ll_tuanduichengyuan;// 团队公告 、成员；
     private TextView tv_message_num, tv_chenyuan;// 团队公告消息数量；
     private View header_view;// 头部；
     private ImageView iv_tjcy;
@@ -353,6 +353,7 @@ public class DetailTuanDuiActivity extends BaseActivity implements
         Intent intent = new Intent(this, PersonDataActivity.class);
         Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
+        intent.putExtra("td", td);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }
@@ -471,10 +472,13 @@ public class DetailTuanDuiActivity extends BaseActivity implements
 
                         JsonBean bean = JsonUtils.getMessage(new String(arg2));
                         if ("200".equals(bean.getCode())) {
+                            if(bean.getMsg().equals("该成员已存在")){
+                                Toast.makeText(TuanDui_DetailActivity.this, "该成员已经加入团队", 0).show();
+                                return;
+                            }
                             Message msg = handler.obtainMessage(3);
                             msg.obj = bean;
                             handler.sendMessage(msg);
-                            Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor() );
                         } else {
                             Message msg = handler.obtainMessage(4);
                             msg.obj = bean;
@@ -510,7 +514,6 @@ public class DetailTuanDuiActivity extends BaseActivity implements
                     Message msg = handler.obtainMessage(5);
                     msg.obj = bean;
                     handler.sendMessage(msg);
-                    Log.e("chengyuan", "handleMessage: -----------------" + bean.getInfor().get(0).get("team_talk") );
                 } else {
                     Message msg = handler.obtainMessage(4);
                     msg.obj = bean;
@@ -576,11 +579,11 @@ public class DetailTuanDuiActivity extends BaseActivity implements
             }
         }
     }
+
     /**
      * 请求回调
      *
      * @author zhaoxu
-     *
      */
     private static abstract class MyCallback implements IWxCallback {
 

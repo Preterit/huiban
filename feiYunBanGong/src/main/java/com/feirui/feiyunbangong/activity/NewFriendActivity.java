@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -60,22 +61,31 @@ public class NewFriendActivity extends BaseActivity implements
     final ArrayList<String> strGroups = new ArrayList<>();
     ArrayList<Group> groups = new ArrayList<>();
     private String phone;// 请求者的电话；
+    private JsonBean jsonBean1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_friend);
+        //从上个页面传过来值,但是
+        Intent intent = getIntent();
+        jsonBean1 = (JsonBean) intent.getSerializableExtra("bean");
+        Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
+
+
+
         initUI();
         requestGroup();// 获取分组信息；
         setListener();
         setData();
-        // 请求数据：
+//        // 请求数据：
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 request();
             }
         }, 100);
+//        addData(jsonBean1);
     }
 
     @Override
@@ -88,8 +98,8 @@ public class NewFriendActivity extends BaseActivity implements
     // 获取手机联系人：
     private void request() {
 
-        dialog = LoadingDialog.getInstance(this);
-        dialog.show();
+//        dialog = LoadingDialog.getInstance(this);
+//        dialog.show();
 
         new Thread(new Runnable() {
 
@@ -98,7 +108,7 @@ public class NewFriendActivity extends BaseActivity implements
 
                 str = LianXiRenUtil.readConnect(NewFriendActivity.this);
 
-                Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+                Log.e("通讯录联系人", "姓名"+str[0] + "电话" + str[1]);
 
                 RequestParams params = new RequestParams();
                 params.put("phone", str[1]);
@@ -109,18 +119,18 @@ public class NewFriendActivity extends BaseActivity implements
                             @Override
                             public void success(JsonBean bean) {
                                 addData(bean);
-                                dialog.dismiss();
+//                                dialog.dismiss();//取消对话框提示
                             }
 
                             @Override
                             public void failure(String msg) {
                                 T.showShort(NewFriendActivity.this, msg);
-                                dialog.dismiss();
+//                                dialog.dismiss();
                             }
 
                             @Override
                             public void finish() {
-                                dialog.dismiss();
+//                                dialog.dismiss();
                             }
                         });
             }
@@ -130,7 +140,7 @@ public class NewFriendActivity extends BaseActivity implements
 
     private void addData(JsonBean bean) {
         ArrayList<HashMap<String, Object>> info = bean.getInfor();
-        Log.e("TAG", info.size() + "info.size");
+        Log.e("新朋友界面","info" + info.toString() );
         if (info != null) {
 
             lxrs01.removeAll(lxrs01);
@@ -144,14 +154,19 @@ public class NewFriendActivity extends BaseActivity implements
 
             for (int i = 0; i < info.size(); i++) {
                 HashMap<String, Object> map = info.get(i);
-                LianXiRen lxr = new LianXiRen((String) map.get("staff_name"),
-                        (String) map.get("phone"), (String) map.get("type"),
+                LianXiRen lxr = new LianXiRen(
+                        (String) map.get("staff_name"),
+                        (String) map.get("phone"),
+                        (String) map.get("type"),
                         (String) map.get("staff_head"));
                 lxrs01.add(lxr);
+                Log.e("新朋友界面", "lxrs01- staff_name"+info.get(i).get("staff_name"));
+                Log.e("新朋友界面", "lxrs01- phone"+info.get(i).get("phone"));
+                Log.e("新朋友界面", "lxrs01- type "+info.get(i).get("type"));
+                Log.e("新朋友界面", "lxr "+lxr.toString());
             }
+            Log.e("新朋友界面", "lxr "+lxrs01.get(0).toString());
             adapter1.addList(lxrs01);
-
-            Log.e("TAG", "发出广播");
 
             //regist.get(lxrs01);// 接口回调：
 
@@ -204,7 +219,7 @@ public class NewFriendActivity extends BaseActivity implements
 
                         strGroups.add("+");
                         setListView();
-                        Log.e("电话好友列表", "requestGroup----1------"+strGroups.toString());
+                        Log.e("电话好友列表", "requestGroup----1------" + strGroups.toString());
                     }
 
 
@@ -223,6 +238,7 @@ public class NewFriendActivity extends BaseActivity implements
     }
 
     private void setData() {
+
         RequestParams params = new RequestParams();
         AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.SHENQING_LIEBIAO, params,
                 new AsyncHttpResponseHandler() {
@@ -241,7 +257,7 @@ public class NewFriendActivity extends BaseActivity implements
     private void setListView() {
         adapter = new NewFriendAdapter(this, this, this.getLayoutInflater());
         adapter1 = new LianXiRenAdapter(this, this.getLayoutInflater(), 1, strGroups);
-        Log.e("电话好友列表", "strGroups-------setListView----------newfriend"+strGroups.toString());
+        Log.e("电话好友列表", "strGroups-------setListView----------newfriend" + strGroups.toString());
         lv_newfriend.setAdapter(adapter);
         lv_lxr.setAdapter(adapter1);
 
@@ -258,6 +274,8 @@ public class NewFriendActivity extends BaseActivity implements
         setRightVisibility(false);
         lv_newfriend = (MyListView) findViewById(R.id.lv_newfriend);
         lv_lxr = (MyListView) findViewById(R.id.lv_lxr);
+
+
 
     }
 
@@ -423,8 +441,8 @@ public class NewFriendActivity extends BaseActivity implements
                             staff_head, id, state);
                     lxrs.add(lxr);
                 }
-                Log.e("新的好友", "lxrs: "+lxrs.toString());
-                adapter.add(lxrs);
+                Log.e("新的好友", "lxrs: " + lxrs.toString());
+                    adapter.add(lxrs);
                 //adapter1.add(lxrs);
             } else if (msg.what == 1) {
                 Toast.makeText(NewFriendActivity.this, "拒绝成功！", Toast.LENGTH_SHORT).show();
@@ -437,5 +455,6 @@ public class NewFriendActivity extends BaseActivity implements
             }
         }
     };
+
 
 }

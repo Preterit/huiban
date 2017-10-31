@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-    >
-
-    <!-- bar -->
-    <RelativeLayout
-        android:id="@+id/rl"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar"
-        android:background="@color/main_color"
-        android:gravity="center_vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <TextView
-            style="@style/ffffff_60"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="我的团队"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <include
+            android:id="@+id/inclue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar"
+            layout="@layout/top" />
+
+        <!--
+             <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/hongdian"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="@dimen/size24"
+            android:visibility="invisible" />
+        -->
+
     </RelativeLayout>
 
     <!-- 创建的团队列表 -->
-
-    <ListView
-        android:id="@+id/lv_tuandui"
+    <com.feirui.feiyunbangong.view.RefreshLayout
+        android:id="@+id/swipe_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl"
-        android:layout_marginBottom="@dimen/y10"
-        android:divider="@color/fenge"
-        android:dividerHeight="@dimen/y2">
-    </ListView>
+        android:layout_height="wrap_content">
+
+        <!--<com.xw.repo.refresh.PullListView-->
+        <!--android:id="@+id/lv_tuandui"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/rl"-->
+        <!--android:layout_marginBottom="@dimen/y10"-->
+        <!--android:divider="@color/fenge"-->
+        <!--android:dividerHeight="@dimen/y2">-->
+
+        <!--</com.xw.repo.refresh.PullListView>-->
+
+        <ListView
+            android:id="@+id/lv_tuandui"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl"
+            android:layout_marginBottom="@dimen/y10"
+            android:divider="@color/fenge"
+            android:dividerHeight="@dimen/y2"></ListView>
+    </com.feirui.feiyunbangong.view.RefreshLayout>
 
     <com.feirui.feiyunbangong.view.WordsNavigation
         android:id="@+id/words"
@@ -39,7 +70,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/rl"
         android:layout_marginBottom="@dimen/y10"
-        android:layout_marginTop="@dimen/y10"/>
+        android:layout_marginTop="@dimen/y10" />
 
     <TextView
         android:id="@+id/tv"
@@ -51,7 +82,7 @@
         android:background="@drawable/tvstyle"
         android:gravity="center"
         android:text="sdf"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -62,6 +62,11 @@ public class BaseActivity extends FragmentActivity {
 		initInjectedView(this);
 	}
 
+//	public void yincang(View view){//隐藏输入法方法
+//		InputMethodManager imm = (InputMethodManager)
+//				getSystemService(Context.INPUT_METHOD_SERVICE);
+//		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//	}
 
 	/**
 	 * 初始化头部

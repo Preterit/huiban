@@ -114,11 +114,13 @@ public class SouSuoTuanDuiActivity extends BaseActivity implements
 						ArrayList<HashMap<String, Object>> infor = bean
 								.getInfor();
 						Log.e("搜索团队", "infor: "+infor.toString() );
-						HashMap<String, Object> hm = infor.get(0);
-						Log.e("搜索团队", "hm: "+hm.toString() );
-						TuanDui td = new TuanDui(String.valueOf(hm.get("id")),
-								String.valueOf(hm.get("team_name")));
-						tds.add(td);
+						Log.e("搜索团队", "bean: "+bean.toString() );
+						for (int i =0;i<infor.size();i++){
+							HashMap<String, Object> hm = infor.get(i);
+							TuanDui td = new TuanDui(String.valueOf(hm.get("id")),
+									String.valueOf(hm.get("team_name")));
+							tds.add(td);
+						}
 						adapter.add(tds);
 					}
 

@@ -91,28 +91,33 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		ChildHolder childHolder = null;
+		ChildItem childItem = childMap.get(groupPosition).get(childPosition);
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.childitem, null);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.childitem, null);
 			childHolder = new ChildHolder();
-			childHolder.childImg = (TextImageView) convertView
-					.findViewById(R.id.img_child);
-			childHolder.childText = (TextView) convertView
-					.findViewById(R.id.tv_child_text);
-			childHolder.rl_child = (RelativeLayout) convertView
-					.findViewById(R.id.rl_child);
+			childHolder.childImg = (TextImageView) convertView.findViewById(R.id.img_child);
+			childHolder.childText = (TextView) convertView.findViewById(R.id.tv_child_text);
+			childHolder.rl_child = (RelativeLayout) convertView.findViewById(R.id.rl_child);
 			convertView.setTag(childHolder);
 			//设置初始头像
-			childHolder.childImg.setImageResource(R.drawable.acquiesce_in);
+			//childHolder.childImg.setImageResource(R.drawable.acquiesce_in);
+//			// 图片上加字：
+			String name = getPicTitle(childItem);
+			childHolder.childImg.setText(name);
 		} else {
 			childHolder = (ChildHolder) convertView.getTag();
 			//设置初始头像
-			childHolder.childImg.setImageResource(R.drawable.acquiesce_in);
+			//childHolder.childImg.setImageResource(R.drawable.acquiesce_in);
+//			String name = getPicTitle(childItem);
+//			childHolder.childImg.setText(name);
 		}
-		ChildItem childItem = childMap.get(groupPosition).get(childPosition);
-		// 图片上加字：
 		String name = getPicTitle(childItem);
-		if ("img/1_1.png".equals(childItem.getMarkerImgId())) {
+
+		// 图片上加字：
+
+		//childHolder.childImg.setText(name);
+		if ("http://123.57.45.74/feiybg1/public/static/staff_head/379/8fe02470a4eb202cf7643a86f31fa39f.jpeg".equals(childItem.getMarkerImgId())
+				||"http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(childItem.getMarkerImgId())) {
 			childHolder.childImg.setText(name);
 		} else {
 			ImageLoader.getInstance().displayImage(childItem.getMarkerImgId(),

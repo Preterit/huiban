@@ -230,18 +230,6 @@ public class TuanDuiChengYuan implements Serializable {
 		return serialVersionUID;
 	}
 
-	public TuanDuiChengYuan(String id, String staff_id, String name,
-			String head, String type, String phone, String email,String introduction) {
-		super();
-		this.id = id;
-		this.introduction=introduction;
-		this.staff_id = staff_id;
-		this.name = name;
-		this.head = head;
-		this.type = type;
-		this.phone = phone;
-		this.email = email;
-	}
 
 	public TuanDuiChengYuan(String id, String staff_id, String name,
 			String head, String type, String phone, String email,
@@ -264,6 +252,22 @@ public class TuanDuiChengYuan implements Serializable {
 		this.key1 = key1;
 		this.key2 = key2;
 		this.key3 = key3;
+	}
+
+	public TuanDuiChengYuan( String name, String head, String phone,String store_url,String sex,
+							String birthday,String address,String key1,String key2,String key3,int friendstate) {
+		super();
+		this.name = name;
+		this.head = head;
+		this.phone = phone;
+		this.store_url = store_url;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.address = address;
+		this.key1 = key1;
+		this.key2 = key2;
+		this.key3 = key3;
+		this.friendstate = friendstate;
 	}
 
 	public TuanDuiChengYuan(String id, String name, String head, String type,

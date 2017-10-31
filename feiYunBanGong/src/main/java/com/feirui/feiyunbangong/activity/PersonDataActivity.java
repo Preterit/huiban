@@ -52,6 +52,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     private Button mPerson_add;
 
     private TuanDuiChengYuan mTdcy;
+    private int code;
     private List<Group> groups = new ArrayList<>();// 分组信息
     private ArrayList<String> group_name = new ArrayList<>();// 组名
     // 二维码名片：
@@ -63,10 +64,13 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         setContentView(R.layout.activity_person_data);
         Intent intent = getIntent();
         mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
+        code = intent.getIntExtra("friend",-1);
 
         initUi();
         setListener();
-        updateState();// 更改新团员状态；
+        if (code == 1){
+            updateState();// 更改新团员状态；
+        }
         createErWeiMa();
     }
 
@@ -106,7 +110,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
 
     private void initData() {
-        if (!"".equals(mTdcy.getHead()) && null != mTdcy.getHead()
+        if (!"null".equals(mTdcy.getHead()) && null != mTdcy.getHead()
                 && !"img/1_1.png".equals(mTdcy.getHead())) {
             ImageLoader.getInstance().displayImage(mTdcy.getHead(), mCir_head);
         } else {
@@ -114,7 +118,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         }
 
         mTv_name.setText(mTdcy.getName());
-        if (!"".equals(mTdcy.getSex()) && null != mTdcy.getSex()){
+        if (!"null".equals(mTdcy.getSex()) && null != mTdcy.getSex()){
             if ("女".equals(mTdcy.getSex())){
                 mIv_sex.setImageResource(R.drawable.girl);
             }else {
@@ -124,12 +128,12 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mIv_sex.setImageResource(R.drawable.boy);
         }
 
-        if (!"".equals(mTdcy.getBirthday()) && null != mTdcy.getBirthday()){
+        if (!"null".equals(mTdcy.getBirthday()) && null != mTdcy.getBirthday()){
             mTv_birthday.setText(mTdcy.getBirthday());
         }else {
             mTv_birthday.setText("2000-01-02");
         }
-        if (!"".equals(mTdcy.getAddress()) && null != mTdcy.getAddress()){
+        if (!"null".equals(mTdcy.getAddress()) && !"".equals(mTdcy.getAddress())){
             mTv_person_area.setText(mTdcy.getAddress());
         }else {
             mTv_person_area.setText("北京 朝阳");
@@ -180,7 +184,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         switch (v.getId()){
             case R.id.person_shop:  //个人小店
                 Log.e("团队成员资料页面", "Store_url: "+ mTdcy.getStore_url() );
-                if ( !"0".equals(mTdcy.getStore_url()) && null != mTdcy.getStore_url()){
+                if ( !"0".equals(mTdcy.getStore_url()) && !"null".equals(mTdcy.getStore_url())){
                     Intent intent1=new Intent();
                     intent1.putExtra("uri",mTdcy.getStore_url());//
                     intent1.putExtra("TAG","1");

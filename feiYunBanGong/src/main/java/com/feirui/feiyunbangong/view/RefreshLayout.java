@@ -1,15 +1,15 @@
 package com.feirui.feiyunbangong.view;
 
-import android.content.Context;  
-import android.support.v4.widget.SwipeRefreshLayout;  
-import android.util.AttributeSet;  
-import android.view.MotionEvent;  
-import android.view.View;  
-import android.view.ViewConfiguration;  
-import android.widget.AbsListView;  
-import android.widget.AbsListView.OnScrollListener;  
-import android.widget.ListView;  
-  
+import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.ListView;
+
 /** 
  * 继承自SwipeRefreshLayout,从而实现滑动到底部时上拉加载更多的功能. 
  */
@@ -190,8 +190,10 @@ public class RefreshLayout extends SwipeRefreshLayout implements
         if (canLoad()) {  
             loadData();  
         }  
-    }  
-  
+    }
+
+
+
     /** 
      * 加载更多的监听器 
      *  

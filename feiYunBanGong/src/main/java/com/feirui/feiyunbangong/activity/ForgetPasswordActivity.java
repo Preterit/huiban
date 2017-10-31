@@ -1,9 +1,11 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -42,6 +44,15 @@ public class ForgetPasswordActivity extends BaseActivity {
 		setContentView(R.layout.activity_forget_password);
 		initView();
 		RegisteActivity.list.add(this);
+		//使edittext失去光标,从而隐藏键盘的方法
+		findViewById(R.id.lay_xiugaimima).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				InputMethodManager imm = (InputMethodManager)
+						getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+			}
+		});
 	}
 
 	private void initView() {

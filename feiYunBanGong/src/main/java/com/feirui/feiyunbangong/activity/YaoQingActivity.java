@@ -55,7 +55,7 @@ public class YaoQingActivity extends BaseActivity {
 	private void initView() {
 		initTitle();
 		setLeftDrawable(R.drawable.arrows_left);
-		setCenterString("邀请奖励");
+		setCenterString("邀请注册");
 //		setRightDrawable(R.drawable.jianglitixian);
 //		rightll.setOnClickListener(new OnClickListener() {
 //			@Override

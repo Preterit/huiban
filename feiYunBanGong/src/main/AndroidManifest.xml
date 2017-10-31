@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="69"
-    android:versionName="1.6.9">
+    android:versionCode="75"
+    android:versionName="1.7.5">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -12,8 +12,7 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -463,8 +462,15 @@
         <activity android:name=".activity.MyCaiGouDetailActivity" />
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
+        <activity
+            android:name=".activity.RenWuDetailActivity"
+            android:label="@string/title_activity_ren_wu_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.ReleaseDetailActivity" />
+        <!-- 个人小店 -->
+        <activity android:name=".activity.AddShopActivity" />
+
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
@@ -473,6 +479,11 @@
         <receiver
             android:name=".receiver.KeepLiveReceiver"
             android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
+        <activity android:name=".activity.SheZhiActivity"/>
+
             android:exported="true" />
 
         <activity android:name=".activity.MyTaskDetailActivity" />
@@ -483,6 +494,8 @@
         <activity android:name=".activity.SearchFriendsActivity" />
         <activity android:name=".activity.MyReleaseTaskActivity" />
         <activity android:name=".activity.MyTaskActivity"></activity>
+        <activity android:name=".activity.SearchFriendsActivity" />
+        <activity android:name=".activity.MoreFriendsActivity"></activity>
     </application>
 
 </manifest>

@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -22,10 +21,10 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.alibaba.mobileim.IYWLoginService;
@@ -76,6 +75,8 @@ import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.feirui.feiyunbangong.state.AppStore.mIMKit;
 
@@ -109,7 +110,8 @@ public class MainActivity extends BaseActivity
     public DrawerLayout drawerlayout;
     @PView
     private ListView lv_left;
-    private ArrayAdapter adapter;
+    //private ArrayAdapter adapter;
+    private SimpleAdapter adapter;
 
     @PView
     private LinearLayout inclue;
@@ -294,9 +296,10 @@ public class MainActivity extends BaseActivity
     // 获取未读消息数：
     private void getNum() {
         int num = mIMKit.getUnreadCount();// 未读消息数；
-        Log.d("获取未读消息数----------------", "getNum:-------------- "+num);
+        Log.e("获取未读消息数----------------", "getNum:-------------- "+num);
         //设置桌面图标提示
         mIMKit.setShortcutBadger(num);
+
         if (num > 0) {
             String str = "";
             if (num > 99) {
@@ -312,14 +315,49 @@ public class MainActivity extends BaseActivity
     }
     //侧滑菜单的item设置
     private void setListView() {
-        adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin, R.id.tv,
-                new String[]{"个人资料","修改密码", "代注册", "我的小店", "意见反馈", "清理缓存", "帮助",
-                        "关于我们", "邀请奖励", "退出登录"});
+        adapter = new SimpleAdapter(this,getData(), R.layout.lv_item_gerenzhongxin,
+                new String[]{"tv_grzx","img_grzx"},
+                new int[]{R.id.tv_grzx,R.id.img_grzx});
         lv_left.setAdapter(adapter);
 		/*
          * adapter = new ArrayAdapter<>(this, R.layout.lv_item_gerenzhongxin,
 		 * R.id.tv, new String[] { "消息通知" }); lv_right.setAdapter(adapter);
 		 */
+    }
+    private List<Map<String, Object>> getData() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("tv_grzx", "个人资料");
+        map.put("img_grzx", R.drawable.gerenziliao);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("tv_grzx", "邀请注册");
+        map.put("img_grzx", R.drawable.yaoqingjiangli);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("tv_grzx", "电话帮助");
+        map.put("img_grzx", R.drawable.shiliang);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("tv_grzx", "意见反馈");
+        map.put("img_grzx", R.drawable.yijianfankui);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("tv_grzx", "系统设置");
+        map.put("img_grzx", R.drawable.shezhi);
+        list.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("tv_grzx", "退出登录");
+        map.put("img_grzx", R.drawable.icon_exit);
+        list.add(map);
+
+        return list;
     }
 
     private void setupView() {
@@ -387,7 +425,6 @@ public class MainActivity extends BaseActivity
                     // 事务
                     transaction.show(fragmentArray[selectedIndex]);
                     transaction.commit();
-
                     btnArray[currentIndex].setSelected(false);
                     btnArray[selectedIndex].setSelected(true);
                     currentIndex = selectedIndex;
@@ -404,8 +441,6 @@ public class MainActivity extends BaseActivity
             btnArray[i].setOnClickListener(myButtonListener);
         }
         lv_left.setOnItemClickListener(this);
-
-
         inclue.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -425,34 +460,12 @@ public class MainActivity extends BaseActivity
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 1:
-                        //修改密码
-                        startActivity(new Intent(MainActivity.this, ForgetPasswordActivity.class));
+                        // 邀请注册
+                        startActivity(new Intent(MainActivity.this, YaoQingActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+
                         break;
                     case 2:
-                        // 添加员工：改为代注册
-                        startActivity(new Intent(MainActivity.this, AddYuanGongActivity.class));
-                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-                        break;
-                    case 3:
-
-                        toMyShpOrAddShop();
-                        // 我的小店：
-                        // startActivity(new Intent(MainActivity.this,
-                        // AddShopActivity.class));
-                        break;
-                    case 4:
-                        // 意见反馈：
-                        startActivity(new Intent(MainActivity.this, YiJianActivity.class));
-                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-                        break;
-                    case 5:
-                        // 清理缓存：
-                        ImageLoader.getInstance().clearMemoryCache();// 清除内存图片；
-                        ImageLoader.getInstance().clearDiscCache();// 清除sd卡图片；
-                        T.showShort(this, "清理完成！");
-                        break;
-                    case 6:
                         // 帮助
                         try {
                             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:13366664598"));
@@ -462,23 +475,46 @@ public class MainActivity extends BaseActivity
                             // TODO: handle exception
                         }
                         break;
+                    case 3:
+                        // 意见反馈：
+                        startActivity(new Intent(MainActivity.this, YiJianActivity.class));
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                        break;
+                    case 4:
+                        startActivity(new Intent(MainActivity.this, SheZhiActivity.class));
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                        break;
+                    case 5:
+                        // 退出账号登录：
+                        outLogin();
+                        break;
+                    case 6:
+                        // 添加员工：改为代注册
+                        startActivity(new Intent(MainActivity.this, AddYuanGongActivity.class));
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                        break;
                     case 7:
                         // 关于我们
                         UseMessageDialog dialog1 = new UseMessageDialog(this);
                         dialog1.show();
                         break;
                     case 8:
-                        // 邀请奖励
-                        startActivity(new Intent(MainActivity.this, YaoQingActivity.class));
+                        //修改密码
+                        startActivity(new Intent(MainActivity.this, ForgetPasswordActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
 //                    case 8:
 //                        // 我的余额：
 //
 //                        break;
+                    // 我的小店：
+//                    toMyShpOrAddShop();
+//                    startActivity(new Intent(MainActivity.this, AddShopActivity.class));
                     case 9:
-                        // 退出账号登录：
-                        outLogin();
+                        // 清理缓存：
+                        ImageLoader.getInstance().clearMemoryCache();// 清除内存图片；
+                        ImageLoader.getInstance().clearDiscCache();// 清除sd卡图片；
+                        T.showShort(this, "清理完成！");
                         break;
 
                 }
@@ -509,6 +545,7 @@ public class MainActivity extends BaseActivity
                 } else {
                     // 有小店
                     Intent intent = new Intent(MainActivity.this, MyShopActivity.class);
+                    Log.e("个人小店json_bean", "json_bean: "+bean );
                     intent.putExtra("json_bean", bean);
                     startActivity(intent);
 
@@ -670,11 +707,13 @@ public class MainActivity extends BaseActivity
                     }
 
                     imageUrls.add(head);
-                    //头像的点击事件
+                    //侧滑菜单头像的点击事件
                     iv_head.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            imageBrower(0,imageUrls);
+                            //imageBrower(0,imageUrls);
+                            startActivity(new Intent(MainActivity.this, DetailPersonActivity.class));
+                            overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         }
                     });
 

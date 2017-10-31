@@ -479,9 +479,11 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	 */
 	public void  deleteTuanLiao(){
 		mTribeId = Long.parseLong(mTbID);
-		Log.e("chengyuan", "mTribeId: -----------------" + mTribeId + "----------" + mTuanDui.getPhone());
+		Log.e("团队成员自动删除人", "mTribeId: -----------------" + mTribeId + "----------" + mTuanDui.getPhone());
+		Log.e("团队成员自动删除人", "td: -----------------" + td );
 
 		IYWContact iywContact =  YWContactFactory.createAPPContact(mTuanDui.getPhone(), Happlication.APP_KEY);
+		Log.e("团队成员自动删除人", "iywContact: -----------------" + iywContact.toString() );
         mTribeService.expelMember(mTribeId, iywContact, new IWxCallback() {
             @Override
             public void onSuccess(Object... objects) {
