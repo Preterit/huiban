@@ -212,7 +212,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(DetailTuanDuiActivity.this, msg,Toast.LENGTH_SHORT)
+                        Toast.makeText(TuanDui_DetailActivity.this, msg,Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -271,7 +271,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         rightll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailTuanDuiActivity.this,
+                Intent intent = new Intent(TuanDui_DetailActivity.this,
                         TuanDuiJiaActivity.class);
                 //将整个团队传过去
                 intent.putExtra("td", td);

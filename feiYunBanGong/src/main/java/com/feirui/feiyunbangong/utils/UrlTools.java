@@ -176,7 +176,7 @@ public class UrlTools {
   /**
    * 新增报销信息
    */
-  public static String EXPENSE_ADD_EXPENSE1 = "Expense/add_expense1";
+  public static String EXPENSE_ADD_EXPENSE1 = "Expense/add_expense111";
 
   /**
    * 新增外出信息
@@ -185,7 +185,7 @@ public class UrlTools {
   /**
    * 新增外出信息(添加抄送人)
    */
-  public static String OUT_ADD_OUT1 = "Out/add_out1";
+  public static String OUT_ADD_OUT1 = "Out/add_out111";
   /**
    * 付款新增
    */
@@ -194,7 +194,7 @@ public class UrlTools {
   /**
    * 付款新增1
    */
-  public static String BUY_ADD_BUY1 = "buy/add_buy1";
+  public static String BUY_ADD_BUY1 = "buy/add_buy111";
   /**
    * 新增采购信息：
    */
@@ -202,7 +202,7 @@ public class UrlTools {
   /**
    * 新增采购信息：http://123.57.45.74/feiybg/public/index.php/index/Purchase/add_purchase1
    */
-  public static final String ADD_CAIGOU_XINXI1 = "Purchase/add_purchase1";
+  public static final String ADD_CAIGOU_XINXI1 = "Purchase/add_purchase111";
   /**
    * 待审批其他新增
    */
@@ -210,7 +210,7 @@ public class UrlTools {
   /**
    * 待审批其他新增,带抄送人
    */
-  public static String OTHER_OTHER_ADD1 = "Other/other_add1";
+  public static String OTHER_OTHER_ADD1 = "Other/other_add111";
   /**
    * 审批里我发起点进去显示所有的信息(我提交的)
    */
@@ -218,11 +218,11 @@ public class UrlTools {
   /**
    * 审批流程中发给我，需要我审批的
    * */
-  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";
+  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval000";
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */
-  public static String APPROVAL_APPROVAL = "Approval/approval";
+  public static String APPROVAL_APPROVAL = "Approval/approval000";
 
   public static String APPROVAL_DETAIL = "Approval/approval_detaile";
     /**

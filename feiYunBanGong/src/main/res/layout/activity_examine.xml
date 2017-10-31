@@ -112,6 +112,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_goOut"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="@dimen/x140"
+                    android:layout_height="@dimen/y140"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/fragment1_d_3" />
+
+                <TextView
+                    style="@style/d6a5f4_48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y6"
+                    android:text="外出" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_refund"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -134,28 +157,7 @@
                     android:text="报销" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_goOut"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical" >
 
-                <ImageView
-                    android:layout_width="@dimen/x140"
-                    android:layout_height="@dimen/y140"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/fragment1_d_3" />
-
-                <TextView
-                    style="@style/d6a5f4_48"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
-                    android:text="外出" />
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

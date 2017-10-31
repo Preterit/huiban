@@ -320,7 +320,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
                     super.onSuccess(statusCode, headers, responseBody);
 
                     JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                    Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
+                    Log.e("获取得到的json", "jsonBean: "+jsonBean.toString());
                     if (jsonBean.getCode().equals("200")) {
 
                         if (onRefreshOrLoadMore == ON_REFRESH) {

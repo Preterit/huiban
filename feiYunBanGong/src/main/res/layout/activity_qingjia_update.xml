@@ -40,6 +40,7 @@
                 <TextView
                     android:id="@+id/tv_leixing"
                     style="@style/huise_38"
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -64,6 +65,7 @@
                 <TextView
                     android:id="@+id/tv_kaishishijian"
                     style="@style/huise_38"
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -92,6 +94,7 @@
                 <TextView
                     android:id="@+id/tv_jieshushijian"
                     style="@style/huise_38"
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -122,6 +125,7 @@
                     style="@style/huise_38"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
@@ -150,6 +154,7 @@
                 <EditText
                     android:id="@+id/et_shiyou"
                     style="@style/huise_38"
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

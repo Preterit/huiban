@@ -483,11 +483,7 @@
 
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
         <activity android:name=".activity.SheZhiActivity"/>
-
-            android:exported="true" />
-
         <activity android:name=".activity.MyTaskDetailActivity"></activity>
-            android:exported="true" />
 
         <!-- 新的anctivity -->
         <activity android:name=".activity.PersonDataActivity" />
