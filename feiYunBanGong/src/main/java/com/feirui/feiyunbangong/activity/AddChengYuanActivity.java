@@ -2,6 +2,8 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +11,12 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.contact.YWContactFactory;
+import com.alibaba.mobileim.conversation.YWMessage;
+import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddChengYuanExpandableListAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -29,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.alibaba.mobileim.R.id.content;
+
 /**
  * 添加成员：
  * 添加审批人也跳转到该页面
@@ -43,6 +53,8 @@ public class AddChengYuanActivity extends BaseActivity implements
 	private List<Group> groups;
 	private Map<Integer, List<ChildItem>> map;
 	private String type;
+	private YWMessage ywMessage;
+	private int msgCode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +69,8 @@ public class AddChengYuanActivity extends BaseActivity implements
 			return;
 		}
 		type = intent.getStringExtra("type");
-
+		ywMessage = (YWMessage) intent.getSerializableExtra("msg");
+		msgCode = intent.getIntExtra("msgCode",-1);
 		initView();
 		setListView();
 		setListener();
@@ -100,7 +113,11 @@ public class AddChengYuanActivity extends BaseActivity implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.bt_submit:
-			submit();
+			if (msgCode == 1){ //用于转发消息
+				sendMeg();
+			}else {
+				submit();
+			}
 			break;
 		}
 	}
@@ -171,11 +188,65 @@ public class AddChengYuanActivity extends BaseActivity implements
 			finish();
 			return;
 		}
-
+		Log.e("child", "submit: --------------------------------" + childs.toString() );
 		Intent intent = new Intent();
 		intent.putExtra("childs", childs);
 		setResult(100, intent);
 
+		finish();
+	}
+
+	Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if (msg.what == 0){
+				YWIMKit mIMKit = AppStore.mIMKit;
+
+				IWxCallback forwardCallBack = new IWxCallback() {
+
+					@Override
+					public void onSuccess(Object... result) {
+//				IMNotificationUtils.getInstance().showToast(context,"forward succeed!");
+					}
+
+					@Override
+					public void onError(int code, String info) {
+//				IMNotificationUtils.getInstance().showToast(context,"forward fail!");
+
+					}
+
+					@Override
+					public void onProgress(int progress) {
+
+					}
+				};
+				//转发给个人示例
+				IYWContact appContact = YWContactFactory.createAPPContact((String) msg.obj, mIMKit.getIMCore().getAppKey());
+
+				mIMKit.getConversationService()
+						.forwardMsgToContact(appContact
+								,ywMessage,forwardCallBack);
+				//跳转到聊天页面的
+//				startActivity(mIMKit.getChattingActivityIntent(ywMessage.getContent()));
+			}
+		}
+	};
+	/*
+	 转发消息内容
+	 */
+	private void sendMeg() {
+		List<Integer> gp = adapter.getGp();
+		List<Integer> cp = adapter.getCp();
+
+		ArrayList<ChildItem> childs = new ArrayList<>();
+		for (int i = 0; i < gp.size(); i++) {
+			Message message = new Message();
+			message.obj = map.get(gp.get(i)).get(cp.get(i)).getPhone();
+            message.what = 0;
+			handler.sendMessage(message);
+		}
+		T.showShort(AddChengYuanActivity.this,"转发成功");
 		finish();
 	}
 

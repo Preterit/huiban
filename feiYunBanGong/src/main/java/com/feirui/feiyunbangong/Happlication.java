@@ -73,9 +73,9 @@ public class Happlication extends MultiDexApplication {
 
 
 
-    public static void addActivity(Activity activity) {
-        activitylist.add(activity);
-    }
+//    public static void addActivity(Activity activity) {
+//        activitylist.add(activity);
+//    }
 
     public static ArrayList<Activity> getActivities() {
         return activitylist;
@@ -116,6 +116,6 @@ public class Happlication extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this) ;
+            MultiDex.install(this) ;
        }
 }

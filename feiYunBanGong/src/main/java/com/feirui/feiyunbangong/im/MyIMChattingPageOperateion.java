@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
@@ -367,7 +368,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
     @Override
     public boolean onUrlClick(Fragment fragment, YWMessage message, String url,
                               YWConversation conversation) {
-//        IMNotificationUtils.getInstance().showToast(fragment.getActivity(), "用户点击了url:" + url);
+        Log.e("url", "onUrlClick: -----------------------" + url );
         if(!url.startsWith("http")) {
             url = "http://" + url;
         }
@@ -466,12 +467,13 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
         final Activity context=fragment.getActivity();
 //        IMNotificationUtils.getInstance().showToast(context, "触发了自定义MessageLongClick事件");
         if (message != null) {
-            final List<String> linkedList = new ArrayList<String>();
+            final List<String> linkedList = new ArrayList<>();
             if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TEXT
                     || message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GEO
                     ) {
                 linkedList.add("转发");
             }
+
             linkedList.add("删除消息");
 
             if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TEXT) {
@@ -515,6 +517,13 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
                                             int which) {
                             if (which < strs.length) {
                                 if ("转发".equals(strs[which])) {
+                                    Intent intent = new Intent(context,AddChengYuanActivity.class);
+                                    intent.putExtra("msg",message);
+                                    Log.e("mess", "onClick: -----------------" + message.getContent() );
+                                    intent.putExtra("msgCode",1);
+                                    context.startActivity(intent);
+//                                    context.finish();
+                                    context.overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 //                                    IMNotificationUtils.getInstance().showToast(context, "暂时还不能转发哦~");
 //                                    showForwardMessageDialog(context, message);
                                 } else if ("删除消息".equals(strs[which])) {
@@ -583,6 +592,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
     }
 
     private void showForwardMessageDialog(final Activity context, final YWMessage msg){
+
         final IWxCallback forwardCallBack = new IWxCallback() {
 
             @Override

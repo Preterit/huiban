@@ -445,6 +445,7 @@
             android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
+        <activity android:name=".activity.tribe.SearchTribeActivity"></activity>
 
         <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />

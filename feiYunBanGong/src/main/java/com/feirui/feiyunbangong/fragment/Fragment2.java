@@ -32,18 +32,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.mobileim.contact.IYWContact;
+import com.alibaba.mobileim.conversation.YWMessage;
+import com.alibaba.mobileim.conversation.YWMessageChannel;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.AboutFriendActivity;
 import com.feirui.feiyunbangong.activity.AddFriendActivity;
 import com.feirui.feiyunbangong.activity.FenZuGuanLiActivity;
 import com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.MoreFriendsActivity;
 import com.feirui.feiyunbangong.activity.NewFriendActivity;
+import com.feirui.feiyunbangong.activity.SearchFriendsActivity;
 import com.feirui.feiyunbangong.activity.WorkCircleActivity;
 import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.EditTribeInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.TribeActivity;
 import com.feirui.feiyunbangong.adapter.MyBaseExpandableListAdapter;
+import com.feirui.feiyunbangong.adapter.SearchFriendsAdapter;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog.CallBack;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -64,6 +71,7 @@ import com.feirui.feiyunbangong.myinterface.AllInterface.OnGroupStateChangedList
 import com.feirui.feiyunbangong.myinterface.AllInterface.OnNewFriendNumChanged;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.LianXiRenUtil;
 import com.feirui.feiyunbangong.utils.T;
@@ -74,7 +82,10 @@ import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.RequestParams;
 import com.zxing.activity.CaptureActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,12 +124,22 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     private OnNewFriendNumChanged friendNumListener;
     public int friend_size;
     public JsonBean josnbean1;
+    private StringBuffer stringBuffer = new StringBuffer(256);
+    private List<Friend> listFriend = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e("string", "onReceiveLocation: --------ddddddd-----------------");
         try {
             view = setContentView(inflater, R.layout.fragment_main2);
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    handler.sendEmptyMessage(0);
+                }
+            },100);
+            Log.e("string", "onReceiveLocation: -------------------------" + stringBuffer.toString());
             initView();
             setListView();
             setListener();
@@ -364,11 +385,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
             Log.e("TAG", keyCode + "");
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 Log.e("TAG", "keydown");
-//        if (!Utils.isPhone(et_sousuo.getText().toString())) {//判断手机号格式
-//          Toast.makeText(getActivity(), "手机号格式错误！", Toast.LENGTH_SHORT).show();
-//          return false;
-//        }
                 search(et_sousuo.getText().toString());
+
             }
         }
         return false;
@@ -380,38 +398,47 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     private void search(String phone) {
         String url = UrlTools.url + UrlTools.SOUSUO_LIANXIREN;
         RequestParams params = new RequestParams();
-        params.put("staff_mobile", phone);
-
+        params.put("staff_id", AppStore.user.getInfor().get(0).get("id") + ""); //个人id
+        params.put("key",phone);
+        params.put("location",stringBuffer.toString());
+        Log.e("string", "onReceiveLocation: -------------stringBuffer------------" + params.toString() + "---" );
         Utils.doPost(LoadingDialog.getInstance(getActivity()), getActivity(),
                 url, params, new HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {
                         try {
-                            String name = "";
-                            String phone = "";
-                            String address = "";
-                            String head = "";
-                            if (bean.getInfor().get(0).get("staff_name") != null) {
-                                name = String.valueOf(bean.getInfor().get(0)
-                                        .get("staff_name"));
+                            ArrayList<HashMap<String,Object>> infor = bean.getInfor();
+                            listFriend.removeAll(listFriend);
+                            if (infor.size() > 0){
+                                for (int i = 0;i < infor.size();i++){
+                                    HashMap<String,Object> hm = infor.get(i);
+                                    Friend friend = new Friend(hm.get("staff_name") + "",hm.get("address") + "",
+                                            hm.get("staff_head") + "",hm.get("sex") + "",hm.get("birthday") + "",
+                                            hm.get("staff_key1")  + "",hm.get("staff_key2")  + "",hm.get("staff_key3")  + "",
+                                            hm.get("distance") + "",hm.get("store_url") + "",hm.get("is_friend") + "",hm.get("staff_mobile") + "");
+
+                                    listFriend.add(friend);
+                                }
+
+                            }else {
+                                T.showShort(getActivity(),"没有找到您要搜索的~");
+                                return;
                             }
-                            if (bean.getInfor().get(0).get("staff_mobile") != null) {
-                                phone = String.valueOf(bean.getInfor().get(0)
-                                        .get("staff_mobile"));
-                            }
-                            if (bean.getInfor().get(0).get("address") != null) {
-                                address = String.valueOf(bean.getInfor().get(0)
-                                        .get("address"));
-                            }
-                            if (bean.getInfor().get(0).get("staff_head") != null) {
-                                head = String.valueOf(bean.getInfor().get(0)
-                                        .get("staff_head"));
-                            }
-                            Friend friend = new Friend(name, phone, address,
-                                    head);
-                            Log.e("联系人页面", "friend: " + friend.toString());
-                            Intent intent = new Intent(getActivity(), AboutFriendActivity.class);
-                            intent.putExtra("friend", friend);
+
+                            //按距离排序
+                            Collections.sort(listFriend, new Comparator<Friend>() {
+                                @Override
+                                public int compare(Friend lhs, Friend rhs) {
+                                    return lhs.getDistence().compareTo(rhs.getDistence());
+                                }
+                            });
+
+                            Log.e("string", "success: --------------------------" + listFriend.toString() );
+                            Intent intent = new Intent(getActivity(), MoreFriendsActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("friendList", (Serializable) listFriend);
+                            bundle.putInt("code",1);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                             getActivity().overridePendingTransition(
                                     R.anim.aty_zoomin, R.anim.aty_zoomout);
@@ -700,6 +727,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                 R.layout.lianxiren_lv_header, null);
         et_sousuo = (EditText) header_view
                 .findViewById(R.id.et_sousuolianxiren);
+        et_sousuo.setHint("名字/手机号/关键词");
         // iv_hongdian = (ImageView) view.findViewById(R.id.iv_hongdian);
         tv_num = (TextView) header_view.findViewById(R.id.tv_num);
         rl_chuangjian = (RelativeLayout) header_view.findViewById(R.id.rl_chuangjian);
@@ -712,13 +740,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         list.add("修改分组");
         list.add("修改备注");
         dialog = new SelectZTDialog(getActivity(), "好友管理", list, this);
-        //asd();
     }
-
-    public void asd() {
-
-    }
-
 
     private void addData(JsonBean bean) {
         ArrayList<HashMap<String, Object>> info = bean.getInfor();
@@ -914,14 +936,36 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     }
 
     Handler handler = new Handler() {
+
         public void handleMessage(android.os.Message msg) {
-            Log.e("好友数量", "msg.obj=" + msg.obj.toString());
-            if ((int) msg.obj > 0) {
-                tv_num.setVisibility(View.VISIBLE);
-                tv_num.setText(msg.obj + "");
-                friendNumListener.newFriendNumChanged((int) msg.obj);
-            } else {
-                tv_num.setVisibility(View.INVISIBLE);
+            if (msg.what == 0){
+                BaiDuUtil.initLocation(getActivity(), new BDLocationListener() {
+                    @Override
+                    public void onReceiveLocation(BDLocation bdLocation) {
+
+                        if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+                            if (stringBuffer.length() > 0){
+                                stringBuffer.delete(0,stringBuffer.length());
+                            }
+                            stringBuffer.append(bdLocation.getLatitude());//纬度
+                            stringBuffer.append(",");
+                            stringBuffer.append(bdLocation.getLongitude());//经度
+                        }
+
+                    }
+
+                    @Override
+                    public void onConnectHotSpotMessage(String s, int i) {}
+                });
+            }else {
+                Log.e("好友数量", "msg.obj=" + msg.obj.toString());
+                if ((int) msg.obj > 0) {
+                    tv_num.setVisibility(View.VISIBLE);
+                    tv_num.setText(msg.obj + "");
+                    friendNumListener.newFriendNumChanged((int) msg.obj);
+                } else {
+                    tv_num.setVisibility(View.INVISIBLE);
+                }
             }
         }
     };

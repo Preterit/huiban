@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,12 +13,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.adapter.SearchFriendsAdapter;
 import com.feirui.feiyunbangong.dialog.EtDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
-import com.feirui.feiyunbangong.entity.Friend;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -38,11 +40,30 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 	private List<LinearLayout> lls = new ArrayList<>();
 	private EditText et_sousuolianxiren;
 	private final int SCANER_CODE = 1;
+	private StringBuffer stringBuffer = new StringBuffer(256);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_friend);
+		new Handler().post(new Runnable() {
+			@Override
+			public void run() {
+				BaiDuUtil.initLocation(AddFriendActivity.this, new BDLocationListener() {
+					@Override
+					public void onReceiveLocation(BDLocation bdLocation) {
+						if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+							stringBuffer.append(bdLocation.getLatitude());//纬度
+							stringBuffer.append(",");
+							stringBuffer.append(bdLocation.getLongitude());//经度
+						}
+					}
+
+					@Override
+					public void onConnectHotSpotMessage(String s, int i) {}
+				});
+			}
+		});
 		initUI();
 		setListener();
 	}
@@ -101,7 +122,8 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
         Intent intent = new Intent(AddFriendActivity.this,
                 SearchFriendsActivity.class);
         intent.putExtra("friend", phone);
-        startActivity(intent);
+		intent.putExtra("location",stringBuffer.toString());
+		startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin,
                 R.anim.aty_zoomout);
 

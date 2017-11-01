@@ -39,7 +39,7 @@ public class BaseActivity extends FragmentActivity {
 //		TestinUtils.configTestin(this);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		Happlication.getInstance().addActivity(this);
+//		Happlication.getInstance().addActivity(this);
 		// 禁止横屏
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}

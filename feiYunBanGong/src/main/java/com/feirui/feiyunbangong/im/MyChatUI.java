@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,8 +18,10 @@ import com.alibaba.mobileim.aop.Pointcut;
 import com.alibaba.mobileim.aop.custom.IMChattingBizService;
 import com.alibaba.mobileim.aop.custom.IMChattingPageUI;
 import com.alibaba.mobileim.channel.event.IWxCallback;
+import com.alibaba.mobileim.contact.IYWContact;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
+import com.alibaba.mobileim.conversation.YWP2PConversationBody;
 import com.alibaba.mobileim.conversation.YWTribeConversationBody;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
@@ -128,23 +131,43 @@ public class MyChatUI extends IMChattingPageUI {
 					conversationId.length() - 11, conversationId.length());
 			Log.e("TAG", phone + "P2P--------conversation.getConversationId()"+ conversation.getConversationBody().toString());
 //            conversation.getConversationBody().toString()
-			String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
-					.getShowName();
+//			if (MyUserProfileSampleHelper.mUserInfo.get(phone).getShowName() != null){
+//				String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
+//						.getShowName();
+//
+//				// 如果不是手机号的话则直接显示：
+//				if (!Utils.isPhone(name)) {
+//					tv_name.setText(name);
+//				}
+//
+//				// 0.5秒后再次显示昵称，0.5秒的时间应该可以从后台获取到昵称了，刚开始显示的可能是手机号：
+//				new Handler().postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
+//								.getShowName();
+//						tv_name.setText(name);
+//					}
+//				}, 300);
+//
+//			}
 
-			// 如果不是手机号的话则直接显示：
-			if (!Utils.isPhone(name)) {
-				tv_name.setText(name);
-			}
+			YWP2PConversationBody conversationBody = (YWP2PConversationBody) conversation
+					.getConversationBody();
+			if (!TextUtils.isEmpty(conversationBody.getContact().getShowName())) {
+				tv_name.setText(conversationBody.getContact().getShowName());
+			} else {
 
-			// 0.5秒后再次显示昵称，0.5秒的时间应该可以从后台获取到昵称了，刚开始显示的可能是手机号：
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					String name = MyUserProfileSampleHelper.mUserInfo.get(phone)
-							.getShowName();
-					tv_name.setText(name);
+				IYWContact contact = mIMKit.getContactService().getContactProfileInfo(conversationBody.getContact().getUserId(), conversationBody.getContact().getAppKey());
+				//生成showName，According to id。
+				if (contact != null && !TextUtils.isEmpty(contact.getShowName())) {
+					tv_name.setText(contact.getShowName());
 				}
-			}, 300);
+			}
+			//如果标题为空，那么直接使用Id
+			if (TextUtils.isEmpty(tv_name.getText())) {
+				tv_name.setText(conversationBody.getContact().getUserId());
+			}
 
 			//点击查看好友资料
 			btn.setOnClickListener(new OnClickListener() {

@@ -82,7 +82,12 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
             holder.mTv_item_area.setText("北京 朝阳");
         }
         if (!TextUtils.isEmpty(friendList.get(position).getDistence()) && !"null".equals(friendList.get(position).getDistence())){
-            holder.mTv_item_distence.setText(friendList.get(position).getDistence());
+            double dist = Double.parseDouble(friendList.get(position).getDistence());
+            if (dist > 1.0 ){
+                holder.mTv_item_distence.setText(friendList.get(position).getDistence() + " km");
+            }else {
+                holder.mTv_item_distence.setText((int)(dist * 1000) + " m");
+            }
         }else {
             holder.mTv_item_distence.setText(" ");
         }

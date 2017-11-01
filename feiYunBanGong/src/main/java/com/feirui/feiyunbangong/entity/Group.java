@@ -44,7 +44,7 @@ public class Group implements Serializable {
 	@Override
 	public String toString() {
 		return "Group [id=" + id + ", name=" + name + ", default_num="
-				+ default_num + ", count=" + count + "]";
+				+ default_num + ", count=" + count  + "]";
 	}
 
 	public Group(int id, String name, int default_num, int count) {

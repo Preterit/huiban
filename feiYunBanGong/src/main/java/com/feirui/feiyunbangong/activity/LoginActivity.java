@@ -18,12 +18,15 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.SPUtils;
@@ -61,11 +64,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	TextView btn_login_register, btn_login_forget, btn_login;
 
 	String type = "personal";// 注册类型,个人注册
+	private StringBuffer stringBuffer = new StringBuffer(256);
 
 	private static final int LOGIN_SUCESS = 1; // 登录成功
 	private static final int LOGIN_ERROR = 2;// 登录失败
 	private static final int JSON_ERROR = 3;// json解析出错
 	private static final int SERVICE_ERROR = 4;// 链接服务器出错
+	private static final int LOCATION = 5;// 定位
 	private PopupWindow popupWindow;
 	private List<String> groups;
 	private ListView lv_group;
@@ -103,6 +108,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 					AppStore.user = null;
 					T.showShort(LoginActivity.this, "网络开小差了");
 					break;
+				case LOCATION:
+					//获取定位
+					BaiDuUtil.initLocation(LoginActivity.this, new BDLocationListener() {
+						@Override
+						public void onReceiveLocation(BDLocation bdLocation) {
+							if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+								stringBuffer.append(bdLocation.getLatitude());//纬度
+								stringBuffer.append(",");
+								stringBuffer.append(bdLocation.getLongitude());//经度
+							}
+						}
+
+						@Override
+						public void onConnectHotSpotMessage(String s, int i) {}
+					});
+					break;
 			}
 		}
 
@@ -115,6 +136,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		//启动的同时 定位
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				handler.sendEmptyMessage(LOCATION);
+			}
+		},100);
+
 		et_login_username= (AutoCompleteTextView) findViewById(R.id.et_login_username);
 		et_login_username.setOnClickListener(this);
 		imageView= (ImageView) findViewById(R.id.iv_pic);
@@ -208,7 +237,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 		}
 
 		autoCompleteTextView.setAdapter(adapter);
-autoCompleteTextView.setThreshold(1);
+        autoCompleteTextView.setThreshold(1);
 		autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
 					@Override
@@ -365,8 +394,9 @@ autoCompleteTextView.setThreshold(1);
 		RequestParams params = new RequestParams();
 		params.put("staff_mobile", et_login_username.getText().toString());
 		params.put("staff_password", et_login_password.getText().toString());
+		params.put("location",stringBuffer.toString());
 		String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
-		L.e("登录url=" + url + " params=" + params);
+		L.e("登录url=" + url + " params=" + params );
 		AsyncHttpServiceHelper.post(url, params,
 				new AsyncHttpResponseHandler() {
 					@Override
