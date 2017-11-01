@@ -170,8 +170,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 //                        tds.removeAll(tds);
 //                        adapter.add(tds);
                         getData();
-//                        T.showShort(getActivity(), "网络请求失败，请检查网络");
-//                        T.showShort(getActivity(), msg);
                         swipe_container.setRefreshing(false);
                     }
 

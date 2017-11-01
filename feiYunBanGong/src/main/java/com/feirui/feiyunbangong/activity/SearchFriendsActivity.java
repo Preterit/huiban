@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.example.testpic.PublishedActivity;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.SearchFriendsAdapter;
@@ -23,6 +25,7 @@ import com.feirui.feiyunbangong.entity.Friend;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -30,8 +33,11 @@ import com.loopj.android.http.RequestParams;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SearchFriendsActivity extends BaseActivity implements View.OnClickListener{
     private ImageView mIv_search_left;
@@ -44,10 +50,11 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
 
     private SearchFriendsAdapter mAdapter;
     private SearchFriendsAdapter mAdapter2;
-    private List<Friend> listFriend = new ArrayList<>();
+    private List<Friend> listFriend = new ArrayList<>(); //防止java.util.ConcurrentModificationException异常
     private List<Friend> listNuFriend = new ArrayList<>();
     private RecyclerView.LayoutManager mManger,mManger2;
-    private String mStr;
+    private String mStr,string;
+    private StringBuffer stringBuffer = new StringBuffer(256);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +62,17 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_search_friends);
         Intent intent = getIntent();
         mStr = intent.getStringExtra("friend");
+        string = intent.getStringExtra("location");
         initView();
+        initLocation();
+    }
+
+    private void initLocation() {
+        //启动的同时 定位
+        handler.sendEmptyMessage(2);
+        //获取定位
+        initDate();
+
     }
 
 
@@ -79,7 +96,6 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-        initDate();
     }
 
     private void initDate() {
@@ -88,6 +104,8 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
             RequestParams params = new RequestParams();
             params.put("staff_id", AppStore.user.getInfor().get(0).get("id") + ""); //个人id
             params.put("key",mSearch.getText().toString());
+            params.put("location",string);
+            Log.e("fail", "friend: =============stringBuffer.toString()==-----------------" + string);
             Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
                 @Override
                 public void success(JsonBean bean) {
@@ -100,14 +118,15 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
                             Friend friend = new Friend(hm.get("staff_name") + "",hm.get("address") + "",
                                     hm.get("staff_head") + "",hm.get("sex") + "",hm.get("birthday") + "",
                                     hm.get("staff_key1")  + "",hm.get("staff_key2")  + "",hm.get("staff_key3")  + "",
-                                    "1.5km",hm.get("store_url") + "",hm.get("is_friend") + "",hm.get("staff_mobile") + "");
-                            Log.e("fail", "friend: ===============-----------------" + friend.toString() );
+                                    hm.get("distance") + "",hm.get("store_url") + "",hm.get("is_friend") + "",hm.get("staff_mobile") + "");
+
                             if ("0".equals(friend.getState())){
                                 listNuFriend.add(friend);
                             }else {
                                 listFriend.add(friend);
                             }
                         }
+
                         handler.sendEmptyMessage(0);
 
                     }else {
@@ -141,14 +160,51 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
             if (msg.what == 0){
                 setRecyclerView();
             }else if (msg.what == 1){
-                initDate();
+//                initDate();
+            }else if (msg.what == 2){
+                BaiDuUtil.initLocation(SearchFriendsActivity.this, new BDLocationListener() {
+                    @Override
+                    public void onReceiveLocation(BDLocation bdLocation) {
+                        if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+                            if (stringBuffer.length() > 0){
+                                stringBuffer.delete(0,stringBuffer.length());
+                            }
+                            stringBuffer.append(bdLocation.getLatitude());//纬度
+                            stringBuffer.append(",");
+                            stringBuffer.append(bdLocation.getLongitude());//经度
+                        }
+                        string = stringBuffer.toString();
+                        Log.e("string", "onReceiveLocation: -------------------------" + string);
+                    }
+
+                    @Override
+                    public void onConnectHotSpotMessage(String s, int i) {}
+                });
             }
         }
     };
     private void setRecyclerView() {
+
         Log.e("fail", "failure: ===============" + listFriend.toString() + "uuuuuuuuuuuuuu" + listNuFriend.toString() );
         mManger = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mManger2 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+
+        //排序
+        Collections.sort(listFriend,new Comparator<Friend>(){
+
+            @Override
+            public int compare(Friend lhs, Friend rhs) {
+                return lhs.getDistence().compareTo(rhs.getDistence());
+            }
+        });
+
+        Collections.sort(listNuFriend, new Comparator<Friend>() {
+            @Override
+            public int compare(Friend lhs, Friend rhs) {
+                return lhs.getDistence().compareTo(rhs.getDistence());
+            }
+        });
+
         if (listFriend.size() > 3){
             mAdapter = new SearchFriendsAdapter(listFriend.subList(0,3));
         }else {
@@ -221,7 +277,7 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
                 findMore(listNuFriend);
                 break;
             case R.id.tv_search:
-                initDate();
+                initLocation();
                 break;
         }
 

@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity
         initUI();
         try {
 
-            Happlication.addActivity(this);
+//            Happlication.addActivity(this);
             setupView();
             addListener();
             setListView();

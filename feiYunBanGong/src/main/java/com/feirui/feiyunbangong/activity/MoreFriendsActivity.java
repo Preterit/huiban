@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.SearchFriendsAdapter;
@@ -27,6 +28,8 @@ public class MoreFriendsActivity extends AppCompatActivity {
     private RecyclerView mRe_search_friends;
     private RecyclerView.LayoutManager mManager;
     private SearchFriendsAdapter mAdapter;
+    private int code;
+    private TextView mTvtitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +37,16 @@ public class MoreFriendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_more_friends);
         //接收对象数组
         friendList = (List<Friend>) getIntent().getSerializableExtra("friendList");
-
+        code = getIntent().getIntExtra("code",-1);
         initView();
     }
 
     private void initView() {
         mIv_search_left = (ImageView) findViewById(R.id.iv_search_left);
+        mTvtitle = (TextView) findViewById(R.id.tv_title_more);
+        if (code == 1){
+            mTvtitle.setText("相关好友");
+        }
         mIv_search_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +84,7 @@ public class MoreFriendsActivity extends AppCompatActivity {
         });
     }
 
+    //由于调用的团队成员的 ，所以好友要先转化为团队成员的
     private void startOther(int postion, List<Friend> friend2) {
         Intent intent = new Intent(MoreFriendsActivity.this,PersonDataActivity.class);
         Friend friend = friend2.get(postion);

@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by feirui1 on 2017-09-20.
+ * Created by xy on 2017-09-20.
  */
 
 public class SearchTribeActivity extends BaseActivity implements
@@ -102,16 +102,12 @@ public class SearchTribeActivity extends BaseActivity implements
         }
         mTribe = mTribeService.getTribe(mTribeId);
         if (mTribe == null || mTribe.getTribeRole() == null) {
-//            searchButton.setClickable(false);
-//            mProgressBar.setVisibility(View.VISIBLE);
             mTribeService.getTribeFromServer(new IWxCallback() {
                 @Override
                 public void onSuccess(Object... result) {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-//                            searchButton.setClickable(true);
-//                            mProgressBar.setVisibility(View.GONE);
                             startTribeInfoActivity(TribeConstants.TRIBE_JOIN);
                         }
                     });
@@ -122,8 +118,6 @@ public class SearchTribeActivity extends BaseActivity implements
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-//                            searchButton.setClickable(true);
-//                            mProgressBar.setVisibility(View.GONE);
                             IMNotificationUtils.getInstance().showToast(SearchTribeActivity.this, "没有搜索到该群，请确认群id是否正确！");
                         }
                     });

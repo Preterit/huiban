@@ -7,10 +7,13 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.ImageUtil;
 import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
@@ -32,6 +35,7 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 
 	private ImageView iv;
 	private boolean flag = true;// 长时间无任何反应的标识；
+	private StringBuffer stringBuffer = new StringBuffer(256);
 
 	private Handler handler = new Handler() {
 
@@ -45,13 +49,30 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 								Constant.SP_ALREADYUSED, false))) {
 					LoginMain();
 				} else {// 没有登陆过
-					startActivity(new Intent(SplashActivity.this,
-							GuideActivity.class));
+					Intent intent = new Intent(SplashActivity.this,
+							GuideActivity.class);
+					startActivity(intent);
 					overridePendingTransition(R.anim.aty_zoomin,
 							R.anim.aty_zoomout);
 					SplashActivity.this.finish();
 				}
 				break;
+				case 1 :
+					//获取定位
+					BaiDuUtil.initLocation(SplashActivity.this, new BDLocationListener() {
+						@Override
+						public void onReceiveLocation(BDLocation bdLocation) {
+							if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+								stringBuffer.append(bdLocation.getLatitude());//纬度
+								stringBuffer.append(",");
+								stringBuffer.append(bdLocation.getLongitude());//经度
+							}
+						}
+
+						@Override
+						public void onConnectHotSpotMessage(String s, int i) {}
+					});
+					break;
 			}
 		};
 	};
@@ -64,6 +85,14 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 		// 压缩：
 		iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
 				getResources(), R.drawable.welcome_logo, 1000, 1500));
+
+		//启动的同时 定位
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				handler.sendEmptyMessage(1);
+			}
+		},100);
 
 		update();// 检查更新：
 
@@ -126,11 +155,14 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 
 	// 自动登录：
 	private void LoginMain() {
+
 		RequestParams params = new RequestParams();
 		params.put("staff_mobile", (String) SPUtils.get(SplashActivity.this,
 				Constant.SP_USERNAME, ""));
 		params.put("staff_password", (String) SPUtils.get(SplashActivity.this,
 				Constant.SP_PASSWORD, ""));
+		params.put("location",stringBuffer.toString());
+		Log.e("string", "LoginMain: ---------LoginMain-------------" + stringBuffer.toString() );
 		String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
 
 		Utils.doPost(null, this, url, params, new HttpCallBack() {

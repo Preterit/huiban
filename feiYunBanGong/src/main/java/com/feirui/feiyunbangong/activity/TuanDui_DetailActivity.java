@@ -212,7 +212,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(DetailTuanDuiActivity.this, msg,Toast.LENGTH_SHORT)
+                        Toast.makeText(TuanDui_DetailActivity.this, msg,Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -231,7 +231,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     break;
                 case 3:
                     // 添加成功！
-                    Toast.makeText(DetailTuanDuiActivity.this, "添加成员成功！", 0).show();
+                    Toast.makeText(TuanDui_DetailActivity.this, "添加成员成功！", 0).show();
                     //团队群Id
                     getTuanLiaoId();
                     Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
@@ -239,7 +239,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
-                    Toast.makeText(DetailTuanDuiActivity.this, bean03.getMsg(),0)
+                    Toast.makeText(TuanDui_DetailActivity.this, bean03.getMsg(),0)
                             .show();
                     break;
                 case 5:
@@ -271,7 +271,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         rightll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailTuanDuiActivity.this,
+                Intent intent = new Intent(TuanDui_DetailActivity.this,
                         TuanDuiJiaActivity.class);
                 //将整个团队传过去
                 intent.putExtra("td", td);
