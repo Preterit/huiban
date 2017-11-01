@@ -19,6 +19,15 @@ public class MyTaskEntity {
         private int type;
 
         private String name;
+       private String staff_head;
+
+        public String getStaff_head() {
+            return staff_head;
+        }
+
+        public void setStaff_head(String staff_head) {
+            this.staff_head = staff_head;
+        }
 
         public void setId(int id){
             this.id = id;

@@ -153,7 +153,11 @@
     <!-- 天蓝色 -->
     <color name="honeydew">#f0fff0</color>
     <!-- 蜜色 -->
+    <color name="textblue">#3586ff</color>
+    <color name="textblue2">#fefefe</color>
     <color name="aliceblue">#f0f8ff</color>
+    <color name="buttonblue">#3586ff</color>
+    <color name="buttonblue2">#dfecff</color>
     <!-- 艾利斯兰 -->
     <color name="khaki">#f0e68c</color>
     <!-- 黄褐色 -->
