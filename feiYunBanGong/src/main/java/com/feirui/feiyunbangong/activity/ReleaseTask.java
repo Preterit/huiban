@@ -38,7 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 写任务
+ * 发布任务
  * */
 public class ReleaseTask extends BaseActivity  implements OnClickListener {
     AddShenHeAdapter adapter;
@@ -215,6 +215,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 //             // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
 //        }
         Log.e("任务单界面参数", "params: "+params.toString());
+        //http://123.57.45.74/feiybg1/public/index.php/home_api/Task/add_task
         String url = UrlTools.pcUrl + UrlTools.TASK_ADDTASK;
         Utils.doPost(LoadingDialog.getInstance(ReleaseTask.this), ReleaseTask.this, url,
                 params, new Utils.HttpCallBack() {
@@ -222,17 +223,15 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
                     public void success(final JsonBean bean) {
                         T.showShort(ReleaseTask.this,"发布任务成功");
                         if ("200".equals(bean.getCode())) {
-                            runOnUiThread(new Runnable() {
-                                public void run() {
-                                    T.showShort(ReleaseTask.this,
-                                            bean.getMsg());
-
-                                    ReleaseTask.this.finish();
-                                    overridePendingTransition(
-                                            R.anim.aty_zoomclosein,
-                                            R.anim.aty_zoomcloseout);
-                                }
-                            });
+//                            runOnUiThread(new Runnable() {
+//                                public void run() {
+//                                    T.showShort(ReleaseTask.this, bean.getMsg());
+//                                    ReleaseTask.this.finish();
+//                                    overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
+//                                }
+//                            });
+                            ReleaseTask.this.finish();
+                            overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
 
                         } else {
                             T.showShort(ReleaseTask.this,

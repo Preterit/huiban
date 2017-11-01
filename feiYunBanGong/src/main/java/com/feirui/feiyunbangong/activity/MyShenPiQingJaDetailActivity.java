@@ -70,12 +70,12 @@ public class MyShenPiQingJaDetailActivity  extends BaseActivity{
         params.put("approval_type", approval_type + "");
         params.put("approval_id", approval_id + "");
         params.put("list_id", list_id + "");
-        Log.e("orz", "getData: " + id + ":" + approval_type + ":" + approval_id + ":" + list_id);
+        Log.e("审批请假页面", "getData: " + id + ":" + approval_type + ":" + approval_id + ":" + list_id);
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
-                Log.e("orz", "success: " + bean.toString());
+                Log.e("审批请假页面", "success: " + bean.toString());
 
                 String leave_type = bean.getInfor().get(0).get("leave_type") + "";
 

@@ -222,7 +222,7 @@ public class UrlTools {
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */
-  public static String APPROVAL_APPROVAL = "Approval/approval000";
+  public static String APPROVAL_APPROVAL = "Approval/approval";
 
   public static String APPROVAL_DETAIL = "Approval/approval_detaile";
     /**

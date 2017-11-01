@@ -168,6 +168,24 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
             Log.d("mytag","添加人员："+childs1.get(0).toString());
         }
     }
+    public static String getDatePoor(Date endDate, Date nowDate) {
+
+        long nd = 1000 * 24 * 60 * 60;
+        long nh = 1000 * 60 * 60;
+        long nm = 1000 * 60;
+        // long ns = 1000;
+        // 获得两个时间的毫秒时间差异
+        long diff = endDate.getTime() - nowDate.getTime();
+        // 计算差多少天
+        long day = diff / nd;
+        // 计算差多少小时
+        long hour = diff % nd / nh;
+        // 计算差多少分钟
+        long min = diff % nd % nh / nm;
+        // 计算差多少秒//输出结果
+        // long sec = diff % nd % nh % nm / ns;
+        return day + "天" + hour + "小时" + min + "分钟";
+    }
 
     public void onClick(View view) {
         switch (view.getId()) {
@@ -260,13 +278,18 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                         //计算请假时间
                         int intervalDay;
                        int mo =(int) ((endTime.getTime() - startTime.getTime()) % (1000*3600*24));
-                        if (mo == 0) {
-                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24));
-                            mTianshu.setText(intervalDay + "");
-                        } else {
-                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24)) + 1;
-                            mTianshu.setText(intervalDay + "");
-                        }
+                        Log.e("请假时间", "startTime: "+ startTime.getTime());
+                        Log.e("请假时间", "endTime: "+endTime.getTime() );
+                        Log.e("请假时间", "mo: "+mo );
+                        mTianshu.setText(getDatePoor(endTime,startTime) );
+//                        if (mo == 0) {
+//                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24));
+//                            mTianshu.setText(intervalDay + "");
+//                        } else {
+//                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24)) + 1;
+//                            mTianshu.setText(intervalDay + "");
+//                        }
+
 
 //                        mCalendar.setTime(startTime);
 //                        int startDay = mCalendar.get(Calendar.DAY_OF_MONTH);

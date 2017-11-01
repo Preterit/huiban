@@ -97,7 +97,7 @@ public class TribeActivity extends BaseActivity implements AdapterView.OnItemCli
         setRightVisibility(false);
         righttv = (TextView) findViewById(R.id.righttv);
         righttv.setVisibility(View.VISIBLE);
-        righttv.setText("搜索群");
+        righttv.setText("搜索群");//群聊界面右上角搜索群
         righttv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

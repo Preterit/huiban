@@ -321,21 +321,24 @@ public class CaoZuoJiLuActivity extends BaseActivity
 
                     JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
                     Log.e("获取得到的json", "jsonBean: "+jsonBean.toString());
-                    if (jsonBean.getCode().equals("200")) {
+                    if(jsonBean.getCode()==null){
+                        if (jsonBean.getCode().equals("200")) {
 
-                        if (onRefreshOrLoadMore == ON_REFRESH) {
+                            if (onRefreshOrLoadMore == ON_REFRESH) {
 
-                            adapter.addAll(jsonBean.getInfor());
-                            mPullToRefreshLayout.refreshFinish(true);
+                                adapter.addAll(jsonBean.getInfor());
+                                mPullToRefreshLayout.refreshFinish(true);
+                            } else {
+                                adapter.add(jsonBean.getInfor());
+                                mPullToRefreshLayout.loadMoreFinish(true);
+                            }
                         } else {
-                            adapter.add(jsonBean.getInfor());
+                            adapter.addAll(jsonBean.getInfor());
                             mPullToRefreshLayout.loadMoreFinish(true);
+                            mPullToRefreshLayout.refreshFinish(true);
                         }
-                    } else {
-                        adapter.addAll(jsonBean.getInfor());
-                        mPullToRefreshLayout.loadMoreFinish(true);
-                        mPullToRefreshLayout.refreshFinish(true);
                     }
+
                 }
             });
         }

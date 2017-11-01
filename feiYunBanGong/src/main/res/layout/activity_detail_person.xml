@@ -117,7 +117,7 @@
             android:id="@+id/iv_erweima"
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/y80"
-            android:layout_marginRight="@dimen/x100"/>
+            android:layout_marginRight="@dimen/x50"/>
     </LinearLayout>
 
     <View
