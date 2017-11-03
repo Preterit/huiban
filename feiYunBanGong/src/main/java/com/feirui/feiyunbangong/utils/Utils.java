@@ -298,7 +298,7 @@ public class Utils {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        call.failure("请检查网络！");
+                        //call.failure("请检查网络！");
                         Log.e("tag","服务器异常的原因--------"+arg3+"---"+arg0);
                         if (dialog != null) {
                             dialog.dismiss();

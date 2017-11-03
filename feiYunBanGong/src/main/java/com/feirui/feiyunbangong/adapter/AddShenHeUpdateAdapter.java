@@ -5,14 +5,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.BiaoQianDialog;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.HttpUtils;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.TextImageView;
@@ -48,8 +47,9 @@ public class AddShenHeUpdateAdapter extends MyBaseAdapter<ChildItem> {
             v = mInflater.inflate(R.layout.lv_item_addshenpiren, null);
             holder.tv_name = (TextView) v.findViewById(R.id.tv_name);
             holder.iv_head = (TextImageView) v.findViewById(R.id.iv_head);
-            holder.iv_jianhao = (ImageView) v.findViewById(R.id.iv_jianhao);
+           // holder.iv_jianhao = (ImageView) v.findViewById(R.id.iv_jianhao);
             holder.tv_biaoqian = (TextView) v.findViewById(R.id.tv_biaoqian);
+            holder.lay_shenpi = (LinearLayout) v.findViewById(R.id.lay_shenpi);
             v.setTag(holder);
 
             holder.tv_biaoqian.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +77,12 @@ public class AddShenHeUpdateAdapter extends MyBaseAdapter<ChildItem> {
 
         holder.tv_biaoqian.setTag(position);
 
-        if (item.getPhone().equals(
-                AppStore.user.getInfor().get(0).get("staff_mobile"))) {
-            holder.iv_jianhao.setVisibility(View.INVISIBLE);
-        } else {
-            holder.iv_jianhao.setVisibility(View.VISIBLE);
-        }
+//        if (item.getPhone().equals(
+//                AppStore.user.getInfor().get(0).get("staff_mobile"))) {
+//            holder.iv_jianhao.setVisibility(View.INVISIBLE);
+//        } else {
+//            holder.iv_jianhao.setVisibility(View.VISIBLE);
+//        }
 
         if (!strs.get(position).equals("其他")) {
             holder.tv_biaoqian.setText(strs.get(position));
@@ -94,6 +94,7 @@ public class AddShenHeUpdateAdapter extends MyBaseAdapter<ChildItem> {
         String name = Utils.getPicTitle(item.getTitle());
         if (item.getMarkerImgId() == null
                 || "img/1_1.png".equals(item.getMarkerImgId())
+                || "http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(item.getMarkerImgId())
                 || item.getMarkerImgId().equals("")) {
             holder.iv_head.setText(name);
         } else {
@@ -101,7 +102,7 @@ public class AddShenHeUpdateAdapter extends MyBaseAdapter<ChildItem> {
                     holder.iv_head);
         }
 
-        holder.iv_jianhao.setOnClickListener(new View.OnClickListener() {
+        holder.iv_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reduce(item);
@@ -110,6 +111,7 @@ public class AddShenHeUpdateAdapter extends MyBaseAdapter<ChildItem> {
 
         return v;
     }
+
 
     public void reduce(ChildItem item) {
         if (list.contains(item)) {
@@ -121,7 +123,8 @@ public class AddShenHeUpdateAdapter extends MyBaseAdapter<ChildItem> {
     class ViewHolder {
         TextView tv_name, tv_biaoqian;
         TextImageView iv_head;
-        ImageView iv_jianhao;
+        //ImageView iv_jianhao;
+        LinearLayout lay_shenpi;
     }
 
     public List<ChildItem> getList() {

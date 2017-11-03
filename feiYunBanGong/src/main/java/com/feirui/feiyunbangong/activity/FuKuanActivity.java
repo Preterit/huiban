@@ -10,7 +10,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -27,6 +26,7 @@ import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -55,9 +55,9 @@ public class FuKuanActivity extends BaseActivity implements OnClickListener {
 	ImageView iv_add,iv_add_chaosong, iv_01;
 	private ArrayList<JsonBean> list1 = new ArrayList<>();
 	@PView
-	ListView lv_add_shenpiren;
+	HorizontalListView lv_add_shenpiren;
 	@PView
-	ListView lv_add_chaosong;
+	HorizontalListView lv_add_chaosong;
 //	AddShenHeAdapter adapter;
 	AddShenHeUpdateAdapter adapter;
 	AddShenHeUpdateAdapter adapter1;

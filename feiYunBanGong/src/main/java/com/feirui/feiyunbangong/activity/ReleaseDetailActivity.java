@@ -162,8 +162,8 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.rwd_btn_qrjd://确认接单
                 RequestParams params2 = new RequestParams();
-                //String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
-                String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/Task/task_accept";
+                String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
+                //String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/Task/task_accept";
                 params2.put("id", id);
                 params2.put("button", "1");
                 Log.e("全部任务获取成功-确认接单", "id: " + id);

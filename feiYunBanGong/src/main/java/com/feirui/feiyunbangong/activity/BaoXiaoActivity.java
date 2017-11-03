@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +35,7 @@ import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.RequestParams;
@@ -74,10 +74,10 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     @SuppressWarnings("unchecked")
     private ArrayList<ChildItem> childs ; //添加的审批人员
     @PView
-    ListView lv_add_shenpiren;
+    HorizontalListView lv_add_shenpiren;
     @PView
-    ListView lv_add_chaosong;
-    //    AddShenHeAdapter adapter;
+    HorizontalListView lv_add_chaosong;
+    //AddShenHeAdapter adapter;
     AddShenHeUpdateAdapter adapter;
     AddShenHeUpdateAdapter adapter1;
     @PView

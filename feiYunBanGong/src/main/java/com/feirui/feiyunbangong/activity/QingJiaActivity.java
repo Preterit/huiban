@@ -11,7 +11,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -27,6 +26,7 @@ import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -61,11 +61,12 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
 
 
     @PView
-    ListView lv_add_shenpiren;
+    HorizontalListView lv_add_shenpiren;
     @PView
-    ListView lv_add_chaosong;
+    HorizontalListView lv_add_chaosong;
     AddShenHeUpdateAdapter adapter1;
     AddShenHeUpdateAdapter adapter;
+
     @PView
     ScrollView sv_caigou;
 
@@ -93,9 +94,9 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
 //                QingJiaActivity.this);
         list1 = new ArrayList<>();
         list1.add(new JsonBean("其他"));
-        adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,QingJiaActivity.this);
+        //审批人列表
+        adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,QingJiaActivity.this);//修改之前的listviewadapter
         lv_add_shenpiren.setAdapter(adapter);
-
         lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -418,4 +419,5 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
 
         return format;
     }
+
 }

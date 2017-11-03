@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +39,7 @@ import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
 import com.feirui.feiyunbangong.utils.FeiKongJianYaoUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -54,7 +54,7 @@ import java.util.List;
 
 public class CaiGouActivity extends BaseActivity implements OnClickListener {
 
-    private ListView lv_add;
+    private HorizontalListView lv_add;
     //添加审批人的
     private ArrayList<JsonBean> list1 = new ArrayList<>();
     private ImageView iv_add,iv_add_cs, iv_add_pic_01, iv_add_pic_02, iv_add_pic_03;
@@ -74,7 +74,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
     private EditText etShenQingMiaoShu;
     //抄送人
     @PView
-    ListView lv_add_chaosong;
+    HorizontalListView lv_add_chaosong;
     AddShenHeUpdateAdapter adapter1;
 //
     @Override
@@ -534,7 +534,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("采购");
         setRightVisibility(false);
-        lv_add = (ListView) findViewById(R.id.lv_add_shenpiren);
+        lv_add = (HorizontalListView) findViewById(R.id.lv_add_shenpiren);
         iv_add = (ImageView) findViewById(R.id.iv_add);
         iv_add_cs = (ImageView) findViewById(R.id.iv_add_chaosong);
         sv_caigou = (ScrollView) findViewById(R.id.sv_caigou);

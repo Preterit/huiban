@@ -218,7 +218,7 @@ public class UrlTools {
   /**
    * 审批流程中发给我，需要我审批的
    * */
-  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval000";
+  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */

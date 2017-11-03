@@ -200,12 +200,12 @@
                     android:src="@drawable/tianjia"
                     android:layout_gravity="center_horizontal"/>
 
-                <ListView
+                <com.feirui.feiyunbangong.view.HorizontalListView
                     android:id="@+id/lv_add_shenpiren"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y400"
                     android:divider="@color/fenge"
-                    android:dividerHeight="@dimen/y4"></ListView>
+                    android:dividerHeight="@dimen/y4"></com.feirui.feiyunbangong.view.HorizontalListView>
 
 
             </LinearLayout>
@@ -231,12 +231,14 @@
                     android:src="@drawable/tianjia"
                     android:layout_gravity="center_horizontal"/>
 
-                <ListView
+                <com.feirui.feiyunbangong.view.HorizontalListView
                     android:id="@+id/lv_add_chaosong"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y400"
                     android:divider="@color/fenge"
-                    android:dividerHeight="@dimen/y4"></ListView>
+                    android:dividerHeight="@dimen/y4">
+
+                </com.feirui.feiyunbangong.view.HorizontalListView>
 
 
             </LinearLayout>

@@ -16,7 +16,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -33,6 +32,7 @@ import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -67,9 +67,12 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 	private ArrayList<JsonBean> list1 ;
 
 	@PView
-	ListView lv_add_shenpiren;
+	HorizontalListView lv_add_shenpiren;
+	@PView
+	HorizontalListView lv_add_chaosong;
 //	AddShenHeAdapter adapter;
 	AddShenHeUpdateAdapter adapter;
+	AddShenHeUpdateAdapter adapter1;
 	@PView
 	ScrollView sv_caigou;
 
@@ -90,6 +93,21 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 		adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,WaiChuActivity.this);
 		lv_add_shenpiren.setAdapter(adapter);
 		lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					sv_caigou.requestDisallowInterceptTouchEvent(false);
+				} else {
+					sv_caigou.requestDisallowInterceptTouchEvent(true);
+				}
+				return false;
+			}
+		});
+		adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,WaiChuActivity.this);
+		lv_add_chaosong.setAdapter(adapter1);
+		lv_add_chaosong.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
