@@ -265,6 +265,12 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 			overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 //			startActivityForResult(intent, 101);// 请求码；
 			break;
+			case R.id.iv_add_chaosong:
+				final Intent intent1 = new Intent(this, AddChengYuanActivity.class);
+				startActivityForResult(intent1, 200);
+				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+//			startActivityForResult(intent, 101);// 请求码；
+				break;
 		case R.id.tv_kaishishijian:
 			// 点击了选择日期按钮
 			DateTimePickDialogUtil kaishishijian = new DateTimePickDialogUtil(
