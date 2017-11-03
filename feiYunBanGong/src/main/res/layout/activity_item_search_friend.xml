@@ -8,7 +8,7 @@
         android:layout_height="85dp"
         android:background="#fff"
         android:layout_marginTop="1dp">
-        <com.feirui.feiyunbangong.view.CircleImageView
+        <com.feirui.feiyunbangong.view.TextImageView
             android:id="@+id/cir_item_head"
             android:layout_width="50dp"
             android:layout_height="50dp"

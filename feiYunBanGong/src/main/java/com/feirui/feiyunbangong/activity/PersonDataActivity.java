@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.feirui.feiyunbangong.Happlication;
@@ -21,6 +23,7 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.PopWindow;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -33,6 +36,8 @@ import com.zxing.encoding.EncodingHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.baidu.platform.comapi.util.e.w;
 
 /**
  * Created by xy on 2017-10-20.
@@ -113,6 +118,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         if (!"null".equals(mTdcy.getHead()) && null != mTdcy.getHead()
                 && !"img/1_1.png".equals(mTdcy.getHead())) {
             ImageLoader.getInstance().displayImage(mTdcy.getHead(), mCir_head);
+
         } else {
             mCir_head.setImageResource(R.drawable.fragment_head);
         }
@@ -216,15 +222,18 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     }
 
     private void clickShow() {
-        Dialog dialog = new Dialog(this);
-        View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima, null);
-        ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
-        if (erweima != null) {
-            iv.setImageBitmap(erweima);
-        }
-        dialog.setContentView(v);
-        dialog.setTitle("扫我加好友");
-        dialog.show();
+        PopWindow popWindow = new PopWindow(this,mTdcy,erweima);
+
+//        Dialog dialog = new Dialog(this);
+//        View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima, null);
+//        ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
+//        if (erweima != null) {
+//            iv.setImageBitmap(erweima);
+//        }
+//        dialog.setContentView(v);
+//        dialog.setTitle("扫我加好友");
+//        dialog.show();
+        popWindow.showPopupWindow();
     }
 
     private void createErWeiMa() {
