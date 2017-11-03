@@ -8,9 +8,13 @@ import android.view.WindowManager;
 import com.feirui.feiyunbangong.R;
 
 public class MyBaseDialog extends Dialog {
+	private Context context;
+	private int theme;
 
 	public MyBaseDialog(Context context, int theme) {
 		super(context, theme);
+		this.context = context;
+		this.theme = theme;
 	}
 
 	public MyBaseDialog(Context context) {

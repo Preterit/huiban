@@ -38,7 +38,7 @@ public class TextImageView extends CircleImageView {
 	}
 
 	private void init() {
-		mPaintBackground = new Paint(Paint.ANTI_ALIAS_FLAG);
+		mPaintBackground = new Paint(Paint.ANTI_ALIAS_FLAG); //没有锯齿
 		mPaintText = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mRect = new Rect();
 	}
@@ -63,7 +63,7 @@ public class TextImageView extends CircleImageView {
 		// 写字
 		mPaintText.setColor(Color.WHITE);
 		mPaintText.setTextSize(getWidth() / 3);
-		mPaintText.setStrokeWidth(3);
+		mPaintText.setStrokeWidth(3); //设置线条宽度
 		// mPaintText.getTextBounds(text, 0, 1, mRect);
 		// 垂直居中
 		Paint.FontMetricsInt fontMetrics = mPaintText.getFontMetricsInt();

@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
@@ -34,7 +33,6 @@ import com.alibaba.mobileim.contact.IYWContact;
 import com.alibaba.mobileim.contact.IYWContactProfileCallback;
 import com.alibaba.mobileim.contact.IYWCrossContactProfileCallback;
 import com.alibaba.mobileim.contact.YWContactFactory;
-import com.alibaba.mobileim.conversation.EServiceContact;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationType;
 import com.alibaba.mobileim.conversation.YWGeoMessageBody;
@@ -44,6 +42,7 @@ import com.alibaba.mobileim.conversation.YWMessageChannel;
 import com.alibaba.mobileim.conversation.YWP2PConversationBody;
 import com.alibaba.mobileim.conversation.YWTribeConversationBody;
 import com.alibaba.mobileim.fundamental.widget.WxAlertDialog;
+import com.alibaba.mobileim.lib.model.message.Message;
 import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -470,6 +469,7 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             final List<String> linkedList = new ArrayList<>();
             if (message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_TEXT
                     || message.getSubType() == YWMessage.SUB_MSG_TYPE.IM_GEO
+//                    || message.getSubType()==YWMessage.SUB_MSG_TYPE.IM_AUDIO
                     ) {
                 linkedList.add("转发");
             }

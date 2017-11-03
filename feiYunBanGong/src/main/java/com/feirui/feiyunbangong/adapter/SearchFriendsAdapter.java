@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.Friend;
 import com.feirui.feiyunbangong.view.CircleImageView;
+import com.feirui.feiyunbangong.view.TextImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -39,9 +40,11 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
         if (!TextUtils.isEmpty(friendList.get(position).getHead())){
             ImageLoader.getInstance().displayImage(friendList.get(position).getHead(),holder.mCir_item_head);
         }else {
-            holder.mCir_item_head.setImageResource(R.drawable.fragment_head);
+            holder.mCir_item_head.setText(friendList.get(position).getName());
         }
+
         holder.mTv_item_name.setText(friendList.get(position).getName());
+
         if (!TextUtils.isEmpty(friendList.get(position).getBrithday()) && !"null".equals(friendList.get(position).getBrithday())){
             String birth = friendList.get(position).getBrithday().substring(0,4);
 
@@ -143,7 +146,7 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        private CircleImageView mCir_item_head;
+        private TextImageView mCir_item_head;
         private TextView mTv_item_name;
         private TextView mTv_item_birth;
         private ImageView mIv_item_sex;
@@ -157,7 +160,7 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mCir_item_head = (com.feirui.feiyunbangong.view.CircleImageView)itemView.findViewById(R.id.cir_item_head);
+            mCir_item_head = (TextImageView)itemView.findViewById(R.id.cir_item_head);
             mTv_item_name = (TextView) itemView.findViewById(R.id.tv_item_name);
             mTv_item_birth = (TextView) itemView.findViewById(R.id.tv_item_birth);
             mIv_item_sex = (ImageView) itemView.findViewById(R.id.iv_item_sex);
