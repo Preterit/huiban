@@ -35,17 +35,17 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请假类型："/>
+                    android:text="请假类型：" />
 
                 <TextView
                     android:id="@+id/tv_leixing"
                     style="@style/huise_38"
-                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:hint="请选择..."/>
+                    android:hint="请选择..."
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,23 +60,23 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="开始时间："/>
+                    android:text="开始时间：" />
 
                 <TextView
                     android:id="@+id/tv_kaishishijian"
                     style="@style/huise_38"
-                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:hint="请选择..."/>
+                    android:hint="请选择..."
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1"
-                android:background="@color/jiange"/>
+                android:background="@color/jiange" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,23 +89,23 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="结束时间："/>
+                    android:text="结束时间：" />
 
                 <TextView
                     android:id="@+id/tv_jieshushijian"
                     style="@style/huise_38"
-                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:hint="请选择..."/>
+                    android:hint="请选择..."
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1"
-                android:background="@color/jiange"/>
+                android:background="@color/jiange" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,25 +118,24 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请假天数："/>
+                    android:text="请假天数：" />
 
                 <TextView
                     android:id="@+id/et_tianshu"
                     style="@style/huise_38"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:textColor="@color/black"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:hint="请选择开始和结束时间"
-                    />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1"
-                android:background="@color/jiange"/>
+                android:background="@color/jiange" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,24 +148,24 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请假事由："/>
+                    android:text="请假事由：" />
 
                 <EditText
                     android:id="@+id/et_shiyou"
                     style="@style/huise_38"
-                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:hint="请输入..."/>
+                    android:hint="请输入..."
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y1"
-                android:background="@color/jiange"/>
+                android:background="@color/jiange" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,17 +176,19 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/y20"
                 android:paddingTop="@dimen/y20">
+
                 <TextView
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="审批人："/>
+                    android:text="审批人：" />
+
                 <ImageView
                     android:id="@+id/iv_add"
                     android:layout_width="@dimen/x100"
                     android:layout_height="@dimen/y100"
-                    android:src="@drawable/tianjia"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/tianjia" />
 
                 <ListView
                     android:id="@+id/lv_add_shenpiren"
@@ -206,17 +207,19 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/y20"
                 android:paddingTop="@dimen/y20">
+
                 <TextView
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="抄送人："/>
+                    android:text="抄送人：" />
+
                 <ImageView
                     android:id="@+id/iv_add_chaosong"
                     android:layout_width="@dimen/x100"
                     android:layout_height="@dimen/y100"
-                    android:src="@drawable/tianjia"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/tianjia" />
 
                 <ListView
                     android:id="@+id/lv_add_chaosong"
@@ -229,6 +232,7 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <Button
         android:id="@+id/btn_submit"
         style="@style/ffffff_60"

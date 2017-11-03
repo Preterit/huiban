@@ -43,7 +43,8 @@
         android:layout_height="@dimen/x120"
         android:layout_gravity="center_horizontal"
         android:background="@null"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
     </Spinner>
     <Spinner

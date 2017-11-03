@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -66,25 +67,27 @@ public class NewFriendActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_friend);
-//        //从上个页面传过来值,但是用addData方法不太好用
-//        Intent intent = getIntent();
-//        jsonBean1 = (JsonBean) intent.getSerializableExtra("bean");
-//        Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
-
-
+        //从上个页面传过来值,但是用addData方法不太好用
+        Intent intent = getIntent();
+        jsonBean1 = (JsonBean) intent.getSerializableExtra("bean");
+       // Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
 
         initUI();
         requestGroup();// 获取分组信息；
         setListener();
         setData();
-//        // 请求数据：
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                request();
-            }
-        }, 100);
-//        addData(jsonBean1);
+        setListView();
+        if (jsonBean1==null) {
+            // 请求数据：
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    request();
+                }
+            }, 100);
+        } else {
+            addData(jsonBean1);
+        }
     }
 
     @Override
@@ -117,6 +120,7 @@ public class NewFriendActivity extends BaseActivity implements
                         new HttpCallBack() {
                             @Override
                             public void success(JsonBean bean) {
+                                Log.e("新朋友界面", "bean: "+bean);
                                 addData(bean);
 //                                dialog.dismiss();//取消对话框提示
                             }
@@ -147,7 +151,7 @@ public class NewFriendActivity extends BaseActivity implements
 
             if (info.size() == 0) {
                 //Toast.makeText(NewFriendActivity.this, "暂无可联系人好友", 0).show();
-                lv_lxr.setVisibility(View.GONE);
+//                lv_lxr.setVisibility(View.GONE);
                 return;
             }
 
@@ -165,28 +169,29 @@ public class NewFriendActivity extends BaseActivity implements
                 Log.e("新朋友界面", "lxr "+lxr.toString());
             }
             Log.e("新朋友界面", "lxr "+lxrs01.get(0).toString());
+
             adapter1.addList(lxrs01);
 
             //regist.get(lxrs01);// 接口回调：
 
             // 删选出未注册的好友发广播给短信邀请：
-            String[] split = str[0].split(",");// 姓名
-            String[] split2 = str[1].split(",");// 联系电话
-            for (int i = 0; i < split2.length; i++) {
-                boolean hasRegist = false;
-                for (int j = 0; j < lxrs01.size(); j++) {
-                    if (lxrs01.get(j).getPhone().equals(split2[i])) {
-                        hasRegist = true;
-                        break;
-                    }
-                }
-                if (!hasRegist) {
-                    LianXiRen lxr = new LianXiRen();
-                    lxr.setName(split[i]);
-                    lxr.setPhone(split2[i]);
-                    //lxrs02.add(lxr);
-                }
-            }
+//            String[] split = str[0].split(",");// 姓名
+//            String[] split2 = str[1].split(",");// 联系电话
+//            for (int i = 0; i < split2.length; i++) {
+//                boolean hasRegist = false;
+//                for (int j = 0; j < lxrs01.size(); j++) {
+//                    if (lxrs01.get(j).getPhone().equals(split2[i])) {
+//                        hasRegist = true;
+//                        break;
+//                    }
+//                }
+//                if (!hasRegist) {
+//                    LianXiRen lxr = new LianXiRen();
+//                    lxr.setName(split[i]);
+//                    lxr.setPhone(split2[i]);
+//                    //lxrs02.add(lxr);
+//                }
+//            }
 
             //unregist.get(lxrs02);// 接口回调：
         }
@@ -217,7 +222,7 @@ public class NewFriendActivity extends BaseActivity implements
                         }
 
                         strGroups.add("+");
-                        setListView();
+//                        setListView();
                         Log.e("电话好友列表", "requestGroup----1------" + strGroups.toString());
                     }
 
@@ -256,7 +261,6 @@ public class NewFriendActivity extends BaseActivity implements
     private void setListView() {
         adapter = new NewFriendAdapter(this, this, this.getLayoutInflater());
         adapter1 = new LianXiRenAdapter(this, this.getLayoutInflater(), 1, strGroups);
-        Log.e("电话好友列表", "strGroups-------setListView----------newfriend" + strGroups.toString());
         lv_newfriend.setAdapter(adapter);
         lv_lxr.setAdapter(adapter1);
 

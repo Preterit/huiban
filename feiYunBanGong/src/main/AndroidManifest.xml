@@ -489,6 +489,7 @@
         <!-- 新的anctivity -->
         <activity android:name=".activity.PersonDataActivity" />
         <activity android:name=".activity.SearchFriendsActivity" />
+        <activity android:name=".activity.tribe.SearchTribeActivity"/>
         <activity android:name=".activity.MyReleaseTaskActivity" />
         <activity android:name=".activity.MyTaskActivity"/>
         <activity android:name=".activity.MoreFriendsActivity"/>

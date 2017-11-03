@@ -1,7 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,20 +55,20 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         mBtnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-                    return;
-                }
+//                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
+//                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
+//                    return;
+//                }
                 updateShenPi(mList_id, "拒绝");
             }
         });
         mBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-                    return;
-                }
+//                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
+//                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
+//                    return;
+//                }
 
                 updateShenPi(mList_id, "通过");
             }
