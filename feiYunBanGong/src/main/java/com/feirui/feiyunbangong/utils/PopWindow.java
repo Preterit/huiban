@@ -3,8 +3,10 @@ package com.feirui.feiyunbangong.utils;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.PaintDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -79,12 +81,14 @@ public class PopWindow extends PopupWindow {
         // 设置SelectPicPopupWindow弹出窗体的高
         this.setHeight(h /2 + 100);
         // 设置SelectPicPopupWindow弹出窗体可点击
-//        this.setFocusable(true);
+        this.setFocusable(true);
         this.setOutsideTouchable(true);
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0000000000);
         // 点back键和其他地方使其消失,设置了这个才能触发OnDismisslistener ，设置其他控件变化等操作
         this.setBackgroundDrawable(dw);
+        this.setBackgroundDrawable(new PaintDrawable());
+
     }
 
     public void showPopupWindow(){

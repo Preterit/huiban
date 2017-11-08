@@ -185,7 +185,6 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
     };
     private void setRecyclerView() {
 
-        Log.e("fail", "failure: ===============" + listFriend.toString() + "uuuuuuuuuuuuuu" + listNuFriend.toString() );
         mManger = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mManger2 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
 

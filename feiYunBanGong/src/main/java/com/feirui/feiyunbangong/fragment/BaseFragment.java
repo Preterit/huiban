@@ -20,8 +20,8 @@ public class BaseFragment extends Fragment {
 	// 左部 中间 右部
 	public TextView centerTv;
 	public ImageView leftIv, rightIv;
-	public LinearLayout leftll, rightll;
-	public RelativeLayout top;
+	public LinearLayout leftll;
+	public RelativeLayout top,rightll;
 
 	public View setContentView(LayoutInflater inflater, int layoutResID) {
 		View view = inflater.inflate(layoutResID, null);
@@ -35,7 +35,7 @@ public class BaseFragment extends Fragment {
 	public void initTitle(View view) {
 		top = (RelativeLayout) view.findViewById(R.id.top);
 		leftll = (LinearLayout) view.findViewById(R.id.leftll);
-		rightll = (LinearLayout) view.findViewById(R.id.rightll);
+		rightll = (RelativeLayout) view.findViewById(R.id.rightll);
 		leftIv = (ImageView) view.findViewById(R.id.leftIv);
 		centerTv = (TextView) view.findViewById(R.id.centerTv);
 		rightIv = (ImageView) view.findViewById(R.id.rightIv);

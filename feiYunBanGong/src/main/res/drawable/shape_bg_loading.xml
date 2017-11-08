@@ -4,6 +4,6 @@
     <!-- 更新提示圆角背景 -->
     <corners android:radius="3dp" >
     </corners>
-    <solid android:color="#fff" />
+    <solid android:color="#f1f1f1" />
 
 </shape>

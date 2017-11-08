@@ -12,7 +12,8 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -445,7 +446,7 @@
             android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
-        <activity android:name=".activity.tribe.SearchTribeActivity"></activity>
+        <activity android:name=".activity.tribe.SearchTribeActivity" />
 
         <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
@@ -464,14 +465,13 @@
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
         <activity android:name=".activity.ReleaseDetailActivity" />
-        <!--<activity-->
-            <!--android:name=".activity.RenWuDetailActivity"-->
-            <!--android:label="@string/title_activity_ren_wu_detail"-->
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
+        <!-- <activity -->
+        <!-- android:name=".activity.RenWuDetailActivity" -->
+        <!-- android:label="@string/title_activity_ren_wu_detail" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
         <activity android:name=".activity.WebViewActivity" />
         <!-- 个人小店 -->
         <activity android:name=".activity.AddShopActivity" />
-
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
@@ -480,19 +480,21 @@
         <receiver
             android:name=".receiver.KeepLiveReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
-        <activity android:name=".activity.SheZhiActivity"/>
-        <activity android:name=".activity.MyTaskDetailActivity"/>
+        <activity android:name=".activity.SheZhiActivity" />
+        <activity android:name=".activity.MyTaskDetailActivity" />
 
         <!-- 新的anctivity -->
         <activity android:name=".activity.PersonDataActivity" />
         <activity android:name=".activity.SearchFriendsActivity" />
-        <activity android:name=".activity.tribe.SearchTribeActivity"/>
+        <activity android:name=".activity.tribe.SearchTribeActivity" />
         <activity android:name=".activity.MyReleaseTaskActivity" />
-        <activity android:name=".activity.MyTaskActivity"/>
-        <activity android:name=".activity.MoreFriendsActivity"/>
+        <activity android:name=".activity.MyTaskActivity" />
+        <activity android:name=".activity.MoreFriendsActivity" />
+        <activity android:name=".activity.RevisePersonActivity" />
+        <activity android:name=".view.AddWordPopupWindow"></activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.contact.IYWContact;
 import com.alibaba.mobileim.contact.YWContactFactory;
+import com.alibaba.mobileim.conversation.YWAudioMessageBody;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationCreater;
 import com.alibaba.mobileim.conversation.YWFileManager;
@@ -260,26 +261,27 @@ public class AddChengYuanActivity extends BaseActivity implements
 					};
 
                     //判断是否6.0以上的手机   不是就不用
-                    if(Build.VERSION.SDK_INT>=23){
-                        //判断是否有这个权限
-                        if(ContextCompat.checkSelfPermission(AddChengYuanActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                            //2、申请权限: 参数二：权限的数组；参数三：请求码
-                            ActivityCompat.requestPermissions(AddChengYuanActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                        }else {
-                            //下载方法
-                            if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-                             ywFile.downloadFile(ywMessage,Environment.getExternalStorageDirectory() + "yuyin","yuyin",forwardCallBack);
-                            }
-                        }
-                    } else{
-                        //下载方法
-                        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-                            ywFile.downloadFile(ywMessage,Environment.getExternalStorageDirectory() + "yuyin","yuyin",forwardCallBack);
-                        }
-                    }
+//                    if(Build.VERSION.SDK_INT>=23){
+//                        //判断是否有这个权限
+//                        if(ContextCompat.checkSelfPermission(AddChengYuanActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+//                            //2、申请权限: 参数二：权限的数组；参数三：请求码
+//                            ActivityCompat.requestPermissions(AddChengYuanActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+//                        }else {
+//                            //下载方法
+//                            if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+//                             ywFile.downloadFile(ywMessage,Environment.getExternalStorageDirectory() + "yuyin","yuyin",forwardCallBack);
+//                            }
+//                        }
+//                    } else{
+//                        //下载方法
+//                        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+//                            ywFile.downloadFile(ywMessage,Environment.getExternalStorageDirectory() + "yuyin","yuyin",forwardCallBack);
+//                        }
+//                    }
 					//http://interface.im.taobao.com/mobileimweb/fileupload/downloadPriFile.do?type=2&fileId=7875d1f1de9f28767389d248284e24b3.amr&suffix=amr&mediaSize=8006&duration=5&fromId=ib3mbd6s18210532546&toId=ib3mbd6s15811015771
 					final YWMessage msage = YWMessageChannel.createAudioMessage("http://interface.im.taobao.com/mobileimweb/fileupload/downloadPriFile.do?type=2&fileId=7875d1f1de9f28767389d248284e24b3.amr&suffix=amr&mediaSize=8006&duration=5&fromId=ib3mbd6s18210532546&toId=ib3mbd6s15811015771",
 							mess.getPlayTime(),mess.getFileSize(),mess.getMimeType());
+					
 					Log.e("mess", "onError: --------------------" + ywMessage.getContent().substring(0,ywMessage.getContent().length() - 52) + ",,,,," + mess.getMimeType());
 					final YWConversation conversation = conversationCreater.createConversationIfNotExist((String) msg.obj);
 					runOnUiThread(new Runnable() {

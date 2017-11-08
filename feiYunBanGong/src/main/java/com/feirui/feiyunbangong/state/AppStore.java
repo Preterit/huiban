@@ -28,7 +28,7 @@ public class AppStore {
 	public static Bitmap erweima;
 
 	// 用户信息：
-	public static MyUser myuser = new MyUser("", "", "", "", "", "", "", "", "");
+	public static MyUser myuser = new MyUser("", "", "", "", "", "", "", "", "","");
 
 	// 修改备注的用户手机号：
 	public static String phone = "";

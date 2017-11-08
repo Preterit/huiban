@@ -26,8 +26,8 @@ public class BaseActivity extends FragmentActivity {
 	// 左部 中间 右部
 	public TextView centerTv;
 	public ImageView leftIv, rightIv;
-	public LinearLayout leftll, rightll;
-	public RelativeLayout top;
+	public LinearLayout leftll;
+	public RelativeLayout top,rightll;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -74,7 +74,7 @@ public class BaseActivity extends FragmentActivity {
 	public void initTitle() {
 		top = (RelativeLayout) findViewById(R.id.top);
 		leftll = (LinearLayout) findViewById(R.id.leftll);
-		rightll = (LinearLayout) findViewById(R.id.rightll);
+		rightll = (RelativeLayout) findViewById(R.id.rightll);
 		leftIv = (ImageView) findViewById(R.id.leftIv);
 		centerTv = (TextView) findViewById(R.id.centerTv);
 		rightIv = (ImageView) findViewById(R.id.rightIv);
