@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -76,10 +77,14 @@ public class PopWindow extends PopupWindow {
         int w = context.getWindowManager().getDefaultDisplay().getWidth();
         // 设置SelectPicPopupWindow的View
         this.setContentView(conentView);
+//        // 设置SelectPicPopupWindow弹出窗体的宽
+//        this.setWidth( (w * 3)/ 4 );
+//        // 设置SelectPicPopupWindow弹出窗体的高
+//        this.setHeight(h /2 + 100);
         // 设置SelectPicPopupWindow弹出窗体的宽
-        this.setWidth( (w * 3)/ 4 );
+        this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         // 设置SelectPicPopupWindow弹出窗体的高
-        this.setHeight(h /2 + 100);
+        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         // 设置SelectPicPopupWindow弹出窗体可点击
         this.setFocusable(true);
         this.setOutsideTouchable(true);

@@ -113,9 +113,16 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         mRevise_sex.setText(user.getSex());
         mRevise_birth.setText(user.getBirthday());
         mRevise_area.setText(user.getAddress());
-        tags.add(user.getKey1());
-        tags.add(user.getKey2());
-        tags.add(user.getKey3());
+        if (!TextUtils.isEmpty(user.getKey1())){
+            tags.add(user.getKey1());
+        }
+        if (!TextUtils.isEmpty(user.getKey2())){
+            tags.add(user.getKey2());
+        }
+        if (!TextUtils.isEmpty(user.getKey3())){
+            tags.add(user.getKey3());
+        }
+
         tagsAdapter = new GridViewAdapter(this);
         mRevise_gd.setAdapter(tagsAdapter);
 
@@ -233,13 +240,20 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         //staff_key1
         if (tags.size() == 1){
             params.put("staff_key1", tags.get(0));
+            params.put("staff_key2", "");
+            params.put("staff_key3", "");
         }else if (tags.size() == 2){
             params.put("staff_key1", tags.get(0));
             params.put("staff_key2", tags.get(1));
+            params.put("staff_key3", "");
         }else if (tags.size() == 3){
             params.put("staff_key1", tags.get(0));
             params.put("staff_key2", tags.get(1));
             params.put("staff_key3", tags.get(2));
+        }else {
+            params.put("staff_key1", "");
+            params.put("staff_key2", "");
+            params.put("staff_key3", "");
         }
         String url = UrlTools.url + UrlTools.XIUGAI_GERENZILIAO;
 
