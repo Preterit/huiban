@@ -71,7 +71,7 @@ public class FormListFragment extends Fragment {
         Gson gson = new Gson();
         ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
         mFormAdapter.setData(readFormEntity.getInfor());
-        Log.e("tag","报表信息-------------------" + readFormEntity.getInfor().toString());
+        Log.e("查看报表页面","自己的列表数据-------------------" + readFormEntity.getInfor().toString());
       }
     });
   }
@@ -87,6 +87,7 @@ public class FormListFragment extends Fragment {
         Gson gson = new Gson();
         ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
           mFormAdapter.setData(readFormEntity.getInfor());
+        Log.e("查看报表页面","其他人的列表数据-------------------" + readFormEntity.getInfor().toString());
       }
     });
   }

@@ -67,9 +67,7 @@ public class ShenPiAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
 
         }
-
-        holder.tv_name.setText((String)
-                data.get(position).get("staff_name"));
+        holder.tv_name.setText((String) data.get(position).get("staff_name"));
 
         if (null == data.get(position).get("staff_department") || "null".equals("" + data.get(position).get("staff_department"))) {
             holder.tv_shenhe.setText("");

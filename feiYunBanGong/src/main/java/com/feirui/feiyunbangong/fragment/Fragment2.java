@@ -260,7 +260,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                 Looper.prepare();
                 //获取通讯录中的电话在会办中注册过的人
                 str = LianXiRenUtil.readConnect(getActivity());
-                Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+                //Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
                 //Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
                 RequestParams params = new RequestParams();
                 if (str == null) {

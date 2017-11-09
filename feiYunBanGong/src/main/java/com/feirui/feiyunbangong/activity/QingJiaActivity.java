@@ -331,13 +331,11 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                 }
 
                 RequestParams params = new RequestParams();
-                params.put("leave_type", tv_leixing.getText().toString().trim());
-                params.put("leave_start", tv_kaishishijian.getText().toString()
-                        .trim());
-                params.put("leave_end", tv_jieshushijian.getText().toString()
-                        .trim());
-                params.put("leave_days", mTianshu.getText().toString().trim());
-                params.put("leave_reason", et_shiyou.getText().toString().trim());
+                params.put("leave_type", tv_leixing.getText().toString().trim());//请假类型
+                params.put("leave_start", tv_kaishishijian.getText().toString().trim());//开始时间
+                params.put("leave_end", tv_jieshushijian.getText().toString().trim());//外出时间
+                params.put("leave_days", mTianshu.getText().toString().trim());//请假天数
+                params.put("leave_reason", et_shiyou.getText().toString().trim());//事由
 
                 //从适配器中取出审批人集合
                 List<ChildItem> shenPi = adapter.getList();
@@ -346,7 +344,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                 for (int i = 0; i < shenPi.size(); i++) {
                     sb_id.append(shenPi.get(i).getId());
                     sb_id.append(",");
-                    Log.d("adapterTag","适配器上的数据"+sb_id);
+                    Log.e("请假页面","适配器上的数据"+sb_id);
                 }
 
                 //从适配器中取出抄送人集合
@@ -356,7 +354,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                 for (int i = 0; i < chaoSong.size(); i++) {
                     cs_id.append(chaoSong.get(i).getId());
                     cs_id.append(",");
-                    Log.d("adapterTag","适配器上的数据"+cs_id);
+                    Log.e("请假页面","适配器上的数据"+cs_id);
                 }
 
 //                for (int i = 0; i < adapter.getCount(); i++) {
@@ -368,9 +366,9 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                     T.showShort(this, "请选择审批人");
                     return;
                 }
-                params.put("leave_approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
-                params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
-                String url = UrlTools.url1 + UrlTools.LEAVE_ADD_LEAVE1;
+                params.put("leave_approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());//审批人id
+                //params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
+              String url = UrlTools.url1 + UrlTools.LEAVE_ADD_LEAVE;//带抄送人
                 L.e("审批-请假url" + url + " params" + params);
                 AsyncHttpServiceHelper.post(url, params,
                         new AsyncHttpResponseHandler() {

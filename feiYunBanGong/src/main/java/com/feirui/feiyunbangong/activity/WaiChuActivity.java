@@ -29,7 +29,6 @@ import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil;
 import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
 import com.feirui.feiyunbangong.utils.JsonUtils;
-import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.HorizontalListView;
@@ -338,7 +337,7 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 						.toString());
 			}
 			String url = UrlTools.url + UrlTools.OUT_ADD_OUT;
-			L.e("审批-外出url" + url + " params" + params);
+			Log.e("审批-外出url", "url+params: "+url+params );
 			AsyncHttpServiceHelper.post(url, params,
 					new AsyncHttpResponseHandler() {
 						@Override

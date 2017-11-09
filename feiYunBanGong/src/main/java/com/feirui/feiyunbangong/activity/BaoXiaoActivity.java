@@ -438,7 +438,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         for (int i = 0; i < shenPi.size(); i++) {
             sb_id.append(shenPi.get(i).getId());
             sb_id.append(",");
-            Log.d("adapterTag", "适配器上的数据" + sb_id);
+            Log.e("报销页面--审批", "适配器上的数据" + sb_id);
         }
         //从适配器中取出抄送人集合
         List<ChildItem> chaoSong = adapter1.getList();
@@ -448,29 +448,33 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         for (int i = 0; i < chaoSong.size(); i++) {
             cs_id.append(chaoSong.get(i).getId());
             cs_id.append(",");
-            Log.d("adapterTag","适配器上的数据"+cs_id);
         }
-        params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
+        Log.e("报销页面--抄送人","cs_id"+cs_id.toString());
+//        if(!cs_id.toString().isEmpty()){
+//            Log.e("报销页面--抄送人","ccuser_id"+cs_id.deleteCharAt(cs_id.length() - 1).toString());
+//            params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
+//        }
+        params.put("ccuser_id", cs_id.toString().isEmpty()?null:cs_id.deleteCharAt(cs_id.length() - 1).toString());
+        Log.e("报销页面--抄送人","params"+params.toString());
         params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
         params.put("expense_money", et_1.getText().toString().trim());
         params.put("expense_type", et_2.getText().toString().trim());
         params.put("expense_detail", et_3.getText().toString().trim());
         String url = UrlTools.url1 + UrlTools.EXPENSE_ADD_EXPENSE1;
-        Log.e("tag", "报销的---------"+  params.toString());
+        Log.e("报销页面", "url--"+url);
+        Log.e("报销页面", "params--"+params.toString());
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(final JsonBean bean) {
-                Log.e("tag", "报销的---------"+ bean.getCode());
+                Log.e("报销页面", "报销的---------"+ bean.getCode());
                 if ("200".equals(bean.getCode())) {
+
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            T.showShort(BaoXiaoActivity.this,
-                                    bean.getMsg());
+                            T.showShort(BaoXiaoActivity.this, bean.getMsg());
                             BaoXiaoActivity.this.finish();
-                            overridePendingTransition(
-                                    R.anim.aty_zoomclosein,
-                                    R.anim.aty_zoomcloseout);
+                            overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
                         }
                     });
                 } else {

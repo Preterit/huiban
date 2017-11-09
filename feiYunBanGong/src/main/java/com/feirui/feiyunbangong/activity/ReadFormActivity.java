@@ -29,6 +29,7 @@ public class ReadFormActivity extends BaseActivity {
     initTitle();
     setLeftDrawable(R.drawable.arrows_left);
     setCenterString("查看报表");
+    setBackgroundColor("#3685FD");
     setRightVisibility(false);
 
     mMyAdapter = new MyAdapter(getSupportFragmentManager());

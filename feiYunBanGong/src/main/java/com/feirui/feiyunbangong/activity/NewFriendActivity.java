@@ -110,10 +110,13 @@ public class NewFriendActivity extends BaseActivity implements
 
                 str = LianXiRenUtil.readConnect(NewFriendActivity.this);
 
-                Log.e("通讯录联系人", "姓名"+str[0] + "电话" + str[1]);
-
+                //Log.e("通讯录联系人", "姓名"+str[0] + "电话" + str[1]);
+                if(str==null){
+                    return;
+                }
                 RequestParams params = new RequestParams();
                 params.put("phone", str[1]);
+                params.put("name", str[0]);
                 String url = UrlTools.url + UrlTools.SHOUJILIANXIREN;
 
                 Utils.doPost(null, NewFriendActivity.this, url, params,

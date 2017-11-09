@@ -101,13 +101,14 @@ public class ExamineActivity extends BaseActivity {
 				JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
 				Log.d("获得待审批jsonBean", "onSuccess:" + jsonBean.toString());
 				//获得待审批条目数量
-				count = jsonBean.getInfor().size();
-				if (count != 0) {
-					//bar_num = (TextView) findViewById(R.id.bar_num);
-					bar_num.setVisibility(view.VISIBLE);
-					bar_num.setText(count + "");
+				if (jsonBean.getInfor()!=null) {
+					count = jsonBean.getInfor().size();
+					if (count != 0) {
+						bar_num = (TextView) view.findViewById(R.id.bar_num);
+						bar_num.setVisibility(view.VISIBLE);
+						bar_num.setText(count + "");
+					}
 				}
-				Log.d("获得待审批条目数量", "count: " + count);
 			}
 		});
 	}

@@ -63,11 +63,11 @@ public class CheckBaobiaoActivity extends FragmentActivity {
 
         if (mFormType == ReadFormActivity.MY_FORM) {
             loadMyForm();
-            Log.d("条目类型---------------","条目类型---------------" + ReadFormActivity.MY_FORM + "");
+            Log.e("查看详细报表","条目类型---------------" + ReadFormActivity.MY_FORM + "");
         }
         if (mFormType == ReadFormActivity.OTHER_FORM) {
             loadOtherForm();
-            Log.d("条目类型---------------", "条目类型---------------" + ReadFormActivity.OTHER_FORM + "");
+            Log.e("查看详细报表", "条目类型---------------" + ReadFormActivity.OTHER_FORM + "");
         }
 
 //        Log.d("条目类型---------------", mBeanList.toString());
@@ -121,11 +121,11 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                     mBeanList.get(position).getForm_time();
 
                 } catch (Exception e) {
-                    Log.d("CheckBaobiao--------tag", "mBeanList赋值错误");
+                    Log.e("查看详细报表", "mBeanList赋值错误");
                 }
 
-                Log.d("mBeanList的值", "onSuccess: "+mBeanList.toString());
-                Log.d("mBeanList的值", "onSuccess: "+ "------" + position );
+                Log.e("查看详细报表", "mBeanList的值: "+mBeanList.toString());
+                Log.e("查看详细报表", "position"+ "------" + position );
                 form_time.setText(mBeanList.get(position).getForm_time());
                 today_work.setText(mBeanList.get(position).getOption_one());//获取今天的工作
                 unfinish_work.setText(mBeanList.get(position).getOption_two());//获取今天未完成的工作
@@ -137,10 +137,10 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                 for (int i = 0; i < str.length; i++){
                     imageUrls.add(UrlTools.pcUrl + str[i]);
                 }
-                Log.d("mBeanList的值", "onSuccess: "+imageUrls.toString());
+                Log.e("查看详细报表", "图片路径: "+imageUrls.toString());
                 // 发表的内容图片显示与隐藏：
                mBeanList.get(position).getPicture();
-                if (imageUrls == null || imageUrls.size() == 0) {
+                if (imageUrls == null || imageUrls.size() == 0||picUrls.isEmpty()) {
                     gridview.setVisibility(View.GONE);
                 } else {
                    gridview.setVisibility(View.VISIBLE);
@@ -174,7 +174,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
         try {
             mBeanList.addAll(data);
         } catch (Exception e) {
-            Log.d("tag", "setData错误");
+            Log.d("查看详细报表", "setData错误");
         }
 
     }
@@ -198,10 +198,10 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                     mBeanList.get(position).getForm_time();
 
                 } catch (Exception e) {
-                    Log.d("CheckBaobiao--------tag", "mBeanList赋值错误");
+                    Log.e("查看详细报表", "mBeanList赋值错误");
                 }
 
-                Log.d("mBeanList集合的时间的值", "onSuccess: "+mBeanList.get(position).getForm_time());
+                Log.e("查看详细报表---其他人", "mBeanList集合的时间的值: "+mBeanList.get(position).getForm_time());
                 form_time.setText(mBeanList.get(position).getForm_time());
                 today_work.setText(mBeanList.get(position).getOption_one());//获取今天的工作
                 unfinish_work.setText(mBeanList.get(position).getOption_two());//获取今天未完成的工作
@@ -213,10 +213,10 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                 for (int i = 0; i < str.length; i++){
                     imageUrls.add(str[i]);
                 }
-                Log.d("mBeanList的值", "onSuccess: "+imageUrls.toString());
+                Log.e("查看详细报表---其他人", "imageUrls: "+imageUrls.toString());
                 // 发表的内容图片显示与隐藏：
                 mBeanList.get(position).getPicture();
-                if (imageUrls == null || imageUrls.size() == 0) {
+                if (imageUrls == null || imageUrls.size() == 0||picUrls.isEmpty()) {
                     gridview.setVisibility(View.GONE);
                 } else {
                     gridview.setVisibility(View.VISIBLE);

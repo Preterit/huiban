@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -72,13 +73,27 @@ public class MyShenPiAdapter  extends BaseAdapter {
 
         }
 
-        holder.tv_name.setText((String)
-                data.get(position).get("staff_name"));
+        holder.tv_name.setText((String) data.get(position).get("staff_name"));
 
-        holder.tv_shenhe.setText((String) data.get(position).get("status"));
+        switch ((int)data.get(position).get("status")){
+            case 0:
+                holder.tv_shenhe.setText("");
+                break;
+            case 1:
+                holder.tv_shenhe.setText("通过");
+                break;
+            case 2:
+                holder.tv_shenhe.setText("审核中");
+                break;
+            case 3:
+                holder.tv_shenhe.setText("未通过");
+                break;
 
-        holder.tv_leixing.setText((String) data.get(position)
-                .get("approval_type"));
+
+        }
+
+
+        holder.tv_leixing.setText((String) data.get(position).get("approval_type"));
 //        holder.bt_detail = (Button) convertView
 //                .findViewById(R.id.bt_detail);
 
@@ -100,6 +115,7 @@ public class MyShenPiAdapter  extends BaseAdapter {
     }
 
     public void addAll(ArrayList<HashMap<String, Object>> map) {
+        Log.e("操作记录-我审批的adapter", "map: "+map.toString() );
         data.clear();
         data.addAll(map);
         notifyDataSetChanged();

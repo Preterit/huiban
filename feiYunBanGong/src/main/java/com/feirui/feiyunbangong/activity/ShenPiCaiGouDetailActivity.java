@@ -111,12 +111,12 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
         Object approval_id = mData.get("approval_id");
         Object list_id = mData.get("list_id");
         mList_id = list_id +"";
-        final String url =  UrlTools.url + UrlTools.APPROVAL_DETAIL;
+        final String url =  UrlTools.url + UrlTools.APP_DETAIL;
 
         RequestParams params = new RequestParams();
-        params.put("id",id + "");
-        params.put("approval_type",approval_type + "");
-        params.put("approval_id",approval_id + "");
+//        params.put("id",id + "");
+//        params.put("approval_type",approval_type + "");
+//        params.put("approval_id",approval_id + "");
         params.put("list_id",mList_id);
 
 //        {code='200', msg='成功',

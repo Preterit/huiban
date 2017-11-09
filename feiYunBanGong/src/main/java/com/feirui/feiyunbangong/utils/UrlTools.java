@@ -164,7 +164,7 @@ public class UrlTools {
   /**
    * 新增请假信息
    */
-  public static String LEAVE_ADD_LEAVE = "leave/add_leave";
+  public static String LEAVE_ADD_LEAVE = "leave/app_leave";
     /**
      * 新增请假信息,带抄送人
      */
@@ -218,13 +218,21 @@ public class UrlTools {
   /**
    * 审批流程中发给我，需要我审批的
    * */
-  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";
+  public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";//旧
+  public static String APP_MY_APPROVAL = "approval/app_my_post";//新
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */
-  public static String APPROVAL_APPROVAL = "Approval/approval";
-
-  public static String APPROVAL_DETAIL = "Approval/approval_detaile";
+  public static String APPROVAL_APPROVAL = "Approval/app_approval";
+  /**
+   * 待审批--根据id查看审批条目详细数据
+   */
+  public static String APPROVAL_DETAIL = "Approval/approval_detaile";//旧
+  public static String APP_DETAIL = "approval/app_alldetail";//新
+  /**
+   * 操作记录-我审批的
+   * */
+  public static String APPROVAL_MY_APPROVAL_OLD = "approval/app_my_approval";
     /**
      * 待审批的个数显示
      * */
@@ -573,8 +581,8 @@ public class UrlTools {
    */
   public static String XIAODIAN_MY_SHOP = "Other/shopcont";
   public static String XIAO_DIAN_GOODS = "Other/goodsList";
-
-  public static String APPROVAL_UPDATE = "Approval/approval_update";
+  //待审批-通过审批
+  public static String APPROVAL_UPDATE = "approval/app_adopt";
   //删除商品
   public static String DELETE_GOOD = "news/delete";
   //删除朋友圈

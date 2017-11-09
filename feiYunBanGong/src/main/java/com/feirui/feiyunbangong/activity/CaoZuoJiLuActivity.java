@@ -18,6 +18,7 @@ import com.feirui.feiyunbangong.adapter.MyShenPiAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -29,7 +30,6 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.feirui.feiyunbangong.utils.UrlTools.pcUrl;
 
 /**
  * Created by 邢悦 on 2017/6/22.
@@ -87,8 +87,8 @@ public class CaoZuoJiLuActivity extends BaseActivity
         shenSpinner = (Spinner) findViewById(R.id.spinner_lei);
         tiSpinner.setVisibility(View.VISIBLE);
 
-        tijiaourl = pcUrl + UrlTools.APPROVAL_MY_APPROVAL;
-        shenpiurl = pcUrl + UrlTools.APPROVAL_APPROVAL;
+        tijiaourl = UrlTools.pcUrl + UrlTools.APPROVAL_MY_APPROVAL;
+        shenpiurl = UrlTools.url + UrlTools.APPROVAL_MY_APPROVAL_OLD;
         mTiJiao.setChecked(true);
         tiJiaoSpinner();
 
@@ -277,7 +277,27 @@ public class CaoZuoJiLuActivity extends BaseActivity
         if (url == tijiaourl){
             if (!"选择审批类型".equals(tiSpinner.getSelectedItem().toString())) {
                 Log.e("tag","leixing------"+tiSpinner.getSelectedItem().toString());
-                params.put("type", tiSpinner.getSelectedItem().toString());
+                switch (tiSpinner.getSelectedItem().toString()){
+                    case "请假" :
+                        params.put("type", "1");
+                        break;
+                    case "外出" :
+                        params.put("type", "2");
+                        break;
+                    case "报销" :
+                        params.put("type", "3");
+                        break;
+                    case "付款" :
+                        params.put("type", "4");
+                        break;
+                    case "采购" :
+                        params.put("type", "5");
+                        break;
+                    case "其他" :
+                        params.put("type", "6");
+                        break;
+
+                }
             }
 
             params.put("current_page", page + "");
@@ -308,8 +328,28 @@ public class CaoZuoJiLuActivity extends BaseActivity
             });
         } else if (url == shenpiurl){
             if (!"选择审批类型".equals(shenSpinner.getSelectedItem().toString())) {
-                Log.e("tag","leixing------"+shenSpinner.getSelectedItem().toString());
-                params.put("type", shenSpinner.getSelectedItem().toString());
+                Log.e("操作记录-我审批的","类型"+shenSpinner.getSelectedItem().toString());
+                switch (shenSpinner.getSelectedItem().toString()){
+                    case "请假" :
+                        params.put("type", "1");
+                        break;
+                    case "外出" :
+                        params.put("type", "2");
+                        break;
+                    case "报销" :
+                        params.put("type", "3");
+                        break;
+                    case "付款" :
+                        params.put("type", "4");
+                        break;
+                    case "采购" :
+                        params.put("type", "5");
+                        break;
+                    case "其他" :
+                        params.put("type", "6");
+                        break;
+
+                }
             }
 
             params.put("current_page", page + "");
@@ -320,8 +360,8 @@ public class CaoZuoJiLuActivity extends BaseActivity
                     super.onSuccess(statusCode, headers, responseBody);
 
                     JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                    Log.e("获取得到的json", "jsonBean: "+jsonBean.toString());
-                    if(jsonBean.getCode()==null){
+                    Log.e("操作记录-我审批的", "jsonBean: "+jsonBean.toString());
+
                         if (jsonBean.getCode().equals("200")) {
 
                             if (onRefreshOrLoadMore == ON_REFRESH) {
@@ -332,12 +372,15 @@ public class CaoZuoJiLuActivity extends BaseActivity
                                 adapter.add(jsonBean.getInfor());
                                 mPullToRefreshLayout.loadMoreFinish(true);
                             }
-                        } else {
+                        } else if(jsonBean.getCode().equals("-400")){
+                            T.showShort(CaoZuoJiLuActivity.this, jsonBean.getMsg());
+                        }
+                        else {
                             adapter.addAll(jsonBean.getInfor());
                             mPullToRefreshLayout.loadMoreFinish(true);
                             mPullToRefreshLayout.refreshFinish(true);
                         }
-                    }
+
 
                 }
             });

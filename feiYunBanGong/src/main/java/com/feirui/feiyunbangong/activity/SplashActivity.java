@@ -25,179 +25,185 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.loopj.android.http.RequestParams;
 
 /**
- * 
  * 最先启动的activity用来判断是否是第一次登录，如果是第一次登录自动跳到新手指导页， 否则自动跳到首页
- * 
- * @author feirui1
  *
+ * @author feirui1
  */
 public class SplashActivity extends BaseActivity implements IsUpdate {
 
-	private ImageView iv;
-	private boolean flag = true;// 长时间无任何反应的标识；
-	private StringBuffer stringBuffer = new StringBuffer(256);
+    private ImageView iv;
+    private boolean flag = true;// 长时间无任何反应的标识；
+    private StringBuffer stringBuffer = new StringBuffer(256);
 
-	private Handler handler = new Handler() {
+    private Handler handler = new Handler() {
 
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 0:
-				// 判断是否登陆过？
-				if (SPUtils.contains(SplashActivity.this,
-						Constant.SP_ALREADYUSED)
-						&& (Boolean) (SPUtils.get(SplashActivity.this,
-								Constant.SP_ALREADYUSED, false))) {
-					LoginMain();
-				} else {// 没有登陆过
-					Intent intent = new Intent(SplashActivity.this,
-							GuideActivity.class);
-					startActivity(intent);
-					overridePendingTransition(R.anim.aty_zoomin,
-							R.anim.aty_zoomout);
-					SplashActivity.this.finish();
-				}
-				break;
-				case 1 :
-					//获取定位
-					BaiDuUtil.initLocation(SplashActivity.this, new BDLocationListener() {
-						@Override
-						public void onReceiveLocation(BDLocation bdLocation) {
-							if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
-								stringBuffer.append(bdLocation.getLatitude());//纬度
-								stringBuffer.append(",");
-								stringBuffer.append(bdLocation.getLongitude());//经度
-							}
-						}
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    // 判断是否登陆过？
+                    if (SPUtils.contains(SplashActivity.this,
+                            Constant.SP_ALREADYUSED)
+                            && (Boolean) (SPUtils.get(SplashActivity.this,
+                            Constant.SP_ALREADYUSED, false))) {
+                        LoginMain();
+                    } else {// 没有登陆过
+                        Intent intent = new Intent(SplashActivity.this,
+                                GuideActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.aty_zoomin,
+                                R.anim.aty_zoomout);
+                        SplashActivity.this.finish();
+                    }
+                    break;
+                case 1:
+                    //获取定位
+                    BaiDuUtil.initLocation(SplashActivity.this, new BDLocationListener() {
+                        @Override
+                        public void onReceiveLocation(BDLocation bdLocation) {
+                            try {
+                                if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError) {
+                                    stringBuffer.append(bdLocation.getLatitude());//纬度
+                                    stringBuffer.append(",");
+                                    stringBuffer.append(bdLocation.getLongitude());//经度
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
-						@Override
-						public void onConnectHotSpotMessage(String s, int i) {}
-					});
-					break;
-			}
-		};
-	};
+                        }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_splash);
-		iv = (ImageView) findViewById(R.id.imageView1);
-		// 压缩：
-		iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
-				getResources(), R.drawable.welcome_logo, 1000, 1500));
+                        @Override
+                        public void onConnectHotSpotMessage(String s, int i) {
+                        }
+                    });
+                    break;
+            }
+        }
 
-		//启动的同时 定位
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				handler.sendEmptyMessage(1);
-			}
-		},100);
+        ;
+    };
 
-		update();// 检查更新：
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        iv = (ImageView) findViewById(R.id.imageView1);
+        // 压缩：
+        iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
+                getResources(), R.drawable.welcome_logo, 1000, 1500));
 
-		// 定时，如果三秒钟扔无任何反应则执行start()操作：
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				// 该flag为true代表着需要自己去执行start();
-				if (flag) {
-					start();
-					Log.e("TAG", "卡住了，自己去启动吧.....");
-				}
-			}
-		}, 3000);
+        //启动的同时 定位
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(1);
+            }
+        }, 100);
 
-		// Utils.getFenBianLv(this);// 获取屏幕分辨率；
-	}
+        update();// 检查更新：
 
-	UpdateManager manager;
+        // 定时，如果三秒钟扔无任何反应则执行start()操作：
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // 该flag为true代表着需要自己去执行start();
+                if (flag) {
+                    start();
+                    Log.e("TAG", "卡住了，自己去启动吧.....");
+                }
+            }
+        }, 3000);
 
-	private void start() {
-		Log.e("TAG", "start()!!!!!!!!!!!!!!!!");
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				handler.sendEmptyMessage(0);
-			}
-		}, 1000);
-	}
+        // Utils.getFenBianLv(this);// 获取屏幕分辨率；
+    }
 
-	private void update() {
-		manager = new UpdateManager(this);
-		// 检查软件是否需要更新
-		manager.isUpdate(this);
-	}
+    UpdateManager manager;
 
-	@Override
-	public void canUpdate() {
-		flag = false;
-		manager.showNoticeDialog();
-	}
+    private void start() {
+        Log.e("TAG", "start()!!!!!!!!!!!!!!!!");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0);
+            }
+        }, 1000);
+    }
 
-	@Override
-	public void canNotUpdate() {
-		flag = false;
-		start();
-	}
+    private void update() {
+        manager = new UpdateManager(this);
+        // 检查软件是否需要更新
+        manager.isUpdate(this);
+    }
 
-	@Override
-	public void complete() {
-		flag = false;
-		start();
-	}
+    @Override
+    public void canUpdate() {
+        flag = false;
+        manager.showNoticeDialog();
+    }
 
-	@Override
-	public void cancel() {
-		flag = false;
-		start();
-	}
+    @Override
+    public void canNotUpdate() {
+        flag = false;
+        start();
+    }
 
-	// 自动登录：
-	private void LoginMain() {
+    @Override
+    public void complete() {
+        flag = false;
+        start();
+    }
 
-		RequestParams params = new RequestParams();
-		params.put("staff_mobile", (String) SPUtils.get(SplashActivity.this,
-				Constant.SP_USERNAME, ""));
-		params.put("staff_password", (String) SPUtils.get(SplashActivity.this,
-				Constant.SP_PASSWORD, ""));
-		params.put("location",stringBuffer.toString());
-		Log.e("string", "LoginMain: ---------LoginMain-------------" + stringBuffer.toString() );
-		String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
+    @Override
+    public void cancel() {
+        flag = false;
+        start();
+    }
 
-		Utils.doPost(null, this, url, params, new HttpCallBack() {
-			@Override
-			public void success(JsonBean bean) {
-				SplashActivity.this.finish();
-				AppStore.user = bean;
-				T.showShort(SplashActivity.this, bean.getMsg());
-				startActivity(new Intent(SplashActivity.this,
-						MainActivity.class));
-				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-			}
+    // 自动登录：
+    private void LoginMain() {
 
-			@Override
-			public void failure(String msg) {
+        RequestParams params = new RequestParams();
+        params.put("staff_mobile", (String) SPUtils.get(SplashActivity.this,
+                Constant.SP_USERNAME, ""));
+        params.put("staff_password", (String) SPUtils.get(SplashActivity.this,
+                Constant.SP_PASSWORD, ""));
+        params.put("location", stringBuffer.toString());
+        Log.e("string", "LoginMain: ---------LoginMain-------------" + stringBuffer.toString());
+        String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
 
-				AppStore.user = null;
-				T.showShort(SplashActivity.this, "自动登录失败，请重新登录！");
-				startActivity(new Intent(SplashActivity.this,
-						LoginActivity.class));
-				SplashActivity.this.finish();
-				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+        Utils.doPost(null, this, url, params, new HttpCallBack() {
+            @Override
+            public void success(JsonBean bean) {
+                SplashActivity.this.finish();
+                AppStore.user = bean;
+                T.showShort(SplashActivity.this, bean.getMsg());
+                startActivity(new Intent(SplashActivity.this,
+                        MainActivity.class));
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+            }
 
-			}
+            @Override
+            public void failure(String msg) {
 
-			@Override
-			public void finish() {
+                AppStore.user = null;
+                T.showShort(SplashActivity.this, "自动登录失败，请重新登录！");
+                startActivity(new Intent(SplashActivity.this,
+                        LoginActivity.class));
+                SplashActivity.this.finish();
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 
-			}
-		});
-	}
+            }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+            @Override
+            public void finish() {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
 }

@@ -161,7 +161,7 @@ public class DaiShenPiActivity extends BaseActivity implements
         String type = (String) itemAtPosition;
 
         loadData(1, ON_REFRESH);
-        Log.e("tag", "自动加载数据----"+mPullListView.toString());
+        Log.e("待审批页面", "自动加载数据----"+mPullListView.toString());
     }
 
     @Override
@@ -176,18 +176,40 @@ public class DaiShenPiActivity extends BaseActivity implements
         String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
 
         if (!"选择审批类型".equals(sp_daishenpi.getSelectedItem().toString())) {
-            Log.e("tag","leixing------"+sp_daishenpi.getSelectedItem().toString());
-            params.put("type", sp_daishenpi.getSelectedItem().toString());
+            Log.e("待审批页面","leixing------"+sp_daishenpi.getSelectedItem().toString());
+
+            switch (sp_daishenpi.getSelectedItem().toString()){
+                case "请假" :
+                    params.put("type", "1");
+                    break;
+                case "外出" :
+                    params.put("type", "2");
+                    break;
+                case "报销" :
+                    params.put("type", "3");
+                    break;
+                case "付款" :
+                    params.put("type", "4");
+                    break;
+                case "采购" :
+                    params.put("type", "5");
+                    break;
+                case "其他" :
+                    params.put("type", "6");
+                    break;
+
+            }
         }
         params.put("current_page", page + "");
         params.put("pagesize", "15");
+        Log.e("待审批页面","params---"+params.toString());
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
 
                 JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
+                Log.e("待审批页面", "待审批jsonBean: "+jsonBean.toString());
                 if (jsonBean.getCode().equals("200")) {
 
                     if (onRefreshOrLoadMore == ON_REFRESH) {
