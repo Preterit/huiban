@@ -445,7 +445,7 @@
             android:name=".activity.tribe.EditGroupInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.tribe.TribeActivity" />
-        <activity android:name=".activity.tribe.SearchTribeActivity"></activity>
+        <activity android:name=".activity.tribe.SearchTribeActivity" />
 
         <!-- 查看待审批页面 -->
         <activity android:name=".activity.ShenPiWaiChuDetailActivity" />
@@ -480,18 +480,21 @@
         <receiver
             android:name=".receiver.KeepLiveReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
-        <activity android:name=".activity.SheZhiActivity"/>
-        <activity android:name=".activity.MyTaskDetailActivity"/>
+        <activity android:name=".activity.SheZhiActivity" />
+        <activity android:name=".activity.MyTaskDetailActivity" />
 
         <!-- 新的anctivity -->
         <activity android:name=".activity.PersonDataActivity" />
         <activity android:name=".activity.SearchFriendsActivity" />
+        <activity android:name=".activity.tribe.SearchTribeActivity" />
         <activity android:name=".activity.MyReleaseTaskActivity" />
-        <activity android:name=".activity.MyTaskActivity"/>
-        <activity android:name=".activity.MoreFriendsActivity"/>
+        <activity android:name=".activity.MyTaskActivity" />
+        <activity android:name=".activity.MoreFriendsActivity" />
+        <activity android:name=".activity.RevisePersonActivity" />
+        <activity android:name=".view.AddWordPopupWindow"></activity>
     </application>
 
 </manifest>

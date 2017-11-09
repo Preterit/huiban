@@ -114,7 +114,7 @@ public class ShenPiRenActivity extends BaseActivity implements
 
         top = (RelativeLayout) findViewById(R.id.top);
         leftll = (LinearLayout) findViewById(R.id.leftll);
-        rightll = (LinearLayout) findViewById(R.id.rightll);
+        rightll = (RelativeLayout) findViewById(R.id.rightll);
         leftIv = (ImageView) findViewById(R.id.leftIv);
         centerTv = (TextView) findViewById(R.id.centerTv);
 

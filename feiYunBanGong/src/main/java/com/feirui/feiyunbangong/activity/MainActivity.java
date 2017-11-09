@@ -456,7 +456,9 @@ public class MainActivity extends BaseActivity
                 switch (position) {
                     case 0:
                         // 个人资料：
-                        startActivity(new Intent(MainActivity.this, DetailPersonActivity.class));
+                        Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
+                        intent2.putExtra("person",2);
+                        startActivity(intent2);
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 1:
@@ -542,12 +544,14 @@ public class MainActivity extends BaseActivity
                     // 没有小店
                     Intent intent = new Intent(MainActivity.this, AddShopActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                 } else {
                     // 有小店
                     Intent intent = new Intent(MainActivity.this, MyShopActivity.class);
                     Log.e("个人小店json_bean", "json_bean: "+bean );
                     intent.putExtra("json_bean", bean);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
 
                 }
             }
@@ -711,8 +715,9 @@ public class MainActivity extends BaseActivity
                     iv_head.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //imageBrower(0,imageUrls);
-                            startActivity(new Intent(MainActivity.this, DetailPersonActivity.class));
+                            Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
+                            intent2.putExtra("person",2);
+                            startActivity(intent2);
                             overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         }
                     });

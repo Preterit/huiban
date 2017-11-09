@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.view.AddWordPopupWindow">
+
+    <LinearLayout
+        android:id="@+id/ll_add_word"
+        android:layout_width="310dp"
+        android:layout_height="190dp"
+        android:orientation="vertical"
+        android:background="@drawable/corners_bg"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#999"
+            android:textSize="18sp"
+            android:text="添加关键词"
+            android:layout_marginTop="17dp"
+            />
+        <EditText
+            android:id="@+id/word_add"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_bg_loading"
+            android:layout_marginTop="26dp"
+            android:hint="如：设计师"
+            android:textColorHint="#ccc"
+            android:gravity="center"
+            android:textSize="15sp"/>
+        <Button
+            android:id="@+id/btn_add_word"
+            android:layout_width="115dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="32dp"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:text="添加"
+            android:background="@drawable/add_msg_bg"/>
+    </LinearLayout>
+</LinearLayout>

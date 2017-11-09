@@ -3,7 +3,7 @@
     android:id="@+id/top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/a42baff" >
+    android:background="@color/bar" >
 
     <LinearLayout
         android:id="@+id/leftll"
@@ -26,28 +26,30 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/rightll"
         android:layout_width="80dp"
         android:layout_height="@dimen/title_bar"
         android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:layout_marginRight="10dp">
+        android:gravity="center_vertical"
+        android:layout_marginRight="15dp">
 
         <ImageView
             android:id="@+id/rightIv"
-            android:layout_width="@dimen/x57"
-            android:layout_height="@dimen/x57"
-            android:layout_gravity="center" />
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            />
         <TextView
             android:id="@+id/righttv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11"
-            android:layout_gravity="center"
             android:textColor="#fff"
-            android:textSize="16sp"
-            android:visibility="gone"/>
-    </LinearLayout>
+            android:textSize="17sp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

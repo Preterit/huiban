@@ -10,7 +10,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/a42baff" >
+        android:background="@color/bar" >
 
         <LinearLayout
             android:id="@+id/leftll"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="信息" />
+            android:text="消息" />
 
         <LinearLayout
             android:id="@+id/rightll"

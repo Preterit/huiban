@@ -1,6 +1,8 @@
 package com.feirui.feiyunbangong.entity;
 
-public class MyUser {
+import java.io.Serializable;
+
+public class MyUser implements Serializable {
 
 	private String id;
 	private String name;
@@ -11,6 +13,10 @@ public class MyUser {
 	private String birthday;
 	private String address;
 	private String phone;
+	private String shop;
+	private String key1;
+	private String key2;
+	private String key3;
 
 	public MyUser(String id, String name, String duty, String head,
 			String department, String sex, String birthday, String address,
@@ -25,6 +31,54 @@ public class MyUser {
 		this.birthday = birthday;
 		this.address = address;
 		this.phone = phone;
+	}
+
+	public MyUser(String name, String head,
+				  String sex, String birthday, String address, String phone,
+				  String shop,String key1,String key2,String key3) {
+		super();
+		this.name = name;
+		this.head = head;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.address = address;
+		this.phone = phone;
+		this.shop = shop;
+		this.key1 = key1;
+		this.key2 = key2;
+		this.key3 = key3;
+	}
+
+	public String getShop() {
+		return shop;
+	}
+
+	public void setShop(String shop) {
+		this.shop = shop;
+	}
+
+	public String getKey1() {
+		return key1;
+	}
+
+	public void setKey1(String key1) {
+		this.key1 = key1;
+	}
+
+	public String getKey2() {
+		return key2;
+	}
+
+	public void setKey2(String key2) {
+		this.key2 = key2;
+	}
+
+	public String getKey3() {
+		return key3;
+	}
+
+	public void setKey3(String key3) {
+		this.key3 = key3;
 	}
 
 	public String getId() {
@@ -114,9 +168,17 @@ public class MyUser {
 
 	@Override
 	public String toString() {
-		return "MyUser [name=" + name + ", duty=" + duty + ", head=" + head
-				+ ", department=" + department + ", sex=" + sex + ", birthday="
-				+ birthday + ", address=" + address + ", phone=" + phone + "]";
+		return "MyUser{" +
+				"name='" + name + '\'' +
+				", head='" + head + '\'' +
+				", sex='" + sex + '\'' +
+				", birthday='" + birthday + '\'' +
+				", address='" + address + '\'' +
+				", phone='" + phone + '\'' +
+				", shop='" + shop + '\'' +
+				", key1='" + key1 + '\'' +
+				", key2='" + key2 + '\'' +
+				", key3='" + key3 + '\'' +
+				'}';
 	}
-
 }

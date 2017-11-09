@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.im;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -332,4 +333,27 @@ public class MyChatUI extends IMChattingPageUI {
 	}
 
 
+	/**
+	 * 是否需要圆角矩形的头像
+	 *
+	 * @return true:需要圆角矩形
+	 * <br>
+	 * false:不需要圆角矩形，默认为圆形
+	 * <br>
+	 * 注：如果返回true，则需要使用{@link #getRoundRectRadius()}给出圆角的设置半径，否则无圆角效果
+	 */
+	@Override
+	public boolean isNeedRoundRectHead() {
+		return true;
+	}
+
+	/**
+	 * 返回设置圆角矩形的圆角半径大小
+	 *
+	 * @return 0:如果{@link #isNeedRoundRectHead()}返回true，此处返回0则表示头像显示为直角正方形
+	 */
+	@Override
+	public int getRoundRectRadius() {
+		return 0;
+	}
 }
