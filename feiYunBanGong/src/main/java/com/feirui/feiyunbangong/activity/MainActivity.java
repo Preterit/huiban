@@ -392,18 +392,21 @@ public class MainActivity extends BaseActivity
         public void onClick(View v) {
 
             drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
-            drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED); //关闭手势滑动
             try {
                 switch (v.getId()) {
                     case R.id.fragment1:
                         selectedIndex = 0;
-                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
                         break;
                     case R.id.fragment2:
                         selectedIndex = 1;
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
                         break;
                     case R.id.fragment3:
                         selectedIndex = 2;
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
+
                         break;
                     case R.id.fragment4:
                         selectedIndex = 3;
@@ -447,6 +450,7 @@ public class MainActivity extends BaseActivity
                 return true;
             }
         });
+
     }
 
     @Override

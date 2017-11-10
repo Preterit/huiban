@@ -170,17 +170,17 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         if (!"".equals(mTdcy.getKey1()) && null != mTdcy.getKey1()){
            mTv_key1.setText(mTdcy.getKey1());
         }else {
-            mTv_key1.setText(" ");
+            mTv_key1.setText("暂无");
         }
         if (!"".equals(mTdcy.getKey2()) && null != mTdcy.getKey2()){
             mTv_key2.setText(mTdcy.getKey2());
         }else {
-            mTv_key2.setText(" ");
+            mTv_key2.setText("暂无");
         }
         if (!"".equals(mTdcy.getKey3()) && null != mTdcy.getKey3()){
             mTv_key3.setText(mTdcy.getKey3());
         }else {
-            mTv_key3.setText(" ");
+            mTv_key3.setText("暂无");
         }
 
         if (mTdcy.getFriendstate() == 1){

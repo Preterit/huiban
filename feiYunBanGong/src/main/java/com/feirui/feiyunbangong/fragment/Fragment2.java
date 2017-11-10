@@ -42,6 +42,7 @@ import com.feirui.feiyunbangong.activity.AboutFriendActivity;
 import com.feirui.feiyunbangong.activity.AddFriendActivity;
 import com.feirui.feiyunbangong.activity.FenZuGuanLiActivity;
 import com.feirui.feiyunbangong.activity.JiaRuTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.MainActivity;
 import com.feirui.feiyunbangong.activity.MoreFriendsActivity;
 import com.feirui.feiyunbangong.activity.NewFriendActivity;
 import com.feirui.feiyunbangong.activity.SearchFriendsActivity;
@@ -126,6 +127,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     public JsonBean josnbean1;
     private StringBuffer stringBuffer = new StringBuffer(256);
     private List<Friend> listFriend = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -296,7 +298,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                 //获取申请好友的个数
                 String url = UrlTools.url + UrlTools.HAOYOU_NUM;
 
-                Utils.doPost(LoadingDialog.getInstance(getActivity()), getActivity(),
+                Utils.doPost(null, getActivity(),
                         url, null, new HttpCallBack() {
 
                             @Override
@@ -329,7 +331,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
                             }
                         });
-                Looper.loop();
+//                Looper.loop();
             }
         }.start();
 
@@ -354,6 +356,13 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                     inclue.setVisibility(View.GONE);
                 }
                 isShow = !isShow;
+            }
+        });
+
+        leftll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openLeft();
             }
         });
 
@@ -461,6 +470,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     }
 
     private void setListView() {
+
         expandlist.addHeaderView(header_view);
         expandlist.setGroupIndicator(null);// 设置去掉小箭头
         map = new HashMap<>();
@@ -645,7 +655,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
             }
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-        } else {
+        }else {
             int[] i = ((ChildItem) ((Object[]) v.getTag())[0]).getPosition();
             int gp = i[0];
             int cp = i[1];
@@ -710,9 +720,10 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     private void initView() {
         // 设置头部
         initTitle(view);
-        setLeftVisibility(false);
+
         setCenterString("联系人");
         setRightDrawable(R.drawable.jia);
+        setLeftDrawable(R.drawable.homepage_l);
         ll_tianjia = (LinearLayout) view.findViewById(R.id.ll_tianjia);
 
         ll_quntalk = (LinearLayout) view.findViewById(R.id.ll_quntalk); //不用

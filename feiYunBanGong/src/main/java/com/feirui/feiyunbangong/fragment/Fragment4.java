@@ -25,6 +25,7 @@ import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ChuangJianTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.GuanLiTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.MainActivity;
 import com.feirui.feiyunbangong.activity.SouSuoTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.TuanDui_DetailActivity;
 import com.feirui.feiyunbangong.adapter.MyAdapter;
@@ -260,13 +261,23 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         // 设置列表点击滑动监听
         handler = new Handler();
         word.setOnWordsChangeListener(this);
+
+        leftll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openLeft();
+            }
+        });
+
     }
 
     @SuppressLint("InflateParams")
     private void initView() {
         initTitle(v);
-        setLeftVisibility(false);
+//        setLeftVisibility(false);
         setCenterString("我的团队");
+        setLeftDrawable(R.drawable.homepage_l);
+
         swipe_container = (RefreshLayout) v.findViewById(R.id.swipe_container);
         tv_word = (TextView) v.findViewById(R.id.tv);
         word = (WordsNavigation) v.findViewById(R.id.words);
@@ -381,6 +392,8 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         adapter2.notifyDataSetChanged();
         adapter2.add(tds0);
 
+        //清除数据库  重新添加
+        DataSupport.deleteAll(TuanDui.class);
         for (int i = 0; i < tds0.size(); i++){
             TuanDui tuanDui = new TuanDui();
             tuanDui.setTid(tds0.get(i).getTid());
