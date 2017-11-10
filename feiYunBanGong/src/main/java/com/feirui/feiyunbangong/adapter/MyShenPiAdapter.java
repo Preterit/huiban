@@ -72,8 +72,10 @@ public class MyShenPiAdapter  extends BaseAdapter {
             holder = (MyShenPiAdapter.ViewHolder) convertView.getTag();
 
         }
+        if(data.get(position).get("staff_name")!=null){
+            holder.tv_name.setText((String) data.get(position).get("staff_name"));
+        }
 
-        holder.tv_name.setText((String) data.get(position).get("staff_name"));
 
         switch ((int)data.get(position).get("status")){
             case 0:
@@ -92,10 +94,10 @@ public class MyShenPiAdapter  extends BaseAdapter {
 
         }
 
+        if (data.get(position).get("approval_type")!=null){
+            holder.tv_leixing.setText((String) data.get(position).get("approval_type"));
+        }
 
-        holder.tv_leixing.setText((String) data.get(position).get("approval_type"));
-//        holder.bt_detail = (Button) convertView
-//                .findViewById(R.id.bt_detail);
 
         holder.bt_detail.setOnClickListener(new View.OnClickListener() {
             @Override

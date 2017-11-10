@@ -359,6 +359,8 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
 								});
 
 							} else {
+
+								Log.e("外出-提交失败", "json: "+json.toString() );
 								T.showShort(WaiChuActivity.this, json.getMsg());
 							}
 						}

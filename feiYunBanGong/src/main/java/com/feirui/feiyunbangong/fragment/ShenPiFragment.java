@@ -19,7 +19,7 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 
 /**
- * Created by Administrator on 2017/4/27.
+ * 好像没用上,看情况删了
  */
 
 public class ShenPiFragment extends BaseFragment {

@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.loopj.android.http.RequestParams;
@@ -102,12 +101,12 @@ public class MyCaiGouDetailActivity  extends BaseActivity{
         Object approval_id = mData.get("approval_id");
         Object list_id = mData.get("list_id");
         mList_id = list_id +"";
-        final String url =  UrlTools.url + UrlTools.APPROVAL_DETAIL;
+        final String url =  UrlTools.url + UrlTools.APP_DETAIL;
 
         RequestParams params = new RequestParams();
-        params.put("id",id + "");
-        params.put("approval_type",approval_type + "");
-        params.put("approval_id",approval_id + "");
+//        params.put("id",id + "");
+//        params.put("approval_type",approval_type + "");
+//        params.put("approval_id",approval_id + "");
         params.put("list_id",mList_id);
 
 //        {code='200', msg='成功',

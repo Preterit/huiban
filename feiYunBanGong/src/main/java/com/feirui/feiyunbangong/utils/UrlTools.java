@@ -181,7 +181,7 @@ public class UrlTools {
   /**
    * 新增外出信息
    */
-  public static String OUT_ADD_OUT = "Out/add_out";
+  public static String OUT_ADD_OUT = "Out/app_out";
   /**
    * 新增外出信息(添加抄送人)
    */
@@ -219,7 +219,14 @@ public class UrlTools {
    * 审批流程中发给我，需要我审批的
    * */
   public static String APPROVAL_MY_APPROVAL = "Approval/my_approval";//旧
+    /**
+     * 操作记录-我提交的
+     * */
   public static String APP_MY_APPROVAL = "approval/app_my_post";//新
+  /**
+   * 操作记录-我审批的
+   * */
+  public static String APPROVAL_MY_APPROVAL_OLD = "approval/app_my_approval";
   /**
    * 待审批详情查看没有审批的 --分页+查询
    */
@@ -229,10 +236,7 @@ public class UrlTools {
    */
   public static String APPROVAL_DETAIL = "Approval/approval_detaile";//旧
   public static String APP_DETAIL = "approval/app_alldetail";//新
-  /**
-   * 操作记录-我审批的
-   * */
-  public static String APPROVAL_MY_APPROVAL_OLD = "approval/app_my_approval";
+
     /**
      * 待审批的个数显示
      * */

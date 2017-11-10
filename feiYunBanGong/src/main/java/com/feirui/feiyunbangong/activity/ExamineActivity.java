@@ -27,7 +27,7 @@ import org.apache.http.Header;
  */
 public class ExamineActivity extends BaseActivity {
 
-	public static int count = 0;
+	public static String count;
 	// 待审批，操作记录，请假，报销，外出，付款，采购，其他
 	@PView(click = "onClick")
 	LinearLayout ll_record, ll_leave, ll_refund, ll_goOut, ll_payment, ll_purchase, ll_else;
@@ -91,19 +91,18 @@ public class ExamineActivity extends BaseActivity {
 	public void loadData() {
 
 		RequestParams params = new RequestParams();
-		String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
-		Log.d("提示数字模块--审批URL", "url: " + url);
+		String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
 		AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 				super.onSuccess(statusCode, headers, responseBody);
 
 				JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-				Log.d("获得待审批jsonBean", "onSuccess:" + jsonBean.toString());
+				Log.e("获得待审批个数", "jsonBean:" + jsonBean.toString());
 				//获得待审批条目数量
 				if (jsonBean.getInfor()!=null) {
-					count = jsonBean.getInfor().size();
-					if (count != 0) {
+					count = String.valueOf(jsonBean.getInfor());
+					if (count != null) {
 						bar_num = (TextView) view.findViewById(R.id.bar_num);
 						bar_num.setVisibility(view.VISIBLE);
 						bar_num.setText(count + "");

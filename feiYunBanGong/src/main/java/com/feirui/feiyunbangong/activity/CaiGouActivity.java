@@ -287,13 +287,12 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
         Log.e("TAG123", "-----提交的采购信息-----" + params.toString());
 
         try {
-            AsyncHttpServiceHelper.post(UrlTools.url1
-                            + UrlTools.ADD_CAIGOU_XINXI1, params,
+            AsyncHttpServiceHelper.post(UrlTools.url1 + UrlTools.ADD_CAIGOU_XINXI1, params,
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int arg0, Header[] arg1,byte[] arg2) {
                             JsonBean bean = JsonUtils.getMessage(new String(arg2));
-                            Log.e("TAG456", "-----提交的采购信息-----" + bean.toString());//bean.getCode()
+                            Log.e("提交采购成功", "bean----" + bean.toString());//bean.getCode()
                             if (bean.getCode().equals("200")){
                                 handler.sendEmptyMessage(0);
                             }
@@ -304,7 +303,7 @@ public class CaiGouActivity extends BaseActivity implements OnClickListener {
                         public void onFailure(int arg0, Header[] arg1,
                                               byte[] arg2, Throwable arg3) {
                             JsonBean bean = JsonUtils.getMessage(new String(arg2));
-                            Log.e("TAG789", "-----提交的采购信息-----" + bean.getCode());
+                            Log.e("提交采购失败", "bean.getCode-----" + bean.getCode());
                             if (bean.getCode().equals("-400")){
                                 handler.sendEmptyMessage(1);
                             }

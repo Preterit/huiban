@@ -87,7 +87,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
         shenSpinner = (Spinner) findViewById(R.id.spinner_lei);
         tiSpinner.setVisibility(View.VISIBLE);
 
-        tijiaourl = UrlTools.pcUrl + UrlTools.APPROVAL_MY_APPROVAL;
+        tijiaourl = UrlTools.url + UrlTools.APP_MY_APPROVAL;
         shenpiurl = UrlTools.url + UrlTools.APPROVAL_MY_APPROVAL_OLD;
         mTiJiao.setChecked(true);
         tiJiaoSpinner();
@@ -308,7 +308,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
                     super.onSuccess(statusCode, headers, responseBody);
 
                     JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                    Log.d("获取得到的json", "jsonBean: "+jsonBean.toString());
+                    Log.e("操作记录-我提交的", "jsonBean: "+jsonBean.toString());
                     if (jsonBean.getCode().equals("200")) {
 
                         if (onRefreshOrLoadMore == ON_REFRESH) {
@@ -319,6 +319,8 @@ public class CaoZuoJiLuActivity extends BaseActivity
                             tiAdapter.add(jsonBean.getInfor());
                             mPullToRefreshLayout.loadMoreFinish(true);
                         }
+                    }else if(jsonBean.getCode().equals("-400")){
+                        T.showShort(CaoZuoJiLuActivity.this, jsonBean.getMsg());
                     } else {
                         tiAdapter.addAll(jsonBean.getInfor());
                         mPullToRefreshLayout.loadMoreFinish(true);

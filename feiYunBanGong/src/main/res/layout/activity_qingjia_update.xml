@@ -118,7 +118,7 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请假天数：" />
+                    android:text="请假时长：" />
 
                 <TextView
                     android:id="@+id/et_tianshu"
@@ -240,7 +240,6 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/y20"
                 android:paddingTop="@dimen/y20"
-                android:visibility="gone"
                 >
 
                 <TextView

@@ -64,11 +64,11 @@ public class MyShenPiQingJaDetailActivity  extends BaseActivity{
 
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_DETAIL;
+        String url = UrlTools.url + UrlTools.APP_DETAIL;
 
-        params.put("id", id + "");
-        params.put("approval_type", approval_type + "");
-        params.put("approval_id", approval_id + "");
+//        params.put("id", id + "");
+//        params.put("approval_type", approval_type + "");
+//        params.put("approval_id", approval_id + "");
         params.put("list_id", list_id + "");
         Log.e("审批请假页面", "getData: " + id + ":" + approval_type + ":" + approval_id + ":" + list_id);
 
@@ -79,8 +79,8 @@ public class MyShenPiQingJaDetailActivity  extends BaseActivity{
 
                 String leave_type = bean.getInfor().get(0).get("leave_type") + "";
 
-                String leave_start = bean.getInfor().get(0).get("leave_start") + "";
-                String leave_end = bean.getInfor().get(0).get("leave_end") + "";
+                String leave_start = bean.getInfor().get(0).get("start_time") + "";
+                String leave_end = bean.getInfor().get(0).get("finish_time") + "";
                 String leave_reason = bean.getInfor().get(0).get("leave_reason") + "";
                 String leave_days = bean.getInfor().get(0).get("leave_days") + "";
                 String ttt = bean.getInfor().get(0).get("ttt") + "";

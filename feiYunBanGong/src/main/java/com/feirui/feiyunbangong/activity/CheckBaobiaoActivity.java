@@ -45,7 +45,8 @@ public class CheckBaobiaoActivity extends FragmentActivity {
 
     public TextView centerTv;
     public ImageView leftIv, rightIv;
-    public LinearLayout leftll, rightll;
+    public LinearLayout leftll;
+    public RelativeLayout rightll;
     public RelativeLayout top;
     private NoScrollGridView gridview;
 
@@ -84,7 +85,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
     private void initTitle() {
         top = (RelativeLayout) findViewById(R.id.top);
         leftll = (LinearLayout) findViewById(R.id.leftll);
-        rightll = (LinearLayout) findViewById(R.id.rightll);
+        rightll = (RelativeLayout) findViewById(R.id.rightll);
         leftIv = (ImageView) findViewById(R.id.leftIv);
         centerTv = (TextView) findViewById(R.id.centerTv);
         rightIv = (ImageView) findViewById(R.id.rightIv);

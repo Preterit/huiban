@@ -45,7 +45,7 @@ public class Fragment1 extends BaseFragment {
 
     private static final String MainActivity = null;
     private static final int ON_REFRESH = 1;  //刷新常量
-    public static int count = 0;
+    public static String count ;
 
     View view;
     //	@PView
@@ -138,7 +138,7 @@ public class Fragment1 extends BaseFragment {
     public void loadData() {
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
+        String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
         Log.d("提示数字模块--审批URL", "url: " + url);
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
@@ -149,8 +149,8 @@ public class Fragment1 extends BaseFragment {
                 Log.d("获得待审批jsonBean", "onSuccess:" + jsonBean.toString());
                 //获得待审批条目数量
                 if (jsonBean.getInfor()!=null) {
-                    count = jsonBean.getInfor().size();
-                    if (count != 0) {
+                    count = String.valueOf(jsonBean.getInfor());
+                    if (count != null) {
                         bar_num = (TextView) view.findViewById(R.id.bar_num);
                         bar_num.setVisibility(view.VISIBLE);
                         bar_num.setText(count + "");

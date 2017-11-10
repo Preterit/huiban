@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="78"
-    android:versionName="1.7.8">
+    android:versionCode="79"
+    android:versionName="1.7.9">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -489,12 +489,10 @@
         <!-- 新的anctivity -->
         <activity android:name=".activity.PersonDataActivity" />
         <activity android:name=".activity.SearchFriendsActivity" />
-        <activity android:name=".activity.tribe.SearchTribeActivity" />
         <activity android:name=".activity.MyReleaseTaskActivity" />
         <activity android:name=".activity.MyTaskActivity" />
         <activity android:name=".activity.MoreFriendsActivity" />
         <activity android:name=".activity.RevisePersonActivity" />
-        <activity android:name=".view.AddWordPopupWindow"></activity>
     </application>
 
 </manifest>
