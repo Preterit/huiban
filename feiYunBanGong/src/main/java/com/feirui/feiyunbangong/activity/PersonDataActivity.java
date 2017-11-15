@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -60,12 +61,13 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     private Button mPerson_add;
 
     private TuanDuiChengYuan mTdcy;
-    private int code,code2;
+    private int code;
     private List<Group> groups = new ArrayList<>();// 分组信息
     private ArrayList<String> group_name = new ArrayList<>();// 组名
     // 二维码名片：
     private  Bitmap erweima;
     private  MyUser user;
+    private String person_id;//个人id
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -77,7 +79,10 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         code = intent.getIntExtra("friend",-1);
 
         //从个人资料跳转过来
-        code2 = intent.getIntExtra("person",-1);
+
+        //从工作圈跳转过来
+        person_id = intent.getStringExtra("person_id");
+
         initUi();
         setListener();
         if (code == 1){
@@ -89,11 +94,11 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-        if (code2 == 2){
-            getPersonDetail();
-        }else {
+        requestGroup();// 获取分组信息；
+        if (code == 1){ //团队的
             initData();
-            requestGroup();// 获取分组信息；
+        }else {
+            getPersonDetail();
         }
     }
 
@@ -125,13 +130,16 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mTv_key3 = (TextView) findViewById(R.id.tv_key3);
         mPerson_btn = (LinearLayout) findViewById(R.id.person_btn);
 
-        if (code2 == 2){
+        if (code == 2){//个人的
             setRightDrawable(R.drawable.xiugai);
             mPerson_btn.setVisibility(View.GONE);
-        }else {
+        }else if (code == 1){//团队成员的
             setRightVisibility(false);
             mPerson_btn.setVisibility(View.VISIBLE);
             createErWeiMa(mTdcy.getPhone());
+        }else if (code == 3){ //朋友圈或工作圈的
+            setRightVisibility(false);
+            mPerson_btn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -188,6 +196,18 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mPerson_add.setText("已是好友");
             mPerson_add.setBackgroundColor(getResources().getColor(R.color.huise));
             mTv_bian_phone.setText(mTdcy.getPhone());
+            mLl_person_phone.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mTdcy.getPhone()));
+                        startActivity(intent3);
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+            });
         }else {
             mPerson_add.setEnabled(true);
             mPerson_add.setText("加好友");
@@ -245,14 +265,32 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mTv_key3.setText("暂无");
         }
         mTv_bian_phone.setText(user.getPhone());
+        mLl_person_phone.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse( "tel:" + user.getPhone()));
+                    startActivity(intent3);
+                    overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+            }
+        });
     }
 
     /*
     获取个人信息
      */
     private void getPersonDetail() {
-        String url=UrlTools.url+UrlTools.DETAIL_ME;
+        String url = "";
         RequestParams params = new RequestParams();
+        if (code == 3){
+            url = UrlTools.url + UrlTools.DETAIL_OTHER;
+            params.put("staff_id",person_id);
+        }else if (code == 2){
+            url = UrlTools.url + UrlTools.DETAIL_ME;
+        }
         AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -290,11 +328,16 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 String key1 =String.valueOf(infor.get("staff_key1"));
                 String key2 =String.valueOf(infor.get("staff_key2"));
                 String key3 =String.valueOf(infor.get("staff_key3"));
-                user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3);
-                AppStore.myuser = user;
-
-                initView();
-                createErWeiMa(user.getPhone());
+                String friendstate = String.valueOf(infor.get("friendstate"));
+                if (code == 2){
+                    user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3);
+                    AppStore.myuser = user;
+                    initView();
+                }else if (code == 3){
+                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,Integer.parseInt(friendstate));
+                    initData();
+                }
+                createErWeiMa(phone);
             }
         }
     };
@@ -302,7 +345,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     private void setListener() {
         mShop.setOnClickListener(this);
         mLl_er_wei_ma.setOnClickListener(this);
-        mLl_person_phone.setOnClickListener(this);
         mLl_person_area.setOnClickListener(this);
         mPerson_add.setOnClickListener(this);
         mPerson_talk.setOnClickListener(this);
@@ -314,7 +356,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.person_shop:  //个人小店
-                if (code2 == 2){
+                if (code == 2){
                     if ( !"0".equals(user.getShop()) && !"null".equals(user.getShop())){
                         Intent intent1=new Intent();
                         intent1.putExtra("uri",user.getShop());//
@@ -337,7 +379,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 }
                 break;
             case R.id.ll_er_wei_ma: //二维码
-                if (code2 == 2){
+                if (code == 2){
                     TuanDuiChengYuan chengYuan = new TuanDuiChengYuan("","",user.getName(),user.getHead(),
                             "",user.getPhone(),"","","",user.getShop(),user.getSex(),user.getBirthday(),
                             user.getAddress(),user.getKey1(),user.getKey2(),user.getKey3());
@@ -347,6 +389,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 }
                 break;
             case R.id.ll_person_phone: //好友电话
+
                 break;
             case R.id.ll_person_area: //所属地区
                 break;
@@ -362,7 +405,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 break;
             case R.id.cir_head: //点击查看头像
                 final ArrayList<String> imageUrls = new ArrayList<String>();
-                if(code2 == 2){
+                if(code == 2){
                     if (!"null".equals(user.getHead()) && null != user.getHead()
                             && !"img/1_1.png".equals(user.getHead())) {
                         imageUrls.add(user.getHead());
@@ -388,6 +431,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 startActivity(intent2);
                 overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomout);
                 break;
+
         }
     }
 

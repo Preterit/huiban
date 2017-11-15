@@ -359,6 +359,11 @@ public class UrlTools {
   public static String DETAIL_ME = "Person/person_detail1";
 
   /**
+   * 获取他人信息：
+   */
+  public static String DETAIL_OTHER = "Person/person_detail2";
+
+  /**
    * 工作圈：
    */
   public static String WORK_QUAN = "Circle/circle_list";

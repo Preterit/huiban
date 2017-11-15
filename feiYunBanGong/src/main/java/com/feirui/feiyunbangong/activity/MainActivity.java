@@ -163,6 +163,7 @@ public class MainActivity extends BaseActivity
     private void getUser() {
 
         RequestParams params=new RequestParams();
+//        params.put("staff_id",AppStore.user.getInfor().get(0).get("id") + "");
         AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.DETAIL_ME, params,new AsyncHttpResponseHandler() {
 
             @Override
@@ -461,7 +462,7 @@ public class MainActivity extends BaseActivity
                     case 0:
                         // 个人资料：
                         Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
-                        intent2.putExtra("person",2);
+                        intent2.putExtra("friend",2);
                         startActivity(intent2);
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
@@ -472,7 +473,7 @@ public class MainActivity extends BaseActivity
 
                         break;
                     case 2:
-                        // 帮助
+                        // 电话帮助
                         try {
                             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:13366664598"));
                             startActivity(intent);
@@ -720,7 +721,7 @@ public class MainActivity extends BaseActivity
                         @Override
                         public void onClick(View v) {
                             Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
-                            intent2.putExtra("person",2);
+                            intent2.putExtra("friend",2);
                             startActivity(intent2);
                             overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         }

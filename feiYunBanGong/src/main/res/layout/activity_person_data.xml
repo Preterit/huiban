@@ -188,6 +188,9 @@
             android:textColor="#3686ff"
             android:textSize="15sp"
             android:gravity="center"
+            android:ellipsize="end"
+            android:maxEms="4"
+            android:singleLine="true"
             />
         <TextView
             android:id="@+id/tv_key2"
@@ -200,6 +203,9 @@
             android:textColor="#3686ff"
             android:textSize="15sp"
             android:gravity="center"
+            android:ellipsize="end"
+            android:maxEms="4"
+            android:singleLine="true"
             />
         <TextView
             android:id="@+id/tv_key3"
@@ -212,6 +218,9 @@
             android:textColor="#3686ff"
             android:textSize="15sp"
             android:gravity="center"
+            android:ellipsize="end"
+            android:maxEms="4"
+            android:singleLine="true"
             />
 
     </LinearLayout>
