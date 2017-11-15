@@ -64,7 +64,8 @@
                     android:gravity="center"
                     android:text="刘备"
                     android:textColor="#ff8736"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
                 <TextView
                     android:id="@+id/tv_item_key2"
                     android:layout_width="59dp"
@@ -74,7 +75,8 @@
                     android:text="网页设计"
                     android:textSize="12sp"
                     android:textColor="#3686ff"
-                    android:layout_marginLeft="8dp"/>
+                    android:layout_marginLeft="8dp"
+                    android:visibility="gone"/>
                 <TextView
                     android:id="@+id/tv_item_key3"
                     android:layout_width="59dp"
@@ -84,7 +86,8 @@
                     android:text="UI设计"
                     android:textSize="12sp"
                     android:textColor="#3686ff"
-                    android:layout_marginLeft="8dp"/>
+                    android:layout_marginLeft="8dp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout

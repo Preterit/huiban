@@ -25,6 +25,7 @@ import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ChuangJianTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.GuanLiTuanDuiActivity;
+import com.feirui.feiyunbangong.activity.MainActivity;
 import com.feirui.feiyunbangong.activity.SouSuoTuanDuiActivity;
 import com.feirui.feiyunbangong.activity.TuanDui_DetailActivity;
 import com.feirui.feiyunbangong.adapter.MyAdapter;
@@ -34,6 +35,7 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.myinterface.AllInterface.OnTeamNoticeNumChanged;
 import com.feirui.feiyunbangong.state.Constant;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -86,6 +88,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = setContentView(inflater, R.layout.fragment_main4);
+        DataSupport.deleteAll(TuanDui.class, "tid = ?", "100144");
         initView();
         setListener();
         setListView();
@@ -132,7 +135,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 //                        tds.removeAll(tds);
 //                        adapter.add(tds);
 //                        getData();
-                        //T.showShort(activity, "网络请求失败，请检查网络");
+                        T.showShort(activity, "网络请求失败，请检查网络");
 //                        T.showShort(getActivity(), msg);
                     }
 
@@ -258,13 +261,23 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         // 设置列表点击滑动监听
         handler = new Handler();
         word.setOnWordsChangeListener(this);
+
+        leftll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openLeft();
+            }
+        });
+
     }
 
     @SuppressLint("InflateParams")
     private void initView() {
         initTitle(v);
-        setLeftVisibility(false);
+//        setLeftVisibility(false);
         setCenterString("我的团队");
+        setLeftDrawable(R.drawable.homepage_l);
+
         swipe_container = (RefreshLayout) v.findViewById(R.id.swipe_container);
         tv_word = (TextView) v.findViewById(R.id.tv);
         word = (WordsNavigation) v.findViewById(R.id.words);

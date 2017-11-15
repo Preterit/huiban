@@ -356,7 +356,7 @@ public class UrlTools {
   /**
    * 显示个人信息：
    */
-  public static String DETAIL_ME = "Person/person_detail";
+  public static String DETAIL_ME = "Person/person_detail1";
 
   /**
    * 工作圈：

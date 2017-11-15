@@ -65,18 +65,21 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
 
         if (!TextUtils.isEmpty(friendList.get(position).getKey1()) && !"null".equals(friendList.get(position).getKey1())){
             holder.mTv_item_key1.setText(friendList.get(position).getKey1());
+            holder.mTv_item_key1.setVisibility(View.VISIBLE);
         }else {
-            holder.mTv_item_key1.setText("");
+            holder.mTv_item_key1.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(friendList.get(position).getKey2()) && !"null".equals(friendList.get(position).getKey2())){
             holder.mTv_item_key2.setText(friendList.get(position).getKey2());
+            holder.mTv_item_key2.setVisibility(View.VISIBLE);
         }else {
-            holder.mTv_item_key2.setText("");
+            holder.mTv_item_key2.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(friendList.get(position).getKey3()) && !"null".equals(friendList.get(position).getKey3())){
             holder.mTv_item_key3.setText(friendList.get(position).getKey3());
+            holder.mTv_item_key3.setVisibility(View.VISIBLE);
         }else {
-            holder.mTv_item_key3.setText("");
+            holder.mTv_item_key3.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(friendList.get(position).getAddress()) && !"null".equals(friendList.get(position).getAddress())){
