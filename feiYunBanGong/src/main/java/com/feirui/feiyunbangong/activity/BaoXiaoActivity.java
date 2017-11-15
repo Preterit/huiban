@@ -425,9 +425,9 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             sb_pic.append(BitmapToBase64.bitmapToBase64(bitmap3) + ",");
         }
         if (bitmap1 == null && bitmap2 == null && bitmap3 == null) {
-            params.put("pic", "");
+            params.put("expense_picture", "");
         } else {
-            params.put("pic", sb_pic.deleteCharAt(sb_pic.length() - 1)
+            params.put("expense_picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
                     .toString());
         }
 
@@ -440,30 +440,24 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             sb_id.append(",");
             Log.e("报销页面--审批", "适配器上的数据" + sb_id);
         }
-        //从适配器中取出抄送人集合
-        List<ChildItem> chaoSong = adapter1.getList();
-        StringBuffer cs_id = new StringBuffer();
-
-        // 循环拼接添加成员id,每个id后加逗号
-        for (int i = 0; i < chaoSong.size(); i++) {
-            cs_id.append(chaoSong.get(i).getId());
-            cs_id.append(",");
+        if(lv_add_chaosong.getChildCount()!=0){
+            //从适配器中取出抄送人集合
+            List<ChildItem> chaoSong = adapter1.getList();
+            StringBuffer cs_id = new StringBuffer();
+            // 循环拼接添加成员id,每个id后加逗号
+            for (int i = 0; i < chaoSong.size(); i++) {
+                cs_id.append(chaoSong.get(i).getId());
+                cs_id.append(",");
+            }
+            params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
         }
-        Log.e("报销页面--抄送人","cs_id"+cs_id.toString());
-//        if(!cs_id.toString().isEmpty()){
-//            Log.e("报销页面--抄送人","ccuser_id"+cs_id.deleteCharAt(cs_id.length() - 1).toString());
-//            params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
-//        }
-        params.put("ccuser_id", cs_id.toString().isEmpty()?null:cs_id.deleteCharAt(cs_id.length() - 1).toString());
-        Log.e("报销页面--抄送人","params"+params.toString());
         params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
         params.put("expense_money", et_1.getText().toString().trim());
         params.put("expense_type", et_2.getText().toString().trim());
         params.put("expense_detail", et_3.getText().toString().trim());
-        String url = UrlTools.url1 + UrlTools.EXPENSE_ADD_EXPENSE1;
-        Log.e("报销页面", "url--"+url);
-        Log.e("报销页面", "params--"+params.toString());
-
+        String url = UrlTools.url1 + UrlTools.EXPENSE_APP_EXPENSE;
+        Log.e("审批-报销", "url--"+url);
+        Log.e("审批-报销", "params--"+params.toString());
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(final JsonBean bean) {

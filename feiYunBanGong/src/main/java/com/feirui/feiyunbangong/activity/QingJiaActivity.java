@@ -23,7 +23,6 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
-import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.HorizontalListView;
@@ -56,7 +55,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     EditText et_shiyou;// 请假天数，请假事由
     // 添加审批人
     @PView(click = "onClick")
-    ImageView iv_add,iv_add_chaosong, iv_01;
+    ImageView iv_add, iv_add_chaosong, iv_01;
     private ArrayList<JsonBean> list1 = new ArrayList<>();
 
 
@@ -95,7 +94,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
         list1 = new ArrayList<>();
         list1.add(new JsonBean("其他"));
         //审批人列表
-        adapter = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,QingJiaActivity.this);//修改之前的listviewadapter
+        adapter = new AddShenHeUpdateAdapter(getLayoutInflater(), list1, QingJiaActivity.this);//修改之前的listviewadapter
         lv_add_shenpiren.setAdapter(adapter);
         lv_add_shenpiren.setOnTouchListener(new OnTouchListener() {
 
@@ -112,7 +111,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
         });
 
         //抄送人列表
-        adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(),list1,QingJiaActivity.this);
+        adapter1 = new AddShenHeUpdateAdapter(getLayoutInflater(), list1, QingJiaActivity.this);
         lv_add_chaosong.setAdapter(adapter1);
         lv_add_chaosong.setOnTouchListener(new OnTouchListener() {
 
@@ -137,7 +136,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == 100) {
             @SuppressWarnings("unchecked")
-             ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
+            ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
                     .getSerializableExtra("childs");
             HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
             childs.add(
@@ -154,11 +153,11 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
             super.onActivityResult(requestCode, resultCode, data);
         }
 
-        if (requestCode == 300 && resultCode == 100 ) {
-            ArrayList<ChildItem> childs1 = (ArrayList<ChildItem>)data.getSerializableExtra("childs");
-            Log.e("tag", "onActivityResult: ----------" + childs1 );
+        if (requestCode == 300 && resultCode == 100) {
+            ArrayList<ChildItem> childs1 = (ArrayList<ChildItem>) data.getSerializableExtra("childs");
+            Log.e("tag", "onActivityResult: ----------" + childs1);
             HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
-            Log.e("tag", "onActivityResult: ----------" + hm );
+            Log.e("tag", "onActivityResult: ----------" + hm);
             childs1.add(0, new ChildItem(hm.get("staff_name") + "", hm.get("staff_head") + "", hm.get("staff_mobile")
                     + "", hm.get("id") + "", 0));
             //去掉自己
@@ -166,9 +165,10 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
             if (childs1 != null && childs1.size() > 0) {
                 adapter1.addList(childs1);
             }
-            Log.d("mytag","添加人员："+childs1.get(0).toString());
+            Log.d("mytag", "添加人员：" + childs1.get(0).toString());
         }
     }
+
     public static String getDatePoor(Date endDate, Date nowDate) {
 
         long nd = 1000 * 24 * 60 * 60;
@@ -278,29 +278,11 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
 
                         //计算请假时间
                         int intervalDay;
-                       int mo =(int) ((endTime.getTime() - startTime.getTime()) % (1000*3600*24));
-                        Log.e("请假时间", "startTime: "+ startTime.getTime());
-                        Log.e("请假时间", "endTime: "+endTime.getTime() );
-                        Log.e("请假时间", "mo: "+mo );
-                        mTianshu.setText(getDatePoor(endTime,startTime) );
-//                        if (mo == 0) {
-//                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24));
-//                            mTianshu.setText(intervalDay + "");
-//                        } else {
-//                            intervalDay = (int) ((endTime.getTime() - startTime.getTime()) / (1000*3600*24)) + 1;
-//                            mTianshu.setText(intervalDay + "");
-//                        }
-
-
-//                        mCalendar.setTime(startTime);
-//                        int startDay = mCalendar.get(Calendar.DAY_OF_MONTH);
-//                        int startHour = mCalendar.get(Calendar.HOUR_OF_DAY);
-//                        mCalendar.setTime(endTime);
-//                        int endDay = mCalendar.get(Calendar.DAY_OF_MONTH);
-//                        int endHour = mCalendar.get(Calendar.HOUR_OF_DAY);
-//
-//                        String intervalDay = endDay - startDay + "天";
-
+                        int mo = (int) ((endTime.getTime() - startTime.getTime()) % (1000 * 3600 * 24));
+                        Log.e("请假时间", "startTime: " + startTime.getTime());
+                        Log.e("请假时间", "endTime: " + endTime.getTime());
+                        Log.e("请假时间", "mo: " + mo);
+                        mTianshu.setText(getDatePoor(endTime, startTime));
 
                     }
                 })
@@ -344,32 +326,28 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                 for (int i = 0; i < shenPi.size(); i++) {
                     sb_id.append(shenPi.get(i).getId());
                     sb_id.append(",");
-                    Log.e("请假页面","适配器上的数据"+sb_id);
                 }
-
-                //从适配器中取出抄送人集合
-                List<ChildItem> chaoSong = adapter1.getList();
-                StringBuffer cs_id = new StringBuffer();
-                // 循环拼接添加成员id,每个id后加逗号
-                for (int i = 0; i < chaoSong.size(); i++) {
-                    cs_id.append(chaoSong.get(i).getId());
-                    cs_id.append(",");
-                    Log.e("请假页面","适配器上的数据"+cs_id);
+                Log.e("审批-请假","count--" + lv_add_chaosong.getChildCount());
+                Log.e("审批-请假","adapter1.getList()" + adapter1.getList());
+                if(lv_add_chaosong.getChildCount()!=0){
+                    //从适配器中取出抄送人集合
+                    List<ChildItem> chaoSong = adapter1.getList();
+                    StringBuffer cs_id = new StringBuffer();
+                    // 循环拼接添加成员id,每个id后加逗号
+                    for (int i = 0; i < chaoSong.size(); i++) {
+                        cs_id.append(chaoSong.get(i).getId());
+                        cs_id.append(",");
+                    }
+                    params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
                 }
-
-//                for (int i = 0; i < adapter.getCount(); i++) {
-//                    AddShenHe ash = (AddShenHe) adapter.getItem(i);
-//                    sb_id.append(ash.getId() + ",");
-//                }
 
                 if (TextUtils.isEmpty(sb_id.toString().trim())) {
                     T.showShort(this, "请选择审批人");
                     return;
                 }
                 params.put("leave_approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());//审批人id
-                //params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
-              String url = UrlTools.url1 + UrlTools.LEAVE_ADD_LEAVE;//带抄送人
-                L.e("审批-请假url" + url + " params" + params);
+                String url = UrlTools.url1 + UrlTools.LEAVE_APP_LEAVE;//带抄送人
+                Log.e("审批-请假","params--" + params);
                 AsyncHttpServiceHelper.post(url, params,
                         new AsyncHttpResponseHandler() {
                             @Override
@@ -398,7 +376,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
                             @Override
                             public void onFailure(int arg0, Header[] arg1,
                                                   byte[] arg2, Throwable arg3) {
-                                Log.e("W",arg3.getMessage().toString());
+                                Log.e("请假", arg3.getMessage().toString());
                                 super.onFailure(arg0, arg1, arg2, arg3);
 
                             }

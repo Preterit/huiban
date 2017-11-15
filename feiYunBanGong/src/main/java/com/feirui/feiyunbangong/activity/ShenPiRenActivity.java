@@ -76,14 +76,15 @@ public class ShenPiRenActivity extends BaseActivity implements
             switch (msg.what) {
                 case 0:
                     JsonBean bean = (JsonBean) msg.obj;
+                    Log.e("添加审批人--选择人员", "bean: "+ bean.toString());
                     ArrayList<HashMap<String, Object>> list = bean.getInfor();
                     ArrayList<ShenPiRen> sprs = new ArrayList<>();
-                    for (int i = 0; i < list.size(); i++) {
+                    for (int i = 0;i<list.size(); i++) {
                         HashMap<String, Object> hm = list.get(i);
 
-                        if (String.valueOf(hm.get("phone")).equals("null")) {
-                            continue;
-                        }
+//                        if (String.valueOf(hm.get("phone")).equals("null")) {
+//                            continue;
+//                        }
                         ShenPiRen spr = new ShenPiRen(Integer.parseInt(String
                                 .valueOf(hm.get("id"))),
                                 String.valueOf(hm.get("staff_name")),

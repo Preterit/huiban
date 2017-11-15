@@ -12,31 +12,43 @@
         android:id="@+id/rgTools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/rb_ti_jiao"
+            style="@style/a000000_48"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:text="我提交的"
-            android:textColor="@color/mytask_button_text_color"
-            style="@style/a000000_48"
             android:checked="true"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:text="我提交的"
+            android:textColor="@color/mytask_button_text_color" />
+
         <RadioButton
             android:id="@+id/rb_shen_pi"
+            style="@style/a000000_48"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:gravity="center_horizontal"
             android:text="我审批的"
+            android:textColor="@color/mytask_button_text_color" />
+        <RadioButton
+            android:id="@+id/rb_chao_song"
             style="@style/a000000_48"
-            android:textColor="@color/mytask_button_text_color"
-            android:gravity="center_horizontal"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:text="抄送给我的"
+            android:textColor="@color/mytask_button_text_color" />
     </RadioGroup>
+
     <Spinner
         android:id="@+id/spinner_lei_xing"
         android:layout_width="@dimen/x400"

@@ -55,21 +55,12 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         mBtnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-//                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-//                    return;
-//                }
                 updateShenPi(mList_id, "拒绝");
             }
         });
         mBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-//                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-//                    return;
-//                }
-
                 updateShenPi(mList_id, "通过");
             }
         });
@@ -79,9 +70,7 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.put("list_id", list_id + "");
         params.put("type", acceptOrRefuse);
-
         String url = UrlTools.url + UrlTools.APPROVAL_UPDATE;
-
         Utils.doPost(LoadingDialog.getInstance(ShenPiQingJaDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {

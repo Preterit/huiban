@@ -164,7 +164,7 @@ public class UrlTools {
   /**
    * 新增请假信息
    */
-  public static String LEAVE_ADD_LEAVE = "leave/app_leave";
+  public static String LEAVE_APP_LEAVE = "leave/app_leave";
     /**
      * 新增请假信息,带抄送人
      */
@@ -176,12 +176,12 @@ public class UrlTools {
   /**
    * 新增报销信息
    */
-  public static String EXPENSE_ADD_EXPENSE1 = "Expense/add_expense111";
+  public static String EXPENSE_APP_EXPENSE = "Expense/app_expense";
 
   /**
    * 新增外出信息
    */
-  public static String OUT_ADD_OUT = "Out/app_out";
+  public static String OUT_APP_OUT = "Out/app_out";
   /**
    * 新增外出信息(添加抄送人)
    */
@@ -192,9 +192,9 @@ public class UrlTools {
   public static String BUY_ADD_BUY = "buy/add_buy";
 
   /**
-   * 付款新增1
+   * 付款新接口
    */
-  public static String BUY_ADD_BUY1 = "buy/add_buy111";
+  public static String BUY_APP_BUY = "buy/app_payment";
   /**
    * 新增采购信息：
    */
@@ -202,7 +202,7 @@ public class UrlTools {
   /**
    * 新增采购信息：http://123.57.45.74/feiybg/public/index.php/index/Purchase/add_purchase1
    */
-  public static final String ADD_CAIGOU_XINXI1 = "Purchase/add_purchase111";
+  public static final String ADD_CAIGOU_XINXI1 = "Purchase/app_purchase";
   /**
    * 待审批其他新增
    */
@@ -210,7 +210,7 @@ public class UrlTools {
   /**
    * 待审批其他新增,带抄送人
    */
-  public static String OTHER_OTHER_ADD1 = "Other/other_add111";
+  public static String OTHER_APP_OTHER = "other/app_other";
   /**
    * 审批里我发起点进去显示所有的信息(我提交的)
    */

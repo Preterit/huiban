@@ -177,11 +177,11 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
         String url = UrlTools.url + UrlTools.XIUGAI_YOUXIANG;
         RequestParams params = new RequestParams();
         Log.e("修改个人简介", "id " + td);
-        params.put("id", td.getTid());
         //判断隐身  0隐身/1在线
-        params.put("stealth", sv_yinshen.isOpened()?"0":"1");
-        params.put("introduction", et_email.getText().toString() + "");
-        params.put("t_remark", et_remark.getText().toString() + "");
+        params.put("stealth", sv_yinshen.isOpened()?"0":"1");//隐身状态
+        params.put("id", td.getTid());//团队id
+        params.put("introduction", et_email.getText().toString() + "");//签名
+        params.put("t_remark", et_remark.getText().toString() + "");//备注
 
          Log.e("修改个人简介", "params " + params.toString());
          Log.e("修改个人简介", "sv_yinshen " + sv_yinshen.isOpened());

@@ -30,6 +30,7 @@
             android:layout_weight="1"
             android:background="@drawable/shape_bg_miaoshu"
             android:gravity="top|left"
+            style="@style/huise_38"
             android:padding="16dp" />
     </LinearLayout>
 
@@ -135,7 +136,6 @@
 
         <TextView
             android:id="@+id/tv_xuanze_zhifufangshi"
-            style="@style/huise_38"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical|right"

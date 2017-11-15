@@ -257,6 +257,6 @@
         android:layout_marginTop="@dimen/y50"
         android:background="@drawable/blue_bt_selector"
         android:gravity="center"
-        android:text="提交"/>
+        android:text="提交" />
 
 </LinearLayout>

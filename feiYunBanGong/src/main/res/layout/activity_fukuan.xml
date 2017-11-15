@@ -38,7 +38,6 @@
 
                 <EditText
                     android:id="@+id/et_miaoshu"
-                    style="@style/huise_38"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -46,7 +45,7 @@
                     android:gravity="top"
                     android:hint="请输入..."
                     android:lines="5"
-                    android:padding="@dimen/x26" />
+                    style="@style/huise_38" />
             </LinearLayout>
 
             <LinearLayout
