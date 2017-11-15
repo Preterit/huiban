@@ -11,7 +11,10 @@
         android:textColor="#333"
         android:textSize="15sp"
         android:gravity="center"
-        android:background="@drawable/shape_bg_loading"/>
+        android:background="@drawable/shape_bg_loading"
+        android:ellipsize="end"
+        android:maxEms="4"
+        android:singleLine="true" />
     <ImageView
         android:id="@+id/tag_delete"
         android:layout_width="14dp"

@@ -118,7 +118,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
         switch (view.getId()) {
             case R.id.ll_saoma:
                 Dialog dialog = new Dialog(this);
-                View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima,
+                View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima_tuandui,
                         null);
                 ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
                 String id = "T" + td.getTid();

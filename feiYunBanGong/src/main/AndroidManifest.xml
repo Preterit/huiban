@@ -332,7 +332,9 @@
             android:label="@string/title_activity_set_guan_liyuan" />
         <activity
             android:name=".activity.TuanDui_DetailActivity"
-            android:label="@string/title_activity_detail_tuan_dui" />
+            android:label="@string/title_activity_detail_tuan_dui"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
         <activity
             android:name=".activity.DetailChengYuanActivity"
             android:hardwareAccelerated="false"

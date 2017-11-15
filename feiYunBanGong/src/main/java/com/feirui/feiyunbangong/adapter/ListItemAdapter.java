@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ImagePagerActivity;
+import com.feirui.feiyunbangong.activity.PersonDataActivity;
 import com.feirui.feiyunbangong.entity.ItemEntity;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
 import com.feirui.feiyunbangong.view.CircleImageView;
@@ -117,6 +118,18 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
         ImageLoader.getInstance().displayImage(itemEntity.getAvatar(),
                 holder.iv_head, ImageLoaderUtils.getWholeOptions());
 
+        //头像的点击事件
+        holder.iv_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PersonDataActivity.class);
+                intent.putExtra("friend",3);
+                intent.putExtra("person_id",itemEntity.getStaffId());
+                mContext.startActivity(intent);
+                mContext.overridePendingTransition(R.anim.aty_zoomin,
+                        R.anim.aty_zoomout);
+            }
+        });
         if (!itemEntity.isZan()) {
             holder.tv_zan.setText("赞一下");
         } else {

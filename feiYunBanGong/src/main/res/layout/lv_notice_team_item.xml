@@ -5,12 +5,15 @@
               android:orientation="vertical">
 
     <!-- 团队公告 -->
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y4"
+        android:background="@color/hui">
+    </View>
     <LinearLayout
         android:id="@+id/ll_tuanduigonggao"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
-        android:layout_marginTop="@dimen/y20"
         android:background="@color/ffffff"
         android:orientation="horizontal">
 
@@ -160,7 +163,8 @@
             android:layout_height="@dimen/size80"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/td_chengyuan"/>
+            android:src="@drawable/td_chengyuan" />
+
         <TextView
             android:id="@+id/tv_chenyuan"
             style="@style/a000000_44"
@@ -169,14 +173,15 @@
             android:layout_marginLeft="@dimen/x50"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="团队成员"/>
+            android:text="团队成员" />
+
         <ImageView
             android:id="@+id/iv_tjcy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="5dp"
-            android:src="@drawable/tianjiachengyuan"/>
+            android:src="@drawable/tianjiachengyuan" />
     </LinearLayout>
 
 </LinearLayout>

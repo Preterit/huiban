@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back_huise"
+    android:background="@color/ffffff"
     android:orientation="vertical"
     tools:context="com.feirui.feiyunbangong.activity.TuanDui_DetailActivity" >
 
@@ -12,15 +12,48 @@
         android:layout_height="@dimen/title_bar"
         layout="@layout/top" />
 
-
-    <ListView
-        android:id="@+id/lv_chengyuan"
+    <SearchView
+        android:id="@+id/sc_search"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/ffffff"
-        android:divider="@color/fenge"
-        android:dividerHeight="@dimen/y4"></ListView>
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/et_bg"
+        android:focusable="false"
+        android:iconifiedByDefault="false"
+        android:queryHint="请输入名字"/>
+    <TextView
+        android:id="@+id/tv_search_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您还没有该联系人~"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ListView
+            android:id="@+id/lv_chengyuan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/ffffff"
+            android:divider="@color/fenge"
+            android:dividerHeight="@dimen/y4"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"></ListView>
+        <ListView
+            android:id="@+id/lv_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:visibility="gone"
+            ></ListView>
+    </RelativeLayout>
 
 
 </LinearLayout>

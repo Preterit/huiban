@@ -31,7 +31,7 @@
             android:textColorHint="#ccc"
             android:gravity="center"
             android:textSize="15sp"
-            android:maxLength = "4"/>
+           />
         <Button
             android:id="@+id/btn_add_word"
             android:layout_width="115dp"

@@ -15,7 +15,7 @@ public class TuanDuiChengYuan implements Serializable {
 	private String type;
 	private String phone;
 	private String email;
-	private String tag;// 成员标签；
+	private String tag;// 成员标签与关键词是一样的 现在用的是关键词
 	private String tag_name;
 	private String store_url;//小店地址
 	private String remark;// 备注；

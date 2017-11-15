@@ -132,7 +132,10 @@ public class WorkCircleActivity extends BaseActivity implements
             if (team_id != null) {
                 setCenterString("团队圈");
             } else {
-                setCenterString("朋友圈");
+                setCenterString("" +
+                        "" +
+                        "" +
+                        "朋友圈");
             }
             setRightDrawable(R.drawable.jia);
             rightll.setOnClickListener(new OnClickListener() {

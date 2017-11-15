@@ -5,9 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +53,7 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,12 +68,14 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         OnItemClickListener, OnKeyListener, OnClickListener {
 
     private ListView lv_chengyuan;
-    private ChengYuanAdapter adapter;
-    private ArrayList<TuanDuiChengYuan> tdcys;
+    private ChengYuanAdapter adapter,mSearchAdapter;
+    private ArrayList<TuanDuiChengYuan> tdcys; //所有的团队成员
+    private List<TuanDuiChengYuan> mBackData=new ArrayList<>(); //返回的团队成员
+    private List<TuanDuiChengYuan> middle=new ArrayList<>();
     private TuanDui td;
     private Button bt_add;// 添加成员
     private LinearLayout ll_tuanduigonggao, ll_tuanduiquan, ll_tuanduichengyuan;// 团队公告 、成员；
-    private TextView tv_message_num, tv_chenyuan;// 团队公告消息数量；
+    private TextView tv_message_num, tv_chenyuan,tv_search_person;// 团队公告消息数量；
     private View header_view;// 头部；
     private ImageView iv_tjcy;
 
@@ -82,6 +88,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     private long mTribeId; //团聊的ID
 
     private BroadcastReceiver receiver;
+    private SearchView sc_search;
+    private ListView lv_search;//承载搜索到的成员
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +133,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     }
 
     private void getMessageNum() {
-
         String url = UrlTools.url + UrlTools.TEAM_MESSAGE_NUM;
         RequestParams params = new RequestParams();
         params.put("teamid", td.getTid());
@@ -158,7 +165,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     private void getData() {
         String url = UrlTools.url + UrlTools.DETAIL_TUANDUICHENGYUAN;
-
         RequestParams params = new RequestParams();
         params.put("id", td.getTid());
         L.e("获取团队成员url" + url + " params" + params);
@@ -208,6 +214,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                         }
                         Log.e("123", "success: ------------------" + tdcys );
                         adapter.add(tdcys);
+                        handler.sendEmptyMessage(6);
                     }
 
                     @Override
@@ -250,6 +257,9 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                         addTuanLiaoChengYuan(bean.getInfor().get(0).get("team_talk") + "");
                     }
                     break;
+                case 6:
+                    listenerSearch(); //搜索成员
+                    break;
             }
         }
 
@@ -283,6 +293,89 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         ll_tuanduiquan.setOnClickListener(this);
 
     }
+    //搜索团队成员
+    private void listenerSearch() {
+        sc_search = (SearchView) findViewById(R.id.sc_search);
+        lv_search = (ListView) findViewById(R.id.lv_search);
+        tv_search_person = (TextView)findViewById(R.id.tv_search_person);
+        // 设置该SearchView默认是否自动缩小为图标
+        sc_search.setIconifiedByDefault(false);
+        if (sc_search != null) {
+            try {        //--拿到字节码
+                Class<?> argClass = sc_search.getClass();
+                //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+                Field ownField = argClass.getDeclaredField("mSearchPlate");
+                //--暴力反射,只有暴力反射才能拿到私有属性
+                ownField.setAccessible(true);
+                View mView = (View) ownField.get(sc_search);
+                //--设置背景
+                mView.setBackgroundColor(Color.TRANSPARENT);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        mBackData.addAll(tdcys);
+        Log.e("123", "listenerSearch: -------------" + mBackData );
+        //设置搜索文本监听
+        sc_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            //搜索内容改变时
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)){
+                    mBackData.clear();
+                    lv_search.setVisibility(View.GONE);
+                    tv_search_person.setVisibility(View.GONE);
+                    lv_chengyuan.setVisibility(View.VISIBLE);
+                }else {//不为空时从联系人中取出
+                    lv_search.setVisibility(View.VISIBLE);
+                    tv_search_person.setVisibility(View.GONE);
+                    lv_chengyuan.setVisibility(View.GONE);
+                    setFilterText(newText);
+                }
+                return false;
+            }
+        });
+
+    }
+
+    public void setFilterText(String text){
+        middle.clear();
+
+        for (int i = 0;i < tdcys.size();i++){
+            TuanDuiChengYuan bean = tdcys.get(i);
+            if (bean.getName().indexOf(text) != -1){//是否包含该字
+                middle.add(bean);
+            }
+        }
+        if (middle.size() > 0){
+            mBackData.clear();
+            mSearchAdapter =  new ChengYuanAdapter(getLayoutInflater());
+            mBackData.addAll(middle);
+            lv_search.setAdapter(mSearchAdapter);
+            mSearchAdapter.add(mBackData);
+            lv_search.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    // 查看团队某个成员信息：
+                    TuanDuiChengYuan tdcy = mBackData.get(position);
+                    Intent intent = new Intent(TuanDui_DetailActivity.this, PersonDataActivity.class);
+                    intent.putExtra("tdcy", tdcy);
+                    intent.putExtra("friend", 1);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                }
+            });
+        }else {
+            lv_search.setVisibility(View.GONE);
+            tv_search_person.setVisibility(View.VISIBLE);
+        }
+    }
 
     private LinearLayout llTeamTask;
 
@@ -306,6 +399,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         setRightDrawable(R.drawable.point);
 
         lv_chengyuan = (ListView) findViewById(R.id.lv_chengyuan);
+        lv_chengyuan.setVisibility(View.VISIBLE);
         adapter = new ChengYuanAdapter(getLayoutInflater());
         tdcys = new ArrayList<>();
 
@@ -353,7 +447,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         Intent intent = new Intent(this, PersonDataActivity.class);
         Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
-        intent.putExtra("td", td);
+        intent.putExtra("friend", 1);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }

@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.adapter;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,8 @@ public class ChengYuanAdapter extends MyBaseAdapter<TuanDuiChengYuan> {
             holder = new ViewHolder();
             holder.tv_guanliyuan = (TextView) v.findViewById(R.id.tv_guanliyuan);
             holder.tv_name = (TextView) v.findViewById(R.id.tv_name);
-            holder.tv_biaoqian = (TextView) v.findViewById(R.id.tv_biaoqian);
             holder.iv_head = (TextImageView) v.findViewById(R.id.iv_head);
+            holder.tv_biaoqian2 = (TextView) v.findViewById(R.id.tv_biaoqian2);
             holder.tv_tag = (TextView) v.findViewById(R.id.tv_biaoqian);
             holder.iv_new_member = (ImageView) v.findViewById(R.id.iv_new_member);
             v.setTag(holder);
@@ -44,12 +45,6 @@ public class ChengYuanAdapter extends MyBaseAdapter<TuanDuiChengYuan> {
 
         TuanDuiChengYuan tdcy = (TuanDuiChengYuan) getItem(position);
         String name = Utils.getPicTitle(tdcy.getName());//获得该行人员的姓名
-        if ("团长".equals(tdcy.getType()) || "副团长".equals(tdcy.getType())) {
-            holder.tv_guanliyuan.setVisibility(View.VISIBLE);
-            holder.tv_guanliyuan.setText(tdcy.getType());
-        } else {
-            holder.tv_guanliyuan.setVisibility(View.GONE);
-        }
 
         if (!TextUtils.isEmpty(tdcy.getT_remark())) {
             holder.tv_name.setText(tdcy.getT_remark());
@@ -65,16 +60,34 @@ public class ChengYuanAdapter extends MyBaseAdapter<TuanDuiChengYuan> {
             holder.iv_new_member.setVisibility(View.INVISIBLE);
         }
 
-//        Log.e("团队成员页面", "tdcy.getTag()" + tdcy.getTag());
+          Log.e("团队成员页面", "tdcy.getTag()" + tdcy.getKey1());
 //        Log.e("团队成员页面", "name: " + name);
 //        Log.e("团队成员页面", "tdcy.getHead(): " + tdcy.getHead());
-        if (!TextUtils.isEmpty(tdcy.getTag())) {
-            holder.tv_tag.setVisibility(View.INVISIBLE);
-            holder.tv_tag.setText(tdcy.getTag());
+        //关键词判断
+        if (!TextUtils.isEmpty(tdcy.getKey1())) {
+            holder.tv_tag.setVisibility(View.VISIBLE);
+            holder.tv_tag.setText(tdcy.getKey1());
         } else {
             holder.tv_tag.setVisibility(View.INVISIBLE);
         }
 
+        if (!TextUtils.isEmpty(tdcy.getKey2())) {
+            holder.tv_biaoqian2.setVisibility(View.VISIBLE);
+            holder.tv_biaoqian2.setText(tdcy.getKey2());
+        } else {
+            holder.tv_biaoqian2.setVisibility(View.INVISIBLE);
+        }
+
+        if ("团长".equals(tdcy.getType()) || "副团长".equals(tdcy.getType())) {
+            holder.tv_guanliyuan.setVisibility(View.VISIBLE);
+            holder.tv_guanliyuan.setText(tdcy.getType());
+            holder.tv_tag.setVisibility(View.VISIBLE);
+            holder.tv_biaoqian2.setVisibility(View.GONE);
+        } else {
+            holder.tv_guanliyuan.setVisibility(View.GONE);
+            holder.tv_tag.setVisibility(View.VISIBLE);
+            holder.tv_biaoqian2.setVisibility(View.VISIBLE);
+        }
 
         if (tdcy.getHead() == null
                 || "http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(tdcy.getHead())
@@ -112,7 +125,7 @@ public class ChengYuanAdapter extends MyBaseAdapter<TuanDuiChengYuan> {
     }
 
     class ViewHolder {
-        TextView tv_name, tv_guanliyuan, tv_biaoqian, tv_tag;
+        TextView tv_name, tv_guanliyuan, tv_tag,tv_biaoqian2;
         TextImageView iv_head;
         ImageView iv_new_member;
     }
