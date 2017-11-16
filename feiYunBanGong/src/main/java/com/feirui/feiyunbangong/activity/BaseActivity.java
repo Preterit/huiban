@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.view.EventListener;
 import com.feirui.feiyunbangong.view.PView;
@@ -91,6 +91,14 @@ public class BaseActivity extends FragmentActivity {
 			});
 		}
 
+	}
+
+	/**
+	 * 设置颜色
+	 * */
+	public void setBackgroundColor(String color){
+		  int COLOR1 = Color.parseColor(color);
+		top.setBackgroundColor(COLOR1);
 	}
 
 	/**

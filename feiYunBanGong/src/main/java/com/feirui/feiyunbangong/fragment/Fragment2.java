@@ -262,15 +262,15 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                 Looper.prepare();
                 //获取通讯录中的电话在会办中注册过的人
                 str = LianXiRenUtil.readConnect(getActivity());
-                Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+                //Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
                 //Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
                 RequestParams params = new RequestParams();
                 if (str == null) {
-
-                } else {
-
+                    //T.showShort(getActivity(),"没有找到您要搜索的~");
+                    return;
                 }
                 params.put("phone", str[1]);
+                params.put("name", str[0]);//之后传联系人姓名
                 String url1 = UrlTools.url + UrlTools.SHOUJILIANXIREN;
                 Utils.doPost(null, getActivity(), url1, params,
                         new HttpCallBack() {

@@ -235,7 +235,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     @Override
     public void onResume() {
         regist();// 注册广播接收器;
-        getData();
+        getData(); //获取数据
         super.onResume();
     }
 
@@ -286,12 +286,9 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         adapter2 = new MyAdapter(getActivity(), tds);
         tds = new ArrayList<>();
         //创建加入团队
-        header_view = getActivity().getLayoutInflater().inflate(
-                R.layout.ll_team_header, null);
-        ll_chaungjiantuandui = (LinearLayout) header_view
-                .findViewById(R.id.ll_add_team);
-        ll_jiarutuandui = (LinearLayout) header_view
-                .findViewById(R.id.ll_add_to_team);
+        header_view = getActivity().getLayoutInflater().inflate(R.layout.ll_team_header, null);
+        ll_chaungjiantuandui = (LinearLayout) header_view.findViewById(R.id.ll_add_team);
+        ll_jiarutuandui = (LinearLayout) header_view.findViewById(R.id.ll_add_to_team);
 
     }
 
@@ -391,7 +388,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         Log.e("tds", "setData: ----------------" + tds0 );
         adapter2.notifyDataSetChanged();
         adapter2.add(tds0);
-
         //清除数据库  重新添加
         DataSupport.deleteAll(TuanDui.class);
         for (int i = 0; i < tds0.size(); i++){

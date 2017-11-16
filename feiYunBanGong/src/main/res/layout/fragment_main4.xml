@@ -18,21 +18,21 @@
             android:layout_height="@dimen/title_bar"
             layout="@layout/top" />
 
-        <!--
-             <TextView
-            android:id="@+id/tv_num"
-            android:layout_width="@dimen/size40"
-            android:layout_height="@dimen/size40"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x15"
-            android:layout_marginTop="@dimen/y20"
-            android:background="@drawable/hongdian"
-            android:gravity="center"
-            android:text=""
-            android:textColor="#ffffff"
-            android:textSize="@dimen/size24"
-            android:visibility="invisible" />
-        -->
+
+             <!--<TextView-->
+            <!--android:id="@+id/tv_num"-->
+            <!--android:layout_width="@dimen/size40"-->
+            <!--android:layout_height="@dimen/size40"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/x15"-->
+            <!--android:layout_marginTop="@dimen/y20"-->
+            <!--android:background="@drawable/hongdian"-->
+            <!--android:gravity="center"-->
+            <!--android:text=""-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="@dimen/size24"-->
+            <!--android:visibility="invisible" />-->
+
 
     </RelativeLayout>
 

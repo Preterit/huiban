@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.loopj.android.http.RequestParams;
@@ -80,11 +79,11 @@ public class MyShenPiBaoXiaoDetailActivity extends BaseActivity{
 
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_DETAIL;
+        String url = UrlTools.url + UrlTools.APP_DETAIL;
 
-        params.put("id", id + "");
-        params.put("approval_type", approval_type + "");
-        params.put("approval_id", approval_id + "");
+//        params.put("id", id + "");
+//        params.put("approval_type", approval_type + "");
+//        params.put("approval_id", approval_id + "");
         params.put("list_id", list_id + "");
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {

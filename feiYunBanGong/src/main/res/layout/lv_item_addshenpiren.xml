@@ -2,29 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="100dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/x100" >
-
-        <com.feirui.feiyunbangong.view.TextImageView
-            android:id="@+id/iv_head"
-            android:layout_width="@dimen/size120"
-            android:layout_height="@dimen/size120"
-            android:src="@drawable/fragment_head" />
-
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/a000000_48"
-            android:layout_width="0dp"
+        android:weightSum="1">
+        <LinearLayout
+            android:id="@+id/lay_shenpi"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x80"
-            android:layout_weight="1"
-            android:text="张三" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <com.feirui.feiyunbangong.view.TextImageView
+                android:id="@+id/iv_head"
+                android:layout_width="@dimen/size120"
+                android:layout_height="@dimen/size120"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/fragment_head" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/a000000_48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="张三" />
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/ll_biaoqian"
@@ -35,7 +47,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/size20"
-            android:visibility="gone" >
+            android:visibility="gone"
+            >
 
             <TextView
                 android:id="@+id/tv_biaoqian"
@@ -50,12 +63,15 @@
                 android:src="@drawable/jiantou_xia" />
         </LinearLayout>
 
+
+
         <ImageView
             android:id="@+id/iv_jianhao"
             android:layout_width="@dimen/size55"
             android:layout_height="@dimen/size55"
             android:layout_marginLeft="@dimen/x38"
-            android:src="@drawable/hongcha" />
+            android:src="@drawable/hongcha"
+            android:visibility="gone"/>
 
         <!-- 设置为管理员 -->
 
@@ -66,7 +82,7 @@
             android:layout_marginLeft="@dimen/x48"
             android:layout_marginRight="@dimen/x68"
             android:src="@drawable/set"
-            android:visibility="invisible" />
-    </LinearLayout>
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </LinearLayout>

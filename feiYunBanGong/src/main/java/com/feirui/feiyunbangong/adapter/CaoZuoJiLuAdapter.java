@@ -78,9 +78,21 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 //				.get("appname"));
 		holder.tv_leixing.setText((String) data.get(position)
 				.get("approval_type"));
-
-		holder.tv_pass.setText((String) data.get(position)
-				.get("status"));
+		switch ((int)data.get(position).get("status")) {
+			case 0:
+				holder.tv_pass.setText("待审批");
+				break;
+			case 1:
+				holder.tv_pass.setText("通过");
+				break;
+			case 2:
+				holder.tv_pass.setText("审核中");
+				break;
+			case 3:
+				holder.tv_pass.setText("未通过");
+				break;
+		}
+		//holder.tv_pass.setText(data.get(position).get("status")+"");
 //		holder.tv_shenpiren.setText("审批");
 
 		holder.bt_detail.setOnClickListener(new View.OnClickListener() {

@@ -20,6 +20,7 @@ import com.feirui.feiyunbangong.activity.ReadFormActivity;
 import com.feirui.feiyunbangong.activity.RenWuListActivity;
 import com.feirui.feiyunbangong.activity.StatementActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.ShowAppCountBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.GlideImageLoader;
 import com.feirui.feiyunbangong.utils.JsonUtils;
@@ -28,6 +29,7 @@ import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.LooperPicture;
 import com.feirui.feiyunbangong.view.PView;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.youth.banner.Banner;
@@ -45,7 +47,7 @@ public class Fragment1 extends BaseFragment {
 
     private static final String MainActivity = null;
     private static final int ON_REFRESH = 1;  //刷新常量
-    public static int count = 0;
+    public static String count ;
 
     View view;
     //	@PView
@@ -138,23 +140,21 @@ public class Fragment1 extends BaseFragment {
     public void loadData() {
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
-        Log.d("提示数字模块--审批URL", "url: " + url);
+        String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
+//      String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
+//		params.put("current_page", 1 + "");
+//		params.put("pagesize", "100");
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-
-                JsonBean jsonBean = JsonUtils.getMessage(new String(responseBody));
-                Log.d("获得待审批jsonBean", "onSuccess:" + jsonBean.toString());
-                //获得待审批条目数量
-                count = jsonBean.getInfor().size();
-                if (count != 0) {
-                    bar_num = (TextView) view.findViewById(R.id.bar_num);
+                Gson gson = new Gson();
+                ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
+                Log.e("审批界面--count", "Infor: "+count.getInfor());
+                if (count.getInfor()!=0) {
                     bar_num.setVisibility(view.VISIBLE);
-                    bar_num.setText(count + "");
+                    bar_num.setText(count.getInfor() + "");
                 }
-                Log.d("获得待审批条目数量", "count: " + count);
             }
         });
     }

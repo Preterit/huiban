@@ -9,6 +9,7 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.UrlTools;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -30,8 +31,8 @@ public class Release_FanKuiActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 RequestParams params2 = new RequestParams();
-                //String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
-                String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/Task/task_accept";
+                String url2 = UrlTools.pcUrl + UrlTools.RENWU_QRJD;
+                //String url22 = "http://123.57.45.74/feiybg1/public/index.php/home_api/Task/task_accept";
                 params2.put("id", 11);
                 params2.put("button", 1);
                 //Log.e("全部任务获取成功-确认接单", "id: " + id);

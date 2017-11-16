@@ -118,7 +118,7 @@
                     style="@style/a000000_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请假天数：" />
+                    android:text="请假时长：" />
 
                 <TextView
                     android:id="@+id/et_tianshu"
@@ -189,13 +189,46 @@
                     android:layout_height="@dimen/y100"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/tianjia" />
+                <com.feirui.feiyunbangong.view.HorizontalListView
+                android:id="@+id/lv_add_shenpiren"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:divider="@color/fenge"
+                android:dividerHeight="@dimen/y4">
 
-                <ListView
-                    android:id="@+id/lv_add_shenpiren"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/y400"
-                    android:divider="@color/fenge"
-                    android:dividerHeight="@dimen/y4"></ListView>
+                </com.feirui.feiyunbangong.view.HorizontalListView>
+
+                <!--<ListView-->
+                    <!--android:id="@+id/lv_add_shenpiren"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/y400"-->
+                    <!--android:divider="@color/fenge"-->
+                    <!--android:dividerHeight="@dimen/y4"></ListView>-->
+                <!--<HorizontalScrollView-->
+                    <!--android:id="@+id/scrollView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:scrollbars="none">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/linearLayout1"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" >-->
+
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/lv_add_shenpiren"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="90dp"-->
+                            <!--android:layout_marginTop="20dp"-->
+                            <!--android:layout_marginBottom="8dp"-->
+                            <!--android:layout_marginLeft="8dp"-->
+                            <!--android:layout_marginRight="8dp"-->
+                            <!--&gt;-->
+                        <!--</android.support.v7.widget.RecyclerView>-->
+                    <!--</LinearLayout>-->
+                <!--</HorizontalScrollView>-->
             </LinearLayout>
 
             <LinearLayout
@@ -206,7 +239,8 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/y20"
-                android:paddingTop="@dimen/y20">
+                android:paddingTop="@dimen/y20"
+                >
 
                 <TextView
                     style="@style/a000000_48"
@@ -221,12 +255,13 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/tianjia" />
 
-                <ListView
+                <com.feirui.feiyunbangong.view.HorizontalListView
                     android:id="@+id/lv_add_chaosong"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y400"
+                    android:layout_height="100dp"
                     android:divider="@color/fenge"
-                    android:dividerHeight="@dimen/y4"></ListView>
+                    android:dividerHeight="@dimen/y4">
+                </com.feirui.feiyunbangong.view.HorizontalListView>
 
 
             </LinearLayout>

@@ -55,21 +55,12 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         mBtnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-//                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-//                    return;
-//                }
                 updateShenPi(mList_id, "拒绝");
             }
         });
         mBtnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (TextUtils.isEmpty(mEtBeizhu.getText().toString().trim())) {
-//                    T.showShort(ShenPiQingJaDetailActivity.this, "请输入备注信息");
-//                    return;
-//                }
-
                 updateShenPi(mList_id, "通过");
             }
         });
@@ -79,17 +70,15 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.put("list_id", list_id + "");
         params.put("type", acceptOrRefuse);
-
         String url = UrlTools.url + UrlTools.APPROVAL_UPDATE;
-
         Utils.doPost(LoadingDialog.getInstance(ShenPiQingJaDetailActivity.this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
-                Log.e("tag"," Utils---seccess=----------"+bean.getCode());
+                Log.e("请假审批详情","seccess"+bean.getCode());
 
                 if (bean.getCode().equals("200")) {
                     T.showShort(ShenPiQingJaDetailActivity.this, bean.getMsg());
-                    Log.e("tag"," Utils---seccess=----------200--");
+                    Log.e("请假审批详情"," Utils---seccess=----------200--");
                     ShenPiQingJaDetailActivity.this.finish();
                 }
             }
@@ -112,7 +101,7 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
 
     private void getData() {
         mData = (HashMap<String, Object>) getIntent().getSerializableExtra("data");
-
+        Log.e("审批请假详情", "mData: "+mData );
         Object id = mData.get("id");
         Object approval_type = mData.get("approval_type");
         Object approval_id = mData.get("approval_id");
@@ -121,26 +110,24 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
 
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_DETAIL;
-
-        params.put("id", id + "");
-        params.put("approval_type", approval_type + "");
-        params.put("approval_id", approval_id + "");
+        String url = UrlTools.url + UrlTools.APP_DETAIL;
+//        params.put("id", id + "");
+//        params.put("approval_type", approval_type + "");
+//        params.put("approval_id", approval_id + "");
         params.put("list_id", list_id + "");
-        Log.e("orz", "getData: " + id + ":" + approval_type + ":" + approval_id + ":" + list_id);
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(JsonBean bean) {
-                Log.e("orz", "success: " + bean.toString());
+                Log.e("请假审批详情", "bean: " + bean.toString());
 
                 String leave_type = bean.getInfor().get(0).get("leave_type") + "";
 
-                String leave_start = bean.getInfor().get(0).get("leave_start") + "";
-                String leave_end = bean.getInfor().get(0).get("leave_end") + "";
+                String leave_start = bean.getInfor().get(0).get("start_time") + "";
+                String leave_end = bean.getInfor().get(0).get("finish_time") + "";
                 String leave_reason = bean.getInfor().get(0).get("leave_reason") + "";
                 String leave_days = bean.getInfor().get(0).get("leave_days") + "";
-                String ttt = bean.getInfor().get(0).get("ttt") + "";
+                //String ttt = bean.getInfor().get(0).get("ttt") + "";
 
                 mTvLeave.setText(leave_type);
                 mTvDays.setText(leave_days);

@@ -105,11 +105,11 @@ public class ShenPiFuKuanDetailActivity extends BaseActivity {
         mList_id = list_id + "";
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_DETAIL;
+        String url = UrlTools.url + UrlTools.APP_DETAIL;
 
-        params.put("id", id + "");
-        params.put("approval_type", approval_type + "");
-        params.put("approval_id", approval_id + "");
+//        params.put("id", id + "");
+//        params.put("approval_type", approval_type + "");
+//        params.put("approval_id", approval_id + "");
         params.put("list_id", list_id + "");
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
@@ -122,11 +122,6 @@ public class ShenPiFuKuanDetailActivity extends BaseActivity {
                 HashMap<String, Object> in_fo = infor.get(0);
                 Log.d("审批付款界面in_fo---------", "in_fo: " + in_fo.toString());
                 try {
-                    //et_miaoshu, et_jine, et_duixiang, et_kaihuhang, et_zhanghao;// 付款描述，付款金额，付款对象，开户行，银行账户
-                    //{id=489, payment_for=李策, staff_duties=null, payment_money=100.00, staff_head=http://123.57.45.74/feiybg/public/static/staff_head/moren/pic_touxiang.png,
-                    // staff_name=李策1, ttt=待付款, staff_department=null, account=450098886, payment_time=2017-05-19, payment_type=支付宝, opening_bank=建行,
-                    // payment_describe=今天买了个大西瓜}
-
                     //付款描述
                     String miaoshu = String.valueOf(in_fo.get("payment_describe"));
                     et_miaoshu.setText(miaoshu);

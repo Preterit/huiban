@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +35,7 @@ import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.loopj.android.http.RequestParams;
@@ -74,10 +74,10 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
     @SuppressWarnings("unchecked")
     private ArrayList<ChildItem> childs ; //添加的审批人员
     @PView
-    ListView lv_add_shenpiren;
+    HorizontalListView lv_add_shenpiren;
     @PView
-    ListView lv_add_chaosong;
-    //    AddShenHeAdapter adapter;
+    HorizontalListView lv_add_chaosong;
+    //AddShenHeAdapter adapter;
     AddShenHeUpdateAdapter adapter;
     AddShenHeUpdateAdapter adapter1;
     @PView
@@ -425,9 +425,9 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             sb_pic.append(BitmapToBase64.bitmapToBase64(bitmap3) + ",");
         }
         if (bitmap1 == null && bitmap2 == null && bitmap3 == null) {
-            params.put("pic", "");
+            params.put("expense_picture", "");
         } else {
-            params.put("pic", sb_pic.deleteCharAt(sb_pic.length() - 1)
+            params.put("expense_picture", sb_pic.deleteCharAt(sb_pic.length() - 1)
                     .toString());
         }
 
@@ -438,39 +438,37 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         for (int i = 0; i < shenPi.size(); i++) {
             sb_id.append(shenPi.get(i).getId());
             sb_id.append(",");
-            Log.d("adapterTag", "适配器上的数据" + sb_id);
+            Log.e("报销页面--审批", "适配器上的数据" + sb_id);
         }
-        //从适配器中取出抄送人集合
-        List<ChildItem> chaoSong = adapter1.getList();
-        StringBuffer cs_id = new StringBuffer();
-
-        // 循环拼接添加成员id,每个id后加逗号
-        for (int i = 0; i < chaoSong.size(); i++) {
-            cs_id.append(chaoSong.get(i).getId());
-            cs_id.append(",");
-            Log.d("adapterTag","适配器上的数据"+cs_id);
+        if(lv_add_chaosong.getChildCount()!=0){
+            //从适配器中取出抄送人集合
+            List<ChildItem> chaoSong = adapter1.getList();
+            StringBuffer cs_id = new StringBuffer();
+            // 循环拼接添加成员id,每个id后加逗号
+            for (int i = 0; i < chaoSong.size(); i++) {
+                cs_id.append(chaoSong.get(i).getId());
+                cs_id.append(",");
+            }
+            params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
         }
-        params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
         params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
         params.put("expense_money", et_1.getText().toString().trim());
         params.put("expense_type", et_2.getText().toString().trim());
         params.put("expense_detail", et_3.getText().toString().trim());
-        String url = UrlTools.url1 + UrlTools.EXPENSE_ADD_EXPENSE1;
-        Log.e("tag", "报销的---------"+  params.toString());
-
+        String url = UrlTools.url1 + UrlTools.EXPENSE_APP_EXPENSE;
+        Log.e("审批-报销", "url--"+url);
+        Log.e("审批-报销", "params--"+params.toString());
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
             public void success(final JsonBean bean) {
-                Log.e("tag", "报销的---------"+ bean.getCode());
+                Log.e("报销页面", "报销的---------"+ bean.getCode());
                 if ("200".equals(bean.getCode())) {
+
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            T.showShort(BaoXiaoActivity.this,
-                                    bean.getMsg());
+                            T.showShort(BaoXiaoActivity.this, bean.getMsg());
                             BaoXiaoActivity.this.finish();
-                            overridePendingTransition(
-                                    R.anim.aty_zoomclosein,
-                                    R.anim.aty_zoomcloseout);
+                            overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
                         }
                     });
                 } else {

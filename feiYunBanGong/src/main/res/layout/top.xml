@@ -7,8 +7,8 @@
 
     <LinearLayout
         android:id="@+id/leftll"
-        android:layout_width="@dimen/x144"
-        android:layout_height="@dimen/title_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:gravity="center" >
 
         <ImageView

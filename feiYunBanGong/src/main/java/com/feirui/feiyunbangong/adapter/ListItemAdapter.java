@@ -162,9 +162,19 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
             holder.gridview.setVisibility(View.GONE);
         } else {
             holder.gridview.setVisibility(View.VISIBLE);
-            holder.gridview.setAdapter(new NoScrollGridAdapter(mContext,
-                    imageUrls));
+            holder.gridview.setAdapter(new NoScrollGridAdapter(mContext, imageUrls));
         }
+        holder.iv_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //留着邢悦写
+                Intent intent2 = new Intent(mContext, PersonDataActivity.class);
+                intent2.putExtra("user",2);
+                intent2.putExtra("staffid",itemEntity.getStaffId());
+
+                mContext.startActivity(intent2);
+            }
+        });
 
         holder.mll_quan.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

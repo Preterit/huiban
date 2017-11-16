@@ -10,7 +10,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -25,6 +24,7 @@ import com.feirui.feiyunbangong.utils.DateTimePickDialogUtil.DialogCallBack;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.view.HorizontalListView;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -52,9 +52,9 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 	@PView(click = "onClick")
 	ImageView iv_add,iv_add_chaosong, iv_01;
 	@PView
-	ListView lv_add_shenpiren;
+	HorizontalListView lv_add_shenpiren;
 	@PView
-	ListView lv_add_chaosong;
+	HorizontalListView lv_add_chaosong;
 //	AddShenHeAdapter adapter;
 	AddShenHeUpdateAdapter adapter;
 	AddShenHeUpdateAdapter adapter1;
@@ -188,28 +188,27 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 				sb_id.append(shenPi.get(i).getId() + ",");
 			}
 
-			//从适配器中取出抄送人集合
-			List<ChildItem> chaoSong = adapter1.getList();
-			StringBuffer cs_id = new StringBuffer();
-			// 循环拼接添加成员id,每个id后加逗号
-			for (int i = 0; i < chaoSong.size(); i++) {
-				cs_id.append(chaoSong.get(i).getId());
-				cs_id.append(",");
-				Log.d("adapterTag","适配器上的数据"+cs_id);
+			if(lv_add_chaosong.getChildCount()!=0){
+				//从适配器中取出抄送人集合
+				List<ChildItem> chaoSong = adapter1.getList();
+				StringBuffer cs_id = new StringBuffer();
+				// 循环拼接添加成员id,每个id后加逗号
+				for (int i = 0; i < chaoSong.size(); i++) {
+					cs_id.append(chaoSong.get(i).getId());
+					cs_id.append(",");
+				}
+				params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
 			}
-
-			params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());
 			params.put("approval", sb_id.deleteCharAt(sb_id.length() - 1).toString());
 			params.put("to_time", tv_shijian.getText().toString().trim());
-			String url = UrlTools.url1 + UrlTools.OTHER_OTHER_ADD1;
-			Log.e("tag","审批-其他url" + url + " params" + params);
+			String url = UrlTools.url1 + UrlTools.OTHER_APP_OTHER;
+			Log.e("审批-其他"," params" + params);
 			AsyncHttpServiceHelper.post(url, params,
 					new AsyncHttpResponseHandler() {
 						@Override
 						public void onSuccess(int arg0, Header[] arg1,
 								byte[] arg2) {
 							super.onSuccess(arg0, arg1, arg2);
-							Log.e("tag","审批-其他---onSuccess-----" );
 							final JsonBean json = JsonUtils
 									.getMessage(new String(arg2));
 
@@ -236,9 +235,6 @@ public class QiTaActivity extends BaseActivity implements OnClickListener {
 							super.onFailure(arg0, arg1, arg2, arg3);
 							JsonBean json = JsonUtils
 									.getMessage(new String(arg2));
-							Log.e("tag","审批-其他url------" + json.getCode());
-							Log.e("tag","--------其他--"+arg3.toString());
-
 						}
 					});
 

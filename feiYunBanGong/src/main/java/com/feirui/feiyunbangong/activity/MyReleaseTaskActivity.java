@@ -17,7 +17,9 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 
 import static com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper.post;
-
+/**
+ * 任务单反馈详情
+ * */
 public class MyReleaseTaskActivity extends BaseActivity implements View.OnClickListener {
     private TextView tv_right;
     private RadioGroup rg_btn;
@@ -54,9 +56,9 @@ public class MyReleaseTaskActivity extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.righttv:
                 if (rbt_complete.isChecked()) {
-                    button = 0;
-                }else if (rbt_fankui.isChecked()) {
                     button = 1;
+                }else if (rbt_fankui.isChecked()) {
+                    button = 0;
                 } else if (rbt_complete.isChecked()==false&&rbt_fankui.isChecked()==false){
                     Toast.makeText(this, "请选择任务进度", Toast.LENGTH_SHORT).show();
                     return;
