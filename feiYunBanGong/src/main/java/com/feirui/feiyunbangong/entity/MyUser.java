@@ -17,6 +17,8 @@ public class MyUser implements Serializable {
 	private String key1;
 	private String key2;
 	private String key3;
+	private String key4;
+	private String key5;
 
 	public MyUser(String id, String name, String duty, String head,
 			String department, String sex, String birthday, String address,
@@ -35,7 +37,7 @@ public class MyUser implements Serializable {
 
 	public MyUser(String name, String head,
 				  String sex, String birthday, String address, String phone,
-				  String shop,String key1,String key2,String key3) {
+				  String shop,String key1,String key2,String key3,String key4,String key5) {
 		super();
 		this.name = name;
 		this.head = head;
@@ -47,6 +49,24 @@ public class MyUser implements Serializable {
 		this.key1 = key1;
 		this.key2 = key2;
 		this.key3 = key3;
+		this.key4 = key4;
+		this.key5 = key5;
+	}
+
+	public String getKey4() {
+		return key4;
+	}
+
+	public void setKey4(String key4) {
+		this.key4 = key4;
+	}
+
+	public String getKey5() {
+		return key5;
+	}
+
+	public void setKey5(String key5) {
+		this.key5 = key5;
 	}
 
 	public String getShop() {
@@ -169,8 +189,11 @@ public class MyUser implements Serializable {
 	@Override
 	public String toString() {
 		return "MyUser{" +
-				"name='" + name + '\'' +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", duty='" + duty + '\'' +
 				", head='" + head + '\'' +
+				", department='" + department + '\'' +
 				", sex='" + sex + '\'' +
 				", birthday='" + birthday + '\'' +
 				", address='" + address + '\'' +
@@ -179,6 +202,8 @@ public class MyUser implements Serializable {
 				", key1='" + key1 + '\'' +
 				", key2='" + key2 + '\'' +
 				", key3='" + key3 + '\'' +
+				", key4='" + key4 + '\'' +
+				", key5='" + key5 + '\'' +
 				'}';
 	}
 }

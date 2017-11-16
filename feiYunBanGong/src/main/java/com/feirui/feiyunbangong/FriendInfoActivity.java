@@ -256,7 +256,8 @@ public class FriendInfoActivity extends BaseActivity implements SelectZTDialog.M
         final ArrayList<String> imageUrls = new ArrayList<String>();
         RequestParams params = new RequestParams();
         phone = getIntent().getStringExtra("phone");
-        params.put("staff_mobile", phone + "");
+        params.put("key", phone + "");
+        params.put("location", "");
         String url = UrlTools.url + UrlTools.USER_SEARCH_MOBILE;
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override

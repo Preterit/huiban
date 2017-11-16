@@ -49,7 +49,7 @@ import java.util.List;
 
 public class PersonDataActivity extends BaseActivity implements OnClickListener {
     private CircleImageView mCir_head;
-    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3;
+    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5;
     private ImageView mIv_sex,mShop;
     private TextView mTv_birthday;
     private LinearLayout mLl_er_wei_ma,mPerson_btn;
@@ -128,6 +128,8 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mTv_key1 = (TextView) findViewById(R.id.tv_key1);
         mTv_key2 = (TextView) findViewById(R.id.tv_key2);
         mTv_key3 = (TextView) findViewById(R.id.tv_key3);
+        mTv_key4 = (TextView) findViewById(R.id.tv_key4);
+        mTv_key5 = (TextView) findViewById(R.id.tv_key5);
         mPerson_btn = (LinearLayout) findViewById(R.id.person_btn);
 
         if (code == 2){//个人的
@@ -191,6 +193,16 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mTv_key3.setText("暂无");
         }
 
+        if (!"".equals(mTdcy.getKey4()) && null != mTdcy.getKey4()){
+            mTv_key4.setText(mTdcy.getKey4());
+        }else {
+            mTv_key4.setText("暂无");
+        }
+        if (!"".equals(mTdcy.getKey5()) && null != mTdcy.getKey5()){
+            mTv_key5.setText(mTdcy.getKey5());
+        }else {
+            mTv_key5.setText("暂无");
+        }
         if (mTdcy.getFriendstate() == 1){
             mPerson_add.setEnabled(false);
             mPerson_add.setText("已是好友");
@@ -264,6 +276,16 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         }else {
             mTv_key3.setText("暂无");
         }
+        if (!"".equals(user.getKey4()) && null != user.getKey4()){
+            mTv_key4.setText(user.getKey4());
+        }else {
+            mTv_key4.setText("暂无");
+        }
+        if (!"".equals(user.getKey5()) && null != user.getKey5()){
+            mTv_key5.setText(user.getKey5());
+        }else {
+            mTv_key5.setText("暂无");
+        }
         mTv_bian_phone.setText(user.getPhone());
         mLl_person_phone.setOnClickListener(new OnClickListener() {
             @Override
@@ -285,10 +307,10 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     private void getPersonDetail() {
         String url = "";
         RequestParams params = new RequestParams();
-        if (code == 3){
+        if (code == 3){//他人的
             url = UrlTools.url + UrlTools.DETAIL_OTHER;
             params.put("staff_id",person_id);
-        }else if (code == 2){
+        }else if (code == 2){//个人的
             url = UrlTools.url + UrlTools.DETAIL_ME;
         }
         AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
@@ -328,13 +350,15 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 String key1 =String.valueOf(infor.get("staff_key1"));
                 String key2 =String.valueOf(infor.get("staff_key2"));
                 String key3 =String.valueOf(infor.get("staff_key3"));
+                String key4 =String.valueOf(infor.get("staff_key4"));
+                String key5 =String.valueOf(infor.get("staff_key5"));
                 String friendstate = String.valueOf(infor.get("friendstate"));
                 if (code == 2){
-                    user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3);
+                    user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3,key4,key5);
                     AppStore.myuser = user;
                     initView();
                 }else if (code == 3){
-                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,Integer.parseInt(friendstate));
+                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,key4,key5,Integer.parseInt(friendstate));
                     initData();
                 }
                 createErWeiMa(phone);
@@ -382,7 +406,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 if (code == 2){
                     TuanDuiChengYuan chengYuan = new TuanDuiChengYuan("","",user.getName(),user.getHead(),
                             "",user.getPhone(),"","","",user.getShop(),user.getSex(),user.getBirthday(),
-                            user.getAddress(),user.getKey1(),user.getKey2(),user.getKey3());
+                            user.getAddress(),user.getKey1(),user.getKey2(),user.getKey3(),user.getKey4(),user.getKey5());
                     clickShow(chengYuan);
                 }else {
                     clickShow(mTdcy);

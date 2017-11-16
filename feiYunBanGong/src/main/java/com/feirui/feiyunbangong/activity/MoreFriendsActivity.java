@@ -90,8 +90,9 @@ public class MoreFriendsActivity extends AppCompatActivity {
         Friend friend = friend2.get(postion);
         TuanDuiChengYuan tdcy = new TuanDuiChengYuan(friend.getName(),friend.getHead(),friend.getPhone(),
                 friend.getShopUrl(),friend.getSex(),friend.getBrithday(),friend.getAddress(),friend.getKey1(),
-                friend.getKey2(),friend.getKey3(),Integer.parseInt(friend.getState()));
+                friend.getKey2(),friend.getKey3(),friend.getKey4(),friend.getKey5(),Integer.parseInt(friend.getState()));
         intent.putExtra("tdcy",tdcy);
+        intent.putExtra("friend", 1);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }

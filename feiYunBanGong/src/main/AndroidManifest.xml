@@ -496,6 +496,7 @@
         <activity android:name=".activity.MyTaskActivity" />
         <activity android:name=".activity.MoreFriendsActivity" />
         <activity android:name=".activity.RevisePersonActivity" />
+        <activity android:name=".activity.FriendInforDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -51,6 +51,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 修改个人资料
+ */
 public class RevisePersonActivity extends BaseActivity implements View.OnClickListener {
     private TextView righttv;
     private EditText mRevise_name;
@@ -130,7 +133,12 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         if (!TextUtils.isEmpty(user.getKey3())){
             tags.add(user.getKey3());
         }
-
+        if (!TextUtils.isEmpty(user.getKey4())){
+            tags.add(user.getKey4());
+        }
+        if (!TextUtils.isEmpty(user.getKey5())){
+            tags.add(user.getKey5());
+        }
         tagsAdapter = new GridViewAdapter(this);
         mRevise_gd.setAdapter(tagsAdapter);
 
@@ -250,18 +258,38 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
             params.put("staff_key1", tags.get(0));
             params.put("staff_key2", "");
             params.put("staff_key3", "");
+            params.put("staff_key4", "");
+            params.put("staff_key5", "");
         }else if (tags.size() == 2){
             params.put("staff_key1", tags.get(0));
             params.put("staff_key2", tags.get(1));
             params.put("staff_key3", "");
+            params.put("staff_key4", "");
+            params.put("staff_key5", "");
         }else if (tags.size() == 3){
             params.put("staff_key1", tags.get(0));
             params.put("staff_key2", tags.get(1));
             params.put("staff_key3", tags.get(2));
+            params.put("staff_key4", "");
+            params.put("staff_key5", "");
+        }else if (tags.size() == 4) {
+            params.put("staff_key1", tags.get(0));
+            params.put("staff_key2", tags.get(1));
+            params.put("staff_key3", tags.get(2));
+            params.put("staff_key4", tags.get(3));
+            params.put("staff_key5", "");
+        }else if (tags.size() == 5){
+            params.put("staff_key1", tags.get(0));
+            params.put("staff_key2", tags.get(1));
+            params.put("staff_key3", tags.get(2));
+            params.put("staff_key4", tags.get(3));
+            params.put("staff_key5", tags.get(4));
         }else {
             params.put("staff_key1", "");
             params.put("staff_key2", "");
             params.put("staff_key3", "");
+            params.put("staff_key4", "");
+            params.put("staff_key5", "");
         }
         String url = UrlTools.url + UrlTools.XIUGAI_GERENZILIAO;
 
@@ -430,7 +458,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                 viewHolder.mTag_tv.setTag("+添加");
                 viewHolder.mTag_tv.setTextColor(Color.parseColor("#3686ff"));
                 viewHolder.mTag_delete.setVisibility(View.GONE);
-                if (position == 3){
+                if (position == 5){
                     viewHolder.mTag_tv.setVisibility(View.GONE);
                 }
             }else {
