@@ -9,7 +9,7 @@
         android:layout_height="@dimen/title_bar"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:background="@drawable/act_person_backgroud">
         <RelativeLayout
@@ -37,7 +37,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal">
             <TextView
                 android:id="@+id/tv_name"
@@ -70,46 +70,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ></include>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"></View>
-        <LinearLayout
-            android:id="@+id/person_btn"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal"
-            android:layout_marginBottom="18dp"
-            android:visibility="gone">
-            <Button
-                android:id="@+id/person_talk"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="28dp"
-                android:background="#3686ff"
-                android:text="去聊天"
-                android:textSize="18sp"
-                android:textColor="#fff"/>
-
-            <Button
-                android:id="@+id/person_add"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="24dp"
-                android:background="#ffb136"
-                android:text="加好友"
-                android:textColor="#fff"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-    </LinearLayout>
 
 
 </LinearLayout>

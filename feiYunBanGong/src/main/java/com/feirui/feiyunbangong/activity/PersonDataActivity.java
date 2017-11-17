@@ -177,28 +177,28 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mTv_person_area.setText("北京 朝阳");
         }
 
-        if (!"".equals(mTdcy.getKey1()) && null != mTdcy.getKey1()){
+        if (!"".equals(mTdcy.getKey1()) && !"null".equals(mTdcy.getKey1())){
            mTv_key1.setText(mTdcy.getKey1());
         }else {
             mTv_key1.setText("暂无");
         }
-        if (!"".equals(mTdcy.getKey2()) && null != mTdcy.getKey2()){
+        if (!"".equals(mTdcy.getKey2()) && !"null".equals(mTdcy.getKey2())){
             mTv_key2.setText(mTdcy.getKey2());
         }else {
             mTv_key2.setText("暂无");
         }
-        if (!"".equals(mTdcy.getKey3()) && null != mTdcy.getKey3()){
+        if (!"".equals(mTdcy.getKey3()) && !"null".equals(mTdcy.getKey3())){
             mTv_key3.setText(mTdcy.getKey3());
         }else {
             mTv_key3.setText("暂无");
         }
 
-        if (!"".equals(mTdcy.getKey4()) && null != mTdcy.getKey4()){
+        if (!"".equals(mTdcy.getKey4()) && !"null".equals(mTdcy.getKey4())){
             mTv_key4.setText(mTdcy.getKey4());
         }else {
             mTv_key4.setText("暂无");
         }
-        if (!"".equals(mTdcy.getKey5()) && null != mTdcy.getKey5()){
+        if (!"".equals(mTdcy.getKey5()) && !"null".equals(mTdcy.getKey5())){
             mTv_key5.setText(mTdcy.getKey5());
         }else {
             mTv_key5.setText("暂无");
@@ -261,27 +261,27 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mTv_person_area.setText("北京 朝阳");
         }
 
-        if (!"".equals(user.getKey1()) && null != user.getKey1()){
+        if (!"".equals(user.getKey1()) && !"null".equals(user.getKey1())){
             mTv_key1.setText(user.getKey1());
         }else {
             mTv_key1.setText("暂无");
         }
-        if (!"".equals(user.getKey2()) && null != user.getKey2()){
+        if (!"".equals(user.getKey2()) && !"null".equals(user.getKey2())){
             mTv_key2.setText(user.getKey2());
         }else {
             mTv_key2.setText("暂无");
         }
-        if (!"".equals(user.getKey3()) && null != user.getKey3()){
+        if (!"".equals(user.getKey3()) && !"null".equals(user.getKey3())){
             mTv_key3.setText(user.getKey3());
         }else {
             mTv_key3.setText("暂无");
         }
-        if (!"".equals(user.getKey4()) && null != user.getKey4()){
+        if (!"".equals(user.getKey4()) && !"null".equals(user.getKey4())){
             mTv_key4.setText(user.getKey4());
         }else {
             mTv_key4.setText("暂无");
         }
-        if (!"".equals(user.getKey5()) && null != user.getKey5()){
+        if (!"".equals(user.getKey5()) && !"null".equals(user.getKey5())){
             mTv_key5.setText(user.getKey5());
         }else {
             mTv_key5.setText("暂无");

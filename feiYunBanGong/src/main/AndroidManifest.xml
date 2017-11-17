@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="80"
-    android:versionName="1.7.10">
+    android:versionCode="82"
+    android:versionName="1.7.12">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -409,9 +409,6 @@
         <!-- android:name=".FriendInfo" -->
         <!-- android:label="@string/title_activity_friend_info"> -->
         <!-- </activity> -->
-        <activity
-            android:name=".FriendInfoActivity"
-            android:label="@string/title_activity_friend_info" />
         <activity android:name=".activity.ShenPiQingJaDetailActivity" />
         <activity android:name=".activity.AddGoodActivity" />
         <activity android:name=".activity.ShenpiBaoxiaoDetailActivity" />

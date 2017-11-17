@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="200dp"
         android:background="@drawable/act_person_backgroud"
         android:orientation="vertical">
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="13dp">
+            android:layout_marginTop="8dp">
 
             <TextView
                 android:id="@+id/tv_name"
@@ -64,10 +64,37 @@
             android:layout_width="74dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="7dp"
             android:text="2020-01-01"
             android:textColor="#fff"
             android:textSize="14sp" />
+        <LinearLayout
+            android:id="@+id/ll_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_revise"
+                android:layout_width="60dp"
+                android:layout_height="23dp"
+                android:text="修改备注"
+                android:textSize="12sp"
+                android:textColor="#155cc7"
+                android:gravity="center"
+                android:background="@drawable/blue_bg_kuang"/>
+            <TextView
+                android:id="@+id/tv_revise_group"
+                android:layout_width="60dp"
+                android:layout_height="23dp"
+                android:text="修改分组"
+                android:textSize="12sp"
+                android:textColor="#155cc7"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/blue_bg_kuang"/>
+        </LinearLayout>
     </LinearLayout>
 
     <include

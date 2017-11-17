@@ -8,14 +8,13 @@ import android.util.Log;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.contact.IYWContact;
-import com.alibaba.mobileim.contact.IYWContactHeadClickCallback;
 import com.alibaba.mobileim.contact.IYWContactHeadClickListener;
 import com.alibaba.mobileim.contact.IYWContactService;
 import com.alibaba.mobileim.contact.IYWCrossContactProfileCallback;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.lib.model.contact.Contact;
 import com.alibaba.mobileim.utility.IMNotificationUtils;
-import com.feirui.feiyunbangong.FriendInfoActivity;
+import com.feirui.feiyunbangong.activity.FriendInforDetailActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -60,7 +59,7 @@ public class MyUserProfileSampleHelper {
 							boolean arg4) {
 						// 跳转到好友资料页面：
 						Intent intent = new Intent(fragment.getActivity(),
-								FriendInfoActivity.class);
+								FriendInforDetailActivity.class);
 						intent.putExtra("phone", user_id);
 						Log.d("tag","私聊的吗。。。。");
 						fragment.getActivity().startActivity(intent);
