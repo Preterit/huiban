@@ -21,13 +21,15 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="10dp"
+        android:visibility="gone"
         >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <com.feirui.feiyunbangong.view.CircleImageView
                 android:id="@+id/baoxiao_head_img"
@@ -52,7 +54,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -120,6 +121,7 @@
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:layout_marginLeft="30dp"
+            android:src="@drawable/pic_jiazai2"
             android:background="@color/red_bg"
             android:scaleType="centerCrop" />
     </LinearLayout>

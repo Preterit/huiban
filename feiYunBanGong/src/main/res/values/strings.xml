@@ -60,7 +60,7 @@
     <string name="type_qingjia">请假类型</string>
     <string name="shenpi_kaishi">开始时间</string>
     <string name="shenpi_jieshu">结束时间</string>
-    <string name="shenpi_tianshu">请假天数</string>
+    <string name="shenpi_tianshu">请假时长</string>
     <string name="shenpi_shiyou">请假事由</string>
     <string name="title_activity_release_task">ReleaseTask</string>
     <string name="title_activity_task_info">TaskInfoActivity</string>

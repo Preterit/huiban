@@ -417,7 +417,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:id="@+id/tvSelectTeam"
