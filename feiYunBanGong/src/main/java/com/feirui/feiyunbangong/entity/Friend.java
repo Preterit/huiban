@@ -13,9 +13,27 @@ public class Friend implements Serializable{
 	private String key1; //关键词
 	private String key2;
 	private String key3;
+	private String key4;
+	private String key5;
 	private String distence;//距离
 	private String shopUrl;//小店地址
 	private String state;//是否是好友
+
+	public String getKey4() {
+		return key4;
+	}
+
+	public void setKey4(String key4) {
+		this.key4 = key4;
+	}
+
+	public String getKey5() {
+		return key5;
+	}
+
+	public void setKey5(String key5) {
+		this.key5 = key5;
+	}
 
 	public String getBrithday() {
 		return brithday;
@@ -113,7 +131,7 @@ public class Friend implements Serializable{
 		this.head = head;
 	}
 	public Friend(String name,String address,String head,String sex,String birthday,
-				  String key1,String key2,String key3,String distence,String shopUrl,String state,String phone){
+				  String key1,String key2,String key3,String key4,String key5,String distence,String shopUrl,String state,String phone){
 		this.name = name;
 		this.address = address;
 		this.head = head;
@@ -122,6 +140,8 @@ public class Friend implements Serializable{
 		this.key1 = key1;
 		this.key2 = key2;
 		this.key3 = key3;
+		this.key4 = key4;
+		this.key5 = key5;
 		this.distence = distence;
 		this.shopUrl = shopUrl;
 		this.state = state;
@@ -132,6 +152,7 @@ public class Friend implements Serializable{
 	public String toString() {
 		return "Friend{" +
 				"name='" + name + '\'' +
+				", phone='" + phone + '\'' +
 				", address='" + address + '\'' +
 				", head='" + head + '\'' +
 				", brithday='" + brithday + '\'' +
@@ -139,6 +160,8 @@ public class Friend implements Serializable{
 				", key1='" + key1 + '\'' +
 				", key2='" + key2 + '\'' +
 				", key3='" + key3 + '\'' +
+				", key4='" + key4 + '\'' +
+				", key5='" + key5 + '\'' +
 				", distence='" + distence + '\'' +
 				", shopUrl='" + shopUrl + '\'' +
 				", state='" + state + '\'' +

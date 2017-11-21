@@ -424,6 +424,8 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                                     Friend friend = new Friend(hm.get("staff_name") + "",hm.get("address") + "",
                                             hm.get("staff_head") + "",hm.get("sex") + "",hm.get("birthday") + "",
                                             hm.get("staff_key1")  + "",hm.get("staff_key2")  + "",hm.get("staff_key3")  + "",
+                                            hm.get("staff_key4")  + "",
+                                            hm.get("staff_key5")  + "",
                                             hm.get("distance") + "",hm.get("store_url") + "",hm.get("is_friend") + "",hm.get("staff_mobile") + "");
 
                                     listFriend.add(friend);

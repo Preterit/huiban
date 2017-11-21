@@ -3,28 +3,28 @@ package com.feirui.feiyunbangong.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.mobileim.contact.IYWContact;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.dialog.XiuGaiDialog;
 import com.feirui.feiyunbangong.entity.Group;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.MyUser;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
+import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
 import com.feirui.feiyunbangong.state.AppStore;
-import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
-import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.PopWindow;
 import com.feirui.feiyunbangong.utils.T;
@@ -32,62 +32,47 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.CircleImageView;
 import com.google.zxing.WriterException;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zxing.encoding.EncodingHandler;
 
-import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by xy on 2017-10-20.
- */
-
-public class PersonDataActivity extends BaseActivity implements OnClickListener {
+public class FriendInforDetailActivity extends BaseActivity implements View.OnClickListener {
     private CircleImageView mCir_head;
-    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5;
+    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_revise,mTv_revise_group;
     private ImageView mIv_sex,mShop;
     private TextView mTv_birthday;
     private LinearLayout mLl_er_wei_ma,mPerson_btn;
     private LinearLayout mLl_person_phone;
     private TextView mTv_bian_phone;
-    private LinearLayout mLl_person_area;
+    private LinearLayout mLl_person_area,mLl_revise;
     private TextView mTv_person_area;
     private Button mPerson_talk;
     private Button mPerson_add;
 
-    private TuanDuiChengYuan mTdcy;
-    private int code;
     private List<Group> groups = new ArrayList<>();// 分组信息
     private ArrayList<String> group_name = new ArrayList<>();// 组名
     // 二维码名片：
-    private  Bitmap erweima;
-    private  MyUser user;
-    private String person_id;//个人id
+    private Bitmap erweima;
+    private String phone;//个人id
+    private TuanDuiChengYuan mTdcy;
+    private String mStaffId;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        setContentView(R.layout.activity_person_data);
+        setContentView(R.layout.activity_friend_infor_detail);
         Intent intent = getIntent();
-        //从团队成员跳转过来的
-        mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
-        code = intent.getIntExtra("friend",-1);
-
-        //从个人资料跳转过来
-
-        //从工作圈跳转过来
-        person_id = intent.getStringExtra("person_id");
-
+        //从聊天跳转过来
+        phone = intent.getStringExtra("phone");
+        Log.e("phone", "onCreate: --------------------" + phone );
         initUi();
         setListener();
-        if (code == 1){
-            updateState();// 更改新团员状态；
-        }
+
     }
 
 
@@ -95,11 +80,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     protected void onResume() {
         super.onResume();
         requestGroup();// 获取分组信息；
-        if (code == 1){ //团队的
-            initData();
-        }else {
-            getPersonDetail();
-        }
+        getPersonDetail();
     }
 
 
@@ -120,6 +101,9 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mTv_birthday = (TextView) findViewById(R.id.tv_birthday);
         mLl_er_wei_ma = (LinearLayout) findViewById(R.id.ll_er_wei_ma);
         mLl_person_phone = (LinearLayout) findViewById(R.id.ll_person_phone);
+
+        mLl_revise = (LinearLayout) findViewById(R.id.ll_friend);
+
         mTv_bian_phone = (TextView) findViewById(R.id.tv_bian_phone);
         mLl_person_area = (LinearLayout) findViewById(R.id.ll_person_area);
         mTv_person_area = (TextView) findViewById(R.id.tv_person_area);
@@ -130,19 +114,16 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mTv_key3 = (TextView) findViewById(R.id.tv_key3);
         mTv_key4 = (TextView) findViewById(R.id.tv_key4);
         mTv_key5 = (TextView) findViewById(R.id.tv_key5);
+
+        mTv_revise = (TextView) findViewById(R.id.tv_revise);
+        mTv_revise.setOnClickListener(this);
+        mTv_revise_group = (TextView) findViewById(R.id.tv_revise_group);
+
         mPerson_btn = (LinearLayout) findViewById(R.id.person_btn);
 
-        if (code == 2){//个人的
-            setRightDrawable(R.drawable.xiugai);
-            mPerson_btn.setVisibility(View.GONE);
-        }else if (code == 1){//团队成员的
-            setRightVisibility(false);
-            mPerson_btn.setVisibility(View.VISIBLE);
-            createErWeiMa(mTdcy.getPhone());
-        }else if (code == 3){ //朋友圈或工作圈的
-            setRightVisibility(false);
-            mPerson_btn.setVisibility(View.VISIBLE);
-        }
+        setRightVisibility(false);
+        mPerson_btn.setVisibility(View.VISIBLE);
+        mLl_revise.setVisibility(View.GONE);
     }
 
 
@@ -178,7 +159,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         }
 
         if (!"".equals(mTdcy.getKey1()) && !"null".equals(mTdcy.getKey1())){
-           mTv_key1.setText(mTdcy.getKey1());
+            mTv_key1.setText(mTdcy.getKey1());
         }else {
             mTv_key1.setText("暂无");
         }
@@ -206,9 +187,10 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         if (mTdcy.getFriendstate() == 1){
             mPerson_add.setEnabled(false);
             mPerson_add.setText("已是好友");
+            mLl_revise.setVisibility(View.VISIBLE);
             mPerson_add.setBackgroundColor(getResources().getColor(R.color.huise));
             mTv_bian_phone.setText(mTdcy.getPhone());
-            mLl_person_phone.setOnClickListener(new OnClickListener() {
+            mLl_person_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
@@ -222,6 +204,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             });
         }else {
             mPerson_add.setEnabled(true);
+            mLl_revise.setVisibility(View.GONE);
             mPerson_add.setText("加好友");
             mPerson_add.setBackgroundColor(getResources().getColor(R.color.juse));
             mTv_bian_phone.setText("好友可查看");
@@ -230,94 +213,19 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
     }
 
-    private void initView() {
-        if (!"null".equals(user.getHead()) && null != user.getHead()
-                && !"img/1_1.png".equals(user.getHead())) {
-            ImageLoader.getInstance().displayImage(user.getHead(), mCir_head);
-
-        } else {
-            mCir_head.setImageResource(R.drawable.fragment_head);
-        }
-
-        mTv_name.setText(user.getName());
-        if (!"null".equals(user.getSex()) && null != user.getSex()){
-            if ("女".equals(user.getSex())){
-                mIv_sex.setImageResource(R.drawable.girl);
-            }else {
-                mIv_sex.setImageResource(R.drawable.boy);
-            }
-        }else {
-            mIv_sex.setImageResource(R.drawable.boy);
-        }
-
-        if (!"null".equals(user.getBirthday()) && null != user.getBirthday()){
-            mTv_birthday.setText(user.getBirthday());
-        }else {
-            mTv_birthday.setText("2000-01-02");
-        }
-        if (!"null".equals(user.getAddress()) && !"".equals(user.getAddress())){
-            mTv_person_area.setText(user.getAddress());
-        }else {
-            mTv_person_area.setText("北京 朝阳");
-        }
-
-        if (!"".equals(user.getKey1()) && !"null".equals(user.getKey1())){
-            mTv_key1.setText(user.getKey1());
-        }else {
-            mTv_key1.setText("暂无");
-        }
-        if (!"".equals(user.getKey2()) && !"null".equals(user.getKey2())){
-            mTv_key2.setText(user.getKey2());
-        }else {
-            mTv_key2.setText("暂无");
-        }
-        if (!"".equals(user.getKey3()) && !"null".equals(user.getKey3())){
-            mTv_key3.setText(user.getKey3());
-        }else {
-            mTv_key3.setText("暂无");
-        }
-        if (!"".equals(user.getKey4()) && !"null".equals(user.getKey4())){
-            mTv_key4.setText(user.getKey4());
-        }else {
-            mTv_key4.setText("暂无");
-        }
-        if (!"".equals(user.getKey5()) && !"null".equals(user.getKey5())){
-            mTv_key5.setText(user.getKey5());
-        }else {
-            mTv_key5.setText("暂无");
-        }
-        mTv_bian_phone.setText(user.getPhone());
-        mLl_person_phone.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent3 = new Intent(Intent.ACTION_CALL, Uri.parse( "tel:" + user.getPhone()));
-                    startActivity(intent3);
-                    overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
-            }
-        });
-    }
-
     /*
     获取个人信息
      */
     private void getPersonDetail() {
-        String url = "";
+
         RequestParams params = new RequestParams();
-        if (code == 3){//他人的
-            url = UrlTools.url + UrlTools.DETAIL_OTHER;
-            params.put("staff_id",person_id);
-        }else if (code == 2){//个人的
-            url = UrlTools.url + UrlTools.DETAIL_ME;
-        }
-        AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
+        params.put("key", phone + "");
+        params.put("location", "");
+        String url = UrlTools.url + UrlTools.USER_SEARCH_MOBILE;
+        Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                super.onSuccess(statusCode, headers, responseBody);
-                JsonBean bean = JsonUtils.getMessage(new String (responseBody));
+            public void success(JsonBean bean) {
+
                 if ("200".equals(bean.getCode())){
                     Message message = new Message();
                     message.obj = bean;
@@ -327,10 +235,17 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                super.onFailure(statusCode, headers, responseBody, error);
+            public void failure(String msg) {
+
+            }
+
+            @Override
+            public void finish() {
+
             }
         });
+
+
     }
 
     Handler handler = new Handler(){
@@ -340,7 +255,8 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             if (msg.what == 0){
                 JsonBean bean = (JsonBean) msg.obj;
                 HashMap<String,Object> infor = bean.getInfor().get(0);
-                String name =String.valueOf(infor.get("staff_name"));
+                mStaffId = String.valueOf(infor.get("id"));
+                String name = String.valueOf(infor.get("staff_name"));
                 String head =String.valueOf(infor.get("staff_head"));
                 String birth =String.valueOf(infor.get("birthday"));
                 String sex =String.valueOf(infor.get("sex"));
@@ -352,15 +268,9 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 String key3 =String.valueOf(infor.get("staff_key3"));
                 String key4 =String.valueOf(infor.get("staff_key4"));
                 String key5 =String.valueOf(infor.get("staff_key5"));
-                String friendstate = String.valueOf(infor.get("friendstate"));
-                if (code == 2){
-                    user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3,key4,key5);
-                    AppStore.myuser = user;
-                    initView();
-                }else if (code == 3){
-                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,key4,key5,Integer.parseInt(friendstate));
-                    initData();
-                }
+                String friendstate = String.valueOf(infor.get("is_friend"));
+                mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,key4,key5,Integer.parseInt(friendstate));
+                initData();
                 createErWeiMa(phone);
             }
         }
@@ -380,39 +290,54 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.person_shop:  //个人小店
-                if (code == 2){
-                    if ( !"0".equals(user.getShop()) && !"null".equals(user.getShop())){
-                        Intent intent1=new Intent();
-                        intent1.putExtra("uri",user.getShop());//
-                        intent1.putExtra("TAG","1");
-                        intent1.setClass(getApplicationContext(),WebViewActivity.class);
-                        startActivity(intent1);
-                    }else {
-                        T.showShort(this,"还没有小店哦~");
-                    }
+                if ( !"0".equals(mTdcy.getStore_url()) && !"null".equals(mTdcy.getStore_url())){
+                    Intent intent1=new Intent();
+                    intent1.putExtra("uri",mTdcy.getStore_url());//
+                    intent1.putExtra("TAG","1");
+                    intent1.setClass(getApplicationContext(),WebViewActivity.class);
+                    startActivity(intent1);
                 }else {
-                    if ( !"0".equals(mTdcy.getStore_url()) && !"null".equals(mTdcy.getStore_url())){
-                        Intent intent1=new Intent();
-                        intent1.putExtra("uri",mTdcy.getStore_url());//
-                        intent1.putExtra("TAG","1");
-                        intent1.setClass(getApplicationContext(),WebViewActivity.class);
-                        startActivity(intent1);
-                    }else {
-                        T.showShort(this,"还没有小店哦~");
-                    }
+                    T.showShort(this,"还没有小店哦~");
                 }
                 break;
             case R.id.ll_er_wei_ma: //二维码
-                if (code == 2){
-                    TuanDuiChengYuan chengYuan = new TuanDuiChengYuan("","",user.getName(),user.getHead(),
-                            "",user.getPhone(),"","","",user.getShop(),user.getSex(),user.getBirthday(),
-                            user.getAddress(),user.getKey1(),user.getKey2(),user.getKey3(),user.getKey4(),user.getKey5());
-                    clickShow(chengYuan);
-                }else {
-                    clickShow(mTdcy);
-                }
+                clickShow(mTdcy);
                 break;
-            case R.id.ll_person_phone: //好友电话
+            case R.id.tv_revise: //好友电话
+                AppStore.phone = phone;
+                Log.e("好友资料", "phone: "+phone.toString());
+                Log.e("好友资料", "phone: "+ mStaffId);
+                XiuGaiDialog tianjia = new XiuGaiDialog("修改备注", mStaffId
+                        + "", "请输入新备注", FriendInforDetailActivity.this, new XiuGaiDialog.AlertCallBack1() {
+
+                    @Override
+                    public void onOK(final String name) {
+                        Log.e("联系人页面", "name:--------------------- "+ MyUserProfileSampleHelper.mUserInfo.get(phone) );
+
+                        // 如果内存缓存中存在该用户，则修改内存缓存中该用户的备注：
+                        if (MyUserProfileSampleHelper.mUserInfo.containsKey(phone)) {
+                            IYWContact iywContact = MyUserProfileSampleHelper.mUserInfo
+                                    .get(phone);
+
+                            IYWContact contact = new MyUserProfileSampleHelper.UserInfo(name, iywContact
+                                    .getAvatarPath(), iywContact.getUserId(),
+                                    iywContact.getAppKey());
+
+                            Log.e("联系人页面", "name: "+name );
+
+                            MyUserProfileSampleHelper.mUserInfo.remove(phone); // 移除临时的IYWContact对象
+                            MyUserProfileSampleHelper.mUserInfo.put(phone, contact); // 保存从服务器获取到的数据
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+                tianjia.show();
 
                 break;
             case R.id.ll_person_area: //所属地区
@@ -429,16 +354,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 break;
             case R.id.cir_head: //点击查看头像
                 final ArrayList<String> imageUrls = new ArrayList<String>();
-                if(code == 2){
-                    if (!"null".equals(user.getHead()) && null != user.getHead()
-                            && !"img/1_1.png".equals(user.getHead())) {
-                        imageUrls.add(user.getHead());
-                        imageBrower(0,imageUrls);
-
-                    } else {
-                        T.showShort(this,"主人还没有设置头像~");
-                    }
-                }else {
                     if (!"null".equals(mTdcy.getHead()) && null != mTdcy.getHead()
                             && !"img/1_1.png".equals(mTdcy.getHead())) {
                         imageUrls.add(mTdcy.getHead());
@@ -447,13 +362,8 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                     } else {
                         T.showShort(this,"主人还没有设置头像~");
                     }
-                }
                 break;
             case R.id.rightIv://修改个人资料
-                Intent intent2 = new Intent(PersonDataActivity.this,RevisePersonActivity.class);
-                intent2.putExtra("user",user);
-                startActivity(intent2);
-                overridePendingTransition(R.anim.aty_zoomin,R.anim.aty_zoomout);
                 break;
 
         }
@@ -463,7 +373,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     查看头像，点击放大的
      */
     protected void imageBrower(int position, ArrayList<String> urls2) {
-        Intent intent = new Intent(PersonDataActivity.this, ImagePagerActivity.class);
+        Intent intent = new Intent(FriendInforDetailActivity.this, ImagePagerActivity.class);
         intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
         intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
         startActivity(intent);
@@ -489,35 +399,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         }
     }
 
-    private void updateState() {
-        // 老成员不需要更新状态；
-        if (mTdcy.getState() == 2) {
-            return;
-        }
-        String url = UrlTools.url + UrlTools.UPDATE_TEAM_STATE;
-        RequestParams params = new RequestParams();
-        params.put("team_member_list_id", mTdcy.getTeam_member_list_id() + "");
-        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
-                new Utils.HttpCallBack() {
-
-                    @Override
-                    public void success(JsonBean bean) {
-                        Log.e("团队成员界面", "成功"+bean.toString());
-                    }
-
-                    @Override
-                    public void failure(String msg) {
-                        Log.e("TAG", msg);
-                    }
-
-                    @Override
-                    public void finish() {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-
-    }
 
     private void addFriend() {
 
@@ -544,13 +425,13 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
                 L.e("添加好友：url " + url + "  params:" + params);
                 Utils.doPost(
-                        LoadingDialog.getInstance(PersonDataActivity.this),
-                        PersonDataActivity.this, url, params,
+                        LoadingDialog.getInstance(FriendInforDetailActivity.this),
+                        FriendInforDetailActivity.this, url, params,
                         new Utils.HttpCallBack() {
 
                             @Override
                             public void success(JsonBean bean) {
-                                T.showShort(PersonDataActivity.this,
+                                T.showShort(FriendInforDetailActivity.this,
                                         "好友申请已发出！");
                                 mPerson_add.setBackgroundColor(getResources()
                                         .getColor(R.color.huise));
@@ -560,7 +441,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
                             @Override
                             public void failure(String msg) {
-                                T.showShort(PersonDataActivity.this, msg);
+                                T.showShort(FriendInforDetailActivity.this, msg);
                             }
 
                             @Override
@@ -603,7 +484,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
                     @Override
                     public void failure(String msg) {
-                        T.showShort(PersonDataActivity.this, msg);
+                        T.showShort(FriendInforDetailActivity.this, msg);
                     }
 
                     @Override
@@ -613,6 +494,5 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                     }
                 });
     }
-
 
 }

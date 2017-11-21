@@ -29,7 +29,24 @@ public class TuanDuiChengYuan implements Serializable {
 	private String key1; //关键词
 	private String key2;
 	private String key3;
+	private String key4;
+	private String key5;
 
+	public String getKey4() {
+		return key4;
+	}
+
+	public void setKey4(String key4) {
+		this.key4 = key4;
+	}
+
+	public String getKey5() {
+		return key5;
+	}
+
+	public void setKey5(String key5) {
+		this.key5 = key5;
+	}
 
 	public String getKey1() {
 		return key1;
@@ -234,7 +251,7 @@ public class TuanDuiChengYuan implements Serializable {
 	public TuanDuiChengYuan(String id, String staff_id, String name,
 			String head, String type, String phone, String email,
 			String tag,String introduction,String store_url,String sex,
-			String birthday,String address,String key1,String key2,String key3) {
+			String birthday,String address,String key1,String key2,String key3,String key4,String key5) {
 		super();
 		this.id = id;
 		this.staff_id = staff_id;
@@ -252,10 +269,12 @@ public class TuanDuiChengYuan implements Serializable {
 		this.key1 = key1;
 		this.key2 = key2;
 		this.key3 = key3;
+		this.key4 = key4;
+		this.key5 = key5;
 	}
 
 	public TuanDuiChengYuan( String name, String head, String phone,String store_url,String sex,
-							String birthday,String address,String key1,String key2,String key3,int friendstate) {
+							 String birthday,String address,String key1,String key2,String key3,String key4,String key5,int friendstate) {
 		super();
 		this.name = name;
 		this.head = head;
@@ -267,6 +286,8 @@ public class TuanDuiChengYuan implements Serializable {
 		this.key1 = key1;
 		this.key2 = key2;
 		this.key3 = key3;
+		this.key4 = key4;
+		this.key5 = key5;
 		this.friendstate = friendstate;
 	}
 
@@ -308,6 +329,8 @@ public class TuanDuiChengYuan implements Serializable {
 				", key1='" + key1 + '\'' +
 				", key2='" + key2 + '\'' +
 				", key3='" + key3 + '\'' +
+				", key4='" + key4 + '\'' +
+				", key5='" + key5 + '\'' +
 				'}';
 	}
 }

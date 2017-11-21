@@ -77,12 +77,6 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!-- 支付宝权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Happlication"
@@ -501,6 +495,7 @@
         <activity android:name=".activity.MyTaskActivity" />
         <activity android:name=".activity.MoreFriendsActivity" />
         <activity android:name=".activity.RevisePersonActivity" />
+        <activity android:name=".activity.FriendInforDetailActivity"></activity>
         <!-- 支付宝声明页面 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"

@@ -3,9 +3,7 @@ package com.feirui.feiyunbangong.im;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,8 +24,8 @@ import com.alibaba.mobileim.conversation.YWP2PConversationBody;
 import com.alibaba.mobileim.conversation.YWTribeConversationBody;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
 import com.alibaba.mobileim.tribe.IYWTribeService;
-import com.feirui.feiyunbangong.FriendInfoActivity;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.FriendInforDetailActivity;
 import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
 import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.YWSDKGlobalConfigSample;
@@ -36,15 +34,12 @@ import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
-import com.feirui.feiyunbangong.utils.Utils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 
 import java.util.List;
-
-import static com.alibaba.mobileim.conversation.YWConversationType.P2P;
 
 //聊天页面自定义；
 public class MyChatUI extends IMChattingPageUI {
@@ -176,7 +171,7 @@ public class MyChatUI extends IMChattingPageUI {
 				public void onClick(View v) {
 					// 跳转到好友资料页面：
 					Intent intent = new Intent(fragment.getActivity(),
-							FriendInfoActivity.class);
+							FriendInforDetailActivity.class);
 					intent.putExtra("phone", phone);
 					fragment.getActivity().startActivity(intent);
 				}

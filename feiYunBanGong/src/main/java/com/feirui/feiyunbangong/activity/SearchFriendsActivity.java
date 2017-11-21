@@ -118,6 +118,7 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
                             Friend friend = new Friend(hm.get("staff_name") + "",hm.get("address") + "",
                                     hm.get("staff_head") + "",hm.get("sex") + "",hm.get("birthday") + "",
                                     hm.get("staff_key1")  + "",hm.get("staff_key2")  + "",hm.get("staff_key3")  + "",
+                                    hm.get("staff_key4")  + "",hm.get("staff_key5")  + "",
                                     hm.get("distance") + "",hm.get("store_url") + "",hm.get("is_friend") + "",hm.get("staff_mobile") + "");
 
                             if ("0".equals(friend.getState())){
@@ -256,8 +257,10 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
         Friend friend = friend2.get(postion);
         TuanDuiChengYuan tdcy = new TuanDuiChengYuan(friend.getName(),friend.getHead(),friend.getPhone(),
                 friend.getShopUrl(),friend.getSex(),friend.getBrithday(),friend.getAddress(),friend.getKey1(),
-                friend.getKey2(),friend.getKey3(),Integer.parseInt(friend.getState()));
+                friend.getKey2(),friend.getKey3(),friend.getKey4(),friend.getKey5(),Integer.parseInt(friend.getState()));
+        Log.e("search", "startOther: ----------------------------" + tdcy );
         intent.putExtra("tdcy",tdcy);
+        intent.putExtra("friend", 1);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }
