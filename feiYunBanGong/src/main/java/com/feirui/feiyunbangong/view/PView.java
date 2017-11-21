@@ -14,18 +14,18 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PView {
-	public int id() default 0;
+	int id() default 0;
 
 	// 点击事件
-	public String click() default "";
+	 String click() default "";
 
 	// 长按事件
-	public String longClick() default "";
+	String longClick() default "";
 
 	// 点击某一项
-	public String itemClick() default "";
+	String itemClick() default "";
 
 	// 长按某一项
-	public String itemLongClick() default "";
+	 String itemLongClick() default "";
 
 }

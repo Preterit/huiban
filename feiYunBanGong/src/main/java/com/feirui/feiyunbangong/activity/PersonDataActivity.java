@@ -49,7 +49,7 @@ import java.util.List;
 
 public class PersonDataActivity extends BaseActivity implements OnClickListener {
     private CircleImageView mCir_head;
-    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5;
+    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_postion;
     private ImageView mIv_sex,mShop;
     private TextView mTv_birthday;
     private LinearLayout mLl_er_wei_ma,mPerson_btn;
@@ -130,6 +130,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mTv_key3 = (TextView) findViewById(R.id.tv_key3);
         mTv_key4 = (TextView) findViewById(R.id.tv_key4);
         mTv_key5 = (TextView) findViewById(R.id.tv_key5);
+        mTv_postion = (TextView) findViewById(R.id.tv_postion);
         mPerson_btn = (LinearLayout) findViewById(R.id.person_btn);
 
         if (code == 2){//个人的
@@ -310,6 +311,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         if (code == 3){//他人的
             url = UrlTools.url + UrlTools.DETAIL_OTHER;
             params.put("staff_id",person_id);
+            Log.e("user", "getPersonDetail:------------------- "  + person_id );
         }else if (code == 2){//个人的
             url = UrlTools.url + UrlTools.DETAIL_ME;
         }

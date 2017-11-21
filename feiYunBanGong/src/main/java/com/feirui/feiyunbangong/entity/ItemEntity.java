@@ -125,7 +125,7 @@ public class  ItemEntity {
     public String toString() {
         return "ItemEntity [id=" + id + ", avatar=" + avatar + ", title="
                 + title + ", content=" + content + ", imageUrls=" + imageUrls
-                + ", picShow=" + picShow + ", isZan=" + isZan + ", zan_name="
+                + ", picShow=" + picShow + ", isZan=" + isZan  + ", staffId=" + staffId + ", zan_name="
                 + zan_name + ", plis=" + plis + "]";
     }
 

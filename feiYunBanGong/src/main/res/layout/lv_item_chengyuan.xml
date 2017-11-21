@@ -48,31 +48,31 @@
             <TextView
                 android:id="@+id/tv_guanliyuan"
                 style="@style/ffffff_38"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
                 android:background="@drawable/shape_bt_bg_lanse"
-                android:paddingBottom="@dimen/y15"
-                android:paddingLeft="@dimen/x40"
-                android:paddingRight="@dimen/x40"
-                android:paddingTop="@dimen/y15"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
                 android:text="团长"
-                android:layout_marginLeft="6dp"/>
+               />
 
 
             <TextView
                 android:id="@+id/tv_biaoqian"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:background="@drawable/shape_person_tag"
                 android:text="UI设计"
-                android:textColor="#3686ff"
                 android:textSize="13sp"
                 android:gravity="center"
+                android:background="@drawable/shape_item_tag"
+                android:textColor="#ff8736"
                 android:ellipsize="end"
                 android:maxEms="4"
                 android:maxLines="1"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 />
             <TextView
                 android:id="@+id/tv_biaoqian2"

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -34,8 +35,10 @@ import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.AddWordPopupWindow;
 import com.feirui.feiyunbangong.view.CircleImageView;
+import com.feirui.feiyunbangong.view.NoScrollGridView;
 import com.feirui.feiyunbangong.view.SelectPicPopupWindow;
 import com.feirui.feiyunbangong.view.SexPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -59,7 +62,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
     private EditText mRevise_name;
     private TextView mRevise_sex;
     private TextView mRevise_birth;
-    private EditText mRevise_area;
+    private EditText mRevise_area,mEv_share_area;
     private GridView mRevise_gd;
     private CircleImageView mRevise_head;
     private List<String> tags = new ArrayList<>();
@@ -67,7 +70,10 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
     private GridViewAdapter tagsAdapter;
     private SexPopupWindow sexPopupWindow; //性别选择
     private AddWordPopupWindow addPopupWindow;
-    private int addPosition;
+    private ImageView mIv_share;
+    private Button mBtn_time_area,mBtn_stone_area;
+    private String limit_position = "0",type = "0";//（0是实时位置1是固定位置）  是否开启共享位置（0不共享1共享）
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         //设置在activity启动的时候输入法默认是不开启的
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         user = (MyUser)getIntent().getSerializableExtra("user");
+        Log.e("user", "onCreate: ======================" + user.toString() );
         initView();
         setListener();
     }
@@ -96,6 +103,11 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         mRevise_birth = (TextView) findViewById(R.id.revise_birth);
         mRevise_area = (EditText) findViewById(R.id.revise_area);
         mRevise_gd = (GridView) findViewById(R.id.revise_gd);
+        Utils.reMesureGridViewHeight(mRevise_gd);
+        mIv_share = (ImageView) findViewById(R.id.iv_share);
+        mBtn_time_area = (Button) findViewById(R.id.btn_time_area);
+        mBtn_stone_area = (Button) findViewById(R.id.btn_stone_area);
+        mEv_share_area = (EditText) findViewById(R.id.tv_share_area);
         getData();
     }
 
@@ -104,6 +116,9 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         mRevise_sex.setOnClickListener(this);
         mRevise_birth.setOnClickListener(this);
         righttv.setOnClickListener(this);
+        mIv_share.setOnClickListener(this);
+        mBtn_time_area.setOnClickListener(this);
+        mBtn_stone_area.setOnClickListener(this);
     }
 
     private void getData() {
@@ -153,11 +168,13 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                                  Log.e("tag", "onClick:---------------- " +  v.getTag() + "");
                                  tags.add(position,v.getTag() + "");
                                  tagsAdapter.notifyDataSetChanged();
+                                 Utils.reMesureGridViewHeight(mRevise_gd);
+                                 Log.e("tag", "onClick:---------------- " +  v.getTag() + "");
+
                              }
                              addPopupWindow.dismiss();
                          }
                      });
-//                     addPosition = position;
                      //添加关键词
                      addPopupWindow.showAtLocation(findViewById(R.id.ll_revise), Gravity.CENTER, 0, 0); // 设置layout在PopupWindow中显示的位置
                  }
@@ -218,6 +235,30 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                  break;
              case R.id.righttv: //保存修改的信息
                  savePersonData();
+                 break;
+             case R.id.iv_share://可选按钮
+                 if (flag == false){
+                     mIv_share.setImageResource(R.drawable.check_no);
+                     type = "0";
+                     flag = true;
+                 }else{
+                     mIv_share.setImageResource(R.drawable.check_ok);
+                     type = "1";
+                     flag = false;
+                 }
+                 break;
+             case R.id.btn_time_area://实时位置
+                 limit_position = "0";
+                 mBtn_time_area.setBackgroundColor(Color.parseColor("#3686ff"));
+                 mBtn_stone_area.setBackgroundColor(Color.parseColor("#ebebeb"));
+                 mEv_share_area.setVisibility(View.GONE);
+                 break;
+             case R.id.btn_stone_area://固定位置
+                 limit_position = "1";
+                 mBtn_stone_area.setBackgroundColor(Color.parseColor("#3686ff"));
+                 mBtn_time_area.setBackgroundColor(Color.parseColor("#ebebeb"));
+                 mEv_share_area.setVisibility(View.VISIBLE);
+                 Utils.reMesureGridViewHeight(mRevise_gd);
                  break;
 
          }
@@ -291,6 +332,22 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
             params.put("staff_key4", "");
             params.put("staff_key5", "");
         }
+
+        params.put("limit_position",limit_position);
+        params.put("type",type);
+        if ("1".equals(limit_position)){
+            if (TextUtils.isEmpty(mEv_share_area.getText().toString().trim())){
+                T.showShort(this,"请输入固定位置~");
+                return;
+            }
+            params.put("position",mEv_share_area.getText().toString().trim());
+        }else {
+            params.put("position","实时");
+        }
+
+
+        Log.e("position", "savePersonData: ------------------------------" + params );
+
         String url = UrlTools.url + UrlTools.XIUGAI_GERENZILIAO;
 
         AsyncHttpServiceHelper.post(url, params,

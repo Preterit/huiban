@@ -103,7 +103,7 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
         }
 
         final ItemEntity itemEntity = items.get(position);
-
+        Log.e("user", "getPersonDetail:-------- items.get(position)----------- "  +  items.get(position) );
         holder.tv_name.setText(itemEntity.getTitle());
         holder.tv_content.setText(itemEntity.getContent());
 
@@ -164,17 +164,6 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
             holder.gridview.setVisibility(View.VISIBLE);
             holder.gridview.setAdapter(new NoScrollGridAdapter(mContext, imageUrls));
         }
-        holder.iv_head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //留着邢悦写
-                Intent intent2 = new Intent(mContext, PersonDataActivity.class);
-                intent2.putExtra("user",2);
-                intent2.putExtra("staffid",itemEntity.getStaffId());
-
-                mContext.startActivity(intent2);
-            }
-        });
 
         holder.mll_quan.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
