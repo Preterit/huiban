@@ -88,7 +88,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = setContentView(inflater, R.layout.fragment_main4);
-        DataSupport.deleteAll(TuanDui.class, "tid = ?", "100144");
+//        DataSupport.deleteAll(TuanDui.class, "tid = ?", "100144");
         initView();
         setListener();
         setListView();

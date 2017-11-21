@@ -10,6 +10,10 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -25,10 +29,60 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 
 import org.apache.http.Header;
 
+import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
+
+
+
+    /**
+     * 被ScrollView包含的GridView高度设置为wrap_content时只显示一行
+     * 此方法用于动态计算GridView的高度(根据item的个数)
+     */
+    public static void reMesureGridViewHeight(GridView gridView) {
+        // 获取GridView对应的Adapter
+        ListAdapter listAdapter = gridView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int rows;
+        int columns = 0;
+        int horizontalBorderHeight = 0;
+        Class<?> clazz = gridView.getClass();
+        try {
+            // 利用反射，取得每行显示的个数
+            Field column = clazz.getDeclaredField("mRequestedNumColumns");
+            column.setAccessible(true);
+            columns = (Integer) column.get(gridView);
+//          columns = gridView.getNumColumns();//Call requires API level 11
+
+            // 利用反射，取得横向分割线高度
+            Field horizontalSpacing = clazz.getDeclaredField("mRequestedHorizontalSpacing");
+            horizontalSpacing.setAccessible(true);
+            horizontalBorderHeight = (Integer) horizontalSpacing.get(gridView);
+
+//          horizontalBorderHeight = gridView.getHorizontalSpacing();//Call requires API level 16
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 判断数据总数除以每行个数是否整除。不能整除代表有多余，需要加一行
+        if (listAdapter.getCount() % columns > 0) {
+            rows = listAdapter.getCount() / columns + 1;
+        } else {
+            rows = listAdapter.getCount() / columns;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < rows; i++) { // 只计算每项高度*行数
+            View listItem = listAdapter.getView(i, null, gridView);
+            listItem.measure(0, 0); // 计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+        }
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        params.height = totalHeight + horizontalBorderHeight * (rows - 1);// 最后加上分割线总高度
+        gridView.setLayoutParams(params);
+    }
 
 
     /**

@@ -146,8 +146,7 @@ public class WorkCircleActivity extends BaseActivity implements
                                 PublishedActivity.class);
                         intent.putExtra("team_id", team_id);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.aty_zoomin,
-                                R.anim.aty_zoomout);
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                     } catch (Exception e) {
                         Log.e("TAG", e.getMessage());
                     }
@@ -155,11 +154,8 @@ public class WorkCircleActivity extends BaseActivity implements
             });
 
             swipeLayout = (RefreshLayout) findViewById(swipe_container);
-            header = this.getLayoutInflater()
-                    .inflate(R.layout.ll_header_work, null);
-            m_listViewFooter = LayoutInflater.from(this).inflate(
-                    R.layout.listview_foot, null, false);
-
+            header = this.getLayoutInflater().inflate(R.layout.ll_header_work, null);
+            m_listViewFooter = LayoutInflater.from(this).inflate(R.layout.listview_foot, null, false);
             lv_work = (PullListView) findViewById(R.id.lv_work);
 
             lv_work.addFooterView(m_listViewFooter);

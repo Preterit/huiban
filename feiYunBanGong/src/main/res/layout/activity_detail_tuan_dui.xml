@@ -22,7 +22,8 @@
         android:background="@drawable/et_bg"
         android:focusable="false"
         android:iconifiedByDefault="false"
-        android:queryHint="请输入名字"/>
+        android:queryHint="请输入名字"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/tv_search_person"
         android:layout_width="wrap_content"
