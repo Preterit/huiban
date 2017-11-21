@@ -82,7 +82,6 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         //设置在activity启动的时候输入法默认是不开启的
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         user = (MyUser)getIntent().getSerializableExtra("user");
-        Log.e("user", "onCreate: ======================" + user.toString() );
         initView();
         setListener();
     }
@@ -128,15 +127,17 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
             mRevise_head.setImageResource(R.drawable.fragment_head);
         }
         mRevise_name.setText(user.getName());
-        if ("null".equals(user.getSex()) && !TextUtils.isEmpty(user.getSex())){
+        if (!"null".equals(user.getSex()) && !TextUtils.isEmpty(user.getSex())){
             mRevise_sex.setText(user.getSex());
         }
-        if ("null".equals(user.getBirthday()) && !TextUtils.isEmpty(user.getBirthday())){
+        if (!"null".equals(user.getBirthday()) && !TextUtils.isEmpty(user.getBirthday())){
             mRevise_birth.setText(user.getBirthday());
+            Log.e("user", "onCreate: ============Birthday==========" + user.getBirthday() );
         }
-
-        if ("null".equals(user.getAddress()) && !TextUtils.isEmpty(user.getAddress())){
+        Log.e("user", "onCreate: ======================" + user.toString() );
+        if (!"null".equals(user.getAddress()) && !TextUtils.isEmpty(user.getAddress())){
             mRevise_area.setText(user.getAddress());
+            Log.e("user", "onCreate: ============Address==========" + user.getAddress() );
         }
 
         if (!TextUtils.isEmpty(user.getKey1())){
