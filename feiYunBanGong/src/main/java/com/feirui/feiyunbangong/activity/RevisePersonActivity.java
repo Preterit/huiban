@@ -132,12 +132,10 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         }
         if (!"null".equals(user.getBirthday()) && !TextUtils.isEmpty(user.getBirthday())){
             mRevise_birth.setText(user.getBirthday());
-            Log.e("user", "onCreate: ============Birthday==========" + user.getBirthday() );
         }
         Log.e("user", "onCreate: ======================" + user.toString() );
         if (!"null".equals(user.getAddress()) && !TextUtils.isEmpty(user.getAddress())){
             mRevise_area.setText(user.getAddress());
-            Log.e("user", "onCreate: ============Address==========" + user.getAddress() );
         }
 
         if (!TextUtils.isEmpty(user.getKey1())){
