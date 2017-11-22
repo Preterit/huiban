@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.ChoiceGroupDialog;
@@ -24,6 +27,7 @@ import com.feirui.feiyunbangong.entity.MyUser;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.PopWindow;
@@ -68,11 +72,21 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     private  Bitmap erweima;
     private  MyUser user;
     private String person_id;//个人id
+    private String mPostion;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_person_data);
+
+        //启动的同时 定位
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(1);
+            }
+        },100);
+
         Intent intent = getIntent();
         //从团队成员跳转过来的
         mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
@@ -179,30 +193,36 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         }
 
         if (!"".equals(mTdcy.getKey1()) && !"null".equals(mTdcy.getKey1())){
-           mTv_key1.setText(mTdcy.getKey1());
+            mTv_key1.setText(mTdcy.getKey1());
+            mTv_key1.setVisibility(View.VISIBLE);
         }else {
-            mTv_key1.setText("暂无");
+            mTv_key1.setVisibility(View.GONE);
         }
         if (!"".equals(mTdcy.getKey2()) && !"null".equals(mTdcy.getKey2())){
             mTv_key2.setText(mTdcy.getKey2());
+            mTv_key2.setVisibility(View.VISIBLE);
         }else {
-            mTv_key2.setText("暂无");
+            mTv_key2.setVisibility(View.GONE);
         }
         if (!"".equals(mTdcy.getKey3()) && !"null".equals(mTdcy.getKey3())){
             mTv_key3.setText(mTdcy.getKey3());
+            mTv_key3.setVisibility(View.VISIBLE);
         }else {
-            mTv_key3.setText("暂无");
+            mTv_key3.setVisibility(View.GONE);
         }
 
         if (!"".equals(mTdcy.getKey4()) && !"null".equals(mTdcy.getKey4())){
             mTv_key4.setText(mTdcy.getKey4());
+            mTv_key4.setVisibility(View.VISIBLE);
         }else {
-            mTv_key4.setText("暂无");
+            mTv_key4.setVisibility(View.GONE);
         }
         if (!"".equals(mTdcy.getKey5()) && !"null".equals(mTdcy.getKey5())){
             mTv_key5.setText(mTdcy.getKey5());
+            mTv_key5.setVisibility(View.VISIBLE);
         }else {
-            mTv_key5.setText("暂无");
+            mTv_key5.setVisibility(View.GONE);
+
         }
         if (mTdcy.getFriendstate() == 1){
             mPerson_add.setEnabled(false);
@@ -264,28 +284,35 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
         if (!"".equals(user.getKey1()) && !"null".equals(user.getKey1())){
             mTv_key1.setText(user.getKey1());
+            mTv_key1.setVisibility(View.VISIBLE);
         }else {
-            mTv_key1.setText("暂无");
+            mTv_key1.setVisibility(View.GONE);
         }
         if (!"".equals(user.getKey2()) && !"null".equals(user.getKey2())){
             mTv_key2.setText(user.getKey2());
+            mTv_key2.setVisibility(View.VISIBLE);
         }else {
-            mTv_key2.setText("暂无");
+            mTv_key2.setVisibility(View.GONE);
         }
         if (!"".equals(user.getKey3()) && !"null".equals(user.getKey3())){
             mTv_key3.setText(user.getKey3());
+            mTv_key3.setVisibility(View.VISIBLE);
         }else {
-            mTv_key3.setText("暂无");
+            mTv_key3.setVisibility(View.GONE);
         }
+
         if (!"".equals(user.getKey4()) && !"null".equals(user.getKey4())){
             mTv_key4.setText(user.getKey4());
+            mTv_key4.setVisibility(View.VISIBLE);
         }else {
-            mTv_key4.setText("暂无");
+            mTv_key4.setVisibility(View.GONE);
         }
         if (!"".equals(user.getKey5()) && !"null".equals(user.getKey5())){
             mTv_key5.setText(user.getKey5());
+            mTv_key5.setVisibility(View.VISIBLE);
         }else {
-            mTv_key5.setText("暂无");
+            mTv_key5.setVisibility(View.GONE);
+
         }
         mTv_bian_phone.setText(user.getPhone());
         mLl_person_phone.setOnClickListener(new OnClickListener() {
@@ -300,6 +327,18 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 }
             }
         });
+
+        if("0".equals(user.getType())){
+            mTv_postion.setText("暂时无法查看");
+        }else if ("1".equals(user.getType())){
+            if ("0".equals(user.getLimit_position())){//实时位置
+                Log.e("postion", "getLimit_position: -------------------------" + mPostion );
+                mTv_postion.setText(mPostion);
+            }else if ("1".equals(user.getLimit_position())){//固定位置
+                mTv_postion.setText(user.getPosition());
+            }
+        }
+
     }
 
     /*
@@ -355,15 +394,33 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 String key4 =String.valueOf(infor.get("staff_key4"));
                 String key5 =String.valueOf(infor.get("staff_key5"));
                 String friendstate = String.valueOf(infor.get("friendstate"));
+                String type = String.valueOf(infor.get("type"));
+                String position = String.valueOf(infor.get("position"));
+                String limit_position = String.valueOf(infor.get("limit_position"));
                 if (code == 2){
-                    user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3,key4,key5);
+                    user = new MyUser(name,head,sex,birth,address,phone,shop_url,key1,key2,key3,key4,key5,type,position,limit_position);
                     AppStore.myuser = user;
                     initView();
                 }else if (code == 3){
-                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,key4,key5,Integer.parseInt(friendstate));
+                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,
+                            key3,key4,key5,Integer.parseInt(friendstate),type,position,limit_position);
                     initData();
                 }
                 createErWeiMa(phone);
+            }else if (msg.what == 1){
+                //获取定位
+                BaiDuUtil.initLocation(PersonDataActivity.this, new BDLocationListener() {
+                    @Override
+                    public void onReceiveLocation(BDLocation bdLocation) {
+                        if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+                            mPostion = bdLocation.getAddrStr();
+                            Log.e("postion", "onReceiveLocation: -------------------------" + mPostion );
+                        }
+                    }
+
+                    @Override
+                    public void onConnectHotSpotMessage(String s, int i) {}
+                });
             }
         }
     };

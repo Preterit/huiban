@@ -153,6 +153,28 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         if (!TextUtils.isEmpty(user.getKey5())){
             tags.add(user.getKey5());
         }
+
+        if (!"".equals(user.getType())){
+            if ("0".equals(user.getType())){
+                mIv_share.setImageResource(R.drawable.check_no);
+            }else if("1".equals(user.getType())){
+                mIv_share.setImageResource(R.drawable.check_ok);
+            }
+
+            if ("0".equals(user.getLimit_position())) {
+                limit_position = "0";
+                mBtn_time_area.setBackgroundColor(Color.parseColor("#3686ff"));
+                mBtn_stone_area.setBackgroundColor(Color.parseColor("#ebebeb"));
+                mEv_share_area.setVisibility(View.GONE);
+            }else if ("1".equals(user.getLimit_position())){
+                limit_position = "1";
+                mBtn_stone_area.setBackgroundColor(Color.parseColor("#3686ff"));
+                mBtn_time_area.setBackgroundColor(Color.parseColor("#ebebeb"));
+                mEv_share_area.setVisibility(View.VISIBLE);
+                mEv_share_area.setText(user.getPosition());
+            }
+        }
+
         tagsAdapter = new GridViewAdapter(this);
         mRevise_gd.setAdapter(tagsAdapter);
 

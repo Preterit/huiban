@@ -31,6 +31,33 @@ public class TuanDuiChengYuan implements Serializable {
 	private String key3;
 	private String key4;
 	private String key5;
+	private String type2;//共享与否
+	private String position;//固定位置
+	private String limit_position;//实时位置
+
+	public String getType2() {
+		return type2;
+	}
+
+	public void setType2(String type2) {
+		this.type2 = type2;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getLimit_position() {
+		return limit_position;
+	}
+
+	public void setLimit_position(String limit_position) {
+		this.limit_position = limit_position;
+	}
 
 	public String getKey4() {
 		return key4;
@@ -274,7 +301,8 @@ public class TuanDuiChengYuan implements Serializable {
 	}
 
 	public TuanDuiChengYuan( String name, String head, String phone,String store_url,String sex,
-							 String birthday,String address,String key1,String key2,String key3,String key4,String key5,int friendstate) {
+							 String birthday,String address,String key1,String key2,String key3,String key4,String key5,int friendstate,
+							 String type2,String position,String limit_position) {
 		super();
 		this.name = name;
 		this.head = head;
@@ -289,6 +317,9 @@ public class TuanDuiChengYuan implements Serializable {
 		this.key4 = key4;
 		this.key5 = key5;
 		this.friendstate = friendstate;
+		this.type2 = type2;
+		this.position = position;
+		this.limit_position = limit_position;
 	}
 
 	public TuanDuiChengYuan(String id, String name, String head, String type,
@@ -331,6 +362,9 @@ public class TuanDuiChengYuan implements Serializable {
 				", key3='" + key3 + '\'' +
 				", key4='" + key4 + '\'' +
 				", key5='" + key5 + '\'' +
+				", type2='" + type2 + '\'' +
+				", position='" + position + '\'' +
+				", limit_position='" + limit_position + '\'' +
 				'}';
 	}
 }

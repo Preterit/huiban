@@ -125,9 +125,8 @@
         android:layout_marginTop="10dp">
         <TextView
             android:id="@+id/tv_key1"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
             android:background="@drawable/shape_person_tag"
             android:text="UI设计"
             android:textColor="#3686ff"
@@ -136,12 +135,12 @@
             android:ellipsize="end"
             android:maxEms="4"
             android:singleLine="true"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/tv_key2"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
             android:layout_marginLeft="25dp"
             android:background="@drawable/shape_person_tag"
             android:text="平面设计"
@@ -151,12 +150,12 @@
             android:ellipsize="end"
             android:maxEms="4"
             android:singleLine="true"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/tv_key3"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
             android:layout_marginLeft="25dp"
             android:background="@drawable/shape_person_tag"
             android:text="网页美工"
@@ -166,6 +165,7 @@
             android:ellipsize="end"
             android:maxEms="4"
             android:singleLine="true"
+            android:visibility="gone"
             />
 
     </LinearLayout>
@@ -179,8 +179,7 @@
         android:layout_marginTop="10dp">
         <TextView
             android:id="@+id/tv_key4"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:background="@drawable/shape_person_tag"
             android:text="UI设计"
@@ -190,11 +189,11 @@
             android:ellipsize="end"
             android:maxEms="4"
             android:singleLine="true"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/tv_key5"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_marginLeft="25dp"
             android:background="@drawable/shape_person_tag"
@@ -205,13 +204,7 @@
             android:ellipsize="end"
             android:maxEms="4"
             android:singleLine="true"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="30dp"
-            android:layout_marginLeft="25dp"
-            android:gravity="center"
+            android:visibility="gone"
             />
 
     </LinearLayout>
@@ -243,7 +236,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="北京 朝阳"
+            android:text=""
             android:textColor="#999"
             android:textSize="17sp"
             android:layout_marginLeft="20dp"
