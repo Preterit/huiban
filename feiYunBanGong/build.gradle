@@ -106,7 +106,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
     compile 'com.github.bumptech.glide:glide:3.5.2'
-    compile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'top.zibin:Luban:1.1.2'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile 'org.litepal.android:core:1.6.0'
