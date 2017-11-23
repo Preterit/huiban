@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -55,11 +56,17 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
     private RecyclerView.LayoutManager mManger,mManger2;
     private String mStr,string;
     private StringBuffer stringBuffer = new StringBuffer(256);
+    private SharedPreferences mShareds ;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_friends);
+
+        mShareds = getSharedPreferences("position",Context.MODE_PRIVATE);
+        mEditor = mShareds.edit();
+
         Intent intent = getIntent();
         mStr = intent.getStringExtra("friend");
         string = intent.getStringExtra("location");
@@ -174,6 +181,13 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
                             stringBuffer.append(bdLocation.getLatitude());//纬度
                             stringBuffer.append(",");
                             stringBuffer.append(bdLocation.getLongitude());//经度
+
+                            if (mEditor != null){
+                                mEditor.clear();
+                                mEditor.commit();
+                            }
+                            mEditor.putString("address",bdLocation.getAddrStr());
+
                         }
                         string = stringBuffer.toString();
                         Log.e("string", "onReceiveLocation: -------------------------" + string);

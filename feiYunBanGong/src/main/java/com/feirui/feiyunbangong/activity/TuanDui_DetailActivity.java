@@ -190,7 +190,9 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                                     String.valueOf(hm.get("sex")),String.valueOf(hm.get("birthday")),
                                      String.valueOf(hm.get("address")),String.valueOf(hm.get("staff_key1")),
                                     String.valueOf(hm.get("staff_key2")),String.valueOf(hm.get("staff_key3"))
-                                    ,String.valueOf(hm.get("staff_key4")),String.valueOf(hm.get("staff_key5")));
+                                    ,String.valueOf(hm.get("staff_key4")),String.valueOf(hm.get("staff_key5")),
+                                    String.valueOf(hm.get("type_position")),String.valueOf(hm.get("position")),
+                                    String.valueOf(hm.get("limit_position")));
 
                             tdcy.setTeam_member_list_id(hm.get("team_member_list_id") + "");
 

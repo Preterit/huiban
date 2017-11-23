@@ -65,6 +65,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
 	String type = "personal";// 注册类型,个人注册
 	private StringBuffer stringBuffer = new StringBuffer(256);
+    private String mPostion;
 
 	private static final int LOGIN_SUCESS = 1; // 登录成功
 	private static final int LOGIN_ERROR = 2;// 登录失败
@@ -114,9 +115,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 						@Override
 						public void onReceiveLocation(BDLocation bdLocation) {
 							if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
+								L.e("登录url=================stringBuffer===============" );
 								stringBuffer.append(bdLocation.getLatitude());//纬度
 								stringBuffer.append(",");
 								stringBuffer.append(bdLocation.getLongitude());//经度
+                                mPostion = bdLocation.getAddrStr();
 							}
 						}
 
@@ -140,6 +143,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
+				L.e("登录url================================" );
 				handler.sendEmptyMessage(LOCATION);
 			}
 		},100);
@@ -395,6 +399,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 		params.put("staff_mobile", et_login_username.getText().toString());
 		params.put("staff_password", et_login_password.getText().toString());
 		params.put("location",stringBuffer.toString());
+        params.put("position",mPostion);
 		String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
 		L.e("登录url=" + url + " params=" + params );
 		AsyncHttpServiceHelper.post(url, params,

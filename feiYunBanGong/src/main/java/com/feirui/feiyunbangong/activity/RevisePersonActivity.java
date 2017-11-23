@@ -72,7 +72,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
     private AddWordPopupWindow addPopupWindow;
     private ImageView mIv_share;
     private Button mBtn_time_area,mBtn_stone_area;
-    private String limit_position = "0",type = "0";//（0是实时位置1是固定位置）  是否开启共享位置（0不共享1共享）
+    private String limit_position,type;//（0是实时位置1是固定位置）  是否开启共享位置（0不共享1共享）
     private boolean flag = true;
 
     @Override

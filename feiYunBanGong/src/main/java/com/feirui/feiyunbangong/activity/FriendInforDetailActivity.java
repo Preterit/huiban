@@ -44,7 +44,7 @@ import java.util.List;
 
 public class FriendInforDetailActivity extends BaseActivity implements View.OnClickListener {
     private CircleImageView mCir_head;
-    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_revise,mTv_revise_group;
+    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_revise,mTv_revise_group,mTv_postion,mTv_change_area;
     private ImageView mIv_sex,mShop;
     private TextView mTv_birthday;
     private LinearLayout mLl_er_wei_ma,mPerson_btn;
@@ -115,7 +115,8 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
         mTv_key3 = (TextView) findViewById(R.id.tv_key3);
         mTv_key4 = (TextView) findViewById(R.id.tv_key4);
         mTv_key5 = (TextView) findViewById(R.id.tv_key5);
-
+        mTv_postion = (TextView) findViewById(R.id.tv_postion);
+        mTv_change_area = (TextView) findViewById(R.id.tv_change_area);
         mTv_revise = (TextView) findViewById(R.id.tv_revise);
         mTv_revise.setOnClickListener(this);
         mTv_revise_group = (TextView) findViewById(R.id.tv_revise_group);
@@ -216,6 +217,19 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
             mPerson_add.setBackgroundColor(getResources().getColor(R.color.juse));
             mTv_bian_phone.setText("好友可查看");
 
+        }
+
+
+        if("0".equals(mTdcy.getType2())){
+            mTv_postion.setText("暂时无法查看");
+        }else if ("1".equals(mTdcy.getType2())){
+            if ("0".equals(mTdcy.getLimit_position())){//实时位置
+                Log.e("postion", "getLimit_position: -------------------------" + mTdcy.getPosition());
+                mTv_change_area.setText("实时位置");
+            }else if ("1".equals(mTdcy.getLimit_position())){//固定位置
+                mTv_change_area.setText("固定位置");
+            }
+            mTv_postion.setText(mTdcy.getPosition());
         }
 
     }
@@ -430,7 +444,6 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
                 RequestParams params = new RequestParams();
                 params.put("group_id", groups.get(pos).getId() + "");
                 L.e("添加好友xxxxxx：" + groups.get(pos).getId());
-                params.put("group_id", groups.get(pos).getId() + "");
                 params.put("staff_mobile", mTdcy.getPhone());
 
 

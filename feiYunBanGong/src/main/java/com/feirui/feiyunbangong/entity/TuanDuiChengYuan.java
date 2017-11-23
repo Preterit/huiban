@@ -278,7 +278,8 @@ public class TuanDuiChengYuan implements Serializable {
 	public TuanDuiChengYuan(String id, String staff_id, String name,
 			String head, String type, String phone, String email,
 			String tag,String introduction,String store_url,String sex,
-			String birthday,String address,String key1,String key2,String key3,String key4,String key5) {
+			String birthday,String address,String key1,String key2,String key3,String key4,
+							String key5,String type2,String position,String limit_position) {
 		super();
 		this.id = id;
 		this.staff_id = staff_id;
@@ -298,6 +299,9 @@ public class TuanDuiChengYuan implements Serializable {
 		this.key3 = key3;
 		this.key4 = key4;
 		this.key5 = key5;
+		this.type2 = type2;
+		this.position = position;
+		this.limit_position = limit_position;
 	}
 
 	public TuanDuiChengYuan( String name, String head, String phone,String store_url,String sex,

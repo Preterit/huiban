@@ -1,6 +1,8 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -53,7 +55,7 @@ import java.util.List;
 
 public class PersonDataActivity extends BaseActivity implements OnClickListener {
     private CircleImageView mCir_head;
-    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_postion;
+    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_postion,mTv_change_area;
     private ImageView mIv_sex,mShop;
     private TextView mTv_birthday;
     private LinearLayout mLl_er_wei_ma,mPerson_btn;
@@ -72,21 +74,11 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     private  Bitmap erweima;
     private  MyUser user;
     private String person_id;//个人id
-    private String mPostion;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_person_data);
-
-        //启动的同时 定位
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                handler.sendEmptyMessage(1);
-            }
-        },100);
-
         Intent intent = getIntent();
         //从团队成员跳转过来的
         mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
@@ -145,6 +137,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mTv_key4 = (TextView) findViewById(R.id.tv_key4);
         mTv_key5 = (TextView) findViewById(R.id.tv_key5);
         mTv_postion = (TextView) findViewById(R.id.tv_postion);
+        mTv_change_area = (TextView) findViewById(R.id.tv_change_area);
         mPerson_btn = (LinearLayout) findViewById(R.id.person_btn);
 
         if (code == 2){//个人的
@@ -162,6 +155,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
 
     private void initData() {
+        Log.e("postion", "getLimit_position: -------------------------" + mTdcy.getPosition() );
         if (!"null".equals(mTdcy.getHead()) && null != mTdcy.getHead()
                 && !"img/1_1.png".equals(mTdcy.getHead())) {
             ImageLoader.getInstance().displayImage(mTdcy.getHead(), mCir_head);
@@ -249,6 +243,17 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
         }
 
+        if("0".equals(mTdcy.getType2())){
+            mTv_postion.setText("暂时无法查看");
+        }else if ("1".equals(mTdcy.getType2())){
+            if ("0".equals(mTdcy.getLimit_position())){//实时位置
+                Log.e("postion", "getLimit_position: -------------------------" + mTdcy.getPosition());
+                mTv_change_area.setText("实时位置");
+            }else if ("1".equals(mTdcy.getLimit_position())){//固定位置
+                mTv_change_area.setText("固定位置");
+            }
+            mTv_postion.setText(mTdcy.getPosition());
+        }
     }
 
     private void initView() {
@@ -332,11 +337,12 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
             mTv_postion.setText("暂时无法查看");
         }else if ("1".equals(user.getType())){
             if ("0".equals(user.getLimit_position())){//实时位置
-                Log.e("postion", "getLimit_position: -------------------------" + mPostion );
-                mTv_postion.setText(mPostion);
+                Log.e("postion", "getLimit_position: -------------------------" + user.getPosition());
+                mTv_change_area.setText("实时位置");
             }else if ("1".equals(user.getLimit_position())){//固定位置
-                mTv_postion.setText(user.getPosition());
+                mTv_change_area.setText("固定位置");
             }
+            mTv_postion.setText(user.getPosition());
         }
 
     }
@@ -407,20 +413,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                     initData();
                 }
                 createErWeiMa(phone);
-            }else if (msg.what == 1){
-                //获取定位
-                BaiDuUtil.initLocation(PersonDataActivity.this, new BDLocationListener() {
-                    @Override
-                    public void onReceiveLocation(BDLocation bdLocation) {
-                        if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
-                            mPostion = bdLocation.getAddrStr();
-                            Log.e("postion", "onReceiveLocation: -------------------------" + mPostion );
-                        }
-                    }
-
-                    @Override
-                    public void onConnectHotSpotMessage(String s, int i) {}
-                });
             }
         }
     };
@@ -465,7 +457,8 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
                 if (code == 2){
                     TuanDuiChengYuan chengYuan = new TuanDuiChengYuan("","",user.getName(),user.getHead(),
                             "",user.getPhone(),"","","",user.getShop(),user.getSex(),user.getBirthday(),
-                            user.getAddress(),user.getKey1(),user.getKey2(),user.getKey3(),user.getKey4(),user.getKey5());
+                            user.getAddress(),user.getKey1(),user.getKey2(),user.getKey3(),user.getKey4(),user.getKey5(),
+                            "","","");
                     clickShow(chengYuan);
                 }else {
                     clickShow(mTdcy);

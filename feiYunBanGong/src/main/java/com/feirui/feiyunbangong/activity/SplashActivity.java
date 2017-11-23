@@ -1,6 +1,8 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +36,7 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
     private ImageView iv;
     private boolean flag = true;// 长时间无任何反应的标识；
     private StringBuffer stringBuffer = new StringBuffer(256);
+    private String mPostion;
 
     private Handler handler = new Handler() {
 
@@ -65,6 +68,8 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
                                     stringBuffer.append(bdLocation.getLatitude());//纬度
                                     stringBuffer.append(",");
                                     stringBuffer.append(bdLocation.getLongitude());//经度
+                                    mPostion = bdLocation.getAddrStr();
+
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -87,6 +92,7 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         iv = (ImageView) findViewById(R.id.imageView1);
         // 压缩：
         iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
@@ -168,7 +174,8 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
         params.put("staff_password", (String) SPUtils.get(SplashActivity.this,
                 Constant.SP_PASSWORD, ""));
         params.put("location", stringBuffer.toString());
-        Log.e("string", "LoginMain: ---------LoginMain-------------" + stringBuffer.toString());
+        params.put("position",mPostion);
+        Log.e("string", "LoginMain: ---------LoginMain-------------" + params);
         String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
 
         Utils.doPost(null, this, url, params, new HttpCallBack() {
