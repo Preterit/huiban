@@ -25,7 +25,7 @@
             android:id="@+id/iv_head"
             android:layout_width="@dimen/size100"
             android:layout_height="@dimen/size100"
-            android:src="@drawable/user"/>
+            android:src="@drawable/user" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -33,62 +33,61 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x50"
-            android:text="张三"
+            android:ellipsize="end"
             android:maxEms="4"
             android:maxLines="2"
-            android:ellipsize="end"
-            />
+            android:text="张三" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_guanliyuan"
                 style="@style/ffffff_38"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:background="@drawable/shape_bt_bg_lanse"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_bt_bg_lanse"
                 android:gravity="center"
-                android:text="团长"
-               />
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="团长" />
 
 
             <TextView
                 android:id="@+id/tv_biaoqian"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:text="UI设计"
-                android:textSize="13sp"
-                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/shape_item_tag"
-                android:textColor="#ff8736"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:maxEms="4"
                 android:maxLines="1"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                />
+                android:text="UI设计"
+                android:textColor="#ff8736"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tv_biaoqian2"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/shape_person_tag"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="4"
+                android:maxLines="1"
                 android:text="UI设计"
                 android:textColor="#3686ff"
                 android:textSize="13sp"
-                android:gravity="center"
-                android:ellipsize="end"
-                android:maxEms="4"
-                android:maxLines="1"
-                android:layout_marginRight="10dp"
-
-                />
+                android:visibility="gone" />
         </LinearLayout>
 
 

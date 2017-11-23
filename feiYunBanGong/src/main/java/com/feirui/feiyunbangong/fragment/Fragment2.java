@@ -426,7 +426,9 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                                             hm.get("staff_key1")  + "",hm.get("staff_key2")  + "",hm.get("staff_key3")  + "",
                                             hm.get("staff_key4")  + "",
                                             hm.get("staff_key5")  + "",
-                                            hm.get("distance") + "",hm.get("store_url") + "",hm.get("is_friend") + "",hm.get("staff_mobile") + "");
+                                            hm.get("distance") + "",hm.get("store_url") + "",hm.get("is_friend") + "",
+                                            hm.get("staff_mobile") + "",hm.get("type") + "",
+                                            hm.get("position") + "",hm.get("limit_position") + "");
 
                                     listFriend.add(friend);
                                 }

@@ -60,33 +60,30 @@ public class ChengYuanAdapter extends MyBaseAdapter<TuanDuiChengYuan> {
             holder.iv_new_member.setVisibility(View.INVISIBLE);
         }
 
-          Log.e("团队成员页面", "tdcy.getTag()" + tdcy.getKey1());
+          Log.e("团队成员页面", "tdcy.getTag()" + tdcy);
 //        Log.e("团队成员页面", "name: " + name);
 //        Log.e("团队成员页面", "tdcy.getHead(): " + tdcy.getHead());
         //关键词判断
-        if (!TextUtils.isEmpty(tdcy.getKey1())) {
+        if (!"".equals(tdcy.getKey1()) && !"null".equals(tdcy.getKey1())) {
             holder.tv_tag.setVisibility(View.VISIBLE);
             holder.tv_tag.setText(tdcy.getKey1());
         } else {
-            holder.tv_tag.setVisibility(View.INVISIBLE);
+            holder.tv_tag.setVisibility(View.GONE);
         }
 
-        if (!TextUtils.isEmpty(tdcy.getKey2())) {
+        if (!"".equals(tdcy.getKey2()) && !"null".equals(tdcy.getKey2())) {
             holder.tv_biaoqian2.setVisibility(View.VISIBLE);
             holder.tv_biaoqian2.setText(tdcy.getKey2());
         } else {
-            holder.tv_biaoqian2.setVisibility(View.INVISIBLE);
+            holder.tv_biaoqian2.setVisibility(View.GONE);
         }
 
         if ("团长".equals(tdcy.getType()) || "副团长".equals(tdcy.getType())) {
             holder.tv_guanliyuan.setVisibility(View.VISIBLE);
             holder.tv_guanliyuan.setText(tdcy.getType());
-            holder.tv_tag.setVisibility(View.VISIBLE);
             holder.tv_biaoqian2.setVisibility(View.GONE);
         } else {
             holder.tv_guanliyuan.setVisibility(View.GONE);
-            holder.tv_tag.setVisibility(View.VISIBLE);
-            holder.tv_biaoqian2.setVisibility(View.VISIBLE);
         }
 
         if (tdcy.getHead() == null

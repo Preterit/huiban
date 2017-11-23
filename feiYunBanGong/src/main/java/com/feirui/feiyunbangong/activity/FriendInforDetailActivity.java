@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -160,29 +161,35 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
 
         if (!"".equals(mTdcy.getKey1()) && !"null".equals(mTdcy.getKey1())){
             mTv_key1.setText(mTdcy.getKey1());
+            mTv_key1.setVisibility(View.VISIBLE);
         }else {
-            mTv_key1.setText("暂无");
+            mTv_key1.setVisibility(View.GONE);
         }
         if (!"".equals(mTdcy.getKey2()) && !"null".equals(mTdcy.getKey2())){
             mTv_key2.setText(mTdcy.getKey2());
+            mTv_key2.setVisibility(View.VISIBLE);
         }else {
-            mTv_key2.setText("暂无");
+            mTv_key2.setVisibility(View.GONE);
         }
         if (!"".equals(mTdcy.getKey3()) && !"null".equals(mTdcy.getKey3())){
             mTv_key3.setText(mTdcy.getKey3());
+            mTv_key3.setVisibility(View.VISIBLE);
         }else {
-            mTv_key3.setText("暂无");
+            mTv_key3.setVisibility(View.GONE);
         }
 
         if (!"".equals(mTdcy.getKey4()) && !"null".equals(mTdcy.getKey4())){
             mTv_key4.setText(mTdcy.getKey4());
+            mTv_key4.setVisibility(View.VISIBLE);
         }else {
-            mTv_key4.setText("暂无");
+            mTv_key4.setVisibility(View.GONE);
         }
         if (!"".equals(mTdcy.getKey5()) && !"null".equals(mTdcy.getKey5())){
             mTv_key5.setText(mTdcy.getKey5());
+            mTv_key5.setVisibility(View.VISIBLE);
         }else {
-            mTv_key5.setText("暂无");
+            mTv_key5.setVisibility(View.GONE);
+
         }
         if (mTdcy.getFriendstate() == 1){
             mPerson_add.setEnabled(false);
@@ -269,7 +276,11 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
                 String key4 =String.valueOf(infor.get("staff_key4"));
                 String key5 =String.valueOf(infor.get("staff_key5"));
                 String friendstate = String.valueOf(infor.get("is_friend"));
-                mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,key3,key4,key5,Integer.parseInt(friendstate));
+                String type = String.valueOf(infor.get("type"));
+                String position = String.valueOf(infor.get("position"));
+                String limit_position = String.valueOf(infor.get("limit_position"));
+                mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,
+                        key3,key4,key5,Integer.parseInt(friendstate),type,position,limit_position);
                 initData();
                 createErWeiMa(phone);
             }

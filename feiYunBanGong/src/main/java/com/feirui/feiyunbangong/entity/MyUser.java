@@ -19,6 +19,9 @@ public class MyUser implements Serializable {
 	private String key3;
 	private String key4;
 	private String key5;
+	private String type;//共享与否
+	private String position;//固定位置
+	private String limit_position;//实时位置
 
 	public MyUser(String id, String name, String duty, String head,
 			String department, String sex, String birthday, String address,
@@ -37,7 +40,8 @@ public class MyUser implements Serializable {
 
 	public MyUser(String name, String head,
 				  String sex, String birthday, String address, String phone,
-				  String shop,String key1,String key2,String key3,String key4,String key5) {
+				  String shop,String key1,String key2,String key3,String key4,String key5,
+				  String type,String position,String limit_position) {
 		super();
 		this.name = name;
 		this.head = head;
@@ -51,6 +55,33 @@ public class MyUser implements Serializable {
 		this.key3 = key3;
 		this.key4 = key4;
 		this.key5 = key5;
+		this.type = type;
+		this.position = position;
+		this.limit_position = limit_position;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getLimit_position() {
+		return limit_position;
+	}
+
+	public void setLimit_position(String limit_position) {
+		this.limit_position = limit_position;
 	}
 
 	public String getKey4() {
@@ -204,6 +235,9 @@ public class MyUser implements Serializable {
 				", key3='" + key3 + '\'' +
 				", key4='" + key4 + '\'' +
 				", key5='" + key5 + '\'' +
+				", type='" + type + '\'' +
+				", position='" + position + '\'' +
+				", limit_position='" + limit_position + '\'' +
 				'}';
 	}
 }

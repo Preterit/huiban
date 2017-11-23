@@ -18,6 +18,33 @@ public class Friend implements Serializable{
 	private String distence;//距离
 	private String shopUrl;//小店地址
 	private String state;//是否是好友
+	private String type;//共享与否
+	private String position;//固定位置
+	private String limit_position;//实时位置
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getLimit_position() {
+		return limit_position;
+	}
+
+	public void setLimit_position(String limit_position) {
+		this.limit_position = limit_position;
+	}
 
 	public String getKey4() {
 		return key4;
@@ -131,7 +158,8 @@ public class Friend implements Serializable{
 		this.head = head;
 	}
 	public Friend(String name,String address,String head,String sex,String birthday,
-				  String key1,String key2,String key3,String key4,String key5,String distence,String shopUrl,String state,String phone){
+				  String key1,String key2,String key3,String key4,String key5,String distence,String shopUrl,String state,
+				  String phone,String type,String position,String limit_position){
 		this.name = name;
 		this.address = address;
 		this.head = head;
@@ -146,6 +174,9 @@ public class Friend implements Serializable{
 		this.shopUrl = shopUrl;
 		this.state = state;
 		this.phone = phone;
+		this.type = type;
+		this.position = position;
+		this.limit_position = limit_position;
 	}
 
 	@Override
@@ -165,6 +196,9 @@ public class Friend implements Serializable{
 				", distence='" + distence + '\'' +
 				", shopUrl='" + shopUrl + '\'' +
 				", state='" + state + '\'' +
+				", type='" + type + '\'' +
+				", position='" + position + '\'' +
+				", limit_position='" + limit_position + '\'' +
 				'}';
 	}
 }

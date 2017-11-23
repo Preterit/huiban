@@ -213,8 +213,9 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             }
                             tdcys.add(tdcy);
                         }
-                        Log.e("123", "success: ------------------" + tdcys );
+                        Log.e("tdcys", "success: ------------------" + tdcys );
                         adapter.add(tdcys);
+                        lv_chengyuan.setAdapter(adapter);
                         handler.sendEmptyMessage(6);
                     }
 
@@ -259,7 +260,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     }
                     break;
                 case 6:
-                    listenerSearch(); //搜索成员
+//                    listenerSearch(); //搜索成员
                     break;
             }
         }
@@ -268,8 +269,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     };
 
     private void setListView() {
-        lv_chengyuan.setAdapter(adapter);
-        adapter.add(tdcys);
+//        lv_chengyuan.setAdapter(adapter);
+//        adapter.add(tdcys);
     }
 
     private void setListener() {
