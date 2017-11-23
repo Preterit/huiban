@@ -67,6 +67,7 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.CircleImageView;
 import com.feirui.feiyunbangong.view.PView;
+import com.feirui.feiyunbangong.view.SelectRemindPopupWindow;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -86,7 +87,7 @@ import static com.feirui.feiyunbangong.state.AppStore.mIMKit;
  * @author feirui1
  */
 public class MainActivity extends BaseActivity
-        implements OnItemClickListener, OnTeamNoticeNumChanged, OnNewFriendNumChanged {
+        implements OnItemClickListener, OnTeamNoticeNumChanged, OnNewFriendNumChanged ,OnClickListener{
     LinearLayout[] btnArray = new LinearLayout[4];
 
     private Fragment work, linkman, message, circle;
@@ -95,7 +96,7 @@ public class MainActivity extends BaseActivity
     UpdateManager manager;
 
     private ImageView iv_erweima;
-
+    private SelectRemindPopupWindow window;// 弹出图片选择框；
     private Handler mHandler = new Handler(Looper.getMainLooper());
     /**
      * 当前显示的fragment
@@ -158,6 +159,10 @@ public class MainActivity extends BaseActivity
         } catch (Exception e) {
             Log.e("TAG", e.getMessage() + "/////////////////////////////////");
         }
+        //检查有没有设置头像
+        check();
+
+
     }
 
     private void getUser() {
@@ -192,15 +197,16 @@ public class MainActivity extends BaseActivity
         tv_num = (TextView) findViewById(R.id.tv_num);
         tv_num_team = (TextView) findViewById(R.id.tv_num_team);
         tv_num_contact = (TextView) findViewById(R.id.tv_num_contact);
+
     }
 
     @Override
     protected void onResume() {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 getUser();
+
             }
         }).start();
 
@@ -387,6 +393,8 @@ public class MainActivity extends BaseActivity
         transaction.commit();
     }
 
+
+
     class MyButtonListener implements OnClickListener {
 
         @Override
@@ -529,6 +537,7 @@ public class MainActivity extends BaseActivity
 
             case R.id.lv_right:
                 break;
+
         }
     }
 
@@ -779,4 +788,74 @@ public class MainActivity extends BaseActivity
 
     }
 
+    private void check(){
+        final String[] head = new String[6];
+        String url = UrlTools.url + UrlTools.DETAIL_ME;
+        RequestParams params = new RequestParams();
+        AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                JsonBean bean = JsonUtils.getMessage(new String (responseBody));
+                Log.e("主页面", "bean: "+bean.toString() );
+                if ("200".equals(bean.getCode())){
+                    HashMap<String,Object> infor = bean.getInfor().get(0);
+                    head[0] =String.valueOf(infor.get("staff_head"));
+                    head[1] =String.valueOf(infor.get("staff_key1"));
+                    head[2] =String.valueOf(infor.get("staff_key2"));
+                    head[3] =String.valueOf(infor.get("staff_key3"));
+                    head[4] =String.valueOf(infor.get("staff_key4"));
+                    head[5] =String.valueOf(infor.get("staff_key5"));
+                    check2(head);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                super.onFailure(statusCode, headers, responseBody, error);
+            }
+        });
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        }, 3000);
+
+
+    }
+
+    private void check2(String[] head){
+        Log.e("主页面check2", "head0: "+head[0]);
+        Log.e("主页面check2", "head0判断条件: "+head[0].isEmpty() );
+        Log.e("主页面check2", "head1: "+(head[1].isEmpty()) );
+        Log.e("主页面check2", "head2: "+(head[2].isEmpty()) );
+        Log.e("主页面check2", "head3: "+(head[3].isEmpty()) );
+        Log.e("主页面check2", "head4: "+(head[4].isEmpty()) );
+        Log.e("主页面check2", "head5: "+(head[5].isEmpty()) );
+        Log.e("主页面check2", "head1判断条件: "+(head[1].isEmpty()&&head[2].isEmpty()&&head[3].isEmpty()&&head[4].isEmpty()&&head[5].isEmpty()));
+        Log.e("主页面check2", "判断条件: "+(head[0].isEmpty()||(head[1].isEmpty()&&head[2].isEmpty()&&head[3].isEmpty()&&head[4].isEmpty()&&head[5].isEmpty())));
+        if(head[0].isEmpty()||(head[1].isEmpty()&&head[2].isEmpty()&&head[3].isEmpty()&&head[4].isEmpty()&&head[5].isEmpty())){
+            window = new SelectRemindPopupWindow(MainActivity.this,this);
+            // 显示窗口
+            window.showAtLocation(findViewById(R.id.rl),
+                    Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
+        }
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.gosit:
+                Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
+                intent2.putExtra("friend",2);
+                startActivity(intent2);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                break;
+            case R.id.noremind:
+                window.dismiss();
+                break;
+        }
+
+    }
 }

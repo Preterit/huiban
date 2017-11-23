@@ -73,7 +73,7 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
     private void initTop() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("采购");
+        setCenterString("采购审批");
         setRightVisibility(false);
         mTvMiaoShu = (TextView) findViewById(R.id.tv_miaoshu);
         mTvLeiXing = (TextView) findViewById(R.id.tv_leixing);
@@ -149,7 +149,7 @@ public class ShenPiCaiGouDetailActivity extends BaseActivity{
                         mTvBeiZhu.setText(in_fo.get("pur_remarks") + "");
 
                         Glide.with(ShenPiCaiGouDetailActivity.this).load( in_fo.get("pur_picture0") + "")
-                                .error( R.drawable.loading_0 )
+                                .error( R.drawable.pic_jiazai2 )
                                 .into(mIvPic);
 //                        ImageLoader.getInstance().displayImage(url  + String.valueOf(in_fo.get("pur_picture")), mIvPic);
                         JSONArray jsonArray = (JSONArray) in_fo.get("detail");

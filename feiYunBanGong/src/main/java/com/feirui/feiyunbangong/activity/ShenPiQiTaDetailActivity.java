@@ -41,7 +41,7 @@ public class ShenPiQiTaDetailActivity extends BaseActivity {
     private void initView() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("待审批");
+        setCenterString("其他审批");
         setRightVisibility(false);
 
         btn_pass.setOnClickListener(new View.OnClickListener() {

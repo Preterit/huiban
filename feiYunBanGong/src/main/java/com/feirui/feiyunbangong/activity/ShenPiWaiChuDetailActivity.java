@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -32,7 +33,7 @@ public class ShenPiWaiChuDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_shenpi_wai_chu_detail);
 
         initView();
-        setCenterString("待审批");
+        setCenterString("外出审批");
         getData();
     }
 
@@ -128,24 +129,26 @@ public class ShenPiWaiChuDetailActivity extends BaseActivity {
             @Override
             public void success(JsonBean bean) {
                 ArrayList<HashMap<String, Object>> infor = bean.getInfor();
-                Log.d("审批外出界面bean---------", "in_fo: " + bean.toString());
+                Log.e("审批-外出bean---------", "in_fo: " + bean.toString());
 
 
                 HashMap<String, Object> in_fo = infor.get(0);
-                Log.d("审批外出界面in_fo---------", "in_fo: " + in_fo.toString());
+                Log.e("审批-外出in_fo---------", "in_fo: " + in_fo.toString());
+
+
 
                 try {
                     //开始时间
-                    String out_start = String.valueOf(in_fo.get("out_start"));
+                    String out_start = String.valueOf(in_fo.get("start_time"));
                     tv_starttime.setText(out_start);
                     //提交时间截取的是开始时间，
                     String[] tj_time = out_start.split(" ");
                     tv_tijiaotime.setText(tj_time[0]);
                     //结束时间
-                    String out_end = String.valueOf(in_fo.get("out_end"));
+                    String out_end = String.valueOf(in_fo.get("finish_time"));
                     tv_endtime.setText(out_end);
                     //外出时间
-                    String out_time = String.valueOf(in_fo.get("out_time"));
+                    String out_time = String.valueOf(in_fo.get("out_days"));
                     end_time.setText(out_time);
                     //外出事由
                     String out_reason = String.valueOf(in_fo.get("out_reason"));
@@ -161,8 +164,11 @@ public class ShenPiWaiChuDetailActivity extends BaseActivity {
 
                     //头像
                     ImageLoader.getInstance().displayImage(String.valueOf(in_fo.get("staff_head")), mWaichuHead);
-                    if(!in_fo.get("out_picture0").equals("")){
-                        ImageLoader.getInstance().displayImage(String.valueOf(in_fo.get("out_picture0")), iv_sp_1);
+                    if(!in_fo.get("out_picture").equals("")){
+//                        ImageLoader.getInstance().displayImage(String.valueOf(in_fo.get("out_picture0")), iv_sp_1);
+                        Glide.with(ShenPiWaiChuDetailActivity.this).load( in_fo.get("pur_picture0") + "")
+                                .error( R.drawable.pic_jiazai2 )
+                                .into(iv_sp_1);
                     }
                     if(!in_fo.get("out_picture1").equals("")){
                         iv_sp_2.setVisibility(View.VISIBLE);

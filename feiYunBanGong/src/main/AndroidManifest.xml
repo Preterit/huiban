@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="82"
-    android:versionName="1.7.12">
+    android:versionCode="84"
+    android:versionName="1.7.14">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -409,6 +409,9 @@
         <!-- android:name=".FriendInfo" -->
         <!-- android:label="@string/title_activity_friend_info"> -->
         <!-- </activity> -->
+        <activity
+            android:name=".FriendInfoActivity"
+            android:label="@string/title_activity_friend_info" />
         <activity android:name=".activity.ShenPiQingJaDetailActivity" />
         <activity android:name=".activity.AddGoodActivity" />
         <activity android:name=".activity.ShenpiBaoxiaoDetailActivity" />
@@ -493,6 +496,21 @@
         <activity android:name=".activity.MoreFriendsActivity" />
         <activity android:name=".activity.RevisePersonActivity" />
         <activity android:name=".activity.FriendInforDetailActivity"></activity>
+        <!-- 支付宝声明页面 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
     </application>
 
 </manifest>

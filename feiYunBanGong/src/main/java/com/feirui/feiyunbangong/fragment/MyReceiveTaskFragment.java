@@ -26,7 +26,7 @@ import org.apache.http.Header;
 import java.util.List;
 
 /***
- * 自己接收的任务的列表
+ * 老版任务单---自己接收的任务的列表
  * */
 public class MyReceiveTaskFragment extends Fragment {
 

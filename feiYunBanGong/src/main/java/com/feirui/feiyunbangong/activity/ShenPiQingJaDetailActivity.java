@@ -38,7 +38,7 @@ public class ShenPiQingJaDetailActivity extends BaseActivity {
 
     private void initTop() {
         initTitle();
-        setCenterString("查看");
+        setCenterString("请假审批");
         setLeftDrawable(R.drawable.arrows_left);
 
         mTvLeave = (TextView) findViewById(R.id.tv_leave_type);

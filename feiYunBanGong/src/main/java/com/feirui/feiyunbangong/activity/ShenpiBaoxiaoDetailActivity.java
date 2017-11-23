@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -35,7 +36,7 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shenpi_baoxiao_detail);
         initView();
-        setCenterString("待报销");
+        setCenterString("报销审批");
         getData();
     }
 
@@ -119,9 +120,6 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         String url = UrlTools.url + UrlTools.APP_DETAIL;
 
-//        params.put("id", id + "");
-//        params.put("approval_type", approval_type + "");
-//        params.put("approval_id", approval_id + "");
         params.put("list_id", list_id + "");
 
         Utils.doPost(LoadingDialog.getInstance(this), this, url, params, new Utils.HttpCallBack() {
@@ -158,7 +156,7 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
                     e.printStackTrace();
                 }
 
-                String total_money = String.valueOf(in_fo.get("total_money"));
+                String total_money = String.valueOf(in_fo.get("expense_amount"));
                 tvAllBaoxiao.setText(total_money);
 
                 String name = String.valueOf(in_fo.get("staff_name"));
@@ -166,7 +164,9 @@ public class ShenpiBaoxiaoDetailActivity extends BaseActivity {
 
 
                 ImageLoader.getInstance().displayImage(String.valueOf(in_fo.get("staff_head")), mBaoxiaoHead);
-                ImageLoader.getInstance().displayImage(String.valueOf(in_fo.get("expense_pic0")), ivBaoxiaoDetail);
+                Glide.with(ShenpiBaoxiaoDetailActivity.this).load( in_fo.get("expense_picture") + "")
+                        .error( R.drawable.pic_jiazai2 )
+                        .into(ivBaoxiaoDetail);
             }
 
             @Override

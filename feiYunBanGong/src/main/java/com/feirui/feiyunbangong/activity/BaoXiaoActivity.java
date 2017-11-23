@@ -395,9 +395,9 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             sb_leixing.append(et_2.getText().toString().trim() + ",");
             sb_mingxi.append(et_3.getText().toString().trim() + ",");
 
-            Log.e("报销类型", "sb_price: "+sb_price.toString());
-            Log.e("报销金额", "sb_leixing: "+sb_leixing.toString() );
-            Log.e("报销明细", "sb_mingxi: "+sb_mingxi.toString() );
+            Log.e("审批-报销-报销类型", "sb_price: "+sb_price.toString());
+            Log.e("审批-报销-报销金额", "sb_leixing: "+sb_leixing.toString() );
+            Log.e("审批-报销-报销明细", "sb_mingxi: "+sb_mingxi.toString() );
 
 //            totle += Integer.parseInt(et_1.getText().toString().trim());
         }
@@ -438,7 +438,7 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
         for (int i = 0; i < shenPi.size(); i++) {
             sb_id.append(shenPi.get(i).getId());
             sb_id.append(",");
-            Log.e("报销页面--审批", "适配器上的数据" + sb_id);
+            Log.e("审批-报销", "适配器上的数据" + sb_id);
         }
         if(lv_add_chaosong.getChildCount()!=0){
             //从适配器中取出抄送人集合
@@ -452,9 +452,9 @@ public class BaoXiaoActivity extends BaseActivity implements OnClickListener {
             params.put("ccuser_id", cs_id.deleteCharAt(cs_id.length() - 1).toString());//抄送人id
         }
         params.put("approvers", sb_id.deleteCharAt(sb_id.length() - 1).toString());
-        params.put("expense_money", et_1.getText().toString().trim());
-        params.put("expense_type", et_2.getText().toString().trim());
-        params.put("expense_detail", et_3.getText().toString().trim());
+        params.put("expense_money", sb_price.toString().trim());
+        params.put("expense_type", sb_leixing.toString().trim());
+        params.put("expense_detail", sb_mingxi.toString().trim());
         String url = UrlTools.url1 + UrlTools.EXPENSE_APP_EXPENSE;
         Log.e("审批-报销", "url--"+url);
         Log.e("审批-报销", "params--"+params.toString());

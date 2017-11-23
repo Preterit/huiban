@@ -28,7 +28,7 @@ import java.util.List;
 
 
 /**
- * 自己发布的任务列表
+ * 老版任务单---自己发布的任务列表
  * */
 public class MyReleaseTaskFragment extends Fragment {
 

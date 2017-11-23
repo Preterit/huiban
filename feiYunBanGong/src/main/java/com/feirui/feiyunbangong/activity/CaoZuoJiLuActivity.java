@@ -356,6 +356,7 @@ public class CaoZuoJiLuActivity extends BaseActivity
 
             params.put("current_page", page + "");
             params.put("pagesize", "15");
+            Log.e("操作记录-我审批的", "params: "+shenpiurl+params.toString() );
             AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -118,6 +118,13 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
                 startActivityForResult(intent, 102);// 请求码；
             }
         });
+        footerTeamPic.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReleaseTask.this, SelectorTeamActivity.class);
+                startActivityForResult(intent, 200);// 请求码；
+            }
+        });
 
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
