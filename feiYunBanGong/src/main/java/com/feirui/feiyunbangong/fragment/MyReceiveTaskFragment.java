@@ -56,25 +56,28 @@ public class MyReceiveTaskFragment extends Fragment {
                 Gson gson=new Gson();
                 final MyTaskRoot root = gson.fromJson(new String(responseBody), MyTaskEntity.MyTaskRoot.class);
                 List<MyTaskInfo> taskinfo = root.getInfo();
-                adapter=new MyReceiveTaskAdapter(getActivity(),taskinfo);
-                receiveTaskList.setAdapter(adapter);
-                receiveTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
-                        Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("json", root.getInfo().get(position)+"");
-                        bundle.putString("id", root.getInfo().get(position).getId()+"");
-                        bundle.putString("staff_name", (String) root.getInfo().get(position).getName());
-                        bundle.putString("time", (String) root.getInfo().get(position).getTime());
-                        bundle.putString("task_txt", (String) root.getInfo().get(position).getTask_txt());
-                        bundle.putString("task_zt", (String) root.getInfo().get(position).getSubject());
-                        bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+root.getInfo().get(position).getStaff_head());
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-                });
+                if(root.getCode()==200){
+                    adapter=new MyReceiveTaskAdapter(getActivity(),taskinfo);
+                    receiveTaskList.setAdapter(adapter);
+                    receiveTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
+                            Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("json", root.getInfo().get(position)+"");
+                            bundle.putString("id", root.getInfo().get(position).getId()+"");
+                            bundle.putString("staff_name", (String) root.getInfo().get(position).getName());
+                            bundle.putString("time", (String) root.getInfo().get(position).getTime());
+                            bundle.putString("task_txt", (String) root.getInfo().get(position).getTask_txt());
+                            bundle.putString("task_zt", (String) root.getInfo().get(position).getSubject());
+                            bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+root.getInfo().get(position).getStaff_head());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+                }
+
             }
         });
 

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="84"
-    android:versionName="1.7.14">
+    android:versionCode="85"
+    android:versionName="1.7.15">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -12,7 +12,8 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
@@ -332,8 +333,7 @@
         <activity
             android:name=".activity.TuanDui_DetailActivity"
             android:label="@string/title_activity_detail_tuan_dui"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activity.DetailChengYuanActivity"
             android:hardwareAccelerated="false"
@@ -409,9 +409,7 @@
         <!-- android:name=".FriendInfo" -->
         <!-- android:label="@string/title_activity_friend_info"> -->
         <!-- </activity> -->
-        <activity
-            android:name=".FriendInfoActivity"
-            android:label="@string/title_activity_friend_info" />
+
         <activity android:name=".activity.ShenPiQingJaDetailActivity" />
         <activity android:name=".activity.AddGoodActivity" />
         <activity android:name=".activity.ShenpiBaoxiaoDetailActivity" />
@@ -466,14 +464,13 @@
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
         <activity android:name=".activity.ReleaseDetailActivity" />
-        <!--<activity-->
-            <!--android:name=".activity.RenWuDetailActivity"-->
-            <!--android:label="@string/title_activity_ren_wu_detail"-->
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
+        <!-- <activity -->
+        <!-- android:name=".activity.RenWuDetailActivity" -->
+        <!-- android:label="@string/title_activity_ren_wu_detail" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
         <activity android:name=".activity.WebViewActivity" />
         <!-- 个人小店 -->
         <activity android:name=".activity.AddShopActivity" />
-
         <activity
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
@@ -495,22 +492,21 @@
         <activity android:name=".activity.MyTaskActivity" />
         <activity android:name=".activity.MoreFriendsActivity" />
         <activity android:name=".activity.RevisePersonActivity" />
-        <activity android:name=".activity.FriendInforDetailActivity"></activity>
+        <activity android:name=".activity.FriendInforDetailActivity" />
         <!-- 支付宝声明页面 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+        <activity android:name=".activity.AboutUsActivity"></activity>
     </application>
 
 </manifest>

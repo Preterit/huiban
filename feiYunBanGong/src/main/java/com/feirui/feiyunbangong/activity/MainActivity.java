@@ -222,7 +222,7 @@ public class MainActivity extends BaseActivity
     }
 
     /**
-     *
+     *登录阿里百川
      */
     private void loginALi() {
         // 此实现不一定要放在Application onCreate中
@@ -847,10 +847,12 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.gosit:
+                window.dismiss();
                 Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
                 intent2.putExtra("friend",2);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+
                 break;
             case R.id.noremind:
                 window.dismiss();
