@@ -61,9 +61,9 @@
                     android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:background="@drawable/shape_item_tag"
+                    android:textColor="#ff8736"
                     android:gravity="center"
                     android:text="刘备"
-                    android:textColor="#ff8736"
                     android:textSize="12sp"
                     android:visibility="gone"/>
                 <TextView

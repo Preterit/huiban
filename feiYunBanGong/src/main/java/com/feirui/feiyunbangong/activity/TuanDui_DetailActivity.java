@@ -448,7 +448,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         }
         // 查看团队某个成员信息：
         TuanDuiChengYuan tdcy = tdcys.get(position - 1);
-        Intent intent = new Intent(this, PersonDataActivity.class);
+        Intent intent = new Intent(this, TeamPersonActivity.class);
         Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
         intent.putExtra("friend", 1);

@@ -901,6 +901,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                     RequestParams params = new RequestParams();
                     params.put("person_id", item.getPerson_id() + "");
                     params.put("group_id", groups.get(pos).getId() + "");
+                    Log.e("id", "OnResultMsg:------------------ "+ params );
                     Utils.doPost(null, getActivity(), url, params,
                             new HttpCallBack() {
                                 @Override
