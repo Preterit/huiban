@@ -80,8 +80,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         super.onCreate(arg0);
         setContentView(R.layout.activity_person_data);
         Intent intent = getIntent();
-        //从团队成员跳转过来的
-        mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
         code = intent.getIntExtra("friend",-1);
 
         //从个人资料跳转过来
@@ -91,9 +89,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
 
         initUi();
         setListener();
-        if (code == 1){
-            updateState();// 更改新团员状态；
-        }
     }
 
 
@@ -101,11 +96,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
     protected void onResume() {
         super.onResume();
         requestGroup();// 获取分组信息；
-        if (code == 1){ //团队的
-            initData();
-        }else {
-            getPersonDetail();
-        }
+        getPersonDetail();
     }
 
 
@@ -539,36 +530,6 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         } catch (WriterException e) {
             e.printStackTrace();
         }
-    }
-
-    private void updateState() {
-        // 老成员不需要更新状态；
-        if (mTdcy.getState() == 2) {
-            return;
-        }
-        String url = UrlTools.url + UrlTools.UPDATE_TEAM_STATE;
-        RequestParams params = new RequestParams();
-        params.put("team_member_list_id", mTdcy.getTeam_member_list_id() + "");
-        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
-                new Utils.HttpCallBack() {
-
-                    @Override
-                    public void success(JsonBean bean) {
-                        Log.e("团队成员界面", "成功"+bean.toString());
-                    }
-
-                    @Override
-                    public void failure(String msg) {
-                        Log.e("TAG", msg);
-                    }
-
-                    @Override
-                    public void finish() {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-
     }
 
     private void addFriend() {

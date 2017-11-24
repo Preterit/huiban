@@ -451,7 +451,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         Intent intent = new Intent(this, TeamPersonActivity.class);
         Log.e("查看团队某个成员信息", "tdcy: "+tdcy.toString() );
         intent.putExtra("tdcy", tdcy);
-        intent.putExtra("friend", 1);
         startActivity(intent);
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }

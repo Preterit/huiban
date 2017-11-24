@@ -58,7 +58,6 @@ public class TeamPersonActivity extends BaseActivity implements View.OnClickList
     private Button mPerson_add;
 
     private TuanDuiChengYuan mTdcy;
-    private int code;
     private List<Group> groups = new ArrayList<>();// 分组信息
     private ArrayList<String> group_name = new ArrayList<>();// 组名
     // 二维码名片：
@@ -71,13 +70,9 @@ public class TeamPersonActivity extends BaseActivity implements View.OnClickList
         Intent intent = getIntent();
         //从团队成员跳转过来的
         mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
-        code = intent.getIntExtra("friend",-1);
-
         initUi();
         setListener();
-        if (code == 1){
-            updateState();// 更改新团员状态；
-        }
+        updateState();// 更改新团员状态；
     }
 
 
@@ -85,9 +80,7 @@ public class TeamPersonActivity extends BaseActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         requestGroup();// 获取分组信息；
-        if (code == 1) { //团队的
-            initData();
-        }
+        initData();
     }
 
 
