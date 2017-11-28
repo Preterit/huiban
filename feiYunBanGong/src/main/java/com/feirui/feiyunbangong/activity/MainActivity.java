@@ -303,9 +303,12 @@ public class MainActivity extends BaseActivity
     // 获取未读消息数：
     private void getNum() {
         int num = mIMKit.getUnreadCount();// 未读消息数；
-        Log.e("获取未读消息数----------------", "getNum:-------------- "+num);
-        //设置桌面图标提示
-        mIMKit.setShortcutBadger(num);
+
+        Message message = new Message();
+        message.obj = num;
+        message.what = 1;
+        handler.sendMessage(message);
+
 
         if (num > 0) {
             String str = "";
@@ -740,6 +743,11 @@ public class MainActivity extends BaseActivity
                     MyUser user = new MyUser(name, duty, head, department, sex, birthday, address, phone);
                     user.setId(id);
                     AppStore.myuser = user;
+                    break;
+                case 1:
+                    Log.e("获取未读消息数----------------", "getNum:-------------- "+(int) msg.obj);
+                    //设置桌面图标提示
+                    mIMKit.setShortcutBadger((int) msg.obj);
                     break;
             }
         }

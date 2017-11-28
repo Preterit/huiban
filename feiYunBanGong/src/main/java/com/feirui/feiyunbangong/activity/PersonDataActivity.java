@@ -81,7 +81,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         setContentView(R.layout.activity_person_data);
         Intent intent = getIntent();
         code = intent.getIntExtra("friend",-1);
-
+        mTdcy = (TuanDuiChengYuan) intent.getSerializableExtra("tdcy");
         //从个人资料跳转过来
 
         //从工作圈跳转过来
@@ -134,9 +134,10 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         if (code == 2){//个人的
             setRightDrawable(R.drawable.xiugai);
             mPerson_btn.setVisibility(View.GONE);
-        }else if (code == 1){//团队成员的
+        }else if (code == 1){//搜索的
             setRightVisibility(false);
             mPerson_btn.setVisibility(View.VISIBLE);
+            initData();
             createErWeiMa(mTdcy.getPhone());
         }else if (code == 3){ //朋友圈或工作圈的
             setRightVisibility(false);

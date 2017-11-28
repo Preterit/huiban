@@ -325,29 +325,35 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
             super.handleMessage(msg);
             if (msg.what == 0){
                 JsonBean bean = (JsonBean) msg.obj;
-                HashMap<String,Object> infor = bean.getInfor().get(0);
-                personId = String.valueOf(infor.get("person_id"));
-                mStaffId = String.valueOf(infor.get("id"));
-                String name = String.valueOf(infor.get("staff_name"));
-                String head =String.valueOf(infor.get("staff_head"));
-                String birth =String.valueOf(infor.get("birthday"));
-                String sex =String.valueOf(infor.get("sex"));
-                String shop_url =String.valueOf(infor.get("store_url"));
-                String address =String.valueOf(infor.get("address"));
-                String phone =String.valueOf(infor.get("staff_mobile"));
-                String key1 =String.valueOf(infor.get("staff_key1"));
-                String key2 =String.valueOf(infor.get("staff_key2"));
-                String key3 =String.valueOf(infor.get("staff_key3"));
-                String key4 =String.valueOf(infor.get("staff_key4"));
-                String key5 =String.valueOf(infor.get("staff_key5"));
-                String friendstate = String.valueOf(infor.get("is_friend"));
-                String type = String.valueOf(infor.get("type"));
-                String position = String.valueOf(infor.get("position"));
-                String limit_position = String.valueOf(infor.get("limit_position"));
-                mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,
-                        key3,key4,key5,Integer.parseInt(friendstate),type,position,limit_position);
-                initData();
-                createErWeiMa(phone);
+                if (bean.getInfor().size() != 0){
+                    HashMap<String,Object> infor = bean.getInfor().get(0);
+                    personId = String.valueOf(infor.get("person_id"));
+                    mStaffId = String.valueOf(infor.get("id"));
+                    String name = String.valueOf(infor.get("staff_name"));
+                    String head =String.valueOf(infor.get("staff_head"));
+                    String birth =String.valueOf(infor.get("birthday"));
+                    String sex =String.valueOf(infor.get("sex"));
+                    String shop_url =String.valueOf(infor.get("store_url"));
+                    String address =String.valueOf(infor.get("address"));
+                    String phone =String.valueOf(infor.get("staff_mobile"));
+                    String key1 =String.valueOf(infor.get("staff_key1"));
+                    String key2 =String.valueOf(infor.get("staff_key2"));
+                    String key3 =String.valueOf(infor.get("staff_key3"));
+                    String key4 =String.valueOf(infor.get("staff_key4"));
+                    String key5 =String.valueOf(infor.get("staff_key5"));
+                    String friendstate = String.valueOf(infor.get("is_friend"));
+                    String type = String.valueOf(infor.get("type"));
+                    String position = String.valueOf(infor.get("position"));
+                    String limit_position = String.valueOf(infor.get("limit_position"));
+                    mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,
+                            key3,key4,key5,Integer.parseInt(friendstate),type,position,limit_position);
+                    initData();
+                    createErWeiMa(phone);
+                }else {
+                    FriendInforDetailActivity.this.finish();
+                    T.showShort(FriendInforDetailActivity.this,"请添加好友再查看");
+                }
+
             }
         }
     };
