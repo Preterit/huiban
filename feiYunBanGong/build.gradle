@@ -111,6 +111,7 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile 'org.litepal.android:core:1.6.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
+
 }
 
 
