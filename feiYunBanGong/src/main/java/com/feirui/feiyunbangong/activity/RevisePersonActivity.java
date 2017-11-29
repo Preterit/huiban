@@ -102,7 +102,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         mRevise_birth = (TextView) findViewById(R.id.revise_birth);
         mRevise_area = (EditText) findViewById(R.id.revise_area);
         mRevise_gd = (GridView) findViewById(R.id.revise_gd);
-        Utils.reMesureGridViewHeight(mRevise_gd);
+
         mIv_share = (ImageView) findViewById(R.id.iv_share);
         mBtn_time_area = (Button) findViewById(R.id.btn_time_area);
         mBtn_stone_area = (Button) findViewById(R.id.btn_stone_area);
@@ -177,6 +177,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
 
         tagsAdapter = new GridViewAdapter(this);
         mRevise_gd.setAdapter(tagsAdapter);
+        Utils.reMesureGridViewHeight(mRevise_gd);
 
         mRevise_gd.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -273,6 +274,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                  mBtn_time_area.setBackgroundColor(Color.parseColor("#3686ff"));
                  mBtn_stone_area.setBackgroundColor(Color.parseColor("#ebebeb"));
                  mEv_share_area.setVisibility(View.GONE);
+                 Utils.reMesureGridViewHeight(mRevise_gd);
                  break;
              case R.id.btn_stone_area://固定位置
                  limit_position = "1";

@@ -11,7 +11,7 @@
         android:layout_height="@dimen/title_bar"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="none"
         android:fillViewport="true" >
         <LinearLayout
@@ -208,50 +208,58 @@
                     android:layout_marginRight="10dp"/>
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/tv_share_area"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="#333"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:hint="请输入固定位置"
-                android:background="#ebebeb"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="6dp"
-                android:visibility="gone"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp">
-                <Button
-                    android:id="@+id/btn_time_area"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="37dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#3686ff"
-                    android:text="实时位置"
-                    android:textSize="18sp"
-                    android:textColor="#fff"/>
-
-                <Button
-                    android:id="@+id/btn_stone_area"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="37dp"
-                    android:layout_marginRight="28dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="30dp"
+                >
+                <EditText
+                    android:id="@+id/tv_share_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="#333"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:hint="请输入固定位置"
                     android:background="#ebebeb"
-                    android:text="固定位置"
-                    android:textColor="#fff"
-                    android:textSize="18sp"/>
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="28dp"
+                    android:layout_marginTop="6dp"
+                    android:visibility="gone"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+                    <Button
+                        android:id="@+id/btn_time_area"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="37dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#3686ff"
+                        android:text="实时位置"
+                        android:textSize="18sp"
+                        android:textColor="#fff"/>
+
+                    <Button
+                        android:id="@+id/btn_stone_area"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="37dp"
+                        android:layout_marginRight="28dp"
+                        android:background="#ebebeb"
+                        android:text="固定位置"
+                        android:textColor="#fff"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
