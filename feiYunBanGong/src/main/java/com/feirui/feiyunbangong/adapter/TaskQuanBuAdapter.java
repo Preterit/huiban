@@ -24,13 +24,13 @@ import java.util.HashMap;
  */
 
 public class
-TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
+TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private Context context;
     private OnItemClickListener mOnItemClickListener = null;
     private ArrayList<HashMap<String, Object>> data;
 
 
-    public TaskQuanBuAdapter(Context context, ArrayList<HashMap<String, Object>> map){
+    public TaskQuanBuAdapter(Context context, ArrayList<HashMap<String, Object>> map) {
         this.context = context;
         this.data = map;
     }
@@ -43,33 +43,33 @@ TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).tv_qbrw_name.setText(data.get(position).get("staff_name")+"");
+        ((ViewHolder) holder).tv_qbrw_name.setText(data.get(position).get("staff_name") + "");
         String a = (String) data.get(position).get("time");
-        String[] a1 =  a.split(" ");
+        String[] a1 = a.split(" ");
         ((ViewHolder) holder).tv_qbrw_time.setText(a1[0]);
-        ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("task_txt")+"");
-        ImageLoader.getInstance().displayImage(UrlTools.url_img+data.get(position).get("staff_head"), ((ViewHolder) holder).iv_qbrw_tx, ImageLoaderUtils.getSimpleOptions());
+        ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("task_txt") + "");
+        ImageLoader.getInstance().displayImage(UrlTools.url_img + data.get(position).get("staff_head"), ((ViewHolder) holder).iv_qbrw_tx, ImageLoaderUtils.getSimpleOptions());
 
-        Log.e("适配器", "onBindViewHolder: " +context);
+        Log.e("适配器", "onBindViewHolder: " + context);
 
-        if(data.get(position).get("state").equals(0)){
+        if (data.get(position).get("state").equals(0)) {
             ((ViewHolder) holder).tv_qbrw_state.setText("待接单");
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#50B3FD"));
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.icon_daijiedan);
-        }else if (data.get(position).get("state").equals(1)){
+        } else if (data.get(position).get("state").equals(1)) {
             ((ViewHolder) holder).tv_qbrw_state.setText("进行中");
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#FB4475"));
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.ongoing);
-        }else if (data.get(position).get("state").equals(2)){
+        } else if (data.get(position).get("state").equals(2)) {
             ((ViewHolder) holder).tv_qbrw_state.setText("完成");
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
-        }else if (data.get(position).get("state").equals(3)){
+        } else if (data.get(position).get("state").equals(3)) {
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
             ((ViewHolder) holder).tv_qbrw_state.setText("拒绝");
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
         }
-        ((ViewHolder) holder).tv_qbrw_target.setText(data.get(position).get("task_time")+"完成");
+        ((ViewHolder) holder).tv_qbrw_target.setText(data.get(position).get("task_time") + "完成");
         if (mOnItemClickListener != null) {
             //为ItemView设置监听器
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,19 +90,20 @@ TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView tv_qbrw_name,tv_qbrw_time,tv_qbrw_title,tv_qbrw_target,tv_qbrw_state;
-        private ImageView iv_qbrw_tx,iv_qbrw_state;
+        private TextView tv_qbrw_name, tv_qbrw_time, tv_qbrw_title, tv_qbrw_target, tv_qbrw_state;
+        private ImageView iv_qbrw_tx, iv_qbrw_state;
+
         public ViewHolder(View itemView) {
             super(itemView);
             LocalDisplay.init(itemView.getContext());
             itemView.setOnClickListener(this);
-            tv_qbrw_name= (TextView) itemView.findViewById(R.id.tv_qbrw_name);
-            tv_qbrw_time= (TextView) itemView.findViewById(R.id.tv_qbrw_time);
-            tv_qbrw_title= (TextView) itemView.findViewById(R.id.tv_qbrw_title);
-            tv_qbrw_target= (TextView) itemView.findViewById(R.id.tv_qbrw_target);
-            tv_qbrw_state= (TextView) itemView.findViewById(R.id.tv_qbrw_state);
-            iv_qbrw_tx=(ImageView) itemView.findViewById(R.id.iv_qbrw_tx);
-            iv_qbrw_state=(ImageView) itemView.findViewById(R.id.iv_qbrw_state);
+            tv_qbrw_name = (TextView) itemView.findViewById(R.id.tv_qbrw_name);
+            tv_qbrw_time = (TextView) itemView.findViewById(R.id.tv_qbrw_time);
+            tv_qbrw_title = (TextView) itemView.findViewById(R.id.tv_qbrw_title);
+            tv_qbrw_target = (TextView) itemView.findViewById(R.id.tv_qbrw_target);
+            tv_qbrw_state = (TextView) itemView.findViewById(R.id.tv_qbrw_state);
+            iv_qbrw_tx = (ImageView) itemView.findViewById(R.id.iv_qbrw_tx);
+            iv_qbrw_state = (ImageView) itemView.findViewById(R.id.iv_qbrw_state);
 
         }
 

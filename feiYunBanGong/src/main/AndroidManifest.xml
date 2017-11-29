@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="85"
-    android:versionName="1.7.15">
+    android:versionCode="86"
+    android:versionName="1.7.16">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -405,13 +405,6 @@
         <activity
             android:name=".activity.MyShopActivity"
             android:label="@string/title_activity_my_shop" />
-        <!-- <activity -->
-        <!-- android:name=".FriendInfo" -->
-        <!-- android:label="@string/title_activity_friend_info"> -->
-        <!-- </activity> -->
-        <activity
-            android:name=".FriendInfoActivity"
-            android:label="@string/title_activity_friend_info" />
         <activity android:name=".activity.ShenPiQingJaDetailActivity" />
         <activity android:name=".activity.AddGoodActivity" />
         <activity android:name=".activity.ShenpiBaoxiaoDetailActivity" />

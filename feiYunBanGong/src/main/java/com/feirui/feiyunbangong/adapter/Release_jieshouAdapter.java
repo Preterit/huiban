@@ -1,7 +1,6 @@
 package com.feirui.feiyunbangong.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,17 +19,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by lice on 2017/7/7.全部任务单
+ * Created by lice on 2017/11/27.我的任务--接收任务
  */
 
-public class
-TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+public class Release_jieshouAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private Context context;
     private OnItemClickListener mOnItemClickListener = null;
     private ArrayList<HashMap<String, Object>> data;
 
 
-    public TaskQuanBuAdapter(Context context, ArrayList<HashMap<String, Object>> map) {
+    public Release_jieshouAdapter(Context context, ArrayList<HashMap<String, Object>> map) {
         this.context = context;
         this.data = map;
     }
@@ -50,25 +48,9 @@ TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
         ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("task_txt") + "");
         ImageLoader.getInstance().displayImage(UrlTools.url_img + data.get(position).get("staff_head"), ((ViewHolder) holder).iv_qbrw_tx, ImageLoaderUtils.getSimpleOptions());
 
-        Log.e("适配器", "onBindViewHolder: " + context);
+        Log.e("jieshouAdapter适配器", "onBindViewHolder: " + context);
 
-        if (data.get(position).get("state").equals(0)) {
-            ((ViewHolder) holder).tv_qbrw_state.setText("待接单");
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#50B3FD"));
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.icon_daijiedan);
-        } else if (data.get(position).get("state").equals(1)) {
-            ((ViewHolder) holder).tv_qbrw_state.setText("进行中");
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#FB4475"));
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.ongoing);
-        } else if (data.get(position).get("state").equals(2)) {
-            ((ViewHolder) holder).tv_qbrw_state.setText("完成");
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
-        } else if (data.get(position).get("state").equals(3)) {
-            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
-            ((ViewHolder) holder).tv_qbrw_state.setText("拒绝");
-            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
-        }
+
         ((ViewHolder) holder).tv_qbrw_target.setText(data.get(position).get("task_time") + "完成");
         if (mOnItemClickListener != null) {
             //为ItemView设置监听器
