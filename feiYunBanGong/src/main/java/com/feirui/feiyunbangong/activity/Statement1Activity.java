@@ -234,7 +234,7 @@ public class Statement1Activity extends BaseActivity implements OnClickListener 
     switch (requestCode) {
       case 102:
         ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-        if (spr.getId() == 0) {
+        if (spr.getId().equals("0")) {
           return;
         }
         mShenPiRecAdapter.addShenPiRen(spr);

@@ -85,8 +85,8 @@ public class ShenPiRenActivity extends BaseActivity implements
 //                        if (String.valueOf(hm.get("phone")).equals("null")) {
 //                            continue;
 //                        }
-                        ShenPiRen spr = new ShenPiRen(Integer.parseInt(String
-                                .valueOf(hm.get("id"))),
+                        ShenPiRen spr = new ShenPiRen(String
+                                .valueOf(hm.get("id")),
                                 String.valueOf(hm.get("staff_name")),
                                 String.valueOf(hm.get("staff_head")),
                                 String.valueOf(hm.get("staff_department")));

@@ -80,7 +80,6 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 Gson gson = new Gson();
                 RenWuDanBean renwudan = gson.fromJson(new String(responseBody), RenWuDanBean.class);
                 if (renwudan.getCode() == 200) {
-
                     rwd_tv_sj.setText(renwudan.getInfo().get(0).getTime() + "");
                     rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
                     rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");

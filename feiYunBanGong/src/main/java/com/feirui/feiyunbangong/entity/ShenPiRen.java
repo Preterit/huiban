@@ -9,7 +9,7 @@ public class ShenPiRen implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private String id;
 	private String name;
 	private String head;
 	private String department;
@@ -17,13 +17,21 @@ public class ShenPiRen implements Serializable{
 	public ShenPiRen() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
+
+	//	public int getId() {
+//		return id;
+//	}
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 	public String getName() {
 		return name;
 	}
@@ -48,7 +56,7 @@ public class ShenPiRen implements Serializable{
 		this.head = head;
 		this.department = department;
 	}
-	public ShenPiRen(int id, String name, String head, String department) {
+	public ShenPiRen(String id, String name, String head, String department) {
 		super();
 		this.id = id;
 		this.name = name;

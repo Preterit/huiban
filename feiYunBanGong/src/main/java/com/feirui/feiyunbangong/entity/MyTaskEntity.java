@@ -7,7 +7,7 @@ public class MyTaskEntity {
 
     public class MyTaskInfo {
         private int id;
-
+private int accept_id;
         private String subject;   //标题
 
         private String task_txt;   //任务内容
@@ -20,6 +20,14 @@ public class MyTaskEntity {
 
         private String name;
        private String staff_head;
+
+        public int getAccept_id() {
+            return accept_id;
+        }
+
+        public void setAccept_id(int accept_id) {
+            this.accept_id = accept_id;
+        }
 
         public String getStaff_head() {
             return staff_head;

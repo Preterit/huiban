@@ -72,6 +72,7 @@ public class TaskJinXingZhongFragment extends BaseFragment implements YRecyclevi
                 bundle.putString("json", json.getInfor().get(position-1)+"");
                 bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
+                bundle.putString("accept_id", (Integer) json.getInfor().get(position-1).get("accept_id")+"");
                 bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
                 bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
