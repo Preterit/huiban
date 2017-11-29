@@ -1,8 +1,12 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -59,6 +64,9 @@ import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.ImmersedStatusbarUtils;
 import com.feirui.feiyunbangong.utils.JPushUtil;
 import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.NumberBadger.BadgeNumberManager;
+import com.feirui.feiyunbangong.utils.NumberBadger.BadgeNumberManagerXiaoMi;
+import com.feirui.feiyunbangong.utils.NumberBadger.MobileBrand;
 import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UpdateManager;
@@ -97,7 +105,6 @@ public class MainActivity extends BaseActivity
 
     private ImageView iv_erweima;
     private SelectRemindPopupWindow window;// 弹出图片选择框；
-    private Handler mHandler = new Handler(Looper.getMainLooper());
     /**
      * 当前显示的fragment
      */
@@ -297,15 +304,18 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        getNum();
+//        getNum();
     }
 
     // 获取未读消息数：
     private void getNum() {
         int num = mIMKit.getUnreadCount();// 未读消息数；
-        Log.e("获取未读消息数----------------", "getNum:-------------- "+num);
-        //设置桌面图标提示
-        mIMKit.setShortcutBadger(num);
+        Log.e("获取未读消息数----------------", "getNum:----num---------- "+num);
+        Message message = new Message();
+        message.obj = num;
+        message.what = 1;
+        handler.sendMessage(message);
+
 
         if (num > 0) {
             String str = "";
@@ -741,11 +751,44 @@ public class MainActivity extends BaseActivity
                     user.setId(id);
                     AppStore.myuser = user;
                     break;
+                case 1:
+                    Log.e("获取未读消息数----------------", "getNum:-------------- "+(int) msg.obj);
+                    //设置桌面图标提示
+
+                    //设置应用在桌面上显示的角标
+                    if (!Build.MANUFACTURER.equalsIgnoreCase(MobileBrand.XIAOMI)) {
+                        BadgeNumberManager.from(MainActivity.this).setBadgeNumber((int) msg.obj);
+                    }else {
+                        setXiaomiBadgeNumber((int) msg.obj);
+                        mIMKit.setShortcutBadger((int) msg.obj);
+                    }
+                    break;
             }
         }
 
 
     };
+
+    private void setXiaomiBadgeNumber(int num) {
+        NotificationManager notificationManager = (NotificationManager) MainActivity.this.
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = new NotificationCompat.Builder(MainActivity.this)
+                .setSmallIcon(MainActivity.this.getApplicationInfo().icon)
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle("")
+                .setContentText("收到消息啦~")
+                .setTicker("ticker")
+                .setAutoCancel(true)  //点击通知后自动清除
+                .build();
+//        Notification notification = new NotificationCompat.Builder(MainActivity.this)
+//                .setContentText("")
+//                .setContentTitle("")
+//                .setTicker("ticker")
+//                .build();
+        BadgeNumberManagerXiaoMi.setBadgeNumber(notification, num);
+        notificationManager.notify(500, notification);
+
+    }
 
     protected void imageBrower(int position, ArrayList<String> urls2) {
         Intent intent = new Intent(MainActivity.this, ImagePagerActivity.class);

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/act_person_backgroud"
         android:orientation="vertical">
 
@@ -61,7 +61,7 @@
 
         <TextView
             android:id="@+id/tv_birthday"
-            android:layout_width="74dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp"
@@ -74,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp">
             <TextView
                 android:id="@+id/tv_revise"
                 android:layout_width="60dp"
@@ -121,8 +122,9 @@
             android:visibility="gone">
             <Button
                 android:id="@+id/person_talk"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="28dp"
                 android:background="#3686ff"
@@ -132,8 +134,9 @@
 
             <Button
                 android:id="@+id/person_add"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:layout_marginRight="24dp"
                 android:background="#ffb136"
                 android:text="加好友"

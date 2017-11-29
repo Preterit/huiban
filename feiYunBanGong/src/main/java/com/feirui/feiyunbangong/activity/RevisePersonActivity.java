@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -74,11 +75,13 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
     private Button mBtn_time_area,mBtn_stone_area;
     private String limit_position,type;//（0是实时位置1是固定位置）  是否开启共享位置（0不共享1共享）
     private boolean flag = true;
+    private SharedPreferences mShareds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revise_person);
+        mShareds = getSharedPreferences("position",Context.MODE_PRIVATE);
         //设置在activity启动的时候输入法默认是不开启的
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         user = (MyUser)getIntent().getSerializableExtra("user");
@@ -365,7 +368,8 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
             }
             params.put("position",mEv_share_area.getText().toString().trim());
         }else {
-            params.put("position","实时");
+            Log.e("position", "savePersonData: -----------------------" + mShareds.getString("mPostion","") );
+            params.put("position",mShareds.getString("mPostion",""));
         }
 
 

@@ -9,7 +9,7 @@
         android:layout_height="@dimen/title_bar"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/act_person_backgroud">
         <RelativeLayout
@@ -56,7 +56,7 @@
         </LinearLayout>
         <TextView
             android:id="@+id/tv_birthday"
-            android:layout_width="74dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2020-01-01"
             android:textColor="#fff"

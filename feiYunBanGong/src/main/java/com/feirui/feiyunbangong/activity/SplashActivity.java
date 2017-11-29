@@ -37,6 +37,8 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
     private boolean flag = true;// 长时间无任何反应的标识；
     private StringBuffer stringBuffer = new StringBuffer(256);
     private String mPostion;
+    private SharedPreferences mShareds;
+    private SharedPreferences.Editor mEditor;
 
     private Handler handler = new Handler() {
 
@@ -93,6 +95,8 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        mShareds = getSharedPreferences("position",Context.MODE_PRIVATE);
+        mEditor = mShareds.edit();//获取编辑器
         iv = (ImageView) findViewById(R.id.imageView1);
         // 压缩：
         iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
@@ -176,6 +180,9 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
         params.put("location", stringBuffer.toString());
         params.put("position",mPostion);
         Log.e("string", "LoginMain: ---------LoginMain-------------" + params);
+//        if (mEditor.)
+        mEditor.putString("mPostion",mPostion); //保存登录时的位置信息
+        mEditor.commit();
         String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
 
         Utils.doPost(null, this, url, params, new HttpCallBack() {
