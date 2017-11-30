@@ -263,10 +263,9 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode){
-
             case 102:
                 ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-                if (spr.getId().equals("0")) {
+                if (spr==null){
                     return;
                 }
                 addFriendAdapter.addFriend(spr);
