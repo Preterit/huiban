@@ -4,7 +4,7 @@ package com.feirui.feiyunbangong.entity;
 public class AddShenHe {
 
 	private String name1;
-	private int id;
+	private String id;
 	
 	
 	public AddShenHe(String name1) {
@@ -14,25 +14,19 @@ public class AddShenHe {
 	
 	
 	
-	public AddShenHe(String name1, int id) {
+	public AddShenHe(String name1, String id) {
 		super();
 		this.name1 = name1;
 		this.id = id;
 	}
 
-
-
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-
-
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-
-
 
 	public AddShenHe() {
 	}

@@ -266,7 +266,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
             case 102:
                 ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-                if (spr.getId() ==0) {
+                if (spr.getId().equals("0")) {
                     return;
                 }
                 addFriendAdapter.addFriend(spr);

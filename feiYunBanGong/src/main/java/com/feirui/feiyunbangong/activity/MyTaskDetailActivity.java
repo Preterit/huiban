@@ -40,7 +40,7 @@ import static com.feirui.feiyunbangong.R.id.iv_fankui;
 
 
 public class MyTaskDetailActivity extends BaseActivity implements View.OnClickListener {
-    private String staff_name, time, task_txt, task_zt, staff_head, id;
+    private String staff_name, time, task_txt, task_zt, staff_head, id,accept_id;
     private TextImageView iv_head;
     private TextView tv_name, tv_time, tv_task, tv_zt;
     private ImageView iv_complete;
@@ -63,6 +63,7 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
         id = getIntent().getStringExtra("id");
+        accept_id =getIntent().getStringExtra("accept_id");
         initView();
         initData();
     }
@@ -70,6 +71,7 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         RequestParams params2 = new RequestParams();
         String url2 = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/Single_details";
         params2.put("id", id + "");
+        params2.put("accept_id", accept_id + "");
         AsyncHttpServiceHelper.post(url2, params2, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
