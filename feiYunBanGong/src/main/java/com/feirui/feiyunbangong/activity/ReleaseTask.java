@@ -142,9 +142,9 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         switch_xs.setOnClickListener(this);
         tv_kssj.setOnClickListener(this);
 
-        //取消按钮
-        //       quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
-        //        footerTeamPic.setOnClickListener(new OnClickListener() {
+////        取消按钮
+////               quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
+//                footerTeamPic.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                Intent intent=new Intent(ReleaseTask.this,SelectorTeamActivity.class);
@@ -169,10 +169,10 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
             T.showShort(ReleaseTask.this, "请输入任务的标题");
             return;
         }
-        if (TextUtils.isEmpty(tvTaskCount.getText().toString().trim())) {
-            T.showShort(ReleaseTask.this, "请输入任务的内容");
-            return;
-        }
+//        if (TextUtils.isEmpty(tvTaskCount.getText().toString().trim())) {
+//            T.showShort(ReleaseTask.this, "请输入任务的内容");
+//            return;
+//        }
         RequestParams params = new RequestParams();
 
         params.put("subject", tvTaskTitle.getText().toString().trim());
@@ -209,18 +209,22 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         for (int i = 0; i < friendList.size(); i++) {
             sb_id.append(friendList.get(i).getId() + ",");
         }
+        if (friendList.size()==0){
+            T.showShort(ReleaseTask.this, "请选择好友或分组");
+            return;
+        }
         if(sb_id!=null) {
             params.put("chooser", sb_id.deleteCharAt(sb_id.length() - 1)
                     .toString());
         }
-//        ArrayList<Infor> teamList=addTeamAdapter.getDataSet();
-//        StringBuffer team_id=new StringBuffer();
-//        for(int i=0;i<teamList.size();i++){
-//            team_id.append(teamList.get(i).getTeam_id()+",");
-//        }
-//        if(team_id!=null){
-//             // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
-//        }
+        ArrayList<Infor> teamList=addTeamAdapter.getDataSet();
+        StringBuffer team_id=new StringBuffer();
+        for(int i=0;i<teamList.size();i++){
+            team_id.append(teamList.get(i).getTeam_id()+",");
+        }
+        if(team_id!=null){
+             // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
+        }
         Log.e("任务单界面参数", "params: "+params.toString());
         //http://123.57.45.74/feiybg1/public/index.php/home_api/Task/add_task
         String url = UrlTools.pcUrl + UrlTools.TASK_ADDTASK;
@@ -266,12 +270,12 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
             case 102:
                 ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-                if (spr.getId()!=null) {
+                if (spr.getId().equals("0")) {
                     return;
                 }
                 addFriendAdapter.addFriend(spr);
                 break;
-            case 103:
+            case 200:
                 Infor infor=(Infor)data.getSerializableExtra("Team");
                 if(infor.getTeam_id()==0){
                     return;
@@ -324,7 +328,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
     public String getDateStr(Date date) {
         // 获得日历实例
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         String format = sdf.format(date);
 

@@ -62,12 +62,20 @@ public class SelectorTeamActivity extends BaseActivity implements OnItemClickLis
                 List<Infor> teaminfo = root.getInfor();
                 if(teaminfo!=null) {
                     adapter = new TeamListAdapter(SelectorTeamActivity.this, teaminfo);
-
                     teamListView.setAdapter(adapter);
                 }else{
                     Toast.makeText(SelectorTeamActivity.this,"加载中",Toast.LENGTH_SHORT).show();
                 }
                 }
+        });
+        teamListView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent();
+                intent.putExtra("Team", (Infor)adapter.getItem(position));
+                setResult(200,intent);
+                finish();
+            }
         });
 
     }
@@ -76,7 +84,7 @@ public class SelectorTeamActivity extends BaseActivity implements OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent=new Intent();
         intent.putExtra("Team", (Infor)adapter.getItem(position));
-        setResult(103,intent);
+        setResult(200,intent);
         finish();
     }
 

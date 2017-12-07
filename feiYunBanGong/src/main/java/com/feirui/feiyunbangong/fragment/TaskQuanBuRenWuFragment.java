@@ -58,9 +58,9 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
                 Bundle bundle = new Bundle();
                 bundle.putString("json", json.getInfor().get(position-1)+"");
                 bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
-                Log.e("全部页面的点击时间", "id: "+(Integer)json.getInfor().get(position-1).get("id") );
+                bundle.putString("accept_id", (Integer)json.getInfor().get(position-1).get("accept_id")+"");
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
-                bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
+                bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
                 bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
                 bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
