@@ -133,7 +133,7 @@ public class DetailLianXiRenActivity extends BaseActivity {
 
 				str = LianXiRenUtil.readConnect(DetailLianXiRenActivity.this);
 
-				Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
+//				Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
 
 				RequestParams params = new RequestParams();
 				params.put("phone", str[1]);
