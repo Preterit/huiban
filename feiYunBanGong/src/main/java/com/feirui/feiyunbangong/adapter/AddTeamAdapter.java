@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by 郭新胜 on 2017/4/7.
  */
 
-public class AddTeamAdapter extends  RecyclerView.Adapter<AddTeamAdapter.ViewHolder> {
+public class AddTeamAdapter extends RecyclerView.Adapter<AddTeamAdapter.ViewHolder> {
 
 
     private ArrayList<Infor> mList;
@@ -49,12 +49,9 @@ public class AddTeamAdapter extends  RecyclerView.Adapter<AddTeamAdapter.ViewHol
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.teamname.setText(mList.get(position).getTeam_name());
-
-
-       // ImageLoader.getInstance().displayImage(mList.get(position).getHead(), holder.ivHead, mDisplayImageOptions);
+        holder.ivHead.setImageResource(R.drawable.user);
+        // ImageLoader.getInstance().displayImage(mList.get(position).getHead(), holder.ivHead, mDisplayImageOptions);
     }
-
-
     public void removeAt(int position) {
         mList.remove(position);
         notifyItemRemoved(position);

@@ -44,7 +44,7 @@ TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).tv_qbrw_name.setText(data.get(position).get("staff_name")+"");
-        String a = (String) data.get(position).get("time");
+        String a = (String) data.get(position).get("release_time");
         String[] a1 =  a.split(" ");
         ((ViewHolder) holder).tv_qbrw_time.setText(a1[0]);
         ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("task_txt")+"");

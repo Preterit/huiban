@@ -17,41 +17,79 @@ public class MyTaskReleEntity {
         private int type;
 
         private int statue;
+        private String staff_name;
+        private String staff_head;
+        private String reward_status;
 
-        public void setTask_txt(String task_txt){
+        public String getStaff_name() {
+            return staff_name;
+        }
+
+        public void setStaff_name(String staff_name) {
+            this.staff_name = staff_name;
+        }
+
+        public String getStaff_head() {
+            return staff_head;
+        }
+
+        public void setStaff_head(String staff_head) {
+            this.staff_head = staff_head;
+        }
+
+        public String getReward_status() {
+            return reward_status;
+        }
+
+        public void setReward_status(String reward_status) {
+            this.reward_status = reward_status;
+        }
+
+        public void setTask_txt(String task_txt) {
             this.task_txt = task_txt;
         }
-        public String getTask_txt(){
+
+        public String getTask_txt() {
             return this.task_txt;
         }
-        public void setId(int id){
+
+        public void setId(int id) {
             this.id = id;
         }
-        public int getId(){
+
+        public int getId() {
             return this.id;
         }
-        public void setTime(String time){
+
+        public void setTime(String time) {
             this.time = time;
         }
-        public String getTime(){
+
+        public String getTime() {
             return this.time;
         }
-        public void setSubject(String subject){
+
+        public void setSubject(String subject) {
             this.subject = subject;
         }
-        public String getSubject(){
+
+        public String getSubject() {
             return this.subject;
         }
-        public void setType(int type){
+
+        public void setType(int type) {
             this.type = type;
         }
-        public int getType(){
+
+        public int getType() {
             return this.type;
         }
-        public void setStatue(int statue){
+
+        public void setStatue(int statue) {
             this.statue = statue;
         }
-        public int getStatue(){
+
+        public int getStatue() {
             return this.statue;
         }
 
@@ -62,24 +100,29 @@ public class MyTaskReleEntity {
 
         private String msg;
 
-        private List<ReleaseInfo> info ;
+        private List<ReleaseInfo> info;
 
-        public void setCode(int code){
+        public void setCode(int code) {
             this.code = code;
         }
-        public int getCode(){
+
+        public int getCode() {
             return this.code;
         }
-        public void setMsg(String msg){
+
+        public void setMsg(String msg) {
             this.msg = msg;
         }
-        public String getMsg(){
+
+        public String getMsg() {
             return this.msg;
         }
-        public void setInfo(List<ReleaseInfo> info){
+
+        public void setInfo(List<ReleaseInfo> info) {
             this.info = info;
         }
-        public List<ReleaseInfo> getInfo(){
+
+        public List<ReleaseInfo> getInfo() {
             return this.info;
         }
 

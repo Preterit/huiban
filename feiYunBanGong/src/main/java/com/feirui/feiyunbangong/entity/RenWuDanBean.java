@@ -57,12 +57,13 @@ public class RenWuDanBean {
          * addresslimit : 未开启
          */
 
-        private int chooser;
+        private String chooser;
         private String choose_team;
         private String choose_group;
         private String subject;
         private String task_txt;
-        private String time;
+        private String release_time;
+        private String begin_time;
         private String reward_limit;
         private String number_limit;
         private String reward;
@@ -70,11 +71,11 @@ public class RenWuDanBean {
         private Object address;
         private String addresslimit;
 
-        public int getChooser() {
+        public String getChooser() {
             return chooser;
         }
 
-        public void setChooser(int chooser) {
+        public void setChooser(String chooser) {
             this.chooser = chooser;
         }
 
@@ -110,12 +111,20 @@ public class RenWuDanBean {
             this.task_txt = task_txt;
         }
 
-        public String getTime() {
-            return time;
+        public String getRelease_time() {
+            return release_time;
         }
 
-        public void setTime(String time) {
-            this.time = time;
+        public String getBegin_time() {
+            return begin_time;
+        }
+
+        public void setBegin_time(String begin_time) {
+            this.begin_time = begin_time;
+        }
+
+        public void setRelease_time(String release_time) {
+            this.release_time = release_time;
         }
 
         public String getReward_limit() {

@@ -63,10 +63,10 @@ public class MyReleaseTaskActivity extends BaseActivity implements View.OnClickL
                     Toast.makeText(this, "请选择任务进度", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (et_jindu.getText().toString().trim() == null||et_jindu.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(this, "任务进度不能为空", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (et_jindu.getText().toString().trim() == null||et_jindu.getText().toString().trim().isEmpty()) {
+//                    Toast.makeText(this, "任务进度不能为空", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 RequestParams params = new RequestParams();
                 String url = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/feedback";
                 params.put("button", button + "");

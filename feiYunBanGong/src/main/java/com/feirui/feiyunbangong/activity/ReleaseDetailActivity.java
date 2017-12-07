@@ -61,7 +61,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_release_detail);
         task_zt = getIntent().getStringExtra("task_zt");
         staff_name = getIntent().getStringExtra("staff_name");
-        time = getIntent().getStringExtra("time");
+        time = getIntent().getStringExtra("release_time");
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
         id = getIntent().getStringExtra("id");
@@ -74,7 +74,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         RequestParams params2 = new RequestParams();
         String url2 = UrlTools.pcUrl + UrlTools.RENWU_DETAIL;
         params2.put("id", id + "");
-        params2.put("accept_id", accept_id + "");
+//        params2.put("accept_id", accept_id + "");
         AsyncHttpServiceHelper.post(url2, params2, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -82,7 +82,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 Gson gson = new Gson();
                 RenWuDanBean renwudan = gson.fromJson(new String(responseBody), RenWuDanBean.class);
                 if (renwudan.getCode() == 200) {
-                    rwd_tv_sj.setText(renwudan.getInfo().get(0).getTime() + "");
+                    rwd_tv_sj.setText(renwudan.getInfo().get(0).getBegin_time() + "");
                     rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
                     rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
                     rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
@@ -108,7 +108,6 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 } else {
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 super.onFailure(statusCode, headers, responseBody, error);
@@ -116,13 +115,11 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
-
     private void setView() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rwd_rec_jdr.setLayoutManager(linearLayoutManager);
-        Log.e("infor", "onSuccess: -----------adapter-------------------------" + infor);
         adapter = new JieDanRenAdapter(ReleaseDetailActivity.this, infor);
         rwd_rec_jdr.setAdapter(adapter);
 

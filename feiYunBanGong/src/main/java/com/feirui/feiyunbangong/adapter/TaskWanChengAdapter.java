@@ -40,9 +40,9 @@ public class TaskWanChengAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).tv_qbrw_name.setText(data.get(position).get("staff_name")+"");
-        String a = (String) data.get(position).get("time");
+        String a = (String) data.get(position).get("release_time");
         String[] a1 =  a.split(" ");
         ((ViewHolder) holder).tv_qbrw_time.setText(a1[0]);
         ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("task_txt")+"");
@@ -51,6 +51,17 @@ public class TaskWanChengAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
         ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
         ((ViewHolder) holder).tv_qbrw_target.setText(data.get(position).get("task_time")+"完成");
+        if (mOnItemClickListener != null) {
+            //为ItemView设置监听器
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView, position);
+                }
+            });
+
+        }
     }
 
 

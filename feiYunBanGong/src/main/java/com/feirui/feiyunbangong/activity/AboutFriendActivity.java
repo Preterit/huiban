@@ -126,7 +126,7 @@ public class AboutFriendActivity extends BaseActivity implements
 
 					@Override
 					public void finish() {
-						
+
 					}
 				});
 		strGroups.add("+");
@@ -148,23 +148,23 @@ public class AboutFriendActivity extends BaseActivity implements
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-		case R.id.bt_submit:
-			submit();
-			break;
-		case R.id.ll_choice:
-			// 弹出对话框：
-			ChoiceGroupDialog dialog = new ChoiceGroupDialog(new CallBack() {
-				@Override
-				public void OnResultMsg(String res) {
-					if ("+".equals(res)) {
-						addGroup();// 添加分组；
-						return;
+			case R.id.bt_submit:
+				submit();
+				break;
+			case R.id.ll_choice:
+				// 弹出对话框：
+				ChoiceGroupDialog dialog = new ChoiceGroupDialog(new CallBack() {
+					@Override
+					public void OnResultMsg(String res) {
+						if ("+".equals(res)) {
+							addGroup();// 添加分组；
+							return;
+						}
+						tv_choice.setText(res);
 					}
-					tv_choice.setText(res);
-				}
-			}, this, strGroups, "选择分组");
-			dialog.show();
-			break;
+				}, this, strGroups, "选择分组");
+				dialog.show();
+				break;
 		}
 	}
 
@@ -173,15 +173,15 @@ public class AboutFriendActivity extends BaseActivity implements
 
 		XiuGaiDialog tianjia = new XiuGaiDialog("添加分组", "添加", "输入新增组名",
 				AboutFriendActivity.this, new AlertCallBack1() {
-					@Override
-					public void onOK(final String name) {
-						requestGroup();
-					}
+			@Override
+			public void onOK(final String name) {
+				requestGroup();
+			}
 
-					@Override
-					public void onCancel() {
-					}
-				});
+			@Override
+			public void onCancel() {
+			}
+		});
 		tianjia.show();
 
 	}
@@ -221,13 +221,12 @@ public class AboutFriendActivity extends BaseActivity implements
 
 						@Override
 						public void failure(String msg) {
-							Toast.makeText(AboutFriendActivity.this, msg, 0)
-									.show();
+							Toast.makeText(AboutFriendActivity.this, msg, 0).show();
 						}
 
 						@Override
 						public void finish() {
-							
+
 						}
 					});
 

@@ -1,13 +1,16 @@
 package com.feirui.feiyunbangong.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.MyTaskDetailActivity;
 import com.feirui.feiyunbangong.adapter.TaskWanChengAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -60,6 +63,25 @@ public class TaskYiWanChengFragment extends BaseFragment implements YRecycleview
                     return;
                 }
                 adapter.addAll(json.getInfor());
+            }
+        });
+        adapter.setOnItemClickListener(new TaskWanChengAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Log.e("点击位置==============", "onItemClick: "+ position);
+                //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
+                Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("json", json.getInfor().get(position-1)+"");
+                bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
+                bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
+                bundle.putString("accept_id", (Integer) json.getInfor().get(position-1).get("accept_id")+"");
+                bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
+                bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
+                bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
+                bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }

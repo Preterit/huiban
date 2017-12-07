@@ -66,7 +66,7 @@
             android:id="@+id/tvreleCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="发布内容"
+            android:text="发布内容（可不填）"
             android:layout_marginLeft="5dp"
             />
 
@@ -103,7 +103,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         >
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -210,7 +209,6 @@
             app:layout_constraintVertical_bias="0.529" />
 
         <com.feirui.feiyunbangong.view.SwitchView
-            app:isOpened="true"
             android:id="@+id/switch_xs"
             android:layout_width="60dp"
             android:layout_height="30dp"
@@ -265,7 +263,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="元/时"
+                    android:text="元/人"
                     android:layout_marginRight="8dp"
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_marginLeft="8dp"
@@ -307,7 +305,6 @@
             android:id="@+id/textView9" />
 
         <com.feirui.feiyunbangong.view.SwitchView
-            app:isOpened="true"
             android:id="@+id/switch_rsxz"
             android:layout_width="60dp"
             android:layout_height="30dp"
@@ -418,7 +415,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginTop="5dp"
-                android:visibility="gone"
                 >
 
                 <TextView

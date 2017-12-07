@@ -24,8 +24,11 @@ import com.baidu.mapapi.model.LatLng;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.JinDuAdapter;
 import com.feirui.feiyunbangong.entity.JinDuBean;
+import com.feirui.feiyunbangong.entity.RenWuDanBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.TextImageView;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -42,7 +45,7 @@ import static com.feirui.feiyunbangong.R.id.iv_fankui;
 public class MyTaskDetailActivity extends BaseActivity implements View.OnClickListener {
     private String staff_name, time, task_txt, task_zt, staff_head, id,accept_id;
     private TextImageView iv_head;
-    private TextView tv_name, tv_time, tv_task, tv_zt;
+    private TextView tv_name, tv_time, tv_task, tv_zt,rwd_tv_sj,rwd_tv_wz,rwd_tv_xs,rwd_tv_xz;
     private ImageView iv_complete;
     MapView mMapView;
     BaiduMap mBaiduMap;
@@ -66,6 +69,7 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         accept_id =getIntent().getStringExtra("accept_id");
         initView();
         initData();
+        initDate();
     }
     private void initData() {
         RequestParams params2 = new RequestParams();
@@ -81,11 +85,18 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
                 if (jindu.getInfo1() != null) {
                     adapter = new JinDuAdapter(MyTaskDetailActivity.this, jindu.getInfo1());
                     lv_jindu.setAdapter(adapter);
+                    Utils.reMesureListViewHeight(lv_jindu);
                 } else {
                     lv_jindu.setVisibility(View.GONE);
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initView() {
@@ -106,8 +117,33 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         iv_complete = (ImageView) findViewById(iv_fankui);
         iv_complete.setOnClickListener(this);
         ImageLoader.getInstance().displayImage(staff_head, iv_head, ImageLoaderUtils.getSimpleOptions());
-    }
+        rwd_tv_sj= (TextView) findViewById(R.id.rwd_tv_sj);
+        rwd_tv_wz= (TextView) findViewById(R.id.rwd_tv_wz);
+        rwd_tv_xs= (TextView) findViewById(R.id.rwd_tv_xs);
+        rwd_tv_xz= (TextView) findViewById(R.id.rwd_tv_xz);
 
+    }
+    private void initDate() {
+        RequestParams params2 = new RequestParams();
+        String url2 = UrlTools.pcUrl + UrlTools.RENWU_DETAIL;
+        params2.put("id", id + "");
+//        params2.put("accept_id", accept_id + "");
+        AsyncHttpServiceHelper.post(url2, params2, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                Gson gson = new Gson();
+                RenWuDanBean renwudan = gson.fromJson(new String(responseBody), RenWuDanBean.class);
+                if (renwudan.getCode() == 200) {
+                    rwd_tv_sj.setText(renwudan.getInfo().get(0).getBegin_time() + "");
+                    rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
+                    rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
+                    rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
+                } else {
+                }
+            }
+        });
+    }
     private void initLocation() {
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
