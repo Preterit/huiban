@@ -15,6 +15,7 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ClockInActivity;
 import com.feirui.feiyunbangong.activity.CustomerActivity;
 import com.feirui.feiyunbangong.activity.ExamineActivity;
+import com.feirui.feiyunbangong.activity.MainActivity;
 import com.feirui.feiyunbangong.activity.ProjectActivity;
 import com.feirui.feiyunbangong.activity.ReadFormActivity;
 import com.feirui.feiyunbangong.activity.RenWuListActivity;
@@ -60,7 +61,7 @@ public class Fragment1 extends BaseFragment {
     // 打卡，报表，项目，审批，客户管理，数据报表
     @PView(click = "onClick")
     LinearLayout ll_clockIn, ll_statement, ll_project, ll_customer,
-            ll_data, llTaskList;
+            ll_data, llTaskList,leftll;
     @PView(click = "onClick")
     ConstraintLayout ll_examine;
 
@@ -235,6 +236,9 @@ public class Fragment1 extends BaseFragment {
             case R.id.llTaskList://任务单列表 RenWuListActivity 新任务单  RenWuDanActivity  TasksListActivity旧任务单
                 startActivity(new Intent(getActivity(), RenWuListActivity.class));
                 getActivity().overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                break;
+            case R.id.leftll: // 个人信息侧滑
+                ((com.feirui.feiyunbangong.activity.MainActivity) getActivity()).openLeft();
                 break;
         }
     }

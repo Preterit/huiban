@@ -179,8 +179,8 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
         Log.e("修改个人简介", "id " + td);
         //判断隐身  0隐身/1在线
         params.put("stealth", sv_yinshen.isOpened()?"0":"1");//隐身状态
-        params.put("id", td.getTid());//团队id
-        params.put("introduction", et_email.getText().toString() + "");//签名
+        params.put("team_id", td.getTid());//团队id
+
         params.put("t_remark", et_remark.getText().toString() + "");//备注
 
          Log.e("修改个人简介", "params " + params.toString());

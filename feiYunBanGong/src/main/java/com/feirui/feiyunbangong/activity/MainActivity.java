@@ -42,6 +42,9 @@ import com.alibaba.mobileim.conversation.IYWConversationService;
 import com.alibaba.mobileim.conversation.IYWConversationUnreadChangeListener;
 import com.alibaba.mobileim.conversation.YWMessage;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
 import com.feirui.feiyunbangong.AddShopActivity;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
@@ -118,7 +121,6 @@ public class MainActivity extends BaseActivity
     public DrawerLayout drawerlayout;
     @PView
     private ListView lv_left;
-    //private ArrayAdapter adapter;
     private SimpleAdapter adapter;
 
     @PView
@@ -158,7 +160,6 @@ public class MainActivity extends BaseActivity
         initUI();
         try {
 
-//            Happlication.addActivity(this);
             setupView();
             addListener();
             setListView();
@@ -169,13 +170,11 @@ public class MainActivity extends BaseActivity
         //检查有没有设置头像
         check();
 
-
     }
 
     private void getUser() {
 
         RequestParams params=new RequestParams();
-//        params.put("staff_id",AppStore.user.getInfor().get(0).get("id") + "");
         AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.DETAIL_ME, params,new AsyncHttpResponseHandler() {
 
             @Override
@@ -275,7 +274,8 @@ public class MainActivity extends BaseActivity
         IYWPushListener msgPushListener = new IYWPushListener() {
             @Override
             public void onPushMessage(IYWContact arg0, YWMessage arg1) {
-                int num = mIMKit.getUnreadCount();// 未读消息数；
+                // 未读消息数；
+                int num = mIMKit.getUnreadCount();
                 if (num > 0) {
                     tv_num.setVisibility(View.VISIBLE);
                     tv_num.setText("" + num);
@@ -307,15 +307,14 @@ public class MainActivity extends BaseActivity
 //        getNum();
     }
 
-    // 获取未读消息数：
     private void getNum() {
-        int num = mIMKit.getUnreadCount();// 未读消息数；
+        // 未读消息数；
+        int num = mIMKit.getUnreadCount();
         Log.e("获取未读消息数----------------", "getNum:----num---------- "+num);
         Message message = new Message();
         message.obj = num;
         message.what = 1;
         handler.sendMessage(message);
-
 
         if (num > 0) {
             String str = "";
@@ -411,24 +410,31 @@ public class MainActivity extends BaseActivity
         public void onClick(View v) {
 
             drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
-            drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED); //关闭手势滑动
+            //关闭手势滑动
+            drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             try {
                 switch (v.getId()) {
                     case R.id.fragment1:
                         selectedIndex = 0;
-                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
+                        //打开手势滑动
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                         break;
                     case R.id.fragment2:
                         selectedIndex = 1;
-                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
+                        //打开手势滑动
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                         break;
                     case R.id.fragment3:
                         selectedIndex = 2;
-                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
+                        //打开手势滑动
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 
                         break;
                     case R.id.fragment4:
                         selectedIndex = 3;
+                        //打开手势滑动
+                        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
                         break;
                 }
 
@@ -699,7 +705,7 @@ public class MainActivity extends BaseActivity
     }
 
     Handler handler = new Handler() {
-        @SuppressLint("HandlerLeak")
+        @Override
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
@@ -759,7 +765,10 @@ public class MainActivity extends BaseActivity
                     if (!Build.MANUFACTURER.equalsIgnoreCase(MobileBrand.XIAOMI)) {
                         BadgeNumberManager.from(MainActivity.this).setBadgeNumber((int) msg.obj);
                     }else {
-                        setXiaomiBadgeNumber((int) msg.obj);
+                        if ((int) msg.obj > 0){
+                            setXiaomiBadgeNumber((int) msg.obj - 1);
+                        }
+
                         mIMKit.setShortcutBadger((int) msg.obj);
                     }
                     break;
@@ -780,11 +789,6 @@ public class MainActivity extends BaseActivity
                 .setTicker("ticker")
                 .setAutoCancel(true)  //点击通知后自动清除
                 .build();
-//        Notification notification = new NotificationCompat.Builder(MainActivity.this)
-//                .setContentText("")
-//                .setContentTitle("")
-//                .setTicker("ticker")
-//                .build();
         BadgeNumberManagerXiaoMi.setBadgeNumber(notification, num);
         notificationManager.notify(500, notification);
 
@@ -799,8 +803,8 @@ public class MainActivity extends BaseActivity
                 R.anim.aty_zoomout);
     }
 
+    @Override
     protected void onDestroy() {
-
         super.onDestroy();
 
     }

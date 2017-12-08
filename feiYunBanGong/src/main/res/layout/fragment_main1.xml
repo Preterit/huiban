@@ -12,7 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
         android:background="@color/bar">
+        <LinearLayout
+            android:id="@+id/leftll"
+            android:layout_width="@dimen/x144"
+            android:layout_height="@dimen/title_bar"
+            android:gravity="center" >
 
+            <ImageView
+                android:id="@+id/leftIv"
+                android:layout_width="@dimen/x57"
+                android:layout_height="@dimen/x57"
+                android:layout_gravity="center"
+                android:src="@drawable/homepage_l" />
+        </LinearLayout>
         <TextView
             android:id="@+id/centerTv"
             style="@style/ffffff_60"

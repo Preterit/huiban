@@ -49,7 +49,8 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 		new Handler().post(new Runnable() {
 			@Override
 			public void run() {
-				BaiDuUtil.initLocation(AddFriendActivity.this, new BDLocationListener() {
+				BaiDuUtil.initLocation(AddFriendActivity.this, new
+						BDLocationListener() {
 					@Override
 					public void onReceiveLocation(BDLocation bdLocation) {
 						if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
@@ -58,9 +59,6 @@ public class AddFriendActivity extends BaseActivity implements OnClickListener,
 							stringBuffer.append(bdLocation.getLongitude());//经度
 						}
 					}
-
-					@Override
-					public void onConnectHotSpotMessage(String s, int i) {}
 				});
 			}
 		});

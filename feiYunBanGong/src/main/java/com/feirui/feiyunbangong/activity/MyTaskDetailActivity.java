@@ -249,8 +249,5 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
             Log.i("BaiduLocationApiDem", sb.toString());
         }
 
-        @Override
-        public void onConnectHotSpotMessage(String s, int i) {
-        }
     }
 }

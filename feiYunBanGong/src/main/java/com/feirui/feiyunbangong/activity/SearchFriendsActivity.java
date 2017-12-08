@@ -192,9 +192,6 @@ public class SearchFriendsActivity extends BaseActivity implements View.OnClickL
                         string = stringBuffer.toString();
                         Log.e("string", "onReceiveLocation: -------------------------" + string);
                     }
-
-                    @Override
-                    public void onConnectHotSpotMessage(String s, int i) {}
                 });
             }
         }
