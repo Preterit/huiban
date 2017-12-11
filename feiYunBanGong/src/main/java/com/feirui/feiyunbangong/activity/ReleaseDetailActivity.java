@@ -141,7 +141,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         rwd_tv_xs = (TextView) findViewById(R.id.rwd_tv_xs);//任务悬赏
         rwd_tv_xz = (TextView) findViewById(R.id.rwd_tv_xz);//任务限制
         rwd_btn_qrjd = (Button) findViewById(R.id.rwd_btn_qrjd);
-        rwd_btn_qrjd.setOnClickListener((View.OnClickListener) this);
+        rwd_btn_qrjd.setOnClickListener(this);
 
         //得到控件
         rwd_rec_jdr = (RecyclerView) findViewById(R.id.rwd_rec_jdr);
