@@ -1,8 +1,10 @@
 package com.feirui.feiyunbangong.entity;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 
-public class TuanDuiChengYuan implements Serializable {
+public class TuanDuiChengYuan extends DataSupport implements Serializable {
 
 	/**
 	 */

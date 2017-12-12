@@ -53,9 +53,9 @@ public class JieDanAdapter extends BaseAdapter {
         ImageLoader.getInstance().displayImage(acctpt_list.get(position).getStaff_head(), holder.iv_head, ImageLoaderUtils.getSimpleOptions());
         holder.tv_name.setText(acctpt_list.get(position).getStaff_name());
         if (acctpt_list.get(position).getState().equals("2")){
-            holder.tv_chakan.setTextColor(R.color.main_color);
+            holder.tv_chakan.setTextColor(R.color.red);
         }else {
-            holder.tv_chakan.setTextColor(R.color.sbc_header_text);
+            holder.tv_chakan.setTextColor(R.color.lanse);
         }
         return view;
 

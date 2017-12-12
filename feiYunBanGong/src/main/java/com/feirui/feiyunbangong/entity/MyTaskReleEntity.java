@@ -10,7 +10,7 @@ public class MyTaskReleEntity {
 
         private int id;
 
-        private String time;
+        private String release_time;
 
         private String subject;
 
@@ -61,12 +61,12 @@ public class MyTaskReleEntity {
             return this.id;
         }
 
-        public void setTime(String time) {
-            this.time = time;
+        public String getRelease_time() {
+            return release_time;
         }
 
-        public String getTime() {
-            return this.time;
+        public void setRelease_time(String release_time) {
+            this.release_time = release_time;
         }
 
         public void setSubject(String subject) {
