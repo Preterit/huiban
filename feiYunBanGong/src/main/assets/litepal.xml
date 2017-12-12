@@ -6,5 +6,6 @@
 
     <list>
         <mapping class="com.feirui.feiyunbangong.entity.TuanDui"></mapping>
+        <mapping class="com.feirui.feiyunbangong.entity.TuanDuiChengYuan"></mapping>
     </list>
 </litepal>

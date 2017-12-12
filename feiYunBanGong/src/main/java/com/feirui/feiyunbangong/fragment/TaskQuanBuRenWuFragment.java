@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.MyTaskDetailActivity;
 import com.feirui.feiyunbangong.activity.ReleaseDetailActivity;
 import com.feirui.feiyunbangong.adapter.TaskQuanBuAdapter;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -28,15 +29,15 @@ import java.util.HashMap;
 /**
  * 任务单-全部任务页面
  */
-public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecycleview.OnRefreshAndLoadMoreListener{
+public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecycleview.OnRefreshAndLoadMoreListener {
     private YRecycleview yRecycleview;
     private TaskQuanBuAdapter adapter;
     private boolean isRefreshState = true;//是否刷新
-    private  JsonBean json;
+    private JsonBean json;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_quan_bu_ren_wu, container, false);
+        View v = inflater.inflate(R.layout.fragment_quan_bu_ren_wu, container, false);
         initView(v);
         initData();
         return v;
@@ -46,46 +47,62 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
         yRecycleview = (YRecycleview) v.findViewById(R.id.yrv_renwu_quanbu);
         yRecycleview.setLayoutManager(new LinearLayoutManager(getActivity()));
         yRecycleview.setRefreshAndLoadMoreListener(this);
-        adapter = new TaskQuanBuAdapter(getActivity(), new ArrayList<HashMap<String, Object>> ());
+        adapter = new TaskQuanBuAdapter(getActivity(), new ArrayList<HashMap<String, Object>>());
         yRecycleview.setAdapter(adapter);
-        adapter.setOnItemClickListener(new TaskQuanBuAdapter.OnItemClickListener(){
+        adapter.setOnItemClickListener(new TaskQuanBuAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view , int position){
-
-                Log.e("全部页面的点击时间", "onItemClick: "+ position);
-                //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
-                Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("json", json.getInfor().get(position-1)+"");
-                bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
-                bundle.putString("accept_id", (Integer)json.getInfor().get(position-1).get("accept_id")+"");
-                bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
-                bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
-                bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
-                bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
-                bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
-                Log.e("全部任务", "onItemClick position: "+position );
-                intent.putExtras(bundle);
-                startActivity(intent);
+            public void onItemClick(View view, int position) {
+                if (json.getInfor().get(position - 1).get("state").equals("0")){
+                    Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
+                    Log.e("全部页面的点击时间", "onItemClick: " + position);
+                    //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("json", json.getInfor().get(position - 1) + "");
+                    bundle.putString("id", (Integer) json.getInfor().get(position - 1).get("id") + "");
+                    bundle.putString("state", json.getInfor().get(position - 1).get("state")+ "");
+                    bundle.putString("accept_id", (Integer) json.getInfor().get(position - 1).get("accept_id") + "");
+                    bundle.putString("staff_name", (String) json.getInfor().get(position - 1).get("staff_name"));
+                    bundle.putString("release_time", (String) json.getInfor().get(position - 1).get("release_time"));
+                    bundle.putString("task_txt", (String) json.getInfor().get(position - 1).get("task_txt"));
+                    bundle.putString("task_zt", (String) json.getInfor().get(position - 1).get("subject"));
+                    bundle.putString("staff_head", "http://123.57.45.74/feiybg1/" + json.getInfor().get(position - 1).get("staff_head"));
+                    Log.e("全部任务", "onItemClick position: " + position);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("json", json.getInfor().get(position-1)+"");
+                    bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
+                    bundle.putString("state", json.getInfor().get(position - 1).get("state")+ "");
+                    bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
+                    bundle.putString("accept_id", (Integer) json.getInfor().get(position-1).get("accept_id")+"");
+                    bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
+                    bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
+                    bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
+                    bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
     }
 
     private void initData() {
         RequestParams params = new RequestParams();
-        String url =UrlTools.pcUrl+ UrlTools.RENWU_QB;
+        String url = UrlTools.pcUrl + UrlTools.RENWU_QB;
         Log.e("任务单--全部任务URL", "url: " + url);
         Log.e("任务单--全部任务URL", "params: " + params.toString());
 
-        AsyncHttpServiceHelper.post(url,new AsyncHttpResponseHandler(){
+        AsyncHttpServiceHelper.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-                 json = JsonUtils.getMessage(new String(responseBody));
+                json = JsonUtils.getMessage(new String(responseBody));
                 Log.e("任务单--全部任务URfwafeewL", "params: " + json.getInfor());
                 //yRecycleview.setReFreshComplete();
                 //setAdapter();
-                if(json.getInfor()==null){
+                if (json.getInfor() == null) {
                     return;
                 }
                 adapter.addAll(json.getInfor());

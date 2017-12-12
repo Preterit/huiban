@@ -340,12 +340,25 @@
 
         </LinearLayout>
     </ScrollView>
+<TextView
+    android:id="@+id/tv_jieshu"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/textview_shape"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:text="已经结束"
+    android:textColor="#FFFFFF"
+    android:textSize="16sp"
+    android:gravity="center"
+    android:layout_marginBottom="8dp"/>
 
     <ImageView
         android:id="@+id/iv_fankui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/fankui" />
+        android:src="@drawable/fankui"
+        android:visibility="gone"/>
 
 </LinearLayout>

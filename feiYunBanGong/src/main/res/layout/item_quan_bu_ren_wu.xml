@@ -97,7 +97,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="0.028"
             app:layout_constraintVertical_bias="1.0"
-            android:visibility="gone"/>
+            android:singleLine="true"/>
 
         <ImageView
             android:id="@+id/iv_qbrw_state"

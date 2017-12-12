@@ -162,7 +162,7 @@
         <!-- 百度地图的appkey -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="SISVtGbSNGrUCdRlYx7sHanT5QWHNCTK" />
+            android:value="vCTbCeapcOaqoaFaNGx23ekpAQ0xfwLK" />
         <!-- 百度地图的后台服务 -->
         <service
             android:name="com.baidu.location.f"

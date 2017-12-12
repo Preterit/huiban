@@ -52,6 +52,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.litepal.crud.DataSupport;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -164,6 +165,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     }
 
     private void getData() {
+
         String url = UrlTools.url + UrlTools.DETAIL_TUANDUICHENGYUAN;
         RequestParams params = new RequestParams();
         params.put("id", td.getTid());
@@ -215,10 +217,30 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             }
                             tdcys.add(tdcy);
                         }
-                        Log.e("tdcys", "success: ------------------" + tdcys );
+                        Log.e("tdcys", "  " + tdcys );
                         adapter.add(tdcys);
                         lv_chengyuan.setAdapter(adapter);
                         handler.sendEmptyMessage(6);
+                        for (int i=0;i<tdcys.size();i++){
+                            TuanDuiChengYuan tdcy=new TuanDuiChengYuan();
+                            tdcy.setName(tdcys.get(i).getName()); //用户名
+                            tdcy.setState(tdcys.get(i).getState()); //状态
+                            tdcy.setRemark(tdcys.get(i).getRemark()); //    b
+                            tdcy.setT_remark(tdcys.get(i).getT_remark());
+                            tdcy.setHead(tdcys.get(i).getHead());  //头像
+                            tdcy.setType(tdcys.get(i).getType()); //团队里面的职位
+                            tdcy.setPhone(tdcys.get(i).getPhone()); //用户手机号
+                            tdcy.setStaff_id(tdcys.get(i).getStaff_id()); //用户ID
+                            tdcy.setId(tdcys.get(i).getId());  //列表ID
+                            tdcy.setIntroduction(tdcys.get(i).getIntroduction()); //
+                            tdcy.setStore_url(tdcys.get(i).getStore_url()); //小店地址
+                            tdcy.setKey1(tdcys.get(i).getKey1()); //第一个用户标签
+                            tdcy.setKey2(tdcys.get(i).getKey2()); //第二个标签
+                            tdcy.save();
+                        }
+
+                        List<TuanDuiChengYuan> tdcy_chengyuan = DataSupport.findAll(TuanDuiChengYuan.class);
+                        Log.e("tdcy_chengyuan  ", "tdcy_chengyuan: -----------------" + tdcy_chengyuan.toString() );
                     }
 
                     @Override
