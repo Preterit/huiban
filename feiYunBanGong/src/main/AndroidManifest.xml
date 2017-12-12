@@ -504,6 +504,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
         <activity android:name=".activity.ZhiFuActivity"></activity>
+        <activity android:name=".activity.AboutUsActivity"></activity>
     </application>
 
 </manifest>

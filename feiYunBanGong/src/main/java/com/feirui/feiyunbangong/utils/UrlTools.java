@@ -642,4 +642,10 @@ public class UrlTools {
    * 新任务单-生成支付订单
    **/
   public static String RENWU_WX_NOTIFY="notify/wx_notify";
+  /***
+   * 获取下单信息
+   * */
+  public static final String WX_GETINFO_WXPAY = "Wxpays/wxPayAction";
+  /***** 微信appkey ******/
+  public static final Object API_KEY_WX = "12WSxfWExfWOSLEKRDwexidrWDERGY31";
 }
