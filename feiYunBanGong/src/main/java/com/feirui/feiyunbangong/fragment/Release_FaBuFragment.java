@@ -10,21 +10,23 @@ import com.feirui.feiyunbangong.R;
 
 /**
  * lice
- * 接收任务页面
+ * 发布任务界面
  */
-public class JieShouReleaseFragment extends Fragment {
+public class Release_FaBuFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public Release_FaBuFragment() {
+        // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_jie_shou_release, container, false);
-        return v;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_release_fa_bu, container, false);
     }
+
 
 
 }

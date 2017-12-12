@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.dialog.UseMessageDialog;
 import com.feirui.feiyunbangong.utils.T;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -29,8 +28,10 @@ public class SheZhiActivity extends AppCompatActivity {
     }
 
     public void onClick3(View view){
-        UseMessageDialog dialog1 = new UseMessageDialog(this);
-        dialog1.show();
+//        UseMessageDialog dialog1 = new UseMessageDialog(this);
+//        dialog1.show();
+        startActivity(new Intent(SheZhiActivity.this, AboutUsActivity.class));
+        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
     }
 
     public void onClick4(View view){

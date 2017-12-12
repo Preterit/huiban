@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -51,6 +50,7 @@ import com.feirui.feiyunbangong.dialog.MyAleartDialog.AlertCallBack;
 import com.feirui.feiyunbangong.dialog.UseMessageDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.MyUser;
+import com.feirui.feiyunbangong.entity.ShowAppCountBean;
 import com.feirui.feiyunbangong.fragment.Fragment1;
 import com.feirui.feiyunbangong.fragment.Fragment2;
 import com.feirui.feiyunbangong.fragment.Fragment3;
@@ -76,6 +76,7 @@ import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.CircleImageView;
 import com.feirui.feiyunbangong.view.PView;
 import com.feirui.feiyunbangong.view.SelectRemindPopupWindow;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -130,7 +131,8 @@ public class MainActivity extends BaseActivity
     private TextView tv_name;
     private CircleImageView iv_head;
 
-    private TextView tv_num, tv_num_team, tv_num_contact;// 会话列表会话数量；团队公告数量；联系人消息数量；
+    private TextView tv_num, tv_num_team, tv_num_contact,tv_num_hb;// 会话列表会话数量；团队公告数量；联系人消息数量；
+    private int num;//
 
     public void openLeft() {
         this.drawerlayout.openDrawer(Gravity.LEFT);
@@ -163,8 +165,10 @@ public class MainActivity extends BaseActivity
             addListener();
             setListView();
             loginALi();
+            getWork_Num();//设置工作页面角标
+
         } catch (Exception e) {
-            Log.e("TAG", e.getMessage() + "/////////////////////////////////");
+            Log.e("Main页面", e.getMessage() + "/登录阿里百川等方法/");
         }
         //检查有没有设置头像
         check();
@@ -204,6 +208,7 @@ public class MainActivity extends BaseActivity
         tv_num = (TextView) findViewById(R.id.tv_num);
         tv_num_team = (TextView) findViewById(R.id.tv_num_team);
         tv_num_contact = (TextView) findViewById(R.id.tv_num_contact);
+        tv_num_hb= (TextView) findViewById(R.id.tv_num_hb);
 
     }
 
@@ -220,6 +225,7 @@ public class MainActivity extends BaseActivity
         //极光推送
         JPushUtil.jOnResume(this);
         super.onResume();
+        getWork_Num();//设置工作页面角标
     }
 
     @Override
@@ -229,7 +235,7 @@ public class MainActivity extends BaseActivity
     }
 
     /**
-     *
+     *登录阿里百川
      */
     private void loginALi() {
         // 此实现不一定要放在Application onCreate中
@@ -307,9 +313,41 @@ public class MainActivity extends BaseActivity
 //        getNum();
     }
 
+
+    //获取工作页面的待审批未读数
+    private void getWork_Num(){
+//        final int[] shenpi_num = {0};
+        RequestParams params = new RequestParams();
+        String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
+        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                Gson gson = new Gson();
+                ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
+                Log.e("审批界面--count", "Infor: "+count.getInfor());
+//                num = count.getInfor();
+
+                Message message = new Message();
+                message.obj = count.getInfor();
+                message.what = 2;
+                handler.sendMessage(message);
+//                if (count.getInfor()!=0) {
+//                    tv_num_hb.setText(count.getInfor());
+//                    shenpi_num[0] =count.getInfor() ;
+//                }
+            }
+        });
+        Log.e("主页面", "Work_Numk: "+num );
+//        return num;
+    }
+
     // 获取未读消息数：
     private void getNum() {
-        int num = mIMKit.getUnreadCount();// 未读消息数；
+
+        int num = mIMKit.getUnreadCount();// 未读消息数；+ getWork_Num()
         Log.e("获取未读消息数----------------", "getNum:----num---------- "+num);
         Message message = new Message();
         message.obj = num;
@@ -763,6 +801,16 @@ public class MainActivity extends BaseActivity
                         mIMKit.setShortcutBadger((int) msg.obj);
                     }
                     break;
+                case 2:
+                    Log.e("设置工作页面数字", "getNum_work:-------- "+(int) msg.obj);
+                    if((int)msg.obj>0){
+                        tv_num_hb.setVisibility(View.VISIBLE);
+                        tv_num_hb.setText(msg.obj+"");
+                    }else{
+                        tv_num_hb.setVisibility(View.INVISIBLE);
+                    }
+
+                    break;
             }
         }
 
@@ -890,10 +938,12 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.gosit:
+                window.dismiss();
                 Intent intent2 = new Intent(MainActivity.this, PersonDataActivity.class);
                 intent2.putExtra("friend",2);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+
                 break;
             case R.id.noremind:
                 window.dismiss();
@@ -901,4 +951,13 @@ public class MainActivity extends BaseActivity
         }
 
     }
+
+//    private void setWorkNum(){
+//        if(getWork_Num()>0){
+//            Message message = new Message();
+//                message.obj = getWork_Num();
+//                message.what = 2;
+//                handler.sendMessage(message);
+//        }
+//    }
 }

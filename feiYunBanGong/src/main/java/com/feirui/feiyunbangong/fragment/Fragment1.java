@@ -154,6 +154,8 @@ public class Fragment1 extends BaseFragment {
                 if (count.getInfor()!=0) {
                     bar_num.setVisibility(view.VISIBLE);
                     bar_num.setText(count.getInfor() + "");
+                }else {
+                    bar_num.setVisibility(view.INVISIBLE);
                 }
             }
         });

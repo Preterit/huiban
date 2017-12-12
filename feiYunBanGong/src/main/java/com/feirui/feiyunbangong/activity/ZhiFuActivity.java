@@ -7,19 +7,14 @@ import com.feirui.feiyunbangong.state.AppStore;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-/**
- * Created by feirui1 on 2017-08-24.
- */
-
-public class PayActivity extends BaseActivity {
+public class ZhiFuActivity extends BaseActivity {
     private IWXAPI wxapi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ren_wu_list);
+        setContentView(R.layout.activity_zhi_fu);
         wxapi = WXAPIFactory.createWXAPI(this, AppStore.APP_ID,false);
         wxapi.registerApp(AppStore.APP_ID);
-//        initView();
     }
-
 }
