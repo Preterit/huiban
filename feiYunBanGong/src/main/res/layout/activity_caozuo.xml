@@ -37,16 +37,17 @@
             android:gravity="center_horizontal"
             android:text="我审批的"
             android:textColor="@color/mytask_button_text_color" />
-        <!--<RadioButton-->
-            <!--android:id="@+id/rb_chao_song"-->
-            <!--style="@style/a000000_48"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:button="@null"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:text="抄送给我的"-->
-            <!--android:textColor="@color/mytask_button_text_color" />-->
+
+        <RadioButton
+            android:id="@+id/rb_chao_song"
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:text="抄送给我的"
+            android:textColor="@color/mytask_button_text_color" />
     </RadioGroup>
 
     <Spinner
@@ -61,6 +62,17 @@
     </Spinner>
     <Spinner
         android:id="@+id/spinner_lei"
+        android:layout_width="@dimen/x400"
+        android:layout_height="@dimen/x120"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        android:visibility="gone"
+        >
+
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="@dimen/x400"
         android:layout_height="@dimen/x120"
         android:layout_gravity="center_horizontal"

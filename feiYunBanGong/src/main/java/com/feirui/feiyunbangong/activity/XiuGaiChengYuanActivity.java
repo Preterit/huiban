@@ -76,10 +76,6 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
                         bean.getInfor().get(0).get("staff_head").toString(),
                         bean.getInfor().get(0).get("staff_mobile").toString()
                         );
-//                tdcy.setT_remark(bean.getInfor().get(0).get("t_remark").toString());
-//                tdcy.setId(bean.getInfor().get(0).get("introduction").toString());
-                //tdcy.setIntroduction(bean.getInfor().get(0).get("stealth").toString());//团队成员里没有这两个属性
-                //tdcy.setIntroduction(bean.getInfor().get(0).get("personal_shop").toString());
 
                 if (!TextUtils.isEmpty(tdcy.getT_remark())&&tdcy.getT_remark()!=null) {
                     tv_name.setText(tdcy.getT_remark());
@@ -166,13 +162,6 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
     }
 
     private void update() {
-//邮箱改成个人签名
-//		if (!TextUtils.isEmpty(et_email.getText().toString())) {
-//			if (!Utils.isEmail(et_email.getText().toString())) {
-//				Toast.makeText(this, "邮箱格式不合法！", 0).show();
-//				return;
-//			}
-//		}
 
         String url = UrlTools.url + UrlTools.XIUGAI_YOUXIANG;
         RequestParams params = new RequestParams();

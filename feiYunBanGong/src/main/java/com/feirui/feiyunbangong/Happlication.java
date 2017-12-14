@@ -72,11 +72,6 @@ public class Happlication extends MultiDexApplication {
     }
 
 
-
-//    public static void addActivity(Activity activity) {
-//        activitylist.add(activity);
-//    }
-
     public static ArrayList<Activity> getActivities() {
         return activitylist;
     }

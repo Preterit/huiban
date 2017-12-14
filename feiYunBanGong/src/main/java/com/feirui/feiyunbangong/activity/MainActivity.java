@@ -348,8 +348,6 @@ public class MainActivity extends BaseActivity
 
     // 获取未读消息数：
     private void getNum() {
-
-        int num = mIMKit.getUnreadCount();// 未读消息数；+ getWork_Num()
         // 未读消息数；
         int num = mIMKit.getUnreadCount();
         Log.e("获取未读消息数----------------", "getNum:----num---------- "+num);

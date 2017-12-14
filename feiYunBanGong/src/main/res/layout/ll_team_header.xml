@@ -74,13 +74,13 @@
                 android:layout_width="@dimen/size70"
                 android:layout_height="@dimen/size70"
                 android:scaleType="fitXY"
-                android:src="@drawable/selector_add_to_team" />
+                android:src="@drawable/search" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
-                android:text="加入团队"
+                android:text="搜索团队"
                 android:textColor="@drawable/tv_selector_color02"
                 android:textSize="@dimen/size46" />
         </LinearLayout>
