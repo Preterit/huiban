@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.MyTaskDetailActivity;
@@ -56,6 +57,9 @@ public class MyReceiveTaskFragment extends Fragment {
                 Gson gson=new Gson();
                 final MyTaskRoot root = gson.fromJson(new String(responseBody), MyTaskEntity.MyTaskRoot.class);
                 List<MyTaskInfo> taskinfo = root.getInfo();
+                if(taskinfo==null||taskinfo.isEmpty()){
+                    Toast.makeText(getActivity(),"没有接受任务",Toast.LENGTH_SHORT).show();
+                }else {
                 adapter=new MyReceiveTaskAdapter(getActivity(),taskinfo);
                 receiveTaskList.setAdapter(adapter);
                 receiveTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,6 +70,7 @@ public class MyReceiveTaskFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putString("json", root.getInfo().get(position)+"");
                         bundle.putString("id", root.getInfo().get(position).getId()+"");
+                        bundle.putString("accept_id", (Integer) root.getInfo().get(position).getAccept_id()+"");
                         bundle.putString("staff_name", (String) root.getInfo().get(position).getName());
                         bundle.putString("time", (String) root.getInfo().get(position).getTime());
                         bundle.putString("task_txt", (String) root.getInfo().get(position).getTask_txt());
@@ -74,7 +79,7 @@ public class MyReceiveTaskFragment extends Fragment {
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
-                });
+                });}
             }
         });
 

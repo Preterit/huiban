@@ -25,7 +25,7 @@ public class LianXiRenUtil {
 			}
 			while (cursor.moveToNext()) {
 				String contactId = cursor.getString(contactIdIndex);
-				String name = cursor.getString(nameIndex);
+				String name = cursor.getString(nameIndex);//获取联系人名字
 				/*
 				 * 查找该联系人的phone信息
 				 */

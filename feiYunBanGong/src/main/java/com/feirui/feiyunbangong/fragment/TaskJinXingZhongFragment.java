@@ -4,6 +4,7 @@ package com.feirui.feiyunbangong.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,14 +66,15 @@ public class TaskJinXingZhongFragment extends BaseFragment implements YRecyclevi
         adapter.setOnItemClickListener(new TaskJingXingAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Log.e("点击位置==============", "onItemClick: "+ position+"dfafdfdf");
                 //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
                 Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("json", json.getInfor().get(position-1)+"");
                 bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
-                bundle.putString("time", (String) json.getInfor().get(position-1).get("time"));
+                bundle.putString("accept_id", (Integer) json.getInfor().get(position-1).get("accept_id")+"");
+                bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
                 bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
                 bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));

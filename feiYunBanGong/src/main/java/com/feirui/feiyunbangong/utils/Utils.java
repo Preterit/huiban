@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
@@ -32,6 +33,8 @@ import org.apache.http.Header;
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.feirui.feiyunbangong.R.id.gridView;
 
 public class Utils {
 
@@ -83,8 +86,28 @@ public class Utils {
         params.height = totalHeight + horizontalBorderHeight * (rows - 1);// 最后加上分割线总高度
         gridView.setLayoutParams(params);
     }
+    /**
+     * 被ScrollView包含的ListView高度设置为wrap_content时只显示一行
+     * 此方法用于动态计算ListView的高度(根据item的个数)
+     */
+    public static void reMesureListViewHeight(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
 
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
 
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
     /**
      * 弹出一个Alertdialog
      * @param context 上下文

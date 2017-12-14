@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import org.apache.http.Header;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -30,6 +28,8 @@ import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * 创建一个新项目
@@ -88,7 +88,7 @@ public class ProjectAddActivity extends BaseActivity implements OnClickListener 
 		switch (requestCode) {
 		case 101:
 			ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-			if (spr.getId() == 0) {
+			if (spr.getId().equals("0")) {
 				return;
 			}
 			AddShenHe ash = new AddShenHe(spr.getName(), spr.getId());

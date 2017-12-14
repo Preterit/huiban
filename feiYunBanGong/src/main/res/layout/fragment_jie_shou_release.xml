@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.feirui.feiyunbangong.fragment.JieShouReleaseFragment">
+    tools:context="com.feirui.feiyunbangong.fragment.Release_JieShouFragment">
 
     <com.feirui.feiyunbangong.view.YRecycleview
         android:id="@+id/yrv_jieshou"

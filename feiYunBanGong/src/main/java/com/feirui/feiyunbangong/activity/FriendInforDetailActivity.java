@@ -2,11 +2,10 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,6 @@ import com.feirui.feiyunbangong.dialog.MyAleartDialog;
 import com.feirui.feiyunbangong.dialog.XiuGaiDialog;
 import com.feirui.feiyunbangong.entity.Group;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.entity.MyUser;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.im.MyUserProfileSampleHelper;
 import com.feirui.feiyunbangong.state.AppStore;
@@ -38,7 +36,6 @@ import com.google.zxing.WriterException;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zxing.encoding.EncodingHandler;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;

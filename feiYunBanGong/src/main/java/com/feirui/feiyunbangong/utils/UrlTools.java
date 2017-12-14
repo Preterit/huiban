@@ -12,7 +12,7 @@ public class UrlTools {
   public static final String TASK_ACCEPT="task/task_accept"; //接收任务
   public static final String TASK_GETTEAN="Task/get_team";   //获取团队列表
   public static final String TASK_MY_TASK_LIST="task/my_task_list";//自己发布的任务列表
-  public static final String TASK_ACCEPT_TASK_LIST="task/accept_task_list";//自己接收的任务列表
+  public static final String TASK_ACCEPT_TASK_LIST="Task/accept_task_list";//自己接收的任务列表
     /**
      * 新的PC端的接口地址
      * */

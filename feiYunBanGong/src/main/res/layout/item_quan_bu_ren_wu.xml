@@ -11,7 +11,8 @@
     android:foreground="?attr/selectableItemBackground"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="350dp"
@@ -95,7 +96,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="0.028"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/iv_qbrw_state"
