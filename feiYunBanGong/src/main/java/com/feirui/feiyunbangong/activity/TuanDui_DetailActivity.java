@@ -52,7 +52,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
-import org.litepal.crud.DataSupport;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -239,8 +238,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             tdcy.save();
                         }
 
-                        List<TuanDuiChengYuan> tdcy_chengyuan = DataSupport.findAll(TuanDuiChengYuan.class);
-                        Log.e("tdcy_chengyuan  ", "tdcy_chengyuan: -----------------" + tdcy_chengyuan.toString() );
+//                        List<TuanDuiChengYuan> tdcy_chengyuan = DataSupport.findAll(TuanDuiChengYuan.class);
+//                        Log.e("tdcy_chengyuan  ", "tdcy_chengyuan: -----------------" + tdcy_chengyuan.toString() );
                     }
 
                     @Override
@@ -264,7 +263,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     break;
                 case 3:
                     // 添加成功！
-                    Toast.makeText(TuanDui_DetailActivity.this, "添加成员成功！", 0).show();
+                    Toast.makeText(TuanDui_DetailActivity.this, "添加成员成功！",Toast.LENGTH_SHORT).show();
                     //团队群Id
                     getTuanLiaoId();
                     Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
@@ -272,7 +271,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
-                    Toast.makeText(TuanDui_DetailActivity.this, bean03.getMsg(),0)
+                    Toast.makeText(TuanDui_DetailActivity.this, bean03.getMsg(),Toast.LENGTH_SHORT)
                             .show();
                     break;
                 case 5:
@@ -592,7 +591,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                         JsonBean bean = JsonUtils.getMessage(new String(arg2));
                         if ("200".equals(bean.getCode())) {
                             if(bean.getMsg().equals("该成员已存在")){
-                                Toast.makeText(TuanDui_DetailActivity.this, "该成员已经加入团队", 0).show();
+                                Toast.makeText(TuanDui_DetailActivity.this, "该成员已经加入团队", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             Message msg = handler.obtainMessage(3);
