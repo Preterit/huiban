@@ -12,7 +12,7 @@ private int accept_id;
 
         private String task_txt;   //任务内容
 
-        private String time;
+        private String release_time;
 
         private int staff_id;
 
@@ -55,15 +55,18 @@ private int accept_id;
         public String getTask_txt(){
             return this.task_txt;
         }
-        public void setTime(String time){
-            this.time = time;
-        }
-        public String getTime(){
-            return this.time;
-        }
         public void setStaff_id(int staff_id){
             this.staff_id = staff_id;
         }
+
+        public String getRelease_time() {
+            return release_time;
+        }
+
+        public void setRelease_time(String release_time) {
+            this.release_time = release_time;
+        }
+
         public int getStaff_id(){
             return this.staff_id;
         }

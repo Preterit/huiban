@@ -56,7 +56,7 @@ public class MyReleaseTaskAdapter extends BaseAdapter {
         ReleaseInfo task = getItem(position);
         holder.tvContentTaskItem.setText(task.getTask_txt());
         holder.tvPubNameTaskItem.setText("");
-        holder.tvPubTime.setText(task.getTime());
+        holder.tvPubTime.setText(task.getRelease_time());
         holder.tvTaskTitle.setText(task.getSubject());
 
         return convertView;

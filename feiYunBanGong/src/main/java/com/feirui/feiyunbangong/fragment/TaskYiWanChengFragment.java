@@ -74,9 +74,10 @@ public class TaskYiWanChengFragment extends BaseFragment implements YRecycleview
                 Bundle bundle = new Bundle();
                 bundle.putString("json", json.getInfor().get(position-1)+"");
                 bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
+                bundle.putString("state", json.getInfor().get(position - 1).get("state")+ "");
                 bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
                 bundle.putString("accept_id", (Integer) json.getInfor().get(position-1).get("accept_id")+"");
-                bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
+                bundle.putString("release_time", (String) json.getInfor().get(position-1).get("release_time"));
                 bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
                 bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
                 bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));

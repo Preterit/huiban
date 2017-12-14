@@ -35,7 +35,7 @@ public class MyTaskActivity extends BaseActivity {
         setContentView(R.layout.activity_my_task);
         task_zt = getIntent().getStringExtra("task_zt");
         staff_name = getIntent().getStringExtra("staff_name");
-        time = getIntent().getStringExtra("time");
+        time = getIntent().getStringExtra("release_time");
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
         id = getIntent().getStringExtra("id");

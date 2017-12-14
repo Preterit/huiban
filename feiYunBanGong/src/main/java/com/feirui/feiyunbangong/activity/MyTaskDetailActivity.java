@@ -42,10 +42,10 @@ import java.util.List;
 import static com.feirui.feiyunbangong.R.id.iv_fankui;
 
 
-public class MyTaskDetailActivity extends BaseActivity implements View.OnClickListener {
-    private String staff_name, time, task_txt, task_zt, staff_head, id,accept_id;
+public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickListener {
+    private String staff_name, time, task_txt, task_zt, staff_head, id,accept_id,state;
     private TextImageView iv_head;
-    private TextView tv_name, tv_time, tv_task, tv_zt,rwd_tv_sj,rwd_tv_wz,rwd_tv_xs,rwd_tv_xz;
+    private TextView tv_name, tv_time, tv_task, tv_zt,rwd_tv_sj,rwd_tv_wz,rwd_tv_xs,rwd_tv_xz,tv_jieshu;
     private ImageView iv_complete;
     MapView mMapView;
     BaiduMap mBaiduMap;
@@ -62,10 +62,11 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_my_task_detail);
         task_zt = getIntent().getStringExtra("task_zt");
         staff_name = getIntent().getStringExtra("staff_name");
-        time = getIntent().getStringExtra("time");
+        time = getIntent().getStringExtra("release_time");
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
         id = getIntent().getStringExtra("id");
+        state = getIntent().getStringExtra("state");
         accept_id =getIntent().getStringExtra("accept_id");
         initView();
         initData();
@@ -115,7 +116,16 @@ public class MyTaskDetailActivity extends BaseActivity implements View.OnClickLi
         tv_time.setText(time);
         tv_task.setText(task_txt);
         iv_complete = (ImageView) findViewById(iv_fankui);
-        iv_complete.setOnClickListener(this);
+        tv_jieshu= (TextView) findViewById(R.id.tv_jieshu);
+        if (state.equals("2")){
+            iv_complete.setVisibility(View.GONE);
+            tv_jieshu.setVisibility(View.VISIBLE);
+
+        }else {
+            iv_complete.setVisibility(View.VISIBLE);
+            iv_complete.setOnClickListener(this);
+            tv_jieshu.setVisibility(View.GONE);
+        }
         ImageLoader.getInstance().displayImage(staff_head, iv_head, ImageLoaderUtils.getSimpleOptions());
         rwd_tv_sj= (TextView) findViewById(R.id.rwd_tv_sj);
         rwd_tv_wz= (TextView) findViewById(R.id.rwd_tv_wz);

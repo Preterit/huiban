@@ -37,7 +37,7 @@ import static com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper.post;
  * lice
  */
 public class ReleaseDetailActivity extends BaseActivity implements View.OnClickListener {
-    public String staff_name, time, task_txt, staff_head, task_zt;
+    public String staff_name, release_time, task_txt, staff_head, task_zt;
     String id,accept_id;
     ImageView rwd_im_tx;
     TextView rwd_tv_mz, rwd_tv_rq, rwd_tv_zt, rwd_tv_xq, rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz;
@@ -61,7 +61,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_release_detail);
         task_zt = getIntent().getStringExtra("task_zt");
         staff_name = getIntent().getStringExtra("staff_name");
-        time = getIntent().getStringExtra("release_time");
+        release_time = getIntent().getStringExtra("release_time");
         task_txt = getIntent().getStringExtra("task_txt");
         staff_head = getIntent().getStringExtra("staff_head");
         id = getIntent().getStringExtra("id");
@@ -147,7 +147,8 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         rwd_rec_jdr = (RecyclerView) findViewById(R.id.rwd_rec_jdr);
 
         rwd_tv_mz.setText(staff_name);
-        rwd_tv_rq.setText(time);
+        rwd_tv_rq.setText(release_time);
+
         rwd_tv_xq.setText(task_txt);
         rwd_tv_zt.setText(task_zt);
         //ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg/"+staff_head, rwd_im_tx);

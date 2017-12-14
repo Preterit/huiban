@@ -70,7 +70,7 @@ public class MyReleaseTaskFragment extends Fragment {
                             bundle.putString("json", root.getInfo().get(position)+"");
                             bundle.putString("id", root.getInfo().get(position).getId()+"");
                             bundle.putString("staff_name", (String) root.getInfo().get(position).getStaff_name());
-                            bundle.putString("time", (String) root.getInfo().get(position).getTime());
+                            bundle.putString("release_time", (String) root.getInfo().get(position).getRelease_time());
                             bundle.putString("task_txt", (String) root.getInfo().get(position).getTask_txt());
                             bundle.putString("task_zt", (String) root.getInfo().get(position).getSubject());
                             bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+root.getInfo().get(position).getStaff_head());
