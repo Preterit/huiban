@@ -32,7 +32,8 @@
         android:layout_height="@dimen/y120"
         android:layout_marginTop="@dimen/title_bar"
         android:paddingTop="@dimen/y2"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RadioButton
             android:id="@+id/rb_add"
@@ -44,7 +45,8 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:text="添加好友"
-            android:textSize="@dimen/size42" />
+            android:textSize="@dimen/size42"
+           />
 
         <RadioButton
             android:id="@+id/rb_msg"
@@ -57,14 +59,15 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:text="短信邀请"
-            android:textSize="@dimen/size42" />
+            android:textSize="@dimen/size42"
+            />
     </RadioGroup>
 
     <LinearLayout
         android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/y320"
+        android:layout_marginTop="@dimen/y150"
         android:orientation="horizontal" >
     </LinearLayout>
 

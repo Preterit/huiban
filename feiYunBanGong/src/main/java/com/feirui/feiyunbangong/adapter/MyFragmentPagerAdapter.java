@@ -8,6 +8,8 @@ import com.feirui.feiyunbangong.fragment.CommitFragment;
 import com.feirui.feiyunbangong.fragment.ReviseFragment;
 import com.feirui.feiyunbangong.fragment.SendFragment;
 
+import java.util.List;
+
 /**
  * Created by xy on 2017-12-14.
  * ViewPager 的适配器
@@ -15,24 +17,23 @@ import com.feirui.feiyunbangong.fragment.SendFragment;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private String[] mTitles = new String[]{"我提交的","我审批的","抄送我的"};
-
-    public MyFragmentPagerAdapter(FragmentManager fm) {
+    List<Fragment> mList;
+    public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> mList) {
         super(fm);
+        this.mList = mList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 1){
-            return new ReviseFragment();
-        }else if (position == 2){
-            return new SendFragment();
-        }
-        return new CommitFragment();
+        return mList.get(position);
     }
 
     @Override
     public int getCount() {
-        return mTitles.length;
+        if(mList.size()<=0){
+            return 0;
+        }
+        return mList.size();
     }
 
     //设置tab的标题

@@ -18,25 +18,29 @@ import com.feirui.feiyunbangong.utils.T;
  */
 public class CommitFragment extends Fragment {
     TextView text;
+    View view;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    public void showMessageFromActivity(String message){
-        text.setText(message);
-    }
 
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_commit, container, false);
+        view  = inflater.inflate(R.layout.fragment_commit,null);
+        return view;
+    }
+
+    public void showMessageFromActivity(String message){
+        text= (TextView) view.findViewById(R.id.commit_text);
+        text.setText(message);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         T.showShort(getContext(),"我提交的——————————");
-        text= (TextView) view.findViewById(R.id.commit_text);
     }
 
     @Override

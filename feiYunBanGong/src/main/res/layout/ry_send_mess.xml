@@ -53,7 +53,7 @@
             android:id="@+id/commit_text"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="eweewqewqeerwqrrqrwerqewrwer"/>
+            android:text="ewe"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recy_loadmore"

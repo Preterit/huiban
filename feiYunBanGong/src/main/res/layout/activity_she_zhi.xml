@@ -71,6 +71,34 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/iv_xgmm" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/yijianfankui"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:onClick="onClick1">
+
+        <ImageView
+            android:id="@+id/iv_yjfk"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/yijianfankui_1"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="意见反馈"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            android:layout_marginStart="35dp"
+            android:id="@+id/tv_yjfk"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/iv_yjfk" />
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/qinglihuancun"
         android:layout_width="match_parent"

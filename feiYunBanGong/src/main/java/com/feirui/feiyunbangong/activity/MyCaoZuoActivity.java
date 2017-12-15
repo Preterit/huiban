@@ -15,6 +15,9 @@ import com.feirui.feiyunbangong.fragment.CommitFragment;
 import com.feirui.feiyunbangong.fragment.ReviseFragment;
 import com.feirui.feiyunbangong.fragment.SendFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListener,
         ReviseFragment.OnFragmentInteractionListener,
         SendFragment.OnFragmentInteractionListener{
@@ -30,21 +33,17 @@ public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cao_zuo);
-        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        CommitFragment fragment1 = new CommitFragment();
+        ReviseFragment fragment2 = new ReviseFragment();
+        SendFragment fragment3 = new SendFragment();
+        List mList=new ArrayList();
+        mList.add(fragment1);
+        mList.add(fragment2);
+        mList.add(fragment3);
+        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),mList);
         initView();
         initListener();
         initDate();
-        /**
-         * button 传至到fragment2
-         */
-        Button button= (Button) findViewById(R.id.commit_btn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CommitFragment fragment21= (CommitFragment) myFragmentPagerAdapter.getItem(0);
-                fragment21.showMessageFromActivity("我是activity传递过来的数据");
-            }
-        });
     }
 
     private void initView() {
@@ -62,6 +61,17 @@ public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListen
         //将TabLayout和ViewPager绑定在一起，使双方各自的改变都能直接影响另一方，解放了开发人员对双方变动事件的监听
         mHandle_tab.setupWithViewPager(mViewPager);
         //指定tab的位置
+        /**
+         * button 传至到fragment2
+         */
+        Button button= (Button) findViewById(R.id.commit_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommitFragment fragment21= (CommitFragment) myFragmentPagerAdapter.getItem(0);
+                fragment21.showMessageFromActivity("我是activity传递过来的数据");
+            }
+        });
 
         mTv_leave = (TextView) findViewById(R.id.tv_leave);
         mTv_submit = (TextView) findViewById(R.id.tv_submit);

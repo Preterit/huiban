@@ -45,6 +45,6 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/my_view"></android.support.v4.view.ViewPager>
+        android:layout_below="@id/commit_btn"></android.support.v4.view.ViewPager>
 
 </RelativeLayout>
