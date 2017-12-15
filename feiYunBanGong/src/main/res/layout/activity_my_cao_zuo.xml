@@ -28,24 +28,6 @@
         app:tabIndicatorHeight="2dp"
         app:tabSelectedTextColor="#3686ff"
         app:tabGravity="fill">
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_commit"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="我提交的"
-            />
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_revise"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="我审批的"
-            />
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_send"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="抄送我的"
-            />
     </android.support.design.widget.TabLayout>
     <View
         android:id="@+id/my_view"
@@ -54,18 +36,15 @@
         android:background="#eee"
         android:layout_below="@id/handle_tab"
         />
-    <com.xw.repo.refresh.PullToRefreshLayout
-        android:id="@+id/daishen_pull_to_refresh"
+    <Button
+        android:id="@+id/commit_btn"
         android:layout_below="@id/my_view"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.xw.repo.refresh.PullListView
-            android:id="@+id/haveget"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </com.xw.repo.refresh.PullListView>
-    </com.xw.repo.refresh.PullToRefreshLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_view"></android.support.v4.view.ViewPager>
 
 </RelativeLayout>

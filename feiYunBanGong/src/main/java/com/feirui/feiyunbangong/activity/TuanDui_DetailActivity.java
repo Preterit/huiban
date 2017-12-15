@@ -239,8 +239,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             tdcy.save();
                         }
 
-                        List<TuanDuiChengYuan> tdcy_chengyuan = DataSupport.findAll(TuanDuiChengYuan.class);
-                        Log.e("tdcy_chengyuan  ", "tdcy_chengyuan: -----------------" + tdcy_chengyuan.toString() );
+//                        List<TuanDuiChengYuan> tdcy_chengyuan = DataSupport.findAll(TuanDuiChengYuan.class);
+//                        Log.e("tdcy_chengyuan  ", "tdcy_chengyuan: -----------------" + tdcy_chengyuan.toString() );
                     }
 
                     @Override

@@ -87,13 +87,13 @@ public  class MyWaiChuDetailActivity extends  BaseActivity {
 
                 try {
                     //开始时间
-                    String out_start = String.valueOf(in_fo.get("out_start"));
+                    String out_start = String.valueOf(in_fo.get("start_time"));
                     tv_starttime.setText(out_start);
                     //结束时间
-                    String out_end = String.valueOf(in_fo.get("out_end"));
+                    String out_end = String.valueOf(in_fo.get("finish_time"));
                     tv_endtime.setText(out_end);
                     //外出时间
-                    String out_time = String.valueOf(in_fo.get("out_time"));
+                    String out_time = String.valueOf(in_fo.get("out_days"));
                     end_time.setText(out_time);
                     //外出事由
                     String out_reason = String.valueOf(in_fo.get("out_reason"));
@@ -103,7 +103,7 @@ public  class MyWaiChuDetailActivity extends  BaseActivity {
 //                    String out_reason = String.valueOf(in_fo.get("out_reason"));
 //                    tv_tijiaotime.setText(out_reason);
 
-                    Log.d("审批外出界面in_fo---------", "in_fo: " +out_end + out_reason );
+                    Log.d("审批外出界面in_fo---------", "in_fo: " + in_fo.get("out_picture"));
 
                     //头像
 //                    ImageLoader.getInstance().displayImage(String.valueOf(in_fo.get("staff_head")), mWaichuHead);

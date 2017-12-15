@@ -56,15 +56,6 @@ public class YaoQingActivity extends BaseActivity {
 		initTitle();
 		setLeftDrawable(R.drawable.arrows_left);
 		setCenterString("邀请注册");
-//		setRightDrawable(R.drawable.jianglitixian);
-//		rightll.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(YaoQingActivity.this,
-//						TiXianActivity.class));
-//				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
-//			}
-//		});
 	}
 
 	/**
@@ -126,16 +117,15 @@ public class YaoQingActivity extends BaseActivity {
 						if ("200".equals(json.getCode())) {
 							runOnUiThread(new Runnable() {
 								public void run() {
-									tv_zongjine.setText("￥  "
-											+ json.getInfor().get(0)
-													.get("infor") + "元");
+									tv_zongjine.setText(json.getInfor().get(0)
+													.get("infor") + "积分");
 								}
 							});
 
 						} else {
 							runOnUiThread(new Runnable() {
 								public void run() {
-									tv_zongjine.setText("￥  00.00");
+									tv_zongjine.setText("00.00");
 								}
 							});
 						}
