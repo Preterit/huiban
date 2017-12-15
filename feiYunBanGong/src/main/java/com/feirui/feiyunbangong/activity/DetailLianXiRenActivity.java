@@ -113,9 +113,9 @@ public class DetailLianXiRenActivity extends BaseActivity {
 			}
 		});
 
-		rg_phone.check(R.id.rb_add);
+		rg_phone.check(R.id.rb_msg);
 
-		fm.beginTransaction().add(R.id.ll_container, add).add(R.id.ll_container, msg).show(add).commit();
+		fm.beginTransaction().add(R.id.ll_container, add).add(R.id.ll_container, msg).show(msg).commit();
 	}
 
 	LoadingDialog dialog;

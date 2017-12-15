@@ -55,7 +55,7 @@ public class ChaoSongMeAdapter extends RecyclerView.Adapter<ChaoSongMeAdapter.Vi
 //            holder.mItem_send_type.setText("开始时间：" + data.get("approval_time"));
 //        }
         if (!TextUtils.isEmpty(data.get("approval_time").toString())){
-            holder.mItem_send_type.setText(data.get("approval_time").toString());
+            holder.mItem_send_time.setText(data.get("approval_time").toString());
         }
 
         //每一项的点击事件
@@ -94,7 +94,7 @@ public class ChaoSongMeAdapter extends RecyclerView.Adapter<ChaoSongMeAdapter.Vi
             mItem_send_head = (CircleImageView2) itemView.findViewById(R.id.item_send_head);
             mItem_send_name = (TextView) itemView.findViewById(R.id.item_send_name);
             mItem_send_type = (TextView) itemView.findViewById(R.id.item_send_type);
-            mItem_send_starttime = (TextView) itemView.findViewById(R.id.item_send_starttime);
+//            mItem_send_starttime = (TextView) itemView.findViewById(R.id.item_send_starttime);
             mItem_send_time = (TextView) itemView.findViewById(R.id.item_send_time);
         }
     }

@@ -399,8 +399,8 @@ public class MainActivity extends BaseActivity
         list.add(map);
 
         map = new HashMap<String, Object>();
-        map.put("tv_grzx", "意见反馈");
-        map.put("img_grzx", R.drawable.yijianfankui);
+        map.put("tv_grzx", "我的钱包");
+        map.put("img_grzx", R.drawable.wallet_icon);
         list.add(map);
 
         map = new HashMap<String, Object>();
@@ -548,8 +548,8 @@ public class MainActivity extends BaseActivity
                         break;
                     case 3:
                         // 意见反馈：
-                        startActivity(new Intent(MainActivity.this, YiJianActivity.class));
-                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+//                        startActivity(new Intent(MainActivity.this, YiJianActivity.class));
+//                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 4:
                         startActivity(new Intent(MainActivity.this, SheZhiActivity.class));
