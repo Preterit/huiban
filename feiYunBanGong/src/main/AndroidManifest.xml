@@ -12,8 +12,7 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -495,7 +494,7 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -505,6 +504,10 @@
         <activity android:name=".activity.TeamPersonActivity" />
         <activity android:name=".activity.ZhiFuActivity"></activity>
         <activity android:name=".activity.AboutUsActivity"></activity>
+
+        <activity android:name=".activity.TeamPersonActivity" />
+        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity" />
+        <activity android:name=".activity.MyCaoZuoActivity"></activity>
     </application>
 
 </manifest>

@@ -44,12 +44,6 @@
         android:layout_marginTop="@dimen/y50"
         android:orientation="horizontal" >
 
-        <!--<TextView-->
-            <!--style="@style/a000000_42"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="姓  名：" />-->
 
         <TextView
             android:id="@+id/tv_name_02"
@@ -63,19 +57,6 @@
 
 
 
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv_phone"-->
-        <!--style="@style/a000000_42"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="@dimen/x100"-->
-        <!--android:layout_marginTop="@dimen/y50"-->
-        <!--android:text="" />-->
-
-    <!-- 个人信息 -->
-
     <TextView
         style="@style/a000000_48"
         android:layout_width="match_parent"
@@ -86,29 +67,6 @@
         android:paddingLeft="@dimen/x50"
         android:text="个人简介 " />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x100"
-        android:layout_marginTop="@dimen/y50"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/a000000_42"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="个 人 签 名 ：" />
-
-        <EditText
-            android:id="@+id/et_email"
-            style="@style/a000000_42"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bt_bg"
-            android:minWidth="@dimen/x500"
-            android:padding="@dimen/size25"
-            android:text="" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

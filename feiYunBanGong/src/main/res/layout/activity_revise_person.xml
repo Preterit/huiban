@@ -221,12 +221,13 @@
                     android:textColor="#333"
                     android:textSize="16sp"
                     android:gravity="center"
-                    android:hint="请输入固定位置"
+                    android:hint="固定位置"
                     android:background="#ebebeb"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="28dp"
                     android:layout_marginTop="6dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:focusable="false"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

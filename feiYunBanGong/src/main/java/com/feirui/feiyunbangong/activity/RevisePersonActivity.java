@@ -25,11 +25,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.bigkoo.pickerview.TimePickerView;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.BaiDuPoi.PoiSearchActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.MyUser;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
+import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.T;
@@ -73,6 +77,8 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
     private String limit_position,type;//（0是实时位置1是固定位置）  是否开启共享位置（0不共享1共享）
     private boolean flag = true;
     private SharedPreferences mShareds;
+    private double longitude,latitude;//经度 纬度
+    private String city,address,fromAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +90,15 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         user = (MyUser)getIntent().getSerializableExtra("user");
         initView();
         setListener();
+        BaiDuUtil.initLocation(this, new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+               longitude = bdLocation.getLongitude();
+               latitude = bdLocation.getLatitude();//
+               city = bdLocation.getCity();
+               address = bdLocation.getAddrStr();
+            }
+        });
     }
 
 
@@ -280,8 +295,12 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                  limit_position = "1";
                  mBtn_stone_area.setBackgroundColor(Color.parseColor("#3686ff"));
                  mBtn_time_area.setBackgroundColor(Color.parseColor("#ebebeb"));
-                 mEv_share_area.setVisibility(View.VISIBLE);
-                 Utils.reMesureGridViewHeight(mRevise_gd);
+                 Intent intent = new Intent(this, PoiSearchActivity.class);
+                 intent.putExtra("longitude",longitude);
+                 intent.putExtra("latitude",latitude);
+                 intent.putExtra("city",city);
+                 intent.putExtra("address",address);
+                 startActivityForResult(intent,100);
                  break;
 
          }
@@ -487,6 +506,16 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                         mRevise_head.setImageBitmap(bitmap1);
                     }
                 }
+                break;
+            case 100:
+                if (resultCode == RESULT_OK){
+                    mEv_share_area.setVisibility(View.VISIBLE);
+                    Utils.reMesureGridViewHeight(mRevise_gd);
+                    fromAddress = data.getStringExtra("fromAdd");
+                    Log.e("result", "onActivityResult:-------------------- " + fromAddress);
+                    mEv_share_area.setText(fromAddress);
+                }
+                break;
         }
     }
     /*

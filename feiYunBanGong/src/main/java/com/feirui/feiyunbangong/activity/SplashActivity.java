@@ -78,10 +78,6 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
                             }
 
                         }
-
-                        @Override
-                        public void onConnectHotSpotMessage(String s, int i) {
-                        }
                     });
                     break;
             }
