@@ -45,6 +45,8 @@ public class Constant {
 
     // 有新成员加入推送后发出的广播：
     public static final String ON_RECEIVE_NEW_MEMBER_ADD = "com.feirui.feiyunbangong.onadd.team.member";
+    // 删除成员发出的广播：
+    public static final String ON_RECEIVE_NEW_MEMBER_DELETE = "com.feirui.feiyunbangong.ondelete.team.member";
 
     //接收到需要审核的广播
 

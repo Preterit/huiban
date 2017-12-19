@@ -10,180 +10,181 @@
         android:layout_height="@dimen/y4"
         android:background="@color/hui">
     </View>
-    <LinearLayout
-        android:id="@+id/ll_tuanduigonggao"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
-        android:background="@color/ffffff"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/size80"
-            android:layout_height="@dimen/size80"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/td_gonggao"/>
+            <LinearLayout
+                android:id="@+id/ll_tuanduigonggao"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y150"
+                android:background="@color/ffffff"
+                android:orientation="horizontal">
 
-        <TextView
-            style="@style/a000000_44"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x50"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="团队公告"/>
+                <ImageView
+                    android:layout_width="@dimen/size80"
+                    android:layout_height="@dimen/size80"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:src="@drawable/td_gonggao"/>
 
-        <TextView
-            android:id="@+id/tv_message_num"
-            style="@style/ffffff_32"
-            android:layout_width="@dimen/size60"
-            android:layout_height="@dimen/size60"
-            android:layout_marginLeft="@dimen/x50"
-            android:background="@drawable/hongdian"
-            android:gravity="center"
-            android:padding="@dimen/size10"
-            android:text="11"
-            android:visibility="invisible"/>
+                <TextView
+                    style="@style/a000000_44"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="团队公告"/>
 
-        <ImageView
-            android:layout_width="@dimen/size21"
-            android:layout_height="@dimen/size37"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x50"
-            android:src="@drawable/td_jiantou"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_message_num"
+                    style="@style/ffffff_32"
+                    android:layout_width="@dimen/size60"
+                    android:layout_height="@dimen/size60"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:background="@drawable/hongdian"
+                    android:gravity="center"
+                    android:padding="@dimen/size10"
+                    android:text="11"
+                    android:visibility="invisible"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y4"
-        android:background="@color/hui">
-    </View>
+                <ImageView
+                    android:layout_width="@dimen/size21"
+                    android:layout_height="@dimen/size37"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x50"
+                    android:src="@drawable/td_jiantou"/>
+            </LinearLayout>
 
-    <!-- 团队圈 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y4"
+                android:background="@color/hui">
+            </View>
 
-    <LinearLayout
-        android:id="@+id/ll_tuanduiquan"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
-        android:background="@color/ffffff"
-        android:orientation="horizontal">
+            <!-- 团队圈 -->
 
-        <ImageView
-            android:layout_width="@dimen/size80"
-            android:layout_height="@dimen/size80"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/td_gongzuoquan"/>
+            <LinearLayout
+                android:id="@+id/ll_tuanduiquan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y150"
+                android:background="@color/ffffff"
+                android:orientation="horizontal">
 
-        <TextView
-            style="@style/a000000_44"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x50"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="团队圈"/>
+                <ImageView
+                    android:layout_width="@dimen/size80"
+                    android:layout_height="@dimen/size80"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:src="@drawable/td_gongzuoquan"/>
 
-        <TextView
-            android:id="@+id/tv_message_num1"
-            style="@style/hongse_38"
-            android:layout_width="@dimen/size70"
-            android:layout_height="@dimen/size70"
-            android:layout_marginLeft="@dimen/x50"
-            android:background="@drawable/hongdian"
-            android:gravity="center"
-            android:padding="@dimen/size10"
-            android:text="11"
-            android:visibility="invisible"/>
+                <TextView
+                    style="@style/a000000_44"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="团队圈"/>
 
-        <ImageView
-            android:layout_width="@dimen/size21"
-            android:layout_height="@dimen/size37"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x50"
-            android:src="@drawable/td_jiantou"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y4"
-        android:background="@color/hui">
-    </View>
+                <TextView
+                    android:id="@+id/tv_message_num1"
+                    style="@style/hongse_38"
+                    android:layout_width="@dimen/size70"
+                    android:layout_height="@dimen/size70"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:background="@drawable/hongdian"
+                    android:gravity="center"
+                    android:padding="@dimen/size10"
+                    android:text="11"
+                    android:visibility="invisible"/>
 
-    <LinearLayout
-        android:id="@+id/llTeamTask"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
-        android:background="@color/ffffff"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        >
+                <ImageView
+                    android:layout_width="@dimen/size21"
+                    android:layout_height="@dimen/size37"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x50"
+                    android:src="@drawable/td_jiantou"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y4"
+                android:background="@color/hui">
+            </View>
 
-        <ImageView
-            android:layout_width="@dimen/size80"
-            android:layout_height="@dimen/size80"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/task"/>
+            <LinearLayout
+                android:id="@+id/llTeamTask"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y150"
+                android:background="@color/ffffff"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
 
-        <TextView
-            style="@style/a000000_44"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x50"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="任务单"/>
+                <ImageView
+                    android:layout_width="@dimen/size80"
+                    android:layout_height="@dimen/size80"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:src="@drawable/task"/>
 
-        <ImageView
-            android:layout_width="@dimen/size21"
-            android:layout_height="@dimen/size37"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x50"
-            android:src="@drawable/td_jiantou"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/a000000_44"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="任务单"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y4"
-        android:background="@color/hui">
-    </View>
+                <ImageView
+                    android:layout_width="@dimen/size21"
+                    android:layout_height="@dimen/size37"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x50"
+                    android:src="@drawable/td_jiantou"/>
+            </LinearLayout>
 
-    <!-- 团队成员 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y4"
+                android:background="@color/hui">
+            </View>
 
-    <LinearLayout
-        android:id="@+id/llChengYuan"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
-        android:background="@color/ffffff"
-        android:orientation="horizontal">
+            <!-- 团队成员 -->
 
-        <ImageView
-            android:layout_width="@dimen/size80"
-            android:layout_height="@dimen/size80"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x50"
-            android:src="@drawable/td_chengyuan" />
+            <LinearLayout
+                android:id="@+id/llChengYuan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y150"
+                android:background="@color/ffffff"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_chenyuan"
-            style="@style/a000000_44"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x50"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="团队成员" />
+                <ImageView
+                    android:layout_width="@dimen/size80"
+                    android:layout_height="@dimen/size80"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:src="@drawable/td_chengyuan" />
 
-        <ImageView
-            android:id="@+id/iv_tjcy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/tianjiachengyuan" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_chenyuan"
+                    style="@style/a000000_44"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="团队成员" />
+
+                <ImageView
+                    android:id="@+id/iv_tjcy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/tianjiachengyuan" />
+            </LinearLayout>
 
 </LinearLayout>

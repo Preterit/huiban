@@ -133,7 +133,7 @@ public class Fragment3 extends BaseFragment implements OnClickListener {
         super.onDestroy();
     }
 
-    public class MyLocalActivityManager extends LocalActivityManager {
+    public class MyLocalActivityManager extends   LocalActivityManager {
 
         @SuppressWarnings("deprecation")
         public MyLocalActivityManager(Activity parent, boolean singleMode) {

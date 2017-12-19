@@ -79,6 +79,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
         td = (TuanDui) intent.getSerializableExtra("td");
         bt_out_team = (Button) findViewById(R.id.bt_out_team);
 
+        Log.e("tdys", "initView: -----------------" + td.toString() );
         setManage(td);
 
         initTitle();

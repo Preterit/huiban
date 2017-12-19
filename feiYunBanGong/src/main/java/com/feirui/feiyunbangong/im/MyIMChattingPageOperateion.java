@@ -348,12 +348,6 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
 
             }
 
-            @Override
-            public void onConnectHotSpotMessage(String s, int i) {
-
-            }
-
-
         });
     }
 

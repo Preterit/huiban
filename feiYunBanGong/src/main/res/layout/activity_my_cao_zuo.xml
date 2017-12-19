@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/top"
+        android:layout_height="@dimen/title_bar"
+        android:layout_width="match_parent"/>
+    <include
+        android:id="@+id/ll_type_handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginTop="@dimen/y110"
+        layout="@layout/ll_type_handle"
+        android:visibility="gone"
+        />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/handle_tab"
+        android:layout_below="@id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="#3686ff"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="#3686ff"
+        app:tabGravity="fill">
+    </android.support.design.widget.TabLayout>
+    <View
+        android:id="@+id/my_view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#eee"
+        android:layout_below="@id/handle_tab"
+        />
+    <Button
+        android:id="@+id/commit_btn"
+        android:layout_below="@id/my_view"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/commit_btn"></android.support.v4.view.ViewPager>
+
+</RelativeLayout>

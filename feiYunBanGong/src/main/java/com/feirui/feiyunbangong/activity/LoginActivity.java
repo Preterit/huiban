@@ -122,9 +122,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                                 mPostion = bdLocation.getAddrStr();
 							}
 						}
-
-						@Override
-						public void onConnectHotSpotMessage(String s, int i) {}
 					});
 					break;
 			}

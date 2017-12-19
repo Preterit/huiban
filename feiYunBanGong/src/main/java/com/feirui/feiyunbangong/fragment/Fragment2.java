@@ -969,9 +969,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                         }
 
                     }
-
-                    @Override
-                    public void onConnectHotSpotMessage(String s, int i) {}
                 });
             }else {
                 Log.e("好友数量", "msg.obj=" + msg.obj.toString());

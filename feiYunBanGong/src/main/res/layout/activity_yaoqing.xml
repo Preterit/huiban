@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x56"
             android:layout_marginTop="@dimen/y56"
-            android:text="奖励总金额"
+            android:text="奖励总积分"
             android:id="@+id/textView17" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_marginLeft="@dimen/x72"
             android:background="@drawable/yaoqing1"
             android:gravity="center"
-            android:text="￥ 00.00"
+            android:text="00.00"
             android:layout_below="@+id/textView17"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.83"
-            android:text="奖励金额用于平台内消费"
+            android:text="奖励积分用于平台内消费"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/y30"
-        android:text="注册奖励1元" />
+        android:text="注册奖励1积分" />
 
     <Button
         android:id="@+id/btn_duanxin"

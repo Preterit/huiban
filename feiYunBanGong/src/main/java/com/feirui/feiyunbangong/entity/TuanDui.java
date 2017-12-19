@@ -24,8 +24,17 @@ public class TuanDui  extends DataSupport implements Serializable {
 	private boolean isHave;// 是否含有公告消息；
 	private ArrayList<String> Dcmoes=new ArrayList<>();// 副团长；
 	private int notice_number;//团队消息数量；
-	
-	
+	//建立多对一的关系
+	private ArrayList<TuanDuiChengYuan> yuanArrayList = new ArrayList<>();
+
+	public ArrayList<TuanDuiChengYuan> getYuanArrayList() {
+		return yuanArrayList;
+	}
+
+	public void setYuanArrayList(ArrayList<TuanDuiChengYuan> yuanArrayList) {
+		this.yuanArrayList = yuanArrayList;
+	}
+
 	public String getPinyin() {
 		return pinyin;
 	}
@@ -98,11 +107,6 @@ public class TuanDui  extends DataSupport implements Serializable {
 		Dcmoes = dcmoes;
 	}
 
-	@Override
-	public String toString() {
-		return "TuanDui [tid=" + tid + ", name=" + name + "]";
-	}
-
 	public TuanDui(String tid, String name) {
 		super();
 		this.tid = tid;
@@ -112,4 +116,13 @@ public class TuanDui  extends DataSupport implements Serializable {
 	public TuanDui() {
 	}
 
+	@Override
+	public String toString() {
+		return "TuanDui[" +
+				"tid='" + tid + '\'' +
+				", name='" + name + '\'' +
+				", guanli_id='" + guanli_id + '\'' +
+				", Dcmoes=" + Dcmoes +
+				']';
+	}
 }

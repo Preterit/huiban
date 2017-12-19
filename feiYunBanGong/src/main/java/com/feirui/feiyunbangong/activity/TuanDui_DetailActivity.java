@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -48,6 +50,7 @@ import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
+import com.feirui.feiyunbangong.view.RefreshLayout;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -66,17 +69,21 @@ import java.util.List;
  */
 @SuppressLint("InflateParams")
 public class TuanDui_DetailActivity extends BaseActivity implements
-        OnItemClickListener, OnKeyListener, OnClickListener {
+        OnItemClickListener, OnKeyListener, OnClickListener, SwipeRefreshLayout.OnRefreshListener{
 
-    private ListView lv_chengyuan;
-    private ChengYuanAdapter adapter,mSearchAdapter;
-    private ArrayList<TuanDuiChengYuan> tdcys; //所有的团队成员
+    private static ListView lv_chengyuan;
+    private static ChengYuanAdapter adapter;
+    private ChengYuanAdapter mSearchAdapter;
+    private static ArrayList<TuanDuiChengYuan> tdcys ; //所有的团队成员
     private List<TuanDuiChengYuan> mBackData=new ArrayList<>(); //返回的团队成员
     private List<TuanDuiChengYuan> middle=new ArrayList<>();
-    private TuanDui td;
+    private List<TuanDuiChengYuan> allTuan = new ArrayList<>();
+    private static TuanDui td;
     private Button bt_add;// 添加成员
     private LinearLayout ll_tuanduigonggao, ll_tuanduiquan, ll_tuanduichengyuan;// 团队公告 、成员；
-    private TextView tv_message_num, tv_chenyuan,tv_search_person;// 团队公告消息数量；
+    private TextView tv_message_num;
+    private static TextView tv_chenyuan;
+    private TextView tv_search_person;// 团队公告消息数量；
     private View header_view;// 头部；
     private ImageView iv_tjcy;
 
@@ -91,35 +98,43 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     private BroadcastReceiver receiver;
     private SearchView sc_search;
     private ListView lv_search;//承载搜索到的成员
+    private static RefreshLayout swipe_container;
+    private String count;//团队人数
+    static ArrayList<Activity> activitys = Happlication.getActivities();
+    private static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tuan_dui);
+        Happlication.getActivities().add(this);
         mIMKit = AppStore.mIMKit;
         initView();
         setListener();
         setListView();
-
+        getMessageNum();// 获得消息数量；
+        initData();//从数据库获取数据
     }
 
     /**
      * 动态注册广播
      */
     private void registReceiver() {
-
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.ON_RECEIVE_NEW_MEMBER_ADD);
-        receiver = new MyReceiver();
+//        filter.addAction(Constant.ON_RECEIVE_NEW_MEMBER_DELETE);
+        receiver = new MyTeamReceiver();
         registerReceiver(receiver, filter);
 
+        //静态广播
+        Intent intent = new Intent();
+        intent.setAction(Constant.ON_RECEIVE_NEW_MEMBER_DELETE);
+        sendBroadcast(intent);
     }
 
     @Override
     protected void onResume() {
         registReceiver();// 注册广播接收器
-        getData();
-        getMessageNum();// 获得消息数量；
         super.onResume();
     }
 
@@ -133,6 +148,12 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Happlication.getActivities().remove(this);
+    }
+
     private void getMessageNum() {
         String url = UrlTools.url + UrlTools.TEAM_MESSAGE_NUM;
         RequestParams params = new RequestParams();
@@ -142,7 +163,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
                     @Override
                     public void success(JsonBean bean) {
-                        String count = "" + bean.getInfor().get(0).get("count");
+                       count = "" + bean.getInfor().get(0).get("count");
                         if ("0".equals(count)) {
                             tv_message_num.setVisibility(View.INVISIBLE);
                         } else {
@@ -164,13 +185,20 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     }
 
-    private void getData() {
-
+    /**
+     * 从网络获取数据
+     */
+    private static void getData() {
         String url = UrlTools.url + UrlTools.DETAIL_TUANDUICHENGYUAN;
         RequestParams params = new RequestParams();
         params.put("id", td.getTid());
+        if (activitys.size() == 0 || activitys == null){
+            return;
+        }else {
+            activity = activitys.get(0);
+        }
         L.e("获取团队成员url" + url + " params" + params);
-        Utils.doPost(LoadingDialog.getInstance(this), this, url, params,
+        Utils.doPost(LoadingDialog.getInstance(activity), activity, url, params,
                 new HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {
@@ -181,7 +209,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             HashMap<String, Object> hm = infor.get(i);
                             Log.e("团队成员", "团队成员: "+hm.toString() );
                             TuanDuiChengYuan tdcy = new TuanDuiChengYuan(hm
-                                    .get("id") + "", String.valueOf(hm
+                                    .get("cid") + "", String.valueOf(hm
                                     .get("staff_id")), String.valueOf(hm
                                     .get("staff_name")), String.valueOf(hm
                                     .get("staff_head")), hm.get("type") + "",
@@ -220,33 +248,53 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                         Log.e("tdcys", "  " + tdcys );
                         adapter.add(tdcys);
                         lv_chengyuan.setAdapter(adapter);
-                        handler.sendEmptyMessage(6);
-                        for (int i=0;i<tdcys.size();i++){
-                            TuanDuiChengYuan tdcy=new TuanDuiChengYuan();
-                            tdcy.setName(tdcys.get(i).getName()); //用户名
-                            tdcy.setState(tdcys.get(i).getState()); //状态
-                            tdcy.setRemark(tdcys.get(i).getRemark()); //    b
-                            tdcy.setT_remark(tdcys.get(i).getT_remark());
-                            tdcy.setHead(tdcys.get(i).getHead());  //头像
-                            tdcy.setType(tdcys.get(i).getType()); //团队里面的职位
-                            tdcy.setPhone(tdcys.get(i).getPhone()); //用户手机号
-                            tdcy.setStaff_id(tdcys.get(i).getStaff_id()); //用户ID
-                            tdcy.setId(tdcys.get(i).getId());  //列表ID
-                            tdcy.setIntroduction(tdcys.get(i).getIntroduction()); //
-                            tdcy.setStore_url(tdcys.get(i).getStore_url()); //小店地址
-                            tdcy.setKey1(tdcys.get(i).getKey1()); //第一个用户标签
-                            tdcy.setKey2(tdcys.get(i).getKey2()); //第二个标签
-                            tdcy.save();
-                        }
+//                        handler.sendEmptyMessage(6);
+                        //保存数据  考虑团队成员 关键字的改变
+                        DataSupport.deleteAll(TuanDuiChengYuan.class,"tuandui_id = ?", td.getTid());
+                        //多对一数据保存
+                        for (int i = 0; i < tdcys.size(); i++){
+                            TuanDuiChengYuan tuan = new TuanDuiChengYuan();
+                            tuan.setCId(tdcys.get(i).getCId());
+                            tuan.setStaff_id(tdcys.get(i).getStaff_id());
+                            tuan.setHead(tdcys.get(i).getHead());
+                            tuan.setName(tdcys.get(i).getName());
+                            tuan.setType(tdcys.get(i).getType());
+                            tuan.setPhone(tdcys.get(i).getPhone());
+                            tuan.setEmail(tdcys.get(i).getEmail());
+                            tuan.setStore_url(tdcys.get(i).getStore_url());
+                            tuan.setSex(tdcys.get(i).getSex());
+                            tuan.setBirthday(tdcys.get(i).getBirthday());
+                            tuan.setAddress(tdcys.get(i).getAddress());
+                            tuan.setKey1(tdcys.get(i).getKey1());
+                            tuan.setKey2(tdcys.get(i).getKey2());
+                            tuan.setKey3(tdcys.get(i).getKey3());
+                            tuan.setKey4(tdcys.get(i).getKey4());
+                            tuan.setKey5(tdcys.get(i).getKey5());
+                            tuan.setPosition(tdcys.get(i).getPosition());
+                            tuan.setLimit_position(tdcys.get(i).getLimit_position());
+                            tuan.setType2(tdcys.get(i).getType2());
+                            tuan.setTuanDui_id(td.getTid());
+                            tuan.setTeam_member_list_id(tdcys.get(i).getTeam_member_list_id());
 
-                        List<TuanDuiChengYuan> tdcy_chengyuan = DataSupport.findAll(TuanDuiChengYuan.class);
-                        Log.e("tdcy_chengyuan  ", "tdcy_chengyuan: -----------------" + tdcy_chengyuan.toString() );
+                            tuan.setState(tdcys.get(i).getState());
+
+                            tuan.setFriendstate(tdcys.get(i).getFriendstate());// 是否是好友；
+
+                            tuan.setRemark(tdcys.get(i).getRemark());// 设置备注；
+
+                            tuan.setT_remark(tdcys.get(i).getT_remark());// 设置团队备注；
+                            tuan.save();
+                        }
+                        //停止刷新
+                        swipe_container.setRefreshing(false);
+
                     }
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(TuanDui_DetailActivity.this, msg,Toast.LENGTH_SHORT)
+                        Toast.makeText(activity, msg,Toast.LENGTH_SHORT)
                                 .show();
+                        swipe_container.setRefreshing(false);
                     }
 
                     @Override
@@ -255,6 +303,45 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
                     }
                 });
+    }
+
+    /**
+     * 从数据库获取数据
+     */
+    private void initData() {
+        //从数据库获取所有数据
+        allTuan = DataSupport.findAll(TuanDuiChengYuan.class);
+        if (allTuan == null || allTuan.size() == 0){
+            Log.e("tdcys", "initData:-------------allTuan---------------- " );
+            //从网络获取数据
+            getData();
+        }else {
+            tdcys.removeAll(tdcys);
+            for (int i = 0; i < allTuan.size(); i++){
+                if ((td.getTid()).equals(allTuan.get(i).getTuanDui_id())){
+                    tdcys.add(allTuan.get(i));
+                }
+            }
+            Log.e("tdcys", " 5555555555555 " + tdcys + "------" + tdcys.size() + "----" + count);
+            if (tdcys.size() == 0 ){
+                Log.e("tdcys", "initData:-------------count---------------- " );
+                //从网络获取数据
+                getData();
+            }else {
+                Log.e("tdcys", "initData:-------------adapter---------------- " );
+                for (int i = 0; i < tdcys.size(); i++){
+                    if ("团长".equals(tdcys.get(i).getType())) {
+                        td.setGuanli_id(tdcys.get(i).getStaff_id());
+                    }
+                    // 副团长添加到团队副团长id集合中；
+                    if ("副团长".equals(tdcys.get(i).getType())) {
+                        td.getDcmoes().add(tdcys.get(i).getStaff_id());
+                    }
+                }
+                adapter.add(tdcys);
+                lv_chengyuan.setAdapter(adapter);
+            }
+        }
     }
 
     Handler handler = new Handler() {
@@ -298,6 +385,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     }
 
     private void setListener() {
+        swipe_container.setOnRefreshListener(this);
         lv_chengyuan.setOnItemClickListener(this);
         //bt_add.setOnClickListener(this);
         iv_tjcy.setOnClickListener(this);
@@ -438,7 +526,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                 null);
 
         lv_chengyuan.addHeaderView(header_view);
-
+        swipe_container = (RefreshLayout)findViewById(R.id.swipe_container);
         ll_tuanduigonggao = (LinearLayout) header_view
                 .findViewById(R.id.ll_tuanduigonggao);
         ll_tuanduichengyuan = (LinearLayout)header_view.findViewById(R.id.llChengYuan);
@@ -513,10 +601,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                 break;
             case R.id.llChengYuan: //打开团队聊天窗口
 
-//                YWTribe tribe = ;
-//                Intent talkInternt = AppStore.mIMKit.getTribeChattingActivityIntent();
-
-
                 break;
         }
         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
@@ -545,8 +629,8 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     boolean isHave = false;
                     if (adapter.getList().size() > 0) {
                         for (int j = 0; j < adapter.getList().size(); j++) {
-                            if (adapter.getList().get(j).getId()
-                                    .equals(tdcy.get(i).getId())) {
+                            if (adapter.getList().get(j).getCId()
+                                    .equals(tdcy.get(i).getCId())) {
                                 isHave = true;
                                 break;
                             }
@@ -571,7 +655,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         StringBuffer sb = new StringBuffer();
 
         for (int i = 0; i < tdcy_add.size(); i++) {
-            sb.append(tdcy_add.get(i).getId());
+            sb.append(tdcy_add.get(i).getCId());
             sb.append(",");
         }
 
@@ -679,25 +763,41 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     }
 
+    /**
+     * 下拉刷新
+     */
+    @Override
+    public void onRefresh() {
+        getMessageNum();
+        getData();
+    }
+
     // 广播接收器，接收团队成员加入的广播：
-    public class MyReceiver extends BroadcastReceiver {
+    public  class MyTeamReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            if (!intent.getAction().equals(Constant.ON_RECEIVE_NEW_MEMBER_ADD)) {
-                return;
-            }
-            Log.e("TAG", "接收到团队成员加入的广播");
-
-            // 判断团队id是否和传过来的团队id一致，如果一致则刷新页面；否则不做处理；
-            String id = intent.getStringExtra("id");
-
-            if (td.getTid().equals(id)) {
-                getData();// 更新数据；
+            Log.e("tdys", "接收到团队成员加入的广播");
+            if (intent.getAction().equals(Constant.ON_RECEIVE_NEW_MEMBER_ADD)) {
+                // 判断团队id是否和传过来的团队id一致，如果一致则刷新页面；否则不做处理；
+                String id = intent.getStringExtra("id");
+                if (td.getTid().equals(id)) {
+                    getData();// 更新数据；
+                }
             }
         }
     }
+
+    public static class mBroadcastReceiver extends BroadcastReceiver {
+        //接收到广播后自动调用该方法
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.e("tdys", "接收到团队成员加入的广播---------");
+            //写入接收广播后的操作
+            getData();// 更新数据；
+        }
+    }
+
 
     /**
      * 请求回调
