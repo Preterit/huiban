@@ -502,7 +502,8 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
-        <activity android:name=".activity.ZhiFuActivity"></activity>
+        <activity android:name=".activity.ZhiFuActivity" />
+        <activity android:name=".activity.ChooseFriendActivity"></activity>
     </application>
 
 </manifest>
