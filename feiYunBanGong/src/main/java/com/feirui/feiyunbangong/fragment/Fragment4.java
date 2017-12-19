@@ -95,6 +95,13 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
         return v;
     }
 
+    @Override
+    public void onResume() {
+        regist();// 注册广播接收器;
+        getData(); //获取数据
+        super.onResume();
+    }
+
     private void regist() {
         //动态广播
 //        IntentFilter filter = new IntentFilter();
@@ -162,6 +169,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                 url, params, new HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {
+                        //从网络获取数据保存到数据库
                         setNetData(bean);
                         swipe_container.setRefreshing(false);
                     }
@@ -214,7 +222,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                     Log.e("tds", "setData: ------数据获取-sdsdsd-------" + td);
                     tds0.add(td);
                 } catch (Exception e) {
-                    Log.e("TAG", e.getMessage());
+                    Log.e("TAG", "9999999999999999999");
                 }
             }
 
@@ -230,13 +238,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
             Log.e("tds", "setData: ------数据获取-sdsdsd-------" + tds0);
             adapter2.add(tds0);   //从数据库获取的 排序
         }
-    }
-
-    @Override
-    public void onResume() {
-        regist();// 注册广播接收器;
-        getData(); //获取数据
-        super.onResume();
     }
 
     @Override
@@ -306,7 +307,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                         R.anim.aty_zoomout);
                 break;
             case R.id.ll_add_to_team:
-                // 加入团队：
+                // 搜索团队：
                 startActivityForResult(new Intent(getActivity(),
                         SouSuoTuanDuiActivity.class),1000);
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
@@ -471,7 +472,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
     }
 
-    //动态注册改为动态注册
+    //动态注册改为静态注册
     public static  class MyBroadReceiver extends BroadcastReceiver {
 
         public MyBroadReceiver(){}

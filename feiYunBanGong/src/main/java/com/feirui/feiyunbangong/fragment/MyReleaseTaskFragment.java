@@ -52,7 +52,7 @@ public class MyReleaseTaskFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-
+   
                 Gson gson=new Gson();
                 final MyTaskReleEntity.Root root = gson.fromJson(new String(responseBody), Root.class);
                 if (root.getCode()==-400){

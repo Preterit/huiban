@@ -6,10 +6,8 @@ import java.io.Serializable;
 
 public class TuanDuiChengYuan extends DataSupport implements Serializable {
 
-	/**
-	 */
 	private static final long serialVersionUID = 1L;
-	private String id;// 列表中的id;
+	private String cid;// 列表中的id;
 	private String staff_id;// 员工id
 	private String name;
 	private String introduction;
@@ -36,6 +34,15 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 	private String type2;//共享与否
 	private String position;//固定位置
 	private String limit_position;//实时位置
+	private String tuanDui_id;
+
+	public String getTuanDui_id() {
+		return tuanDui_id;
+	}
+
+	public void setTuanDui_id(String tuanDui_id) {
+		this.tuanDui_id = tuanDui_id;
+	}
 
 	public String getType2() {
 		return type2;
@@ -190,13 +197,13 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 
 	public TuanDuiChengYuan(String id, String name, String head) {
 		super();
-		this.id = id;
+		this.cid = id;
 		this.name = name;
 		this.head = head;
 	}
     public TuanDuiChengYuan(String id, String name, String head,String phone) {
         super();
-        this.id = id;
+        this.cid = id;
         this.name = name;
         this.head = head;
         this.phone = phone;
@@ -233,12 +240,12 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getId() {
-		return id;
+	public String getCId() {
+		return cid;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setCId(String id) {
+		this.cid = id;
 	}
 	public String getStore_url() {
 		return store_url;
@@ -283,7 +290,7 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 			String birthday,String address,String key1,String key2,String key3,String key4,
 							String key5,String type2,String position,String limit_position) {
 		super();
-		this.id = id;
+		this.cid = id;
 		this.staff_id = staff_id;
 		this.introduction=introduction;
 		this.name = name;
@@ -331,7 +338,7 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 	public TuanDuiChengYuan(String id, String name, String head, String type,
 			String phone) {
 		super();
-		this.id = id;
+		this.cid = id;
 		this.name = name;
 		this.head = head;
 		this.type = type;
@@ -344,7 +351,7 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 	@Override
 	public String toString() {
 		return "TuanDuiChengYuan{" +
-				"id='" + id + '\'' +
+				"cid='" + cid + '\'' +
 				", staff_id='" + staff_id + '\'' +
 				", name='" + name + '\'' +
 				", introduction='" + introduction + '\'' +

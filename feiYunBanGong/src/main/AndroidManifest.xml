@@ -99,9 +99,7 @@
         <!-- 防止软键盘将布局弹出 -->
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" >
-
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.GuideActivity" />
         <activity
             android:name=".activity.LoginActivity"
@@ -496,7 +494,7 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -504,11 +502,8 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
-        <activity android:name=".activity.ZhiFuActivity">
-
-        </activity>
+        <activity android:name=".activity.ZhiFuActivity"></activity>
         <activity android:name=".activity.AboutUsActivity"></activity>
-
         <activity android:name=".activity.BaiDuPoi.PoiSearchActivity"/>
         <activity android:name=".activity.MyCaoZuoActivity"></activity>
         <activity
@@ -521,9 +516,7 @@
                 <data android:scheme="wx061139fe146e41ae"/>
             </intent-filter>
         </activity>
-
-
+        <activity android:name=".activity.ChooseFriendActivity"></activity>
     </application>
-
 
 </manifest>

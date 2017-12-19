@@ -229,7 +229,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 							tdcy = new TuanDuiChengYuan();
 							try {
 								tdcy.setHead(obj.get("staff_head") + "");
-								tdcy.setId(obj.get("staff_id") + "");
+								tdcy.setCId(obj.get("staff_id") + "");
 								tdcy.setName(obj.get("staff_name") + "");
 								tdcy.setType(obj.get("type") + "");
 							} catch (JSONException e) {

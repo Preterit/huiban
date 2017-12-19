@@ -102,7 +102,7 @@ public class GuanLiChengYuanAdapter extends MyBaseAdapter<TuanDuiChengYuan> {
 
 			boolean isHave = false;
 			for (int j = 0; j < list.size(); j++) {
-				if (list.get(j).getId().equals(items.get(i).getId())) {
+				if (list.get(j).getCId().equals(items.get(i).getCId())) {
 					isHave = true;
 					break;
 				}

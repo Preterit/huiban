@@ -44,6 +44,7 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.T;
@@ -196,7 +197,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 			createTribe(YWTribeType.CHATTING_GROUP);
 			break;
 		default:
-			MyAleartDialog delete_dialog = new MyAleartDialog("删除团队成员",
+			final MyAleartDialog delete_dialog = new MyAleartDialog("删除团队成员",
 					"确定删除团队该成员吗？", this, new AlertCallBack() {
 						@Override
 						public void onOK() {
@@ -405,7 +406,7 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 		String url = UrlTools.url + UrlTools.DELETE_TUANDUI_CHENGYUAN;
 		RequestParams params = new RequestParams();
-		params.put("id", tdcy.getId());
+		params.put("id", tdcy.getCId());
 		mTuanDui = tdcy;
 		AsyncHttpServiceHelper.post(url, params,
 				new AsyncHttpResponseHandler() {
@@ -536,6 +537,11 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				// 删除成功！
 				TuanDuiChengYuan item = (TuanDuiChengYuan) msg.obj;
 				adapter.reduce(item);
+                // 团队删除成员发出的广播：
+                Intent i = new Intent();
+                i.setAction(Constant.ON_RECEIVE_NEW_MEMBER_DELETE);
+                i.putExtra("guangbo","删除团队成员成功啦");
+				sendBroadcast(i);
 				//删除团聊成员
 				if (mTbID != null){
 					deleteTuanLiao();

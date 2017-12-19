@@ -1,17 +1,9 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,18 +11,15 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-import com.alibaba.mobileim.YWIMCore;
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.contact.IYWContact;
 import com.alibaba.mobileim.contact.YWContactFactory;
-import com.alibaba.mobileim.conversation.YWAudioMessageBody;
 import com.alibaba.mobileim.conversation.YWConversation;
 import com.alibaba.mobileim.conversation.YWConversationCreater;
 import com.alibaba.mobileim.conversation.YWFileManager;
 import com.alibaba.mobileim.conversation.YWMessage;
 import com.alibaba.mobileim.conversation.YWMessageChannel;
-import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddChengYuanExpandableListAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
@@ -51,8 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.alibaba.mobileim.R.id.content;
 
 /**
  * 添加成员：
@@ -153,7 +140,6 @@ public class AddChengYuanActivity extends BaseActivity implements
 					public void success(JsonBean bean) {
 						ArrayList<HashMap<String, Object>> infor = bean
 								.getInfor();
-
 						groups.removeAll(groups);
 						Log.e("TAG", infor.size() + "info.size()");
 
@@ -281,7 +267,7 @@ public class AddChengYuanActivity extends BaseActivity implements
 					//http://interface.im.taobao.com/mobileimweb/fileupload/downloadPriFile.do?type=2&fileId=7875d1f1de9f28767389d248284e24b3.amr&suffix=amr&mediaSize=8006&duration=5&fromId=ib3mbd6s18210532546&toId=ib3mbd6s15811015771
 					final YWMessage msage = YWMessageChannel.createAudioMessage("http://interface.im.taobao.com/mobileimweb/fileupload/downloadPriFile.do?type=2&fileId=7875d1f1de9f28767389d248284e24b3.amr&suffix=amr&mediaSize=8006&duration=5&fromId=ib3mbd6s18210532546&toId=ib3mbd6s15811015771",
 							mess.getPlayTime(),mess.getFileSize(),mess.getMimeType());
-					
+
 					Log.e("mess", "onError: --------------------" + ywMessage.getContent().substring(0,ywMessage.getContent().length() - 52) + ",,,,," + mess.getMimeType());
 					final YWConversation conversation = conversationCreater.createConversationIfNotExist((String) msg.obj);
 					runOnUiThread(new Runnable() {

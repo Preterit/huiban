@@ -1,7 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.fragment.MyReleaseTaskFragment;
 import com.feirui.feiyunbangong.fragment.TaskJieDanFragment;
 import com.feirui.feiyunbangong.fragment.TaskJinXingZhongFragment;
 import com.feirui.feiyunbangong.fragment.TaskQuanBuRenWuFragment;
@@ -47,28 +46,34 @@ public class RenWuListActivity extends AppCompatActivity {
         iv_rw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CharSequence items[] = {"发布任务", "个人任务详情","支付页面"};
-
-                AlertDialog alertDialog = new AlertDialog.Builder(RenWuListActivity.this).setIcon(R.drawable.selectimage)
-                        .setTitle("请选择方式").setItems(items, new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case 0:
-                                        startActivity(new Intent(RenWuListActivity.this, ReleaseTask.class));
-                                        break;
-                                    case 1:
-                                        startActivity(new Intent(RenWuListActivity.this, WoDeTaskActivity.class));
-                                        break;
-                                    case 2:
-                                        startActivity(new Intent(RenWuListActivity.this,ZhiFuActivity.class));
-                                        break;
-                                }
-
-                            }
-                        }).show();
+                startActivity(new Intent(RenWuListActivity.this, ReleaseTask.class));
             }
         });
+//        iv_rw.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final CharSequence items[] = {"发布任务", "个人任务详情","支付页面"};
+//
+//                AlertDialog alertDialog = new AlertDialog.Builder(RenWuListActivity.this).setIcon(R.drawable.selectimage)
+//                        .setTitle("请选择方式").setItems(items, new DialogInterface.OnClickListener() {
+//
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case 0:
+//                                        startActivity(new Intent(RenWuListActivity.this, ReleaseTask.class));
+//                                        break;
+//                                    case 1:
+//                                        startActivity(new Intent(RenWuListActivity.this, WoDeTaskActivity.class));
+//                                        break;
+//                                    case 2:
+//                                        startActivity(new Intent(RenWuListActivity.this,ZhiFuActivity.class));
+//                                        break;
+//                                }
+//
+//                            }
+//                        }).show();
+//            }
+//        });
         viewPager= (ViewPager) findViewById(R.id.vp_renwudan);
         tabLayout= (TabLayout) findViewById(R.id.tl_tab_renwudan);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(this.getSupportFragmentManager());
@@ -96,6 +101,9 @@ public class RenWuListActivity extends AppCompatActivity {
                 case 3 :
                     fragment = new TaskYiWanChengFragment();
                     break;
+                case 4 :
+                    fragment = new MyReleaseTaskFragment();
+                    break;
             }
 
             return fragment;
@@ -103,7 +111,7 @@ public class RenWuListActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -117,6 +125,8 @@ public class RenWuListActivity extends AppCompatActivity {
                     return "进行中";
                 case 3:
                     return "已完成";
+                case 4:
+                    return "已发布";
 
             }
             return null;
