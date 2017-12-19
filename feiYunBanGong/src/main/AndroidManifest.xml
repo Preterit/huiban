@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="90"
-    android:versionName="1.7.20">
+    android:versionCode="91"
+    android:versionName="1.7.21">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -99,7 +99,9 @@
         <!-- 防止软键盘将布局弹出 -->
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+
+        </activity>
         <activity android:name=".activity.GuideActivity" />
         <activity
             android:name=".activity.LoginActivity"
@@ -502,12 +504,26 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
-        <activity android:name=".activity.ZhiFuActivity"></activity>
+        <activity android:name=".activity.ZhiFuActivity">
+
+        </activity>
         <activity android:name=".activity.AboutUsActivity"></activity>
 
-        <activity android:name=".activity.TeamPersonActivity" />
-        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity" />
+        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity"/>
         <activity android:name=".activity.MyCaoZuoActivity"></activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx061139fe146e41ae"/>
+            </intent-filter>
+        </activity>
+
+
     </application>
+
 
 </manifest>

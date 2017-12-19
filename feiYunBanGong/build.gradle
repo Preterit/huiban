@@ -2,11 +2,18 @@ apply plugin: 'com.android.application'
 //apply plugin: 'com.jakewharton.butterknife'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('F:/feirui.keystore')
+            storePassword 'feirui'
+            keyAlias 'feirui'
+            keyPassword 'feirui'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '25.0.2'
     //6.0以后应用handle添加的依赖
     useLibrary 'org.apache.http.legacy'
-
     dexOptions {
         jumboMode true
         javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
@@ -35,8 +42,6 @@ android {
 
 
     }
-
-
     buildTypes {
         release {
 
@@ -50,7 +55,6 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-
     sourceSets {
         main {
             jniLibs.srcDir 'libs'
@@ -60,25 +64,27 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/android-async-http-1.4.4.jar')
     //支付宝SDK
     compile files('libs/alipaySdk-20170922.jar')
     //极光推送
     compile files('libs/core.jar')
     //谷歌二维码
-//    compile files('libs/jcore-android_v1.1.3.jar')
+    //compile files('libs/jcore-android_v1.1.3.jar')
     //compile files('libs/jpush-android-3.0.6.jar')
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/universal-image-loader-1.9.0.jar')
     compile files('libs/volley.jar')
     compile files('libs/xUtils-2.6.2.jar')
     //必选
+
     //可选，如果使用SDK的UI必须添加该依赖，如果不使用SDK的UI，完全自己开发UI则无需添加该依赖
-//    compile files('libs/BaiduLBS_Android.jar')
+
+    //compile files('libs/BaiduLBS_Android.jar')
     compile('com.android.support:cardview-v7:23.2.0') { force = true }
     //鲁班压缩
+
     //微信支付
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     compile 'org.apache.httpcomponents:httpcore:4.4.2'

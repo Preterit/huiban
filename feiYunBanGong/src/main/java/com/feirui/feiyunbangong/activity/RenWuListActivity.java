@@ -61,7 +61,7 @@ public class RenWuListActivity extends AppCompatActivity {
                                         startActivity(new Intent(RenWuListActivity.this, WoDeTaskActivity.class));
                                         break;
                                     case 2:
-//                                        startActivity(new Intent(RenWuListActivity.this,ZhiFuActivity.class));
+                                        startActivity(new Intent(RenWuListActivity.this,ZhiFuActivity.class));
                                         break;
                                 }
 

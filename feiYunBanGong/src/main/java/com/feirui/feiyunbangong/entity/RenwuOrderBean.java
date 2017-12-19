@@ -6,6 +6,7 @@ package com.feirui.feiyunbangong.entity;
 
 public class RenwuOrderBean {
 
+
     /**
      * code : 200
      * msg : 成功
@@ -41,6 +42,7 @@ public class RenwuOrderBean {
     }
 
     public static class InfoBean {
+
         /**
          * out_trade_no : 201712141513238435621
          * reward : 1
@@ -64,5 +66,21 @@ public class RenwuOrderBean {
         public void setReward(String reward) {
             this.reward = reward;
         }
+
+        @Override
+        public String toString() {
+            return "InfoBean{" +
+                    "out_trade_no='" + out_trade_no + '\'' +
+                    ", reward='" + reward + '\'' +
+                    '}';
+        }
+    }
+    @Override
+    public String toString() {
+        return "RenwuOrderBean{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", info=" + info +
+                '}';
     }
 }
