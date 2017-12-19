@@ -18,13 +18,16 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.AddFriendAdapter;
+import com.feirui.feiyunbangong.adapter.AddRecyFriendAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddTeamAdapter;
 import com.feirui.feiyunbangong.adapter.HeaderViewRecyclerAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
+import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.entity.TeamList_entity.Infor;
+import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -36,11 +39,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 发布任务
- * */
-public class ReleaseTask extends BaseActivity  implements OnClickListener {
+ */
+public class ReleaseTask extends BaseActivity implements OnClickListener {
     AddShenHeAdapter adapter;
 
     private HeaderViewRecyclerAdapter addFriendAdapterRc;
@@ -55,7 +59,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
     //选择时间的属性
     private Calendar mCalendar;
     private Date startTime;
-
+    public AddRecyFriendAdapter addRecyFriendAdapter;
     public AddFriendAdapter addFriendAdapter;  //添加好友的适配器
     public AddTeamAdapter addTeamAdapter; //添加团队的适配器
     private ImageView addPicFriend;  //添加朋友
@@ -70,6 +74,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
     private SwitchView switch_rsxz;
     private ConstraintLayout layout_xsje;
     private ConstraintLayout layout_rsxz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +83,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         setlisteners();
     }
 
-    public void initView(){
+    public void initView() {
         mCalendar = Calendar.getInstance();
         mCalendar.setTime(new Date());
         switch_wzjl = (SwitchView) findViewById(R.id.switch_wzjl);
@@ -86,39 +91,52 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         switch_rsxz = (SwitchView) findViewById(R.id.switch_rsxz);
         layout_xsje = (ConstraintLayout) findViewById(R.id.layout_xsje);
         layout_rsxz = (ConstraintLayout) findViewById(R.id.layout_rsxz);
-        tvTaskCount=(EditText) findViewById(R.id.tvTaskCount);
-        tvTaskTitle=(EditText) findViewById(R.id.tvTaskTitle);
-        et_xsje= (EditText) findViewById(R.id.et_xsje);
-        et_xzrs= (EditText) findViewById(R.id.et_xzrs);
+        tvTaskCount = (EditText) findViewById(R.id.tvTaskCount);
+        tvTaskTitle = (EditText) findViewById(R.id.tvTaskTitle);
+        et_xsje = (EditText) findViewById(R.id.et_xsje);
+        et_xzrs = (EditText) findViewById(R.id.et_xzrs);
         tv_kssj = (TextView) findViewById(R.id.tv_kssj);
-        quedingButton=(Button) findViewById(R.id.quedingButton);
-        friend_pic_recycler=(RecyclerView)findViewById(R.id.friend_pic_recycler1);
-        team_pic_recycler=(RecyclerView)findViewById(R.id.team_pic_recycler);
-        fenzu_pic_recycler=(RecyclerView)findViewById(R.id.team_pic_recycler);
+        quedingButton = (Button) findViewById(R.id.quedingButton);
+        friend_pic_recycler = (RecyclerView) findViewById(R.id.friend_pic_recycler1);
+        team_pic_recycler = (RecyclerView) findViewById(R.id.team_pic_recycler);
+        fenzu_pic_recycler = (RecyclerView) findViewById(R.id.team_pic_recycler);
 
         View footerFriendPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
         View footerTeamPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
+
+
+
+        addRecyFriendAdapter=new AddRecyFriendAdapter(new ArrayList<ChildItem>());
+        addFriendAdapterRc = new HeaderViewRecyclerAdapter(addRecyFriendAdapter);
         //添加好友
-        addFriendAdapter=new AddFriendAdapter(new ArrayList<ShenPiRen>());
-        addFriendAdapterRc = new HeaderViewRecyclerAdapter(addFriendAdapter);
+//        addFriendAdapter = new AddFriendAdapter(new ArrayList<ShenPiRen>());
+//        addFriendAdapterRc = new HeaderViewRecyclerAdapter(addFriendAdapter);
         addFriendAdapterRc.addFooterView(footerFriendPic);
         //添加团队
-       addTeamAdapter=new AddTeamAdapter(new ArrayList<Infor>());
-        addTeamAdapterRc=new HeaderViewRecyclerAdapter(addTeamAdapter);
+        addTeamAdapter = new AddTeamAdapter(new ArrayList<Infor>());
+        addTeamAdapterRc = new HeaderViewRecyclerAdapter(addTeamAdapter);
         addTeamAdapterRc.addFooterView(footerTeamPic);
         //把头像放进来
         addPicFriend = (ImageView) footerFriendPic.findViewById(R.id.iv_add_pic_footer);
         //把团队的头像添加进来
-        addPicTeam=(ImageView) footerTeamPic.findViewById(R.id.iv_add_pic_footer);
+        addPicTeam = (ImageView) footerTeamPic.findViewById(R.id.iv_add_pic_footer);
+        //点击加号
+//        footerFriendPic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ReleaseTask.this, ShenPiRenActivity.class);
+//                startActivityForResult(intent, 102);// 请求码；
+//            }
+//        });
         //点击加号
         footerFriendPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReleaseTask.this, ShenPiRenActivity.class);
-                startActivityForResult(intent, 102);// 请求码；
+                Intent intent = new Intent(ReleaseTask.this, ChooseFriendActivity.class);
+                startActivityForResult(intent, 100);// 请求码；
             }
         });
-        footerTeamPic.setOnClickListener(new View.OnClickListener(){
+        footerTeamPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReleaseTask.this, SelectorTeamActivity.class);
@@ -128,9 +146,9 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("写任务");
+        setCenterString("发布任务");
         setRightVisibility(false);
-        adapter = new AddShenHeAdapter(getLayoutInflater(),ReleaseTask.this);
+        adapter = new AddShenHeAdapter(getLayoutInflater(), ReleaseTask.this);
 
         friend_pic_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         team_pic_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -181,58 +199,62 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
         params.put("time", tv_kssj.getText().toString().trim());
 
         //是否开启位置记录
-        if(switch_wzjl.isOpened()){
+        if (switch_wzjl.isOpened()) {
             params.put("address", "金隅国际");
-            params.put("address_limit","1" );
-        }else {
-            params.put("address_limit","0");
+            params.put("address_limit", "1");
+        } else {
+            params.put("address_limit", "0");
         }
         //是否开启悬赏
-        if(switch_xs.isOpened()){
-            params.put("reward",  et_xsje.getText().toString().trim());
-            params.put("reward_limit","1");
-        }else {
+        if (switch_xs.isOpened()) {
+            params.put("reward", et_xsje.getText().toString().trim());
+            params.put("reward_limit", "1");
+        } else {
             params.put("reward", "0");
-            params.put("reward_limit","0");
+            params.put("reward_limit", "0");
         }
         //是否开启人数限制
-        if(switch_rsxz.isOpened()){
+        if (switch_rsxz.isOpened()) {
             params.put("number", et_xzrs.getText().toString().trim());
             params.put("number_limit", "1");
         } else {
             params.put("number", "0");
             params.put("number_limit", "0");
         }
-
-        ArrayList<ShenPiRen> friendList = addFriendAdapter.getDataSet();
+        ArrayList<ChildItem> friendList = addRecyFriendAdapter.getDataSet();
         StringBuffer sb_id = new StringBuffer();
         for (int i = 0; i < friendList.size(); i++) {
             sb_id.append(friendList.get(i).getId() + ",");
         }
-        if (friendList.size()==0){
+//        ArrayList<ShenPiRen> friendList = addFriendAdapter.getDataSet();
+//        StringBuffer sb_id = new StringBuffer();
+//        for (int i = 0; i < friendList.size(); i++) {
+//            sb_id.append(friendList.get(i).getId() + ",");
+//        }
+        if (friendList.size() == 0) {
             T.showShort(ReleaseTask.this, "请选择好友或分组");
             return;
         }
-        if(sb_id!=null) {
+        if (sb_id != null) {
             params.put("chooser", sb_id.deleteCharAt(sb_id.length() - 1)
                     .toString());
         }
-        ArrayList<Infor> teamList=addTeamAdapter.getDataSet();
-        StringBuffer team_id=new StringBuffer();
-        for(int i=0;i<teamList.size();i++){
-            team_id.append(teamList.get(i).getTeam_id()+",");
+        ArrayList<Infor> teamList = addTeamAdapter.getDataSet();
+        StringBuffer team_id = new StringBuffer();
+        for (int i = 0; i < teamList.size(); i++) {
+            team_id.append(teamList.get(i).getTeam_id() + ",");
         }
-        if(team_id!=null){
-             // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
+        if (team_id != null) {
+            // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
         }
-        Log.e("任务单界面参数", "params: "+params.toString());
+        Log.e("任务单界面参数", "params: " + params.toString());
         //http://123.57.45.74/feiybg1/public/index.php/home_api/Task/add_task
         String url = UrlTools.pcUrl + UrlTools.TASK_ADDTASK;
         Utils.doPost(LoadingDialog.getInstance(ReleaseTask.this), ReleaseTask.this, url,
                 params, new Utils.HttpCallBack() {
                     @Override
                     public void success(final JsonBean bean) {
-                        T.showShort(ReleaseTask.this,"发布任务成功");
+                        T.showShort(ReleaseTask.this, "发布任务成功");
                         if ("200".equals(bean.getCode())) {
 //                            runOnUiThread(new Runnable() {
 //                                public void run() {
@@ -266,18 +288,40 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
+        switch (requestCode) {
 
             case 102:
                 ShenPiRen spr = (ShenPiRen) data.getSerializableExtra("shenpiren");
-                if (spr.getId().equals("0")) {
+                if (spr.getId() == null) {
                     return;
                 }
                 addFriendAdapter.addFriend(spr);
                 break;
+            case 100:
+                ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
+                        .getSerializableExtra("childs");
+                if (childs==null){
+                    return;
+                }else {
+                    Log.e("djakfjfje====",childs.toString());
+                    HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
+                    childs.add(
+                            0,
+                            new ChildItem(hm.get("staff_name") + "", hm
+                                    .get("staff_head") + "", hm.get("staff_mobile")
+                                    + "", hm.get("id") + "", 0));
+                    //去掉自己
+                    childs.remove(0);
+                    if (childs != null && childs.size() > 0) {
+                        addRecyFriendAdapter.addList(childs);
+                    }
+                    super.onActivityResult(requestCode, resultCode, data);
+                }
+
+                break;
             case 200:
-                Infor infor=(Infor)data.getSerializableExtra("Team");
-                if(infor.getTeam_id()==0){
+                Infor infor = (Infor) data.getSerializableExtra("Team");
+                if (infor==null) {
                     return;
                 }
                 addTeamAdapter.addTeam(infor);
@@ -287,7 +331,7 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_kssj:
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(new Date());
@@ -310,15 +354,15 @@ public class ReleaseTask extends BaseActivity  implements OnClickListener {
 
                 tv_kssj.setText(startTime + "");
             case R.id.switch_xs:
-                if(switch_xs.isOpened()){
+                if (switch_xs.isOpened()) {
                     layout_xsje.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     layout_xsje.setVisibility(View.GONE);
                 }
             case R.id.switch_rsxz:
-                if(switch_rsxz.isOpened()){
+                if (switch_rsxz.isOpened()) {
                     layout_rsxz.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     layout_rsxz.setVisibility(View.GONE);
                 }
         }

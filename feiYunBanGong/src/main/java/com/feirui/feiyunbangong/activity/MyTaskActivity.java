@@ -77,10 +77,10 @@ public class MyTaskActivity extends BaseActivity {
                 Gson gson = new Gson();
                 JieDanRenBean jieDanRenBean = gson.fromJson(new String(responseBody), JieDanRenBean.class);
                 int num=0;
-                for (int i=0;i<jieDanRenBean.getInfor().size();i++){
-                    if (jieDanRenBean.getInfor().get(i).getState().equals("2"));
-                    num++;
-                    i++;
+                for (int i = 0; i < jieDanRenBean.getInfor().size(); i++){
+                    if (!"0".equals(jieDanRenBean.getInfor().get(i).getState())){
+                        num += 1;
+                    }
                 }
                 tv_number.setText(num+"/"+jieDanRenBean.getInfor().size());
                 adapter=new JieDanAdapter(jieDanRenBean.getInfor(),MyTaskActivity.this);

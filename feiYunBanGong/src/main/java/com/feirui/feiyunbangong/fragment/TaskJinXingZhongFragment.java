@@ -4,7 +4,6 @@ package com.feirui.feiyunbangong.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,10 +62,10 @@ public class TaskJinXingZhongFragment extends BaseFragment implements YRecyclevi
                 adapter.addAll(json.getInfor());
             }
         });
+
         adapter.setOnItemClickListener(new TaskJingXingAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.e("点击位置==============", "onItemClick: "+ position+"dfafdfdf");
                 //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
                 Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
                 Bundle bundle = new Bundle();
@@ -84,6 +83,7 @@ public class TaskJinXingZhongFragment extends BaseFragment implements YRecyclevi
             }
         });
     }
+
 
     @Override
     public void onRefresh() {
