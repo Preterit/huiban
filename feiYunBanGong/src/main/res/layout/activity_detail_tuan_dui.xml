@@ -38,15 +38,20 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <ListView
-            android:id="@+id/lv_chengyuan"
+        <com.feirui.feiyunbangong.view.RefreshLayout
+            android:id="@+id/swipe_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/ffffff"
-            android:divider="@color/fenge"
-            android:dividerHeight="@dimen/y4"
-            android:layout_marginTop="10dp"
-            android:visibility="gone"></ListView>
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/lv_chengyuan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/ffffff"
+                android:divider="@color/fenge"
+                android:dividerHeight="@dimen/y4"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"></ListView>
+        </com.feirui.feiyunbangong.view.RefreshLayout>
         <ListView
             android:id="@+id/lv_search"
             android:layout_width="match_parent"
