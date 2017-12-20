@@ -136,7 +136,12 @@ public class DetailLianXiRenActivity extends BaseActivity {
 //				Log.e("通讯录联系人", str[0] + "姓名，电话" + str[1]);
 
 				RequestParams params = new RequestParams();
-				params.put("phone", str[1]);
+				if(str==null){
+					dialog.dismiss();
+					return;
+
+				}
+				params.put("phone", str[1]);//-------------------------------------
 				String url = UrlTools.url + UrlTools.SHOUJILIANXIREN;
 
 				Utils.doPost(null, DetailLianXiRenActivity.this, url, params,
@@ -172,8 +177,7 @@ public class DetailLianXiRenActivity extends BaseActivity {
 			lxrs02.removeAll(lxrs02);
 
 			if (info.size() == 0) {
-				Toast.makeText(DetailLianXiRenActivity.this, "暂无可联系人好友", 0)
-						.show();
+				Toast.makeText(DetailLianXiRenActivity.this, "暂无可联系人好友", 0).show();
 				return;
 			}
 

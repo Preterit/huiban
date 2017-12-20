@@ -74,7 +74,6 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
     private SwitchView switch_rsxz;
     private ConstraintLayout layout_xsje;
     private ConstraintLayout layout_rsxz;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

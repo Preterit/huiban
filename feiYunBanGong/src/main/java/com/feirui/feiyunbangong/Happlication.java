@@ -30,6 +30,8 @@ public class Happlication extends MultiDexApplication {
     public static String APP_KEY = "23529997";
     public static YWEnvType sEnvType = YWEnvType.TEST;
 
+    private String out_trade_no;
+
 
     /**
      * 实现单例模式
@@ -113,4 +115,12 @@ public class Happlication extends MultiDexApplication {
         super.attachBaseContext(base);
             MultiDex.install(this) ;
        }
+
+    public String getOut_trade_no() {
+        return out_trade_no;
+    }
+
+    public void setOut_trade_no(String number) {
+        this.out_trade_no = number;
+    }
 }
