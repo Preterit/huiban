@@ -57,8 +57,6 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
     @PView(click = "onClick")
     ImageView iv_add, iv_add_chaosong, iv_01;
     private ArrayList<JsonBean> list1 = new ArrayList<>();
-
-
     @PView
     HorizontalListView lv_add_shenpiren;
     @PView
@@ -138,6 +136,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
             @SuppressWarnings("unchecked")
             ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
                     .getSerializableExtra("childs");
+            Log.e("djakfjasfje====",childs.toString());
             HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
             childs.add(
                     0,
@@ -163,6 +162,7 @@ public class QingJiaActivity extends BaseActivity implements OnClickListener {
             //去掉自己
             childs1.remove(0);
             if (childs1 != null && childs1.size() > 0) {
+
                 adapter1.addList(childs1);
             }
             Log.d("mytag", "添加人员：" + childs1.get(0).toString());

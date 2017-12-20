@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.ChooseFriendActivity">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bar" >
+
+        <LinearLayout
+            android:id="@+id/leftll"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/leftIv"
+                android:layout_width="@dimen/x57"
+                android:src="@drawable/arrows_left"
+                android:layout_height="@dimen/y57"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/centerTv"
+            style="@style/ffffff_60"
+            android:text="选择人员"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+
+
+    </RelativeLayout>
+    <!--<include-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/title_bar"-->
+    <!--layout="@layout/top" />-->
+
+    <!-- android 原生下拉刷新 -->
+
+    <ExpandableListView
+        android:id="@+id/expandlist"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/ffffff"
+        android:divider="@color/fenge"
+        android:dividerHeight="@dimen/y4" />
+
+    <Button
+        android:id="@+id/bt_submit"
+        style="@style/ffffff_49"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="确认" />
+
+</LinearLayout>

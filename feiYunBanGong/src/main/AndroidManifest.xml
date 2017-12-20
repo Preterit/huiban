@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="87"
-    android:versionName="1.7.17">
+    android:versionCode="91"
+    android:versionName="1.7.21">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -267,13 +267,6 @@
                 <action android:name="com.feirui.feiyunbangong.onadd.team" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".activity.TuanDui_DetailActivity$mBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.feirui.feiyunbangong.ondelete.team.member" />
-            </intent-filter>
-        </receiver>
 
         <!-- Required. For publish channel feature -->
         <!-- JPUSH_CHANNEL 是为了方便开发者统计APK分发渠道。 -->
@@ -501,7 +494,7 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -510,10 +503,21 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
         <activity android:name=".activity.ZhiFuActivity"></activity>
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activity.TeamPersonActivity" />
-        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity" />
+        <activity android:name=".activity.AboutUsActivity"></activity>
+        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity"/>
         <activity android:name=".activity.MyCaoZuoActivity"></activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx061139fe146e41ae"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.ChooseFriendActivity"></activity>
+        <activity android:name=".activity.ChaKanJinDuActivity"></activity>
     </application>
 
 </manifest>

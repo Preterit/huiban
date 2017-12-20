@@ -38,9 +38,11 @@
         android:layout_height="60dp"
         android:background="@color/white">
         <ImageView
+            android:id="@+id/iv_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/ic_launcher"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,6 +50,7 @@
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -55,12 +58,41 @@
                 android:textColor="@color/black"
                 android:text="金额"/>
             <TextView
+                android:id="@+id/tv_zt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="求传单人员十名"/>
         </LinearLayout>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x150"
+        android:visibility="gone">
+        <!--android:layout_marginTop="@dimen/x100" -->
+
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x30"
+            android:src="@drawable/add_money" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:ems="10"
+            android:hint="请输入充值金额"
+            android:inputType="numberDecimal"
+            >
+
+            <requestFocus />
+        </EditText>
     </LinearLayout>
 
     <RelativeLayout
@@ -78,7 +110,6 @@
             android:text="推荐使用" />
 
     </RelativeLayout>
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -88,18 +119,19 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/add_money"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="13dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/textView27"
-            app:layout_constraintHorizontal_bias="0.275" />
+            app:layout_constraintHorizontal_bias="0.275"
+            android:id="@+id/imageView8" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,20 +152,20 @@
             app:layout_constraintHorizontal_bias="0.184"
             app:layout_constraintVertical_bias="0.533" />
 
-        <ImageButton
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/checkBox3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="9dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/textView27"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintHorizontal_bias="0.965"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintHorizontal_bias="0.977" />
     </android.support.constraint.ConstraintLayout>
     <View
         android:layout_width="match_parent"
@@ -142,11 +174,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/weixin_pay"
             android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
@@ -176,19 +209,17 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintHorizontal_bias="0.181"
             app:layout_constraintVertical_bias="0.533" />
-        <RadioButton
+        <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/textView28"
             android:layout_marginLeft="8dp"
-            android:id="@+id/radioButton4"
+            android:id="@+id/checkBox1"
             app:layout_constraintHorizontal_bias="0.965" />
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
@@ -197,9 +228,9 @@
         android:background="@color/white"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/zhifubao_pay"
             android:layout_gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
@@ -229,22 +260,21 @@
             android:id="@+id/textView29"
             app:layout_constraintHorizontal_bias="0.187"
             app:layout_constraintVertical_bias="0.533" />
-        <RadioButton
+        <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintHorizontal_bias="0.977"
-            android:id="@+id/radioButton5" />
+            android:id="@+id/checkBox2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
     </android.support.constraint.ConstraintLayout>
-
 
     <Button
         android:id="@+id/btn_submit"
@@ -258,6 +288,50 @@
         android:background="@drawable/blue_bt_selector"
         android:gravity="center"
         android:text="确认支付"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_submit1"
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x114"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/blue_bt_selector"
+            android:gravity="center"
+            android:onClick="onClick1"
+            android:text="确认支付" />
+
+        <Button
+            android:id="@+id/btn_submit2"
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x114"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/blue_bt_selector"
+            android:gravity="center"
+            android:onClick="onClick2"
+            android:text="确认支付" />
+
+        <Button
+            android:id="@+id/btn_submit3"
+            style="@style/ffffff_60"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x114"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/blue_bt_selector"
+            android:gravity="center"
+            android:onClick="onClick3"
+            android:text="确认支付" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_prepay_id"/>
 
 
 

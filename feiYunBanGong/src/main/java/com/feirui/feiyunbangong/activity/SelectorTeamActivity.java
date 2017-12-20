@@ -2,6 +2,7 @@ package com.feirui.feiyunbangong.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * 选择团队界面
  * */
-public class SelectorTeamActivity extends BaseActivity implements OnItemClickListener {
+public class  SelectorTeamActivity extends BaseActivity implements OnItemClickListener {
     private TeamListAdapter adapter;
     private ListView teamListView;
     @Override
@@ -35,8 +36,6 @@ public class SelectorTeamActivity extends BaseActivity implements OnItemClickLis
         //获取团队列表的方法
         getTeamList();
         initViews();
-
-
     }
 
     private void initViews() {
@@ -44,8 +43,6 @@ public class SelectorTeamActivity extends BaseActivity implements OnItemClickLis
         setCenterString("选择团队");
         setLeftDrawable(R.drawable.arrows_left);
         setRightVisibility(false);
-
-
     }
 
     private void getTeamList() {
@@ -77,7 +74,6 @@ public class SelectorTeamActivity extends BaseActivity implements OnItemClickLis
                 finish();
             }
         });
-
     }
 
     @Override
@@ -88,5 +84,15 @@ public class SelectorTeamActivity extends BaseActivity implements OnItemClickLis
         finish();
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            Intent intent = new Intent();
+            intent.putExtra("Team","");
+            setResult(200, intent);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
