@@ -540,8 +540,11 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
                 // 团队删除成员发出的广播：
                 Intent i = new Intent();
                 i.setAction(Constant.ON_RECEIVE_NEW_MEMBER_DELETE);
-                i.putExtra("guangbo","删除团队成员成功啦");
-				sendBroadcast(i);
+                i.putExtra("guangbo","删除");
+                i.putExtra("id", item.getStaff_id());
+                i.putExtra("teamId",td.getTid());
+                Log.e("tdcys", "handleMessage: ==============" + item.getStaff_id() + "---" + td.getTid() );
+                sendBroadcast(i);
 				//删除团聊成员
 				if (mTbID != null){
 					deleteTuanLiao();

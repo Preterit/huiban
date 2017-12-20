@@ -418,6 +418,10 @@ public class UrlTools {
    * 查看团队中的成员：
    */
   public static String DETAIL_TUANDUICHENGYUAN = "Team/team_detail";
+  /**
+   * 查看团队中的成员 新接口：
+   */
+  public static String DETAIL_TUANDUICHENGYUAN_TEAM = "Team/team_detail_page";
 
   /**
    * 修改邮箱：
