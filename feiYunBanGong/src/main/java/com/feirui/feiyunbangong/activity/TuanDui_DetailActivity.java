@@ -55,6 +55,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.litepal.crud.DataSupport;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

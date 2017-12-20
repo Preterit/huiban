@@ -95,6 +95,8 @@ public class MyTaskActivity extends BaseActivity {
                         bundle.putString("id", id);
                         bundle.putString("accept_id", jieDanRenBean.getInfor().get(i).getAccept_id()+"");
                         bundle.putString("staff_name", staff_name);
+                        bundle.putString("jiedanren_name", jieDanRenBean.getInfor().get(i).getStaff_name());
+                        bundle.putString("jiedanren_head", jieDanRenBean.getInfor().get(i).getStaff_head());
                         bundle.putString("release_time", time);
                         bundle.putString("task_txt", task_txt);
                         bundle.putString("task_zt", task_zt);

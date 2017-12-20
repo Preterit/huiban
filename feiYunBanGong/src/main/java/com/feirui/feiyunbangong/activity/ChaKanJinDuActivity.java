@@ -1,9 +1,9 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,9 +28,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.apache.http.Header;
 
 public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickListener {
-    private String staff_name, time, task_txt, task_zt, staff_head, id, accept_id, state,xuanshang;
+    private String staff_name, time, task_txt, task_zt, staff_head, id, accept_id, state,xuanshang,jiedanren_name,jiedanren_head;
     private TextImageView iv_head;
-    private TextView tv_name, tv_time, tv_task, tv_zt, rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz, tv_jieshu,tv_money;
+    private TextView tv_name, tv_time, tv_task, tv_zt, rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz, tv_jieshu,tv_money,tv_jieshu_hui;
     private Button btn_querenzhifu;
     private ImageView iv_complete;
     private LinearLayout ll_zhifu;
@@ -50,6 +50,8 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         id = getIntent().getStringExtra("id");
         state = getIntent().getStringExtra("state");
         accept_id = getIntent().getStringExtra("accept_id");
+        jiedanren_name=getIntent().getStringExtra("jiedanren_name");
+        jiedanren_head=getIntent().getStringExtra("jiedanren_head");
         initView();
         initTask();
         initData();
@@ -72,6 +74,7 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         tv_task.setText(task_txt);
         tv_jieshu = (TextView) findViewById(R.id.tv_jieshu);
         tv_jieshu.setOnClickListener(this);
+        tv_jieshu_hui= (TextView) findViewById(R.id.tv_jieshu_hui);
         ll_zhifu= (LinearLayout) findViewById(R.id.ll_zhifu);
         tv_money= (TextView) findViewById(R.id.tv_money);
         btn_querenzhifu= (Button) findViewById(R.id.btn_querenzhifu);
@@ -100,6 +103,13 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
                     rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
                     rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
                     xuanshang=renwudan.getInfo().get(0).getReward() + "";
+                    if ("".equals(renwudan.getInfo().get(0).getReward())){
+                        tv_jieshu.setVisibility(View.GONE);
+                        tv_jieshu_hui.setVisibility(View.VISIBLE);
+                    }else {
+                        tv_jieshu.setVisibility(View.VISIBLE);
+                        tv_jieshu_hui.setVisibility(View.GONE);
+                    }
                 } else {
                 }
             }
@@ -132,16 +142,15 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
     public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.tv_jieshu:
-                Log.e("dianjil =========","fmafdfdf");
                 AlertDialog.Builder dialog = new AlertDialog.Builder(ChaKanJinDuActivity.this);
                 dialog.setTitle("支付报酬");
-                dialog.setMessage("已出色完成任务，是否进行支付报酬？");
+                dialog.setMessage(jiedanren_name+"已出色完成任务，是否进行支付报酬？");
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         tv_jieshu.setVisibility(View.GONE);
                         ll_zhifu.setVisibility(View.VISIBLE);
-                        tv_money.setText(xuanshang+" 元");
+                        tv_money.setText(xuanshang+"   元");
                     }
                 });
                 dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -153,7 +162,15 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
                 dialog.show();
                 break;
             case R.id.btn_querenzhifu:
-
+                Intent intent = new Intent(ChaKanJinDuActivity.this, ZhiFuActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("task_id", id);
+                bundle.putString("accept_id",accept_id );
+                bundle.putString("xuanshang", xuanshang);
+                bundle.putString("task_zt", task_zt);
+                bundle.putString("jiedanren_head", jiedanren_head);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
         }
     }

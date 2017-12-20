@@ -347,6 +347,19 @@
         android:textSize="16sp"
         android:gravity="center"
         android:layout_marginBottom="8dp"/>
+    <TextView
+        android:id="@+id/tv_jieshu_hui"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/textview_shape"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="已经结束"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
 <LinearLayout
     android:id="@+id/ll_zhifu"
     android:layout_width="match_parent"
@@ -371,7 +384,7 @@
         android:textSize="16sp"
         android:textColor="@color/a000000"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="20dp"/>
     <Button
         android:id="@+id/btn_querenzhifu"
         android:layout_width="wrap_content"
