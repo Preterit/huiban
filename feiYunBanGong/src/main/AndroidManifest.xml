@@ -517,6 +517,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ChooseFriendActivity"></activity>
+        <activity android:name=".activity.ChaKanJinDuActivity"></activity>
     </application>
 
 </manifest>

@@ -44,24 +44,46 @@ public class JieDanAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view=inflater.inflate(R.layout.item_jiedanren,null);
         ViewHolder holder=new ViewHolder();
         holder.iv_head= (ImageView) view.findViewById(R.id.iv_head);
         holder.tv_name= (TextView) view.findViewById(R.id.tv_name);
         holder.tv_chakan= (TextView) view.findViewById(R.id.tv_chakan);
+        holder.tv_chakan_hui= (TextView) view.findViewById(R.id.tv_chakan_hui);
         ImageLoader.getInstance().displayImage(acctpt_list.get(position).getStaff_head(), holder.iv_head, ImageLoaderUtils.getSimpleOptions());
         holder.tv_name.setText(acctpt_list.get(position).getStaff_name());
-        if (acctpt_list.get(position).getState().equals("2")){
-            holder.tv_chakan.setTextColor(R.color.red);
+        if ("2".equals(acctpt_list.get(position).getState())||"4".equals(acctpt_list.get(position).getState())){
+            holder.tv_chakan.setVisibility(View.VISIBLE);
+            holder.tv_chakan_hui.setVisibility(View.GONE);
         }else {
-            holder.tv_chakan.setTextColor(R.color.lanse);
+            holder.tv_chakan_hui.setVisibility(View.VISIBLE);
+            holder.tv_chakan.setVisibility(View.GONE);
         }
+        holder.tv_chakan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnItemChanKanListener.onChanKanClick(position);
+            }
+        });
         return view;
 
     }
     class ViewHolder{
         ImageView iv_head;
-        TextView tv_name,tv_chakan;
+        TextView tv_name,tv_chakan,tv_chakan_hui;
     }
+    /**
+     * 删除按钮的监听接口
+     */
+    public interface onItemChanKanListener {
+        void onChanKanClick(int i);
+    }
+
+    private onItemChanKanListener mOnItemChanKanListener;
+
+    public void setOnItemChanKanClickListener(onItemChanKanListener mOnItemChanKanListener) {
+        this.mOnItemChanKanListener = mOnItemChanKanListener;
+    }
+
 }
