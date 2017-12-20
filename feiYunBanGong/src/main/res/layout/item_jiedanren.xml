@@ -23,5 +23,14 @@
         android:layout_height="18dp"
         android:textSize="14sp"
         android:text="查看进度"
-        android:layout_gravity="center_vertical"/>
+        android:textColor="@color/buttonblue"
+        android:layout_gravity="center_vertical" />
+    <TextView
+        android:id="@+id/tv_chakan_hui"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:textSize="14sp"
+        android:text="查看进度"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"/>
 </LinearLayout>

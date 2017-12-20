@@ -12,7 +12,8 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -503,7 +504,8 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
         <activity android:name=".activity.ZhiFuActivity" />
-        <activity android:name=".activity.ChooseFriendActivity"></activity>
+        <activity android:name=".activity.ChooseFriendActivity" />
+        <activity android:name=".activity.ChaKanJinDuActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,7 @@ public class MyTaskActivity extends BaseActivity {
     private TextImageView tiv_head;
     private TextView tv_name, tv_zt, tv_task, tv_number,tv_time;
     private ListView lv_jiedanren;
-    private String id, staff_name, time, task_txt, task_zt, staff_head;
+    private String id, staff_name, time, task_txt, task_zt, staff_head,xuanshang;
     TextView  rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz;
     JieDanAdapter adapter;
     @Override
@@ -61,6 +62,7 @@ public class MyTaskActivity extends BaseActivity {
                     rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
                     rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
                     rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
+
                 } else {
                 }
             }
@@ -75,7 +77,7 @@ public class MyTaskActivity extends BaseActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 Gson gson = new Gson();
-                JieDanRenBean jieDanRenBean = gson.fromJson(new String(responseBody), JieDanRenBean.class);
+                final JieDanRenBean jieDanRenBean = gson.fromJson(new String(responseBody), JieDanRenBean.class);
                 int num=0;
                 for (int i = 0; i < jieDanRenBean.getInfor().size(); i++){
                     if (!"0".equals(jieDanRenBean.getInfor().get(i).getState())){
@@ -85,6 +87,22 @@ public class MyTaskActivity extends BaseActivity {
                 tv_number.setText(num+"/"+jieDanRenBean.getInfor().size());
                 adapter=new JieDanAdapter(jieDanRenBean.getInfor(),MyTaskActivity.this);
                 lv_jiedanren.setAdapter(adapter);
+                adapter.setOnItemChanKanClickListener(new JieDanAdapter.onItemChanKanListener() {
+                    @Override
+                    public void onChanKanClick(int i) {
+                        Intent intent = new Intent(MyTaskActivity.this, ChaKanJinDuActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", id);
+                        bundle.putString("accept_id", jieDanRenBean.getInfor().get(i).getAccept_id()+"");
+                        bundle.putString("staff_name", staff_name);
+                        bundle.putString("release_time", time);
+                        bundle.putString("task_txt", task_txt);
+                        bundle.putString("task_zt", task_zt);
+                        bundle.putString("staff_head",staff_head);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
                 lv_jiedanren.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
