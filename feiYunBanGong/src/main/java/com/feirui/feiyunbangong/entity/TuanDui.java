@@ -24,6 +24,16 @@ public class TuanDui  extends DataSupport implements Serializable {
 	private boolean isHave;// 是否含有公告消息；
 	private ArrayList<String> Dcmoes=new ArrayList<>();// 副团长；
 	private int notice_number;//团队消息数量；
+	private int num;
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
 	//建立多对一的关系
 	private ArrayList<TuanDuiChengYuan> yuanArrayList = new ArrayList<>();
 
@@ -122,7 +132,7 @@ public class TuanDui  extends DataSupport implements Serializable {
 				"tid='" + tid + '\'' +
 				", name='" + name + '\'' +
 				", guanli_id='" + guanli_id + '\'' +
-				", Dcmoes=" + Dcmoes +
+				", num=" + num +
 				']';
 	}
 }
