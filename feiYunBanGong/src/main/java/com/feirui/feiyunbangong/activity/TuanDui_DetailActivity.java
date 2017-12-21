@@ -82,6 +82,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     private List<TuanDuiChengYuan> mBackData=new ArrayList<>(); //返回的团队成员
     private List<TuanDuiChengYuan> middle=new ArrayList<>();
     private List<TuanDuiChengYuan> allTuan = new ArrayList<>();
+    private static List<TuanDuiChengYuan> tuanDui = new ArrayList<>();
     private static TuanDui td;
     private Button bt_add;// 添加成员
     private LinearLayout ll_tuanduigonggao, ll_tuanduiquan, ll_tuanduichengyuan;// 团队公告 、成员；
@@ -142,6 +143,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     @Override
     protected void onResume() {
         registReceiver();// 注册广播接收器
+        getNum();
         initData();//从数据库获取数据
         setListView();
         super.onResume();
@@ -202,6 +204,48 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     }
 
+    /**
+     * 获取团队人数
+     */
+    private  void getNum(){
+        String url = UrlTools.url + UrlTools.DETAIL_TUANDUICHENGYUAN_TEAM;
+        RequestParams params = new RequestParams();
+        params.put("id", td.getTid());
+        params.put("curpage",1 + "");
+        if (activitys.size() == 0 || activitys == null){
+            return;
+        }else {
+            activity = activitys.get(0);
+        }
+        Utils.doPost(LoadingDialog.getInstance(activity), activity, url, params,
+                new HttpCallBack() {
+                    @Override
+                    public void success(JsonBean bean) {
+                        ArrayList<HashMap<String, Object>> infor = bean
+                                .getInfor();
+                        if (infor.size() > 0){
+                            HashMap<String, Object> hm = infor.get(0);
+                            tv_chenyuan.setText("团队成员" + "("
+                                    + (hm.get("Allnum") + "") + ")");
+
+                        }else {
+                            tv_chenyuan.setText("团队成员" + "("
+                                    + (0 + "") + ")");
+                        }
+
+                    }
+
+                    @Override
+                    public void failure(String msg) {
+                        Toast.makeText(activity, msg,Toast.LENGTH_SHORT)
+                                .show();
+                    }
+
+                    @Override
+                    public void finish() {
+                    }
+                });
+    }
 
     /**
      * 从网络获取数据
@@ -229,16 +273,12 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             public void run() {
                                 swipe_container.setLoading(false);
                             }
-                        }, 1500);
+                        }, 1000);
 
                         swipe_container.setRefreshing(false);
                         if (type == 0){
                             tdcys.removeAll(tdcys);
                             position = 2 ;
-                        }
-                        // 上拉加载：
-                        if (type == 1) {
-                            position ++;
                         }
                         for (int i = 0; i < infor.size(); i++) {
                             HashMap<String, Object> hm = infor.get(i);
@@ -280,9 +320,15 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                             }
                             tdcys.add(tdcy);
                         }
+                        // 上拉加载：
+                        if (type == 1) {
+                            position ++;
+                            Log.e("tdcys", " 保存数据库的 ===========" + tdcys.get(25).getCId() + "======" + tdcys.get(0).getCId() );
+                            if (tdcys.get(25).getCId().equals(tdcys.get(0).getCId())){
+                                tdcys.removeAll(tuanDui);
+                            }
+                        }
                         adapter.add(tdcys);
-//                        lv_chengyuan.setAdapter(adapter);
-//                        handler.sendEmptyMessage(6);
                         // 下拉刷新：
                         if (type == 0) {
                             //保存数据  考虑团队成员 关键字的改变
@@ -378,11 +424,11 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     }
                 }
                 adapter.add(tdcys);
-                tv_chenyuan.setText("团队成员" + "("
-                        + tdcys.size() + ")");
+                tuanDui.removeAll(tuanDui);
+                tuanDui = tdcys;
+                position = 2;
                 swipe_container.setLoading(false);
                 swipe_container.setRefreshing(false);
-//                lv_chengyuan.setAdapter(adapter);
             }
         }
     }
@@ -821,7 +867,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     @Override
     public void onLoad() {
         Log.e("load", "onLoad: =========================" + position );
-        if (tdcys.size() > 25){
+        if (tdcys.size() >= 25){
             getData( position +  "",1);
         }else {
             T.showShort(this,"已全部加载");
@@ -863,7 +909,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         public void onReceive(Context context, Intent intent) {
             if ("删除".equals(intent.getStringExtra("guangbo"))){
                 Log.e("tdys", "接收到团队成员加入的广播---------" + intent.getStringExtra("teamId")+ "===" + intent.getStringExtra("id"));
-//                getMessageNum();
 //                getData( 1 +  "",0);
                 DataSupport.deleteAll(TuanDuiChengYuan.class,"tuandui_id = ? and staff_id = ?",
                         intent.getStringExtra("teamId"),intent.getStringExtra("id"));
