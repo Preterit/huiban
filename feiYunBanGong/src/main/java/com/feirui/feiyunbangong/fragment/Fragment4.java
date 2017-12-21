@@ -335,12 +335,35 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                             long id) {
         // 注意从1开始，因为有header;
         if (position > 0 && position <= tds0.size()){
-            TuanDui tuanDui = tds0.get(position - 1);
-            Intent intent = new Intent(getActivity(), TuanDui_DetailActivity.class);
-            intent.putExtra("tuanDui", tuanDui);
-            startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.aty_zoomin,
-                    R.anim.aty_zoomout);
+            final TuanDui tuanDui = tds0.get(position - 1);
+            String url = UrlTools.url + UrlTools.TEAM_MESSAGE_NUM;
+            RequestParams params = new RequestParams();
+            params.put("teamid", tuanDui.getTid());
+            Utils.doPost(LoadingDialog.getInstance(getActivity()), getActivity(), url, params,
+                    new HttpCallBack() {
+
+                        @Override
+                        public void success(JsonBean bean) {
+                            String count = "" + bean.getInfor().get(0).get("count");
+                            Intent intent = new Intent(getActivity(), TuanDui_DetailActivity.class);
+                            intent.putExtra("tuanDui", tuanDui);
+                            intent.putExtra("count",count);
+
+                            startActivity(intent);
+                            getActivity().overridePendingTransition(R.anim.aty_zoomin,
+                                    R.anim.aty_zoomout);
+                        }
+
+                        @Override
+                        public void failure(String msg) {
+                            Log.e("frag", "failure: =================" + msg );
+                        }
+
+                        @Override
+                        public void finish() {
+
+                        }
+                    });
         }
 
     }
@@ -358,6 +381,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                     String.valueOf(infor.get(i).get("team_name")));
             td.setNotice_number(Integer.parseInt(""
                     + infor.get(i).get("noticecount")));
+            td.setNum(Integer.parseInt(infor.get(i).get("num") + ""));
             try {
                 td.setHave(Integer.parseInt(""
                         + infor.get(i).get("noticecount")) > 0);
@@ -413,6 +437,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                     String.valueOf(infor.get(i).get("team_name")));
             td.setNotice_number(Integer.parseInt(""
                     + infor.get(i).get("noticecount")));
+            td.setNum(Integer.parseInt(infor.get(i).get("num") + ""));
             try {
                 td.setHave(Integer.parseInt(""
                         + infor.get(i).get("noticecount")) > 0);

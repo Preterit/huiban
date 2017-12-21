@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,9 +41,6 @@ import com.alibaba.mobileim.conversation.IYWConversationService;
 import com.alibaba.mobileim.conversation.IYWConversationUnreadChangeListener;
 import com.alibaba.mobileim.conversation.YWMessage;
 import com.alibaba.mobileim.gingko.model.tribe.YWTribe;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
 import com.feirui.feiyunbangong.AddShopActivity;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
@@ -903,7 +899,7 @@ public class MainActivity extends BaseActivity
                     head[3] =String.valueOf(infor.get("staff_key3"));
                     head[4] =String.valueOf(infor.get("staff_key4"));
                     head[5] =String.valueOf(infor.get("staff_key5"));
-                    check2(head);
+                    setWindow(head);
                 }
             }
 
@@ -923,16 +919,7 @@ public class MainActivity extends BaseActivity
 
     }
 
-    private void check2(String[] head){
-        Log.e("主页面check2", "head0: "+head[0]);
-        Log.e("主页面check2", "head0判断条件: "+head[0].isEmpty() );
-        Log.e("主页面check2", "head1: "+(head[1].isEmpty()) );
-        Log.e("主页面check2", "head2: "+(head[2].isEmpty()) );
-        Log.e("主页面check2", "head3: "+(head[3].isEmpty()) );
-        Log.e("主页面check2", "head4: "+(head[4].isEmpty()) );
-        Log.e("主页面check2", "head5: "+(head[5].isEmpty()) );
-        Log.e("主页面check2", "head1判断条件: "+(head[1].isEmpty()&&head[2].isEmpty()&&head[3].isEmpty()&&head[4].isEmpty()&&head[5].isEmpty()));
-        Log.e("主页面check2", "判断条件: "+(head[0].isEmpty()||(head[1].isEmpty()&&head[2].isEmpty()&&head[3].isEmpty()&&head[4].isEmpty()&&head[5].isEmpty())));
+    private void setWindow(String[] head){
         if(head[0].isEmpty()||(head[1].isEmpty()&&head[2].isEmpty()&&head[3].isEmpty()&&head[4].isEmpty()&&head[5].isEmpty())){
             window = new SelectRemindPopupWindow(MainActivity.this,this);
             // 显示窗口

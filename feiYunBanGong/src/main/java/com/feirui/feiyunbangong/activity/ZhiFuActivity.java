@@ -58,7 +58,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
     // 标题
     private String title = "会办";
     //订单号
-    public static String out_trade_no = "";
+    public static String out_trade_no;
 
     // 总价格
     private String total = "0.01";
@@ -131,9 +131,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initData() {
-        //第一步 APP生成预支付订单 prepay_id
-        GetPrepayIdTask getPrepayId = new GetPrepayIdTask();//asyncTask
-        getPrepayId.execute();
+
         getOrderInfo();//获取订单信息
 
 //        if(!resultunifiedorder.get("prepay_id").isEmpty()){
@@ -160,11 +158,11 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if (text.getText().toString().equals("")) {
-//            AnimationHelper.shakeAnimation(text);
-            Toast.makeText(ZhiFuActivity.this, "没有金额", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (text.getText().toString().equals("")) {
+////            AnimationHelper.shakeAnimation(text);
+//            Toast.makeText(ZhiFuActivity.this, "没有金额", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
         if (checkBox1.isChecked()) {//微信支付
 
@@ -195,7 +193,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
         RequestParams params = new RequestParams();
         params.put("task_id", task_id);
         params.put("accept_id", accept_id);
-        Log.e("jjfldlfd;le;====",task_id+"====."+accept_id);
+        Log.e("支付页面-传值====",task_id+"====."+accept_id);
         String url = UrlTools.pcUrl + UrlTools.RENWU_ORDER;//http://123.57.45.74/feiybg1/public/index.php/home_api/task/task_order
         AsyncHttpServiceHelper.post(url, params,
                 new AsyncHttpResponseHandler() {
@@ -209,31 +207,23 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
                         out_trade_no = bean.getInfo().getOut_trade_no();
                         Happlication application = (Happlication) getApplication().getApplicationContext();
                         application.setOut_trade_no(out_trade_no);//out_trade_no值
-
+                        //第一步 APP生成预支付订单 prepay_id
+                        GetPrepayIdTask getPrepayId = new GetPrepayIdTask();//asyncTask
+                        getPrepayId.execute();
 
                         if (bean.getCode() != 200) {
-//                            out_trade_no= bean.getInfo().getOut_trade_no();
-//                            if (checkBox1.isChecked()) {//微信支付
-//
-//                            } else {//支付宝支付
-//                                pay(bean.getInfo().getOut_trade_no());
-//                            }
+                            out_trade_no= bean.getInfo().getOut_trade_no();
+                            if (checkBox1.isChecked()) {//微信支付
+
+                            } else {//支付宝支付
+                                pay(bean.getInfo().getOut_trade_no());
+                            }
                         } else {
                             Toast.makeText(ZhiFuActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
 
-                    ;
-
-                    /*
-                     * (non-Javadoc)
-                     *
-                     * @see
-                     * com.loopj.android.http.AsyncHttpResponseHandler#onFailure
-                     * (int, org.apache.http.Header[], byte[],
-                     * java.lang.Throwable)
-                     */
                     @Override
                     public void onFailure(int arg0, Header[] arg1,
                                           byte[] arg2, Throwable arg3) {
@@ -316,10 +306,10 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
 
         try {
             String nonceStr = genNonceStr();
-            Happlication application = (Happlication) getApplication().getApplicationContext();
-            out_trade_no = application.getOut_trade_no();
+//            Happlication application = (Happlication) getApplication().getApplicationContext();
+//            out_trade_no = application.getOut_trade_no();
 //            out_trade_no=genOutTradNo();
-            Log.e("支付页面-获取支付订单", "out_trade_no: " + out_trade_no);
+            Log.e("支付页面-获取支付订单", "out_trade_no: " + out_trade_no+"悬赏"+xuanshang);
 
             xml.append("</xml>");
             List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
