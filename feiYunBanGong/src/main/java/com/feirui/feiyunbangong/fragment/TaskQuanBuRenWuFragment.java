@@ -52,14 +52,14 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
         adapter.setOnItemClickListener(new TaskQuanBuAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (json.getInfor().get(position - 1).get("state").equals("0")){
+                if (json.getInfor().get(position - 1).get("state").equals("0")) {
                     Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
                     Log.e("全部页面的点击时间", "onItemClick: " + position);
                     //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("json", json.getInfor().get(position - 1) + "");
                     bundle.putString("id", (Integer) json.getInfor().get(position - 1).get("id") + "");
-                    bundle.putString("state", json.getInfor().get(position - 1).get("state")+ "");
+                    bundle.putString("state", json.getInfor().get(position - 1).get("state") + "");
                     bundle.putString("accept_id", (Integer) json.getInfor().get(position - 1).get("accept_id") + "");
                     bundle.putString("staff_name", (String) json.getInfor().get(position - 1).get("staff_name"));
                     bundle.putString("release_time", (String) json.getInfor().get(position - 1).get("release_time"));
@@ -69,18 +69,18 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
                     Log.e("全部任务", "onItemClick position: " + position);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                }else {
+                } else {
                     Intent intent = new Intent(getActivity(), MyTaskDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("json", json.getInfor().get(position-1)+"");
-                    bundle.putString("id", (Integer)json.getInfor().get(position-1).get("id")+"");
-                    bundle.putString("state", json.getInfor().get(position - 1).get("state")+ "");
-                    bundle.putString("staff_name", (String) json.getInfor().get(position-1).get("staff_name"));
-                    bundle.putString("accept_id", (Integer) json.getInfor().get(position-1).get("accept_id")+"");
-                    bundle.putString("time", (String) json.getInfor().get(position-1).get("release_time"));
-                    bundle.putString("task_txt", (String) json.getInfor().get(position-1).get("task_txt"));
-                    bundle.putString("task_zt", (String) json.getInfor().get(position-1).get("subject"));
-                    bundle.putString("staff_head", "http://123.57.45.74/feiybg1/"+json.getInfor().get(position-1).get("staff_head"));
+                    bundle.putString("json", json.getInfor().get(position - 1) + "");
+                    bundle.putString("id", (Integer) json.getInfor().get(position - 1).get("id") + "");
+                    bundle.putString("state", json.getInfor().get(position - 1).get("state") + "");
+                    bundle.putString("staff_name", (String) json.getInfor().get(position - 1).get("staff_name"));
+                    bundle.putString("accept_id", (Integer) json.getInfor().get(position - 1).get("accept_id") + "");
+                    bundle.putString("time", (String) json.getInfor().get(position - 1).get("release_time"));
+                    bundle.putString("task_txt", (String) json.getInfor().get(position - 1).get("task_txt"));
+                    bundle.putString("task_zt", (String) json.getInfor().get(position - 1).get("subject"));
+                    bundle.putString("staff_head", "http://123.57.45.74/feiybg1/" + json.getInfor().get(position - 1).get("staff_head"));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
