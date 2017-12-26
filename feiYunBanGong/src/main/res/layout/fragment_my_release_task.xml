@@ -10,6 +10,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:divider="@null"
+    android:visibility="gone"
     ></ListView>
+    <com.feirui.feiyunbangong.view.YRecycleview
+        android:id="@+id/yrv_renwu_jinxingzhong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+    </com.feirui.feiyunbangong.view.YRecycleview>
 </RelativeLayout>

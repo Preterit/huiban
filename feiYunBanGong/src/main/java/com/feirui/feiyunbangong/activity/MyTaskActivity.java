@@ -1,7 +1,9 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +12,15 @@ import android.widget.TextView;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.JieDanAdapter;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JieDanRenBean;
+import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.RenWuDanBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.TextImageView;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -144,6 +150,54 @@ public class MyTaskActivity extends BaseActivity {
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(false);
+        right_tv.setVisibility(View.VISIBLE);
+        right_tv.setText("终止");
+        right_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MyTaskActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("是否确认终止该任务？");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        RequestParams params = new RequestParams();
+                        params.put("id", id);
+                        String url = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/Stoptask";
+                        Utils.doPost(LoadingDialog.getInstance(MyTaskActivity.this), MyTaskActivity.this, url,
+                                params, new Utils.HttpCallBack() {
+                                    @Override
+                                    public void success(final JsonBean bean) {
+                                        T.showShort(MyTaskActivity.this, "终止任务成功");
+                                        if ("200".equals(bean.getCode())) {
+
+                                        } else {
+                                            T.showShort(MyTaskActivity.this,
+                                                    bean.getMsg());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void failure(String msg) {
+                                        T.showShort(MyTaskActivity.this, msg);
+                                    }
+
+                                    @Override
+                                    public void finish() {
+
+                                    }
+                                });
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
         lv_jiedanren= (ListView) findViewById(R.id.lv_jiedanren);
         tiv_head= (TextImageView) findViewById(R.id.tiv_head);
         tv_name= (TextView) findViewById(R.id.tv_name);

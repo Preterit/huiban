@@ -69,7 +69,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhi_fu);
         task_zt = getIntent().getStringExtra("task_zt");
-        jiedanren_head = getIntent().getStringExtra("staff_head");
+        jiedanren_head = getIntent().getStringExtra("jiedanren_head");
         task_id = getIntent().getStringExtra("task_id");
         accept_id = getIntent().getStringExtra("accept_id");
         xuanshang = getIntent().getStringExtra("xuanshang");
