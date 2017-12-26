@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -69,6 +70,7 @@ public class MyReleaseTaskActivity extends BaseActivity implements View.OnClickL
 //                }
                 RequestParams params = new RequestParams();
                 String url = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/feedback";
+                Log.e("button=-------",button+"");
                 params.put("button", button + "");
                 params.put("id", id + "");
                 params.put("message", et_jindu.getText().toString().trim());

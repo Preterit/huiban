@@ -117,7 +117,7 @@ public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickL
         tv_task.setText(task_txt);
         iv_complete = (ImageView) findViewById(iv_fankui);
         tv_jieshu= (TextView) findViewById(R.id.tv_jieshu);
-        if (state.equals("2")){
+        if (state.equals("2")||state.equals("4")){
             iv_complete.setVisibility(View.GONE);
             tv_jieshu.setVisibility(View.VISIBLE);
 
