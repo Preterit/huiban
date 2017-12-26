@@ -2,14 +2,6 @@ apply plugin: 'com.android.application'
 //apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    signingConfigs {
-        config {
-            storeFile file('F:/feirui.keystore')
-            storePassword 'feirui'
-            keyAlias 'feirui'
-            keyPassword 'feirui'
-        }
-    }
     compileSdkVersion 23
     buildToolsVersion '25.0.2'
     //6.0以后应用handle添加的依赖
