@@ -55,13 +55,9 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
     private TextView tv_money, tv_zt;
     private ImageView iv_head;
 
-    // 标题
-    private String title = "会办";
     //订单号
     public static String out_trade_no;
 
-    // 总价格
-    private String total = "0.01";
     final IWXAPI msgApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
     PayReq req;
     StringBuffer sb;
@@ -134,52 +130,21 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
 
         getOrderInfo();//获取订单信息
 
-//        if(!resultunifiedorder.get("prepay_id").isEmpty()){
-//
-//        }else {
-//
-//        }
-
     }
 
-    public void onClick1(View v) {
-        //demo的方法
-        //第一步 APP生成预支付订单 prepay_id
-        GetPrepayIdTask getPrepayId = new GetPrepayIdTask();//asyncTask
-        getPrepayId.execute();
 
-        //第二步 生成APP微信支付参数 sign
-//        genPayReq();
-
-        //第三步 调起微信支付
-        sendPayReq();
-    }
 
 
     @Override
     public void onClick(View v) {
-//        if (text.getText().toString().equals("")) {
-////            AnimationHelper.shakeAnimation(text);
-//            Toast.makeText(ZhiFuActivity.this, "没有金额", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
 
         if (checkBox1.isChecked()) {//微信支付
-
-//            //demo的方法
-//            //第一步 APP生成预支付订单 prepay_id
-//            GetPrepayIdTask getPrepayId = new GetPrepayIdTask();//asyncTask
-//            getPrepayId.execute();
-//
             //第二步 生成APP微信支付参数 sign
             genPayReq();
 
-
         } else if (checkBox2.isChecked()) {
-            getOrderInfo();
             Toast.makeText(ZhiFuActivity.this, "支付宝正在申请中", Toast.LENGTH_SHORT).show();
         } else if (checkBox3.isChecked()) {
-            getOrderInfo();
             Toast.makeText(ZhiFuActivity.this, "余额支付正在开发中", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(ZhiFuActivity.this, "请选择支付方式", Toast.LENGTH_SHORT).show();
@@ -194,7 +159,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
         params.put("task_id", task_id);
         params.put("accept_id", accept_id);
         Log.e("支付页面-传值====",task_id+"====."+accept_id);
-        String url = UrlTools.pcUrl + UrlTools.RENWU_ORDER;//http://123.57.45.74/feiybg1/public/index.php/home_api/task/task_order
+        String url = UrlTools.pcUrl + UrlTools.RENWU_ORDER;
         AsyncHttpServiceHelper.post(url, params,
                 new AsyncHttpResponseHandler() {
 
@@ -202,11 +167,11 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
                         super.onSuccess(arg0, arg1, arg2);
                         Gson gson = new Gson();
                         RenwuOrderBean bean = gson.fromJson(new String(arg2), RenwuOrderBean.class);
-//                        JsonBean bean = JsonUtils.getMessage(new String(arg2));
                         Log.e("支付页面", "获取订单信息: " + bean.toString());
                         out_trade_no = bean.getInfo().getOut_trade_no();
-                        Happlication application = (Happlication) getApplication().getApplicationContext();
-                        application.setOut_trade_no(out_trade_no);//out_trade_no值
+//                        Happlication application = (Happlication) getApplication().getApplicationContext();
+//                        application.setOut_trade_no(out_trade_no);//out_trade_no值
+
                         //第一步 APP生成预支付订单 prepay_id
                         GetPrepayIdTask getPrepayId = new GetPrepayIdTask();//asyncTask
                         getPrepayId.execute();
@@ -303,14 +268,13 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
      */
     private String genProductArgs() {
         StringBuffer xml = new StringBuffer();
-
+        Log.e("支付页面-获取支付订单", "out_trade_no: " + out_trade_no+" 悬赏 "+(int)(Double.parseDouble(xuanshang)*100));
+        int money =(int)(Double.parseDouble(xuanshang)*100);
         try {
             String nonceStr = genNonceStr();
 //            Happlication application = (Happlication) getApplication().getApplicationContext();
 //            out_trade_no = application.getOut_trade_no();
 //            out_trade_no=genOutTradNo();
-            Log.e("支付页面-获取支付订单", "out_trade_no: " + out_trade_no+"悬赏"+xuanshang);
-
             xml.append("</xml>");
             List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
             packageParams.add(new BasicNameValuePair("appid", Constants.APP_ID));
@@ -320,7 +284,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
             packageParams.add(new BasicNameValuePair("notify_url", "http://123.57.45.74/feiybg1/public/index.php/home_api/notify/wx_notify"));
             packageParams.add(new BasicNameValuePair("out_trade_no", out_trade_no));//获取后台的订单号
             packageParams.add(new BasicNameValuePair("spbill_create_ip", "127.0.0.1"));
-            packageParams.add(new BasicNameValuePair("total_fee", xuanshang));
+            packageParams.add(new BasicNameValuePair("total_fee",money+""));//(Integer.parseInt(xuanshang)*100)+""//金额'
             packageParams.add(new BasicNameValuePair("trade_type", "APP"));
 
             Log.e("支付页面-获取支付订单", "packageParams: " + packageParams.toString());
@@ -331,7 +295,7 @@ public class ZhiFuActivity extends BaseActivity implements View.OnClickListener 
 
             return xmlstring;
         } catch (Exception e) {
-            Log.e("支付页面-", "genProductArgs fail, ex = " + e.getMessage());
+            Log.e("支付页面-", "genProductArgs 错误, ex = " + e.getMessage());
             return null;
         }
     }
