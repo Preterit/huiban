@@ -248,6 +248,10 @@ public class UrlTools {
      * */
     public static String APPROVAL_SHOWAPPCOUNT = "Approval/showappcount";
   /**
+   * 待审批的个数显示
+   * */
+  public static String APPROVAL_TASK = "remind/task_subscript";
+  /**
    * 推广-团队工作圈
    */
   public static String CIRCLE_ADDTEAMCIRCLE = "Circle/addteamcircle";

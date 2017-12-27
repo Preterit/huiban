@@ -275,12 +275,12 @@
 
     <style name="a66c8ff_54">
         <item name="android:textColor">@color/a66c8ff</item>
-        <item name="android:textSize">@dimen/size48</item>
+        <item name="android:textSize">@dimen/size54</item>
     </style>
     <!-- 数据报表 -->
     <style name="ffcc33_48">
         <item name="android:textColor">@color/ffcc33</item>
-        <item name="android:textSize">@dimen/size48</item>
+        <item name="android:textSize">@dimen/size54</item>
     </style>
 
     <style name="ffcc33_54">
