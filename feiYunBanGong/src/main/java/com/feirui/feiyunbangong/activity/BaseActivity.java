@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 
 public class BaseActivity extends FragmentActivity {
 	// 左部 中间 右部
-	public TextView centerTv;
+	public TextView centerTv,right_tv;
 	public ImageView leftIv, rightIv;
 	public LinearLayout leftll;
 	public RelativeLayout top,rightll;
@@ -71,6 +71,7 @@ public class BaseActivity extends FragmentActivity {
 		rightll = (RelativeLayout) findViewById(R.id.rightll);
 		leftIv = (ImageView) findViewById(R.id.leftIv);
 		centerTv = (TextView) findViewById(R.id.centerTv);
+		right_tv= (TextView) findViewById(R.id.righttv);
 		rightIv = (ImageView) findViewById(R.id.rightIv);
 //		righttv = (TextView) findViewById(R.id.righttv);
 		if (leftIv != null) {

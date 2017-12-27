@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -52,6 +53,7 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         accept_id = getIntent().getStringExtra("accept_id");
         jiedanren_name=getIntent().getStringExtra("jiedanren_name");
         jiedanren_head=getIntent().getStringExtra("jiedanren_head");
+        Log.e("jfasff;f====",id+"============"+accept_id);
         initView();
         initTask();
         initData();
@@ -100,8 +102,16 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
                 if (renwudan.getCode() == 200) {
                     rwd_tv_sj.setText(renwudan.getInfo().get(0).getBegin_time() + "");
                     rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
-                    rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
-                    rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
+                    if ("".equals(renwudan.getInfo().get(0).getReward())){
+                        rwd_tv_xs.setText("未悬赏");
+                    }else {
+                        rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "元/人");
+                    }
+                    if ("".equals(renwudan.getInfo().get(0).getNumber())){
+                        rwd_tv_xz.setText("无");
+                    }else {
+                        rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "人");
+                    }
                     xuanshang=renwudan.getInfo().get(0).getReward() + "";
                     if ("".equals(renwudan.getInfo().get(0).getReward())){
                         tv_jieshu.setVisibility(View.GONE);

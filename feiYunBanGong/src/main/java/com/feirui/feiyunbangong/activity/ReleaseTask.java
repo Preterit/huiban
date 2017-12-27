@@ -1,7 +1,10 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +44,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+
 /**
  * 发布任务
  */
@@ -74,6 +78,8 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
     private SwitchView switch_rsxz;
     private ConstraintLayout layout_xsje;
     private ConstraintLayout layout_rsxz;
+    private Dialog mWeiboDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +110,7 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         View footerTeamPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
 
 
-
-        addRecyFriendAdapter=new AddRecyFriendAdapter(new ArrayList<ChildItem>());
+        addRecyFriendAdapter = new AddRecyFriendAdapter(new ArrayList<ChildItem>());
         addFriendAdapterRc = new HeaderViewRecyclerAdapter(addRecyFriendAdapter);
         //添加好友
 //        addFriendAdapter = new AddFriendAdapter(new ArrayList<ShenPiRen>());
@@ -246,15 +251,16 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         if (team_id != null) {
             // params.put("choose_team",team_id.deleteCharAt(team_id.length()-1));
         }
-        Log.e("任务单界面参数", "params: " + params.toString());
-        //http://123.57.45.74/feiybg1/public/index.php/home_api/Task/add_task
         String url = UrlTools.pcUrl + UrlTools.TASK_ADDTASK;
+        quedingButton.setVisibility(View.GONE);
         Utils.doPost(LoadingDialog.getInstance(ReleaseTask.this), ReleaseTask.this, url,
                 params, new Utils.HttpCallBack() {
                     @Override
                     public void success(final JsonBean bean) {
-                        T.showShort(ReleaseTask.this, "发布任务成功");
+
                         if ("200".equals(bean.getCode())) {
+                            mHandler.sendEmptyMessageDelayed(1, 100);
+                            T.showShort(ReleaseTask.this, "发布任务成功");
 //                            runOnUiThread(new Runnable() {
 //                                public void run() {
 //                                    T.showShort(ReleaseTask.this, bean.getMsg());
@@ -264,7 +270,7 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
 //                            });
                             ReleaseTask.this.finish();
                             overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
-
+                            mHandler.sendEmptyMessage(1);
                         } else {
                             T.showShort(ReleaseTask.this,
                                     bean.getMsg());
@@ -284,6 +290,18 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
 
     }
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    quedingButton.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -299,10 +317,10 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
             case 100:
                 ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
                         .getSerializableExtra("childs");
-                if (childs==null){
+                if (childs == null) {
                     return;
-                }else {
-                    Log.e("djakfjfje====",childs.toString());
+                } else {
+                    Log.e("djakfjfje====", childs.toString());
                     HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
                     childs.add(
                             0,
@@ -320,7 +338,7 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                 break;
             case 200:
                 Infor infor = (Infor) data.getSerializableExtra("Team");
-                if (infor==null) {
+                if (infor == null) {
                     return;
                 }
                 addTeamAdapter.addTeam(infor);
