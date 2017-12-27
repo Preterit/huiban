@@ -1,6 +1,8 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -80,6 +82,7 @@ public class MyReleaseTaskActivity extends BaseActivity implements View.OnClickL
                         final JsonBean json = JsonUtils.getMessage(new String(responseBody));
                         if ("200".equals(json.getCode())) {
                             Toast.makeText(MyReleaseTaskActivity.this, "提交反馈成功", Toast.LENGTH_SHORT).show();
+                            mHandler.sendEmptyMessage(1);
                             finish();
                         }
                     }
@@ -94,4 +97,16 @@ public class MyReleaseTaskActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    right_tv.setVisibility(View.VISIBLE);
+                    right_tv.setText("确定");
+                    break;
+            }
+        }
+    };
 }

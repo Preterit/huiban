@@ -53,13 +53,30 @@ public class JieDanAdapter extends BaseAdapter {
         holder.tv_chakan_hui= (TextView) view.findViewById(R.id.tv_chakan_hui);
         ImageLoader.getInstance().displayImage(acctpt_list.get(position).getStaff_head(), holder.iv_head, ImageLoaderUtils.getSimpleOptions());
         holder.tv_name.setText(acctpt_list.get(position).getStaff_name());
-        if ("2".equals(acctpt_list.get(position).getState())||"4".equals(acctpt_list.get(position).getState())){
-            holder.tv_chakan.setVisibility(View.VISIBLE);
-            holder.tv_chakan_hui.setVisibility(View.GONE);
-        }else {
+        if ("0".equals(acctpt_list.get(position).getState())){
             holder.tv_chakan_hui.setVisibility(View.VISIBLE);
+            holder.tv_chakan_hui.setText("待接单");
+            holder.tv_chakan.setVisibility(View.GONE);
+        }else if ("1".equals(acctpt_list.get(position).getState())){
+            holder.tv_chakan_hui.setVisibility(View.GONE);
+            holder.tv_chakan.setText("进行中");
+            holder.tv_chakan.setVisibility(View.VISIBLE);
+        }else if ("2".equals(acctpt_list.get(position).getState())){
+            holder.tv_chakan_hui.setVisibility(View.GONE);
+            holder.tv_chakan.setText("申请完成");
+            holder.tv_chakan.setVisibility(View.VISIBLE);
+        }else if ("3".equals(acctpt_list.get(position).getState())){
+            holder.tv_chakan_hui.setVisibility(View.VISIBLE);
+            holder.tv_chakan_hui.setText("已忽略");
             holder.tv_chakan.setVisibility(View.GONE);
         }
+//        if ("2".equals(acctpt_list.get(position).getState())||"4".equals(acctpt_list.get(position).getState())){
+//            holder.tv_chakan.setVisibility(View.VISIBLE);
+//            holder.tv_chakan_hui.setVisibility(View.GONE);
+//        }else {
+//            holder.tv_chakan_hui.setVisibility(View.VISIBLE);
+//            holder.tv_chakan.setVisibility(View.GONE);
+//        }
         holder.tv_chakan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -66,11 +66,15 @@ public class TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
         } else if (data.get(position).get("state").equals("3")) {
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
-            ((ViewHolder) holder).tv_qbrw_state.setText("拒绝");
+            ((ViewHolder) holder).tv_qbrw_state.setText("已忽略");
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
         } else if (data.get(position).get("state").equals("4")) {
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
-            ((ViewHolder) holder).tv_qbrw_state.setText("完成");
+            ((ViewHolder) holder).tv_qbrw_state.setText("已终止");
+            ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
+        }else if (data.get(position).get("state").equals("5")) {
+            ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
+            ((ViewHolder) holder).tv_qbrw_state.setText("已接满");
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
         }
         if (mOnItemClickListener != null) {

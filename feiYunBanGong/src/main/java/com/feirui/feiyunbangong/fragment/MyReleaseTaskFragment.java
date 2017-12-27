@@ -76,13 +76,14 @@ public class MyReleaseTaskFragment extends Fragment implements YRecycleview.OnRe
                             //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
                             Intent intent = new Intent(getActivity(), MyTaskActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putString("json", root.getInfo().get(position) + "");
-                            bundle.putString("id", root.getInfo().get(position).getId() + "");
-                            bundle.putString("staff_name", (String) root.getInfo().get(position).getStaff_name());
-                            bundle.putString("release_time", (String) root.getInfo().get(position).getRelease_time());
-                            bundle.putString("task_txt", (String) root.getInfo().get(position).getTask_txt());
-                            bundle.putString("task_zt", (String) root.getInfo().get(position).getSubject());
-                            bundle.putString("staff_head", "http://123.57.45.74/feiybg1/" + root.getInfo().get(position).getStaff_head());
+                            bundle.putString("json", root.getInfo().get(position-1) + "");
+                            bundle.putString("id", root.getInfo().get(position-1).getId() + "");
+                            bundle.putString("statue", root.getInfo().get(position-1).getStatue() + "");
+                            bundle.putString("staff_name", (String) root.getInfo().get(position-1).getStaff_name());
+                            bundle.putString("release_time", (String) root.getInfo().get(position-1).getRelease_time());
+                            bundle.putString("task_txt", (String) root.getInfo().get(position-1).getTask_txt());
+                            bundle.putString("task_zt", (String) root.getInfo().get(position-1).getSubject());
+                            bundle.putString("staff_head", "http://123.57.45.74/feiybg1/" + root.getInfo().get(position-1).getStaff_head());
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }

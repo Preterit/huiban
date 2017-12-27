@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,14 +38,12 @@ import org.apache.http.Header;
 
 import java.util.List;
 
-import static com.feirui.feiyunbangong.R.id.iv_fankui;
-
 
 public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickListener {
     private String staff_name, time, task_txt, task_zt, staff_head, id,accept_id,state;
     private TextImageView iv_head;
     private TextView tv_name, tv_time, tv_task, tv_zt,rwd_tv_sj,rwd_tv_wz,rwd_tv_xs,rwd_tv_xz,tv_jieshu;
-    private ImageView iv_complete;
+    private TextView iv_complete;
     MapView mMapView;
     BaiduMap mBaiduMap;
     BitmapDescriptor markerIcon;
@@ -55,7 +52,6 @@ public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickL
     String address = "";
     private ListView lv_jindu;
     private JinDuAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +111,7 @@ public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickL
         tv_name.setText(staff_name);
         tv_time.setText(time);
         tv_task.setText(task_txt);
-        iv_complete = (ImageView) findViewById(iv_fankui);
+        iv_complete = (TextView) findViewById(R.id.tv_fankui);
         tv_jieshu= (TextView) findViewById(R.id.tv_jieshu);
         if (state.equals("2")||state.equals("4")){
             iv_complete.setVisibility(View.GONE);
@@ -147,8 +143,17 @@ public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickL
                 if (renwudan.getCode() == 200) {
                     rwd_tv_sj.setText(renwudan.getInfo().get(0).getBegin_time() + "");
                     rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
-                    rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
-                    rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
+                    if ("".equals(renwudan.getInfo().get(0).getReward())){
+                        rwd_tv_xs.setText("未悬赏");
+                    }else {
+                        rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "元/人");
+                    }
+                    if ("".equals(renwudan.getInfo().get(0).getNumber())){
+                        rwd_tv_xz.setText("无");
+                    }else {
+                        rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "人");
+                    }
+
                 } else {
                 }
             }
@@ -188,7 +193,7 @@ public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickL
             case R.id.righttv:
 
                 break;
-            case iv_fankui:
+            case R.id.tv_fankui:
                 Intent intent = new Intent(MyTaskDetailActivity.this, MyReleaseTaskActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id", id);
