@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.feirui.feiyunbangong.activity.SearchMemberActivity">
+    <include
+        android:id="@+id/inclue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <SearchView
+        android:id="@+id/sc_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/et_bg"
+        android:focusable="false"
+        android:iconifiedByDefault="false"
+        android:queryHint="请输入名字/关键词" />
+    <TextView
+        android:id="@+id/tv_search_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您还没有该联系人~"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:id="@+id/layout_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="历史记录"
+            android:textColor="#333"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
+
+        <ImageView
+            android:id="@+id/iv_deleteall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="10dp"
+            android:src="@drawable/delete"/>
+    </RelativeLayout>
+    <!--<com.google.android.flexbox.FlexboxLayout-->
+        <!--android:id="@+id/flexbox_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:padding="8dp"-->
+        <!--app:alignContent="flex_start"-->
+        <!--app:alignItems="center"-->
+        <!--app:flexDirection="row"-->
+        <!--app:flexWrap="wrap"-->
+        <!--app:justifyContent="flex_start"-->
+        <!--app:showDivider="beginning|middle"></com.google.android.flexbox.FlexboxLayout>-->
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:indicatorColor="?attr/colorPrimary"
+        app:indicatorName="BallSpinFadeLoaderIndicator"/>
+    <ListView
+        android:id="@+id/lv_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+        ></ListView>
+
+</LinearLayout>

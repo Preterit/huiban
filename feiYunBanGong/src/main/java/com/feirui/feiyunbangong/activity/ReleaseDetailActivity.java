@@ -1,8 +1,11 @@
 package com.feirui.feiyunbangong.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,13 +17,16 @@ import android.widget.Toast;
 
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.adapter.JieDanRenAdapter;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JieDanRenBean;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.RenWuDanBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
 import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.utils.Utils;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -38,7 +44,7 @@ import static com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper.post;
  */
 public class ReleaseDetailActivity extends BaseActivity implements View.OnClickListener {
     public String staff_name, release_time, task_txt, staff_head, task_zt;
-    String id,accept_id;
+    String id, accept_id;
     ImageView rwd_im_tx;
     TextView rwd_tv_mz, rwd_tv_rq, rwd_tv_zt, rwd_tv_xq, rwd_tv_sj, rwd_tv_wz, rwd_tv_xs, rwd_tv_xz;
     RecyclerView rwd_rec_jdr;
@@ -70,6 +76,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         initDate();
         initData();
     }
+
     private void initData() {
         RequestParams params2 = new RequestParams();
         String url2 = UrlTools.pcUrl + UrlTools.RENWU_DETAIL;
@@ -91,6 +98,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
+
     private void initDate() {
         RequestParams params = new RequestParams();
         String url = UrlTools.pcUrl + UrlTools.RENWU_JDR;
@@ -108,6 +116,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 } else {
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 super.onFailure(statusCode, headers, responseBody, error);
@@ -115,6 +124,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
+
     private void setView() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -130,7 +140,9 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(false);
-
+        right_tv.setVisibility(View.VISIBLE);
+        right_tv.setText("忽略");
+        right_tv.setOnClickListener(this);
         rwd_im_tx = (ImageView) findViewById(R.id.rwd_im_tx);//发布人头像
         rwd_tv_mz = (TextView) findViewById(R.id.rwd_tv_mz);//发布人名字
         rwd_tv_sj = (TextView) findViewById(R.id.rwd_tv_sj);//开始时间
@@ -195,26 +207,52 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                         super.onFailure(arg0, arg1, arg2, arg3);
                     }
                 });
+                break;
+            case R.id.righttv:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ReleaseDetailActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("是否确认忽略该任务？");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        RequestParams params = new RequestParams();
+                        params.put("task_id", id);
+                        String url = "http://123.57.45.74/feiybg1/public/index.php/home_api/task/task_ignore";
+                        Utils.doPost(LoadingDialog.getInstance(ReleaseDetailActivity.this), ReleaseDetailActivity.this, url,
+                                params, new Utils.HttpCallBack() {
 
-//                Utils.doPost(LoadingDialog.getInstance(this), this, url2, params2, new Utils.HttpCallBack() {
-//                    @Override
-//                    public void success(JsonBean bean) {
-//
-//                        ArrayList<HashMap<String, Object>> infor = bean.getInfor();
-//                        Log.e("详细任务-确认接单按钮", "成功");
-//                    }
-//
-//                    @Override
-//                    public void failure(String msg) {
-//                        Log.e("详细任务-确认接单按钮", "失败，返回值: " + msg);
-//                    }
-//
-//                    @Override
-//                    public void finish() {
-//                        //finish();
-//                    }
-//                });
+                                    @Override
+                                    public void success(final JsonBean bean) {
+                                        T.showShort(ReleaseDetailActivity.this, "已忽略该任务成功");
+                                        startActivity(new Intent(ReleaseDetailActivity.this,RenWuListActivity .class));
+                                        finish();
+                                        if ("200".equals(bean.getCode())) {
+                                            finish();
+                                        } else {
+                                            T.showShort(ReleaseDetailActivity.this,
+                                                    bean.getMsg());
+                                        }
+                                    }
 
+                                    @Override
+                                    public void failure(String msg) {
+                                        T.showShort(ReleaseDetailActivity.this, msg);
+                                    }
+
+                                    @Override
+                                    public void finish() {
+
+                                    }
+                                });
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
                 break;
         }
     }
