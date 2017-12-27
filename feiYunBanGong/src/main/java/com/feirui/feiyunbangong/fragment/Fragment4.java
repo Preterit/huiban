@@ -139,11 +139,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
                     @Override
                     public void failure(String msg) {
-//                        tds.removeAll(tds);
-//                        adapter.add(tds);
-//                        getData();
                         T.showShort(activity, "网络请求失败，请检查网络");
-//                        T.showShort(getActivity(), msg);
                     }
 
                     @Override
@@ -313,11 +309,6 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                 getActivity().overridePendingTransition(R.anim.aty_zoomin,
                         R.anim.aty_zoomout);
                 break;
-            /**case R.id.tv_sousuolianxiren:
-                startActivity(new Intent(getActivity(), SouSuoTuanDuiActivity.class));
-                getActivity().overridePendingTransition(R.anim.aty_zoomin,
-                        R.anim.aty_zoomout);
-                break;*/
         }
     }
 

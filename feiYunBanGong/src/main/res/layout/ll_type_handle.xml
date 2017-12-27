@@ -33,16 +33,17 @@
             android:text="报销"
             android:textSize="@dimen/size50"
             />
+
         <TextView
             android:id="@+id/tv_out"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y100"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/y20"
             android:gravity="center"
+            android:orientation="horizontal"
             android:text="外出"
-            android:textSize="@dimen/size50"
-            />
+            android:textSize="@dimen/size50" />
+
         <TextView
             android:id="@+id/tv_spend"
             android:layout_width="match_parent"

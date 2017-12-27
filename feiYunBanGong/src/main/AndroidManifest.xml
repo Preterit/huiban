@@ -12,7 +12,8 @@
     <permission
         android:name="com.feirui.feiyunbangong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -502,22 +503,25 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activity.TeamPersonActivity" />
-        <activity android:name=".activity.ZhiFuActivity"></activity>
-        <activity android:name=".activity.AboutUsActivity"></activity>
-        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity"/>
-        <activity android:name=".activity.MyCaoZuoActivity"></activity>
+        <activity android:name=".activity.ZhiFuActivity" />
+        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.BaiDuPoi.PoiSearchActivity" />
+        <activity android:name=".activity.MyCaoZuoActivity" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="wx061139fe146e41ae"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx061139fe146e41ae" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChooseFriendActivity"></activity>
-        <activity android:name=".activity.ChaKanJinDuActivity"></activity>
+        <activity android:name=".activity.ChooseFriendActivity" />
+        <activity android:name=".activity.ChaKanJinDuActivity" />
+        <activity android:name=".activity.SearchMemberActivity"></activity>
     </application>
 
 </manifest>

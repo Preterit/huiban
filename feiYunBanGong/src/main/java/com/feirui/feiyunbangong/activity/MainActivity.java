@@ -159,7 +159,6 @@ public class MainActivity extends BaseActivity
 
         initUI();
         try {
-
             setupView();
             addListener();
             setListView();
@@ -175,7 +174,6 @@ public class MainActivity extends BaseActivity
     }
 
     private void getUser() {
-
         RequestParams params=new RequestParams();
         AsyncHttpServiceHelper.post(UrlTools.url + UrlTools.DETAIL_ME, params,new AsyncHttpResponseHandler() {
 

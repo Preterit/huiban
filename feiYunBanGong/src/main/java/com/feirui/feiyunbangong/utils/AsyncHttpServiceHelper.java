@@ -1,12 +1,15 @@
 package com.feirui.feiyunbangong.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.feirui.feiyunbangong.Happlication;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.client.HttpClient;
 
 public class AsyncHttpServiceHelper {
 	public Context context;
@@ -76,7 +79,7 @@ public class AsyncHttpServiceHelper {
 			T.showShort(con, "请检查网络设置！");
 			return;
 		}
-		client.setTimeout(10 * 1000);
+		client.setTimeout(30 * 1000);
 		client.post(url, params, responseHandler);
 	}
 

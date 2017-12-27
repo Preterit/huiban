@@ -444,10 +444,6 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
         return false;
     }
 
-    /**
-     * 开发者可以根据用户操作设置该值
-     */
-    private static boolean mUserInCallMode = false;
 
     /**
      * 定制长按消息事件，每一条消息的长按事件都会回调该方法，开发者根据消息类型，对不同类型的消息设置不同的长按事件
@@ -583,6 +579,23 @@ public class MyIMChattingPageOperateion extends IMChattingPageOperateion
             return true;
         }
         return false;
+    }
+
+    /**
+     * 开发者可以根据用户操作设置该值
+     */
+    private static boolean mUserInCallMode = false;
+
+    /**
+     * 是否使用听筒模式播放语音消息
+     *
+     * @param fragment
+     * @param message
+     * @return true：使用听筒模式， false：使用扬声器模式
+     */
+    @Override
+    public boolean useInCallMode(Fragment fragment, YWMessage message) {
+        return mUserInCallMode;
     }
 
     private void showForwardMessageDialog(final Activity context, final YWMessage msg){
