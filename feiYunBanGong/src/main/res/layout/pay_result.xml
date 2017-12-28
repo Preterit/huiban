@@ -10,7 +10,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="fill_parent"
 		android:gravity="center"
-		android:text="支付结果页面"
+		android:text="支付成功页面"
 		android:textColor="#ff000000"
 		android:textSize="20dp" />
 

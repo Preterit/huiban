@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="94"
-    android:versionName="1.7.24">
+    android:versionCode="95"
+    android:versionName="1.7.25">
 
     <uses-sdk
         android:minSdkVersion="17"
