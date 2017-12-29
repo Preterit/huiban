@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="95"
-    android:versionName="1.7.25">
+    android:versionCode="96"
+    android:versionName="1.7.26">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -266,6 +266,15 @@
                 <action android:name="com.feirui.feiyunbangong.getteam" />
                 <action android:name="com.feirui.feiyunbangong.onadd.team.member" />
                 <action android:name="com.feirui.feiyunbangong.onadd.team" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".activity.MainActivity$MainBroadReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.feirui.feiyunbangong.task" />
+                <action android:name="com.feirui.feiyunbangong.baobiao" />
+                <action android:name="com.feirui.feiyunbangong.qingjia" />
             </intent-filter>
         </receiver>
 

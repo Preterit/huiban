@@ -562,7 +562,10 @@ public class UrlTools {
    * 邀请经理、联系人里的短信邀请
    */
   public static String APPLICATION_INVITATIONMESSAGE = "Application/invitationmessage";
-
+/**
+ * 短信邀请后再发送
+ */
+public static String APPLICATION_MESSAGE = "zhuce/sms_registration";//http://123.57.45.74/feiybg1/public/index.php/api/zhuce/sms_registration
   /**
    * 转移分组：
    */

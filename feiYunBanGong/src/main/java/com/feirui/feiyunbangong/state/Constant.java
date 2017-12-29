@@ -47,6 +47,12 @@ public class Constant {
     public static final String ON_RECEIVE_NEW_MEMBER_ADD = "com.feirui.feiyunbangong.onadd.team.member";
     // 删除成员发出的广播：
     public static final String ON_RECEIVE_NEW_MEMBER_DELETE = "com.feirui.feiyunbangong.ondelete.team.member";
+    // 新的任务单发出的广播：
+    public static final String ON_RECEIVE_NEW_TASK = "com.feirui.feiyunbangong.task";
+    // 新的报表发出的广播：
+    public static final String ON_RECEIVE_NEW_BAOBIAO = "com.feirui.feiyunbangong.baobiao";
+    // 新的请假审批发出的广播：
+    public static final String ON_RECEIVE_NEW_QINGJIA = "com.feirui.feiyunbangong.qingjia";
 
     //接收到需要审核的广播
 

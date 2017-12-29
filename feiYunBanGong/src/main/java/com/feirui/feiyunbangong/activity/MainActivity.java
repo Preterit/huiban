@@ -1,8 +1,10 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -117,7 +119,7 @@ public class MainActivity extends BaseActivity
     /**
      * 会办页面的未读消息数
      */
-    int work_num;
+    static int work_num;
 
     @PView
     public DrawerLayout drawerlayout;
@@ -134,9 +136,12 @@ public class MainActivity extends BaseActivity
 
     private TextView tv_name;
     private CircleImageView iv_head;
+    private MainBroadReceiver receiver;
 
     private TextView tv_num, tv_num_team, tv_num_contact,tv_num_hb;// 会话列表会话数量；团队公告数量；联系人消息数量；
     private int num;//
+    static ArrayList<Activity> activitys = Happlication.getActivities();
+    private static Activity activity;
 
     public void openLeft() {
         this.drawerlayout.openDrawer(Gravity.LEFT);
@@ -154,7 +159,7 @@ public class MainActivity extends BaseActivity
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main);
-
+        Happlication.getActivities().add(this);
         // 设置沉浸式状态栏：
         ImmersedStatusbarUtils.initAfterSetContentView(this, findViewById(R.id.rl));
 
@@ -218,7 +223,6 @@ public class MainActivity extends BaseActivity
             @Override
             public void run() {
                 getUser();
-
             }
         }).start();
 
@@ -227,13 +231,35 @@ public class MainActivity extends BaseActivity
         super.onResume();
         getNum();//设置桌面app角标
         getWork_Num();//设置工作页面角标
+        regist();// 注册广播接收器;
+    }
+    private void regist() {
+        //动态广播
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(Constant.ON_RECEIVE_NEW_BAOBIAO);
+//        filter.addAction(Constant.ON_RECEIVE_NEW_QINGJIA);// 加入某个团队的意图；
+//        filter.addAction(Constant.ON_RECEIVE_NEW_TASK);
+//        receiver = new MainBroadReceiver();
+//        registerReceiver(receiver, filter);
+
+        //静态广播
+        Intent intent = new Intent();
+        intent.setAction(Constant.ON_RECEIVE_NEW_BAOBIAO);
+        intent.setAction(Constant.ON_RECEIVE_NEW_QINGJIA);// 加入某个团队的意图；
+        intent.setAction(Constant.ON_RECEIVE_NEW_TASK);
+        sendBroadcast(intent);
+
     }
 
     @Override
     protected void onPause() {
+//        if(receiver!=null){//解绑广播
+//            unregisterReceiver(receiver);
+//        }
         JPushUtil.jOnPause(this);
         super.onPause();
     }
+
 
     /**
      *登录阿里百川
@@ -281,8 +307,6 @@ public class MainActivity extends BaseActivity
         IYWPushListener msgPushListener = new IYWPushListener() {
             @Override
             public void onPushMessage(IYWContact arg0, YWMessage arg1) {
-                getWork_Num();//设置工作页面角标
-                getNum();//设置桌面app角标
                 // 未读消息数；
                 int num = mIMKit.getUnreadCount();
                 if (num > 0) {
@@ -318,7 +342,7 @@ public class MainActivity extends BaseActivity
 
 
     //获取工作页面的待审批未读数
-    private void getWork_Num(){
+    public void getWork_Num(){
         RequestParams params = new RequestParams();
         String url = UrlTools.url + UrlTools.APPROVAL_TASK;
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
@@ -340,7 +364,7 @@ public class MainActivity extends BaseActivity
     }
 
     // 获取未读消息数：
-    private void getNum() {
+    public void getNum() {
         RequestParams params = new RequestParams();
         String url = UrlTools.url + UrlTools.APPROVAL_TASK;
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
@@ -836,11 +860,16 @@ public class MainActivity extends BaseActivity
 
     };
 
-    private void setXiaomiBadgeNumber(int num) {
-        NotificationManager notificationManager = (NotificationManager) MainActivity.this.
+    private static void setXiaomiBadgeNumber(int num) {
+        if (activitys.size() == 0 || activitys == null){
+            return;
+        }else {
+            activity = activitys.get(0);
+        }
+        NotificationManager notificationManager = (NotificationManager) activity.
                 getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = new NotificationCompat.Builder(MainActivity.this)
-                .setSmallIcon(MainActivity.this.getApplicationInfo().icon)
+        Notification notification = new NotificationCompat.Builder(activity)
+                .setSmallIcon(activity.getApplicationInfo().icon)
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle("")
                 .setContentText("收到消息啦~")
@@ -864,7 +893,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        Happlication.getActivities().remove(this);
     }
 
     @Override
@@ -890,7 +919,6 @@ public class MainActivity extends BaseActivity
         } else {
             tv_num_contact.setVisibility(View.INVISIBLE);
         }
-
     }
 
     private void check(){
@@ -920,15 +948,6 @@ public class MainActivity extends BaseActivity
                 super.onFailure(statusCode, headers, responseBody, error);
             }
         });
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        }, 3000);
-
-
     }
 
     private void setWindow(String[] head){
@@ -956,4 +975,66 @@ public class MainActivity extends BaseActivity
         }
 
     }
+
+
+    public static class MainBroadReceiver extends BroadcastReceiver {
+
+        public MainBroadReceiver(){}
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Constant.ON_RECEIVE_NEW_TASK.equals(intent.getAction())) {//任务单
+                Log.e("自定义广播", "任务单--main");
+                getNum_update();
+//                getWork_Num();//设置工作页面角标
+//                getNum();//设置桌面app角标
+            } else if (Constant.ON_RECEIVE_NEW_QINGJIA.equals(intent.getAction())) {//请假
+                Log.e("自定义广播", "请假--main");
+                getNum_update();
+//                getWork_Num();//设置工作页面角标
+//                getNum();//设置桌面app角标
+            }else if(Constant.ON_RECEIVE_NEW_BAOBIAO.equals(intent.getAction())){//报表
+                getNum_update();
+                Log.e("自定义广播", "报表--main");
+//                getWork_Num();//设置工作页面角标
+//                getNum();//设置桌面app角标
+            }
+        }
+        private void getNum_update() {
+            RequestParams params = new RequestParams();
+            String url = UrlTools.url + UrlTools.APPROVAL_TASK;
+            AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    super.onSuccess(statusCode, headers, responseBody);
+                    Gson gson = new Gson();
+                    ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
+                    Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
+                    work_num=Integer.parseInt(count.getInfo().getNum());
+                }
+            });
+            Log.e("获取未读消息数", "work_num: "+work_num);
+            // 未读消息数；
+            int num = mIMKit.getUnreadCount();
+            //设置应用在桌面上显示的角标
+            if (!Build.MANUFACTURER.equalsIgnoreCase(MobileBrand.XIAOMI)) {
+                mIMKit.setShortcutBadger(num+work_num);
+                if (activitys.size() == 0 || activitys == null){
+                    return;
+                }else {
+                    activity = activitys.get(0);
+                }
+                BadgeNumberManager.from(activity).setBadgeNumber(num+work_num);
+            }else {
+                if (num+work_num > 0){
+                    setXiaomiBadgeNumber(num+work_num - 1);
+                }
+
+                mIMKit.setShortcutBadger(num+work_num);
+            }
+        }
+
+
+    }
+
 }

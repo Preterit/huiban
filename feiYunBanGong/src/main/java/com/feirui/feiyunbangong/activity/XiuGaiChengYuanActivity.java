@@ -100,9 +100,9 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
                 if (tdcy.getT_remark()!=null) {//如果原来有个人签名,设置个人签名
                     et_remark.setText(tdcy.getT_remark());
                 }
-                if(tdcy.getIntroduction()!=null){//如果原来有团队备注,设置团队备注
-                    et_email.setText(tdcy.getIntroduction());
-                }
+//                if(tdcy.getIntroduction()!=null){//如果原来有团队备注,设置团队备注
+//                    et_email.setText(tdcy.getIntroduction());
+//                }
                 if (!"".equals(tdcy.getHead()) && null!= tdcy.getHead() &&
                         !"http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(tdcy.getHead())&&
                         !"http://123.57.45.74/feiybg1/public/index.php/home_api/public/static/staff_head/430/c8aa160662318c6f62a068de84ed797b.jpeg".equals(tdcy.getHead())) {
@@ -168,7 +168,7 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
         Log.e("修改个人简介", "id " + td);
         //判断隐身  0隐身/1在线
         params.put("stealth", sv_yinshen.isOpened()?"0":"1");//隐身状态
-        params.put("team_id", td.getTid());//团队id
+        params.put("id", td.getTid());//团队id
 
         params.put("t_remark", et_remark.getText().toString() + "");//备注
 
@@ -208,8 +208,8 @@ public class XiuGaiChengYuanActivity extends BaseActivity implements
                 case 0:
                     Toast.makeText(XiuGaiChengYuanActivity.this, "修改成功！", 0).show();
                     //tdcy.setEmail(et_email.getText().toString() + "");
-                    Log.e("修改成员界面", "et_email: " + et_email.getText().toString());
-                    tdcy.setIntroduction(et_email.getText().toString());
+//                    Log.e("修改成员界面", "et_email: " + et_email.getText().toString());
+//                    tdcy.setIntroduction(et_email.getText().toString());
                     tdcy.setT_remark(et_remark.getText().toString() + "");
                     Log.e("修改成员界面", "tdcy: " + tdcy.toString());
                     setResult(200, new Intent().putExtra("tdcy", tdcy));

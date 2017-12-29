@@ -1,6 +1,7 @@
 package com.feirui.feiyunbangong.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -246,6 +247,18 @@ public class YaoQingActivity extends BaseActivity {
 												// stub
 											}
 										});
+								String url1 = UrlTools.url + UrlTools.APPLICATION_MESSAGE;
+								RequestParams params1 = new RequestParams();
+								params1.put("mobile", name);
+								AsyncHttpServiceHelper.post(url1, params1, new AsyncHttpResponseHandler() {
+									@Override
+									public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+										super.onSuccess(statusCode, headers, responseBody);
+										final JsonBean json = JsonUtils.getMessage(new String(responseBody));
+										Log.e("邀请页面","邀请成功后发送手机号" + json);
+									}
+								});
+
 							} else {
 
 							}

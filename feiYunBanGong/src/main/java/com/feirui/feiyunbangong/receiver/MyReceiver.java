@@ -84,10 +84,13 @@ public class MyReceiver extends BroadcastReceiver {
                 // 发出被邀请加入团队的广播：刷新查看团队页面接口：
                 context.sendBroadcast(new Intent(Constant.ON_REACEIVE_ADD_TEAM));
             } else if ("add_baobiao".equals(json.get("key"))) {//报表
+                context.sendBroadcast(new Intent(Constant.ON_RECEIVE_NEW_BAOBIAO));
                 Log.e("自定义广播", "报表");
             }else if ("app_leave".equals(json.get("key"))) {//请假
+                context.sendBroadcast(new Intent(Constant.ON_RECEIVE_NEW_QINGJIA));
                 Log.e("自定义广播", "请假");
             }else if ("add_task".equals(json.get("key"))) {//任务单
+                context.sendBroadcast(new Intent(Constant.ON_RECEIVE_NEW_TASK));
                 Log.e("自定义广播", "任务单");
             } else {
                 Log.e(TAG, "onReceive: -------------添加好友-----------------" );

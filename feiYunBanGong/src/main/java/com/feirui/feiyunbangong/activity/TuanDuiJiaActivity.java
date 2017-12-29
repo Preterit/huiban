@@ -104,8 +104,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
     private void setManage(TuanDui td) {
         if (td.getGuanli_id() != null
                 && String.valueOf(td.getGuanli_id()).equals(
-                String.valueOf(AppStore.user.getInfor().get(0)
-                        .get("id")))) {
+                String.valueOf(AppStore.user.getInfor().get(0).get("id")))) {
             ll_guanli.setVisibility(View.VISIBLE);
             bt_out_team.setVisibility(View.INVISIBLE);//管理员不显示退出团队；
         } else {
