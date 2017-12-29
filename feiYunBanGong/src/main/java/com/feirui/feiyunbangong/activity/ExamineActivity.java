@@ -90,7 +90,7 @@ public class ExamineActivity extends BaseActivity {
 
 	public void loadData() {
 		RequestParams params = new RequestParams();
-		String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
+		String url = UrlTools.url + UrlTools.APPROVAL_TASK;
 //		params.put("current_page", 1 + "");
 //		params.put("pagesize", "100");
 		Log.d("提示数字模块--审批URL", "url: " + url);
@@ -101,10 +101,10 @@ public class ExamineActivity extends BaseActivity {
 				super.onSuccess(statusCode, headers, responseBody);
 				Gson gson = new Gson();
 				ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
-				Log.e("审批界面--count", "Infor: "+count.getInfor());
-					if (count.getInfor()!=0) {
+				Log.e("审批界面--count", "Infor: "+count.getInfo().getApproval());
+					if (!count.getInfo().getApproval().equals("0")) {
 						bar_num.setVisibility(view.VISIBLE);
-						bar_num.setText(count.getInfor() + "");
+						bar_num.setText(count.getInfo().getApproval());
 					}else {
 						bar_num.setVisibility(view.INVISIBLE);
 					}

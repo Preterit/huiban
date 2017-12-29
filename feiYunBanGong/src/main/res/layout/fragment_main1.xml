@@ -203,7 +203,10 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
-                    android:id="@+id/imageView3" />
+                    android:id="@+id/imageView3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintVertical_bias="0.177" />
 
                 <TextView
                     style="@style/ff6f5c_54"
@@ -211,16 +214,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="审批"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginRight="8dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                    app:layout_constraintVertical_bias="0.384" />
                 <TextView
-                    android:id="@+id/bar_num"
+                    android:id="@+id/approval_num"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@drawable/red_dot"
@@ -228,7 +231,6 @@
                     android:textSize="15sp"
                     android:text="10"
                     android:gravity="center"
-
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="-3dp"
                     android:layout_marginLeft="8dp"
@@ -256,15 +258,16 @@
                     android:src="@drawable/fragment1_b" />
 
                 <TextView
+                    android:id="@+id/textView26"
                     style="@style/ffa44b_54"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
+                    android:layout_marginTop="@dimen/y7"
                     android:text="填写报表" />
             </LinearLayout>
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/ll_data"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -276,17 +279,55 @@
                     android:layout_width="@dimen/size160"
                     android:layout_height="@dimen/size160"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/fragment1_f" />
+                    android:src="@drawable/fragment1_f"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/imageView10"
+                    app:layout_constraintVertical_bias="0.177" />
+
+                <TextView
+                    android:id="@+id/form_num"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/red_dot"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:text="10"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="-3dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.843"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     style="@style/ffcc33_48"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
-                    android:text="查看报表" />
+                    android:text="查看报表"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView10"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.487" />
 
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -295,7 +336,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_weight="1">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/llTaskList"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -307,18 +348,56 @@
                     android:layout_width="@dimen/size160"
                     android:layout_height="@dimen/size160"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/taskss" />
+                    android:src="@drawable/taskss"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintVertical_bias="0.177"
+                    android:id="@+id/imageView9" />
+                <TextView
+                    android:id="@+id/task_num"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/red_dot"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:text="10"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="-3dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.843"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     style="@style/tasks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y6"
-                    android:text="任务单" />
+                    android:text="任务单"
+                    android:id="@+id/textView25"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView9"
+                    app:layout_constraintVertical_bias="0.384" />
 
 
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/ll_customer"

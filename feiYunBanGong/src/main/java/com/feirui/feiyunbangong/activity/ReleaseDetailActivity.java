@@ -170,7 +170,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         rwd_tv_mz.setText(staff_name);
         rwd_tv_rq.setText(release_time);
 
-        rwd_tv_xq.setText(task_txt);
+        rwd_tv_xq.setText("\u3000\u3000"+task_txt);
         rwd_tv_zt.setText(task_zt);
         //ImageLoader.getInstance().displayImage("http://123.57.45.74/feiybg/"+staff_head, rwd_im_tx);
         ImageLoader.getInstance().displayImage(staff_head, rwd_im_tx, ImageLoaderUtils.getSimpleOptions());

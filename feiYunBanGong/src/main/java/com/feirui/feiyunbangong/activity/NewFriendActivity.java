@@ -107,18 +107,17 @@ public class NewFriendActivity extends BaseActivity implements
 
             @Override
             public void run() {
-
-                str = LianXiRenUtil.readConnect(NewFriendActivity.this);
-
                 //Log.e("通讯录联系人", "姓名"+str[0] + "电话" + str[1]);
+                str = LianXiRenUtil.readConnect(NewFriendActivity.this);
                 if(str==null){
+                    //如果没有开启通讯录权限,退出该方法
                     return;
                 }
                 RequestParams params = new RequestParams();
                 params.put("phone", str[1]);
                 params.put("name", str[0]);
+                Log.e("新朋友界面", "params: "+params.toString());
                 String url = UrlTools.url + UrlTools.SHOUJILIANXIREN;
-
                 Utils.doPost(null, NewFriendActivity.this, url, params,
                         new HttpCallBack() {
                             @Override
@@ -148,10 +147,7 @@ public class NewFriendActivity extends BaseActivity implements
         ArrayList<HashMap<String, Object>> info = bean.getInfor();
         Log.e("新朋友界面","info" + info.toString() );
         if (info != null) {
-
             lxrs01.removeAll(lxrs01);
-
-
             if (info.size() == 0) {
                 //Toast.makeText(NewFriendActivity.this, "暂无可联系人好友", 0).show();
 //                lv_lxr.setVisibility(View.GONE);

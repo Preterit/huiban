@@ -93,11 +93,11 @@
                 android:layout_marginTop="8dp"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.036"
+                app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.229"
+                app:layout_constraintVertical_bias="0.219"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp" />
 
@@ -121,7 +121,7 @@
 
             <TextView
                 android:id="@+id/rwd_tv_xq"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:text="参考消息网8月17日报道 港媒称，几张被广泛分享的照片显示，万里长城上最常被游客参观的路段，有大量的中国人、英国人和韩国人的涂鸦，这引起了中国社交媒体用户的愤怒。"
                 android:layout_marginStart="8dp"
