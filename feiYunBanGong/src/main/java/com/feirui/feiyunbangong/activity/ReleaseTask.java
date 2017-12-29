@@ -320,7 +320,6 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                 if (childs == null) {
                     return;
                 } else {
-                    Log.e("djakfjfje====", childs.toString());
                     HashMap<String, Object> hm = AppStore.user.getInfor().get(0);
                     childs.add(
                             0,
@@ -334,7 +333,6 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                     }
                     super.onActivityResult(requestCode, resultCode, data);
                 }
-
                 break;
             case 200:
                 Infor infor = (Infor) data.getSerializableExtra("Team");

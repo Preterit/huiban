@@ -15,7 +15,6 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ClockInActivity;
 import com.feirui.feiyunbangong.activity.CustomerActivity;
 import com.feirui.feiyunbangong.activity.ExamineActivity;
-import com.feirui.feiyunbangong.activity.MainActivity;
 import com.feirui.feiyunbangong.activity.ProjectActivity;
 import com.feirui.feiyunbangong.activity.ReadFormActivity;
 import com.feirui.feiyunbangong.activity.RenWuListActivity;
@@ -60,12 +59,13 @@ public class Fragment1 extends BaseFragment {
     TextView tv_renzheng, tv_1, tv_2, tv_3;// 认证,电话会议，视频会议，公司须知
     // 打卡，报表，项目，审批，客户管理，数据报表
     @PView(click = "onClick")
-    LinearLayout ll_clockIn, ll_statement, ll_project, ll_customer,
-            ll_data, llTaskList,leftll;
+    LinearLayout ll_clockIn, ll_statement, ll_project, ll_customer, leftll;
     @PView(click = "onClick")
-    ConstraintLayout ll_examine;
+    ConstraintLayout llTaskList,ll_data,ll_examine;
 
-    TextView bar_num;
+    TextView approval_num;
+    TextView form_num;
+    TextView task_num;
 
     public Fragment1() {
     }
@@ -75,7 +75,7 @@ public class Fragment1 extends BaseFragment {
                              Bundle savedInstanceState) {
         try {
             view = setContentView(inflater, R.layout.fragment_main1);
-            initData();
+//            initData();//认证公司
             // 添加轮播图片
 //			LooperPicture.addLooperPicture(vp, fragment_vp_ll, getActivity());
 
@@ -84,14 +84,17 @@ public class Fragment1 extends BaseFragment {
             images.add("drawable://" + R.drawable.ban2);
             images.add("drawable://" + R.drawable.ban3);
 
-
             Banner banner = (Banner) view.findViewById(R.id.banner);
             banner.setImages(images).setImageLoader(new GlideImageLoader()).start();
             ll_examine = (ConstraintLayout) view.findViewById(R.id.ll_examine);
-            bar_num = (TextView) view.findViewById(R.id.bar_num);
+            approval_num = (TextView) view.findViewById(R.id.approval_num);
+            form_num = (TextView) view.findViewById(R.id.form_num);
+            task_num = (TextView) view.findViewById(R.id.task_num);
 
-            bar_num.setVisibility(view.GONE);
-            loadData();
+            approval_num.setVisibility(view.GONE);
+            form_num.setVisibility(view.GONE);
+            task_num.setVisibility(view.GONE);
+            loadData();//设置未读圆圈
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +103,7 @@ public class Fragment1 extends BaseFragment {
     }
 
     /**
-     * 是否认证
+     * 公司是否认证
      */
     private void initData() {
         RequestParams params = new RequestParams();
@@ -141,22 +144,31 @@ public class Fragment1 extends BaseFragment {
     public void loadData() {
 
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
-//      String url = UrlTools.url + UrlTools.APPROVAL_APPROVAL;
-//		params.put("current_page", 1 + "");
-//		params.put("pagesize", "100");
+        String url = UrlTools.url + UrlTools.APPROVAL_TASK;
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
-                Log.e("审批界面--count", "Infor: "+count.getInfor());
-                if (count.getInfor()!=0) {
-                    bar_num.setVisibility(view.VISIBLE);
-                    bar_num.setText(count.getInfor() + "");
+                Log.e("审批界面--count", "Infor: "+count.getInfo());
+                if (!count.getInfo().getApproval().equals("0")) {//审批
+                    approval_num.setVisibility(view.VISIBLE);
+                    approval_num.setText(count.getInfo().getApproval());
                 }else {
-                    bar_num.setVisibility(view.INVISIBLE);
+                    approval_num.setVisibility(view.INVISIBLE);
+                }
+                if (!count.getInfo().getForm().equals("0")) {//报表
+                    form_num.setVisibility(view.VISIBLE);
+                    form_num.setText(count.getInfo().getForm());
+                }else {
+                    form_num.setVisibility(view.INVISIBLE);
+                }
+                if (!count.getInfo().getTask().equals("0")) {//任务单
+                    task_num.setVisibility(view.VISIBLE);
+                    task_num.setText(count.getInfo().getTask());
+                }else {
+                    task_num.setVisibility(view.INVISIBLE);
                 }
             }
         });

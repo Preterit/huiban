@@ -54,7 +54,6 @@ public class TaskQuanBuRenWuFragment extends BaseFragment implements YRecyclevie
             public void onItemClick(View view, int position) {
                   if (json.getInfor().get(position - 1).get("state").equals("0")) {
                     Intent intent = new Intent(getActivity(), ReleaseDetailActivity.class);
-                    Log.e("全部页面的点击时间", "onItemClick: " + position);
                     //Intent intent = new Intent(getActivity(), Release_FanKuiA ctivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("json", json.getInfor().get(position - 1) + "");

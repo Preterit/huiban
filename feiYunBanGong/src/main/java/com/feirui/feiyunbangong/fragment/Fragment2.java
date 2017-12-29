@@ -173,7 +173,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     public void onResume() {
         regist();// 注册广播接收器；
         requestGroup();// 获取分组信息；
-
         getNewFriendNum();// 获取新申请的朋友个数；
 
 //        new Thread(new Runnable() {
@@ -256,7 +255,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
     private void getNewFriendNum() {
 
         new Thread() {
-            //        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Looper.prepare();
@@ -305,33 +303,24 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
                             public void success(JsonBean bean) {
                                 Object object = bean.getInfor().get(0).get("num");
                                 int num = Integer.parseInt(String.valueOf(object));
+                                Log.e("获取申请好友的个数", "num: "+num );
                                 Message msg = new Message();
+                                msg.what = 1;
                                 msg.obj = num + friend_size;
                                 handler.sendMessage(msg);
-//                                if (num + friend_size > 0) {
-//                                    tv_num.setVisibility(View.VISIBLE);
-//                                    tv_num.setText(num + friend_size + "");
-//
-//                                } else {
-//                                    tv_num.setVisibility(View.INVISIBLE);
-//                                }
-                                //friendNumListener.newFriendNumChanged(num + friend_size);
                             }
 
                             @Override
                             public void failure(String msg) {
-
                                 T.showShort(getActivity(), msg);
-
                             }
 
                             @Override
                             public void finish() {
                                 // TODO Auto-generated method stub
-
                             }
                         });
-//                Looper.loop();
+                Looper.loop();
             }
         }.start();
 
@@ -738,8 +727,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         ll_qunliao = (LinearLayout) view.findViewById(R.id.ll_qunliao);
         ll_saosao = (LinearLayout) view.findViewById(R.id.ll_saoyisao);
         swipe_container = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        header_view = getActivity().getLayoutInflater().inflate(
-                R.layout.lianxiren_lv_header, null);
+        header_view = getActivity().getLayoutInflater().inflate(R.layout.lianxiren_lv_header, null);
         et_sousuo = (EditText) header_view
                 .findViewById(R.id.et_sousuolianxiren);
         et_sousuo.setHint("名字/手机号/关键词");
@@ -748,13 +736,13 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         rl_chuangjian = (RelativeLayout) header_view.findViewById(R.id.rl_chuangjian);
         rl_qunliebiao = (RelativeLayout) header_view.findViewById(R.id.rl_qunliebiao);
         fl_main2 = (FrameLayout) view.findViewById(R.id.fl_main2);
-        rl_newfriend = (RelativeLayout) header_view
-                .findViewById(R.id.rl_newfriend);
+        rl_newfriend = (RelativeLayout) header_view.findViewById(R.id.rl_newfriend);
         ArrayList<String> list = new ArrayList<>();
         list.add("删除好友");
         list.add("修改分组");
         list.add("修改备注");
         dialog = new SelectZTDialog(getActivity(), "好友管理", list, this);
+        getNewFriendNum();
     }
 
     private void addData(JsonBean bean) {
@@ -970,7 +958,7 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
 
                     }
                 });
-            }else {
+            }else if(msg.what == 1){
                 Log.e("好友数量", "msg.obj=" + msg.obj.toString());
                 if ((int) msg.obj > 0) {
                     tv_num.setVisibility(View.VISIBLE);

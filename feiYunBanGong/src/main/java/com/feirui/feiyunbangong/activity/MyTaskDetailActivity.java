@@ -101,6 +101,7 @@ public class  MyTaskDetailActivity extends BaseActivity implements View.OnClickL
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(true);
+        rightIv.setVisibility(View.GONE);
         lv_jindu = (ListView) findViewById(R.id.lv_jindu);
         iv_head = (TextImageView) findViewById(R.id.tiv_head);
         tv_name = (TextView) findViewById(R.id.tv_name);

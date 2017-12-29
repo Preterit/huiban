@@ -119,6 +119,7 @@ public class MainActivity extends BaseActivity
     public DrawerLayout drawerlayout;
     @PView
     private ListView lv_left;
+    //private ArrayAdapter adapter;
     private SimpleAdapter adapter;
 
     @PView
@@ -310,25 +311,22 @@ public class MainActivity extends BaseActivity
 
     //获取工作页面的待审批未读数
     private void getWork_Num(){
-//        final int[] shenpi_num = {0};
         RequestParams params = new RequestParams();
-        String url = UrlTools.url + UrlTools.APPROVAL_SHOWAPPCOUNT;
+        String url = UrlTools.url + UrlTools.APPROVAL_TASK;
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
-
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
-                Log.e("审批界面--count", "Infor: "+count.getInfor());
-
+                Log.e("审批界面--count", "Infor: "+count.getInfo().getNum());
                 Message message = new Message();
-                message.obj = count.getInfor();
+                message.obj = count.getInfo().getNum();
                 message.what = 2;
                 handler.sendMessage(message);
-            }
-        });
+
+    }
+});
         Log.e("主页面", "Work_Numk: "+num );
 //        return num;
     }
@@ -337,7 +335,6 @@ public class MainActivity extends BaseActivity
     private void getNum() {
         // 未读消息数；
         int num = mIMKit.getUnreadCount();
-        Log.e("获取未读消息数----------------", "getNum:----num---------- "+num);
         Message message = new Message();
         message.obj = num;
         message.what = 1;
@@ -793,8 +790,9 @@ public class MainActivity extends BaseActivity
                     }
                     break;
                 case 2:
-                    Log.e("设置工作页面数字", "getNum_work:-------- "+(int) msg.obj);
-                    if((int)msg.obj>0){
+
+                    Log.e("设置工作页面数字", "getNum_work:-------- "+msg.obj);
+                    if(!(msg.obj).equals("0")){
                         tv_num_hb.setVisibility(View.VISIBLE);
                         tv_num_hb.setText(msg.obj+"");
                     }else{
