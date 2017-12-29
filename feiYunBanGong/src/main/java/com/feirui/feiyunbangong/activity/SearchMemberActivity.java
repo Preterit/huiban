@@ -1,6 +1,6 @@
 package com.feirui.feiyunbangong.activity;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -24,17 +25,20 @@ import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
-import com.feirui.feiyunbangong.utils.IPreference;
-import com.feirui.feiyunbangong.utils.PreferenceImpl;
+import com.feirui.feiyunbangong.utils.PreferenceUtil.IPreference;
+import com.feirui.feiyunbangong.utils.PreferenceUtil.PreferenceImpl;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
+import com.google.android.flexbox.FlexboxLayout;
 import com.loopj.android.http.RequestParams;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -54,8 +58,9 @@ public class SearchMemberActivity extends BaseActivity {
     private TextView tv_search_person;
     private ChengYuanAdapter mSearchAdapter;
     private AVLoadingIndicatorView mAvi;//加载中动画
-//    private FlexboxLayout mFlexboxLayout;//流式标签云控件
+    private FlexboxLayout mFlexboxLayout;//流式标签云控件
     private RelativeLayout mLayoutHistory;//历史搜索标签
+    private ImageView mIvDeleteAll;//清除所有按钮
     private List<String> mHotTitles = new ArrayList<String>();//搜索历史内容
     private List<String> mHistoryTitles;
     private PreferenceImpl mPreUtils;
@@ -96,8 +101,9 @@ public class SearchMemberActivity extends BaseActivity {
         setCenterString("搜索团队成员");
         leftIv.setImageResource(R.drawable.arrows_left);
         setRightVisibility(false);
-//        mFlexboxLayout = (FlexboxLayout) findViewById(R.id.flexbox_layout);
+        mFlexboxLayout = (FlexboxLayout)findViewById(R.id.flt);
         mLayoutHistory = (RelativeLayout) findViewById(R.id.layout_history);
+        mIvDeleteAll = (ImageView) findViewById(R.id.iv_deleteall);
         mAvi = (AVLoadingIndicatorView) findViewById(R.id.avi);
     }
 
@@ -188,11 +194,44 @@ public class SearchMemberActivity extends BaseActivity {
 
     private void initListener() {
         listenerSearch();
+        //清除搜索历史
+        mIvDeleteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.creatDialog(SearchMemberActivity.this, null, "清除搜索历史吗", new Utils.DialogListener() {
+                    @Override
+                    public void onYesClick(DialogInterface dialog, int which) {
+                        mHistoryTitles.clear();
+                        mPreUtils.remove("history_search");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mFlexboxLayout.removeAllViews();
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onNoClick(DialogInterface dialog, int which) {
+
+                    }
+                },true).show();
+            }
+        });
     }
 
     //搜索团队成员
     private void listenerSearch() {
         sc_search = (SearchView) findViewById(R.id.sc_search);
+        //设置输入字体颜色
+        if(sc_search == null) { return;}
+        int id = sc_search.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = (TextView) sc_search.findViewById(id);
+//        textView.setTextColor(Color.parseColor("#ddd"));//字体颜色
+        textView.setTextSize(16);//字体、提示字体大小
+        textView.setHintTextColor(Color.parseColor("#999999"));//提示字体颜色
+        textView.setGravity(Gravity.CENTER_VERTICAL);
         lv_search = (ListView) findViewById(R.id.lv_search);
         tv_search_person = (TextView)findViewById(R.id.tv_search_person);
         // 设置该SearchView默认是否自动缩小为图标
@@ -226,15 +265,24 @@ public class SearchMemberActivity extends BaseActivity {
             public boolean onQueryTextChange(String newText) {
                 if (TextUtils.isEmpty(newText)){
                     mBackData.clear();
-                    lv_search.setVisibility(View.GONE);
-                    tv_search_person.setVisibility(View.GONE);
+                    lv_search.setVisibility(GONE);
+                    tv_search_person.setVisibility(GONE);
                 }else {//不为空时从联系人中取出
                     lv_search.setVisibility(View.VISIBLE);
-                    tv_search_person.setVisibility(View.GONE);
+                    tv_search_person.setVisibility(GONE);
+                    Set<String> set = new LinkedHashSet<>();
+                    for (String value : mHistoryTitles) {
+                        set.add(value);
+                    }
+                    if (set.contains(newText)){
+                    }else {
+                        showTextView(newText);
+                    }
                     //添加到历史搜索记录里
                     mHistoryTitles.add(newText);
                     mPreUtils.putAll(HISTORY_SEARCHA, mHistoryTitles);
                     setFilterText(newText);
+
                 }
                 return false;
             }
@@ -244,7 +292,6 @@ public class SearchMemberActivity extends BaseActivity {
 
     public void setFilterText(String text){
         middle.clear();
-
         for (int i = 0;i < tdcys.size();i++){
             TuanDuiChengYuan bean = tdcys.get(i);
             if (bean.getName().indexOf(text) != -1 || bean.getKey1().indexOf(text) != -1
@@ -272,7 +319,7 @@ public class SearchMemberActivity extends BaseActivity {
                 }
             });
         }else {
-            lv_search.setVisibility(View.GONE);
+            lv_search.setVisibility(GONE);
             tv_search_person.setVisibility(View.VISIBLE);
         }
     }
@@ -285,47 +332,51 @@ public class SearchMemberActivity extends BaseActivity {
     private void updateShowHotTag(List<String> tags) {
         // 通过代码向FlexboxLayout添加View
         for (int i = 0; i < tags.size(); i++) {
-            TextView textView = new TextView(this);
-            textView.setBackground(getResources().getDrawable(R.drawable.flexbox_text_bg));
-            textView.setText(tags.get(i));
-            textView.setGravity(Gravity.CENTER);
-            textView.setPadding(20, 20, 20, 20);
-            textView.setClickable(true);
-            textView.setFocusable(true);
-            textView.setTextColor(getResources().getColor(Color.parseColor("#333333")));
-//            mFlexboxLayout.addView(textView);
-            //通过FlexboxLayout.LayoutParams 设置子元素支持的属性
-            ViewGroup.LayoutParams params = textView.getLayoutParams();
-//            if (params instanceof FlexboxLayout.LayoutParams) {
-//                FlexboxLayout.LayoutParams layoutParams = (FlexboxLayout.LayoutParams) params;
-//                //layoutParams.setFlexBasisPercent(0.5f);
-//                layoutParams.setMargins(10, 10, 20, 10);
-//            }
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TextView tv = (TextView) v;
-                    //保存搜索记录
-                    mKeywords = tv.getText().toString().trim();
-                    mHistoryTitles.add(mKeywords);
-                    mPreUtils.putAll(HISTORY_SEARCHA, mHistoryTitles);
-                    setFilterText(mKeywords);
-                }
-            });
+            showTextView(tags.get(i));
         }
 
     }
 
+    public void showTextView(String str){
+        TextView textView = new TextView(this);
+        textView.setBackground(getResources().getDrawable(R.drawable.flexbox_text_bg));
+        textView.setText(str);
+        textView.setGravity(Gravity.CENTER);
+        textView.setPadding(20, 20, 20, 20);
+        textView.setClickable(true);
+        textView.setFocusable(true);
+        textView.setTextColor(Color.parseColor("#333333"));
+        mFlexboxLayout.addView(textView);
+        //通过FlexboxLayout.LayoutParams 设置子元素支持的属性
+        ViewGroup.LayoutParams params = textView.getLayoutParams();
+        if (params instanceof FlexboxLayout.LayoutParams) {
+            FlexboxLayout.LayoutParams layoutParams = (FlexboxLayout.LayoutParams) params;
+            //原本就注释了 该属性是占行的一半
+//                layoutParams.setFlexBasisPercent(0.5f);
+            layoutParams.setMargins(10, 10, 20, 10);
+        }
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tv = (TextView) v;
+                //保存搜索记录
+                mKeywords = tv.getText().toString().trim();
+                mHistoryTitles.add(mKeywords);
+                mPreUtils.putAll(HISTORY_SEARCHA, mHistoryTitles);
+                sc_search.setQuery(mKeywords,false);
+            }
+        });
+    }
 
     public void showLoading() {
         mAvi.setVisibility(VISIBLE);
-//        mFlexboxLayout.setVisibility(GONE);
+        mFlexboxLayout.setVisibility(GONE);
         mAvi.smoothToShow();
     }
 
     public void hideLoading() {
-        mAvi.setVisibility(View.GONE);
-//        mFlexboxLayout.setVisibility(VISIBLE);
+        mAvi.setVisibility(GONE);
+        mFlexboxLayout.setVisibility(VISIBLE);
         mAvi.smoothToHide();
     }
 

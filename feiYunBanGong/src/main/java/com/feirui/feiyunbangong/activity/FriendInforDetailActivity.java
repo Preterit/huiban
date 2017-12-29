@@ -361,6 +361,7 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
         mLl_person_area.setOnClickListener(this);
         mPerson_add.setOnClickListener(this);
         mPerson_talk.setOnClickListener(this);
+        rightIv.setVisibility(View.VISIBLE);
         //修改
         rightIv.setOnClickListener(this);
         mTv_revise_group.setOnClickListener(this);

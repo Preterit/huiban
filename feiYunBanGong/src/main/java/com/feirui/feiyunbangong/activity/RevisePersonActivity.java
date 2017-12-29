@@ -106,7 +106,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
         initTitle();
         setCenterString("修改个人资料");
         setLeftDrawable(R.drawable.arrows_left);
-        rightIv.setVisibility(View.INVISIBLE);
+        rightIv.setVisibility(View.GONE);
         righttv = (TextView) findViewById(R.id.righttv);
         righttv.setVisibility(View.VISIBLE);
         righttv.setText("保存");

@@ -54,6 +54,13 @@ public class Constant {
     public static final String NEED_TO_SHEN_HE = "com.feirui.feiyunbangong.need.to.shenhe";
     public static final String INTENT_SERIALIZABLE_DATA = "intent_serializable_data";
 
+    // 新的任务单发出的广播：
+    public static final String ON_RECEIVE_NEW_TASK = "com.feirui.feiyunbangong.task";
+    // 新的报表发出的广播：
+    public static final String ON_RECEIVE_NEW_BAOBIAO = "com.feirui.feiyunbangong.baobiao";
+    // 新的请假审批发出的广播：
+    public static final String ON_RECEIVE_NEW_QINGJIA = "com.feirui.feiyunbangong.qingjia";
+
     public static class JPUSH {
         public static final String QINGJIA_SHENPI = "add_leave";
     }

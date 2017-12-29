@@ -1,4 +1,4 @@
-package com.feirui.feiyunbangong.utils;
+package com.feirui.feiyunbangong.utils.PreferenceUtil;
 
 /**
  * 作者：Leon
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.feirui.feiyunbangong.utils.IPreference.DataType.INTEGER;
+import static com.feirui.feiyunbangong.utils.PreferenceUtil.IPreference.DataType.INTEGER;
 
 /**
  * 操作SharedPreferences的工具类

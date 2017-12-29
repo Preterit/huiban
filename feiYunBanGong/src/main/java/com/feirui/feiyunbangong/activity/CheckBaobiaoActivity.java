@@ -89,6 +89,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
         leftIv = (ImageView) findViewById(R.id.leftIv);
         centerTv = (TextView) findViewById(R.id.centerTv);
         rightIv = (ImageView) findViewById(R.id.rightIv);
+        rightIv.setVisibility(View.VISIBLE);
         if (leftIv != null) {
             leftll.setOnClickListener(new View.OnClickListener() {
 

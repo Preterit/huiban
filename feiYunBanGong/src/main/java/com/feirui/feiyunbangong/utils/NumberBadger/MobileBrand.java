@@ -1,7 +1,7 @@
 package com.feirui.feiyunbangong.utils.NumberBadger;
 
 /**
- * Created by feirui1 on 2017-11-29.
+ * Created by xy on 2017-11-29.
  */
 /**
  * 手机的 Build.MANUFACTURER 常量

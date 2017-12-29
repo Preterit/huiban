@@ -1,4 +1,4 @@
-package com.feirui.feiyunbangong.utils;
+package com.feirui.feiyunbangong.utils.PreferenceUtil;
 
 import android.content.Context;
 

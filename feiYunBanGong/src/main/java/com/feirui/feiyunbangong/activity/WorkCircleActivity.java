@@ -76,8 +76,8 @@ public class WorkCircleActivity extends BaseActivity implements
     private EditText et_pinglun;
     private Button bt_send;// 发送评论；
 
-    private String team_id;// 团队id,如果未空则表示是朋友圈，不为空则表示团队圈；
-    private TextView tvLinked = null;
+    private String team_id;// 团队id,如果为空则表示是朋友圈，不为空则表示团队圈；
+    private String guanli_id;// 团长id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,37 +94,13 @@ public class WorkCircleActivity extends BaseActivity implements
 
     private AlertDialog mAlertDialog;
 
-//    Intent intent=new Intent();
-//                intent.putExtra("uri",urll);
-//                intent.putExtra("TAG","1");
-//                intent.setClass(getApplicationContext(),WebViewActivity.class);
-//    startActivity(intent);
-
     @SuppressLint("InflateParams")
     private void initView() {
-        //
-//        tvLinked = (TextView) findViewById(R.id.tv_content_work);
-//        tvLinked.setAutoLinkMask(Linkify.ALL);
-//        CharSequence content = tvLinked.getText();
-//        Log.e("朋友圈textview网址", "textView: " + content);
-//        SpannableStringBuilder builder = SpannableStringBuilder.valueOf(content);
-//        URLSpan[] spans = builder.getSpans(0, content.length(), URLSpan.class);
-//        if (spans != null && spans.length > 0) {
-//            int start = 0;
-//            int end = 0;
-//            for (URLSpan span : spans) {
-//                start = builder.getSpanStart(span);
-//                end = builder.getSpanEnd(span);
-//                // to replace each link span with customized ClickableSpan
-//                builder.removeSpan(span);
-////                builder.setSpan(new MyURLSpan(WorkCircleActivity.this, span.getURL().toString()),
-////                        start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//    }
-//            }
 
 
             Intent intent = getIntent();
             team_id = intent.getStringExtra("team_id");
+            guanli_id = intent.getStringExtra("guanli_id");
             Log.e("朋友圈", "team_id" + team_id);
 
             initTitle();
@@ -185,9 +161,10 @@ public class WorkCircleActivity extends BaseActivity implements
             adapter.setMyLongClickListener(new ListItemAdapter.MyLongClickListener() {
                 @Override
                 public void onLongClick(final ItemEntity itemEntity, final int position) {
-                    if (itemEntity.getStaffId().equals(AppStore.myuser.getId())) {
+                    if (itemEntity.getStaffId().equals(AppStore.myuser.getId()) ||
+                            guanli_id.equals(AppStore.myuser.getId())) {
                         mAlertDialog = new AlertDialog.Builder(WorkCircleActivity.this)
-                                .setMessage("删除这条朋友圈吗?")
+                                .setMessage("删除这条动态吗?")
                                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

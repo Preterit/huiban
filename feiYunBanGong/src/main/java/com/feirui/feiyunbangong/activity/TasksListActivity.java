@@ -50,7 +50,7 @@ public class TasksListActivity extends BaseActivity {
 
     private void initView() {
         rightIv = (ImageView) findViewById(R.id.rightIv);
-
+        rightIv.setVisibility(View.VISIBLE);
         initTitle();
         setCenterString("任务单");
         setLeftDrawable(R.drawable.arrows_left);

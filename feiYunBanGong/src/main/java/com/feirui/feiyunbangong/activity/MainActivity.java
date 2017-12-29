@@ -119,7 +119,6 @@ public class MainActivity extends BaseActivity
     public DrawerLayout drawerlayout;
     @PView
     private ListView lv_left;
-    //private ArrayAdapter adapter;
     private SimpleAdapter adapter;
 
     @PView
@@ -213,7 +212,6 @@ public class MainActivity extends BaseActivity
             @Override
             public void run() {
                 getUser();
-
             }
         }).start();
 
@@ -324,16 +322,11 @@ public class MainActivity extends BaseActivity
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
                 Log.e("审批界面--count", "Infor: "+count.getInfor());
-//                num = count.getInfor();
 
                 Message message = new Message();
                 message.obj = count.getInfor();
                 message.what = 2;
                 handler.sendMessage(message);
-//                if (count.getInfor()!=0) {
-//                    tv_num_hb.setText(count.getInfor());
-//                    shenpi_num[0] =count.getInfor() ;
-//                }
             }
         });
         Log.e("主页面", "Work_Numk: "+num );
@@ -568,13 +561,6 @@ public class MainActivity extends BaseActivity
                         startActivity(new Intent(MainActivity.this, ForgetPasswordActivity.class));
                         overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
-//                    case 8:
-//                        // 我的余额：
-//
-//                        break;
-                    // 我的小店：
-//                    toMyShpOrAddShop();
-//                    startActivity(new Intent(MainActivity.this, AddShopActivity.class));
                     case 9:
                         // 清理缓存：
                         ImageLoader.getInstance().clearMemoryCache();// 清除内存图片；
@@ -906,13 +892,6 @@ public class MainActivity extends BaseActivity
                 super.onFailure(statusCode, headers, responseBody, error);
             }
         });
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        }, 3000);
 
 
     }
