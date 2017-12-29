@@ -45,13 +45,13 @@
 
         <TextView
             android:id="@+id/tv_qbrw_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:text="任务标题"
             android:textSize="20sp"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            />
+            android:layout_above="@+id/tv_qbrw_target"
+            android:layout_alignEnd="@+id/tv_qbrw_state" />
 
         <TextView
             android:id="@+id/tv_qbrw_target"

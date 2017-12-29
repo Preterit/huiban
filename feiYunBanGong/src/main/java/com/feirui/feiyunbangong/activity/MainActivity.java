@@ -114,6 +114,10 @@ public class MainActivity extends BaseActivity
      * 选中的button,显示下一个fragment
      */
     int selectedIndex;
+    /**
+     * 会办页面的未读消息数
+     */
+    int work_num;
 
     @PView
     public DrawerLayout drawerlayout;
@@ -163,6 +167,7 @@ public class MainActivity extends BaseActivity
             addListener();
             setListView();
             loginALi();
+            getNum();//设置桌面app角标
             getWork_Num();//设置工作页面角标
 
         } catch (Exception e) {
@@ -220,6 +225,7 @@ public class MainActivity extends BaseActivity
         //极光推送
         JPushUtil.jOnResume(this);
         super.onResume();
+        getNum();//设置桌面app角标
         getWork_Num();//设置工作页面角标
     }
 
@@ -262,7 +268,6 @@ public class MainActivity extends BaseActivity
                     }
                 });
             }
-
             @Override
             public void onProgress(int arg0) {
             }
@@ -276,6 +281,8 @@ public class MainActivity extends BaseActivity
         IYWPushListener msgPushListener = new IYWPushListener() {
             @Override
             public void onPushMessage(IYWContact arg0, YWMessage arg1) {
+                getWork_Num();//设置工作页面角标
+                getNum();//设置桌面app角标
                 // 未读消息数；
                 int num = mIMKit.getUnreadCount();
                 if (num > 0) {
@@ -292,12 +299,12 @@ public class MainActivity extends BaseActivity
             }
         };
 
+
        final IYWConversationService conversationService = mIMKit.getConversationService();
         // 如果之前add过，请清除
         conversationService.removePushListener(msgPushListener);
         // 增加新消息到达的通知
         conversationService.addPushListener(msgPushListener);
-
         // 未读数量变化监听：
         conversationService.addTotalUnreadChangeListener(new IYWConversationUnreadChangeListener() {
             @Override
@@ -306,7 +313,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-//        getNum();
+
     }
 
 
@@ -334,11 +341,24 @@ public class MainActivity extends BaseActivity
 
     // 获取未读消息数：
     private void getNum() {
+        RequestParams params = new RequestParams();
+        String url = UrlTools.url + UrlTools.APPROVAL_TASK;
+        AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                Gson gson = new Gson();
+                ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
+                Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
+                work_num=Integer.parseInt(count.getInfo().getNum());
+            }
+        });
+        Log.e("获取未读消息数", "work_num: "+work_num);
         // 未读消息数；
         int num = mIMKit.getUnreadCount();
-        Log.e("获取未读消息数----------------", "getNum:----num---------- "+num);
+        Log.e("获取未读消息数", "getNum:----num---------- "+num);
         Message message = new Message();
-        message.obj = num;
+        message.obj = num+work_num;
         message.what = 1;
         handler.sendMessage(message);
 
@@ -807,6 +827,7 @@ public class MainActivity extends BaseActivity
                     }else{
                         tv_num_hb.setVisibility(View.INVISIBLE);
                     }
+
 
                     break;
             }

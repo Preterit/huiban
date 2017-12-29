@@ -222,50 +222,33 @@ public class YaoQingActivity extends BaseActivity {
 
 			break;
 		case R.id.btn_duanxin: // 邀请
-
 			EtDialog dialog1 = new EtDialog("短信邀请", "请输入手机号",
 					YaoQingActivity.this, new EtDialog.AlertCallBack1() {
-
 						@Override
 						public void onOK(String name) {
-
 							if (Utils.isPhone(name)) {
-
 								String url = UrlTools.url + UrlTools.APPLICATION_INVITATIONMESSAGE;
-
 								RequestParams params = new RequestParams();
 								params.put("staff_mobile", name);
-								Utils.doPost(LoadingDialog
-										.getInstance(YaoQingActivity.this),
-										YaoQingActivity.this, url, params,
+								Utils.doPost(LoadingDialog.getInstance(YaoQingActivity.this), YaoQingActivity.this, url, params,
 										new HttpCallBack() {
-
 											@Override
 											public void success(JsonBean bean) {
-												T.showShort(
-														YaoQingActivity.this,
-														"发送成功！");
+												T.showShort(YaoQingActivity.this, "发送成功！");
 											}
-
 											@Override
 											public void failure(String msg) {
-												T.showShort(
-														YaoQingActivity.this,
-														msg);
+												T.showShort(YaoQingActivity.this, msg);
 											}
-
 											@Override
 											public void finish() {
 												// TODO Auto-generated method
 												// stub
-
 											}
 										});
-
 							} else {
 
 							}
-
 						}
 
 						@Override
@@ -273,9 +256,7 @@ public class YaoQingActivity extends BaseActivity {
 
 						}
 					});
-
 			dialog1.show();
-
 			break;
 
 		}

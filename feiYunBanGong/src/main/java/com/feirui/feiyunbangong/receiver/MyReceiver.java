@@ -36,7 +36,7 @@ public class MyReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         JSONObject json = null;
 
-        Log.e("TAG", "接收到推送相关广播......");
+        Log.e("自定义广播", "接收到推送相关广播......");
 
         try {
 
@@ -51,20 +51,20 @@ public class MyReceiver extends BroadcastReceiver {
             }
 
             if (!isHave) {
-                Log.e("TAG", "不含有！！！！");
+                Log.e("自定义广播", "不含有！！！！");
                 return;
             }
 
-            Log.e("TAG", "含有");
+            Log.e("自定义广播", "含有");
             json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
 
-            Log.e(TAG, "onReceive: " + json.toString());
+            Log.e("自定义广播", "onReceive: " + json.toString());
 
             if (json == null) {
                 return;
             }
 
-            Log.e("TAG", json + "json");
+            Log.e("自定义广播", json + "json");
 
             if ("addnotice".equals(json.get("key"))) {
                 // 发送广播：
@@ -83,8 +83,12 @@ public class MyReceiver extends BroadcastReceiver {
                 Log.e("TAG", "您被邀请加入团队");
                 // 发出被邀请加入团队的广播：刷新查看团队页面接口：
                 context.sendBroadcast(new Intent(Constant.ON_REACEIVE_ADD_TEAM));
-            } else if ("add_leave".equals("key")) {
-                context.sendBroadcast(new Intent(Constant.NEED_TO_SHEN_HE));
+            } else if ("add_baobiao".equals(json.get("key"))) {//报表
+                Log.e("自定义广播", "报表");
+            }else if ("app_leave".equals(json.get("key"))) {//请假
+                Log.e("自定义广播", "请假");
+            }else if ("add_task".equals(json.get("key"))) {//任务单
+                Log.e("自定义广播", "任务单");
             } else {
                 Log.e(TAG, "onReceive: -------------添加好友-----------------" );
                 context.sendBroadcast(new Intent(
@@ -179,7 +183,9 @@ public class MyReceiver extends BroadcastReceiver {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            } else {
+            }else if ("accept".equals(object)) {
+//                openAccept(context, bundle);
+            }  else {
                 Log.e("TAG", "新好友申请！");
                 openAccept(context, bundle);
             }
