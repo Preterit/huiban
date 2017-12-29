@@ -91,8 +91,16 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
                 if (renwudan.getCode() == 200) {
                     rwd_tv_sj.setText(renwudan.getInfo().get(0).getBegin_time() + "");
                     rwd_tv_wz.setText(renwudan.getInfo().get(0).getAddresslimit() + "");
-                    rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "");
-                    rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "");
+                    if ("".equals(renwudan.getInfo().get(0).getReward())){
+                        rwd_tv_xs.setText("未悬赏");
+                    }else {
+                        rwd_tv_xs.setText(renwudan.getInfo().get(0).getReward() + "元/人");
+                    }
+                    if ("".equals(renwudan.getInfo().get(0).getNumber())){
+                        rwd_tv_xz.setText("无");
+                    }else {
+                        rwd_tv_xz.setText(renwudan.getInfo().get(0).getNumber() + "人");
+                    }
                 } else {
                 }
             }
@@ -140,6 +148,7 @@ public class ReleaseDetailActivity extends BaseActivity implements View.OnClickL
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(false);
+        rightIv.setVisibility(View.GONE);
         right_tv.setVisibility(View.VISIBLE);
         right_tv.setText("忽略");
         right_tv.setOnClickListener(this);
