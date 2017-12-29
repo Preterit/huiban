@@ -2,7 +2,11 @@ package com.feirui.feiyunbangong.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -17,6 +21,7 @@ import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.activity.ImagePagerActivity;
 import com.feirui.feiyunbangong.activity.PersonDataActivity;
 import com.feirui.feiyunbangong.entity.ItemEntity;
+import com.feirui.feiyunbangong.utils.CustomUrlSpan;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
 import com.feirui.feiyunbangong.view.CircleImageView;
 import com.feirui.feiyunbangong.view.MyListView;
@@ -106,6 +111,7 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
         Log.e("user", "getPersonDetail:-------- items.get(position)----------- "  +  items.get(position) );
         holder.tv_name.setText(itemEntity.getTitle());
         holder.tv_content.setText(itemEntity.getContent());
+        interceptHyperLink(holder.tv_content);
 
         holder.ll_show_hide_zan.setTag(itemEntity);// 设置标记，根据findviewbytag找到该Linearlayout;
         holder.ll_show_hide_zan.setOnTouchListener(listener);
@@ -197,6 +203,35 @@ public class ListItemAdapter extends MyBaseAdapter<ItemEntity> {
         mContext.startActivity(intent);
         mContext.overridePendingTransition(R.anim.aty_zoomin,
                 R.anim.aty_zoomout);
+    }
+
+    /**
+     * 拦截超链接
+     * @param tv
+     */
+    protected void interceptHyperLink(TextView tv) {
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        CharSequence text = tv.getText();
+        if (text instanceof Spannable) {
+            int end = text.length();
+            Spannable spannable = (Spannable) tv.getText();
+            URLSpan[] urlSpans = spannable.getSpans(0, end, URLSpan.class);
+            if (urlSpans.length == 0) {
+                return;
+            }
+
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(text);
+            // 循环遍历并拦截 所有https://开头的链接
+            for (URLSpan uri : urlSpans) {
+                String url = uri.getURL();
+//                if (url.indexOf("https://") == 0) {
+                    CustomUrlSpan customUrlSpan = new CustomUrlSpan(mContext,url);
+                    spannableStringBuilder.setSpan(customUrlSpan, spannable.getSpanStart(uri),
+                            spannable.getSpanEnd(uri), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+//                }
+            }
+            tv.setText(spannableStringBuilder);
+        }
     }
 
     /**

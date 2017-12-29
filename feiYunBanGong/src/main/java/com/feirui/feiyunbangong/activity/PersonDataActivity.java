@@ -417,6 +417,7 @@ public class PersonDataActivity extends BaseActivity implements OnClickListener 
         mPerson_talk.setOnClickListener(this);
         //修改
         rightIv.setOnClickListener(this);
+        rightIv.setVisibility(View.VISIBLE);
     }
 
     @Override

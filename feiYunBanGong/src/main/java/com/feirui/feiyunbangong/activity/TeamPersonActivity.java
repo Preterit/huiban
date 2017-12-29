@@ -220,6 +220,7 @@ public class TeamPersonActivity extends BaseActivity implements View.OnClickList
         mLl_person_area.setOnClickListener(this);
         mPerson_add.setOnClickListener(this);
         mPerson_talk.setOnClickListener(this);
+        rightIv.setVisibility(View.VISIBLE);
         //修改
         rightIv.setOnClickListener(this);
     }

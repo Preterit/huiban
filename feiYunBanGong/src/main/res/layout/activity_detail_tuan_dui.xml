@@ -10,7 +10,7 @@
         android:id="@+id/inclue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
-        layout="@layout/top" />
+        layout="@layout/top2" />
 
         <com.feirui.feiyunbangong.view.RefreshLayout
             android:id="@+id/swipe_container"

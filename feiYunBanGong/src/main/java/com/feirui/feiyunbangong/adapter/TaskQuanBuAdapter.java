@@ -61,7 +61,7 @@ public class TaskQuanBuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#FB4475"));
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.ongoing);
         } else if (data.get(position).get("state").equals("2")) {
-            ((ViewHolder) holder).tv_qbrw_state.setText("完成");
+            ((ViewHolder) holder).tv_qbrw_state.setText("已完成");
             ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#A4A4A4"));
             ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.over);
         } else if (data.get(position).get("state").equals("3")) {

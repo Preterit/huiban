@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +50,6 @@ import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
-import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -59,8 +60,6 @@ import com.xw.repo.refresh.PullListView;
 
 import org.apache.http.Header;
 import org.litepal.crud.DataSupport;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +70,7 @@ import java.util.List;
  * @author feirui1
  */
 @SuppressLint("InflateParams")
-public class TuanDui_DetailActivity extends BaseActivity implements
+public class TuanDui_DetailActivity extends AppCompatActivity implements
         OnItemClickListener, OnKeyListener, OnClickListener,
         SwipeRefreshLayout.OnRefreshListener,RefreshLayout.OnLoadListener{
 
@@ -105,6 +104,10 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     private View m_listViewFooter;
     public TextView righttv;
     private int numMem = 0;
+    // 左部 中间 右部
+    public TextView centerTv,right_tv;
+    public ImageView leftIv, rightIv;
+    private static String guanli_id;// 团长id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,7 +206,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
     /**
      * 获取团队人数
      */
-    private  void getNum(String num){
+    private  void getNum(final String num){
         String url = UrlTools.url + UrlTools.DETAIL_TUANDUICHENGYUAN_TEAM;
         RequestParams params = new RequestParams();
         params.put("id", td.getTid());
@@ -219,11 +222,16 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     public void success(JsonBean bean) {
                         ArrayList<HashMap<String, Object>> infor = bean
                                 .getInfor();
-                        numMem += infor.size();
+                        HashMap<String, Object> hm = infor.get(0);
                         if (infor.size() > 0){
-                            HashMap<String, Object> hm = infor.get(0);
-                            tv_chenyuan.setText("团队成员" + "("
-                                    + numMem + "/" + (hm.get("Allnum") + "") + ")");
+                            if ("1".equals(num)){
+                                tv_chenyuan.setText("团队成员" + "("
+                                        + infor.size() + "/" + (hm.get("Allnum") + "") + ")");
+                            }else {
+                                numMem += infor.size();
+                                tv_chenyuan.setText("团队成员" + "("
+                                        + numMem + "/" + (hm.get("Allnum") + "") + ")");
+                            }
 
                         }else {
                             tv_chenyuan.setText("团队成员" + "("
@@ -234,8 +242,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
                     @Override
                     public void failure(String msg) {
-                        Toast.makeText(activity, msg,Toast.LENGTH_SHORT)
-                                .show();
                     }
 
                     @Override
@@ -309,6 +315,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 //                                    + infor.size() + "/" + (hm.get("Allnum") + "") + ")");
                             // 团队设置到团队团长id:
                             if ("团长".equals(tdcy.getType())) {
+                                guanli_id = tdcy.getStaff_id();
                                 td.setGuanli_id(tdcy.getStaff_id());
                             }
                             // 副团长添加到团队副团长id集合中；
@@ -379,10 +386,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                     }
 
                     @Override
-                    public void finish() {
-                        // TODO Auto-generated method stub
-
-                    }
+                    public void finish() {}
                 });
     }
 
@@ -413,6 +417,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                 Log.e("tdcys", "initData:------------数据库获取---------------- " );
                 for (int i = 0; i < tdcys.size(); i++){
                     if ("团长".equals(tdcys.get(i).getType())) {
+                        guanli_id = tdcys.get(i).getStaff_id();
                         td.setGuanli_id(tdcys.get(i).getStaff_id());
                     }
                     // 副团长添加到团队副团长id集合中；
@@ -501,12 +506,12 @@ public class TuanDui_DetailActivity extends BaseActivity implements
         righttv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(TuanDui_DetailActivity.this,
-//                        SearchMemberActivity.class);
-//                //将整个团队传过去
-//                intent.putExtra("td", td);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                Intent intent = new Intent(TuanDui_DetailActivity.this,
+                        SearchMemberActivity.class);
+                //将整个团队传过去
+                intent.putExtra("td", td);
+                startActivity(intent);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
             }
         });
 
@@ -517,21 +522,25 @@ public class TuanDui_DetailActivity extends BaseActivity implements
 
     private void initView() {
         AppStore.acts.add(this);
-
-        initTitle();
-        setLeftDrawable(R.drawable.arrows_left);
+        leftIv = (ImageView) findViewById(R.id.leftIv);
+        centerTv = (TextView) findViewById(R.id.centerTv);
+        right_tv= (TextView) findViewById(R.id.righttv);
+        rightIv = (ImageView) findViewById(R.id.rightIv);
+		righttv = (TextView) findViewById(R.id.righttv);
+        leftIv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         if (td.getName().length() > 10) {
-            setCenterString(td.getName().substring(0, 9) + "...");
+            centerTv.setText(td.getName().substring(0, 9) + "...");
         } else {
-            setCenterString(td.getName());
+            centerTv.setText(td.getName());
         }
-
-        righttv = (TextView) findViewById(R.id.righttv);
-        righttv.setVisibility(View.VISIBLE);
         righttv.setBackgroundResource(R.drawable.bai_fangdajing);
 
-        setRightDrawable(R.drawable.point);
 
         lv_chengyuan = (PullListView) findViewById(R.id.lv_chengyuan);
         lv_chengyuan.setVisibility(View.VISIBLE);
@@ -617,6 +626,7 @@ public class TuanDui_DetailActivity extends BaseActivity implements
                 break;
             case R.id.ll_tuanduiquan:
                 Intent intent03 = new Intent(this, WorkCircleActivity.class);
+                intent03.putExtra("guanli_id", guanli_id);
                 intent03.putExtra("team_id", td.getTid());
                 startActivity(intent03);
                 break;
@@ -804,7 +814,6 @@ public class TuanDui_DetailActivity extends BaseActivity implements
             getData( position +  "",1);
             getNum(position + "");
         }else {
-//            T.showShort(this,"已全部加载");
             swipe_container.setLoading(false);
         }
 

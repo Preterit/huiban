@@ -84,9 +84,7 @@ public class TaskWanChengAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_qbrw_state= (TextView) itemView.findViewById(R.id.tv_qbrw_state);
             iv_qbrw_tx=(ImageView) itemView.findViewById(R.id.iv_qbrw_tx);
             iv_qbrw_state=(ImageView) itemView.findViewById(R.id.iv_qbrw_state);
-
         }
-
         @Override
         public void onClick(View v) {
 

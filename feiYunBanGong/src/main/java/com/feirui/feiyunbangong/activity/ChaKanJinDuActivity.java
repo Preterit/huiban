@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,7 +52,6 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         accept_id = getIntent().getStringExtra("accept_id");
         jiedanren_name=getIntent().getStringExtra("jiedanren_name");
         jiedanren_head=getIntent().getStringExtra("jiedanren_head");
-        Log.e("jfasff;f====",id+"============"+accept_id);
         initView();
         initTask();
         initData();
@@ -64,6 +62,7 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(true);
+        rightIv.setVisibility(View.GONE);
         lv_jindu = (ListView) findViewById(R.id.lv_jindu);
         iv_head = (TextImageView) findViewById(R.id.tiv_head);
         tv_name = (TextView) findViewById(R.id.tv_name);
@@ -87,7 +86,6 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         rwd_tv_xs = (TextView) findViewById(R.id.rwd_tv_xs);
         rwd_tv_xz = (TextView) findViewById(R.id.rwd_tv_xz);
     }
-
     private void initTask() {
         RequestParams params2 = new RequestParams();
         String url2 = UrlTools.pcUrl + UrlTools.RENWU_DETAIL;
@@ -115,7 +113,7 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
                     xuanshang=renwudan.getInfo().get(0).getReward() + "";
                     if ("".equals(renwudan.getInfo().get(0).getReward())){
                         tv_jieshu.setVisibility(View.GONE);
-                        tv_jieshu_hui.setVisibility(View.VISIBLE);
+                        tv_jieshu_hui.setVisibility(View.GONE);
                     }else {
                         tv_jieshu.setVisibility(View.VISIBLE);
                         tv_jieshu_hui.setVisibility(View.GONE);

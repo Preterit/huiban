@@ -160,6 +160,7 @@ public class MyTaskActivity extends BaseActivity {
         setLeftDrawable(R.drawable.arrows_left);
         setCenterString("任务单详情");
         setRightVisibility(false);
+        rightIv.setVisibility(View.GONE);
         if ("0".equals(statue)){
             right_tv.setVisibility(View.GONE);
         }else {

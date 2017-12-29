@@ -83,7 +83,9 @@ public class MyReceiver extends BroadcastReceiver {
                 Log.e("TAG", "您被邀请加入团队");
                 // 发出被邀请加入团队的广播：刷新查看团队页面接口：
                 context.sendBroadcast(new Intent(Constant.ON_REACEIVE_ADD_TEAM));
-            } else if ("add_baobiao".equals(json.get("key"))) {//报表
+            } else if ("add_leave".equals("key")) {
+                context.sendBroadcast(new Intent(Constant.NEED_TO_SHEN_HE));
+            }else if ("add_baobiao".equals(json.get("key"))) {//报表
                 context.sendBroadcast(new Intent(Constant.ON_RECEIVE_NEW_BAOBIAO));
                 Log.e("自定义广播", "报表");
             }else if ("app_leave".equals(json.get("key"))) {//请假
@@ -186,9 +188,7 @@ public class MyReceiver extends BroadcastReceiver {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }else if ("accept".equals(object)) {
-//                openAccept(context, bundle);
-            }  else {
+            } else {
                 Log.e("TAG", "新好友申请！");
                 openAccept(context, bundle);
             }
