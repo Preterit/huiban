@@ -6,10 +6,10 @@ android {
     buildToolsVersion '25.0.2'
     //6.0以后应用handle添加的依赖
     useLibrary 'org.apache.http.legacy'
-    dexOptions {
-        jumboMode true
-        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
-    }
+//    dexOptions {
+//        jumboMode true
+//        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
+//    }
     defaultConfig {
         applicationId "com.feirui.feiyunbangong"
         multiDexEnabled true
