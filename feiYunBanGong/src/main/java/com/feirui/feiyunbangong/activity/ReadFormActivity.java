@@ -35,10 +35,8 @@ public class ReadFormActivity extends BaseActivity {
     mMyAdapter = new MyAdapter(getSupportFragmentManager());
     vpReadStatement = (ViewPager) findViewById(R.id.vpReadStatement);
     vpReadStatement.setAdapter(mMyAdapter);
-
     indicatorReadStatement = (TabPageIndicator) findViewById(R.id.indicatorReadStatement);
     indicatorReadStatement.setViewPager(vpReadStatement);
-
   }
 
   /**
@@ -46,7 +44,7 @@ public class ReadFormActivity extends BaseActivity {
    */
   public static class MyAdapter extends FragmentPagerAdapter {
 
-    String[] mTitles = new String[]{"我的报表", "收到的报表"};
+    String[] mTitles = new String[]{"我收到的", "我提交的"};
 
     public MyAdapter(FragmentManager fm) {
       super(fm);
@@ -66,9 +64,9 @@ public class ReadFormActivity extends BaseActivity {
     public Fragment getItem(int position) {
       switch (position) {
         case 0:
-          return FormListFragment.newInstance(MY_FORM);
+            return FormListFragment.newInstance(OTHER_FORM);
         case 1:
-          return FormListFragment.newInstance(OTHER_FORM);
+            return FormListFragment.newInstance(MY_FORM);
         default:
           return null;
       }

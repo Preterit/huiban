@@ -120,9 +120,9 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 			LianXiRen spr = list.get(position);
 			holder.tv_name.setText(spr.getName());
 			holder.tv_phone.setText(spr.getPhone());
-			Log.e("通讯录联系人", "lianXiRen: "+spr.getName() );
-			Log.e("通讯录联系人", "lianXiRen: "+spr.getId() );
-			Log.e("通讯录联系人", "lianXiRen: "+spr.getHead() );
+			Log.e("通讯录联系人", "name: "+spr.getName() );
+//			Log.e("通讯录联系人", "Id: "+spr.getId() );
+//			Log.e("通讯录联系人", "Head: "+spr.getHead() );
 
 			if ("http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(spr.getHead())) {
 				holder.iv.setText(spr.getName());

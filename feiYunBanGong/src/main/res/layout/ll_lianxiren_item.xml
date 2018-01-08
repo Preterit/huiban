@@ -16,6 +16,7 @@
             android:layout_width="@dimen/size120"
             android:layout_height="@dimen/size120"
             android:src="@drawable/fragment_head"
+            android:layout_marginLeft="10dp"
             />
 
         <TextView
@@ -30,11 +31,11 @@
         <TextView
             android:id="@+id/tv_phone"
             style="@style/a000000_42"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/x50"
             android:gravity="center"
-            android:text="1777777777" />
+            android:text="1777777777777" />
 
         <Button
             android:id="@+id/bt_tianjia"

@@ -8,6 +8,7 @@ public class UrlTools {
   public static final String TEAM_TASK_LIST = "Task/taskIndex";  //任务列表
   public static final String MY_FORM_LIST = "form/my_form_list";
   public static final String OTHER_FORM_LIST = "form/form_list";
+  public static final String FORM_LIST_DETAILS = "form/details";
   public static final String TASK_ADDTASK="Task/add_task";  //添加发布的任务
   public static final String TASK_ACCEPT="task/task_accept"; //接收任务
   public static final String TASK_GETTEAN="Task/get_team";   //获取团队列表
