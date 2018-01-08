@@ -46,7 +46,7 @@ public class ClockInActivity extends BaseActivity {
 	// 上班时间，下班时间，周，日期
 	@PView(click = "onClick")
 	TextView tv_in, tv_out, tv_week, tv_day, tv_sign;
-
+    String tag;
 	public LocationClient mLocationClient = null;
 	public BDLocationListener myListener = new MyLocationListener();
 	BitmapDescriptor markerIcon;
@@ -71,6 +71,7 @@ public class ClockInActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_clock_in);
+		tag="1";
 		initView();
 		initData();
 		initLocation();
@@ -82,8 +83,7 @@ public class ClockInActivity extends BaseActivity {
 		setCenterString("打卡");
 		setRightVisibility(false);
 		// 显示时间格式
-		tv_day.setText(DateUtils.getTime("yyyy年MM月dd日",
-				System.currentTimeMillis()));
+		tv_day.setText(DateUtils.getTime("yyyy年MM月dd日", System.currentTimeMillis()));
 		tv_week.setText(DateUtils.StringData());
 	}
 
@@ -227,6 +227,7 @@ public class ClockInActivity extends BaseActivity {
 			params = new RequestParams();
 			params.put("work_type", "签到");
 			params.put("address", address);
+			params.put("check_type", "0");
 			url = UrlTools.url + UrlTools.HOME_WORK_START;
 			L.e("签到url=" + url + " params=" + params);
 			AsyncHttpServiceHelper.post(url, params,
@@ -236,8 +237,7 @@ public class ClockInActivity extends BaseActivity {
 								byte[] arg2) {
 							super.onSuccess(arg0, arg1, arg2);
 							try {
-								JsonBean json = JsonUtils
-										.getMessage(new String(arg2));
+								JsonBean json = JsonUtils.getMessage(new String(arg2));
 								final Message mse = new Message();
 								if ("200".equals(json.getCode())) {
 									mse.what = 0;
@@ -256,13 +256,13 @@ public class ClockInActivity extends BaseActivity {
 			params = new RequestParams();
 			params.put("work_type", "签退");
 			params.put("address", address);
+			params.put("check_type", "0");
 			url = UrlTools.url + UrlTools.HOME_WORK_END;
 			L.e("签退url=" + url + " params=" + params);
 			AsyncHttpServiceHelper.post(url, params,
 					new AsyncHttpResponseHandler() {
 						@Override
-						public void onSuccess(int arg0, Header[] arg1,
-								byte[] arg2) {
+						public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 							super.onSuccess(arg0, arg1, arg2);
 							try {
 								JsonBean json = JsonUtils
@@ -282,8 +282,10 @@ public class ClockInActivity extends BaseActivity {
 					});
 			break;
 		case R.id.tv_sign:
-			startActivity(new Intent(ClockInActivity.this,
-					WifiClockActivity.class));
+			Intent intent=new Intent();
+
+			intent.setClass(ClockInActivity.this, WifiClockActivity.class);
+			startActivity(intent);
 			break;
 		}
 	}
