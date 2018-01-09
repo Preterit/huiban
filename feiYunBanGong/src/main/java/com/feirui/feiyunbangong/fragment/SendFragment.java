@@ -62,6 +62,14 @@ public class SendFragment extends Fragment implements ChaoSongAdapter.OnChakanCl
         return fragment;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isVisible()){
+            initView();
+            initListener();
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,8 +80,10 @@ public class SendFragment extends Fragment implements ChaoSongAdapter.OnChakanCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_send, container, false);
-        initView();
-        initListener();
+        if (getUserVisibleHint()){
+            initView();
+            initListener();
+        }
         return mView;
     }
 
@@ -151,7 +161,6 @@ public class SendFragment extends Fragment implements ChaoSongAdapter.OnChakanCl
             } else {
                 params.put("type", "");
             }
-
             params.put("current_page", page + "");
             params.put("pagesize", "15");
             Log.e("操作记录-抄送我的", "params: " + chaosongurl + params.toString());

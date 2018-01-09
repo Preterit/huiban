@@ -63,6 +63,15 @@ public class ReviseFragment extends Fragment implements MyShenPiAdapter.OnChakan
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isVisible()){
+            initView();
+            initListener();
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -71,8 +80,11 @@ public class ReviseFragment extends Fragment implements MyShenPiAdapter.OnChakan
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_revise, container, false);
-        initView();
-        initListener();
+        Log.e("eeee", "onCreateView: ========================" + getUserVisibleHint());
+        if (getUserVisibleHint()){
+            initView();
+            initListener();
+        }
         return mView;
     }
     public void showMessageFromActivity(String message){

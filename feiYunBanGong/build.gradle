@@ -6,10 +6,10 @@ android {
     buildToolsVersion '25.0.2'
     //6.0以后应用handle添加的依赖
     useLibrary 'org.apache.http.legacy'
-//    dexOptions {
-//        jumboMode true
-//        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
-//    }
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
+    }
     defaultConfig {
         applicationId "com.feirui.feiyunbangong"
         multiDexEnabled true
@@ -19,13 +19,6 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_7
             targetCompatibility JavaVersion.VERSION_1_7
         }
-        //极光推送
-//        ndk {
-//            //选择要添加的对应cpu类型的.so库。
-//            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
-//            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
-//        }
-
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "3f2df3e9e2810677bce669dc", //JPush上注册的包名对应的appkey.
@@ -43,8 +36,6 @@ android {
     }
     lintOptions {
         checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
         abortOnError false
     }
     sourceSets {

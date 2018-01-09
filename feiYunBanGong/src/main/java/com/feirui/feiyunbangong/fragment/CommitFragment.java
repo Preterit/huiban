@@ -53,12 +53,22 @@ public class CommitFragment extends Fragment implements CaoZuoJiLuAdapter.OnChak
     private String type = "";
     private int currentPage = 1;//当前页数
     CallBackCommitValue callBackValue;
+    private long refreshTime  = 0;
 
     public static CommitFragment newInstance() {
         CommitFragment fragment = new CommitFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isVisible()){
+            initView();
+            initListener();
+        }
     }
 
     @Override
@@ -71,8 +81,10 @@ public class CommitFragment extends Fragment implements CaoZuoJiLuAdapter.OnChak
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView  = inflater.inflate(R.layout.fragment_commit,container,false);
-        initView();
-        initListener();
+        if (getUserVisibleHint()){
+            initView();
+            initListener();
+        }
         return mView;
     }
 

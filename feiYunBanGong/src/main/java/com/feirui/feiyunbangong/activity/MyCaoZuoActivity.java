@@ -22,6 +22,9 @@ import java.util.List;
 /**
  * create by xy
  * 这个anctiviy包含的fragment最好用接口的形式 使代码更清晰简洁
+ * 由于viewpager的与缓存效果 不能使activity及时更新 所以把预缓存屏蔽掉了
+ * 但是这样的话每次请求数据会浪费流量
+ *
  */
 public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListener,
         SendFragment.CallBackValue,CommitFragment.CallBackCommitValue,ReviseFragment.CallBackReviseValue{
