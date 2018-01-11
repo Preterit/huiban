@@ -11,10 +11,13 @@ import com.alibaba.tcms.env.YWEnvType;
 import com.alibaba.wxlib.util.SysUtil;
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
+import com.feirui.feiyunbangong.entity.Constants;
 import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.feirui.feiyunbangong.wxapi.WXEntryActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 import org.litepal.LitePal;
 
@@ -31,6 +34,7 @@ public class Happlication extends MultiDexApplication {
     public static YWEnvType sEnvType = YWEnvType.TEST;
 
     private String out_trade_no;
+    public static IWXAPI sApi;
 
 
     /**
@@ -71,6 +75,12 @@ public class Happlication extends MultiDexApplication {
 		 * AbAppConfig.UI_HEIGHT = 1920;
 		 */
         SDKInitializer.initialize(getApplicationContext());
+        // 初始化微信组件
+        initWeiXin();
+    }
+
+    private void initWeiXin() {
+        sApi = WXEntryActivity.initWeiXin(this, Constants.APP_ID);
     }
 
 

@@ -182,7 +182,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
+
         android:gravity="center_horizontal"
        >
         <TextView
@@ -193,6 +193,23 @@
             android:paddingBottom="@dimen/x18"
             android:gravity="center"
             android:text="快速登录" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        >
+        <TextView
+            android:id="@+id/btn_WX_login"
+            style="@style/a42baff_46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/x18"
+            android:gravity="center"
+            android:text="微信登录" />
     </LinearLayout>
 
 

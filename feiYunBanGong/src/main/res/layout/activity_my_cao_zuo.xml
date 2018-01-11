@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
@@ -16,7 +17,7 @@
         android:layout_marginTop="@dimen/y110"
         layout="@layout/ll_type_handle"
         android:visibility="gone"
-        />
+        tools:ignore="RtlHardcoded" />
     <android.support.design.widget.TabLayout
         android:id="@+id/handle_tab"
         android:layout_below="@id/top"

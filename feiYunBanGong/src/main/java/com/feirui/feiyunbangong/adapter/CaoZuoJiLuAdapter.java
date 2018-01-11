@@ -14,7 +14,9 @@ import com.bumptech.glide.Glide;
 import com.feirui.feiyunbangong.R;
 import com.feirui.feiyunbangong.view.CircleImageView2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -87,6 +89,15 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 		}
 		if (!TextUtils.isEmpty(data.get(position).get("approval_type").toString())){
 			holder.mItem_send_type.setText("类型：" + data.get(position).get("approval_type"));
+		}
+
+		if (!TextUtils.isEmpty(data.get(position).get("approval_time").toString())){
+			SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd");
+			@SuppressWarnings("unused")
+			long lcc = Long.valueOf(data.get(position).get("approval_time").toString());
+			int i = Integer.parseInt(data.get(position).get("approval_time").toString());
+			String times = sdr.format(new Date(i * 1000L));
+			holder.mItem_send_time.setText(times);
 		}
 
 		holder.mItem_send_state.setVisibility(View.VISIBLE);

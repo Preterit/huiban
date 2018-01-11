@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -17,11 +18,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.entity.Constants;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
@@ -33,8 +36,12 @@ import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.view.PView;
+import com.feirui.feiyunbangong.wxapi.WXEntryActivity;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.apache.http.Header;
 
@@ -42,6 +49,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 /**
  * 登录界面
@@ -61,7 +69,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	Button btn_login_submit;
 	// 注册，忘记密码
 	@PView(click = "onClick")
-	TextView btn_login_register, btn_login_forget, btn_login;
+	TextView btn_login_register, btn_login_forget, btn_login,btn_WX_login;
 
 	String type = "personal";// 注册类型,个人注册
 	private StringBuffer stringBuffer = new StringBuffer(256);
@@ -80,6 +88,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	private ArrayList user_list;
 	private ArrayAdapter<String> adapter;
 	private ImageView imageView;
+
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -115,7 +124,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 						@Override
 						public void onReceiveLocation(BDLocation bdLocation) {
 							if (bdLocation != null && bdLocation.getLocType() != BDLocation.TypeServerError){
-								L.e("登录url=================stringBuffer===============" );
 								stringBuffer.append(bdLocation.getLatitude());//纬度
 								stringBuffer.append(",");
 								stringBuffer.append(bdLocation.getLongitude());//经度
@@ -136,6 +144,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		//创建微信并注册到微信
+		Happlication.sApi.registerApp(Constants.APP_ID);
 		//启动的同时 定位
 		new Handler().postDelayed(new Runnable() {
 			@Override
@@ -372,7 +382,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 				intent.putExtra("type", "denglu");
 				startActivity(intent);
 				overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomcloseout);
-//			finish();
 				break;
 //			case R.id.iv_pic: //
 //				//Toast.makeText(LoginActivity.this,"adasfafa",Toast.LENGTH_SHORT).show();
@@ -380,18 +389,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 //					popupWindow.dismiss();
 //				}else {
 //					showWindow(view1);
-//				}
+//				}0
 			//finish();
 //				break;
 			case R.id.et_login_username:
 				initAutoComplete("history", et_login_username);
+				break;
+			case R.id.btn_WX_login:
+				// send oauth request
+				Log.e("wx", "onClick: ------------------------------" + "微信登录---" );
+				WXEntryActivity.loginWeixin(this,Happlication.sApi);
 				break;
 		}
 
 	}
 
 	private void LoginMain() {
-
 		RequestParams params = new RequestParams();
 		params.put("staff_mobile", et_login_username.getText().toString());
 		params.put("staff_password", et_login_password.getText().toString());
@@ -443,7 +456,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 	}
 
 	private void saveZhangHao() {
-
 		SharedPreferences preferences = getApplication().getSharedPreferences("username", Context.MODE_PRIVATE);
 		Set<String> set = new HashSet<String>();
 		set = preferences.getStringSet("username", null);

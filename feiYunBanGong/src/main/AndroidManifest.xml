@@ -517,7 +517,7 @@
         <activity android:name=".activity.BaiDuPoi.PoiSearchActivity" />
         <activity android:name=".activity.MyCaoZuoActivity" />
         <activity
-            android:name=".wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
