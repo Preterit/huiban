@@ -1,11 +1,15 @@
 package com.feirui.feiyunbangong.adapter;
 
-import java.util.List;
-
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
+
+import java.util.List;
 
 /**
  * 新手指导页adapter
@@ -25,7 +29,28 @@ public class GuideAdapter extends PagerAdapter {
 	// 销毁arg1位置的界面
 	@Override
 	public void destroyItem(View arg0, int arg1, Object arg2) {
+		//回收图片
+		ImageView imageView = (ImageView) views.get(arg1);
+		imageView.setImageBitmap(null);
+		releaseImageViewResouce(imageView);
 		((ViewPager) arg0).removeView(views.get(arg1));
+	}
+	/**
+	 * 释放图片资源的方法
+	 * @param imageView
+	 */
+	public void releaseImageViewResouce(ImageView imageView) {
+		if (imageView == null) return;
+		Drawable drawable = imageView.getDrawable();
+		if (drawable != null && drawable instanceof BitmapDrawable) {
+			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+			Bitmap bitmap = bitmapDrawable.getBitmap();
+			if (bitmap != null && !bitmap.isRecycled()) {
+				bitmap.recycle();
+				bitmap=null;
+			}
+		}
+		System.gc();
 	}
 
 	@Override
@@ -47,9 +72,7 @@ public class GuideAdapter extends PagerAdapter {
 	// 初始化arg1位置的界面
 	@Override
 	public Object instantiateItem(View arg0, int arg1) {
-
 		((ViewPager) arg0).addView(views.get(arg1), 0);
-
 		return views.get(arg1);
 	}
 

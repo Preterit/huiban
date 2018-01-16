@@ -5,14 +5,10 @@ public class UrlTools {
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
-  public static final String TEAM_TASK_LIST = "Task/taskIndex";  //任务列表
   public static final String MY_FORM_LIST = "form/my_form_list";
   public static final String OTHER_FORM_LIST = "form/form_list";
-  public static final String TASK_ADDTASK="Task/add_task";  //添加发布的任务
-  public static final String TASK_ACCEPT="task/task_accept"; //接收任务
-  public static final String TASK_GETTEAN="Task/get_team";   //获取团队列表
-  public static final String TASK_MY_TASK_LIST="task/my_task_list";//自己发布的任务列表
-  public static final String TASK_ACCEPT_TASK_LIST="Task/accept_task_list";//自己接收的任务列表
+  public static final String FORM_LIST_DETAILS = "form/details";//查看报表详细内容
+
     /**
      * 新的PC端的接口地址
      * */
@@ -412,6 +408,10 @@ public class UrlTools {
    * 创建团队：
    */
   public static String CHUANGIJAN_TUANDUI = "Team/add_team";
+  /**
+   * 修改团队名称：
+   */
+  public static String CHANGE_TEAM_NAME = "team/changeTeamName";
 
   /**
    * 显示所有团队列表：
@@ -614,7 +614,30 @@ public static String APPLICATION_MESSAGE = "zhuce/sms_registration";//http://123
   //删除朋友圈
   public static String DELETE_CIRCLE = "circle/delCircle";
 
-
+  /**
+   * 任务单--任务列表
+   * */
+  public static final String TEAM_TASK_LIST = "Task/taskIndex";
+  /**
+   * 任务单--获取团队列表
+   * */
+  public static final String TASK_GETTEAN="Task/get_team";
+  /**
+   * 任务单--添加发布的任务
+   * */
+  public static final String TASK_ADDTASK="Task/add_task";
+  /**
+   * 任务单--接收任务
+   * */
+  public static final String TASK_ACCEPT="task/task_accept";
+  /**
+   * 任务单--自己发布的任务列表
+   * */
+  public static final String TASK_MY_TASK_LIST="task/my_task_list";
+  /**
+   * 任务单--自己接收的任务列表
+   * */
+  public static final String TASK_ACCEPT_TASK_LIST="Task/accept_task_list";
   /**
    * 新任务单-全部任务接口
    * */
@@ -647,6 +670,10 @@ public static String APPLICATION_MESSAGE = "zhuce/sms_registration";//http://123
    * 新任务单-任务信息
    **/
   public static String RENWU_RWXX="Task/task_detial";
+  /**
+   * 新任务单-发布任务
+   **/
+  public static String ADD_TASK_NEW="task/add_task_new";
     /**
      * 新任务单-确认接单
      **/

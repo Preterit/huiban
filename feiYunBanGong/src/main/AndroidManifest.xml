@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="96"
-    android:versionName="1.7.26">
+    android:versionCode="97"
+    android:versionName="1.7.27">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -268,7 +268,8 @@
                 <action android:name="com.feirui.feiyunbangong.onadd.team" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".activity.MainActivity$MainBroadReceiver"
+        <receiver
+            android:name=".activity.MainActivity$MainBroadReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -530,7 +531,9 @@
         </activity>
         <activity android:name=".activity.ChooseFriendActivity" />
         <activity android:name=".activity.ChaKanJinDuActivity" />
-        <activity android:name=".activity.SearchMemberActivity"></activity>
+        <activity android:name=".activity.SearchMemberActivity" />
+        <activity android:name=".activity.TuanDui_UpdateNameActivity" />
+        <activity android:name=".activity.ChooseTxlActivity"></activity>
     </application>
 
 </manifest>

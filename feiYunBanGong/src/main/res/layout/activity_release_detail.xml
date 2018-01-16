@@ -85,7 +85,7 @@
 
             <TextView
                 android:id="@+id/rwd_tv_zt"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
@@ -121,7 +121,7 @@
 
             <TextView
                 android:id="@+id/rwd_tv_xq"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:text="参考消息网8月17日报道 港媒称，几张被广泛分享的照片显示，万里长城上最常被游客参观的路段，有大量的中国人、英国人和韩国人的涂鸦，这引起了中国社交媒体用户的愤怒。"
                 android:layout_marginStart="8dp"
@@ -293,7 +293,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已接单人员："
+            android:text="接单人员："
             />
         <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
         <!--android:layout_width="wrap_content"-->

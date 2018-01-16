@@ -40,7 +40,6 @@ public class FormListFragment extends Fragment {
   private int mFormType = 1;
   private FormAdapter mFormAdapter;
   private RecyclerView list;
-
   public FormListFragment() {
   }
 
@@ -49,7 +48,6 @@ public class FormListFragment extends Fragment {
     FormListFragment fragment = new FormListFragment();
     Bundle args = new Bundle();
     args.putInt(FORM_TYPE, type);
-
     fragment.setArguments(args);
     return fragment;
   }
@@ -86,7 +84,8 @@ public class FormListFragment extends Fragment {
         Gson gson = new Gson();
         ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
           mFormAdapter.setData(readFormEntity.getInfor());
-        Log.e("查看报表页面","其他人的列表数据-------------------" + readFormEntity.getInfor().toString());
+
+//        Log.e("查看报表页面","其他人的列表数据-------------------" + read FormEntity.getInfor().toString());
       }
     });
   }
@@ -124,13 +123,11 @@ public class FormListFragment extends Fragment {
 
           @Override
           public void onItemClick(View view, int position) {
-            view.getId();
             Intent intent = new Intent(getActivity(), CheckBaobiaoActivity.class);
             Bundle bundle = new Bundle();
-//            value.add(mFormType);  //传递报表类型
-//            value.add(position);   //传递报表所在的位置
             bundle.putInt("position",position);
-            Log.d("mBeanList的值", "onSuccess: "+position);
+            bundle.putInt("id",mFormAdapter.getId(position));
+            Log.e("mBeanList的值", "onSuccess: "+position);
             bundle.putInt("type",mFormType);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -150,6 +147,7 @@ public class FormListFragment extends Fragment {
 //            value.add(mFormType);  //传递报表类型
 //            value.add(position);   //传递报表所在的位置
             bundle.putInt("position",position);
+            bundle.putInt("id",mFormAdapter.getId(position));
             Log.d("mBeanList的值", "onSuccess: "+position);
             bundle.putInt("type",mFormType);
             intent.putExtras(bundle);

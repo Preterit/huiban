@@ -100,9 +100,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 											} else {
 												st = res;
 												Log.e("电话好友列表","groups==="+groups);
-												addFriend(list.get(pos)
-														.getPhone(), pos,
-														groups);
+												addFriend(list.get(pos).getPhone(), pos, groups);
 											}
 										}
 									}, activity, strGroups, "选择分组");
@@ -120,9 +118,9 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 			LianXiRen spr = list.get(position);
 			holder.tv_name.setText(spr.getName());
 			holder.tv_phone.setText(spr.getPhone());
-			Log.e("通讯录联系人", "lianXiRen: "+spr.getName() );
-			Log.e("通讯录联系人", "lianXiRen: "+spr.getId() );
-			Log.e("通讯录联系人", "lianXiRen: "+spr.getHead() );
+			Log.e("通讯录联系人", "name: "+spr.getName() );
+//			Log.e("通讯录联系人", "Id: "+spr.getId() );
+//			Log.e("通讯录联系人", "Head: "+spr.getHead() );
 
 			if ("http://123.57.45.74/feiybg1/public/static/staff_head/19912/53da489597afc6f5abb2a1bae0d767ff.jpeg".equals(spr.getHead())) {
 				holder.iv.setText(spr.getName());
@@ -134,7 +132,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 
 			if (strs.get(position) == null) {
 				holder.bt.setEnabled(true);
-				holder.bt.setText("短信邀请");
+				holder.bt.setText("添加朋友");
 			} else if ("未添加".equals(strs.get(position))) {
 				holder.bt.setEnabled(true);
 				holder.bt.setText("未添加");
@@ -266,7 +264,7 @@ public class LianXiRenAdapter extends MyBaseAdapter<LianXiRen> {
 			}
 		}
 		Log.e("电话好友列表","group_id==="+id);
-		Log.e("电话好友列表","groups.size()==="+groups.size());
+		Log.e("电话好友列表","phone"+phone);
 		params.put("group_id", id + "");
 		params.put("staff_mobile", phone);
 		String url = UrlTools.url + UrlTools.TIANJIAHAOYOU;

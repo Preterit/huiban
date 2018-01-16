@@ -42,7 +42,6 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-
 		return data.size();
 	}
 
@@ -63,11 +62,8 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 
 		final ViewHolder holder;
 		if (convertView == null) {
-			convertView = View.inflate(context, R.layout.ll_item_ti,
-					null);
-
+			convertView = View.inflate(context, R.layout.ll_item_ti, null);
 			holder = new ViewHolder(convertView);
-
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -76,8 +72,7 @@ public class CaoZuoJiLuAdapter extends BaseAdapter {
 
 //		holder.tv_shenpi.setText((String) data.get(position)
 //				.get("appname"));
-		holder.tv_leixing.setText((String) data.get(position)
-				.get("approval_type"));
+		holder.tv_leixing.setText((String) data.get(position).get("approval_type"));
 		switch ((int)data.get(position).get("status")) {
 			case 0:
 				holder.tv_pass.setText("待审批");

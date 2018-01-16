@@ -82,6 +82,10 @@ public class FormAdapter extends Adapter<ViewHolder> {
     return mBeanList.size();
   }
 
+  public int getId(int position){
+    return mBeanList.get(position).getId();
+  }
+
   public void setData(List<InforBean> data) {
     mBeanList.clear();
     try {

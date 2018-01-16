@@ -6,13 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,9 +22,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +55,7 @@ import com.xw.repo.refresh.PullListView;
 
 import org.apache.http.Header;
 import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -122,6 +118,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
         initView();
         setListener();
         initData();//从数据库获取数据
+        getNum(1 + "");
         setListView();
     }
 
@@ -144,7 +141,6 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         registReceiver();// 注册广播接收器
-        getNum(1 + "");
         super.onResume();
     }
 
@@ -227,8 +223,10 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                             if ("1".equals(num)){
                                 tv_chenyuan.setText("团队成员" + "("
                                         + infor.size() + "/" + (hm.get("Allnum") + "") + ")");
+                                numMem = infor.size();
                             }else {
                                 numMem += infor.size();
+                                Log.e("num", "success:---------------------------- " + numMem );
                                 tv_chenyuan.setText("团队成员" + "("
                                         + numMem + "/" + (hm.get("Allnum") + "") + ")");
                             }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F3F3"
+    tools:context="com.feirui.feiyunbangong.activity.TuanDui_UpdateNameActivity">
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/et_update_name"
+            android:hint="请输入新的团队名"
+            android:textColorHint="#CDC9C9"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_update_name"
+        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:text="完成"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_btn_shenpi_tg"/>
+
+</LinearLayout>
