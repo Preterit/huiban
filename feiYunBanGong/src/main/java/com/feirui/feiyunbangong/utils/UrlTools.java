@@ -1,18 +1,12 @@
 package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
-  public static String umeng_url ="https://t.vipkid.com.cn/activity/parents_feedback_share/509c61bb1afa43f1080528de7ba020a8";
+  public static String umeng_url ="http://openbox.mobilem.360.cn/index/d/sid/3574607";
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
-  public static final String TEAM_TASK_LIST = "Task/taskIndex";  //任务列表
   public static final String MY_FORM_LIST = "form/my_form_list";
   public static final String OTHER_FORM_LIST = "form/form_list";
-  public static final String TASK_ADDTASK="Task/add_task";  //添加发布的任务
-  public static final String TASK_ACCEPT="task/task_accept"; //接收任务
-  public static final String TASK_GETTEAN="Task/get_team";   //获取团队列表
-  public static final String TASK_MY_TASK_LIST="task/my_task_list";//自己发布的任务列表
-  public static final String TASK_ACCEPT_TASK_LIST="Task/accept_task_list";//自己接收的任务列表
   public static final String FORM_LIST_DETAILS = "form/details";//查看报表详细内容
 
     /**
@@ -30,6 +24,12 @@ public class UrlTools {
   public static String url_img = "http://123.57.45.74/feiybg1";
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
 // public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
+
+
+  /**
+   * 修改团队名称：
+   */
+  public static String CHANGE_TEAM_NAME = "team/changeTeamName";
 
   /*
   添加好友接口搜索

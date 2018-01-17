@@ -12,7 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
@@ -25,6 +24,7 @@ import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -58,8 +58,7 @@ import java.lang.ref.WeakReference;
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
     @PView(click = "onClick")
-    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx,ll_update_name;// 扫码，推广，管理,短信邀请；团队聊天,修改信息
-    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx,ll_send_share;// 扫码，推广，管理,短信邀请；团队聊天,修改信息,分享
+    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx,ll_send_share,ll_update_name;// 扫码，推广，管理,短信邀请；团队聊天,修改信息,分享
     private TuanDui td;
     private Button bt_out_team;//退出团队；
     private String mTuanLiaoID;
@@ -144,40 +143,40 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 Intent intent3 = new Intent(this,TuanDui_UpdateNameActivity.class);
                 intent3.putExtra("id", td.getTid());
                 startActivity(intent3);
-            case R.id.ll_tuiguang:
-                RequestParams params = new RequestParams();
-                params.put("teamid", td.getTid());
-                String url = UrlTools.url + UrlTools.CIRCLE_ADDTEAMCIRCLE;
-                L.e("推广——工作圈url" + url + " params" + params);
-                AsyncHttpServiceHelper.post(url, params,
-                        new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int arg0, Header[] arg1,
-                                                  byte[] arg2) {
-                                super.onSuccess(arg0, arg1, arg2);
-                                final JsonBean json = JsonUtils
-                                        .getMessage(new String(arg2));
-                                if ("200".equals(json.getCode())) {
-                                    runOnUiThread(new Runnable() {
-                                        public void run() {
-                                            T.showShort(TuanDuiJiaActivity.this,
-                                                    json.getMsg());
-                                        }
-                                    });
-
-                                } else {
-                                    T.showShort(TuanDuiJiaActivity.this,
-                                            json.getMsg());
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int arg0, Header[] arg1,
-                                                  byte[] arg2, Throwable arg3) {
-                                super.onFailure(arg0, arg1, arg2, arg3);
-                            }
-                        });
-                break;
+//            case R.id.ll_tuiguang:
+//                RequestParams params = new RequestParams();
+//                params.put("teamid", td.getTid());
+//                String url = UrlTools.url + UrlTools.CIRCLE_ADDTEAMCIRCLE;
+//                L.e("推广——工作圈url" + url + " params" + params);
+//                AsyncHttpServiceHelper.post(url, params,
+//                        new AsyncHttpResponseHandler() {
+//                            @Override
+//                            public void onSuccess(int arg0, Header[] arg1,
+//                                                  byte[] arg2) {
+//                                super.onSuccess(arg0, arg1, arg2);
+//                                final JsonBean json = JsonUtils
+//                                        .getMessage(new String(arg2));
+//                                if ("200".equals(json.getCode())) {
+//                                    runOnUiThread(new Runnable() {
+//                                        public void run() {
+//                                            T.showShort(TuanDuiJiaActivity.this,
+//                                                    json.getMsg());
+//                                        }
+//                                    });
+//
+//                                } else {
+//                                    T.showShort(TuanDuiJiaActivity.this,
+//                                            json.getMsg());
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(int arg0, Header[] arg1,
+//                                                  byte[] arg2, Throwable arg3) {
+//                                super.onFailure(arg0, arg1, arg2, arg3);
+//                            }
+//                        });
+//                break;
 
             case R.id.ll_guanli:  //团长管理团队 将整个团队传过去
                 Intent intent = new Intent(this, TuanDuiGuanLiActivity.class);
@@ -234,9 +233,9 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
                 config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
                 UMWeb  web = new UMWeb(UrlTools.umeng_url);
-                web.setTitle("This is music title");//标题
+                web.setTitle("会办");//标题
                 web.setThumb(new UMImage(this,R.drawable.logo));  //缩略图
-                web.setDescription("my description");//描述
+                web.setDescription("会办是一个人人管理的平台~");//描述
                 new ShareAction(this).setDisplayList(
                         SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,
                         SHARE_MEDIA.QQ)
