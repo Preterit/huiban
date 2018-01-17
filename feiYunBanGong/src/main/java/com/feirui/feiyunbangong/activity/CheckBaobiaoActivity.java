@@ -44,7 +44,7 @@ public class CheckBaobiaoActivity extends FragmentActivity {
     private int id;
 
 
-    public TextView centerTv;
+    public TextView centerTv,tv_title_1,tv_title_2,tv_title_3;
     public ImageView leftIv, rightIv;
     public LinearLayout leftll;
     public RelativeLayout rightll;
@@ -65,16 +65,6 @@ public class CheckBaobiaoActivity extends FragmentActivity {
         Log.e("查看详细报表","条目id" + id + "");
         mBeanList = new ArrayList<>();
         loadMyForm();
-
-//        if (mFormType == ReadFormActivity.MY_FORM) {
-//            loadMyForm();
-//        }
-//        if (mFormType == ReadFormActivity.OTHER_FORM) {
-//            loadOtherForm();
-//        }
-
-//        Log.d("条目类型---------------", mBeanList.toString());
-
     }
 
 
@@ -146,7 +136,24 @@ public class CheckBaobiaoActivity extends FragmentActivity {
                 unfinish_work.setText(readFromDetail.getInfor().getOption_two_value());//获取今天未完成的工作
                 tomorrow_work.setText(readFromDetail.getInfor().getOption_three_value());//获取今天未完成的工作
                 remark_work.setText(readFromDetail.getInfor().getRemarks());//获取备注
-
+                if(readFromDetail.getInfor().getType_name().equals("日报")){
+                    tv_title_1.setText("本日完成工作");
+                    tv_title_2.setText("本日未完成工作");
+                    tv_title_3.setText("明日工作计划");
+                }else if(readFromDetail.getInfor().getType_name().equals("周报")){
+                    tv_title_1.setText("本周完成工作");
+                    tv_title_2.setText("本周未完成工作");
+                    tv_title_3.setText("下周工作计划");
+                }else if(readFromDetail.getInfor().getType_name().equals("月报")){
+                    tv_title_1.setText("本月完成工作");
+                    tv_title_2.setText("本月未完成工作");
+                    tv_title_3.setText("下月工作计划");
+                }else if(readFromDetail.getInfor().getType_name().equals("业务报表")){
+                    tv_title_1.setText("今日营业额");
+                    tv_title_2.setText("今日用户数");
+                    tv_title_3.setText("明日目标");
+                }
+                //图片路径
                 String picUrls =  readFromDetail.getInfor().getPicture();
                 String[] str=picUrls.split(",");
                 for (int i = 0; i < str.length; i++){
@@ -176,62 +183,15 @@ public class CheckBaobiaoActivity extends FragmentActivity {
 
     }
 
-    /**
-     * 读取其他人的列表数据
-     */
-    private void loadOtherForm() {
-        final ArrayList<String> imageUrls = new ArrayList<String>();
-        String url = UrlTools.url + UrlTools.FORM_LIST_DETAILS;
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("id",id);
-        AsyncHttpServiceHelper.post(url, requestParams, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Gson gson = new Gson();
-                ReadFromDetail readFromDetail = gson.fromJson(new String(responseBody), ReadFromDetail.class);
-
-                Log.e("查看详细报表---其他人", "getInfor: "+readFromDetail.getInfor());
-                form_time.setText(readFromDetail.getInfor().getForm_time());
-                today_work.setText(readFromDetail.getInfor().getOption_one_value());//获取今天的工作
-                unfinish_work.setText(readFromDetail.getInfor().getOption_two_value());//获取今天未完成的工作
-                tomorrow_work.setText(readFromDetail.getInfor().getOption_three_value());//获取今天未完成的工作
-                remark_work.setText(readFromDetail.getInfor().getRemarks());//获取备注
-
-                String picUrls =  readFromDetail.getInfor().getPicture();
-                String[] str=picUrls.split(",");
-                for (int i = 0; i < str.length; i++){
-                    imageUrls.add(str[i]);
-                }
-                Log.e("查看详细报表---其他人", "imageUrls: "+imageUrls.toString());
-                // 发表的内容图片显示与隐藏：
-                readFromDetail.getInfor().getPicture();
-                if (imageUrls == null || imageUrls.size() == 0||picUrls.isEmpty()) {
-                    gridview.setVisibility(View.GONE);
-                } else {
-                    gridview.setVisibility(View.VISIBLE);
-                    gridview.setAdapter(new NoScrollGridAdapter(CheckBaobiaoActivity.this,
-                            imageUrls));
-                }
-            }
-        });
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                imageBrower(position, imageUrls);
-            }
-        });
-
-    }
-
-
     private void initUI() {
         today_work = (TextView) findViewById(R.id.today_work);
         unfinish_work = (TextView) findViewById(R.id.today_unfinish_work);
         tomorrow_work = (TextView) findViewById(R.id.tomorrow_work);
         remark_work = (TextView) findViewById(R.id.remark_work);
         form_time = (TextView) findViewById(R.id.tv_form_time);
-       gridview = (NoScrollGridView)findViewById(R.id.gridview_work);
-
+        gridview = (NoScrollGridView)findViewById(R.id.gridview_work);
+        tv_title_1=findViewById(R.id.tv_title_1);
+        tv_title_2=findViewById(R.id.tv_title_2);
+        tv_title_3=findViewById(R.id.tv_title_3);
     }
 }

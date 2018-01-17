@@ -268,7 +268,8 @@
                 <action android:name="com.feirui.feiyunbangong.onadd.team" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".activity.MainActivity$MainBroadReceiver"
+        <receiver
+            android:name=".activity.MainActivity$MainBroadReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -530,6 +531,9 @@
         </activity>
         <activity android:name=".activity.ChooseFriendActivity" />
         <activity android:name=".activity.ChaKanJinDuActivity" />
+        <activity android:name=".activity.SearchMemberActivity" />
+        <activity android:name=".activity.TuanDui_UpdateNameActivity" />
+        <activity android:name=".activity.ChooseTxlActivity"></activity>
         <activity android:name=".activity.SearchMemberActivity"></activity>
         //友盟
         <meta-data android:value="5a56d792a40fa33196000115" android:name="UMENG_APPKEY"/>

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
 import com.feirui.feiyunbangong.R;
@@ -17,7 +16,6 @@ import com.feirui.feiyunbangong.adapter.GuideAdapter;
 import com.feirui.feiyunbangong.utils.ImageUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 新手指导页
@@ -30,11 +28,11 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 
 	private ViewPager vp;
 	private GuideAdapter vpAdapter;
-	private List<View> views;
+	private ArrayList<View> views;
 	private Button button;
 
 	// 引导图片资源
-	private static final int[] pics = { R.drawable.guide5 ,R.drawable.guide6,R.drawable.guide4};
+	private int[] pics = { R.drawable.guide5 ,R.drawable.guide6,R.drawable.guide4};
 
 	// 底部小点图片
 	private ImageView[] dots;
@@ -60,12 +58,12 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 		for (int i = 0; i < pics.length; i++) {
 			ImageView iv = new ImageView(this);
 			iv.setLayoutParams(mParams);
-			iv.setScaleType(ScaleType.FIT_XY);
+			iv.setScaleType(ImageView.ScaleType.FIT_XY);
 			iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
 					getResources(), pics[i], 1000, 1500));
 			views.add(iv);
 		}
-		vp = (ViewPager) findViewById(R.id.viewpager_guide);
+		vp = findViewById(R.id.viewpager_guide);
 		// 初始化Adapter
 		vpAdapter = new GuideAdapter(views);
 		vp.setAdapter(vpAdapter);
@@ -98,7 +96,6 @@ public class GuideActivity extends BaseActivity implements OnClickListener,
 			dots[i].setOnClickListener(this);
 			dots[i].setTag(i);// 设置位置tag，方便取出与当前位置对应
 		}
-
 		currentIndex = 0;
 		dots[currentIndex].setEnabled(false);// 设置为白色，即选中状态
 	}

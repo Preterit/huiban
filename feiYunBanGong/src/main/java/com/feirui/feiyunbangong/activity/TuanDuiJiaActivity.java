@@ -25,7 +25,6 @@ import com.feirui.feiyunbangong.entity.TuanDui;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
-import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -59,6 +58,7 @@ import java.lang.ref.WeakReference;
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
     @PView(click = "onClick")
+    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx,ll_update_name;// 扫码，推广，管理,短信邀请；团队聊天,修改信息
     LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx,ll_send_share;// 扫码，推广，管理,短信邀请；团队聊天,修改信息,分享
     private TuanDui td;
     private Button bt_out_team;//退出团队；
@@ -71,7 +71,6 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuan_dui_jia);
         mYWIMkit = AppStore.mIMKit;
-
         initView();
         setListener();
     }
@@ -87,19 +86,14 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 
     private void initView() {
         AppStore.acts.add(this);
-
         Intent intent = getIntent();
         //传过来的团队
         td = (TuanDui) intent.getSerializableExtra("td");
         bt_out_team = (Button) findViewById(R.id.bt_out_team);
-
         Log.e("tdys", "initView: -----------------" + td.toString() );
         setManage(td);
-
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-
-
         if (td.getName().length() > 10) {
             setCenterString(td.getName().substring(0, 9) + "...");
         } else {
@@ -132,8 +126,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
         switch (view.getId()) {
             case R.id.ll_saoma:
                 Dialog dialog = new Dialog(this);
-                View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima_tuandui,
-                        null);
+                View v = getLayoutInflater().inflate(R.layout.ll_dialog_erweima_tuandui, null);
                 ImageView iv = (ImageView) v.findViewById(R.id.iv_erweima2);
                 String id = "T" + td.getTid();
                 // 根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
@@ -147,6 +140,10 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 dialog.setTitle("扫码加入团队");
                 dialog.show();
                 break;
+            case R.id.ll_update_name:
+                Intent intent3 = new Intent(this,TuanDui_UpdateNameActivity.class);
+                intent3.putExtra("id", td.getTid());
+                startActivity(intent3);
             case R.id.ll_tuiguang:
                 RequestParams params = new RequestParams();
                 params.put("teamid", td.getTid());
@@ -193,60 +190,38 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 startActivity(intent1);
                 break;
             case R.id.ll_send_msg:
-
                 EtDialog dialog1 = new EtDialog("短信邀请", "请输入手机号",
                         TuanDuiJiaActivity.this, new EtDialog.AlertCallBack1() {
-
                     @Override
                     public void onOK(String name) {
-
                         if (Utils.isPhone(name)) {
-
                             String url = UrlTools.url + UrlTools.SEND_MSG;
-
                             RequestParams params = new RequestParams();
                             params.put("staff_mobile", name);
                             params.put("teamnum", td.getTid());
-                            Utils.doPost(LoadingDialog
-                                            .getInstance(TuanDuiJiaActivity.this),
+                            Utils.doPost(LoadingDialog.getInstance(TuanDuiJiaActivity.this),
                                     TuanDuiJiaActivity.this, url, params,
                                     new HttpCallBack() {
-
                                         @Override
                                         public void success(JsonBean bean) {
-                                            T.showShort(
-                                                    TuanDuiJiaActivity.this,
-                                                    "发送成功！");
+                                            T.showShort(TuanDuiJiaActivity.this, "发送成功！");
                                         }
-
                                         @Override
                                         public void failure(String msg) {
-                                            T.showShort(
-                                                    TuanDuiJiaActivity.this,
-                                                    msg);
+                                            T.showShort(TuanDuiJiaActivity.this, msg);
                                         }
-
                                         @Override
                                         public void finish() {
                                             // TODO Auto-generated method stub
-
                                         }
                                     });
-
-                        } else {
-
                         }
-
                     }
-
                     @Override
                     public void onCancel() {
-
                     }
                 });
-
                 dialog1.show();
-
                 break;
             case R.id.ll_send_talk:  //团队聊天
                 YWIMKit mIMKit = AppStore.mIMKit;

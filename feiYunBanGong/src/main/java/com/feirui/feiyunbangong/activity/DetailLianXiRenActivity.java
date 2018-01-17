@@ -139,7 +139,6 @@ public class DetailLianXiRenActivity extends BaseActivity {
 //				str = LianXiRenUtil.readConnect(DetailLianXiRenActivity.this);
 				ls = getContact(DetailLianXiRenActivity.this);
 				Log.e("通讯录", "联系人列表"+ls.toString());
-				Log.e("通讯录", "第一个"+ls.get(0).getContact_name());
 				for(int i=0;i<ls.size();i++){
 					name+=ls.get(i).getContact_name()+",";
 					phone+=ls.get(i).getContact_phone()+",";
@@ -209,16 +208,17 @@ public class DetailLianXiRenActivity extends BaseActivity {
 			}
 
 			Log.e("TAG", "发出广播");
+			Log.e("通讯录", lxrs01.toString());
 
 			regist.get(lxrs01);// 接口回调：
 
-			// 删选出未注册的好友发广播给短信邀请：
+			// 筛选出未注册的好友发广播给短信邀请：
 			String[] split = name.split(",");// 姓名
 			String[] split2 = phone.split(",");// 联系电话
 			for (int i = 0; i < split2.length; i++) {
 				boolean hasRegist = false;
 				for (int j = 0; j < lxrs01.size(); j++) {
-					if (lxrs01.get(j).getPhone().equals(split2[i])) {
+					if (lxrs01.get(j).getName().equals(split[i])) {
 						hasRegist = true;
 						break;
 					}

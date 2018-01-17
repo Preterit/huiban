@@ -1,12 +1,7 @@
 package com.feirui.feiyunbangong.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +17,10 @@ import com.feirui.feiyunbangong.myinterface.AllInterface.OnGroupStateChangedList
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.view.TextImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ExpandListView的适配器，继承自BaseExpandableListAdapter
@@ -108,8 +107,7 @@ public class AddChengYuanExpandableListAdapter extends
 		childHolder.rl_child.setBackgroundColor(Color.WHITE);
 
 		for (int i = 0; i < groupPos.size(); i++) {
-			if (groupPos.get(i) == groupPosition
-					&& childPos.get(i) == childPosition) {
+			if (groupPos.get(i) == groupPosition && childPos.get(i) == childPosition) {
 				childHolder.rl_child.setBackgroundColor(Color.YELLOW);
 			}
 		}
@@ -117,7 +115,7 @@ public class AddChengYuanExpandableListAdapter extends
 		return convertView;
 	}
 
-	public List<Integer> groupPos = new ArrayList<>();
+	public List<Integer>  groupPos = new ArrayList<>();
 	public List<Integer> childPos = new ArrayList<>();
 	private List<String> location = new ArrayList<>();
 

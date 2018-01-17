@@ -49,7 +49,7 @@ public class RenWuDanActivity extends BaseActivity {
      */
     public static class MyAdapter extends FragmentPagerAdapter {
 
-        String[] mTitles = new String[]{"全部", "待接单","进行中","已完成"};
+        String[] mTitles = new String[]{"全部", "待接单","进行中","已结束"};
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
