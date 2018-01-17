@@ -22,14 +22,7 @@ public class UrlTools {
    * 后台给的图片有的地址差的url
    * */
   public static String url_img = "http://123.57.45.74/feiybg1";
-//public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
-// public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
-
-  /**
-   * 修改团队名称：
-   */
-  public static String CHANGE_TEAM_NAME = "team/changeTeamName";
 
   /*
   添加好友接口搜索
