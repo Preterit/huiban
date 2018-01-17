@@ -87,10 +87,10 @@ public class ChaoSongAdapter  extends BaseAdapter {
 
         if (!TextUtils.isEmpty(data.get("staff_head").toString())){
             Glide.with(context).load(data.get("staff_head"))
-                    .placeholder(R.drawable.fragment_head).into(holder.mItem_send_head);
+                    .into(holder.mItem_send_head);
         }
         if (!TextUtils.isEmpty(data.get("staff_name").toString())){
-            holder.mItem_send_name.setText(data.get("staff_name") + "的请假申请");
+            holder.mItem_send_name.setText(data.get("staff_name") + "的申请");
         }
         if (!TextUtils.isEmpty(data.get("approval_type").toString())){
             holder.mItem_send_type.setText("类型：" + data.get("approval_type"));
@@ -99,7 +99,7 @@ public class ChaoSongAdapter  extends BaseAdapter {
 //            holder.mItem_send_type.setText("开始时间：" + data.get("approval_time"));
 //        }
         if (!TextUtils.isEmpty(data.get("approval_time").toString())){
-            SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd");
             @SuppressWarnings("unused")
             long lcc = Long.valueOf(data.get("approval_time").toString());
             int i = Integer.parseInt(data.get("approval_time").toString());

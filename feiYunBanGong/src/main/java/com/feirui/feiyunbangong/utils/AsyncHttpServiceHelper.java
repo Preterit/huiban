@@ -119,8 +119,4 @@ public class AsyncHttpServiceHelper {
 		client.setTimeout(30 * 1000);
 		client.delete(url, responseHandler);
 	}
-
-	// private static String getAbsoluteUrl(String relativeUrl) {
-	// return BASE_URL + relativeUrl;
-	// }
 }

@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/type_handle"
         android:layout_width="@dimen/x400"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inclue"
@@ -12,13 +13,22 @@
         android:gravity="center"
         android:orientation="vertical"
         >
-
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/y50"
+            android:gravity="center"
+            android:text="全部"
+            android:textSize="@dimen/size50"
+            />
         <TextView
             android:id="@+id/tv_leave"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y100"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/y50"
+            android:layout_marginTop="@dimen/y20"
             android:gravity="center"
             android:text="请假"
             android:textSize="@dimen/size50"

@@ -4,10 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.feirui.feiyunbangong.fragment.CommitFragment;
-import com.feirui.feiyunbangong.fragment.ReviseFragment;
-import com.feirui.feiyunbangong.fragment.SendFragment;
-
 import java.util.List;
 
 /**

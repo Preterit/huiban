@@ -53,7 +53,7 @@
     android:padding="@dimen/size15"
     android:background="@color/main_color"
     android:gravity="center"
-    android:text="上传WiFi"
+    android:text="上班WiFi打卡"
     android:textColor="@color/white"
     android:textSize="@dimen/size45"/>
 

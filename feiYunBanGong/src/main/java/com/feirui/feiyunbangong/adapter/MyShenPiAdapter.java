@@ -1,16 +1,23 @@
 package com.feirui.feiyunbangong.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.view.CircleImageView2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -62,7 +69,7 @@ public class MyShenPiAdapter  extends BaseAdapter {
 
         final MyShenPiAdapter.ViewHolder holder;
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.ll_item_daishenqi,
+            convertView = View.inflate(context, R.layout.item_ry_send_mess,
                     null);
 
             holder = new MyShenPiAdapter.ViewHolder(convertView);
@@ -72,38 +79,53 @@ public class MyShenPiAdapter  extends BaseAdapter {
             holder = (MyShenPiAdapter.ViewHolder) convertView.getTag();
 
         }
-        if(data.get(position).get("staff_name")!=null){
-            holder.tv_name.setText((String) data.get(position).get("staff_name"));
+
+        if (!TextUtils.isEmpty(data.get(position).get("staff_head").toString())){
+            Glide.with(context).load(data.get(position).get("staff_head"))
+                    .into(holder.mItem_send_head);
+        }
+        if (!TextUtils.isEmpty(data.get(position).get("staff_name").toString())){
+            holder.mItem_send_name.setText(data.get(position).get("staff_name") + "的申请");
+        }
+        if (!TextUtils.isEmpty(data.get(position).get("approval_type").toString())){
+            holder.mItem_send_type.setText("类型：" + data.get(position).get("approval_type"));
         }
 
+        if (!TextUtils.isEmpty(data.get(position).get("approval_time").toString())){
+            SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd");
+            @SuppressWarnings("unused")
+            long lcc = Long.valueOf(data.get(position).get("approval_time").toString());
+            int i = Integer.parseInt(data.get(position).get("approval_time").toString());
+            String times = sdr.format(new Date(i * 1000L));
+            holder.mItem_send_time.setText(times);
+        }
 
+        holder.mItem_send_state.setVisibility(View.VISIBLE);
         switch ((int)data.get(position).get("status")){
             case 0:
-                holder.tv_shenhe.setText("");
+                holder.mItem_send_state.setText("");
                 break;
             case 1:
-                holder.tv_shenhe.setText("通过");
+                holder.mItem_send_state.setText("通过");
+                holder.mItem_send_state.setTextColor(Color.parseColor("#ff8736"));
+                holder.mItem_send_state.setBackgroundResource(R.drawable.shape_item_tag);
                 break;
             case 2:
-                holder.tv_shenhe.setText("审核中");
+                holder.mItem_send_state.setText("审核中");
                 break;
             case 3:
-                holder.tv_shenhe.setText("未通过");
+                holder.mItem_send_state.setText("未通过");
+                holder.mItem_send_state.setTextColor(Color.parseColor("#3686ff"));
+                holder.mItem_send_state.setBackgroundResource(R.drawable.shape_person_tag);
                 break;
 
-
         }
 
-        if (data.get(position).get("approval_type")!=null){
-            holder.tv_leixing.setText((String) data.get(position).get("approval_type"));
-        }
-
-
-        holder.bt_detail.setOnClickListener(new View.OnClickListener() {
+        holder.item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnChakanClickListener != null) {
-                    mOnChakanClickListener.onChakanClick(data.get(position), position);
+                if (mOnChakanClickListener != null){
+                    mOnChakanClickListener.onChakanClick(data.get(position),position);
                 }
             }
         });
@@ -125,15 +147,21 @@ public class MyShenPiAdapter  extends BaseAdapter {
 
 
     class ViewHolder {
-        TextView tv_name, tv_shenhe, tv_leixing;// 姓名，类型
-        Button bt_detail;
+        private CircleImageView2 mItem_send_head;
+        private TextView mItem_send_name;
+        private TextView mItem_send_type,mItem_send_state;
+        private TextView mItem_send_starttime;
+        private TextView mItem_send_time;
+        private LinearLayout item_layout;
 
-        public ViewHolder(View convertView) {
-
-            tv_name = (TextView) convertView.findViewById(R.id.tv_name);
-            tv_shenhe = (TextView) convertView.findViewById(R.id.tv_shenhe);
-            tv_leixing = (TextView) convertView.findViewById(R.id.tv_leixing);
-            bt_detail = (Button) convertView.findViewById(R.id.bt_detail);
+        public ViewHolder(View itemView) {
+            item_layout = (LinearLayout) itemView.findViewById(R.id.item_layout);
+            mItem_send_head = (CircleImageView2) itemView.findViewById(R.id.item_send_head);
+            mItem_send_name = (TextView) itemView.findViewById(R.id.item_send_name);
+            mItem_send_type = (TextView) itemView.findViewById(R.id.item_send_type);
+//            mItem_send_starttime = (TextView) itemView.findViewById(R.id.item_send_starttime);
+            mItem_send_time = (TextView) itemView.findViewById(R.id.item_send_time);
+            mItem_send_state = itemView.findViewById(R.id.item_send_state);
         }
     }
 

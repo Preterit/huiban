@@ -46,19 +46,33 @@
                 <!--android:visibility="gone"/>-->
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/item_send_time"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="18dp"
-        android:textSize="12sp"
-        android:textColor="#999"
-        android:text="2017.03.19"/>
-    <View
-        android:layout_below="@id/item_layout"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#eee"/>
+        android:layout_marginRight="18dp">
+        <TextView
+            android:id="@+id/item_send_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#999"
+            android:text="2017.03.19"/>
+
+        <TextView
+            android:id="@+id/item_send_state"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:textColor="#ff8736"
+            android:textSize="13sp"
+            android:text="wei"
+            android:background="@drawable/shape_item_tag"
+            android:visibility="gone"/>
+    </LinearLayout>
+
 </RelativeLayout>

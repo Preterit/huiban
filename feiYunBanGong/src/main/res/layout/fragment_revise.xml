@@ -1,11 +1,64 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.feirui.feiyunbangong.fragment.ReviseFragment">
-    <include
-        layout="@layout/ry_send_mess"
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="visible"
+        app:indicatorColor="#3fc2e3"
+        app:indicatorName="BallSpinFadeLoaderIndicator"
+        android:layout_centerInParent="true"
+        />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/ry_loading_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:padding="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            >
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi_loadingmore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AVLoadingIndicatorView.Small"
+                app:indicatorName="LineScalePartyIndicator"
+                app:indicatorColor="#3fc2e3" />
 
-</FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:gravity="center"
+                android:text="加载ing..."
+                android:textColor="#b2b2b2"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <com.xw.repo.refresh.PullToRefreshLayout
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.xw.repo.refresh.PullListView
+                android:id="@+id/haveget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/ry_loading_more"
+                >
+            </com.xw.repo.refresh.PullListView>
+        </com.xw.repo.refresh.PullToRefreshLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
