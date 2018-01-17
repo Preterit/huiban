@@ -92,12 +92,12 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 //        // 压缩：
 //        iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(getResources(), R.drawable.welcome_logo, 1000, 1500));
         //启动的同时 定位
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                handler.sendEmptyMessage(1);
-//            }
-//        }, 100);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(1);
+            }
+        }, 100);
         update();// 检查更新：
         // 定时，如果三秒钟扔无任何反应则执行start()操作：
         new Handler().postDelayed(new Runnable() {

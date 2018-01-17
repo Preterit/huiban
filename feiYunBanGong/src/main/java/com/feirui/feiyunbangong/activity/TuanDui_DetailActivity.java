@@ -629,7 +629,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                 startActivity(intent03);
                 break;
             case R.id.llTeamTask:
-                Intent teamTaskIntent = new Intent(this, TasksListActivity.class);
+                Intent teamTaskIntent = new Intent(this, RenWuDanActivity.class);
                 startActivity(teamTaskIntent);
                 break;
             case R.id.llChengYuan: //打开团队聊天窗口
