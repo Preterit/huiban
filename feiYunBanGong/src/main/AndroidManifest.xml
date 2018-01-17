@@ -534,10 +534,9 @@
         <activity android:name=".activity.SearchMemberActivity" />
         <activity android:name=".activity.TuanDui_UpdateNameActivity" />
         <activity android:name=".activity.ChooseTxlActivity"></activity>
-        <activity android:name=".activity.SearchMemberActivity"></activity>
-        //友盟
+        <!--友盟-->
         <meta-data android:value="5a56d792a40fa33196000115" android:name="UMENG_APPKEY"/>
-        //qq官方申请的key的配置
+        <!--qq官方申请的key的配置-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
