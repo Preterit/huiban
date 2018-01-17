@@ -1,7 +1,7 @@
 package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
-
+  public static String umeng_url ="https://t.vipkid.com.cn/activity/parents_feedback_share/509c61bb1afa43f1080528de7ba020a8";
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
@@ -48,7 +48,7 @@ public class UrlTools {
   /**
    * 登录获取验证码
    */
-  public  static String DENGLU_REGIST ="login/logincode";
+  public  static String DENGLU_REGIST ="login/sms_code";
   /**
    * 快速登录
    */
@@ -69,6 +69,12 @@ public class UrlTools {
    * 登录
    */
   public static String LOGIN_LOGIN = "login/login";
+
+  /**
+   * 验证码登录
+   */
+  public static String CODE_LOGIN = "login/code_login";
+
 
   /**
    * 个人注册

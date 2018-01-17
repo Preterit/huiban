@@ -139,7 +139,8 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
                     @Override
                     public void failure(String msg) {
-                        T.showShort(activity, "网络请求失败，请检查网络");
+                        Log.e("init", "failure:---------------------------- " + msg );
+//                        T.showShort(activity, "网络请求失败，请检查网络");
                     }
 
                     @Override
@@ -166,6 +167,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                     @Override
                     public void success(JsonBean bean) {
                         //从网络获取数据保存到数据库
+//                        if (bean.getInfor().size() != null)
                         setNetData(bean);
                         swipe_container.setRefreshing(false);
                     }

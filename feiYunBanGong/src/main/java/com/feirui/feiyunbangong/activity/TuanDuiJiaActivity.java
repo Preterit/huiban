@@ -3,6 +3,7 @@ package com.feirui.feiyunbangong.activity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.alibaba.mobileim.YWIMKit;
 import com.alibaba.mobileim.channel.event.IWxCallback;
@@ -32,20 +34,32 @@ import com.feirui.feiyunbangong.view.PView;
 import com.google.zxing.WriterException;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 import com.zxing.encoding.EncodingHandler;
 
 import org.apache.http.Header;
 import org.litepal.crud.DataSupport;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 团队——加
+ *  含分享
  *
  * @author admina
  *         (团队退出按钮)
  */
 public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener {
     @PView(click = "onClick")
-    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx;// 扫码，推广，管理,短信邀请；团队聊天,修改信息
+    LinearLayout ll_saoma, ll_tuiguang, ll_guanli, ll_send_msg, ll_send_talk, ll_xgxx,ll_send_share;// 扫码，推广，管理,短信邀请；团队聊天,修改信息,分享
     private TuanDui td;
     private Button bt_out_team;//退出团队；
     private String mTuanLiaoID;
@@ -135,7 +149,6 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 break;
             case R.id.ll_tuiguang:
                 RequestParams params = new RequestParams();
-
                 params.put("teamid", td.getTid());
                 String url = UrlTools.url + UrlTools.CIRCLE_ADDTEAMCIRCLE;
                 L.e("推广——工作圈url" + url + " params" + params);
@@ -236,17 +249,49 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 
                 break;
             case R.id.ll_send_talk:  //团队聊天
-//			startActivity(new Intent(TuanDuiJiaActivity.this, TribeActivity.class));
-//			this.overridePendingTransition(R.anim.aty_zoomin,
-//					R.anim.aty_zoomout);
                 YWIMKit mIMKit = AppStore.mIMKit;
                 //参数为群ID号
                 Intent intent2 = mIMKit.getTribeChattingActivityIntent(Long.parseLong(mTuanLiaoID));
                 startActivity(intent2);
                 break;
+            case R.id.ll_send_share://分享
+                ShareBoardConfig config = new ShareBoardConfig();
+                config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
+                UMWeb  web = new UMWeb(UrlTools.umeng_url);
+                web.setTitle("This is music title");//标题
+                web.setThumb(new UMImage(this,R.drawable.logo));  //缩略图
+                web.setDescription("my description");//描述
+                new ShareAction(this).setDisplayList(
+                        SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,
+                        SHARE_MEDIA.QQ)
+                        .withMedia(web)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+                                T.showShort(TuanDuiJiaActivity.this,share_media + "分享成功");
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                T.showShort(TuanDuiJiaActivity.this,share_media + "分享失败");
+                                Log.e("share", "onError:------------------- " + throwable.getMessage());
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        })
+                        .open(config);
+                break;
         }
     }
-
     // 退出团队：
     private void out() {
         String url = UrlTools.url + UrlTools.OUT_TEAM;
@@ -280,6 +325,14 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                     }
                 });
 
+    }
+
+    /**
+     * 屏幕横竖屏切换时避免出现window leak的问题
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     /**
@@ -327,6 +380,15 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
             ll_send_talk.setVisibility(View.GONE);
         }
         super.onActivityResult(requestCode, resultCode, intent);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //防止内存泄漏
+        UMShareAPI.get(this).release();
     }
 
     /**

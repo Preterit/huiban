@@ -492,6 +492,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent(TuanDui_DetailActivity.this,
                         TuanDuiJiaActivity.class);
+                Log.e("td", "onClick:-------------------- " + td.toString());
                 //将整个团队传过去
                 intent.putExtra("td", td);
                 startActivity(intent);
@@ -801,8 +802,9 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
      */
     @Override
     public void onRefresh() {
-        getMessageNum();
-        getData( 1 +  "",0);
+        getMessageNum();//公告数
+        getData( 1 +  "",0); //获取原始数据
+        getNum(1 + ""); //团队人数
     }
 
     @Override
@@ -839,6 +841,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                 if (td.getTid().equals(id)) {
                     getMessageNum();
                     getData( 1 +  "",0);
+                    getNum(1 + "");
                 }
             }
         }

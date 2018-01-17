@@ -531,6 +531,25 @@
         <activity android:name=".activity.ChooseFriendActivity" />
         <activity android:name=".activity.ChaKanJinDuActivity" />
         <activity android:name=".activity.SearchMemberActivity"></activity>
+        //友盟
+        <meta-data android:value="5a56d792a40fa33196000115" android:name="UMENG_APPKEY"/>
+        //qq官方申请的key的配置
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1105861990" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
     </application>
 
 </manifest>

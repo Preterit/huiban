@@ -163,19 +163,17 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 //						tuanDui.setTid(id);
 //						tuanDui.setName(teamName);
 //						tuanDui.save();
-						setResult(1001,new Intent());
-						Toast.makeText(JiaRuTuanDuiActivity.this, "加入成功", 0)
-								.show();
-//						addData();
 						if (!"".equals(mTuanLiaoID)){
 							addTuanLiao();
 						}
+						setResult(1001,new Intent());
+						T.showShort(JiaRuTuanDuiActivity.this, "加入成功");
+//						addData();
 					}
 
 					@Override
 					public void failure(String msg) {
-						Toast.makeText(JiaRuTuanDuiActivity.this, msg, 0)
-								.show();
+						T.showShort(JiaRuTuanDuiActivity.this, msg);
 					}
 
 					@Override
@@ -242,8 +240,7 @@ public class JiaRuTuanDuiActivity extends BaseActivity implements
 
 					@Override
 					public void failure(String msg) {
-						Toast.makeText(JiaRuTuanDuiActivity.this, msg, 0)
-								.show();
+						T.showShort(JiaRuTuanDuiActivity.this, msg);
 					}
 
 					@Override

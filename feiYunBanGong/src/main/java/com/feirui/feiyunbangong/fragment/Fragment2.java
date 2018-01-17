@@ -174,14 +174,6 @@ public class Fragment2 extends BaseFragment implements OnGroupClickListener,
         regist();// 注册广播接收器；
         requestGroup();// 获取分组信息；
         getNewFriendNum();// 获取新申请的朋友个数；
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                // 写子线程中的操作
-//                getNewFriendNum();// 获取新申请的朋友个数；
-//            }
-//        }).start();
         // 合上：
         for (int i = 0; i < groups.size(); i++) {
             expandlist.collapseGroup(i);

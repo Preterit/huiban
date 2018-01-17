@@ -329,27 +329,32 @@ public class Utils {
                 final JsonBean bean = JsonUtils.getMessage(new String(arg2));
                 if ("200".equals(bean.getCode())) {
                     Log.e("tag", "AsyncHttpServiceHelper----success: " +bean.getCode());
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            call.success(bean);
+                    if (activity != null){
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                call.success(bean);
 
-                            if (dialog != null) {
-                                dialog.dismiss();
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 } else {
                     Log.e("tag", "AsyncHttpServiceHelper----failure: " +bean.getMsg());
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            call.failure(bean.getMsg());
-                            if (dialog != null) {
-                                dialog.dismiss();
+                    if (activity != null){
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                call.failure(bean.getMsg());
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 }
             }
 
