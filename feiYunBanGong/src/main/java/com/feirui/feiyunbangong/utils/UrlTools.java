@@ -1,7 +1,7 @@
 package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
-
+  public static String umeng_url ="http://openbox.mobilem.360.cn/index/d/sid/3574607";
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
@@ -25,6 +25,12 @@ public class UrlTools {
 //public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
 // public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
 
+
+  /**
+   * 修改团队名称：
+   */
+  public static String CHANGE_TEAM_NAME = "team/changeTeamName";
+
   /*
   添加好友接口搜索
    */
@@ -43,7 +49,7 @@ public class UrlTools {
   /**
    * 登录获取验证码
    */
-  public  static String DENGLU_REGIST ="login/logincode";
+  public  static String DENGLU_REGIST ="login/sms_code";
   /**
    * 快速登录
    */
@@ -64,6 +70,12 @@ public class UrlTools {
    * 登录
    */
   public static String LOGIN_LOGIN = "login/login";
+
+  /**
+   * 验证码登录
+   */
+  public static String CODE_LOGIN = "login/code_login";
+
 
   /**
    * 个人注册

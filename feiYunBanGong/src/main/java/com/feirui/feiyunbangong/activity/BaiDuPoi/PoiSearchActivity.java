@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -114,7 +115,9 @@ public class PoiSearchActivity extends BaseActivity implements
         editCity = (EditText) findViewById(R.id.city);
         editCity.setText(city);
         keyWorldsView = (AutoCompleteTextView) findViewById(R.id.searchkey);
-        keyWorldsView.setText(address.substring(5,address.length()));
+        if (!TextUtils.isEmpty(address)){
+            keyWorldsView.setText(address.substring(5,address.length()));
+        }
         sugAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line);
         keyWorldsView.setAdapter(sugAdapter);
@@ -138,7 +141,8 @@ public class PoiSearchActivity extends BaseActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("fromAdd",keyWorldsView.getText().toString());
-                Log.e("result", "onActivityResult:-------------------- " + keyWorldsView.getText() );
+                intent.putExtra("location",latitude + "," + longitude);
+                Log.e("result", "onActivityResult:-------------------- " + keyWorldsView.getText() + latitude + "," + longitude );
                 setResult(RESULT_OK,intent);
                 finish();
             }

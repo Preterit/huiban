@@ -114,8 +114,6 @@ public class RegisteActivity extends BaseActivity {
 				return;
 			}
 
-
-
 			try {
 				String url = "";
 				// 发请求
@@ -205,8 +203,6 @@ public class RegisteActivity extends BaseActivity {
 
 		case R.id.btn_confirm:
 			//获取验证码
-
-
 				// 下一步
 			if (TextUtils.isEmpty(et_phone.getText().toString().trim())) {
 				T.showShort(RegisteActivity.this, "手机号不能为空");

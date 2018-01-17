@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,7 +34,6 @@ import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.alibaba.mobileim.tribe.YWTribeCreationParam;
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.activity.tribe.EditGroupInfoActivity;
 import com.feirui.feiyunbangong.activity.tribe.TribeConstants;
 import com.feirui.feiyunbangong.activity.tribe.TribeInfoActivity;
 import com.feirui.feiyunbangong.adapter.GuanLiChengYuanAdapter;
@@ -477,18 +477,27 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 	/**
 	 * 团队聊天自动删除人
 	 * @param
+	 * @param item
 	 */
-	public void  deleteTuanLiao(){
+	public void  deleteTuanLiao(final TuanDuiChengYuan item){
 		mTribeId = Long.parseLong(mTbID);
 		Log.e("团队成员自动删除人", "mTribeId: -----------------" + mTribeId + "----------" + mTuanDui.getPhone());
 		Log.e("团队成员自动删除人", "td: -----------------" + td );
 
 		IYWContact iywContact =  YWContactFactory.createAPPContact(mTuanDui.getPhone(), Happlication.APP_KEY);
-		Log.e("团队成员自动删除人", "iywContact: -----------------" + iywContact.toString() );
+		Log.e("团队成员自动删除人", "iywContact: -----------------" + iywContact.toString() + "------" + mTribeService);
         mTribeService.expelMember(mTribeId, iywContact, new IWxCallback() {
             @Override
             public void onSuccess(Object... objects) {
                 Log.e("chengyuan", "iywContact: -------移除团聊----------");
+				// 团队删除成员发出的广播：
+				Intent i = new Intent();
+				i.setAction(Constant.ON_RECEIVE_NEW_MEMBER_DELETE);
+				i.putExtra("guangbo","删除");
+				i.putExtra("id", item.getStaff_id());
+				i.putExtra("teamId",td.getTid());
+				Log.e("tdcys", "handleMessage: ==============" + item.getStaff_id() + "---" + td.getTid() );
+				sendBroadcast(i);
             }
 
             @Override
@@ -537,17 +546,9 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 				// 删除成功！
 				TuanDuiChengYuan item = (TuanDuiChengYuan) msg.obj;
 				adapter.reduce(item);
-                // 团队删除成员发出的广播：
-                Intent i = new Intent();
-                i.setAction(Constant.ON_RECEIVE_NEW_MEMBER_DELETE);
-                i.putExtra("guangbo","删除");
-                i.putExtra("id", item.getStaff_id());
-                i.putExtra("teamId",td.getTid());
-                Log.e("tdcys", "handleMessage: ==============" + item.getStaff_id() + "---" + td.getTid() );
-                sendBroadcast(i);
 				//删除团聊成员
-				if (mTbID != null){
-					deleteTuanLiao();
+				if (!TextUtils.isEmpty(mTbID)){
+					deleteTuanLiao(item);
 				}
 				break;
 			case 4:
