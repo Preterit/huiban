@@ -117,9 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y150"
                 android:background="@color/ffffff"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="@dimen/size80"

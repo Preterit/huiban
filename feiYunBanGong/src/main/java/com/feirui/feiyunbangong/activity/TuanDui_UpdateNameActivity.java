@@ -52,13 +52,15 @@ public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnC
         String url = UrlTools.url + UrlTools.CHANGE_TEAM_NAME;
         RequestParams params = new RequestParams();
         params.put("id", id);
-        params.put("new_name", et_update_name.getText());
+        params.put("new_name", et_update_name.getText().toString());
+        Log.e("修改团队名称", "params: "+params.toString()+"name"+et_update_name.getText() );
         Utils.doPost(LoadingDialog.getInstance(TuanDui_UpdateNameActivity.this),
                 TuanDui_UpdateNameActivity.this, url, params,
                 new Utils.HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {
                         T.showShort(TuanDui_UpdateNameActivity.this, "修改团队名成功！");
+
                     }
                     @Override
                     public void failure(String msg) {
@@ -66,8 +68,8 @@ public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnC
                     }
                     @Override
                     public void finish() {
-                        // TODO Auto-generated method stub
                     }
                 });
+        finish();
     }
 }

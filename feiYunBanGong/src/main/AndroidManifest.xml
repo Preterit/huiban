@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="96"
-    android:versionName="1.7.26">
+    android:versionCode="97"
+    android:versionName="1.7.27">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -533,6 +533,10 @@
         <activity android:name=".activity.ChaKanJinDuActivity" />
         <activity android:name=".activity.SearchMemberActivity" />
         <activity android:name=".activity.TuanDui_UpdateNameActivity" />
+        <activity android:name=".activity.ChooseTxlActivity"></activity>
+        <!--友盟-->
+        <meta-data android:value="5a56d792a40fa33196000115" android:name="UMENG_APPKEY"/>
+        <!--qq官方申请的key的配置-->
         <activity android:name=".activity.ChooseTxlActivity" />
         <activity android:name=".activity.SearchMemberActivity" />
         //友盟
@@ -543,13 +547,11 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true">
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="tencent1105861990" />
             </intent-filter>
         </activity>
