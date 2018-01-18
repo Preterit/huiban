@@ -533,19 +533,23 @@
         <activity android:name=".activity.ChaKanJinDuActivity" />
         <activity android:name=".activity.SearchMemberActivity" />
         <activity android:name=".activity.TuanDui_UpdateNameActivity" />
-        <activity android:name=".activity.ChooseTxlActivity"></activity>
-        <activity android:name=".activity.SearchMemberActivity"></activity>
+        <activity android:name=".activity.ChooseTxlActivity" />
+        <activity android:name=".activity.SearchMemberActivity" />
         //友盟
-        <meta-data android:value="5a56d792a40fa33196000115" android:name="UMENG_APPKEY"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a56d792a40fa33196000115" />
         //qq官方申请的key的配置
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent1105861990" />
             </intent-filter>
         </activity>
@@ -553,7 +557,7 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
+        <activity android:name=".activity.QickLoginActivity"></activity>
     </application>
 
 </manifest>

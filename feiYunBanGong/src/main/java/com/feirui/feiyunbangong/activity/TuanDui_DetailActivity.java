@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -444,7 +445,6 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                     //团队群Id
                     getTuanLiaoId();
                     Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
-                    getData(1 + "",0);// 更新数据；
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
@@ -453,9 +453,12 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                     break;
                 case 5:
                     final JsonBean bean = (JsonBean) msg.obj;
-                    Log.e("chengyuan", "JsonBean: -----------------" + bean.getInfor().get(0).get("team_talk") );
+                    getData(1 + "",0);// 更新数据；
+                    getNum(1 + "");
                     //添加团聊成员
-                    if (!bean.getInfor().get(0).get("team_talk").equals("")){
+                    if (TextUtils.isEmpty(bean.getInfor().get(0).get("team_talk") + "")){
+                        return;
+                    }else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

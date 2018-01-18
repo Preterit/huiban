@@ -58,25 +58,25 @@ import java.util.List;
 
 public class PoiSearchActivity extends BaseActivity implements
         OnGetPoiSearchResultListener, OnGetSuggestionResultListener {
-    private PoiSearch mPoiSearch = null;
-    private SuggestionSearch mSuggestionSearch = null;
-    private BaiduMap mBaiduMap = null;
+    private PoiSearch mPoiSearch;
+    private SuggestionSearch mSuggestionSearch;
+    private BaiduMap mBaiduMap;
     private List<String> suggest;
     private TextView righttv;
 
     /**
      * 搜索关键字输入窗口
      */
-    private EditText editCity = null;
-    private AutoCompleteTextView keyWorldsView = null;
-    private ArrayAdapter<String> sugAdapter = null;
+    private EditText editCity;
+    private AutoCompleteTextView keyWorldsView;
+    private ArrayAdapter<String> sugAdapter;
     private int loadIndex = 0;
 
-    private LatLng center = null;
+    private LatLng center;
     private int radius = 100;
-    private LatLng southwest = null;
-    private LatLng northeast = null;
-    private LatLngBounds searchbound = null;
+    private LatLng southwest;
+    private LatLng northeast;
+    private LatLngBounds searchbound;
 
     int searchType = 0;  // 搜索的类型，在显示时区分
     private String city,address;

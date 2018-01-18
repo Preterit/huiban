@@ -33,7 +33,9 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
+import com.feirui.feiyunbangong.utils.Utils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -169,11 +171,34 @@ public class MyChatUI extends IMChattingPageUI {
 			btn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// 跳转到好友资料页面：
-					Intent intent = new Intent(fragment.getActivity(),
-							FriendInforDetailActivity.class);
-					intent.putExtra("phone", phone);
-					fragment.getActivity().startActivity(intent);
+					RequestParams params = new RequestParams();
+					params.put("key", phone + "");
+					params.put("location", "");
+					String url = UrlTools.url + UrlTools.USER_SEARCH_MOBILE;
+					Utils.doPost(null, fragment.getActivity(), url, params, new Utils.HttpCallBack() {
+						@Override
+						public void success(JsonBean bean) {
+							if ("200".equals(bean.getCode())){
+								if (bean.getInfor().size() == 0){
+									T.showShort(fragment.getActivity(),"请添加好友再查看");
+								}else {
+									// 跳转到好友资料页面：
+									Intent intent = new Intent(fragment.getActivity(),
+											FriendInforDetailActivity.class);
+									intent.putExtra("phone", phone);
+									fragment.getActivity().startActivity(intent);
+								}
+							}
+						}
+
+						@Override
+						public void failure(String msg) {
+						}
+
+						@Override
+						public void finish() {
+						}
+					});
 				}
 			});
 

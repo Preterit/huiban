@@ -361,22 +361,26 @@ public class Utils {
             @Override
             public void onFinish() {
                 Log.e("tag", "AsyncHttpServiceHelper----onFinish: " );
-                activity.runOnUiThread(new Runnable() {
+                if (activity != null){
+                    activity.runOnUiThread(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        Log.e("TAG", "结束！！！！");
-                        call.finish();
-                        if (dialog != null) {
-                            dialog.dismiss();
+                        @Override
+                        public void run() {
+                            Log.e("TAG", "结束！！！！");
+                            call.finish();
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
 
             @Override
             public void onFailure(final int arg0, Header[] arg1, byte[] arg2, final Throwable arg3) {
                 Log.e("tag", "AsyncHttpServiceHelper----onFailure: " );
+                if (activity != null)
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

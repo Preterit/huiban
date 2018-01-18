@@ -67,6 +67,14 @@
         <item name="android:textColor">@color/ffffff</item>
         <item name="android:textSize">@dimen/size49</item>
     </style>
+    <style name="ffffff_55">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size55</item>
+    </style>
+    <style name="ffffff_45">
+        <item name="android:textColor">@color/ffffff</item>
+        <item name="android:textSize">@dimen/size45</item>
+    </style>
 
     <style name="ffffff_38">
         <item name="android:textColor">@color/ffffff</item>

@@ -1,7 +1,7 @@
 package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
-  public static String umeng_url ="http://openbox.mobilem.360.cn/index/d/sid/3574607";
+  public static String umeng_url ="http://91huiban.com/wxshare/team_member.html";
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";

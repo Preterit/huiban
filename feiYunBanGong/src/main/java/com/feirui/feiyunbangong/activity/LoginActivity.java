@@ -32,6 +32,7 @@ import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.BaiDuUtil;
 import com.feirui.feiyunbangong.utils.DingShiQiUtil;
+import com.feirui.feiyunbangong.utils.ImmersedStatusbarUtils;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
 import com.feirui.feiyunbangong.utils.SPUtils;
@@ -161,6 +162,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        // 设置沉浸式状态栏：
+        ImmersedStatusbarUtils.initAfterSetContentView(this, findViewById(R.id.lay_login));
         //创建微信并注册到微信
         Happlication.sApi.registerApp(Constants.APP_ID);
         //启动的同时 定位
@@ -328,12 +331,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 LoginMain(flag);
                 break;
-//            case R.id.btn_login: //快速登录
-//                intent = new Intent(LoginActivity.this, RegisteActivity.class);
-//                intent.putExtra("type", "denglu");
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomcloseout);
-//                break;
             case R.id.et_login_username:
                 initAutoComplete("history", et_login_username);
                 break;
@@ -443,6 +440,33 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 temp = temp + key + " : " + map.get(key) + "\n";
             }
             Log.e("qq", "onComplete: ---------------" + temp);
+
+//            uid : 66C6CDB0EC7ABAB5B1934645A104B473
+//            ret : 0
+//            is_yellow_year_vip : 0
+//            accessToken : 4C62418C65B076811CA1E06503405540
+//            expiration : 1523945605579
+//            unionid :
+//            yellow_vip_level : 0
+//            expires_in : 1523945605579
+//            iconurl : http://q.qlogo.cn/qqapp/1105861990/66C6CDB0EC7ABAB5B1934645A104B473/100
+//            msg :
+//            city : 朝阳
+//            vip : 0
+//            level : 0
+//            name : 飞锐科技有限公司
+//            province : 北京
+//            is_yellow_vip : 0
+//            gender : 男
+//            openid : 66C6CDB0EC7ABAB5B1934645A104B473
+//            screen_name : 飞锐科技有限公司
+//            profile_image_url : http://q.qlogo.cn/qqapp/1105861990/66C6CDB0EC7ABAB5B1934645A104B473/100
+//            access_token : 4C62418C65B076811CA1E06503405540
+            Intent intent = new Intent(LoginActivity.this,QickLoginActivity.class);
+            intent.putExtra("name",map.get("name"));
+            intent.putExtra("iconurl",map.get("iconurl"));
+            startActivity(intent);
+            overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
         }
 
         @Override

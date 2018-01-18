@@ -176,8 +176,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
 //                                super.onFailure(arg0, arg1, arg2, arg3);
 //                            }
 //                        });
-//                break;
-
+                break;
             case R.id.ll_guanli:  //团长管理团队 将整个团队传过去
                 Intent intent = new Intent(this, TuanDuiGuanLiActivity.class);
                 intent.putExtra("td", td);
@@ -232,7 +231,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 ShareBoardConfig config = new ShareBoardConfig();
                 config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
                 config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
-                UMWeb  web = new UMWeb(UrlTools.umeng_url);
+                UMWeb  web = new UMWeb(UrlTools.umeng_url + "?team_id=" + td.getTid());
                 web.setTitle("会办");//标题
                 web.setThumb(new UMImage(this,R.drawable.logo));  //缩略图
                 web.setDescription("会办是一个人人管理的平台~");//描述

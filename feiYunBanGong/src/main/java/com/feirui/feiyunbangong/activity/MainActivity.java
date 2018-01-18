@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -271,9 +272,15 @@ public class MainActivity extends BaseActivity
         // 此对象获取到后，保存为全局对象，供APP使用
         // 此对象跟用户相关，如果切换了用户，需要重新获取
         mIMKit = YWAPI.getIMKitInstance(userid, Happlication.APP_KEY);
-        // 自定义用户事件：
         MyUserProfileSampleHelper.activity = this;
-        MyUserProfileSampleHelper.initProfileCallback();
+        // 自定义用户事件：
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.e("123", "onError: "+ "onSuccess");
+                MyUserProfileSampleHelper.initProfileCallback();
+            }
+        },3000);
 
         // 开始登陆IM:
         String password = (String) AppStore.user.getInfor().get(0).get("staff_password");
@@ -351,11 +358,13 @@ public class MainActivity extends BaseActivity
                 super.onSuccess(statusCode, headers, responseBody);
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
-                Log.e("审批界面--count", "Infor: "+count.getInfo().getNum());
-                Message message = new Message();
-                message.obj = count.getInfo().getNum();
-                message.what = 2;
-                handler.sendMessage(message);
+//                Log.e("审批界面--count", "Infor: "+count.getInfo().getNum());
+                if (!TextUtils.isEmpty(count.getInfo().getNum())){
+                    Message message = new Message();
+                    message.obj = count.getInfo().getNum();
+                    message.what = 2;
+                    handler.sendMessage(message);
+                }
 
     }
 });
@@ -373,7 +382,7 @@ public class MainActivity extends BaseActivity
                 super.onSuccess(statusCode, headers, responseBody);
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
-                Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
+//                Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
                 work_num=Integer.parseInt(count.getInfo().getNum());
             }
         });
@@ -515,7 +524,6 @@ public class MainActivity extends BaseActivity
                     // 当前hide
                     transaction.hide(fragmentArray[currentIndex]);
                     // show你选中
-
                     if (!fragmentArray[selectedIndex].isAdded()) {
                         // 以前没添加过
                         transaction.add(R.id.fragment_container, fragmentArray[selectedIndex]);
@@ -829,8 +837,6 @@ public class MainActivity extends BaseActivity
                     break;
                 case 1:
                     Log.e("获取未读消息数----------------", "getNum:-------------- "+(int) msg.obj);
-                    //设置桌面图标提示
-
                     //设置应用在桌面上显示的角标
                     if (!Build.MANUFACTURER.equalsIgnoreCase(MobileBrand.XIAOMI)) {
                         BadgeNumberManager.from(MainActivity.this).setBadgeNumber((int) msg.obj);
@@ -843,7 +849,6 @@ public class MainActivity extends BaseActivity
                     }
                     break;
                 case 2:
-
                     Log.e("设置工作页面数字", "getNum_work:-------- "+msg.obj);
                     if(!(msg.obj).equals("0")){
                         tv_num_hb.setVisibility(View.VISIBLE);
@@ -986,18 +991,12 @@ public class MainActivity extends BaseActivity
             if (Constant.ON_RECEIVE_NEW_TASK.equals(intent.getAction())) {//任务单
                 Log.e("自定义广播", "任务单--main");
                 getNum_update();
-//                getWork_Num();//设置工作页面角标
-//                getNum();//设置桌面app角标
             } else if (Constant.ON_RECEIVE_NEW_QINGJIA.equals(intent.getAction())) {//请假
                 Log.e("自定义广播", "请假--main");
                 getNum_update();
-//                getWork_Num();//设置工作页面角标
-//                getNum();//设置桌面app角标
             }else if(Constant.ON_RECEIVE_NEW_BAOBIAO.equals(intent.getAction())){//报表
                 getNum_update();
                 Log.e("自定义广播", "报表--main");
-//                getWork_Num();//设置工作页面角标
-//                getNum();//设置桌面app角标
             }
         }
         private void getNum_update() {
@@ -1009,7 +1008,7 @@ public class MainActivity extends BaseActivity
                     super.onSuccess(statusCode, headers, responseBody);
                     Gson gson = new Gson();
                     ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
-                    Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
+//                    Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
                     work_num=Integer.parseInt(count.getInfo().getNum());
                 }
             });

@@ -94,7 +94,7 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
 
         top.setBackgroundColor(getResources().getColor(R.color.bar));
 
-        mCir_head = (com.feirui.feiyunbangong.view.CircleImageView) findViewById(R.id.cir_head);
+        mCir_head =  findViewById(R.id.cir_head);
         mCir_head.setOnClickListener(this);
         mTv_name = (TextView) findViewById(R.id.tv_name);
         mIv_sex = (ImageView) findViewById(R.id.iv_sex);
@@ -265,7 +265,6 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
                     public void success(JsonBean bean) {
                         T.showShort(FriendInforDetailActivity.this, "删除好友成功！");
                         FriendInforDetailActivity.this.finish();
-                        // TODO 获取该分组下的所有好友信息：
                     }
 
                     @Override
@@ -275,8 +274,6 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
 
                     @Override
                     public void finish() {
-                        // TODO Auto-generated method stub
-
                     }
                 });
     }
@@ -348,7 +345,6 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
                     createErWeiMa(phone);
                 }else {
                     FriendInforDetailActivity.this.finish();
-                    T.showShort(FriendInforDetailActivity.this,"请添加好友再查看");
                 }
 
             }

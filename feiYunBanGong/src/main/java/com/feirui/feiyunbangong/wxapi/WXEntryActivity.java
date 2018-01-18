@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.activity.LoginActivity;
+import com.feirui.feiyunbangong.activity.QickLoginActivity;
 import com.feirui.feiyunbangong.entity.Constants;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.SPUtils;
@@ -124,10 +126,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 result = "发送返回";
                 break;
         }
-
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         finish();
-
     }
 
     /**
@@ -289,7 +289,12 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 // 解析获取的用户信息
                 WXUserInfo userInfo = mGson.fromJson(new String(responseBody), WXUserInfo.class);
                 T.showShort(WXEntryActivity.this, "获取用户信息成功");
-                Log.e("gson", "用户信息获取结果：" + userInfo.toString());
+                Log.e("gson", "用户信息获取结果：" + userInfo.getNickname() + "----" +userInfo.getHeadimgurl());
+                Intent intent = new Intent(WXEntryActivity.this,QickLoginActivity.class);
+                intent.putExtra("name",userInfo.getNickname());
+                intent.putExtra("iconurl",userInfo.getHeadimgurl());
+                startActivity(intent);
+                overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
             }
 
             @Override
