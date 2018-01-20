@@ -13,12 +13,12 @@
         layout="@layout/top" />
 
     <LinearLayout
+        android:id="@+id/ll_update"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
         >
-
         <EditText
             android:layout_gravity="center"
             android:id="@+id/et_update_name"
@@ -26,17 +26,67 @@
             android:textColorHint="#CDC9C9"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@null" />
+            android:background="@drawable/blue_kuang"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:paddingLeft="20dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp">
+            <EditText
+                android:layout_gravity="center"
+                android:id="@+id/et_update_introduction"
+                android:hint="请输入团队介绍(最多40字)"
+                android:gravity="left"
+                android:paddingTop="20dp"
+                android:maxLength="40"
+                android:textColorHint="#CDC9C9"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:paddingLeft="20dp"
+                android:background="@null"/>
+            <TextView
+                android:id="@+id/tv_num_update"
+                android:layout_below="@id/et_update_introduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666"
+                android:text="40"
+                android:textSize="15sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:text="团队头像："
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+        <ImageView
+            android:id="@+id/update_head"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_addpic_unfocused"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            />
 
     </LinearLayout>
-
     <Button
         android:id="@+id/btn_update_name"
         android:layout_gravity="center"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="40dp"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:text="完成"
+        android:text="完 成"
         android:textSize="18sp"
         android:textColor="@color/white"
         android:background="@drawable/shape_btn_shenpi_tg"/>

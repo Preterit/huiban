@@ -178,7 +178,6 @@ public class TuanDuiGuanLiActivity extends BaseActivity implements
 
 			break;
 		case R.id.bt_dissolve_team:
-
 			MyAleartDialog dissolve_dialog = new MyAleartDialog("解散团队",
 					"确定解散团队吗？", this, new AlertCallBack() {
 						@Override

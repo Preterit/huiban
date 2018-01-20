@@ -46,6 +46,7 @@ import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -141,8 +142,23 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
 
     @Override
     protected void onResume() {
-        registReceiver();// 注册广播接收器
         super.onResume();
+        registReceiver();// 注册广播接收器
+        String name = (String) SPUtils.get(this,td.getTid(),"");
+        Log.e("name", "onResume: -------------" + name );
+        if (!name.equals(td.getName()) && !TextUtils.isEmpty(name)){
+            if (name.length() > 10) {
+                centerTv.setText(name.substring(0, 9) + "...");
+            } else {
+                centerTv.setText(name);
+            }
+        }else {
+            if (td.getName().length() > 10) {
+                centerTv.setText(td.getName().substring(0, 9) + "...");
+            } else {
+                centerTv.setText(td.getName());
+            }
+        }
     }
 
     @Override
@@ -394,7 +410,12 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
      */
     private void initData() {
         //从数据库获取所有数据
-        allTuan = DataSupport.findAll(TuanDuiChengYuan.class);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                allTuan = DataSupport.findAll(TuanDuiChengYuan.class);
+            }
+        });
         if (allTuan == null || allTuan.size() == 0){
             Log.e("tdcys", "initData:-------------allTuan---------------- " );
             //从网络获取数据
@@ -535,12 +556,6 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                 finish();
             }
         });
-
-        if (td.getName().length() > 10) {
-            centerTv.setText(td.getName().substring(0, 9) + "...");
-        } else {
-            centerTv.setText(td.getName());
-        }
         righttv.setBackgroundResource(R.drawable.bai_fangdajing);
 
 

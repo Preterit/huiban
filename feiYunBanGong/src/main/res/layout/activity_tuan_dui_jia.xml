@@ -185,7 +185,7 @@
             android:paddingRight="@dimen/x250"
             android:textColor="#6A6A6A"
             android:textSize="15sp"
-            android:text="修改成员信息" />
+            android:text="修改个人信息" />
 
         <ImageView
             android:layout_width="@dimen/x55"
@@ -258,7 +258,7 @@
             android:paddingRight="@dimen/x250"
             android:textColor="#6A6A6A"
             android:textSize="15sp"
-            android:text="修改团队名称" />
+            android:text="修改团队信息" />
 
         <ImageView
             android:layout_width="@dimen/x55"

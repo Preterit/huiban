@@ -30,6 +30,11 @@ public class UrlTools {
   public static String FRIEND_SEARCH = "User/search_stranger";
 
   /**
+   * 获取团队的信息 图片 名字
+   */
+  public static String TEAM_INFOR = "Team/share_teaminfo";
+
+  /**
    * 注册获取验证码
    */
   public static String ZHUCE_REGIST = "Zhuce/regist";
@@ -436,6 +441,11 @@ public class UrlTools {
    * 修改团队名称：
    */
   public static String CHANGE_TEAM_NAME = "team/changeTeamName";
+  /**
+   * 修改团队名称,简介，图片
+   */
+  public static String UPDATE_TEAM_INFOR = "Team/change_teaminfo";
+
   /**
    * 修改成员信息页面获取成员信息：
    */

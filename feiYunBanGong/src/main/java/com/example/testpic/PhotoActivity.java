@@ -1,3 +1,4 @@
+
 package com.example.testpic;
 
 import java.util.ArrayList;
@@ -94,8 +95,8 @@ public class PhotoActivity extends Activity {
 			initListViews(bmp.get(i));//
 		}
 
-		adapter = new MyPageAdapter(listViews);// 鏋勯�燼dapter
-		pager.setAdapter(adapter);// 璁剧疆閫傞厤鍣�
+		adapter = new MyPageAdapter(listViews);// 构�?�adapter
+		pager.setAdapter(adapter);// 设置适配�?
 		Intent intent = getIntent();
 		int id = intent.getIntExtra("ID", 0);
 		pager.setCurrentItem(id);
@@ -104,25 +105,25 @@ public class PhotoActivity extends Activity {
 	private void initListViews(Bitmap bm) {
 		if (listViews == null)
 			listViews = new ArrayList<View>();
-		ImageView img = new ImageView(this);// 鏋勯�爐extView瀵硅薄
+		ImageView img = new ImageView(this);// 构�?�textView对象
 		img.setBackgroundColor(0xff000000);
 		img.setImageBitmap(bm);
 		img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
-		listViews.add(img);// 娣诲姞view
+		listViews.add(img);// 添加view
 	}
 
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
 
-		public void onPageSelected(int arg0) {// 椤甸潰閫夋嫨鍝嶅簲鍑芥暟
+		public void onPageSelected(int arg0) {// 页面选择响应函数
 			count = arg0;
 		}
 
-		public void onPageScrolled(int arg0, float arg1, int arg2) {// 婊戝姩涓�傘�傘��
+		public void onPageScrolled(int arg0, float arg1, int arg2) {// 滑动中�?��?��??
 
 		}
 
-		public void onPageScrollStateChanged(int arg0) {// 婊戝姩鐘舵�佹敼鍙�
+		public void onPageScrollStateChanged(int arg0) {// 滑动状�?�改�?
 
 		}
 	};
@@ -131,20 +132,20 @@ public class PhotoActivity extends Activity {
 
 		private ArrayList<View> listViews;// content
 
-		private int size;// 椤垫暟
+		private int size;// 页数
 
-		public MyPageAdapter(ArrayList<View> listViews) {// 鏋勯�犲嚱鏁�
-															// 鍒濆鍖杤iewpager鐨勬椂鍊欑粰鐨勪竴涓〉闈�
+		public MyPageAdapter(ArrayList<View> listViews) {// 构�?�函�?
+			// 初始化viewpager的时候给的一个页�?
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public void setListViews(ArrayList<View> listViews) {// 鑷繁鍐欑殑涓�涓柟娉曠敤鏉ユ坊鍔犳暟鎹�
+		public void setListViews(ArrayList<View> listViews) {// 自己写的�?个方法用来添加数�?
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public int getCount() {// 杩斿洖鏁伴噺
+		public int getCount() {// 返回数量
 			return size;
 		}
 
@@ -152,14 +153,14 @@ public class PhotoActivity extends Activity {
 			return POSITION_NONE;
 		}
 
-		public void destroyItem(View arg0, int arg1, Object arg2) {// 閿�姣乿iew瀵硅薄
+		public void destroyItem(View arg0, int arg1, Object arg2) {// �?毁view对象
 			((ViewPager) arg0).removeView(listViews.get(arg1 % size));
 		}
 
 		public void finishUpdate(View arg0) {
 		}
 
-		public Object instantiateItem(View arg0, int arg1) {// 杩斿洖view瀵硅薄
+		public Object instantiateItem(View arg0, int arg1) {// 返回view对象
 			try {
 				((ViewPager) arg0).addView(listViews.get(arg1 % size), 0);
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,7 @@ import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
@@ -48,6 +50,9 @@ import org.apache.http.Header;
 import org.litepal.crud.DataSupport;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * 团队——加
@@ -93,11 +98,6 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
         setManage(td);
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        if (td.getName().length() > 10) {
-            setCenterString(td.getName().substring(0, 9) + "...");
-        } else {
-            setCenterString(td.getName());
-        }
         setRightVisibility(false);
     }
 
@@ -105,6 +105,21 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
     protected void onResume() {
         super.onResume();
         getTuanLiaoId(); //获取该团聊的ID
+        String name = (String) SPUtils.get(this,td.getTid(),"");
+        Log.e("name", "onResume: -------jia------" + name );
+        if (!name.equals(td.getName()) && !TextUtils.isEmpty(name)){
+            if (name.length() > 10) {
+                setCenterString(name.substring(0, 9) + "...");
+            } else {
+                setCenterString(name);
+            }
+        }else {
+            if (td.getName().length() > 10) {
+                setCenterString(td.getName().substring(0, 9) + "...");
+            } else {
+                setCenterString(td.getName());
+            }
+        }
     }
 
     // 设置管理员的显示与隐藏：
@@ -113,9 +128,11 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 && String.valueOf(td.getGuanli_id()).equals(
                 String.valueOf(AppStore.user.getInfor().get(0).get("id")))) {
             ll_guanli.setVisibility(View.VISIBLE);
+            ll_update_name.setVisibility(View.VISIBLE);
             bt_out_team.setVisibility(View.INVISIBLE);//管理员不显示退出团队；
         } else {
             bt_out_team.setVisibility(View.VISIBLE);
+            ll_update_name.setVisibility(View.GONE);
             ll_guanli.setVisibility(View.GONE);
         }
     }
@@ -139,7 +156,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 dialog.setTitle("扫码加入团队");
                 dialog.show();
                 break;
-            case R.id.ll_update_name:
+            case R.id.ll_update_name://修改团队名称
                 Intent intent3 = new Intent(this,TuanDui_UpdateNameActivity.class);
                 intent3.putExtra("id", td.getTid());
                 startActivity(intent3);
@@ -228,40 +245,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 startActivity(intent2);
                 break;
             case R.id.ll_send_share://分享
-                ShareBoardConfig config = new ShareBoardConfig();
-                config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
-                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
-                UMWeb  web = new UMWeb(UrlTools.umeng_url + "?team_id=" + td.getTid());
-                web.setTitle("会办");//标题
-                web.setThumb(new UMImage(this,R.drawable.logo));  //缩略图
-                web.setDescription("会办是一个人人管理的平台~");//描述
-                new ShareAction(this).setDisplayList(
-                        SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,
-                        SHARE_MEDIA.QQ)
-                        .withMedia(web)
-                        .setCallback(new UMShareListener() {
-                            @Override
-                            public void onStart(SHARE_MEDIA share_media) {
-
-                            }
-
-                            @Override
-                            public void onResult(SHARE_MEDIA share_media) {
-                                T.showShort(TuanDuiJiaActivity.this,share_media + "分享成功");
-                            }
-
-                            @Override
-                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                                T.showShort(TuanDuiJiaActivity.this,share_media + "分享失败");
-                                Log.e("share", "onError:------------------- " + throwable.getMessage());
-                            }
-
-                            @Override
-                            public void onCancel(SHARE_MEDIA share_media) {
-
-                            }
-                        })
-                        .open(config);
+                getTeamInfor();
                 break;
         }
     }
@@ -380,6 +364,96 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
                 T.showShort(TuanDuiJiaActivity.this, "退出团聊失败--" + s);
             }
         }, Long.parseLong(mTuanLiaoID));
+    }
+
+    /**
+     * 获取团队信息
+     * @return
+     */
+    public void getTeamInfor() {
+        String url = UrlTools.url + UrlTools.TEAM_INFOR;
+        RequestParams params = new RequestParams();
+        params.put("team_id",td.getTid());
+        AsyncHttpServiceHelper.post(url,params,new AsyncHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                JsonBean bean = JsonUtils.getMessage(new String(responseBody));
+                if ("200".equals(bean.getCode())){
+                    Log.e("infor", "onSuccess:------------------------- " +bean.getInfor().get(0));
+                    ArrayList<HashMap<String,Object>> infor = bean.getInfor();
+                    String name = infor.get(0).get("team_name") + "";
+                    String pic = infor.get(0).get("pic") + "";
+                    String introduction = infor.get(0).get("team_introduction") + "";
+                    shareTeam(name,introduction,pic);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                super.onFailure(statusCode, headers, responseBody, error);
+            }
+        });
+
+    }
+
+    /**
+     * 分享团队
+     * @param name 团队名称
+     * @param introduction 简介
+     * @param pic 头像
+     */
+    private void shareTeam(String name, String introduction, String pic) {
+        ShareBoardConfig config = new ShareBoardConfig();
+        config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+        config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
+        UMWeb  web = new UMWeb(UrlTools.umeng_url + "?team_id=" + td.getTid());
+        String title = "";
+        if (!TextUtils.isEmpty(name)){
+            title = name ;
+            web.setTitle(name + "通讯录");//标题
+        }else {
+            title = td.getTid();
+            web.setTitle(td.getTid() + "团队通讯录");//标题
+        }
+        if (!TextUtils.isEmpty(pic)){
+            web.setThumb(new UMImage(this,pic));  //缩略图
+        }else {
+            web.setThumb(new UMImage(this,R.drawable.logo));  //缩略图
+        }
+
+        if (!TextUtils.isEmpty(introduction)){
+            web.setDescription(introduction);//描述
+        }else {
+            web.setDescription("会办是一个人人管理的平台,快加入" + title + "团队，跟你的好友互动吧~");//描述
+        }
+        new ShareAction(this).setDisplayList(
+                SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,
+                SHARE_MEDIA.QQ)
+                .withMedia(web)
+                .setCallback(new UMShareListener() {
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+                        T.showShort(TuanDuiJiaActivity.this,share_media + "分享成功");
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                        T.showShort(TuanDuiJiaActivity.this,share_media + "分享失败");
+                        Log.e("share", "onError:------------------- " + throwable.getMessage());
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                })
+                .open(config);
     }
 
 

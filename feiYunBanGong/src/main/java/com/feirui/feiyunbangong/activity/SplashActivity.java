@@ -167,7 +167,6 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
         params.put("location", stringBuffer.toString());
         params.put("position",mPostion);
         Log.e("string", "LoginMain: ---------LoginMain-------------" + params);
-//        if (mEditor.)
         mEditor.putString("mPostion",mPostion); //保存登录时的位置信息
         mEditor.putString("mLocation",stringBuffer.toString()); //保存登录时的位置信息
         mEditor.commit();

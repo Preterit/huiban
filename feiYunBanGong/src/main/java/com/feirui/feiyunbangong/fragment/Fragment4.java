@@ -33,6 +33,7 @@ import com.feirui.feiyunbangong.adapter.TuanDuiAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
+import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.myinterface.AllInterface.OnTeamNoticeNumChanged;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.T;
@@ -195,7 +196,13 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
      * 数据获取
      */
     public void getData(){
-        tds = DataSupport.findAll(TuanDui.class);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tds = DataSupport.findAll(TuanDui.class);
+            }
+        });
+
         //获取本地数据库信息
         if (tds == null || tds.size() == 0){
             //如果数据库为空  从网络获取数据

@@ -58,6 +58,7 @@ import java.util.List;
 
 /**
  * 修改个人资料
+ * create by xy
  */
 public class RevisePersonActivity extends BaseActivity implements View.OnClickListener {
     private TextView righttv;

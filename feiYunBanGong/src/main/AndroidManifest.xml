@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="97"
-    android:versionName="1.7.27">
+    android:versionCode="99"
+    android:versionName="1.7.29">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -331,10 +331,6 @@
         <activity
             android:name=".activity.YiJianActivity"
             android:label="@string/title_activity_yi_jian" />
-        <!-- <activity -->
-        <!-- android:name=".activity.WoDeTuanDuiActivity" -->
-        <!-- android:label="@string/title_activity_chuang_jian"> -->
-        <!-- </activity> -->
         <activity
             android:name=".activity.GuanLiTuanDuiActivity"
             android:label="@string/title_activity_guan_li_tuan_dui" />
@@ -403,10 +399,6 @@
         <activity
             android:name=".activity.NoticeReadUnReadActivity"
             android:label="@string/title_activity_notice_read_un_read" />
-        <!-- <activity -->
-        <!-- android:name=".activity.MainSlidingMenuActivity" -->
-        <!-- android:label="@string/title_activity_main_sliding_menu"> -->
-        <!-- </activity> -->
         <activity
             android:name=".activity.WifiClockActivity"
             android:label="@string/title_activity_wifi_clock" />
@@ -470,10 +462,6 @@
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
         <activity android:name=".activity.ReleaseDetailActivity" />
-        <!-- <activity -->
-        <!-- android:name=".activity.RenWuDetailActivity" -->
-        <!-- android:label="@string/title_activity_ren_wu_detail" -->
-        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
         <activity android:name=".activity.WebViewActivity" />
         <!-- 个人小店 -->
         <activity android:name=".activity.AddShopActivity" />
@@ -481,11 +469,6 @@
             android:name=".activity.Release_FanKuiActivity"
             android:label="@string/title_activity_release__fan_kui"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <receiver
-            android:name=".receiver.KeepLiveReceiver"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
         <activity android:name=".activity.SheZhiActivity" />
@@ -535,15 +518,10 @@
         <activity android:name=".activity.TuanDui_UpdateNameActivity" />
         <activity android:name=".activity.ChooseTxlActivity"></activity>
         <!--友盟-->
-        <meta-data android:value="5a56d792a40fa33196000115" android:name="UMENG_APPKEY"/>
-        <!--qq官方申请的key的配置-->
-        <activity android:name=".activity.ChooseTxlActivity" />
-        <activity android:name=".activity.SearchMemberActivity" />
-        //友盟
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5a56d792a40fa33196000115" />
-        //qq官方申请的key的配置
+        <!--qq官方申请的key的配置-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

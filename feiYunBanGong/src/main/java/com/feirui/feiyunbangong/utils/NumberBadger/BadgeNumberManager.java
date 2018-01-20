@@ -6,7 +6,7 @@ import android.os.Build;
 
 /**
  * 应用桌面角标设置的管理类
- * Created by zlq on 2017 17/8/23 14:50.
+ * Created by xy on 2017 17/8/23 14:50.
  */
 
 public class BadgeNumberManager {

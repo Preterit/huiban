@@ -865,6 +865,10 @@ public class MainActivity extends BaseActivity
 
     };
 
+    /**
+     * 小米角标通知
+     * @param num
+     */
     private static void setXiaomiBadgeNumber(int num) {
         if (activitys.size() == 0 || activitys == null){
             return;
