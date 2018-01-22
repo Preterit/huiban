@@ -40,7 +40,7 @@ public class XiuGaiDialog extends MyBaseDialog {
 		tv_title = (TextView) findViewById(R.id.tv_title);
 		tv_alert = (EditText) findViewById(R.id.tv_alert);
 		tv_title.setText(title);
-		tv_alert.setHint(name);
+		tv_alert.setText(name);
 
 		bt_cancel.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -83,6 +83,7 @@ public class XiuGaiDialog extends MyBaseDialog {
 					params.put("remark", tv_alert.getText().toString().trim());
 					url = UrlTools.url + UrlTools.USER_UPDATREMARK;
 					L.e("修改备注弹框--修改备注url" + url + " params  " + params);
+					callback.onOK(tv_alert.getText().toString().trim());
 				} else if ("添加".equals(id)) {
 
 					if (TextUtils.isEmpty(tv_alert.getText().toString().trim())) {

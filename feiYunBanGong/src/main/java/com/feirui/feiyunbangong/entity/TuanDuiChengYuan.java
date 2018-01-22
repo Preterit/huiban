@@ -335,6 +335,29 @@ public class TuanDuiChengYuan extends DataSupport implements Serializable {
 		this.limit_position = limit_position;
 	}
 
+	public TuanDuiChengYuan( String name, String head, String phone,String store_url,String sex,
+							 String birthday,String address,String key1,String key2,String key3,String key4,String key5,int friendstate,
+							 String type2,String position,String limit_position,String remark) {
+		super();
+		this.name = name;
+		this.head = head;
+		this.phone = phone;
+		this.store_url = store_url;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.address = address;
+		this.key1 = key1;
+		this.key2 = key2;
+		this.key3 = key3;
+		this.key4 = key4;
+		this.key5 = key5;
+		this.friendstate = friendstate;
+		this.type2 = type2;
+		this.position = position;
+		this.limit_position = limit_position;
+		this.remark = remark;
+	}
+
 	public TuanDuiChengYuan(String id, String name, String head, String type,
 			String phone) {
 		super();

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,9 +42,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 好友的资料
+ * create by xy
+ */
 public class FriendInforDetailActivity extends BaseActivity implements View.OnClickListener {
     private CircleImageView mCir_head;
-    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_revise,mTv_revise_group,mTv_postion,mTv_change_area;
+    private TextView mTv_name,mTv_key1,mTv_key2,mTv_key3,mTv_key4,mTv_key5,mTv_revise,
+            mTv_revise_group,mTv_postion,mTv_change_area,mTv_nick;
     private ImageView mIv_sex,mShop;
     private TextView mTv_birthday;
     private LinearLayout mLl_er_wei_ma,mPerson_btn;
@@ -97,6 +103,7 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
         mCir_head =  findViewById(R.id.cir_head);
         mCir_head.setOnClickListener(this);
         mTv_name = (TextView) findViewById(R.id.tv_name);
+        mTv_nick = findViewById(R.id.tv_nick);
         mIv_sex = (ImageView) findViewById(R.id.iv_sex);
         mShop = (ImageView) findViewById(R.id.person_shop);
         mTv_birthday = (TextView) findViewById(R.id.tv_birthday);
@@ -139,14 +146,19 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
         }
 
         mTv_name.setText(mTdcy.getName());
+        if (!TextUtils.isEmpty(mTdcy.getRemark())){
+            mTv_nick.setText(mTdcy.getRemark());
+        }else {
+            mTv_nick.setText(mTdcy.getName());
+        }
         if (!"null".equals(mTdcy.getSex()) && null != mTdcy.getSex()){
             if ("女".equals(mTdcy.getSex())){
-                mIv_sex.setImageResource(R.drawable.girl);
+                mIv_sex.setImageResource(R.drawable.team_gril);
             }else {
-                mIv_sex.setImageResource(R.drawable.boy);
+                mIv_sex.setImageResource(R.drawable.team_boy);
             }
         }else {
-            mIv_sex.setImageResource(R.drawable.boy);
+            mIv_sex.setImageResource(R.drawable.team_boy);
         }
 
         if (!"null".equals(mTdcy.getBirthday()) && null != mTdcy.getBirthday()){
@@ -339,8 +351,9 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
                     String type = String.valueOf(infor.get("type"));
                     String position = String.valueOf(infor.get("position"));
                     String limit_position = String.valueOf(infor.get("limit_position"));
+                    String remark = String.valueOf(infor.get("remark"));
                     mTdcy = new TuanDuiChengYuan(name,head,phone,shop_url,sex,birth,address,key1,key2,
-                            key3,key4,key5,Integer.parseInt(friendstate),type,position,limit_position);
+                            key3,key4,key5,Integer.parseInt(friendstate),type,position,limit_position,remark);
                     initData();
                     createErWeiMa(phone);
                 }else {
@@ -391,7 +404,7 @@ public class FriendInforDetailActivity extends BaseActivity implements View.OnCl
                     @Override
                     public void onOK(final String name) {
                         Log.e("联系人页面", "name:--------------------- "+ MyUserProfileSampleHelper.mUserInfo.get(phone).getShowName() );
-
+                        mTv_nick.setText(name);
                         // 如果内存缓存中存在该用户，则修改内存缓存中该用户的备注：
                         if (MyUserProfileSampleHelper.mUserInfo.containsKey(phone)) {
                             IYWContact iywContact = MyUserProfileSampleHelper.mUserInfo

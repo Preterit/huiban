@@ -22,6 +22,7 @@ import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.alibaba.mobileim.tribe.IYWTribeService;
 import com.bumptech.glide.Glide;
 import com.feirui.feiyunbangong.R;
+import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.BitmapToBase64;
@@ -43,13 +44,13 @@ import static com.feirui.feiyunbangong.state.AppStore.mIMKit;
 
 public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnClickListener {
     private static final int MAX_NUM = 40;
-    private Button btn_update_name;
     private EditText et_update_name,et_update_introduction;
     private ImageView update_head;
     private String id;
     private IYWTribeService mTribeService;
     private ModifyTribeInfoCallback callback;
     private TextView tv_num_update;
+    public TextView right_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,15 +66,19 @@ public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnC
     private void initView() {
         initTitle();
         setLeftDrawable(R.drawable.arrows_left);
-        setCenterString("修改团信息");
+        setCenterString("修改团队信息");
         setRightVisibility(false);
-        btn_update_name=findViewById(R.id.btn_update_name);
+        right_tv = findViewById(R.id.righttv);
+        right_tv.setVisibility(View.VISIBLE);
+        right_tv.setText("完成");
+        right_tv.setOnClickListener(this);
+
         et_update_name=findViewById(R.id.et_update_name);
         et_update_introduction = findViewById(R.id.et_update_introduction);
         update_head = findViewById(R.id.update_head);
         tv_num_update = findViewById(R.id.tv_num_update);
         update_head.setOnClickListener(this);
-        btn_update_name.setOnClickListener(this);
+
         et_update_introduction.addTextChangedListener(watcher);
     }
 
@@ -146,7 +151,7 @@ public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_update_name:
+            case R.id.righttv:
                 upDateName();
                 break;
             case R.id.update_head:
@@ -255,8 +260,8 @@ public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnC
             params.put("pic", BitmapToBase64.bitmapToBase64(bitmap1));
         }
 
-        Log.e("修改团队名称", "params: "+params.toString()+"name"+et_update_name.getText() );
-        Utils.doPost(null, TuanDui_UpdateNameActivity.this, url, params,
+        Log.e("修改团队名称", "params: "+params.toString()+"name"+et_update_name.getText() + mTribeService);
+        Utils.doPost(LoadingDialog.getInstance(this), TuanDui_UpdateNameActivity.this, url, params,
                 new Utils.HttpCallBack() {
                     @Override
                     public void success(JsonBean bean) {
@@ -267,7 +272,8 @@ public class TuanDui_UpdateNameActivity extends BaseActivity implements View.OnC
                                 SPUtils.put(TuanDui_UpdateNameActivity.this,id,et_update_name.getText().toString().trim() + "");
                             }
                            if (!TextUtils.isEmpty(infor.get(0).get("team_talk") + "")
-                                   && !name.equals(et_update_name.getText().toString().trim())){
+                                   && !name.equals(et_update_name.getText().toString().trim())
+                                   && mTribeService != null){
                                mTribeService.modifyTribeInfo(callback,
                                        Long.parseLong(infor.get(0).get("team_talk") + ""),
                                        et_update_name.getText().toString(), null);

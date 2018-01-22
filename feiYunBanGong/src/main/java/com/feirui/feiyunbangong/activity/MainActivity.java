@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity
     /**
      * 会办页面的未读消息数
      */
-    static int work_num;
+    static int work_num = 0;
 
     @PView
     public DrawerLayout drawerlayout;
@@ -359,7 +359,7 @@ public class MainActivity extends BaseActivity
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
 //                Log.e("审批界面--count", "Infor: "+count.getInfo().getNum());
-                if (!TextUtils.isEmpty(count.getInfo().getNum())){
+                if (count.getInfo().getNum() != null && !TextUtils.isEmpty(count.getInfo().getNum())){
                     Message message = new Message();
                     message.obj = count.getInfo().getNum();
                     message.what = 2;
@@ -379,11 +379,15 @@ public class MainActivity extends BaseActivity
         AsyncHttpServiceHelper.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
                 super.onSuccess(statusCode, headers, responseBody);
                 Gson gson = new Gson();
                 ShowAppCountBean count = gson.fromJson(new String(responseBody), ShowAppCountBean.class);
 //                Log.e("获取未读消息数", "Infor: "+count.getInfo().getNum());
-                work_num=Integer.parseInt(count.getInfo().getNum());
+                if (count.getInfo().getNum() != null){
+                    work_num=Integer.parseInt(count.getInfo().getNum());
+                }
+
             }
         });
         Log.e("获取未读消息数", "work_num: "+work_num);

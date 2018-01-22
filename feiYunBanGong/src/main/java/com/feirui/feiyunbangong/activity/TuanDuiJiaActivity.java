@@ -425,7 +425,7 @@ public class TuanDuiJiaActivity extends BaseActivity implements OnClickListener 
         if (!TextUtils.isEmpty(introduction)){
             web.setDescription(introduction);//描述
         }else {
-            web.setDescription("会办是一个人人管理的平台,快加入" + title + "团队，跟你的好友互动吧~");//描述
+            web.setDescription("会办是一个社群化的兴趣交友平台，找朋友、找圈子，通过个性化关键词的设置和搜索，精准匹配您附近的小伙伴。");//描述
         }
         new ShareAction(this).setDisplayList(
                 SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,
