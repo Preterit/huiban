@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+   <RelativeLayout
+       android:id="@+id/Card_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/cardbackground1"
+      android:layout_marginTop="10dp"
+       android:layout_marginLeft="15dp"
+       android:layout_marginRight="15dp"
+       >
+
+       <TextView
+           android:id="@+id/yinhangName"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" 
+           android:text="建设银行"
+           android:textColor="#ffffff"
+           android:textSize="18sp"
+           android:layout_margin="20dp"
+           />
+       
+         <TextView
+             android:id="@+id/yinhangCard"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="1234567899999"
+             android:textColor="#ffffff"
+             android:textSize="20sp"
+             android:layout_centerInParent="true"
+             />
+       
+   </RelativeLayout>
+
+</LinearLayout>

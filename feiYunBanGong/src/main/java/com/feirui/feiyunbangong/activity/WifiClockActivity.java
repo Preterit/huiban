@@ -325,9 +325,8 @@ public class WifiClockActivity extends BaseActivity  {
                 }
             }
         });
-
-
     }
+
 
     @Override
     protected void onDestroy() {
@@ -335,6 +334,8 @@ public class WifiClockActivity extends BaseActivity  {
 
         unregisterReceiver(mWifiReceiver);
     }
+
+
 
     class WifiReceiver extends BroadcastReceiver {
 

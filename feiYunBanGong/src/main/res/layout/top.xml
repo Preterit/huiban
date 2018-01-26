@@ -15,6 +15,7 @@
             android:id="@+id/leftIv"
             android:layout_width="@dimen/x57"
             android:layout_height="@dimen/y57"
+
             android:layout_gravity="center" />
     </LinearLayout>
 

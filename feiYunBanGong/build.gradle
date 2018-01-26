@@ -8,7 +8,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     dexOptions {
         jumboMode true
-        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
+//        javaMaxHeapSize "4g" //specify the heap size for the dex process preDexLibraries = false
     }
     defaultConfig {
         applicationId "com.feirui.feiyunbangong"

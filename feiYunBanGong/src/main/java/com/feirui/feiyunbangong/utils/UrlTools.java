@@ -663,6 +663,16 @@ public static String APPLICATION_MESSAGE = "zhuce/sms_registration";//http://123
   /***
    * 获取下单信息
    * */
+
+  //显示银行卡
+  public static final String SHOW_BACKCARD="wallet/show_bankcard";
+  //添加银行卡
+  public static final String ADD_BACKCARD="wallet/add_bankcard";
+  //我的余额
+  public static final String MY_WALLET="wallet/my_wallet";
+  //删除银行卡
+  public static final String DELETE_BANKCARD="wallet/delete_bankcard";
+
   public static final String WX_GETINFO_WXPAY = "Wxpays/wxPayAction";
   /***** 微信appkey ******/
   public static final Object API_KEY_WX = "12WSxfWExfWOSLEKRDwexidrWDERGY31";

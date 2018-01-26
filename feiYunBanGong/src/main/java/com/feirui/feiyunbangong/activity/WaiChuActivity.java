@@ -218,13 +218,11 @@ public class WaiChuActivity extends BaseActivity implements OnClickListener {
                                 iv_tupian3.setImageBitmap(bitmap3);
                                 break;
                         }
-
                     }
                 }
                 break;
         }
     }
-
     ;
 
     /**

@@ -9,7 +9,7 @@
         <!-- 背景模糊 -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert"></style>
     <style name="AppBaseTheme" parent="android:Theme.Light"></style>
 
     <style name="AppTheme" parent="AppBaseTheme"></style>

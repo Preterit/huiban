@@ -577,9 +577,9 @@ public class MainActivity extends BaseActivity
                         }
                         break;
                     case 3:
-                        // 意见反馈：
-//                        startActivity(new Intent(MainActivity.this, YiJianActivity.class));
-//                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
+                         //
+                        startActivity(new Intent(MainActivity.this, WoDeQianBaoActivity.class));
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         break;
                     case 4:
                         startActivity(new Intent(MainActivity.this, SheZhiActivity.class));
@@ -608,7 +608,7 @@ public class MainActivity extends BaseActivity
 //                        // 我的余额：
 //
 //                        break;
-                    // 我的小店：
+////                     我的小店：
 //                    toMyShpOrAddShop();
 //                    startActivity(new Intent(MainActivity.this, AddShopActivity.class));
                     case 9:

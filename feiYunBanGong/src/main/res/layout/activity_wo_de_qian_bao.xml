@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.feirui.feiyunbangong.activity.WoDeQianBaoActivity"
+    android:background="#ffffff"
+    >
+
+    <include
+        android:id="@+id/includeIdd"
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar"
+        />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="17dp"
+          android:background="@drawable/qianbao_background"
+          >
+
+
+          <TextView
+              android:id="@+id/yueText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="#ffffff"
+              android:textSize="58dp"
+              android:text="0.00"
+              android:layout_centerInParent="true"
+              />
+
+      </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/qianbao_juxing"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="140dp"
+        android:layout_below="@+id/includeIdd"
+
+        android:layout_centerHorizontal="true">
+
+       <RelativeLayout
+           android:id="@+id/tixian_layourt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+           android:layout_gravity="center"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            >
+
+            <ImageView
+                android:id="@+id/tixianText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/qianbao_tixian"
+               android:layout_marginLeft="3dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提现"
+                android:layout_below="@+id/tixianText"
+                android:layout_marginTop="3dp"
+                android:textSize="15sp"
+                />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/chongzhi_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+
+                >
+
+                <ImageView
+                    android:id="@+id/congzhiText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/qianbao_congzhi"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="1dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="充值"
+                    android:layout_below="@+id/congzhiText"
+                    android:layout_marginTop="3dp"
+                    android:textSize="15sp"
+
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/llll"
+        android:layout_marginTop="8dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/jifen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+          <ImageView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:src="@drawable/qianbao_jifen"
+              android:layout_gravity="center"
+              android:layout_marginLeft="15dp"
+
+              />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="我的积分"
+               android:layout_gravity="center_vertical"
+               android:layout_marginLeft="13dp"
+               android:textSize="15sp"
+               />
+             <View
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 />
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="17dp"
+                android:src="@drawable/qianbao_info"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ebebeb"
+            />
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/hongbao_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/qianbao_hongbao"
+                android:layout_gravity="center"
+                android:layout_marginLeft="17dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="红包"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:textSize="15sp"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="17dp"
+                android:src="@drawable/qianbao_info"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                />
+
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ebebeb"
+                />
+
+        <LinearLayout
+            android:id="@+id/yajin_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/qianbao_yajin"
+                android:layout_gravity="center"
+                android:layout_marginLeft="17dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="悬赏押金"
+                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
+                android:textSize="15sp"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="17dp"
+                android:src="@drawable/qianbao_info"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ebebeb"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
