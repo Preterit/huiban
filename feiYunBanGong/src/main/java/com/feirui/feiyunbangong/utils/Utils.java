@@ -329,49 +329,58 @@ public class Utils {
                 final JsonBean bean = JsonUtils.getMessage(new String(arg2));
                 if ("200".equals(bean.getCode())) {
                     Log.e("tag", "AsyncHttpServiceHelper----success: " +bean.getCode());
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            call.success(bean);
+                    if (activity != null){
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                call.success(bean);
 
-                            if (dialog != null) {
-                                dialog.dismiss();
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 } else {
                     Log.e("tag", "AsyncHttpServiceHelper----failure: " +bean.getMsg());
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            call.failure(bean.getMsg());
-                            if (dialog != null) {
-                                dialog.dismiss();
+                    if (activity != null){
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                call.failure(bean.getMsg());
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 }
             }
 
             @Override
             public void onFinish() {
                 Log.e("tag", "AsyncHttpServiceHelper----onFinish: " );
-                activity.runOnUiThread(new Runnable() {
+                if (activity != null){
+                    activity.runOnUiThread(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        Log.e("TAG", "结束！！！！");
-                        call.finish();
-                        if (dialog != null) {
-                            dialog.dismiss();
+                        @Override
+                        public void run() {
+                            Log.e("TAG", "结束！！！！");
+                            call.finish();
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
 
             @Override
             public void onFailure(final int arg0, Header[] arg1, byte[] arg2, final Throwable arg3) {
                 Log.e("tag", "AsyncHttpServiceHelper----onFailure: " );
+                if (activity != null)
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

@@ -85,10 +85,11 @@ public class FormListFragment extends Fragment {
         ReadFormEntity readFormEntity = gson.fromJson(new String(responseBody), ReadFormEntity.class);
           mFormAdapter.setData(readFormEntity.getInfor());
 
-        Log.e("查看报表页面","其他人的列表数据-------------------" + readFormEntity.getInfor().toString());
+//        Log.e("查看报表页面","其他人的列表数据-------------------" + read FormEntity.getInfor().toString());
       }
     });
   }
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,

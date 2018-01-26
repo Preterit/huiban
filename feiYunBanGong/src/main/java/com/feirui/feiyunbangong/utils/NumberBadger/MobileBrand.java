@@ -5,7 +5,7 @@ package com.feirui.feiyunbangong.utils.NumberBadger;
  */
 /**
  * 手机的 Build.MANUFACTURER 常量
- * Created by zlq on 2017 17/8/22 18:08.
+ * Created by xy on 2017 17/8/22 18:08.
  */
 
 public class MobileBrand {

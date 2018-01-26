@@ -33,6 +33,7 @@ import com.feirui.feiyunbangong.adapter.TuanDuiAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.entity.TuanDui;
+import com.feirui.feiyunbangong.entity.TuanDuiChengYuan;
 import com.feirui.feiyunbangong.myinterface.AllInterface.OnTeamNoticeNumChanged;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.T;
@@ -139,7 +140,8 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
 
                     @Override
                     public void failure(String msg) {
-                        T.showShort(activity, "网络请求失败，请检查网络");
+                        Log.e("init", "failure:---------------------------- " + msg );
+//                        T.showShort(activity, "网络请求失败，请检查网络");
                     }
 
                     @Override
@@ -166,6 +168,7 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
                     @Override
                     public void success(JsonBean bean) {
                         //从网络获取数据保存到数据库
+//                        if (bean.getInfor().size() != null)
                         setNetData(bean);
                         swipe_container.setRefreshing(false);
                     }
@@ -193,7 +196,13 @@ public class Fragment4 extends BaseFragment implements OnClickListener,
      * 数据获取
      */
     public void getData(){
-        tds = DataSupport.findAll(TuanDui.class);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tds = DataSupport.findAll(TuanDui.class);
+            }
+        });
+
         //获取本地数据库信息
         if (tds == null || tds.size() == 0){
             //如果数据库为空  从网络获取数据

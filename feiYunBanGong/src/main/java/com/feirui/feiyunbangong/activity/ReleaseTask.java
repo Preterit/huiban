@@ -9,7 +9,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,10 +23,12 @@ import com.feirui.feiyunbangong.adapter.AddFriendAdapter;
 import com.feirui.feiyunbangong.adapter.AddRecyFriendAdapter;
 import com.feirui.feiyunbangong.adapter.AddShenHeAdapter;
 import com.feirui.feiyunbangong.adapter.AddTeamAdapter;
+import com.feirui.feiyunbangong.adapter.AddTxlAdapter;
 import com.feirui.feiyunbangong.adapter.HeaderViewRecyclerAdapter;
 import com.feirui.feiyunbangong.dialog.LoadingDialog;
 import com.feirui.feiyunbangong.entity.ChildItem;
 import com.feirui.feiyunbangong.entity.JsonBean;
+import com.feirui.feiyunbangong.entity.LianXiRen;
 import com.feirui.feiyunbangong.entity.ShenPiRen;
 import com.feirui.feiyunbangong.entity.TeamList_entity.Infor;
 import com.feirui.feiyunbangong.state.AppStore;
@@ -53,6 +54,7 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
 
     private HeaderViewRecyclerAdapter addFriendAdapterRc;
     private HeaderViewRecyclerAdapter addTeamAdapterRc;
+    private HeaderViewRecyclerAdapter addTxlAdapterRc;
     private HeaderViewRecyclerAdapter addFenZuAdapterRc;
     private SelectPicPopupWindow window;// 弹出图片选择框；
     private EditText tvTaskTitle;   //发布任务的标题
@@ -63,19 +65,20 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
     //选择时间的属性
     private Calendar mCalendar;
     private Date startTime;
-    public AddRecyFriendAdapter addRecyFriendAdapter;
+    public AddRecyFriendAdapter addRecyFriendAdapter;//添加好友的适配器
     public AddFriendAdapter addFriendAdapter;  //添加好友的适配器
     public AddTeamAdapter addTeamAdapter; //添加团队的适配器
+    public AddTxlAdapter addTxlAdapter; //添加团队的适配器
     private ImageView addPicFriend;  //添加朋友
     private ImageView addPicTeam;    //添加团队
+    private ImageView addTxlTeam;    //添加通讯录
     private RecyclerView team_pic_recycler;  //添加朋友的RecyclerView
     private RecyclerView friend_pic_recycler; //添加团队的RecyclerView
+    private RecyclerView txl_pic_recycler; //添加通讯录的RecyclerView
     private RecyclerView fenzu_pic_recycler; //添加分组的RecyclerView
     private Button quedingButton;
     private Button quxiaoButton;
-    private SwitchView switch_wzjl;
-    private SwitchView switch_xs;
-    private SwitchView switch_rsxz;
+    private SwitchView switch_xs,switch_rsxz,switch_dxtz,switch_wzjl;
     private ConstraintLayout layout_xsje;
     private ConstraintLayout layout_rsxz;
     private Dialog mWeiboDialog;
@@ -94,6 +97,7 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         switch_wzjl = (SwitchView) findViewById(R.id.switch_wzjl);
         switch_xs = (SwitchView) findViewById(R.id.switch_xs);
         switch_rsxz = (SwitchView) findViewById(R.id.switch_rsxz);
+        switch_dxtz = (SwitchView) findViewById(R.id.switch_dxtz);
         layout_xsje = (ConstraintLayout) findViewById(R.id.layout_xsje);
         layout_rsxz = (ConstraintLayout) findViewById(R.id.layout_rsxz);
         tvTaskCount = (EditText) findViewById(R.id.tvTaskCount);
@@ -105,17 +109,23 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         friend_pic_recycler = (RecyclerView) findViewById(R.id.friend_pic_recycler1);
         team_pic_recycler = (RecyclerView) findViewById(R.id.team_pic_recycler);
         fenzu_pic_recycler = (RecyclerView) findViewById(R.id.team_pic_recycler);
+        txl_pic_recycler = (RecyclerView) findViewById(R.id.txl_pic_recycler);
 
-        View footerFriendPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
-        View footerTeamPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);
+        View footerFriendPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);//添加好友的加号
+        View footerTeamPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);//添加团队的加号
+        View footerTXLPic = LayoutInflater.from(this).inflate(R.layout.add_pic_footer_shenpi, null);//添加通讯录的加号
 
-
+        //添加好友
         addRecyFriendAdapter = new AddRecyFriendAdapter(new ArrayList<ChildItem>());
         addFriendAdapterRc = new HeaderViewRecyclerAdapter(addRecyFriendAdapter);
-        //添加好友
+        addFriendAdapterRc.addFooterView(footerFriendPic);
 //        addFriendAdapter = new AddFriendAdapter(new ArrayList<ShenPiRen>());
 //        addFriendAdapterRc = new HeaderViewRecyclerAdapter(addFriendAdapter);
-        addFriendAdapterRc.addFooterView(footerFriendPic);
+
+        //添加通讯录
+        addTxlAdapter = new AddTxlAdapter(new ArrayList<LianXiRen>());//-----------------------------------
+        addTxlAdapterRc = new HeaderViewRecyclerAdapter(addRecyFriendAdapter);
+        addTxlAdapterRc.addFooterView(footerTXLPic);
         //添加团队
         addTeamAdapter = new AddTeamAdapter(new ArrayList<Infor>());
         addTeamAdapterRc = new HeaderViewRecyclerAdapter(addTeamAdapter);
@@ -124,15 +134,17 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         addPicFriend = (ImageView) footerFriendPic.findViewById(R.id.iv_add_pic_footer);
         //把团队的头像添加进来
         addPicTeam = (ImageView) footerTeamPic.findViewById(R.id.iv_add_pic_footer);
-        //点击加号
-//        footerFriendPic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ReleaseTask.this, ShenPiRenActivity.class);
-//                startActivityForResult(intent, 102);// 请求码；
-//            }
-//        });
-        //点击加号
+        //把通讯录的头像添加进来
+        addTxlTeam = footerTXLPic.findViewById(R.id.iv_add_pic_footer);
+        //点击添加好友加号
+        footerFriendPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReleaseTask.this, ShenPiRenActivity.class);
+                startActivityForResult(intent, 102);// 请求码；
+            }
+        });
+        //点击添加好友加号
         footerFriendPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,11 +152,20 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                 startActivityForResult(intent, 100);// 请求码；
             }
         });
+        //点击添加团队加号
         footerTeamPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReleaseTask.this, SelectorTeamActivity.class);
                 startActivityForResult(intent, 200);// 请求码；
+            }
+        });
+        //点击添加通讯录加号
+        footerTXLPic.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ReleaseTask.this,ChooseTxlActivity.class);
+                startActivityForResult(intent, 300);// 请求码；
             }
         });
 
@@ -153,30 +174,19 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         setCenterString("发布任务");
         setRightVisibility(false);
         adapter = new AddShenHeAdapter(getLayoutInflater(), ReleaseTask.this);
-
         friend_pic_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         team_pic_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
+        txl_pic_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));//通讯录
         friend_pic_recycler.setAdapter(addFriendAdapterRc);
         team_pic_recycler.setAdapter(addTeamAdapterRc);
-
+        txl_pic_recycler.setAdapter(addTxlAdapterRc);//通讯录
         switch_rsxz.setOnClickListener(this);
+        switch_dxtz.setOnClickListener(this);
         switch_xs.setOnClickListener(this);
         tv_kssj.setOnClickListener(this);
-
-////        取消按钮
-////               quxiaoButton=(Button) findViewById(R.id.quxiaoButton);
-//                footerTeamPic.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(ReleaseTask.this,SelectorTeamActivity.class);
-//                startActivityForResult(intent,103);
-//            }
-//        });
     }
 
-//点击确定按钮
-
+    //点击确定按钮
     private void setlisteners() {
         quedingButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -186,17 +196,15 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         });
     }
 
+    LoadingDialog dialog;
     private void determine() {
+        dialog = LoadingDialog.getInstance(this);
+        dialog.show();
         if (TextUtils.isEmpty(tvTaskTitle.getText().toString().trim())) {
             T.showShort(ReleaseTask.this, "请输入任务的标题");
             return;
         }
-//        if (TextUtils.isEmpty(tvTaskCount.getText().toString().trim())) {
-//            T.showShort(ReleaseTask.this, "请输入任务的内容");
-//            return;
-//        }
         RequestParams params = new RequestParams();
-
         params.put("subject", tvTaskTitle.getText().toString().trim());
         params.put("task_txt", tvTaskCount.getText().toString().trim());
         //时间
@@ -221,10 +229,17 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
         if (switch_rsxz.isOpened()) {
             params.put("number", et_xzrs.getText().toString().trim());
             params.put("number_limit", "1");
-        } else {
+        }else {
             params.put("number", "0");
             params.put("number_limit", "0");
         }
+        //是否短信通知
+        if (switch_dxtz.isOpened()) {
+            params.put("send_sms", "1");
+        }else {
+            params.put("send_sms", "0");
+        }
+
         ArrayList<ChildItem> friendList = addRecyFriendAdapter.getDataSet();
         StringBuffer sb_id = new StringBuffer();
         for (int i = 0; i < friendList.size(); i++) {
@@ -259,15 +274,9 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                     public void success(final JsonBean bean) {
 
                         if ("200".equals(bean.getCode())) {
+                            dialog.dismiss();
                             mHandler.sendEmptyMessageDelayed(1, 100);
                             T.showShort(ReleaseTask.this, "发布任务成功");
-//                            runOnUiThread(new Runnable() {
-//                                public void run() {
-//                                    T.showShort(ReleaseTask.this, bean.getMsg());
-//                                    ReleaseTask.this.finish();
-//                                    overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
-//                                }
-//                            });
                             ReleaseTask.this.finish();
                             overridePendingTransition(R.anim.aty_zoomclosein, R.anim.aty_zoomcloseout);
                             mHandler.sendEmptyMessage(1);
@@ -276,12 +285,10 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                                     bean.getMsg());
                         }
                     }
-
                     @Override
                     public void failure(String msg) {
                         T.showShort(ReleaseTask.this, msg);
                     }
-
                     @Override
                     public void finish() {
 
@@ -312,7 +319,7 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                 if (spr.getId() == null) {
                     return;
                 }
-                addFriendAdapter.addFriend(spr);
+//                addFriendAdapter.addFriend(spr);
                 break;
             case 100:
                 ArrayList<ChildItem> childs = (ArrayList<ChildItem>) data
@@ -340,6 +347,11 @@ public class ReleaseTask extends BaseActivity implements OnClickListener {
                     return;
                 }
                 addTeamAdapter.addTeam(infor);
+                break;
+            case 300:
+//                Infor infor2 = (Infor) data.getSerializableExtra("Team");
+
+                break;
         }
 
     }

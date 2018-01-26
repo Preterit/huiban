@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
 import com.feirui.feiyunbangong.utils.JsonUtils;
 import com.feirui.feiyunbangong.utils.L;
+import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -140,8 +142,23 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
 
     @Override
     protected void onResume() {
-        registReceiver();// 注册广播接收器
         super.onResume();
+        registReceiver();// 注册广播接收器
+        String name = (String) SPUtils.get(this,td.getTid(),"");
+        Log.e("name", "onResume: -------------" + name );
+        if (!name.equals(td.getName()) && !TextUtils.isEmpty(name)){
+            if (name.length() > 10) {
+                centerTv.setText(name.substring(0, 9) + "...");
+            } else {
+                centerTv.setText(name);
+            }
+        }else {
+            if (td.getName().length() > 10) {
+                centerTv.setText(td.getName().substring(0, 9) + "...");
+            } else {
+                centerTv.setText(td.getName());
+            }
+        }
     }
 
     @Override
@@ -393,7 +410,12 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
      */
     private void initData() {
         //从数据库获取所有数据
-        allTuan = DataSupport.findAll(TuanDuiChengYuan.class);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                allTuan = DataSupport.findAll(TuanDuiChengYuan.class);
+            }
+        });
         if (allTuan == null || allTuan.size() == 0){
             Log.e("tdcys", "initData:-------------allTuan---------------- " );
             //从网络获取数据
@@ -444,7 +466,6 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                     //团队群Id
                     getTuanLiaoId();
                     Log.e("chengyuan", "handleMessage: -----------------" + tdcy_add.get(0).getPhone() );
-                    getData(1 + "",0);// 更新数据；
                     break;
                 case 4:
                     JsonBean bean03 = (JsonBean) msg.obj;
@@ -453,9 +474,12 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                     break;
                 case 5:
                     final JsonBean bean = (JsonBean) msg.obj;
-                    Log.e("chengyuan", "JsonBean: -----------------" + bean.getInfor().get(0).get("team_talk") );
+                    getData(1 + "",0);// 更新数据；
+                    getNum(1 + "");
                     //添加团聊成员
-                    if (!bean.getInfor().get(0).get("team_talk").equals("")){
+                    if (TextUtils.isEmpty(bean.getInfor().get(0).get("team_talk") + "")){
+                        return;
+                    }else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -492,6 +516,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Intent intent = new Intent(TuanDui_DetailActivity.this,
                         TuanDuiJiaActivity.class);
+                Log.e("td", "onClick:-------------------- " + td.toString());
                 //将整个团队传过去
                 intent.putExtra("td", td);
                 startActivity(intent);
@@ -531,12 +556,6 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                 finish();
             }
         });
-
-        if (td.getName().length() > 10) {
-            centerTv.setText(td.getName().substring(0, 9) + "...");
-        } else {
-            centerTv.setText(td.getName());
-        }
         righttv.setBackgroundResource(R.drawable.bai_fangdajing);
 
 
@@ -629,7 +648,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                 startActivity(intent03);
                 break;
             case R.id.llTeamTask:
-                Intent teamTaskIntent = new Intent(this, TasksListActivity.class);
+                Intent teamTaskIntent = new Intent(this, RenWuListActivity.class);
                 startActivity(teamTaskIntent);
                 break;
             case R.id.llChengYuan: //打开团队聊天窗口
@@ -801,8 +820,9 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
      */
     @Override
     public void onRefresh() {
-        getMessageNum();
-        getData( 1 +  "",0);
+        getMessageNum();//公告数
+        getData( 1 +  "",0); //获取原始数据
+        getNum(1 + ""); //团队人数
     }
 
     @Override
@@ -839,6 +859,7 @@ public class TuanDui_DetailActivity extends AppCompatActivity implements
                 if (td.getTid().equals(id)) {
                     getMessageNum();
                     getData( 1 +  "",0);
+                    getNum(1 + "");
                 }
             }
         }

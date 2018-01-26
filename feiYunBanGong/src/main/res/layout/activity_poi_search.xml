@@ -10,52 +10,73 @@
         android:layout_height="@dimen/title_bar"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginTop="8dp">
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="在"></TextView>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在"></TextView>
 
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="@drawable/blue_bg_kuang"
-            android:text="北京" />
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/blue_bg_kuang"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="北京市" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="内找"
+                android:layout_marginRight="5dp"></TextView>
+            <AutoCompleteTextView
+                android:id="@+id/searchkey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/blue_bg_kuang"
+                android:layout_weight="0.88"
+                android:text=" "
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="内找"></TextView>
-
-        <AutoCompleteTextView
-            android:id="@+id/searchkey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="@drawable/blue_bg_kuang"
-            android:layout_weight="0.88"
-            android:text="餐厅"
-            android:layout_marginRight="10dp"/>
+        <Button
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:onClick="searchButtonProcess"
+            android:padding="5dip"
+            android:text="搜 索"
+            android:textSize="18dp"
+            android:textColor="#fff"
+            android:background="@drawable/btn_login"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="6dp"/>
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="50dip"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
-            android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="searchButtonProcess"
             android:padding="5dip"
-            android:text="城市内搜索" />
+            android:text="城市内搜索"
+            android:background="@drawable/btn_login"/>
 
         <Button
             android:id="@+id/searchNearby"
@@ -73,7 +94,8 @@
             android:layout_weight="1"
             android:onClick="searchBoundProcess"
             android:padding="10dip"
-            android:text="区域搜索" />
+            android:text="区域搜索"
+            />
     </LinearLayout>
 
     <fragment

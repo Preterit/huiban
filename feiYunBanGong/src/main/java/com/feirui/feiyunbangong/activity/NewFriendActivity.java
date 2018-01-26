@@ -70,7 +70,7 @@ public class NewFriendActivity extends BaseActivity implements
         //从上个页面传过来值,但是用addData方法不太好用
         Intent intent = getIntent();
         jsonBean1 = (JsonBean) intent.getSerializableExtra("bean");
-       // Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
+        Log.e("新朋友界面", "jsonBean1: "+jsonBean1.toString() );
 
         initUI();
         requestGroup();// 获取分组信息；
@@ -162,10 +162,7 @@ public class NewFriendActivity extends BaseActivity implements
                         (String) map.get("type"),
                         (String) map.get("staff_head"));
                 lxrs01.add(lxr);
-                Log.e("新朋友界面", "lxrs01- staff_name"+info.get(i).get("staff_name"));
-                Log.e("新朋友界面", "lxrs01- phone"+info.get(i).get("phone"));
-                Log.e("新朋友界面", "lxrs01- type "+info.get(i).get("type"));
-                Log.e("新朋友界面", "lxr "+lxr.toString());
+                Log.e("新朋友界面", "lxr --"+lxr.toString());
             }
             Log.e("新朋友界面", "lxr "+lxrs01.get(0).toString());
 

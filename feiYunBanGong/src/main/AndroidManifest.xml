@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.feirui.feiyunbangong"
-    android:versionCode="96"
-    android:versionName="1.7.26">
+    android:versionCode="101"
+    android:versionName="1.7.31">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -331,10 +331,6 @@
         <activity
             android:name=".activity.YiJianActivity"
             android:label="@string/title_activity_yi_jian" />
-        <!-- <activity -->
-        <!-- android:name=".activity.WoDeTuanDuiActivity" -->
-        <!-- android:label="@string/title_activity_chuang_jian"> -->
-        <!-- </activity> -->
         <activity
             android:name=".activity.GuanLiTuanDuiActivity"
             android:label="@string/title_activity_guan_li_tuan_dui" />
@@ -403,10 +399,6 @@
         <activity
             android:name=".activity.NoticeReadUnReadActivity"
             android:label="@string/title_activity_notice_read_un_read" />
-        <!-- <activity -->
-        <!-- android:name=".activity.MainSlidingMenuActivity" -->
-        <!-- android:label="@string/title_activity_main_sliding_menu"> -->
-        <!-- </activity> -->
         <activity
             android:name=".activity.WifiClockActivity"
             android:label="@string/title_activity_wifi_clock" />
@@ -470,10 +462,6 @@
         <activity android:name=".activity.MyQiTaDetailActivity" />
         <activity android:name=".activity.RenWuListActivity" />
         <activity android:name=".activity.ReleaseDetailActivity" />
-        <!-- <activity -->
-        <!-- android:name=".activity.RenWuDetailActivity" -->
-        <!-- android:label="@string/title_activity_ren_wu_detail" -->
-        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
         <activity android:name=".activity.WebViewActivity" />
         <!-- 个人小店 -->
         <activity android:name=".activity.AddShopActivity" />
@@ -518,7 +506,7 @@
         <activity android:name=".activity.BaiDuPoi.PoiSearchActivity" />
         <activity android:name=".activity.MyCaoZuoActivity" />
         <activity
-            android:name=".wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
@@ -531,6 +519,30 @@
         </activity>
         <activity android:name=".activity.ChooseFriendActivity" />
         <activity android:name=".activity.ChaKanJinDuActivity" />
+        <activity android:name=".activity.SearchMemberActivity" />
+        <activity android:name=".activity.TuanDui_UpdateNameActivity" />
+        <activity android:name=".activity.ChooseTxlActivity"></activity>
+        <!--友盟-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a56d792a40fa33196000115" />
+        <!--qq官方申请的key的配置-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1105861990" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.QickLoginActivity"></activity>
         <activity android:name=".activity.SearchMemberActivity" />
         <activity android:name=".activity.WoDeQianBaoActivity" />
         <activity android:name=".activity.QianTiXianActivity" />

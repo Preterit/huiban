@@ -9,43 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_bar"
         layout="@layout/top" />
-
     <LinearLayout
-        android:id="@+id/ll_saoma"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
-        android:layout_marginTop="@dimen/y40"
-        android:background="@color/ffffff"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/x56"
-        android:paddingRight="@dimen/x56" >
-
-        <ImageView
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/x80"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/saoyisaomeifannao" />
-
-        <TextView
-            style="@style/a000000_48"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y132"
-            android:layout_weight="1"
-            android:gravity="center_vertical|left"
-            android:paddingLeft="@dimen/x100"
-            android:paddingRight="@dimen/x250"
-            android:text="扫码加入我们" />
-
-        <ImageView
-            android:layout_width="@dimen/x55"
-            android:layout_height="@dimen/y55"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/x100"
-            android:src="@drawable/jiantou_you" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_tuiguang"
+        android:id="@+id/ll_txlyq"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
         android:layout_marginTop="@dimen/y20"
@@ -58,7 +23,7 @@
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x80"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/shoujilianxiren" />
+            android:src="@drawable/t_tong" />
 
         <TextView
             style="@style/a000000_48"
@@ -68,65 +33,33 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/x100"
             android:paddingRight="@dimen/x250"
-            android:text="朋友圈推广" />
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
+            android:text="通讯录邀请" />
 
         <ImageView
             android:layout_width="@dimen/x55"
             android:layout_height="@dimen/y55"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/x100"
-            android:src="@drawable/jiantou_you" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_guanli"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
-        android:layout_marginTop="@dimen/y20"
-        android:background="@color/ffffff"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/x56"
-        android:paddingRight="@dimen/x56" >
-
-        <ImageView
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/x80"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/team_manage" />
-
-        <TextView
-            style="@style/a000000_48"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y132"
-            android:layout_weight="1"
-            android:gravity="center_vertical|left"
-            android:paddingLeft="@dimen/x100"
-            android:paddingRight="@dimen/x250"
-            android:text="团队管理" />
-
-        <ImageView
-            android:layout_width="@dimen/x55"
-            android:layout_height="@dimen/y55"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/x100"
-            android:src="@drawable/jiantou_you" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_send_msg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
-        android:layout_marginTop="@dimen/y20"
+        android:layout_marginTop="1dp"
         android:background="@color/ffffff"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x56"
-        android:paddingRight="@dimen/x56" >
+        android:paddingRight="@dimen/x56">
 
         <ImageView
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x80"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/send_msg" />
+            android:src="@drawable/t_sms" />
 
         <TextView
             style="@style/a000000_48"
@@ -136,20 +69,23 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/x100"
             android:paddingRight="@dimen/x250"
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
             android:text="短信邀请" />
 
         <ImageView
             android:layout_width="@dimen/x55"
             android:layout_height="@dimen/y55"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/x100"
-            android:src="@drawable/jiantou_you" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
     </LinearLayout>
+
     <LinearLayout
-        android:id="@+id/ll_xgxx"
+        android:id="@+id/ll_send_share"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
-        android:layout_marginTop="@dimen/y20"
+        android:layout_marginTop="5dp"
         android:background="@color/ffffff"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x56"
@@ -159,7 +95,7 @@
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x80"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/send_msg" />
+            android:src="@drawable/t_share2" />
 
         <TextView
             style="@style/a000000_48"
@@ -169,31 +105,75 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/x100"
             android:paddingRight="@dimen/x250"
-            android:text="修改成员信息" />
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
+            android:text="分享团队" />
 
         <ImageView
             android:layout_width="@dimen/x55"
             android:layout_height="@dimen/y55"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/x100"
-            android:src="@drawable/jiantou_you" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
     </LinearLayout>
+
     <LinearLayout
-        android:id="@+id/ll_send_talk"
+        android:id="@+id/ll_saoma"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
-        android:layout_marginTop="@dimen/y20"
         android:background="@color/ffffff"
         android:gravity="center_vertical"
+        android:layout_marginTop="1dp"
         android:paddingLeft="@dimen/x56"
-        android:paddingRight="@dimen/x56"
-        android:visibility="gone">
+        android:paddingRight="@dimen/x56" >
 
         <ImageView
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x80"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/talk" />
+            android:src="@drawable/t_sao" />
+
+        <TextView
+            android:id="@+id/textView30"
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y132"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="@dimen/x100"
+            android:paddingRight="@dimen/x250"
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
+            android:text="扫码加入我们" />
+
+        <ImageView
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/y55"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
+    </LinearLayout>
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_xgxx"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="5dp"
+        android:background="@color/ffffff"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x56"
+        android:paddingRight="@dimen/x56" >
+
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/t_geren" />
 
         <TextView
             style="@style/a000000_48"
@@ -203,15 +183,126 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/x100"
             android:paddingRight="@dimen/x250"
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
+            android:text="修改个人信息" />
+
+        <ImageView
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/y55"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_send_talk"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@color/ffffff"
+        android:gravity="center_vertical"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="@dimen/x56"
+        android:paddingRight="@dimen/x56"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/t_talk"/>
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y132"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="@dimen/x100"
+            android:paddingRight="@dimen/x250"
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
             android:text="团队聊天" />
 
         <ImageView
             android:layout_width="@dimen/x55"
             android:layout_height="@dimen/y55"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/x100"
-            android:src="@drawable/jiantou_you" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_update_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@color/ffffff"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x56"
+        android:paddingRight="@dimen/x56" >
+
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/t_xiugai" />
+
+        <TextView
+            android:id="@+id/textView31"
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y132"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="@dimen/x100"
+            android:paddingRight="@dimen/x250"
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
+            android:text="修改团队信息" />
+
+        <ImageView
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/y55"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_guanli"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="1dp"
+        android:background="@color/ffffff"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x56"
+        android:paddingRight="@dimen/x56" >
+
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/t_guali" />
+
+        <TextView
+            style="@style/a000000_48"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y132"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="@dimen/x100"
+            android:paddingRight="@dimen/x250"
+            android:textColor="#6A6A6A"
+            android:textSize="15sp"
+            android:text="团队管理" />
+
+        <ImageView
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/y55"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/t_back2" />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

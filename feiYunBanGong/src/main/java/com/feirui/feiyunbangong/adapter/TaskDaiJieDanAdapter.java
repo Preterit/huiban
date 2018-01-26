@@ -48,7 +48,7 @@ public class TaskDaiJieDanAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((ViewHolder) holder).tv_qbrw_time.setText(a1[0]);
         ((ViewHolder) holder).tv_qbrw_title.setText(data.get(position).get("subject")+"");
         ((ViewHolder) holder).tv_qbrw_target.setText(data.get(position).get("task_txt")+"");
-        ImageLoader.getInstance().displayImage(UrlTools.pcUrl+data.get(position).get("staff_head"), ((ViewHolder) holder).iv_qbrw_tx, ImageLoaderUtils.getSimpleOptions());
+        ImageLoader.getInstance().displayImage(UrlTools.url_img+data.get(position).get("staff_head"), ((ViewHolder) holder).iv_qbrw_tx, ImageLoaderUtils.getSimpleOptions());
         ((ViewHolder) holder).tv_qbrw_state.setText("待接单");
         ((ViewHolder) holder).tv_qbrw_state.setTextColor(Color.parseColor("#50B3FD"));
         ((ViewHolder) holder).iv_qbrw_state.setImageResource(R.drawable.icon_daijiedan);

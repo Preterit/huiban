@@ -11,10 +11,16 @@ import com.alibaba.tcms.env.YWEnvType;
 import com.alibaba.wxlib.util.SysUtil;
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.stetho.Stetho;
+import com.feirui.feiyunbangong.entity.Constants;
 import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.ImageLoaderUtils;
+import com.feirui.feiyunbangong.wxapi.WXEntryActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
 
 import org.litepal.LitePal;
 
@@ -31,6 +37,7 @@ public class Happlication extends MultiDexApplication {
     public static YWEnvType sEnvType = YWEnvType.TEST;
 
     private String out_trade_no;
+    public static IWXAPI sApi;
 
 
     /**
@@ -71,6 +78,23 @@ public class Happlication extends MultiDexApplication {
 		 * AbAppConfig.UI_HEIGHT = 1920;
 		 */
         SDKInitializer.initialize(getApplicationContext());
+        // 初始化微信组件
+        initWeiXin();
+        //友盟初始化
+        UMinit();
+    }
+
+    private void UMinit() {
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
+        PlatformConfig.setQQZone("1105861990", "CU0DhhCHoBr1iygG");
+        PlatformConfig.setWeixin("wx061139fe146e41ae", "76214c74cbdfeda05effaef86e8c5620");
+//        PlatformConfig.setSinaWeibo("3719191837", "39c0d98163db0dbb012fc9147eab57d4", "http://sns.whalecloud.com");
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+//        Config.DEBUG = true;
+    }
+
+    private void initWeiXin() {
+        sApi = WXEntryActivity.initWeiXin(this, Constants.APP_ID);
     }
 
 

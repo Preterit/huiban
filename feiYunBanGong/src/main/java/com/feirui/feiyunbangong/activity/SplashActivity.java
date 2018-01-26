@@ -16,7 +16,6 @@ import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
 import com.feirui.feiyunbangong.state.Constant;
 import com.feirui.feiyunbangong.utils.BaiDuUtil;
-import com.feirui.feiyunbangong.utils.ImageUtil;
 import com.feirui.feiyunbangong.utils.SPUtils;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UpdateManager;
@@ -46,17 +45,13 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
             switch (msg.what) {
                 case 0:
                     // 判断是否登陆过？
-                    if (SPUtils.contains(SplashActivity.this,
-                            Constant.SP_ALREADYUSED)
-                            && (Boolean) (SPUtils.get(SplashActivity.this,
-                            Constant.SP_ALREADYUSED, false))) {
+                    if (SPUtils.contains(SplashActivity.this, Constant.SP_ALREADYUSED)
+                            && (Boolean) (SPUtils.get(SplashActivity.this, Constant.SP_ALREADYUSED, false))) {
                         LoginMain();
                     } else {// 没有登陆过
-                        Intent intent = new Intent(SplashActivity.this,
-                                GuideActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.aty_zoomin,
-                                R.anim.aty_zoomout);
+                        overridePendingTransition(R.anim.aty_zoomin, R.anim.aty_zoomout);
                         SplashActivity.this.finish();
                     }
                     break;
@@ -93,11 +88,9 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
 
         mShareds = getSharedPreferences("position",Context.MODE_PRIVATE);
         mEditor = mShareds.edit();//获取编辑器
-        iv = (ImageView) findViewById(R.id.imageView1);
-        // 压缩：
-        iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(
-                getResources(), R.drawable.welcome_logo, 1000, 1500));
-
+//        iv = (ImageView) findViewById(R.id.imageView1);
+//        // 压缩：
+//        iv.setImageBitmap(ImageUtil.decodeSampledBitmapFromResource(getResources(), R.drawable.welcome_logo, 1000, 1500));
         //启动的同时 定位
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -105,9 +98,7 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
                 handler.sendEmptyMessage(1);
             }
         }, 100);
-
         update();// 检查更新：
-
         // 定时，如果三秒钟扔无任何反应则执行start()操作：
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -118,7 +109,7 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
                     Log.e("TAG", "卡住了，自己去启动吧.....");
                 }
             }
-        }, 3000);
+        }, 100);
 
         // Utils.getFenBianLv(this);// 获取屏幕分辨率；
     }
@@ -176,8 +167,8 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
         params.put("location", stringBuffer.toString());
         params.put("position",mPostion);
         Log.e("string", "LoginMain: ---------LoginMain-------------" + params);
-//        if (mEditor.)
         mEditor.putString("mPostion",mPostion); //保存登录时的位置信息
+        mEditor.putString("mLocation",stringBuffer.toString()); //保存登录时的位置信息
         mEditor.commit();
         String url = UrlTools.url + UrlTools.LOGIN_LOGIN;
 
@@ -214,6 +205,8 @@ public class SplashActivity extends BaseActivity implements IsUpdate {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+
     }
 
 }

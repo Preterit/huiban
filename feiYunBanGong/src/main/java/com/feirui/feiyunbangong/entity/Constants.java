@@ -9,4 +9,6 @@ public class Constants {
     //  API密钥，在商户平台设置
     public static final String API_KEY="huibanappFeirui2017Feiruikeji150";
 
+    public static final  String APP_SECRET = "76214c74cbdfeda05effaef86e8c5620";
+
 }

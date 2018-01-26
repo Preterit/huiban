@@ -17,6 +17,7 @@ import com.alibaba.mobileim.utility.IMNotificationUtils;
 import com.feirui.feiyunbangong.activity.FriendInforDetailActivity;
 import com.feirui.feiyunbangong.entity.JsonBean;
 import com.feirui.feiyunbangong.state.AppStore;
+import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
 import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
@@ -54,15 +55,39 @@ public class MyUserProfileSampleHelper {
 
 					// 点击用户头像回调：
 					@Override
-					public void onUserHeadClick(Fragment fragment,
-							YWConversation arg1, String user_id, String arg3,
-							boolean arg4) {
-						// 跳转到好友资料页面：
-						Intent intent = new Intent(fragment.getActivity(),
-								FriendInforDetailActivity.class);
-						intent.putExtra("phone", user_id);
-						Log.d("tag","私聊的吗。。。。");
-						fragment.getActivity().startActivity(intent);
+					public void onUserHeadClick(final Fragment fragment,
+												YWConversation arg1, final String user_id, String arg3,
+												boolean arg4) {
+
+						RequestParams params = new RequestParams();
+						params.put("key", user_id + "");
+						params.put("location", "");
+						String url = UrlTools.url + UrlTools.USER_SEARCH_MOBILE;
+						Utils.doPost(null, fragment.getActivity(), url, params, new Utils.HttpCallBack() {
+							@Override
+							public void success(JsonBean bean) {
+								if ("200".equals(bean.getCode())){
+									if (bean.getInfor().size() == 0){
+										T.showShort(fragment.getActivity(),"请添加好友再查看");
+									}else {
+										// 跳转到好友资料页面：
+										Intent intent = new Intent(fragment.getActivity(),
+												FriendInforDetailActivity.class);
+										intent.putExtra("phone", user_id);
+										Log.d("tag","私聊的吗。。。。");
+										fragment.getActivity().startActivity(intent);
+									}
+								}
+							}
+
+							@Override
+							public void failure(String msg) {
+							}
+
+							@Override
+							public void finish() {
+							}
+						});
 
 					}
 

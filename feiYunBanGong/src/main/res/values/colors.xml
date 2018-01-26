@@ -383,4 +383,6 @@
     <color name="renwu_list_jieshu">#A4A4A4</color>
     <color name="renwu_list_daijiedan">#50B3FD</color>
 
+    <color name="read_bgcolor">#ffeeeeee</color>
+
 </resources>

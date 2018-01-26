@@ -47,30 +47,31 @@
             android:layout_height="100dp"
             android:src="@drawable/logo"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="20dp"/>
         <TextView
             android:id="@+id/tv_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:text="版本号"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lineSpacingExtra="4dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
-            android:text="\t\t北京飞锐科技有限公司是一家高新技术企业，为各类企事业单位提供互联网技术开发和信息化建设服务。公司总部位于北京市朝阳区望京科技园区。
-            \n\t\t我司主要从事Android/iOS手机客户端、JAVA/PHP服务端、SQL系列数据库、HTML5、C/C#等方面的软硬件开发，提供电子商务、电子政务、移动办公、O2O、社交聊天、智能硬件、物联网、智慧应用等各种定制的软硬件开发和系统集成服务。
-            \n\t\t在中国引领移动互联网浪潮的背景下，飞锐科技全情投入，助力信息化强国战略的实施。公司致力于“实业+互联网”的创造性发展，以技术改变世界，以创新成就商机。愿与各界精英一道，携手共创辉煌。
-            \n\t\t会办APP是飞锐科技推出的个人关系管理平台，将为个人和企业提供第一手的信息化手段，让您的日常事务处理更加顺心顺手。平台广交天下友，招募运营合作伙伴，详情请联络：13366664598。"/>
+            android:layout_marginTop="15dp"
+            android:text="\t\t\t\t北京飞锐科技有限公司是一家高新技术企业，为各类企事业单位提供互联网技术开发和信息化建设服务。公司总部位于北京市朝阳区望京科技园区。
+            \n\t\t\t\t\t我司主要从事Android/iOS手机客户端、JAVA/PHP服务端、SQL系列数据库、HTML5、C/C#等方面的软硬件开发，提供电子商务、电子政务、移动办公、O2O、社交聊天、智能硬件、物联网、智慧应用等各种定制的软硬件开发和系统集成服务。
+            \n\t\t\t\t\t在中国引领移动互联网浪潮的背景下，飞锐科技全情投入，助力信息化强国战略的实施。公司致力于“实业+互联网”的创造性发展，以技术改变世界，以创新成就商机。愿与各界精英一道，携手共创辉煌。
+            \n\t\t\t\t\t会办APP是飞锐科技推出的个人关系管理平台，将为个人和企业提供第一手的信息化手段，让您的日常事务处理更加顺心顺手。平台广交天下友，招募运营合作伙伴，详情请联络：13366664598。"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="15dp"
             android:text="北京飞锐科技有限公司"/>
     </LinearLayout>
 </LinearLayout>

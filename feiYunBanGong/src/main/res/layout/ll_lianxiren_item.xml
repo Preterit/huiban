@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y200"
         android:gravity="center"
+        android:id="@+id/ll_txl"
         android:orientation="horizontal" >
 
         <com.feirui.feiyunbangong.view.TextImageView

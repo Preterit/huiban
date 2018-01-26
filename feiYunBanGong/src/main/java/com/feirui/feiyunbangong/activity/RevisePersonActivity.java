@@ -58,6 +58,7 @@ import java.util.List;
 
 /**
  * 修改个人资料
+ * create by xy
  */
 public class RevisePersonActivity extends BaseActivity implements View.OnClickListener {
     private TextView righttv;
@@ -78,7 +79,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
     private boolean flag = true;
     private SharedPreferences mShareds;
     private double longitude,latitude;//经度 纬度
-    private String city,address,fromAddress;
+    private String city,address,fromAddress,stoneLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,10 +385,13 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
             }
             params.put("position",mEv_share_area.getText().toString().trim());
         }else {
-            Log.e("position", "savePersonData: -----------------------" + mShareds.getString("mPostion","") );
+            //从SplashActivity传递来的
+            Log.e("position", "savePersonData: -----------------------" + mShareds.getString("mPostion","") + mShareds.getString("mLocation","" ));
             params.put("position",mShareds.getString("mPostion",""));
+            stoneLocation = mShareds.getString("mLocation","");
         }
 
+        params.put("location",stoneLocation);
 
         Log.e("position", "savePersonData: ------------------------------" + params );
 
@@ -512,6 +516,7 @@ public class RevisePersonActivity extends BaseActivity implements View.OnClickLi
                     mEv_share_area.setVisibility(View.VISIBLE);
                     Utils.reMesureGridViewHeight(mRevise_gd);
                     fromAddress = data.getStringExtra("fromAdd");
+                    stoneLocation = data.getStringExtra("location");
                     Log.e("result", "onActivityResult:-------------------- " + fromAddress);
                     mEv_share_area.setText(fromAddress);
                 }

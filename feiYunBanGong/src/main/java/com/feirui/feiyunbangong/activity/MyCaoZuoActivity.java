@@ -53,10 +53,13 @@ public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListen
         setCenterString("操作记录");
         righttv = findViewById(R.id.righttv);
         righttv.setVisibility(View.VISIBLE);
+        //右上角类型
         righttv.setText("类型");
+        //TabLayaout
         mHandle_tab = findViewById(R.id.handle_tab);
         //ViewPager
         mViewPager = findViewById(R.id.view_pager);
+        //初始化MyFragmentPagerAdapter
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),mList);
         mViewPager.setAdapter(myFragmentPagerAdapter);
         mViewPager.setCurrentItem(0);
@@ -125,12 +128,15 @@ public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListen
      */
     private void loadData(int selectedTabPosition, String type) {
         if ( selectedTabPosition == 0) {
+            //我提交的
             CommitFragment fragment0= (CommitFragment) myFragmentPagerAdapter.getItem(0);
             fragment0.showMessageFromActivity(type);
         }else if (selectedTabPosition == 1){
+            //我审批的
             ReviseFragment fragment1 = (ReviseFragment) myFragmentPagerAdapter.getItem(1);
             fragment1.showMessageFromActivity(type);
         }else if (selectedTabPosition == 2){
+            //抄送我的
             SendFragment fragment2 = (SendFragment) myFragmentPagerAdapter.getItem(2);
             fragment2.showMessageFromActivity(type);
         }
@@ -153,7 +159,7 @@ public class MyCaoZuoActivity extends BaseActivity implements View.OnClickListen
     }
 
     /**
-     * 获取抄送我的类型
+     * 获取的类型
      * @param strValue
      */
     @Override

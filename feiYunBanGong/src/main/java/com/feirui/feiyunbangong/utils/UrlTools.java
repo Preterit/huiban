@@ -1,19 +1,14 @@
 package com.feirui.feiyunbangong.utils;
 
 public class UrlTools {
-
+  public static String umeng_url ="http://91huiban.com/wxshare/team_member.html";
   public static final String ADD_GOOD = "Store/add_goods";
   public static final String GOOD_DETAIL = "Other/goodsdetaile";
   public static final String FRIEND_SHOP = "Store/look_store";
-  public static final String TEAM_TASK_LIST = "Task/taskIndex";  //任务列表
   public static final String MY_FORM_LIST = "form/my_form_list";
   public static final String OTHER_FORM_LIST = "form/form_list";
-  public static final String FORM_LIST_DETAILS = "form/details";
-  public static final String TASK_ADDTASK="Task/add_task";  //添加发布的任务
-  public static final String TASK_ACCEPT="task/task_accept"; //接收任务
-  public static final String TASK_GETTEAN="Task/get_team";   //获取团队列表
-  public static final String TASK_MY_TASK_LIST="task/my_task_list";//自己发布的任务列表
-  public static final String TASK_ACCEPT_TASK_LIST="Task/accept_task_list";//自己接收的任务列表
+  public static final String FORM_LIST_DETAILS = "form/details";//查看报表详细内容
+
     /**
      * 新的PC端的接口地址
      * */
@@ -27,13 +22,17 @@ public class UrlTools {
    * 后台给的图片有的地址差的url
    * */
   public static String url_img = "http://123.57.45.74/feiybg1";
-//public static String url = "http://175.25.23.139/feiybg/public/index.php/api/";
-// public static String fyUrl = "http://175.25.23.139/feiybg/public/index.php/index/";
+
 
   /*
   添加好友接口搜索
    */
   public static String FRIEND_SEARCH = "User/search_stranger";
+
+  /**
+   * 获取团队的信息 图片 名字
+   */
+  public static String TEAM_INFOR = "Team/share_teaminfo";
 
   /**
    * 注册获取验证码
@@ -48,7 +47,7 @@ public class UrlTools {
   /**
    * 登录获取验证码
    */
-  public  static String DENGLU_REGIST ="login/logincode";
+  public  static String DENGLU_REGIST ="login/sms_code";
   /**
    * 快速登录
    */
@@ -69,6 +68,12 @@ public class UrlTools {
    * 登录
    */
   public static String LOGIN_LOGIN = "login/login";
+
+  /**
+   * 验证码登录
+   */
+  public static String CODE_LOGIN = "login/code_login";
+
 
   /**
    * 个人注册
@@ -433,6 +438,15 @@ public class UrlTools {
    */
   public static String XIUGAI_YOUXIANG = "Team/team_yx_update";
   /**
+   * 修改团队名称：
+   */
+  public static String CHANGE_TEAM_NAME = "team/changeTeamName";
+  /**
+   * 修改团队名称,简介，图片
+   */
+  public static String UPDATE_TEAM_INFOR = "Team/change_teaminfo";
+
+  /**
    * 修改成员信息页面获取成员信息：
    */
   public static String XIUGAI_ChengYuan = "Team/team_update";
@@ -615,7 +629,30 @@ public static String APPLICATION_MESSAGE = "zhuce/sms_registration";//http://123
   //删除朋友圈
   public static String DELETE_CIRCLE = "circle/delCircle";
 
-
+  /**
+   * 任务单--任务列表
+   * */
+  public static final String TEAM_TASK_LIST = "Task/taskIndex";
+  /**
+   * 任务单--获取团队列表
+   * */
+  public static final String TASK_GETTEAN="Task/get_team";
+  /**
+   * 任务单--添加发布的任务
+   * */
+  public static final String TASK_ADDTASK="Task/add_task";
+  /**
+   * 任务单--接收任务
+   * */
+  public static final String TASK_ACCEPT="task/task_accept";
+  /**
+   * 任务单--自己发布的任务列表
+   * */
+  public static final String TASK_MY_TASK_LIST="task/my_task_list";
+  /**
+   * 任务单--自己接收的任务列表
+   * */
+  public static final String TASK_ACCEPT_TASK_LIST="Task/accept_task_list";
   /**
    * 新任务单-全部任务接口
    * */
@@ -648,6 +685,10 @@ public static String APPLICATION_MESSAGE = "zhuce/sms_registration";//http://123
    * 新任务单-任务信息
    **/
   public static String RENWU_RWXX="Task/task_detial";
+  /**
+   * 新任务单-发布任务
+   **/
+  public static String ADD_TASK_NEW="task/add_task_new";
     /**
      * 新任务单-确认接单
      **/

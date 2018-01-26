@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -68,6 +69,7 @@ public class ChaKanJinDuActivity extends BaseActivity implements View.OnClickLis
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_time = (TextView) findViewById(R.id.tv_time);
         tv_task = (TextView) findViewById(R.id.tv_task);
+        tv_task.setMovementMethod(ScrollingMovementMethod.getInstance());
         tv_zt = (TextView) findViewById(R.id.tv_zt);
         tv_zt.setText(task_zt);
         tv_name.setText(staff_name);
