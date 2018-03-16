@@ -73,6 +73,7 @@ public class WifiClockActivity extends BaseActivity  {
     private String tag;
     private String ssid;
     private String qian;
+    private int wifirssi;
 
     @Override
 
@@ -119,6 +120,9 @@ public class WifiClockActivity extends BaseActivity  {
         Log.e("wifi", "wifi的BSSID"+wifiInfo.getBSSID());
         address=wifiInfo.getBSSID();
         ssid=wifiInfo.getSSID();
+
+        wifirssi = wifiInfo.getRssi();
+        Log.e("wifi", "wifi的名称"+ssid+"wifi强度"+wifirssi);
     }
 
     private String getwifiInfo() {
@@ -217,8 +221,9 @@ public class WifiClockActivity extends BaseActivity  {
         params.put("address", address);
         params.put("check_type", "1");
         params.put("ssid",ssid);
+        params.put("rssi",wifirssi+"");
         url = UrlTools.url + UrlTools.HOME_WORK_START;
-        L.e("签退url=" + url + " params=" + params);
+        L.e("签到url=" + url + " params=" + params.toString());
         AsyncHttpServiceHelper.post(url, params,
                 new AsyncHttpResponseHandler() {
                     @Override
@@ -259,6 +264,7 @@ public class WifiClockActivity extends BaseActivity  {
         params.put("address", address);
         params.put("check_type", "1");
         params.put("ssid",ssid);
+        params.put("rssi",wifirssi);
         url = UrlTools.url + UrlTools.HOME_WORK_END;
         L.e("签退url=" + url + " params=" + params);
         AsyncHttpServiceHelper.post(url, params,

@@ -29,6 +29,8 @@ public class UrlTools {
    */
   public static String FRIEND_SEARCH = "User/search_stranger";
 
+
+
   /**
    * 获取团队的信息 图片 名字
    */

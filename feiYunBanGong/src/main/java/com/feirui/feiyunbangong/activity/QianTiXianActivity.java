@@ -86,7 +86,6 @@ public class QianTiXianActivity extends Activity {
 
 
     private void addCard() {
-
         lijitianjia_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +112,6 @@ public class QianTiXianActivity extends Activity {
     }
 
     private void addCardPost() {
-
             RequestParams params = new RequestParams();
             params.put("button","0");
             params.put("certificate_type",type_edt.getText().toString());
@@ -124,10 +122,8 @@ public class QianTiXianActivity extends Activity {
 
             Log.e("tag", "参数"+params);
             String url = UrlTools.url+UrlTools.ADD_BACKCARD;
-
                 Utils.doPost(LoadingDialog.getInstance(QianTiXianActivity.this),
                         QianTiXianActivity.this, url, params, new Utils.HttpCallBack() {
-
                     @Override
                     public void success(JsonBean bean) {
                         Log.e("tag", "bean---"+bean.toString() );
@@ -135,12 +131,10 @@ public class QianTiXianActivity extends Activity {
                         startActivity(new Intent(QianTiXianActivity.this,XuanZeYinHangKaActivity.class));
                         finish();
                     }
-
                     @Override
                     public void failure(String msg) {
                         Toast.makeText(QianTiXianActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void finish() {
 
@@ -149,8 +143,6 @@ public class QianTiXianActivity extends Activity {
     }
 
     private void setListeners() {
-
-
         yinhangka_card_edt.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -165,20 +157,16 @@ public class QianTiXianActivity extends Activity {
                 } else {
                     kaihuhang_edt.setText(null);
                 }
-
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
                 // 在输入数据前监听
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 // 在输入数据后监听
-
             }
         });
 
@@ -190,7 +178,5 @@ public class QianTiXianActivity extends Activity {
                 tishi_layout.setVisibility(View.GONE);
             }
         });
-
     }
-
 }

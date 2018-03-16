@@ -1,8 +1,5 @@
 package com.feirui.feiyunbangong.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,7 +21,6 @@ import com.feirui.feiyunbangong.dialog.XiuGaiDialog.AlertCallBack1;
 import com.feirui.feiyunbangong.entity.Friend;
 import com.feirui.feiyunbangong.entity.Group;
 import com.feirui.feiyunbangong.entity.JsonBean;
-import com.feirui.feiyunbangong.utils.IMUtil;
 import com.feirui.feiyunbangong.utils.LoadImage;
 import com.feirui.feiyunbangong.utils.T;
 import com.feirui.feiyunbangong.utils.UrlTools;
@@ -32,6 +28,9 @@ import com.feirui.feiyunbangong.utils.Utils;
 import com.feirui.feiyunbangong.utils.Utils.HttpCallBack;
 import com.feirui.feiyunbangong.view.PView;
 import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 添加好友：
@@ -221,7 +220,7 @@ public class AboutFriendActivity extends BaseActivity implements
 
 						@Override
 						public void failure(String msg) {
-							Toast.makeText(AboutFriendActivity.this, msg, 0).show();
+							Toast.makeText(AboutFriendActivity.this, msg, Toast.LENGTH_SHORT).show();
 						}
 
 						@Override

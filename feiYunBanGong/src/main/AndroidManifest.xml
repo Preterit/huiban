@@ -470,11 +470,6 @@
             android:label="@string/title_activity_release__fan_kui"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <receiver
-            android:name=".receiver.KeepLiveReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity android:name=".activity.ReleaseDetail_FanKuiActivity" />
         <activity android:name=".activity.SheZhiActivity" />
         <activity android:name=".activity.MyTaskDetailActivity" />
@@ -543,7 +538,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.QickLoginActivity"></activity>
-        <activity android:name=".activity.SearchMemberActivity" />
         <activity android:name=".activity.WoDeQianBaoActivity" />
         <activity android:name=".activity.QianTiXianActivity" />
         <activity android:name=".activity.XuanZeYinHangKaActivity"></activity>

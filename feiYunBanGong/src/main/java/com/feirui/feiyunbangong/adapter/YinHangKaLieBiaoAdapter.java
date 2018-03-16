@@ -93,7 +93,6 @@ public class YinHangKaLieBiaoAdapter extends BaseAdapter{
         TextView tvyinhangName;
         TextView tvyinhangcard;
 
-
     }
 
  public String fenge(String str){

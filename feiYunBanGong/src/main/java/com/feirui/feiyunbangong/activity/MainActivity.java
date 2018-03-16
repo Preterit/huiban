@@ -98,8 +98,7 @@ import static com.feirui.feiyunbangong.state.AppStore.mIMKit;
  *
  * @author feirui1
  */
-public class MainActivity extends BaseActivity
-        implements OnItemClickListener, OnTeamNoticeNumChanged, OnNewFriendNumChanged ,OnClickListener{
+public class MainActivity extends BaseActivity implements OnItemClickListener, OnTeamNoticeNumChanged, OnNewFriendNumChanged ,OnClickListener{
     LinearLayout[] btnArray = new LinearLayout[4];
 
     private Fragment work, linkman, message, circle;

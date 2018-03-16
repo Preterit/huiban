@@ -19,7 +19,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 
 import org.litepal.LitePal;

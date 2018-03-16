@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.feirui.feiyunbangong.Happlication;
 import com.feirui.feiyunbangong.R;
-import com.feirui.feiyunbangong.activity.LoginActivity;
 import com.feirui.feiyunbangong.activity.QickLoginActivity;
 import com.feirui.feiyunbangong.entity.Constants;
 import com.feirui.feiyunbangong.utils.AsyncHttpServiceHelper;
@@ -77,6 +76,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp resp) {
+
         Log.e("支付结果页面", "onPayFinish, errCode = " + resp.errCode);
 
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
